@@ -3,11 +3,11 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <section className="relative grid min-h-[calc(100vh-110px)] gap-8 overflow-hidden px-1 pb-8 pt-1 sm:px-3 lg:min-h-[calc(100vh-120px)] lg:grid-cols-[88px_1fr]">
+    <section className="relative grid min-h-[calc(100vh-110px)] gap-8 overflow-hidden px-1 pb-8 pt-1 sm:px-3 lg:min-h-[calc(100vh-120px)]">
       {/* Mostra a imagem no desktop sem gradiente para evitar qualquer transparência lateral. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[min(46vw,620px)] lg:block"
+        className="pointer-events-none absolute inset-y-0 hidden w-[min(46vw,620px)] lg:right-8 lg:block xl:right-12"
       >
         <Image
           alt="Cliente mistério em destaque"
@@ -18,14 +18,6 @@ export default function HomePage() {
           src="/images/IMG_2622.png"
         />
       </div>
-
-      {/* Constrói a coluna lateral apenas com texto vertical, sem marcadores sociais. */}
-      <aside className="relative z-10 hidden py-8 lg:flex lg:flex-col lg:items-center lg:justify-between">
-        <p className="vertical-text text-[10px] font-semibold uppercase tracking-[0.35em] text-[color:var(--foreground)]">
-          Bad Co.
-        </p>
-
-      </aside>
 
       {/* Mantém o conteúdo textual em primeiro plano para legibilidade sobre a imagem de fundo. */}
       <div className="relative z-10 grid items-start gap-8 pb-8 lg:items-center lg:gap-10">
