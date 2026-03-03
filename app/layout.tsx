@@ -41,7 +41,7 @@ export default function RootLayout({
         {/* Mantém o fundo em largura total enquanto o conteúdo segue os mesmos eixos do hero. */}
         <div className="mx-auto min-h-screen w-full max-w-[1400px] bg-[color:var(--background)]">
           {/* Usa o mesmo content width do hero para alinhar logo com texto e ação com a imagem. */}
-          <header className="px-4 py-5 sm:px-6 md:px-10 md:py-6">
+          <header className="sticky top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--background)]/95 px-4 py-5 backdrop-blur-sm sm:px-6 md:px-10 md:py-6">
             <div className="relative mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto] items-center gap-3 lg:grid-cols-[minmax(220px,1fr)_auto_minmax(180px,1fr)]">
               <a
                 className="text-[10px] font-black uppercase tracking-[0.28em] text-[color:var(--foreground)] sm:text-xs sm:tracking-[0.35em]"
