@@ -595,13 +595,6 @@ export default function DashboardPage() {
             >
               {isSavingProfile ? "A guardar..." : "Guardar perfil"}
             </button>
-            <button
-              className="button-size-login border border-slate-200"
-              type="button"
-              onClick={handleLogout}
-            >
-              Terminar sessão
-            </button>
           </div>
 
           <div className="mt-8 border-t border-slate-200 pt-8">
@@ -678,6 +671,16 @@ export default function DashboardPage() {
             </div>
           </div>
         </aside>
+
+        <div className="flex justify-end">
+          <button
+            className="button-size-login border border-slate-200"
+            type="button"
+            onClick={handleLogout}
+          >
+            Terminar sessão
+          </button>
+        </div>
       </div>
     </section>
   );
