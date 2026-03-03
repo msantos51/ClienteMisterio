@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 
-import { createEmailConfirmationTemplate } from "@/lib/authEmail";
 import { query } from "@/lib/database";
-import { sendEmail } from "@/lib/email";
 import { hashPassword } from "@/lib/password";
-import { createToken, hashToken } from "@/lib/token";
 
 type RegisterPayload = {
   firstName: string;
@@ -57,8 +54,6 @@ export const POST = async (request: Request) => {
   const lastName = payload.lastName.trim();
   const fullName = `${firstName} ${lastName}`.trim();
   const passwordHash = hashPassword(payload.password);
-  const confirmationToken = createToken();
-  const confirmationTokenHash = hashToken(confirmationToken);
   const firstAdminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   const shouldBeAdmin = Boolean(firstAdminEmail) && normalizedEmail === firstAdminEmail;
 
@@ -71,32 +66,15 @@ export const POST = async (request: Request) => {
       password_hash,
       profile_completed,
       email_confirmed,
-      email_confirmation_token_hash,
-      email_confirmation_sent_at,
       is_admin
     )
-     values ($1, $2, $3, $4, $5, false, false, $6, now(), $7)
+     values ($1, $2, $3, $4, $5, false, true, $6)
      returning id, first_name, last_name, full_name, email, is_admin, created_at`,
-    [firstName, lastName, fullName, normalizedEmail, passwordHash, confirmationTokenHash, shouldBeAdmin]
+    [firstName, lastName, fullName, normalizedEmail, passwordHash, shouldBeAdmin]
   );
 
-  try {
-    // Envia e-mail de confirmação para bloquear login até validação da conta.
-    const template = createEmailConfirmationTemplate(confirmationToken);
-    await sendEmail({
-      to: normalizedEmail,
-      subject: template.subject,
-      html: template.html,
-    });
-  } catch {
-    return NextResponse.json(
-      { message: "Conta criada, mas não foi possível enviar o e-mail de confirmação." },
-      { status: 500 }
-    );
-  }
-
   return NextResponse.json({
-    message: "Conta criada com sucesso. Confirme o e-mail para ativar o acesso.",
+    message: "Conta criada com sucesso. Já pode iniciar sessão.",
     user: {
       id: result.rows[0]?.id,
       firstName: result.rows[0]?.first_name,
