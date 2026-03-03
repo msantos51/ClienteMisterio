@@ -3,25 +3,11 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <section className="relative grid min-h-[calc(100vh-110px)] gap-8 overflow-hidden px-1 pb-8 pt-1 sm:px-3 lg:min-h-[calc(100vh-120px)]">
-      {/* Mostra a imagem no desktop sem gradiente para evitar qualquer transparência lateral. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 hidden w-[min(46vw,620px)] lg:right-8 lg:block xl:right-12"
-      >
-        <Image
-          alt="Cliente mistério em destaque"
-          className="object-contain object-right-bottom"
-          fill
-          priority
-          sizes="(max-width: 1024px) 0px, min(46vw, 620px)"
-          src="/images/IMG_2622.png"
-        />
-      </div>
-
-      {/* Mantém o conteúdo textual em primeiro plano para legibilidade sobre a imagem de fundo. */}
-      <div className="relative z-10 grid items-start gap-8 pb-8 lg:items-center lg:gap-10">
-        <article className="max-w-md bg-white p-4 shadow-[0_0_0_1px_rgba(0,0,0,0.03)] sm:p-5 lg:ml-6 lg:bg-transparent lg:p-0 lg:shadow-none">
+    <section className="px-4 pb-10 pt-2 sm:px-6 lg:px-8">
+      {/* Centraliza o conteúdo numa largura máxima para aproximar texto e imagem em ecrãs grandes. */}
+      <div className="mx-auto grid min-h-[calc(100vh-120px)] w-full max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,480px)] lg:gap-10">
+        {/* Mantém o bloco textual com largura controlada para preservar legibilidade e hierarquia visual. */}
+        <article className="max-w-xl bg-white p-4 shadow-[0_0_0_1px_rgba(0,0,0,0.03)] sm:p-5 lg:bg-transparent lg:p-0 lg:shadow-none">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--accent)] sm:text-[11px] sm:tracking-[0.28em]">
             Novo Curso
           </p>
@@ -44,14 +30,14 @@ export default function HomePage() {
           </div>
         </article>
 
-        {/* Mostra a foto em bloco dedicado no mobile para evitar sobreposição com o texto. */}
-        <div className="relative mx-auto h-[320px] w-full max-w-[360px] lg:hidden">
+        {/* Reserva uma coluna fixa para a imagem no desktop para reduzir o espaço vazio entre blocos. */}
+        <div className="relative mx-auto h-[340px] w-full max-w-[360px] sm:h-[420px] sm:max-w-[420px] lg:h-[680px] lg:max-w-[480px]">
           <Image
             alt="Cliente mistério em destaque"
-            className="object-contain object-bottom"
+            className="object-contain object-bottom lg:object-right-bottom"
             fill
             priority
-            sizes="(max-width: 640px) 90vw, 360px"
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 480px"
             src="/images/IMG_2622.png"
           />
         </div>
