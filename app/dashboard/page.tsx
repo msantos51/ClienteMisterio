@@ -652,37 +652,29 @@ export default function DashboardPage() {
           <div className="mt-4 space-y-3">
             <div className="flex items-center justify-between text-sm text-slate-700">
               <label htmlFor="receive-newsletter">Receber newsletter</label>
-              <span className="checkbox-wrapper-12">
-                <span className="cbx">
-                  <input
-                    id="receive-newsletter"
-                    type="checkbox"
-                    checked={preferences.receiveNewsletter}
-                    onChange={() => handlePreferenceChange("receiveNewsletter")}
-                  />
-                  <label htmlFor="receive-newsletter" aria-hidden="true" />
-                  <svg viewBox="0 0 15 14" fill="none" aria-hidden="true">
-                    <path d="M2 8.36364L6.23077 12L13 2" />
-                  </svg>
-                </span>
-              </span>
+              <label className="checkbox-container" htmlFor="receive-newsletter">
+                <input
+                  id="receive-newsletter"
+                  className="custom-checkbox"
+                  type="checkbox"
+                  checked={preferences.receiveNewsletter}
+                  onChange={() => handlePreferenceChange("receiveNewsletter")}
+                />
+                <span className="checkmark" aria-hidden="true" />
+              </label>
             </div>
             <div className="flex items-center justify-between text-sm text-slate-700">
               <label htmlFor="allow-notifications">Notificações da comunidade</label>
-              <span className="checkbox-wrapper-12">
-                <span className="cbx">
-                  <input
-                    id="allow-notifications"
-                    type="checkbox"
-                    checked={preferences.allowNotifications}
-                    onChange={() => handlePreferenceChange("allowNotifications")}
-                  />
-                  <label htmlFor="allow-notifications" aria-hidden="true" />
-                  <svg viewBox="0 0 15 14" fill="none" aria-hidden="true">
-                    <path d="M2 8.36364L6.23077 12L13 2" />
-                  </svg>
-                </span>
-              </span>
+              <label className="checkbox-container" htmlFor="allow-notifications">
+                <input
+                  id="allow-notifications"
+                  className="custom-checkbox"
+                  type="checkbox"
+                  checked={preferences.allowNotifications}
+                  onChange={() => handlePreferenceChange("allowNotifications")}
+                />
+                <span className="checkmark" aria-hidden="true" />
+              </label>
             </div>
           </div>
         </aside>
