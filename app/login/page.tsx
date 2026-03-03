@@ -47,18 +47,8 @@ export default function LoginPage() {
     const urlParameters = new URLSearchParams(window.location.search);
 
     if (urlParameters.get("registered") === "1") {
-      // Exibe orientação após registo para o utilizador confirmar o e-mail.
-      setFeedback("Conta criada com sucesso. Verifique o e-mail para confirmar a conta.");
-    }
-
-    if (urlParameters.get("confirmed") === "1") {
-      // Mostra confirmação quando o utilizador valida a conta pelo link enviado.
-      setFeedback("Conta confirmada com sucesso. Já pode iniciar sessão.");
-    }
-
-    if (urlParameters.get("confirmed") === "0") {
-      // Informa token inválido ou expirado no fluxo de confirmação de conta.
-      setFeedback("Link de confirmação inválido ou expirado.");
+      // Exibe confirmação de registo concluído e acesso imediato ao login.
+      setFeedback("Conta criada com sucesso. Já pode iniciar sessão.");
     }
 
     // Mantém o utilizador autenticado ao regressar ao ecrã de login.
