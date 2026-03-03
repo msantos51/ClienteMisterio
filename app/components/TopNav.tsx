@@ -22,7 +22,7 @@ export default function TopNav() {
 
   return (
     <>
-      {/* Exibe botão de menu apenas no mobile com ícone puro, sem texto visível. */}
+      {/* Exibe botão hamburguer apenas no mobile para manter o desktop limpo e alinhado ao centro. */}
       <button
         aria-expanded={isMenuOpen}
         aria-label="Abrir menu principal"
@@ -37,15 +37,15 @@ export default function TopNav() {
         </span>
       </button>
 
-      {/* Mantém navegação horizontal no desktop para preservar o layout editorial. */}
-      <nav className="hidden items-center gap-8 lg:flex">
+      {/* Mantém os links centrados no desktop e destaca a página ativa com sublinhado. */}
+      <nav className="hidden items-center justify-center gap-8 xl:gap-10 lg:flex">
         {navigationItems.map((item) => {
           const isActive = pathname === item.href;
 
           return (
             <Link
               key={item.href}
-              className={`text-[11px] font-semibold uppercase tracking-[0.18em] transition ${
+              className={`relative pb-2 text-[14px] font-semibold transition ${
                 isActive
                   ? "text-[color:var(--accent)]"
                   : "text-[color:var(--foreground)] hover:text-[color:var(--accent)]"
@@ -53,12 +53,16 @@ export default function TopNav() {
               href={item.href}
             >
               {item.label}
+
+              {isActive ? (
+                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[color:var(--accent)]" />
+              ) : null}
             </Link>
           );
         })}
       </nav>
 
-      {/* Renderiza menu em coluna no mobile com texto vermelho e estilo do mockup. */}
+      {/* Renderiza menu vertical no mobile com área clicável confortável e ordem visual consistente. */}
       {isMenuOpen ? (
         <nav className="mobile-menu-container absolute inset-x-4 top-[84px] z-40 flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] bg-[color:var(--surface)] shadow-sm lg:hidden">
           {navigationItems.map((item, index) => {
@@ -68,7 +72,7 @@ export default function TopNav() {
             return (
               <Link
                 key={item.href}
-                className={`mobile-menu-item px-5 py-4 text-[11px] font-semibold uppercase tracking-[0.18em] transition ${
+                className={`mobile-menu-item px-5 py-4 text-sm font-semibold transition ${
                   isActive
                     ? "text-[#b91c1c]"
                     : "text-[color:var(--accent)] hover:bg-red-50"
