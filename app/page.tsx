@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const mainHeroImagePath = "/images/Background.png";
+
 export default function HomePage() {
   return (
     <section className="px-0 pb-10 pt-2">
@@ -38,7 +40,7 @@ export default function HomePage() {
             fill
             priority
             sizes="(max-width: 640px) 92vw, (max-width: 1024px) 68vw, 520px"
-            src="/images/IMG_2622.png"
+            src={mainHeroImagePath}
           />
         </div>
       </div>
