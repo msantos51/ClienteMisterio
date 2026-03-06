@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const mainHeroImagePath = "/images/IMG_2622.png";
+const mainHeroImagePath = "/images/Background.png";
 
 export default function HomePage() {
   return (
