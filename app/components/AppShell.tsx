@@ -26,8 +26,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             Cliente Mistério
           </a>
 
-          {/* Mantém o menu no centro em ecrãs grandes e no lado direito em ecrãs pequenos. */}
-          <div className="justify-self-end lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+          {/* Na home desloca o menu para o centro da metade esquerda; nas páginas internas mantém ao centro global. */}
+          <div
+            className={`justify-self-end lg:absolute lg:-translate-x-1/2 ${
+              isHomePage ? "lg:left-1/4" : "lg:left-1/2"
+            }`}
+          >
             <TopNav />
           </div>
 
