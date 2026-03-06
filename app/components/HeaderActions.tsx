@@ -48,14 +48,14 @@ export default function HeaderActions() {
     <div className="flex items-center gap-2 sm:gap-3">
       {!sessionUser ? (
         <Link
-          className="site-pill-button text-[10px] uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.15em]"
+          className="site-pill-button text-[11px] uppercase tracking-[0.14em] sm:text-[12px] sm:tracking-[0.15em]"
           href="/login"
         >
           Login
         </Link>
       ) : (
         <Link
-          className="site-pill-button text-[10px] uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.15em]"
+          className="site-pill-button text-[11px] uppercase tracking-[0.14em] sm:text-[12px] sm:tracking-[0.15em]"
           href={profileHref}
         >
           Dashboard

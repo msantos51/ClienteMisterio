@@ -46,7 +46,7 @@ export default function TopNav() {
           return (
             <Link
               key={item.href}
-              className={`relative pb-2 text-[14px] font-semibold transition ${
+              className={`relative pb-2 text-[16px] font-semibold transition ${
                 isActive
                   ? "text-[color:var(--accent)]"
                   : "text-[color:var(--foreground)] hover:text-[color:var(--accent)]"
@@ -73,7 +73,7 @@ export default function TopNav() {
             return (
               <Link
                 key={item.href}
-                className={`mobile-menu-item px-5 py-4 text-sm font-semibold transition ${
+                className={`mobile-menu-item px-5 py-4 text-base font-semibold transition ${
                   isActive
                     ? "text-[#b91c1c]"
                     : "text-[color:var(--accent)] hover:bg-red-50"

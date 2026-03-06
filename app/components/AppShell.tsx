@@ -18,26 +18,26 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             : "sticky top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--background)]/95 backdrop-blur-sm"
         } px-4 py-5 sm:px-6 md:px-10 md:py-6`}
       >
-        <div className="relative mx-auto grid w-full max-w-6xl grid-cols-[1fr_auto] items-center gap-3 lg:grid-cols-[minmax(220px,1fr)_auto_minmax(180px,1fr)]">
+        <div className="relative flex w-full items-center justify-between gap-3">
           <a
-            className="text-[10px] font-black uppercase tracking-[0.28em] text-[color:var(--foreground)] sm:text-xs sm:tracking-[0.35em]"
+            className="text-[11px] font-black uppercase tracking-[0.3em] text-[color:var(--foreground)] sm:text-sm sm:tracking-[0.35em]"
             href="/"
           >
             Cliente Mistério
           </a>
 
           {/* Mantém o menu no centro em ecrãs grandes e no lado direito em ecrãs pequenos. */}
-          <div className="justify-self-end lg:justify-self-center">
+          <div className="justify-self-end lg:absolute lg:left-1/2 lg:-translate-x-1/2">
             <TopNav />
           </div>
 
           {/* Alinha o botão de ação ao limite direito do conteúdo para manter consistência visual. */}
-          <div className="hidden lg:flex lg:justify-self-end">
+          <div className="hidden lg:flex">
             <HeaderActions />
           </div>
 
           {/* Mantém as ações disponíveis no mobile sem quebrar o layout do menu hamburguer. */}
-          <div className="justify-self-end lg:hidden">
+          <div className="lg:hidden">
             <HeaderActions />
           </div>
         </div>
