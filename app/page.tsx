@@ -19,15 +19,14 @@ export default function HomePage() {
 
             {/* Recupera a mensagem principal com ênfase cromática na proposta de valor. */}
             <h1 className="text-4xl font-semibold leading-tight text-black sm:text-5xl lg:text-6xl">
-              Aprende a observar,
-              <span className="block text-[#dc2626]">avaliar e melhorar serviços.</span>
+              Descobre como ser pago para avaliar serviços, produtos e experiências de forma
+              profissional
             </h1>
 
             {/* Explica a proposta de valor com linguagem curta para não competir visualmente com a imagem. */}
             <p className="max-w-lg text-sm leading-7 text-black/70 sm:text-base">
-              O programa Cliente Mistério ajuda-te a desenvolver pensamento crítico,
-              método de avaliação e capacidade de transformar observações em melhorias
-              concretas para equipas e negócios.
+              Aprende a aplicar técnicas de observação, análise e reporte que tornam o teu
+              olhar crítico útil para marcas, equipas e negócios.
             </p>
 
             {/* Em mobile mantém o CTA no fluxo natural para facilitar leitura e toque. */}
