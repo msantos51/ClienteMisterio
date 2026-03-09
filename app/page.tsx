@@ -10,14 +10,14 @@ export default function HomePage() {
       <div className="relative grid min-h-screen w-full bg-[#efefef] lg:grid-cols-2">
         {/* Mantém um painel dedicado ao conteúdo textual para evitar que o texto desapareça atrás da imagem. */}
         <div className="relative z-10 flex px-6 py-24 sm:px-10 lg:px-16">
-          {/* Estrutura o conteúdo para manter texto acima e CTA centrado na parte inferior da metade esquerda. */}
-          <div className="flex min-h-[70vh] w-full max-w-xl flex-col justify-between">
+          {/* Estrutura o conteúdo textual para preservar hierarquia e legibilidade. */}
+          <div className="flex min-h-[70vh] w-full max-w-xl flex-col gap-8">
             {/* Reforça o contexto da landing com uma etiqueta editorial discreta. */}
             <p className="section-label-uppercase text-[11px] tracking-[0.35em] text-black/70">
               Formação e prática
             </p>
 
-            {/* Recupera a mensagem principal que estava em falta no lado esquerdo do hero. */}
+            {/* Recupera a mensagem principal com ênfase cromática na proposta de valor. */}
             <h1 className="text-4xl font-semibold leading-tight text-black sm:text-5xl lg:text-6xl">
               Aprende a observar,
               <span className="block text-[#dc2626]">avaliar e melhorar serviços.</span>
@@ -30,8 +30,8 @@ export default function HomePage() {
               concretas para equipas e negócios.
             </p>
 
-            {/* Posiciona a CTA centrada horizontalmente e mais abaixo para não competir com o menu superior. */}
-            <div className="flex justify-center pb-4 pt-8 lg:pb-8">
+            {/* Em mobile mantém o CTA no fluxo natural para facilitar leitura e toque. */}
+            <div className="flex justify-center pb-4 pt-8 lg:hidden">
               <Link
                 className="site-pill-button px-10 py-4 text-[11px] uppercase tracking-[0.2em] shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
                 href="/about"
@@ -40,6 +40,16 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* No desktop posiciona o CTA no centro horizontal da página, mantendo a altura atual no hero. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-[18%] z-20 hidden justify-center lg:flex">
+          <Link
+            className="pointer-events-auto site-pill-button px-10 py-4 text-[11px] uppercase tracking-[0.2em] shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
+            href="/about"
+          >
+            Começa Já
+          </Link>
         </div>
 
         {/* Garante que a imagem começa no topo e chega até ao extremo direito da página. */}

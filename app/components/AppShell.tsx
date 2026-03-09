@@ -23,12 +23,14 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             className="text-[11px] font-black uppercase tracking-[0.3em] text-[color:var(--foreground)] sm:text-sm sm:tracking-[0.35em]"
             href="/"
           >
-            Cliente Mistério
+            CM
           </a>
 
-          {/* Mantém o menu sempre no centro para evitar sobreposição com o logótipo. */}
+          {/* Na home centra o menu na metade cinzenta; nas restantes páginas mantém o centro global. */}
           <div
-            className="justify-self-end lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+            className={`justify-self-end lg:absolute lg:-translate-x-1/2 ${
+              isHomePage ? "lg:left-1/4" : "lg:left-1/2"
+            }`}
           >
             <TopNav />
           </div>
