@@ -32,6 +32,17 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Força todos os elementos tipográficos principais a usar Montserrat em negrito. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
 /* Gira texto para orientação vertical usada na barra lateral do hero. */
 .vertical-text {
   writing-mode: vertical-rl;
@@ -156,23 +167,23 @@ body {
 
   /* Define tipografia padrão para títulos principais do site. */
   .page-title {
-    @apply text-3xl font-semibold text-[color:var(--foreground)];
+    @apply text-3xl font-bold text-[color:var(--foreground)];
   }
 
   .section-title {
-    @apply text-2xl font-semibold text-[color:var(--foreground)];
+    @apply text-2xl font-bold text-[color:var(--foreground)];
   }
 
   .section-title-inverse {
-    @apply text-2xl font-semibold text-white;
+    @apply text-2xl font-bold text-white;
   }
 
   .card-title {
-    @apply text-lg font-semibold text-[color:var(--foreground)];
+    @apply text-lg font-bold text-[color:var(--foreground)];
   }
 
   .subsection-title {
-    @apply text-base font-semibold text-[color:var(--foreground)];
+    @apply text-base font-bold text-[color:var(--foreground)];
   }
 
   .section-label {
