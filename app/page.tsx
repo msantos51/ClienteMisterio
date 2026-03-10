@@ -4,7 +4,7 @@ export default function HomePage() {
   return (
     <section className="w-full">
       {/* Mantém o hero em coluna única para remover a imagem e priorizar a mensagem principal. */}
-      <div className="relative flex min-h-screen w-full bg-[#9581C8] bg-[radial-gradient(circle,rgba(149,129,200,1)_0%,rgba(81,66,136,1)_100%)]">
+      <div className="relative flex min-h-screen w-full bg-black">
         {/* Centraliza e limita a largura do conteúdo textual para preservar legibilidade em todos os ecrãs. */}
         <div className="relative z-10 flex w-full px-6 py-24 sm:px-10 lg:px-16">
           {/* Organiza título, benefícios e CTA com espaçamento consistente. */}
@@ -15,7 +15,7 @@ export default function HomePage() {
             </p>
 
             {/* Destaca a proposta principal com cor dourada e peso tipográfico forte para aumentar o impacto. */}
-            <h1 className="text-4xl font-bold leading-tight text-[#e3a319] sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
               Sê pago para testar produtos e serviços
             </h1>
 

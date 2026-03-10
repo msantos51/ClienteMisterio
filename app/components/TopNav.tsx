@@ -53,15 +53,15 @@ export default function TopNav() {
               key={item.href}
               className={`relative pb-2 text-[16px] font-semibold transition ${
                 isActive
-                  ? "text-[#e3a319]"
-                  : "text-[#e3a319] hover:text-[#e3a319]"
+                  ? "text-white"
+                  : "text-white hover:text-white"
               }`}
               href={item.href}
             >
               {item.label}
 
               {isActive ? (
-                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[#e3a319]" />
+                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-white" />
               ) : null}
             </Link>
           );
@@ -70,7 +70,7 @@ export default function TopNav() {
 
       {/* Renderiza menu vertical no mobile com área clicável confortável e ordem visual consistente. */}
       {isMenuOpen ? (
-        <nav className="mobile-menu-container absolute inset-x-4 top-[84px] z-40 flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] bg-[color:var(--surface)] shadow-sm lg:hidden">
+        <nav className="mobile-menu-container absolute inset-x-4 top-[84px] z-40 flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] bg-black shadow-sm lg:hidden">
           {navigationItems.map((item, index) => {
             const isActive = pathname === item.href;
             const isLast = index === navigationItems.length - 1;
@@ -80,8 +80,8 @@ export default function TopNav() {
                 key={item.href}
                 className={`mobile-menu-item px-5 py-4 text-base font-semibold transition ${
                   isActive
-                    ? "text-[#e3a319]"
-                    : "text-[#e3a319] hover:bg-[#fdf3dc]"
+                    ? "text-white"
+                    : "text-white hover:bg-[#111111]"
                 } ${isLast ? "border-b-0" : "border-b border-[color:var(--line)]"}`}
                 href={item.href}
                 onClick={closeMenu}

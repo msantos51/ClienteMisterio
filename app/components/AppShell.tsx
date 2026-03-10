@@ -13,11 +13,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     <div className="mx-auto min-h-screen w-full bg-[color:var(--background)]">
       {/* Mantém o cabeçalho absoluto na home para sobrepor o hero, e sticky nas páginas internas. */}
       <header
-        className={`${
-          isHomePage
-            ? "absolute inset-x-0 top-0 z-50 border-b border-transparent bg-transparent"
-            : "sticky top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--background)]/95 backdrop-blur-sm"
-        } px-4 py-5 sm:px-6 md:px-10 md:py-6`}
+        className="sticky top-0 z-50 border-b border-[color:var(--line)] bg-black px-4 py-5 sm:px-6 md:px-10 md:py-6"
       >
         <div className="relative flex w-full items-center justify-between gap-3">
           <Link
