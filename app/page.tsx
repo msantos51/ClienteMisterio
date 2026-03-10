@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <section className="w-full">
       {/* Divide o hero em duas colunas no desktop para manter o texto à esquerda e a imagem à direita. */}
-      <div className="relative grid min-h-screen w-full bg-[#efefef] lg:grid-cols-2">
+      <div className="relative grid min-h-screen w-full bg-gradient-to-b from-[#0067a9] to-[#0067a9] lg:grid-cols-2">
         {/* Mantém um painel dedicado ao conteúdo textual para evitar que o texto desapareça atrás da imagem. */}
         <div className="relative z-10 flex px-6 py-24 sm:px-10 lg:px-16">
           {/* Estrutura o conteúdo textual para preservar hierarquia e legibilidade. */}
@@ -17,8 +17,8 @@ export default function HomePage() {
               Formação e prática
             </p>
 
-            {/* Destaca a proposta principal com cor vermelha e peso tipográfico forte para aumentar o impacto. */}
-            <h1 className="text-4xl font-bold leading-tight text-[color:var(--accent)] sm:text-5xl lg:text-6xl">
+            {/* Destaca a proposta principal com cor azul e peso tipográfico forte para aumentar o impacto. */}
+            <h1 className="text-4xl font-bold leading-tight text-[#0067a9] sm:text-5xl lg:text-6xl">
               Sê pago para testar produtos e serviços
             </h1>
 
