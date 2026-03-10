@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HeaderActions from "./HeaderActions";
 import TopNav from "./TopNav";
@@ -19,12 +20,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         } px-4 py-5 sm:px-6 md:px-10 md:py-6`}
       >
         <div className="relative flex w-full items-center justify-between gap-3">
-          <a
+          <Link
             className="text-[11px] font-black uppercase tracking-[0.3em] text-[color:var(--foreground)] sm:text-sm sm:tracking-[0.35em]"
             href="/"
           >
             CM
-          </a>
+          </Link>
 
           {/* Na home centra o menu na metade cinzenta; nas restantes páginas mantém o centro global. */}
           <div
@@ -35,13 +36,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <TopNav />
           </div>
 
-          {/* Alinha o botão de ação ao limite direito do conteúdo para manter consistência visual. */}
-          <div className="hidden lg:flex">
-            <HeaderActions />
-          </div>
-
-          {/* Mantém as ações disponíveis no mobile sem quebrar o layout do menu hamburguer. */}
-          <div className="lg:hidden">
+          {/* Mantém uma única instância das ações para evitar renderização duplicada e navegação menos fluída. */}
+          <div>
             <HeaderActions />
           </div>
         </div>

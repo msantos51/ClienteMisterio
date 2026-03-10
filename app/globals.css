@@ -30,6 +30,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Força todos os elementos tipográficos principais a usar Montserrat em negrito. */
@@ -41,12 +43,6 @@ h5,
 h6 {
   font-family: var(--font-sans);
   font-weight: 700;
-}
-
-/* Gira texto para orientação vertical usada na barra lateral do hero. */
-.vertical-text {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
 }
 
 @layer components {
@@ -66,8 +62,9 @@ h6 {
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    will-change: transform;
+    touch-action: manipulation;
   }
 
   /* Realça o botão no hover com aumento subtil e sombra difusa vermelha. */
@@ -76,7 +73,7 @@ h6 {
     background-color: #F56151 !important;
     filter: none !important;
     box-shadow: 0 0 20px rgb(245 97 81 / 32%);
-    transform: scale(1.1);
+    transform: translateZ(0) scale(1.03);
   }
 
   /* Aplica estado de clique com redução de escala para feedback tátil. */
@@ -84,10 +81,8 @@ h6 {
   .button-size-login:active {
     background-color: #F56151 !important;
     filter: none !important;
-    transition: all 0.25s;
-    -webkit-transition: all 0.25s;
     box-shadow: none;
-    transform: scale(0.98);
+    transform: translateZ(0) scale(0.98);
   }
 
   /* Evita animações quando o botão está desativado para manter acessibilidade. */
