@@ -17,8 +17,8 @@ export default function HomePage() {
               Formação e prática
             </p>
 
-            {/* Destaca a proposta principal com cor azul e peso tipográfico forte para aumentar o impacto. */}
-            <h1 className="text-4xl font-bold leading-tight text-[#2596be] sm:text-5xl lg:text-6xl">
+            {/* Destaca a proposta principal com cor dourada e peso tipográfico forte para aumentar o impacto. */}
+            <h1 className="text-4xl font-bold leading-tight text-[#e3a319] sm:text-5xl lg:text-6xl">
               Sê pago para testar produtos e serviços
             </h1>
 
