@@ -18,7 +18,7 @@ export default function HomePage() {
             </p>
 
             {/* Destaca a proposta principal com cor azul e peso tipográfico forte para aumentar o impacto. */}
-            <h1 className="text-4xl font-bold leading-tight text-[#0067a9] sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold leading-tight text-[#2596be] sm:text-5xl lg:text-6xl">
               Sê pago para testar produtos e serviços
             </h1>
 

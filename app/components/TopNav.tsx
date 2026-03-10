@@ -53,15 +53,15 @@ export default function TopNav() {
               key={item.href}
               className={`relative pb-2 text-[16px] font-semibold transition ${
                 isActive
-                  ? "text-[color:var(--accent)]"
-                  : "text-[color:var(--foreground)] hover:text-[color:var(--accent)]"
+                  ? "text-[#2596be]"
+                  : "text-[#2596be] hover:text-[#2596be]"
               }`}
               href={item.href}
             >
               {item.label}
 
               {isActive ? (
-                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[color:var(--accent)]" />
+                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[#2596be]" />
               ) : null}
             </Link>
           );
@@ -80,8 +80,8 @@ export default function TopNav() {
                 key={item.href}
                 className={`mobile-menu-item px-5 py-4 text-base font-semibold transition ${
                   isActive
-                    ? "text-[color:var(--accent)]"
-                    : "text-[color:var(--accent)] hover:bg-red-50"
+                    ? "text-[#2596be]"
+                    : "text-[#2596be] hover:bg-[#eaf6fb]"
                 } ${isLast ? "border-b-0" : "border-b border-[color:var(--line)]"}`}
                 href={item.href}
                 onClick={closeMenu}
