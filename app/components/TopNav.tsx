@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navigationItems = [
   { href: "/", label: "Home" },
@@ -15,6 +15,11 @@ const navigationItems = [
 export default function TopNav() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    // Fecha automaticamente o menu quando a rota muda para manter a navegação ágil no mobile.
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   const closeMenu = () => {
     // Fecha o menu após navegação para melhorar a experiência em ecrãs pequenos.
