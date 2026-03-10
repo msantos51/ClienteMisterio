@@ -27,12 +27,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             CM
           </Link>
 
-          {/* Na home centra o menu na metade cinzenta; nas restantes páginas mantém o centro global. */}
-          <div
-            className={`justify-self-end lg:absolute lg:-translate-x-1/2 ${
-              isHomePage ? "lg:left-1/4" : "lg:left-1/2"
-            }`}
-          >
+          {/* Mantém o menu centrado no cabeçalho em desktop, inclusive na home. */}
+          <div className="justify-self-end lg:absolute lg:left-1/2 lg:-translate-x-1/2">
             <TopNav />
           </div>
 
