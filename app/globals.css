@@ -7,7 +7,7 @@
   --surface-muted: #ececec;
   --primary: #111111;
   --primary-soft: #f0f0f0;
-  --accent: #f44336;
+  --accent: #F56151;
   --line: #d5d5d5;
   --header-control-height: 36px;
   color-scheme: light;
@@ -60,7 +60,7 @@ h6 {
     border: 0;
     border-radius: 100px;
     padding: 0 30px;
-    background-color: #dc2626 !important;
+    background-color: #F56151 !important;
     color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
@@ -73,16 +73,16 @@ h6 {
   /* Realça o botão no hover com aumento subtil e sombra difusa vermelha. */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background-color: #ef4444 !important;
+    background-color: #F56151 !important;
     filter: none !important;
-    box-shadow: 0 0 20px rgb(239 68 68 / 32%);
+    box-shadow: 0 0 20px rgb(245 97 81 / 32%);
     transform: scale(1.1);
   }
 
   /* Aplica estado de clique com redução de escala para feedback tátil. */
   .site-pill-button:active,
   .button-size-login:active {
-    background-color: #b91c1c !important;
+    background-color: #F56151 !important;
     filter: none !important;
     transition: all 0.25s;
     -webkit-transition: all 0.25s;
@@ -132,7 +132,7 @@ h6 {
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background-color: #dc2626;
+    background-color: #F56151;
     transition: all 0.35s ease;
   }
 
@@ -157,7 +157,7 @@ h6 {
 
   /* Garante texto vermelho em todas as opções do menu mobile. */
   .mobile-menu-item {
-    color: #dc2626;
+    color: #F56151;
   }
 
   /* Mantém estilo textual consistente para botões em páginas internas. */
@@ -243,8 +243,8 @@ h6 {
 
   /* Aplica o tom vermelho solicitado e reforça destaque visual quando selecionado. */
   .custom-checkbox:checked ~ .checkmark {
-    background-color: #dc2626;
-    box-shadow: 0 3px 7px rgba(220, 38, 38, 0.3);
+    background-color: #F56151;
+    box-shadow: 0 3px 7px rgba(245, 97, 81, 0.3);
   }
 
   /* Exibe o check e dispara animação curta para feedback da seleção. */
@@ -255,7 +255,7 @@ h6 {
 
   /* Remove contorno padrão e usa anel customizado para foco acessível. */
   .custom-checkbox:focus-visible ~ .checkmark {
-    outline: 2px solid #dc2626;
+    outline: 2px solid #F56151;
     outline-offset: 2px;
   }
 
