@@ -22,8 +22,8 @@ export default function HomePage() {
               Sê pago para testar produtos e serviços
             </h1>
 
-            {/* Lista os benefícios principais em frases curtas para facilitar leitura rápida. */}
-            <ul className="space-y-2 text-sm leading-7 text-black/75 sm:text-base">
+            {/* Mostra os benefícios com o mesmo tamanho tipográfico do título principal, mantendo a cor preta. */}
+            <ul className="space-y-2 text-4xl leading-tight text-black sm:text-5xl lg:text-6xl">
               <li>Sem horários</li>
               <li>Escolhes as marcas</li>
               <li>Rendimento extra ao teu ritmo</li>
