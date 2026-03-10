@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f4f4;
-  --foreground: #111111;
-  --surface: #ffffff;
-  --surface-muted: #ececec;
-  --primary: #111111;
-  --primary-soft: #f0f0f0;
+  --background: #000000;
+  --foreground: #ffffff;
+  --surface: #000000;
+  --surface-muted: #0f0f0f;
+  --primary: #000000;
+  --primary-soft: #111111;
   --accent: #F56151;
-  --line: #d5d5d5;
+  --line: #2a2a2a;
   --header-control-height: 36px;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -32,6 +32,20 @@ body {
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Garante contraste consistente ao forçar texto branco em todos os elementos visíveis da interface. */
+body * {
+  color: var(--foreground) !important;
+}
+
+/* Mantém campos de formulário com fundo preto e texto branco em todas as páginas. */
+input,
+textarea,
+select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: var(--line) !important;
 }
 
 /* Força todos os elementos tipográficos principais a usar Montserrat em negrito. */
@@ -56,7 +70,8 @@ h6 {
     border: 0;
     border-radius: 100px;
     padding: 0 30px;
-    background-color: #e3a319 !important;
+    background-color: #000000 !important;
+    border: 1px solid #ffffff;
     color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
@@ -70,16 +85,16 @@ h6 {
   /* Realça o botão no hover com aumento subtil e sombra difusa dourada. */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background-color: #e3a319 !important;
+    background-color: #000000 !important;
     filter: none !important;
-    box-shadow: 0 0 20px rgb(227 163 25 / 32%);
+    box-shadow: 0 0 20px rgb(255 255 255 / 28%);
     transform: translateZ(0) scale(1.03);
   }
 
   /* Aplica estado de clique com redução de escala para feedback tátil. */
   .site-pill-button:active,
   .button-size-login:active {
-    background-color: #e3a319 !important;
+    background-color: #000000 !important;
     filter: none !important;
     box-shadow: none;
     transform: translateZ(0) scale(0.98);
