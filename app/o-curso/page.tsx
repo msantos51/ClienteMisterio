@@ -86,7 +86,7 @@ export default function CoursePage() {
     <section className="mx-auto w-full max-w-5xl space-y-8 rounded-[32px] bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.08)] lg:p-10">
       {/* Define o cabeçalho principal para contextualizar o conteúdo da página de módulos. */}
       <header className="space-y-3">
-        <p className="inline-flex rounded-full bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-red-600">
+        <p className="inline-flex rounded-full bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--accent)]">
           Estrutura do curso
         </p>
 
@@ -108,7 +108,7 @@ export default function CoursePage() {
             {/* Mostra apenas o título do módulo fechado e revela os tópicos ao clicar. */}
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold text-zinc-800 marker:content-none">
               <span>{moduleItem.title}</span>
-              <span className="text-red-600 transition-transform duration-200 group-open:rotate-45">+</span>
+              <span className="text-[color:var(--accent)] transition-transform duration-200 group-open:rotate-45">+</span>
             </summary>
 
             <ul className="mt-4 space-y-3 border-t border-zinc-200 pt-4 text-sm leading-6 text-zinc-700">

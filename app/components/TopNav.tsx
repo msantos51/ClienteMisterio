@@ -75,7 +75,7 @@ export default function TopNav() {
                 key={item.href}
                 className={`mobile-menu-item px-5 py-4 text-base font-semibold transition ${
                   isActive
-                    ? "text-[#b91c1c]"
+                    ? "text-[color:var(--accent)]"
                     : "text-[color:var(--accent)] hover:bg-red-50"
                 } ${isLast ? "border-b-0" : "border-b border-[color:var(--line)]"}`}
                 href={item.href}

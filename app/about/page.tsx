@@ -19,7 +19,7 @@ export default function AboutPage() {
       <article className="mx-auto grid w-full max-w-6xl gap-8 rounded-[34px] bg-white p-8 shadow-[0_22px_55px_rgba(15,23,42,0.08)] lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:p-12">
         {/* Mantém toda a informação atual do site, com hierarquia visual e pormenores vermelhos. */}
         <div className="space-y-6">
-          <p className="inline-flex rounded-full bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-red-600">
+          <p className="inline-flex rounded-full bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--accent)]">
             Sobre a Cliente Mistério
           </p>
 
@@ -51,7 +51,7 @@ export default function AboutPage() {
                 key={metric.label}
                 className="rounded-2xl border border-red-100 bg-red-50/70 px-4 py-3"
               >
-                <p className="text-2xl font-bold text-red-700">{metric.value}</p>
+                <p className="text-2xl font-bold text-[color:var(--accent)]">{metric.value}</p>
                 <p className="text-sm font-medium text-zinc-700">{metric.label}</p>
               </div>
             ))}
@@ -71,7 +71,7 @@ export default function AboutPage() {
               priority
             />
             <div className="absolute bottom-8 left-8 rounded-xl bg-white/95 px-4 py-3 shadow-lg">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-red-600">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--accent)]">
                 Curso estruturado
               </p>
               <p className="text-sm font-medium text-zinc-700">
@@ -99,7 +99,7 @@ export default function AboutPage() {
               className="group rounded-2xl border border-zinc-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-red-300 hover:shadow-[0_16px_28px_rgba(220,38,38,0.14)]"
             >
               <div className="flex items-start gap-3">
-                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-700">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-[color:var(--accent)]">
                   {index + 1}
                 </span>
                 <p className="text-base leading-7 text-zinc-700">{advantage}</p>
