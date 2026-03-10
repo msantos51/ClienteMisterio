@@ -17,18 +17,17 @@ export default function HomePage() {
               Formação e prática
             </p>
 
-            {/* Recupera a mensagem principal com ênfase cromática na proposta de valor. */}
-            <h1 className="text-4xl font-semibold leading-tight text-black sm:text-5xl lg:text-6xl">
-              Aprende a observar,
-              <span className="block text-[#dc2626]">avaliar e melhorar serviços.</span>
+            {/* Destaca a proposta principal com cor vermelha e peso tipográfico forte para aumentar o impacto. */}
+            <h1 className="text-4xl font-bold leading-tight text-[#dc2626] sm:text-5xl lg:text-6xl">
+              Sê pago para testar produtos e serviços
             </h1>
 
-            {/* Explica a proposta de valor com linguagem curta para não competir visualmente com a imagem. */}
-            <p className="max-w-lg text-sm leading-7 text-black/70 sm:text-base">
-              O programa Cliente Mistério ajuda-te a desenvolver pensamento crítico,
-              método de avaliação e capacidade de transformar observações em melhorias
-              concretas para equipas e negócios.
-            </p>
+            {/* Mostra os benefícios com o mesmo tamanho tipográfico do título principal, mantendo a cor preta. */}
+            <ul className="space-y-2 text-4xl leading-tight text-black sm:text-5xl lg:text-6xl">
+              <li>Sem horários</li>
+              <li>Escolhes as marcas</li>
+              <li>Rendimento extra ao teu ritmo</li>
+            </ul>
 
             {/* Em mobile mantém o CTA no fluxo natural para facilitar leitura e toque. */}
             <div className="flex justify-center pb-4 pt-8 lg:hidden">
