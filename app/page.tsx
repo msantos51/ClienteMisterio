@@ -22,11 +22,11 @@ export default function HomePage() {
               Sê pago para testar produtos e serviços
             </h1>
 
-            {/* Mostra os benefícios com o mesmo tamanho tipográfico do título principal, mantendo a cor preta. */}
-            <ul className="space-y-2 text-4xl leading-tight text-black sm:text-5xl lg:text-6xl">
-              <li>Sem horários</li>
-              <li>Escolhes as marcas</li>
-              <li>Rendimento extra ao teu ritmo</li>
+            {/* Mostra os benefícios em bold e com tamanho ligeiramente inferior ao título principal. */}
+            <ul className="space-y-2 text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
+              <li>-Sem horários</li>
+              <li>-Escolhes as marcas</li>
+              <li>-Rendimento extra</li>
             </ul>
 
             {/* Em mobile mantém o CTA no fluxo natural para facilitar leitura e toque. */}
