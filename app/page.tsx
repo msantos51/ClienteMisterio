@@ -18,7 +18,7 @@ export default function HomePage() {
             </p>
 
             {/* Destaca a proposta principal com cor vermelha e peso tipográfico forte para aumentar o impacto. */}
-            <h1 className="text-4xl font-bold leading-tight text-[#dc2626] sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-bold leading-tight text-[color:var(--accent)] sm:text-5xl lg:text-6xl">
               Sê pago para testar produtos e serviços
             </h1>
 
