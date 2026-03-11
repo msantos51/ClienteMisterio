@@ -113,7 +113,7 @@ export default function LoginPage() {
 
   return (
     <section className="space-y-8">
-      <div className="mx-auto flex w-full max-w-5xl justify-center">
+      <div className="mx-auto flex w-full max-w-6xl justify-center">
         <article className="login-form">
           <h1 className="form-heading">Login</h1>
           <form onSubmit={handleSubmit}>

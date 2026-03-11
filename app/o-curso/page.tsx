@@ -83,7 +83,7 @@ const courseModules = [
 
 export default function CoursePage() {
   return (
-    <section className="mx-auto w-full max-w-5xl space-y-8">
+    <section className="w-full space-y-8">
       {/* Define o cabeçalho principal para contextualizar o conteúdo da página de módulos. */}
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">

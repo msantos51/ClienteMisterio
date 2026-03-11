@@ -16,7 +16,7 @@ export default function AboutPage() {
   return (
     <section className="space-y-12 pb-4">
       {/* Mantém a estrutura de duas colunas sem cartão branco para seguir o estilo da landing page. */}
-      <article className="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <article className="grid w-full gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         {/* Preserva o conteúdo da página e ajusta a hierarquia para texto branco com destaques amarelos. */}
         <div className="space-y-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
