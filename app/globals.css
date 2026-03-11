@@ -56,7 +56,8 @@ h6 {
     border: 0;
     border-radius: 100px;
     padding: 0 30px;
-    background-color: #e3a319 !important;
+    background-color: #000000 !important;
+    border: 1px solid #ffffff;
     color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
@@ -70,16 +71,16 @@ h6 {
   /* Realça o botão no hover com aumento subtil e sombra difusa dourada. */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background-color: #e3a319 !important;
+    background-color: #000000 !important;
     filter: none !important;
-    box-shadow: 0 0 20px rgb(227 163 25 / 32%);
+    box-shadow: 0 0 20px rgb(255 255 255 / 28%);
     transform: translateZ(0) scale(1.03);
   }
 
   /* Aplica estado de clique com redução de escala para feedback tátil. */
   .site-pill-button:active,
   .button-size-login:active {
-    background-color: #e3a319 !important;
+    background-color: #000000 !important;
     filter: none !important;
     box-shadow: none;
     transform: translateZ(0) scale(0.98);
