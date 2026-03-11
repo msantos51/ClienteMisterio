@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #9581C8;
+  --background: #6f5eb2;
   --foreground: #ffffff;
   --surface: #000000;
   --surface-muted: #0f0f0f;
@@ -27,8 +27,12 @@
 }
 
 body {
-  background: #9581C8;
-  background: radial-gradient(circle, rgba(149, 129, 200, 1) 0%, rgba(81, 66, 136, 1) 100%);
+  /* Combina gradiente radial e linear para reproduzir o fundo roxo com centro mais iluminado da referência. */
+  background-color: #31285e;
+  background-image:
+    radial-gradient(circle at 50% 68%, #8f7bda 0%, #6c59b2 40%, #4e3e8f 68%, #30265d 100%),
+    linear-gradient(160deg, #231a49 0%, #4a3a86 55%, #6655ae 100%);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
