@@ -29,7 +29,6 @@ type PasswordForm = {
   confirmNewPassword: string;
 };
 
-
 type StoredUserProfile = Pick<UserProfile, "email" | "nationalId" | "birthDate">;
 
 
@@ -72,13 +71,12 @@ const getStoredNationalId = (email: string) => {
     if (storedUser.email === email) {
       return storedUser.nationalId ?? "";
     }
-  } catch (error) {
+  } catch {
     return "";
   }
 
   return "";
 };
-
 
 const normalizeBirthDateForInput = (birthDate: string | null, email: string) => {
   // Garante formato YYYY-MM-DD no input date e usa fallback local quando necessário.
@@ -98,7 +96,7 @@ const normalizeBirthDateForInput = (birthDate: string | null, email: string) => 
     if (storedUser.email === email) {
       return (storedUser.birthDate ?? "").slice(0, 10);
     }
-  } catch (error) {
+  } catch {
     return "";
   }
 
@@ -181,7 +179,7 @@ export default function DashboardPage() {
 
         setProfile(normalizedProfile);
         localStorage.setItem(userStorageKey, JSON.stringify(normalizedProfile));
-      } catch (error) {
+      } catch {
         router.push("/login");
       }
     };
@@ -271,7 +269,7 @@ export default function DashboardPage() {
       setProfile(refreshedProfile);
       setFeedbackState(data.message);
 
-    } catch (error) {
+    } catch {
       setFeedbackState("Não foi possível guardar as alterações. Tente novamente.");
     } finally {
       setSavingState(false);
@@ -363,7 +361,7 @@ export default function DashboardPage() {
 
       setPasswordFeedback(data.message);
       setPasswordForm({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
-    } catch (error) {
+    } catch {
       setPasswordFeedback("Não foi possível atualizar a senha. Tente novamente.");
     } finally {
       setIsSavingPassword(false);
@@ -386,21 +384,19 @@ export default function DashboardPage() {
     <section className="space-y-8">
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/40 p-4">
-          <div className="w-full max-w-2xl rounded-3xl bg-white p-6 shadow-2xl">
+          <div className="login-form w-full max-w-2xl">
             <h2 className="section-title">Complete o seu perfil</h2>
-            <p className="mt-2 text-sm text-justify text-slate-600">
+            <p className="mt-2 text-sm text-justify">
               Os dados seguintes nunca serão partilhados e servem apenas para fins estatísticos. Este preenchimento é obrigatório para concluir o primeiro acesso.
             </p>
-            <p className="mt-3 text-sm font-semibold text-[color:var(--primary)]">
+            <p className="mt-3 text-sm font-semibold">
               Preencha: NIF, data de nascimento, cidade, género e habilitações literárias.
             </p>
 
 
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                NIF
+              <div className="input-group">
                 <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                   inputMode="numeric"
                   maxLength={9}
                   placeholder={
@@ -411,31 +407,28 @@ export default function DashboardPage() {
                   value={profile.nationalId}
                   onChange={(event) => handleProfileChange("nationalId", event.target.value)}
                 />
-              </label>
+                <span className="label">NIF</span>
+              </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Data de nascimento
+              <div className="input-group">
                 <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                   type="date"
                   value={profile.birthDate}
                   onChange={(event) => handleProfileChange("birthDate", event.target.value)}
                 />
-              </label>
+                <span className="label">Data de nascimento</span>
+              </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Cidade
+              <div className="input-group">
                 <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                   value={profile.city}
                   onChange={(event) => handleProfileChange("city", event.target.value)}
                 />
-              </label>
+                <span className="label">Cidade</span>
+              </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Género
+              <div className="input-group">
                 <select
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                   value={profile.gender}
                   onChange={(event) => handleProfileChange("gender", event.target.value)}
                 >
@@ -443,12 +436,11 @@ export default function DashboardPage() {
                   <option value="male">Masculino</option>
                   <option value="female">Feminino</option>
                 </select>
-              </label>
+                <span className="label">Género</span>
+              </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Habilitações literárias
+              <div className="input-group">
                 <select
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                   value={profile.educationLevel}
                   onChange={(event) => handleProfileChange("educationLevel", event.target.value)}
                 >
@@ -459,18 +451,19 @@ export default function DashboardPage() {
                     </option>
                   ))}
                 </select>
-              </label>
+                <span className="label">Habilitações literárias</span>
+              </div>
             </div>
 
             {firstAccessFeedback && (
-              <p className="mt-4 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
+              <p className="form-feedback mt-2">
                 {firstAccessFeedback}
               </p>
             )}
 
             <div className="mt-4">
               <button
-                className="button-size-login bg-[color:var(--primary)] text-white"
+                className="submit"
                 type="button"
                 onClick={handleCompleteFirstAccess}
               >
@@ -484,42 +477,37 @@ export default function DashboardPage() {
       <div className="mx-auto w-full max-w-6xl space-y-8">
         <header className="rounded-[32px] bg-[color:var(--surface)] p-8 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
           <h1 className="page-title">Olá, {profile.firstName}</h1>
-          <p className="mt-3 text-sm text-slate-600">Faça a gestão da sua conta e segurança.</p>
+          <p className="mt-3 text-sm">Faça a gestão da sua conta e segurança.</p>
         </header>
 
-        <article className="rounded-[32px] bg-white p-8 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
+        <article className="login-form max-w-none">
           <div className="grid gap-4 md:grid-cols-2">
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              Primeiro nome
+            <div className="input-group">
               <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 value={profile.firstName}
                 onChange={(event) => handleProfileChange("firstName", event.target.value)}
               />
-            </label>
+              <span className="label">Primeiro nome</span>
+            </div>
 
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              Último nome
+            <div className="input-group">
               <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 value={profile.lastName}
                 onChange={(event) => handleProfileChange("lastName", event.target.value)}
               />
-            </label>
+              <span className="label">Último nome</span>
+            </div>
 
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700 md:col-span-2">
-              E-mail
+            <div className="input-group md:col-span-2">
               <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 value={profile.email}
                 onChange={(event) => handleProfileChange("email", event.target.value)}
               />
-            </label>
+              <span className="label">E-mail</span>
+            </div>
 
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              NIF
+            <div className="input-group">
               <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 inputMode="numeric"
                 maxLength={9}
                 placeholder={
@@ -530,31 +518,28 @@ export default function DashboardPage() {
                 value={profile.nationalId}
                 onChange={(event) => handleProfileChange("nationalId", event.target.value)}
               />
-            </label>
+              <span className="label">NIF</span>
+            </div>
 
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              Data de nascimento
+            <div className="input-group">
               <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 type="date"
                 value={profile.birthDate}
                 onChange={(event) => handleProfileChange("birthDate", event.target.value)}
               />
-            </label>
+              <span className="label">Data de nascimento</span>
+            </div>
 
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              Cidade
+            <div className="input-group">
               <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 value={profile.city}
                 onChange={(event) => handleProfileChange("city", event.target.value)}
               />
-            </label>
+              <span className="label">Cidade</span>
+            </div>
 
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              Género
+            <div className="input-group">
               <select
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 value={profile.gender}
                 onChange={(event) => handleProfileChange("gender", event.target.value)}
               >
@@ -562,12 +547,11 @@ export default function DashboardPage() {
                 <option value="male">Masculino</option>
                 <option value="female">Feminino</option>
               </select>
-            </label>
+              <span className="label">Género</span>
+            </div>
 
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              Habilitações literárias
+            <div className="input-group">
               <select
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
                 value={profile.educationLevel}
                 onChange={(event) => handleProfileChange("educationLevel", event.target.value)}
               >
@@ -578,18 +562,19 @@ export default function DashboardPage() {
                   </option>
                 ))}
               </select>
-            </label>
+              <span className="label">Habilitações literárias</span>
+            </div>
           </div>
 
           {profileFeedback && (
-            <p className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+            <p className="form-feedback mt-2">
               {profileFeedback}
             </p>
           )}
 
           <div className="mt-4 flex gap-3">
             <button
-              className="button-size-login bg-[color:var(--primary)] text-white"
+              className="submit"
               type="button"
               onClick={handleSaveProfile}
             >
@@ -600,50 +585,55 @@ export default function DashboardPage() {
           <div className="mt-8 border-t border-slate-200 pt-8">
             <h2 className="section-title">Alterar palavra-passe</h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3 md:col-span-2"
-                placeholder="Senha atual"
-                type="password"
-                value={passwordForm.currentPassword}
-                onChange={(event) =>
-                  handlePasswordFieldChange("currentPassword", event.target.value)
-                }
-              />
-              <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
-                placeholder="Nova senha"
-                type="password"
-                value={passwordForm.newPassword}
-                onChange={(event) =>
-                  handlePasswordFieldChange("newPassword", event.target.value)
-                }
-              />
-              <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3"
-                placeholder="Confirmar nova senha"
-                type="password"
-                value={passwordForm.confirmNewPassword}
-                onChange={(event) =>
-                  handlePasswordFieldChange("confirmNewPassword", event.target.value)
-                }
-              />
+              <div className="input-group md:col-span-2">
+                <input
+                  placeholder="Senha atual"
+                  type="password"
+                  value={passwordForm.currentPassword}
+                  onChange={(event) =>
+                    handlePasswordFieldChange("currentPassword", event.target.value)
+                  }
+                />
+                <span className="label">Senha atual</span>
+              </div>
+              <div className="input-group">
+                <input
+                  placeholder="Nova senha"
+                  type="password"
+                  value={passwordForm.newPassword}
+                  onChange={(event) =>
+                    handlePasswordFieldChange("newPassword", event.target.value)
+                  }
+                />
+                <span className="label">Nova senha</span>
+              </div>
+              <div className="input-group">
+                <input
+                  placeholder="Confirmar nova senha"
+                  type="password"
+                  value={passwordForm.confirmNewPassword}
+                  onChange={(event) =>
+                    handlePasswordFieldChange("confirmNewPassword", event.target.value)
+                  }
+                />
+                <span className="label">Confirmar nova senha</span>
+              </div>
             </div>
-            {passwordFeedback && <p className="mt-4 text-sm text-slate-600">{passwordFeedback}</p>}
+            {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
             <button
-              className="button-size-login mt-4 bg-[color:var(--primary)] text-white"
+              className="submit mt-4"
               type="button"
               onClick={handleChangePassword}
             >
-
               {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
             </button>
           </div>
         </article>
 
-        <aside className="rounded-[32px] bg-white p-6 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
+        <aside className="login-form max-w-none">
           <h3 className="card-title">Preferências</h3>
           <div className="mt-4 space-y-3">
-            <div className="flex items-center justify-between text-sm text-slate-700">
+            <div className="flex items-center justify-between text-sm">
               <label htmlFor="receive-newsletter">Receber newsletter</label>
               <label className="checkbox-container" htmlFor="receive-newsletter">
                 <input
@@ -656,7 +646,7 @@ export default function DashboardPage() {
                 <span className="checkmark" aria-hidden="true" />
               </label>
             </div>
-            <div className="flex items-center justify-between text-sm text-slate-700">
+            <div className="flex items-center justify-between text-sm">
               <label htmlFor="allow-notifications">Notificações da comunidade</label>
               <label className="checkbox-container" htmlFor="allow-notifications">
                 <input
@@ -674,7 +664,7 @@ export default function DashboardPage() {
 
         <div className="flex justify-end">
           <button
-            className="button-size-login border border-slate-200"
+            className="submit max-w-[280px]"
             type="button"
             onClick={handleLogout}
           >
