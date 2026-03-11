@@ -44,6 +44,12 @@ body * {
   color: var(--foreground) !important;
 }
 
+
+/* Permite destacar textos específicos da home sem ser afetado pela regra global de contraste. */
+.home-highlight-text {
+  color: #2596be !important;
+}
+
 /* Mantém campos de formulário com fundo preto e texto branco em todas as páginas. */
 input,
 textarea,
@@ -65,7 +71,7 @@ h6 {
 }
 
 @layer components {
-  /* Define estilo base único para todos os botões com visual pill e destaque dourado. */
+  /* Define estilo base único para todos os botões com fundo branco e texto preto. */
   .site-pill-button,
   .button-size-login {
     display: inline-flex;
@@ -75,9 +81,9 @@ h6 {
     border: 0;
     border-radius: 100px;
     padding: 0 30px;
-    background-color: #000000 !important;
+    background-color: #ffffff !important;
     border: 1px solid #ffffff;
-    color: #ffffff !important;
+    color: #000000 !important;
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 1;
@@ -87,10 +93,10 @@ h6 {
     touch-action: manipulation;
   }
 
-  /* Realça o botão no hover com aumento subtil e sombra difusa dourada. */
+  /* Realça o botão no hover mantendo o contraste de fundo branco com texto preto. */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background-color: #000000 !important;
+    background-color: #ffffff !important;
     filter: none !important;
     box-shadow: 0 0 20px rgb(255 255 255 / 28%);
     transform: translateZ(0) scale(1.03);
@@ -99,7 +105,7 @@ h6 {
   /* Aplica estado de clique com redução de escala para feedback tátil. */
   .site-pill-button:active,
   .button-size-login:active {
-    background-color: #000000 !important;
+    background-color: #ffffff !important;
     filter: none !important;
     box-shadow: none;
     transform: translateZ(0) scale(0.98);
