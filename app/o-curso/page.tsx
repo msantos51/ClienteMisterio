@@ -83,16 +83,16 @@ const courseModules = [
 
 export default function CoursePage() {
   return (
-    <section className="mx-auto w-full max-w-5xl space-y-8 rounded-[32px] bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.08)] lg:p-10">
+    <section className="mx-auto w-full max-w-5xl space-y-8">
       {/* Define o cabeçalho principal para contextualizar o conteúdo da página de módulos. */}
       <header className="space-y-3">
-        <p className="inline-flex rounded-full bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--accent)]">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
           Estrutura do curso
         </p>
 
-        <h1 className="text-3xl font-semibold text-zinc-900 lg:text-4xl">O Curso</h1>
+        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">O Curso</h1>
 
-        <p className="max-w-3xl text-base leading-7 text-zinc-600">
+        <p className="max-w-3xl text-base leading-7">
           Clica em cada módulo para veres os submódulos e os tópicos abordados em cada etapa da
           formação.
         </p>
@@ -103,18 +103,18 @@ export default function CoursePage() {
         {courseModules.map((moduleItem) => (
           <details
             key={moduleItem.title}
-            className="group rounded-2xl border border-zinc-200 bg-zinc-50 p-5 open:border-red-200 open:bg-white"
+            className="group rounded-2xl border border-white/30 p-5 open:border-[#F6C25B]"
           >
             {/* Mostra apenas o título do módulo fechado e revela os tópicos ao clicar. */}
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold text-zinc-800 marker:content-none">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none">
               <span>{moduleItem.title}</span>
-              <span className="text-[color:var(--accent)] transition-transform duration-200 group-open:rotate-45">+</span>
+              <span className="home-title-highlight-text transition-transform duration-200 group-open:rotate-45">+</span>
             </summary>
 
-            <ul className="mt-4 space-y-3 border-t border-zinc-200 pt-4 text-sm leading-6 text-zinc-700">
+            <ul className="mt-4 space-y-3 border-t border-white/20 pt-4 text-sm leading-6">
               {moduleItem.topics.map((topic) => (
                 <li key={topic} className="flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-red-500" />
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F6C25B]" />
                   <span>{topic}</span>
                 </li>
               ))}
