@@ -20,10 +20,10 @@ export default function HomePage() {
             </h1>
 
             {/* Mostra os benefícios em destaque com alinhamento central para manter equilíbrio visual sem imagem lateral. */}
-            <ul className="space-y-2 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            <ul className="space-y-2 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
               <li>-Sem horários</li>
               <li>-Escolhes as marcas</li>
-              <li className="home-benefit-extra-highlight-text">-Rendimento extra</li>
+              <li>-Rendimento extra</li>
             </ul>
 
             {/* Mantém o CTA principal em posição central para facilitar leitura e toque em todos os dispositivos. */}
