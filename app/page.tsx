@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <section className="w-full">
-      {/* Mantém o hero a ocupar o ecrã para preservar o impacto visual da primeira dobra. */}
-      <div className="relative min-h-screen w-full bg-transparent">
-        {/* Usa um content wrapper com limites de largura para criar margens laterais consistentes em desktop. */}
-        <div className="mx-auto flex min-h-screen w-full max-w-[1440px] px-6 py-16 sm:px-10 lg:px-20 xl:px-24">
-          {/* Em desktop, distribui texto e imagem em duas colunas com espaçamento semelhante à referência. */}
-          <div className="grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20">
+      {/* Mantém o hero com o mesmo content width e paddings das páginas internas para evitar "salto" visual na navegação. */}
+      <div className="relative w-full bg-transparent">
+        {/* Reaproveita o mesmo envelope horizontal (max-w-6xl + px responsivo) usado no AppShell das páginas internas. */}
+        <div className="mx-auto w-full max-w-6xl px-4 pb-10 pt-8 sm:px-6 sm:pt-10 md:px-10">
+          {/* Em desktop, mantém duas colunas, mas com alinhamento inicial para sincronizar o ponto de arranque com a página Sobre. */}
+          <div className="grid w-full items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20">
             {/* Agrupa o conteúdo textual e mantém alinhamento central no mobile e à esquerda no desktop. */}
-            <div className="flex w-full max-w-2xl flex-col items-center justify-center gap-8 text-center lg:items-start lg:text-left">
+            <div className="flex w-full max-w-2xl flex-col items-center gap-8 pt-8 text-center lg:items-start lg:pt-10 lg:text-left">
               {/* Reforça o contexto da landing com uma etiqueta editorial discreta. */}
               <p className="section-label-uppercase text-[11px] tracking-[0.35em] text-white/80">
                 Formação e prática
