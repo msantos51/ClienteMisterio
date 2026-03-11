@@ -475,14 +475,15 @@ export default function DashboardPage() {
       )}
 
       <div className="mx-auto w-full max-w-6xl space-y-8">
-        <header className="rounded-[32px] bg-[color:var(--surface)] p-8 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
-          <h1 className="page-title">Olá, {profile.firstName}</h1>
-          <p className="mt-3 text-sm">Faça a gestão da sua conta e segurança.</p>
+        <header className="rounded-[32px] bg-white p-8 text-black shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
+          <h1 className="page-title !text-black">Olá, {profile.firstName}</h1>
+          <p className="mt-3 text-sm text-black">Faça a gestão da sua conta e segurança.</p>
         </header>
 
-        <article className="login-form max-w-none">
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="input-group">
+        <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+          <article className="login-form dashboard-form max-w-none">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="input-group">
               <input
                 value={profile.firstName}
                 onChange={(event) => handleProfileChange("firstName", event.target.value)}
@@ -566,101 +567,102 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          {profileFeedback && (
-            <p className="form-feedback mt-2">
-              {profileFeedback}
-            </p>
-          )}
+            {profileFeedback && (
+              <p className="form-feedback mt-2">
+                {profileFeedback}
+              </p>
+            )}
 
-          <div className="mt-4 flex gap-3">
-            <button
-              className="submit"
-              type="button"
-              onClick={handleSaveProfile}
-            >
-              {isSavingProfile ? "A guardar..." : "Guardar perfil"}
-            </button>
-          </div>
+            <div className="mt-4 flex gap-3">
+              <button
+                className="submit"
+                type="button"
+                onClick={handleSaveProfile}
+              >
+                {isSavingProfile ? "A guardar..." : "Guardar perfil"}
+              </button>
+            </div>
 
-          <div className="mt-8 border-t border-slate-200 pt-8">
-            <h2 className="section-title">Alterar palavra-passe</h2>
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <div className="input-group md:col-span-2">
-                <input
-                  placeholder="Senha atual"
-                  type="password"
-                  value={passwordForm.currentPassword}
-                  onChange={(event) =>
-                    handlePasswordFieldChange("currentPassword", event.target.value)
-                  }
-                />
-                <span className="label">Senha atual</span>
+            <div className="mt-8 border-t border-slate-200 pt-8">
+              <h2 className="section-title">Alterar palavra-passe</h2>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div className="input-group md:col-span-2">
+                  <input
+                    placeholder="Senha atual"
+                    type="password"
+                    value={passwordForm.currentPassword}
+                    onChange={(event) =>
+                      handlePasswordFieldChange("currentPassword", event.target.value)
+                    }
+                  />
+                  <span className="label">Senha atual</span>
+                </div>
+                <div className="input-group">
+                  <input
+                    placeholder="Nova senha"
+                    type="password"
+                    value={passwordForm.newPassword}
+                    onChange={(event) =>
+                      handlePasswordFieldChange("newPassword", event.target.value)
+                    }
+                  />
+                  <span className="label">Nova senha</span>
+                </div>
+                <div className="input-group">
+                  <input
+                    placeholder="Confirmar nova senha"
+                    type="password"
+                    value={passwordForm.confirmNewPassword}
+                    onChange={(event) =>
+                      handlePasswordFieldChange("confirmNewPassword", event.target.value)
+                    }
+                  />
+                  <span className="label">Confirmar nova senha</span>
+                </div>
               </div>
-              <div className="input-group">
-                <input
-                  placeholder="Nova senha"
-                  type="password"
-                  value={passwordForm.newPassword}
-                  onChange={(event) =>
-                    handlePasswordFieldChange("newPassword", event.target.value)
-                  }
-                />
-                <span className="label">Nova senha</span>
+              {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
+              <button
+                className="submit mt-4"
+                type="button"
+                onClick={handleChangePassword}
+              >
+                {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
+              </button>
+            </div>
+          </article>
+
+          <aside className="login-form max-w-none xl:sticky xl:top-6">
+            <h3 className="card-title">Preferências</h3>
+            <div className="mt-4 space-y-3">
+              <div className="flex items-center justify-between text-sm">
+                <label htmlFor="receive-newsletter">Receber newsletter</label>
+                <label className="checkbox-container" htmlFor="receive-newsletter">
+                  <input
+                    id="receive-newsletter"
+                    className="custom-checkbox"
+                    type="checkbox"
+                    checked={preferences.receiveNewsletter}
+                    onChange={() => handlePreferenceChange("receiveNewsletter")}
+                  />
+                  <span className="checkmark" aria-hidden="true" />
+                </label>
               </div>
-              <div className="input-group">
-                <input
-                  placeholder="Confirmar nova senha"
-                  type="password"
-                  value={passwordForm.confirmNewPassword}
-                  onChange={(event) =>
-                    handlePasswordFieldChange("confirmNewPassword", event.target.value)
-                  }
-                />
-                <span className="label">Confirmar nova senha</span>
+              <div className="flex items-center justify-between text-sm">
+                <label htmlFor="allow-notifications">Notificações da comunidade</label>
+                <label className="checkbox-container" htmlFor="allow-notifications">
+                  <input
+                    id="allow-notifications"
+                    className="custom-checkbox"
+                    type="checkbox"
+                    checked={preferences.allowNotifications}
+                    onChange={() => handlePreferenceChange("allowNotifications")}
+                  />
+                  <span className="checkmark" aria-hidden="true" />
+                </label>
               </div>
             </div>
-            {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
-            <button
-              className="submit mt-4"
-              type="button"
-              onClick={handleChangePassword}
-            >
-              {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
-            </button>
-          </div>
-        </article>
-
-        <aside className="login-form max-w-none">
-          <h3 className="card-title">Preferências</h3>
-          <div className="mt-4 space-y-3">
-            <div className="flex items-center justify-between text-sm">
-              <label htmlFor="receive-newsletter">Receber newsletter</label>
-              <label className="checkbox-container" htmlFor="receive-newsletter">
-                <input
-                  id="receive-newsletter"
-                  className="custom-checkbox"
-                  type="checkbox"
-                  checked={preferences.receiveNewsletter}
-                  onChange={() => handlePreferenceChange("receiveNewsletter")}
-                />
-                <span className="checkmark" aria-hidden="true" />
-              </label>
-            </div>
-            <div className="flex items-center justify-between text-sm">
-              <label htmlFor="allow-notifications">Notificações da comunidade</label>
-              <label className="checkbox-container" htmlFor="allow-notifications">
-                <input
-                  id="allow-notifications"
-                  className="custom-checkbox"
-                  type="checkbox"
-                  checked={preferences.allowNotifications}
-                  onChange={() => handlePreferenceChange("allowNotifications")}
-                />
-                <span className="checkmark" aria-hidden="true" />
-              </label>
-            </div>
-          </div>
-        </aside>
+          </aside>
+        </div>
 
         <div className="flex justify-end">
           <button
