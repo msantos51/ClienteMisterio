@@ -44,7 +44,7 @@ export default function HomePage() {
             <div className="relative mx-auto hidden h-[70vh] min-h-[520px] w-full max-w-[620px] lg:block">
               {/* Usa imagem local otimizada do Next para garantir desempenho e fidelidade visual. */}
               <Image
-                src="/images/background (2).png"
+                src="/images/background 3.png"
                 alt="Imagem decorativa do lado direito"
                 fill
                 className="object-contain object-center"
