@@ -4,7 +4,7 @@ export default function HomePage() {
   return (
     <section className="w-full">
       {/* Mantém o hero em coluna única para remover a imagem e priorizar a mensagem principal. */}
-      <div className="relative flex min-h-screen w-full bg-black">
+      <div className="relative flex min-h-screen w-full bg-transparent">
         {/* Centraliza e limita a largura do conteúdo textual para preservar legibilidade em todos os ecrãs. */}
         <div className="relative z-10 flex w-full px-6 py-24 sm:px-10 lg:px-16">
           {/* Organiza título, benefícios e CTA com espaçamento consistente. */}
