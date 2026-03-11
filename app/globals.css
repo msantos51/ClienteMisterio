@@ -47,12 +47,16 @@ body * {
 
 /* Permite destacar textos específicos da home sem ser afetado pela regra global de contraste. */
 .home-title-highlight-text {
-  color: #e49b27 !important;
+  color: #F6C25B !important;
 }
 
 /* Aplica cor de destaque secundária aos benefícios da home com prioridade sobre a regra global. */
 .home-benefits-highlight-text {
   color: #F6C25B !important;
+}
+/* Destaca especificamente o benefício de rendimento com tom dourado mais intenso. */
+.home-benefit-extra-highlight-text {
+  color: #e49b27 !important;
 }
 
 /* Mantém campos de formulário com fundo preto e texto branco em todas as páginas. */
