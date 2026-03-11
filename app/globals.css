@@ -251,7 +251,7 @@ h6 {
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: #fef3c7;
     border-radius: 4px;
     transition: background-color 0.3s;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -271,10 +271,10 @@ h6 {
     transform: rotate(45deg);
   }
 
-  /* Aplica o tom vermelho solicitado e reforça destaque visual quando selecionado. */
+  /* Aplica o tom amarelo solicitado e reforça destaque visual quando selecionado. */
   .custom-checkbox:checked ~ .checkmark {
-    background-color: #F56151;
-    box-shadow: 0 3px 7px rgba(245, 97, 81, 0.3);
+    background-color: #facc15;
+    box-shadow: 0 3px 7px rgba(250, 204, 21, 0.35);
   }
 
   /* Exibe o check e dispara animação curta para feedback da seleção. */
@@ -285,7 +285,7 @@ h6 {
 
   /* Remove contorno padrão e usa anel customizado para foco acessível. */
   .custom-checkbox:focus-visible ~ .checkmark {
-    outline: 2px solid #F56151;
+    outline: 2px solid #facc15;
     outline-offset: 2px;
   }
 
@@ -318,12 +318,16 @@ h6 {
 
 .login-form {
   width: 100%;
-  max-width: 420px;
+  max-width: 520px;
   padding: 40px;
   background: rgb(255 255 255 / 90%);
   border-radius: 12px;
   box-shadow: 0 10px 30px rgb(0 0 0 / 10%);
   animation: fadeIn 1.5s ease-out;
+}
+
+.dashboard-form {
+  max-width: 100%;
 }
 
 .login-form * {
