@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/layout.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import AppShell from "./components/AppShell";

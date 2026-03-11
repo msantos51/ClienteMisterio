@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/components/TopNav.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 "use client";
 
 import Link from "next/link";

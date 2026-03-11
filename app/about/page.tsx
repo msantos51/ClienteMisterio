@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/about/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import Image from 'next/image';
 
 export default function AboutPage() {

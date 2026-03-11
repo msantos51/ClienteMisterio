@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/o-curso/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 const courseModules = [
   {
     title: 'Módulo 1 — Enquadramento do Cliente Mistério',
