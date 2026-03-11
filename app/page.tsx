@@ -19,9 +19,9 @@ export default function HomePage() {
         </div>
 
         {/* Centraliza e limita a largura do conteúdo textual para preservar legibilidade em todos os ecrãs. */}
-        <div className="relative z-10 flex w-full px-6 py-24 sm:px-10 lg:px-16">
-          {/* Organiza título, benefícios e CTA com espaçamento consistente e com respiro à direita em desktop. */}
-          <div className="mx-auto flex min-h-[70vh] w-full max-w-3xl flex-col items-center justify-center gap-8 pr-0 text-center lg:mx-0 lg:ml-0 lg:pr-[30vw]">
+        <div className="relative z-10 flex w-full px-6 py-24 sm:px-10 lg:px-20 xl:px-24">
+          {/* Organiza título, benefícios e CTA com espaçamento consistente, deslocando o bloco ligeiramente para o centro em desktop. */}
+          <div className="mx-auto flex min-h-[70vh] w-full max-w-3xl flex-col items-center justify-center gap-8 pr-0 text-center lg:max-w-4xl lg:pr-[26vw] xl:pr-[24vw]">
             {/* Reforça o contexto da landing com uma etiqueta editorial discreta. */}
             <p className="section-label-uppercase text-[11px] tracking-[0.35em] text-white/80">
               Formação e prática
