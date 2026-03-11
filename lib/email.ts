@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/email.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 type MailPayload = {
   to: string;
   subject: string;

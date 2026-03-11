@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/authEmail.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 const normalizeBaseUrl = (rawUrl: string) => {
   // Remove espaços e barra final para evitar URLs duplicadas com "//" ao concatenar paths.
   const sanitizedUrl = rawUrl.trim().replace(/\/+$/, "");

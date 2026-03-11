@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro centraliza os estilos globais e utilitários visuais usados em toda a aplicação.
+ */
+
 @import "tailwindcss";
 
 :root {

@@ -1,3 +1,5 @@
+-- DESCRIÇÃO DO FICHEIRO: Este ficheiro define a estrutura da base de dados e os objetos SQL usados pela aplicação.
+
 -- Cria extensões necessárias para gerar UUIDs.
 create extension if not exists "pgcrypto";
 

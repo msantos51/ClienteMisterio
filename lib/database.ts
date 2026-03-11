@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/database.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import { Pool } from "pg";
 
 const databaseUrl = process.env.DATABASE_URL;

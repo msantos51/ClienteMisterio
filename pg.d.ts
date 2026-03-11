@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `pg.d.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 
 // Define tipagens mínimas do módulo "pg" para manter segurança de tipos sem depender de @types/pg.
 declare module "pg" {

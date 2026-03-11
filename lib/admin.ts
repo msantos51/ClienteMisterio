@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/admin.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import { query } from "@/lib/database";
 
 type AdminRow = {
