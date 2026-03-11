@@ -14,13 +14,13 @@ export default function HomePage() {
               Formação e prática
             </p>
 
-            {/* Destaca a proposta principal com cor dourada e peso tipográfico forte para aumentar o impacto. */}
-            <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+            {/* Destaca a proposta principal com cor de marca e peso tipográfico forte para aumentar o impacto. */}
+            <h1 className="text-4xl font-bold leading-tight home-title-highlight-text sm:text-5xl lg:text-6xl">
               Sê pago para testar produtos e serviços
             </h1>
 
             {/* Mostra os benefícios em destaque com alinhamento central para manter equilíbrio visual sem imagem lateral. */}
-            <ul className="space-y-2 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+            <ul className="space-y-2 text-3xl font-bold leading-tight home-benefits-highlight-text sm:text-4xl lg:text-5xl">
               <li>-Sem horários</li>
               <li>-Escolhes as marcas</li>
               <li>-Rendimento extra</li>
