@@ -132,6 +132,7 @@ export default function DashboardPage() {
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isCompletingFirstAccess, setIsCompletingFirstAccess] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
+  const [isPasswordFormVisible, setIsPasswordFormVisible] = useState(false);
 
   const mustCompleteProfile = useMemo(() => {
     if (!profile) {
@@ -206,6 +207,23 @@ export default function DashboardPage() {
 
   const handlePasswordFieldChange = (field: keyof PasswordForm, value: string) => {
     setPasswordForm((previous) => ({ ...previous, [field]: value }));
+  };
+
+  const handlePasswordFormVisibility = () => {
+    setIsPasswordFormVisible((previous) => {
+      const nextVisibility = !previous;
+
+      if (!nextVisibility) {
+        setPasswordFeedback(null);
+        setPasswordForm({
+          currentPassword: "",
+          newPassword: "",
+          confirmNewPassword: "",
+        });
+      }
+
+      return nextVisibility;
+    });
   };
 
   const hasNationalIdValue = (nationalId: string, hasNationalId: boolean) => {
@@ -583,52 +601,64 @@ export default function DashboardPage() {
               </button>
             </div>
 
-            <div className="mt-8 border-t border-slate-200 pt-8">
-              <h2 className="section-title">Alterar palavra-passe</h2>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
-                <div className="input-group md:col-span-2">
-                  <input
-                    placeholder="Senha atual"
-                    type="password"
-                    value={passwordForm.currentPassword}
-                    onChange={(event) =>
-                      handlePasswordFieldChange("currentPassword", event.target.value)
-                    }
-                  />
-                  <span className="label">Senha atual</span>
-                </div>
-                <div className="input-group">
-                  <input
-                    placeholder="Nova senha"
-                    type="password"
-                    value={passwordForm.newPassword}
-                    onChange={(event) =>
-                      handlePasswordFieldChange("newPassword", event.target.value)
-                    }
-                  />
-                  <span className="label">Nova senha</span>
-                </div>
-                <div className="input-group">
-                  <input
-                    placeholder="Confirmar nova senha"
-                    type="password"
-                    value={passwordForm.confirmNewPassword}
-                    onChange={(event) =>
-                      handlePasswordFieldChange("confirmNewPassword", event.target.value)
-                    }
-                  />
-                  <span className="label">Confirmar nova senha</span>
-                </div>
-              </div>
-              {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
+            <div className="mt-4 text-center">
               <button
-                className="submit mt-4"
+                className="form-link bg-transparent p-0"
                 type="button"
-                onClick={handleChangePassword}
+                onClick={handlePasswordFormVisibility}
               >
-                {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
+                {isPasswordFormVisible ? "Fechar alteração de password" : "Alterar Password"}
               </button>
             </div>
+
+            {isPasswordFormVisible && (
+              <div className="mt-8 border-t border-slate-200 pt-8">
+                <h2 className="section-title">Alterar palavra-passe</h2>
+                <div className="mt-4 grid gap-4 md:grid-cols-2">
+                  <div className="input-group md:col-span-2">
+                    <input
+                      placeholder="Senha atual"
+                      type="password"
+                      value={passwordForm.currentPassword}
+                      onChange={(event) =>
+                        handlePasswordFieldChange("currentPassword", event.target.value)
+                      }
+                    />
+                    <span className="label">Senha atual</span>
+                  </div>
+                  <div className="input-group">
+                    <input
+                      placeholder="Nova senha"
+                      type="password"
+                      value={passwordForm.newPassword}
+                      onChange={(event) =>
+                        handlePasswordFieldChange("newPassword", event.target.value)
+                      }
+                    />
+                    <span className="label">Nova senha</span>
+                  </div>
+                  <div className="input-group">
+                    <input
+                      placeholder="Confirmar nova senha"
+                      type="password"
+                      value={passwordForm.confirmNewPassword}
+                      onChange={(event) =>
+                        handlePasswordFieldChange("confirmNewPassword", event.target.value)
+                      }
+                    />
+                    <span className="label">Confirmar nova senha</span>
+                  </div>
+                </div>
+                {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
+                <button
+                  className="submit mt-4"
+                  type="button"
+                  onClick={handleChangePassword}
+                >
+                  {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
+                </button>
+              </div>
+            )}
           </article>
 
           <aside className="login-form max-w-none xl:sticky xl:top-6">
