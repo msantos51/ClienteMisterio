@@ -36,7 +36,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Remove margens na home para permitir hero full-bleed e mantém paddings nas páginas internas. */}
-      <main className={isHomePage ? "px-0 pb-0" : "px-4 pb-10 sm:px-6 md:px-10"}>{children}</main>
+      <main className={isHomePage ? "px-0 pb-0" : "px-4 pb-10 pt-8 sm:px-6 sm:pt-10 md:px-10"}>
+        {isHomePage ? children : <div className="mx-auto w-full max-w-6xl">{children}</div>}
+      </main>
     </div>
   );
 }

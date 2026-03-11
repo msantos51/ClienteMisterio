@@ -23,7 +23,7 @@ export default function ResetPasswordPage() {
 function ResetPasswordLoadingState() {
   return (
     <section className="space-y-8">
-      <div className="mx-auto flex w-full max-w-5xl justify-center">
+      <div className="mx-auto flex w-full max-w-6xl justify-center">
         <article className="login-form">
           <p className="text-center text-sm">A carregar formulário de recuperação...</p>
         </article>
@@ -70,7 +70,7 @@ function ResetPasswordContent() {
 
   return (
     <section className="space-y-8">
-      <div className="mx-auto flex w-full max-w-5xl justify-center">
+      <div className="mx-auto flex w-full max-w-6xl justify-center">
         <article className="login-form">
           <h1 className="form-heading">Definir password</h1>
           <form onSubmit={handleSubmit}>

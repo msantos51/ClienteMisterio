@@ -495,7 +495,7 @@ export default function DashboardPage() {
       <div className="mx-auto w-full max-w-6xl space-y-8">
         <header className="rounded-[32px] bg-white p-8 text-black shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
           <h1 className="page-title !text-black">Olá, {profile.firstName}</h1>
-          <p className="mt-3 text-sm text-black">Faça a gestão da sua conta e segurança.</p>
+          <p className="mt-3 text-sm !text-black">Faça a gestão da sua conta e segurança.</p>
         </header>
 
         <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
@@ -694,7 +694,7 @@ export default function DashboardPage() {
           </aside>
         </div>
 
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           <button
             className="submit max-w-[280px]"
             type="button"
