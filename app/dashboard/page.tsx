@@ -35,6 +35,7 @@ type PasswordForm = {
 
 type StoredUserProfile = Pick<UserProfile, "email" | "nationalId" | "birthDate">;
 
+type DashboardSection = "account" | "security" | "preferences";
 
 type ProfileResponse = {
   user?: {
@@ -60,6 +61,21 @@ type UpdateResponse = {
 const userStorageKey = "vp_user";
 const sessionStorageKey = "vp_session";
 const preferencesStorageKey = "vp_preferences";
+
+const educationOptions = [
+  { value: "6th_grade", label: "6º Ano" },
+  { value: "9th_grade", label: "9º Ano" },
+  { value: "12th_grade", label: "12º Ano" },
+  { value: "bachelor", label: "Licenciatura" },
+  { value: "master", label: "Mestrado" },
+  { value: "doctorate", label: "Doutoramento" },
+];
+
+const dashboardSections: Array<{ id: DashboardSection; label: string; description: string }> = [
+  { id: "account", label: "Conta", description: "Dados pessoais e perfil" },
+  { id: "security", label: "Segurança", description: "Palavra-passe e acesso" },
+  { id: "preferences", label: "Preferências", description: "Comunicações e notificações" },
+];
 
 const getStoredNationalId = (email: string) => {
   // Reutiliza o NIF previamente guardado no browser para o mesmo e-mail.
@@ -107,20 +123,11 @@ const normalizeBirthDateForInput = (birthDate: string | null, email: string) => 
   return "";
 };
 
-
-const educationOptions = [
-  { value: "6th_grade", label: "6º Ano" },
-  { value: "9th_grade", label: "9º Ano" },
-  { value: "12th_grade", label: "12º Ano" },
-  { value: "bachelor", label: "Licenciatura" },
-  { value: "master", label: "Mestrado" },
-  { value: "doctorate", label: "Doutoramento" },
-];
-
 export default function DashboardPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [sessionEmail, setSessionEmail] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<DashboardSection>("account");
   const [preferences, setPreferences] = useState<UserPreferences>({
     receiveNewsletter: true,
     allowNotifications: true,
@@ -136,7 +143,6 @@ export default function DashboardPage() {
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isCompletingFirstAccess, setIsCompletingFirstAccess] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
-  const [isPasswordFormVisible, setIsPasswordFormVisible] = useState(false);
 
   const mustCompleteProfile = useMemo(() => {
     if (!profile) {
@@ -213,23 +219,6 @@ export default function DashboardPage() {
     setPasswordForm((previous) => ({ ...previous, [field]: value }));
   };
 
-  const handlePasswordFormVisibility = () => {
-    setIsPasswordFormVisible((previous) => {
-      const nextVisibility = !previous;
-
-      if (!nextVisibility) {
-        setPasswordFeedback(null);
-        setPasswordForm({
-          currentPassword: "",
-          newPassword: "",
-          confirmNewPassword: "",
-        });
-      }
-
-      return nextVisibility;
-    });
-  };
-
   const hasNationalIdValue = (nationalId: string, hasNationalId: boolean) => {
     return hasNationalId || nationalId.trim().length > 0;
   };
@@ -272,7 +261,6 @@ export default function DashboardPage() {
         return;
       }
 
-
       const refreshedProfile: UserProfile = {
         ...profile,
         fullName: `${profile.firstName} ${profile.lastName}`.trim(),
@@ -280,7 +268,6 @@ export default function DashboardPage() {
         hasNationalId: hasNationalIdValue(profile.nationalId, profile.hasNationalId),
         isAdmin: profile.isAdmin,
       };
-
 
       // Mantém sessão, preferências e perfil sincronizados após guardar alterações.
       localStorage.setItem(preferencesStorageKey, JSON.stringify(preferences));
@@ -290,7 +277,6 @@ export default function DashboardPage() {
       setSessionEmail(profile.email);
       setProfile(refreshedProfile);
       setFeedbackState(data.message);
-
     } catch {
       setFeedbackState("Não foi possível guardar as alterações. Tente novamente.");
     } finally {
@@ -415,7 +401,6 @@ export default function DashboardPage() {
               Preencha: NIF, data de nascimento, cidade, género e habilitações literárias.
             </p>
 
-
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               <div className="input-group">
                 <input
@@ -477,18 +462,10 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {firstAccessFeedback && (
-              <p className="form-feedback mt-2">
-                {firstAccessFeedback}
-              </p>
-            )}
+            {firstAccessFeedback && <p className="form-feedback mt-2">{firstAccessFeedback}</p>}
 
             <div className="mt-4">
-              <button
-                className="submit"
-                type="button"
-                onClick={handleCompleteFirstAccess}
-              >
+              <button className="submit" type="button" onClick={handleCompleteFirstAccess}>
                 {isCompletingFirstAccess ? "A concluir..." : "Concluir primeiro acesso"}
               </button>
             </div>
@@ -496,129 +473,139 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="mx-auto w-full max-w-6xl space-y-8">
-        <header className="rounded-[32px] bg-white p-8 text-black shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
+      <div className="mx-auto w-full max-w-6xl space-y-6">
+        <header className="dashboard-top-banner">
           <h1 className="page-title !text-black">Olá, {profile.firstName}</h1>
-          <p className="mt-3 text-sm !text-black">Faça a gestão da sua conta e segurança.</p>
+          <p className="mt-2 text-sm !text-black">Faça a gestão da sua conta e segurança.</p>
         </header>
 
-        <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+        <div className="dashboard-layout-shell">
+          <aside className="dashboard-sidebar">
+            <h2 className="dashboard-sidebar-title">Definições</h2>
+            <nav className="dashboard-menu" aria-label="Navegação do dashboard">
+              {dashboardSections.map((menuSection) => (
+                <button
+                  key={menuSection.id}
+                  type="button"
+                  className={`dashboard-menu-item ${
+                    activeSection === menuSection.id ? "is-active" : ""
+                  }`}
+                  onClick={() => setActiveSection(menuSection.id)}
+                >
+                  <span>{menuSection.label}</span>
+                  <small>{menuSection.description}</small>
+                </button>
+              ))}
+            </nav>
+          </aside>
+
           <article className="login-form dashboard-form max-w-none">
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="input-group">
-              <input
-                value={profile.firstName}
-                onChange={(event) => handleProfileChange("firstName", event.target.value)}
-              />
-              <span className="label">Primeiro nome</span>
-            </div>
+            {activeSection === "account" && (
+              <>
+                <h2 className="section-title">Informação da conta</h2>
+                <p className="mt-2 text-sm">Atualize os seus dados pessoais e guarde as alterações.</p>
 
-            <div className="input-group">
-              <input
-                value={profile.lastName}
-                onChange={(event) => handleProfileChange("lastName", event.target.value)}
-              />
-              <span className="label">Último nome</span>
-            </div>
+                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                  <div className="input-group">
+                    <input
+                      value={profile.firstName}
+                      onChange={(event) => handleProfileChange("firstName", event.target.value)}
+                    />
+                    <span className="label">Primeiro nome</span>
+                  </div>
 
-            <div className="input-group md:col-span-2">
-              <input
-                value={profile.email}
-                onChange={(event) => handleProfileChange("email", event.target.value)}
-              />
-              <span className="label">E-mail</span>
-            </div>
+                  <div className="input-group">
+                    <input
+                      value={profile.lastName}
+                      onChange={(event) => handleProfileChange("lastName", event.target.value)}
+                    />
+                    <span className="label">Último nome</span>
+                  </div>
 
-            <div className="input-group">
-              <input
-                inputMode="numeric"
-                maxLength={9}
-                placeholder={
-                  profile.hasNationalId
-                    ? "NIF já guardado. Digite apenas para atualizar"
-                    : "Digite o seu NIF (9 dígitos)"
-                }
-                value={profile.nationalId}
-                onChange={(event) => handleProfileChange("nationalId", event.target.value)}
-              />
-              <span className="label">NIF</span>
-            </div>
+                  <div className="input-group md:col-span-2">
+                    <input
+                      value={profile.email}
+                      onChange={(event) => handleProfileChange("email", event.target.value)}
+                    />
+                    <span className="label">E-mail</span>
+                  </div>
 
-            <div className="input-group">
-              <input
-                type="date"
-                value={profile.birthDate}
-                onChange={(event) => handleProfileChange("birthDate", event.target.value)}
-              />
-              <span className="label">Data de nascimento</span>
-            </div>
+                  <div className="input-group">
+                    <input
+                      inputMode="numeric"
+                      maxLength={9}
+                      placeholder={
+                        profile.hasNationalId
+                          ? "NIF já guardado. Digite apenas para atualizar"
+                          : "Digite o seu NIF (9 dígitos)"
+                      }
+                      value={profile.nationalId}
+                      onChange={(event) => handleProfileChange("nationalId", event.target.value)}
+                    />
+                    <span className="label">NIF</span>
+                  </div>
 
-            <div className="input-group">
-              <input
-                value={profile.city}
-                onChange={(event) => handleProfileChange("city", event.target.value)}
-              />
-              <span className="label">Cidade</span>
-            </div>
+                  <div className="input-group">
+                    <input
+                      type="date"
+                      value={profile.birthDate}
+                      onChange={(event) => handleProfileChange("birthDate", event.target.value)}
+                    />
+                    <span className="label">Data de nascimento</span>
+                  </div>
 
-            <div className="input-group">
-              <select
-                value={profile.gender}
-                onChange={(event) => handleProfileChange("gender", event.target.value)}
-              >
-                <option value="">Selecione</option>
-                <option value="male">Masculino</option>
-                <option value="female">Feminino</option>
-              </select>
-              <span className="label">Género</span>
-            </div>
+                  <div className="input-group">
+                    <input
+                      value={profile.city}
+                      onChange={(event) => handleProfileChange("city", event.target.value)}
+                    />
+                    <span className="label">Cidade</span>
+                  </div>
 
-            <div className="input-group">
-              <select
-                value={profile.educationLevel}
-                onChange={(event) => handleProfileChange("educationLevel", event.target.value)}
-              >
-                <option value="">Selecione</option>
-                {educationOptions.map((educationOption) => (
-                  <option key={educationOption.value} value={educationOption.value}>
-                    {educationOption.label}
-                  </option>
-                ))}
-              </select>
-              <span className="label">Habilitações literárias</span>
-            </div>
-          </div>
+                  <div className="input-group">
+                    <select
+                      value={profile.gender}
+                      onChange={(event) => handleProfileChange("gender", event.target.value)}
+                    >
+                      <option value="">Selecione</option>
+                      <option value="male">Masculino</option>
+                      <option value="female">Feminino</option>
+                    </select>
+                    <span className="label">Género</span>
+                  </div>
 
-            {profileFeedback && (
-              <p className="form-feedback mt-2">
-                {profileFeedback}
-              </p>
+                  <div className="input-group">
+                    <select
+                      value={profile.educationLevel}
+                      onChange={(event) => handleProfileChange("educationLevel", event.target.value)}
+                    >
+                      <option value="">Selecione</option>
+                      {educationOptions.map((educationOption) => (
+                        <option key={educationOption.value} value={educationOption.value}>
+                          {educationOption.label}
+                        </option>
+                      ))}
+                    </select>
+                    <span className="label">Habilitações literárias</span>
+                  </div>
+                </div>
+
+                {profileFeedback && <p className="form-feedback mt-2">{profileFeedback}</p>}
+
+                <div className="mt-4">
+                  <button className="submit" type="button" onClick={handleSaveProfile}>
+                    {isSavingProfile ? "A guardar..." : "Guardar perfil"}
+                  </button>
+                </div>
+              </>
             )}
 
-            <div className="mt-4 flex gap-3">
-              <button
-                className="submit"
-                type="button"
-                onClick={handleSaveProfile}
-              >
-                {isSavingProfile ? "A guardar..." : "Guardar perfil"}
-              </button>
-            </div>
+            {activeSection === "security" && (
+              <>
+                <h2 className="section-title">Segurança da conta</h2>
+                <p className="mt-2 text-sm">Defina uma palavra-passe forte para proteger o seu acesso.</p>
 
-            <div className="mt-4 text-center">
-              <button
-                className="form-link bg-transparent p-0"
-                type="button"
-                onClick={handlePasswordFormVisibility}
-              >
-                {isPasswordFormVisible ? "Fechar alteração de password" : "Alterar Password"}
-              </button>
-            </div>
-
-            {isPasswordFormVisible && (
-              <div className="mt-8 border-t border-slate-200 pt-8">
-                <h2 className="section-title">Alterar palavra-passe</h2>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <div className="mt-5 grid gap-4 md:grid-cols-2">
                   <div className="input-group md:col-span-2">
                     <input
                       placeholder="Senha atual"
@@ -635,9 +622,7 @@ export default function DashboardPage() {
                       placeholder="Nova senha"
                       type="password"
                       value={passwordForm.newPassword}
-                      onChange={(event) =>
-                        handlePasswordFieldChange("newPassword", event.target.value)
-                      }
+                      onChange={(event) => handlePasswordFieldChange("newPassword", event.target.value)}
                     />
                     <span className="label">Nova senha</span>
                   </div>
@@ -653,59 +638,65 @@ export default function DashboardPage() {
                     <span className="label">Confirmar nova senha</span>
                   </div>
                 </div>
+
                 {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
-                <button
-                  className="submit mt-4"
-                  type="button"
-                  onClick={handleChangePassword}
-                >
+
+                <button className="submit mt-4" type="button" onClick={handleChangePassword}>
                   {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
                 </button>
-              </div>
+              </>
+            )}
+
+            {activeSection === "preferences" && (
+              <>
+                <h2 className="section-title">Preferências</h2>
+                <p className="mt-2 text-sm">Escolha como pretende receber atualizações da plataforma.</p>
+
+                <div className="mt-5 space-y-3 rounded-xl border border-slate-200 bg-white p-4">
+                  <div className="flex items-center justify-between text-sm">
+                    <label htmlFor="receive-newsletter">Receber newsletter</label>
+                    <label className="checkbox-container" htmlFor="receive-newsletter">
+                      <input
+                        id="receive-newsletter"
+                        className="custom-checkbox"
+                        type="checkbox"
+                        checked={preferences.receiveNewsletter}
+                        onChange={() => handlePreferenceChange("receiveNewsletter")}
+                      />
+                      <span className="checkmark" aria-hidden="true" />
+                    </label>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <label htmlFor="allow-notifications">Notificações da comunidade</label>
+                    <label className="checkbox-container" htmlFor="allow-notifications">
+                      <input
+                        id="allow-notifications"
+                        className="custom-checkbox"
+                        type="checkbox"
+                        checked={preferences.allowNotifications}
+                        onChange={() => handlePreferenceChange("allowNotifications")}
+                      />
+                      <span className="checkmark" aria-hidden="true" />
+                    </label>
+                  </div>
+                </div>
+
+                <button className="submit mt-8" type="button" onClick={handleLogout}>
+                  Terminar sessão
+                </button>
+              </>
             )}
           </article>
 
-          <aside className="login-form max-w-none xl:sticky xl:top-6">
-            <h3 className="card-title">Preferências</h3>
-            <div className="mt-4 space-y-3">
-              <div className="flex items-center justify-between text-sm">
-                <label htmlFor="receive-newsletter">Receber newsletter</label>
-                <label className="checkbox-container" htmlFor="receive-newsletter">
-                  <input
-                    id="receive-newsletter"
-                    className="custom-checkbox"
-                    type="checkbox"
-                    checked={preferences.receiveNewsletter}
-                    onChange={() => handlePreferenceChange("receiveNewsletter")}
-                  />
-                  <span className="checkmark" aria-hidden="true" />
-                </label>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <label htmlFor="allow-notifications">Notificações da comunidade</label>
-                <label className="checkbox-container" htmlFor="allow-notifications">
-                  <input
-                    id="allow-notifications"
-                    className="custom-checkbox"
-                    type="checkbox"
-                    checked={preferences.allowNotifications}
-                    onChange={() => handlePreferenceChange("allowNotifications")}
-                  />
-                  <span className="checkmark" aria-hidden="true" />
-                </label>
-              </div>
-            </div>
+          <aside className="dashboard-right-highlight">
+            <p className="dashboard-right-highlight-icon" aria-hidden="true">
+              ✧
+            </p>
+            <h3 className="card-title">Conta segura</h3>
+            <p className="mt-3 text-sm text-center">
+              Use o menu lateral para navegar entre perfil, segurança e preferências sem perder o foco.
+            </p>
           </aside>
-        </div>
-
-        <div className="flex justify-center">
-          <button
-            className="submit max-w-[280px]"
-            type="button"
-            onClick={handleLogout}
-          >
-            Terminar sessão
-          </button>
         </div>
       </div>
     </section>
