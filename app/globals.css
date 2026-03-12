@@ -449,3 +449,115 @@ h6 {
     padding: 22px;
   }
 }
+
+/* Estrutura principal do dashboard com menu lateral, conteúdo e cartão de apoio. */
+.dashboard-layout-shell {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Cabeçalho superior do dashboard mantendo o visual claro pedido. */
+.dashboard-top-banner {
+  border-radius: 20px;
+  background: rgb(255 255 255 / 90%);
+  box-shadow: 0 12px 32px rgb(15 23 42 / 14%);
+  padding: 1.5rem;
+}
+
+/* Cartão lateral de navegação inspirado no exemplo com foco na secção ativa. */
+.dashboard-sidebar {
+  border-radius: 18px;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 10px 24px rgb(15 23 42 / 10%);
+  padding: 1rem;
+}
+
+/* Título principal do menu lateral. */
+.dashboard-sidebar-title {
+  color: #111827 !important;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Lista vertical de opções do dashboard com espaçamento consistente. */
+.dashboard-menu {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* Botão de menu com descrição curta para orientar utilizador. */
+.dashboard-menu-item {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 0.7rem 0.8rem;
+  text-align: left;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.dashboard-menu-item span {
+  display: block;
+  color: #111827 !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.dashboard-menu-item small {
+  display: block;
+  margin-top: 0.2rem;
+  color: #6b7280 !important;
+  font-size: 0.74rem;
+}
+
+/* Destaque visual da secção ativa com tonalidade suave coerente com o design. */
+.dashboard-menu-item.is-active {
+  background: #fef2f4;
+  border-color: #fbcfe8;
+}
+
+.dashboard-menu-item:hover {
+  border-color: #e5e7eb;
+  background: #fafafa;
+}
+
+/* Cartão lateral direito para reforçar contexto visual semelhante ao mockup. */
+.dashboard-right-highlight {
+  border-radius: 18px;
+  background: linear-gradient(180deg, #fdf2f8 0%, #fef7ff 100%);
+  box-shadow: 0 12px 24px rgb(15 23 42 / 10%);
+  padding: 1.2rem;
+  display: none;
+}
+
+.dashboard-right-highlight .card-title,
+.dashboard-right-highlight p {
+  color: #111827 !important;
+}
+
+/* Ícone decorativo simples para equilibrar a composição visual do painel. */
+.dashboard-right-highlight-icon {
+  font-size: 1.3rem;
+  text-align: center;
+  color: #ec4899 !important;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-layout-shell {
+    grid-template-columns: 220px minmax(0, 1fr) 240px;
+  }
+
+  .dashboard-sidebar {
+    position: sticky;
+    top: 110px;
+  }
+
+  .dashboard-right-highlight {
+    position: sticky;
+    top: 110px;
+    display: block;
+  }
+}
