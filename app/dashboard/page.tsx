@@ -473,7 +473,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="mx-auto w-full max-w-6xl space-y-6">
+      <div className="space-y-6">
         <header className="dashboard-top-banner">
           <h1 className="page-title !text-black">Olá, {profile.firstName}</h1>
           <p className="mt-2 text-sm !text-black">Faça a gestão da sua conta e segurança.</p>

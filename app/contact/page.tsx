@@ -70,7 +70,7 @@ export default function ContactPage() {
 
   return (
     <section className="space-y-8">
-      <div className="mx-auto flex w-full max-w-6xl justify-center">
+      <div className="flex w-full justify-center">
         <article className="login-form max-w-[620px]">
           <h1 className="form-heading">Contacto</h1>
           <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>

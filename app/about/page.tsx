@@ -87,7 +87,7 @@ export default function AboutPage() {
       </article>
 
       {/* Mantém a secção de vantagens sem caixa branca, reforçando o contraste de texto. */}
-      <article className="mx-auto w-full max-w-6xl">
+      <article className="w-full">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">Vantagens do curso</h2>
           <p className="mt-3 text-base leading-7">
