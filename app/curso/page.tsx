@@ -131,10 +131,10 @@ export default function CursoPage() {
   };
 
   const getOptionClass = (question: QuizQuestion, optionIndex: number): string => {
-    const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm";
+    const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm text-slate-900";
     if (!quizSubmitted) {
       if (quizAnswers[question.id] === optionIndex) {
-        return `${base} border-[#F6C25B] bg-[#F6C25B]/10`;
+        return `${base} border-[#F6C25B] bg-[#F6C25B]/10 text-slate-800`;
       }
       return `${base} border-slate-200 hover:border-slate-300 bg-white`;
     }
