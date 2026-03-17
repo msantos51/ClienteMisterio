@@ -7,13 +7,11 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <section className="w-full">
+    <section className="w-full px-4 sm:px-6 md:px-10">
       {/* Mantém o hero com o mesmo content width e paddings das páginas internas para evitar "salto" visual na navegação. */}
-      <div className="relative w-full bg-transparent">
-        {/* Reaproveita o mesmo envelope horizontal (max-w-6xl + px responsivo) usado no AppShell das páginas internas. */}
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 md:px-10">
-          {/* Em desktop, mantém duas colunas, mas com alinhamento inicial para sincronizar o ponto de arranque com a página Sobre. */}
-          <div className="grid w-full items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20">
+      <div className="mx-auto w-full max-w-6xl">
+        {/* Em desktop, mantém duas colunas, mas com alinhamento inicial para sincronizar o ponto de arranque com a página Sobre. */}
+        <div className="grid w-full items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20">
             {/* Agrupa o conteúdo textual com alinhamento consistente com a página sobre. */}
             <div className="space-y-6">
               {/* Reforça o contexto da landing com uma etiqueta editorial discreta. */}
