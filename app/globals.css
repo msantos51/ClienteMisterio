@@ -43,8 +43,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Garante contraste consistente ao forçar texto branco em todos os elementos visíveis da interface. */
-body * {
+/* Garante contraste consistente ao forçar texto branco nos elementos principais da interface. */
+body p,
+body span,
+body a,
+body li,
+body label,
+body small,
+body strong,
+body em {
   color: var(--foreground) !important;
 }
 
