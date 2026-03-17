@@ -48,14 +48,14 @@ export default function TopNav() {
       </button>
 
       {/* Mantém os links centrados no desktop e destaca a página ativa com sublinhado. */}
-      <nav className="hidden items-center justify-center gap-8 xl:gap-10 lg:flex">
+      <nav className="hidden items-center justify-center gap-6 lg:gap-8 xl:gap-10 lg:flex">
         {navigationItems.map((item) => {
           const isActive = pathname === item.href;
 
           return (
             <Link
               key={item.href}
-              className={`relative pb-2 text-[16px] font-semibold transition ${
+              className={`relative pb-2 text-[14px] lg:text-[16px] font-semibold transition min-h-[44px] flex items-center ${
                 isActive
                   ? "text-white"
                   : "text-white hover:text-white"
@@ -74,7 +74,7 @@ export default function TopNav() {
 
       {/* Renderiza menu vertical no mobile com área clicável confortável e ordem visual consistente. */}
       {isMenuOpen ? (
-        <nav className="mobile-menu-container absolute inset-x-4 top-[84px] z-40 flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] bg-black shadow-sm lg:hidden">
+        <nav className="mobile-menu-container absolute inset-x-3 top-[80px] z-40 sm:inset-x-4 sm:top-[84px] flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] bg-black shadow-sm lg:hidden">
           {navigationItems.map((item, index) => {
             const isActive = pathname === item.href;
             const isLast = index === navigationItems.length - 1;
@@ -82,7 +82,7 @@ export default function TopNav() {
             return (
               <Link
                 key={item.href}
-                className={`mobile-menu-item px-5 py-4 text-base font-semibold transition ${
+                className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold transition ${
                   isActive
                     ? "text-white"
                     : "text-white hover:bg-[#111111]"
