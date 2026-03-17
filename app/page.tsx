@@ -48,9 +48,10 @@ export default function HomePage() {
             <div className="relative mx-auto hidden h-[70vh] min-h-[520px] w-full max-w-[620px] lg:block">
               {/* Usa imagem local otimizada do Next para garantir desempenho e fidelidade visual. */}
               <Image
-                src="/images/background 3.png"
+                src="/images/hero-bg.webp"
                 alt="Imagem decorativa do lado direito"
                 fill
+                sizes="(max-width: 1024px) 0px, 50vw"
                 className="object-contain object-center"
                 priority
               />

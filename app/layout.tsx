@@ -11,24 +11,33 @@ import "./globals.css";
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "900"],
+  display: "swap",
 });
 
 // Mantém as fontes auxiliares para áreas técnicas sem quebrar compatibilidade.
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 // Centraliza metadados globais do website.
 export const metadata: Metadata = {
   title: "Cliente Mistério",
   description: "Portal de participação cidadã e informação pública.",
+  metadataBase: new URL("https://clientemisterio.onrender.com"),
+  openGraph: {
+    title: "Cliente Mistério",
+    description: "Portal de participação cidadã e informação pública.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
