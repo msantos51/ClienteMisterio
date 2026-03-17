@@ -1,6 +1,13 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/o-curso/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ * DESCRIÇÃO DO FICHEIRO: Página pública com a estrutura do curso e ligação para a formação completa.
  */
+
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const sessionStorageKey = "vp_session";
 
 const courseModules = [
   {
@@ -86,9 +93,14 @@ const courseModules = [
 ];
 
 export default function CoursePage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(Boolean(localStorage.getItem(sessionStorageKey)));
+  }, []);
+
   return (
     <section className="w-full space-y-8">
-      {/* Define o cabeçalho principal para contextualizar o conteúdo da página de módulos. */}
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
           Estrutura do curso
@@ -102,14 +114,23 @@ export default function CoursePage() {
         </p>
       </header>
 
-      {/* Usa componentes nativos <details> para criar acordeões acessíveis sem lógica adicional no cliente. */}
+      {isLoggedIn && (
+        <div className="flex justify-center">
+          <Link
+            href="/curso"
+            className="submit inline-block max-w-sm text-center !no-underline"
+          >
+            Aceder ao Curso Completo
+          </Link>
+        </div>
+      )}
+
       <div className="space-y-4">
         {courseModules.map((moduleItem) => (
           <details
             key={moduleItem.title}
             className="group rounded-2xl border border-white/30 p-5 open:border-[#F6C25B]"
           >
-            {/* Mostra apenas o título do módulo fechado e revela os tópicos ao clicar. */}
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none">
               <span>{moduleItem.title}</span>
               <span className="home-title-highlight-text transition-transform duration-200 group-open:rotate-45">+</span>
@@ -126,6 +147,18 @@ export default function CoursePage() {
           </details>
         ))}
       </div>
+
+      {!isLoggedIn && (
+        <div className="text-center space-y-3">
+          <p className="text-sm text-white/70">Crie uma conta ou inicie sessão para aceder ao curso completo com conteúdo teórico e questionários.</p>
+          <Link
+            href="/account"
+            className="submit inline-block max-w-sm text-center !no-underline"
+          >
+            Criar Conta Gratuita
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

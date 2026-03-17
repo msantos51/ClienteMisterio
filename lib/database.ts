@@ -66,6 +66,20 @@ const initializeDatabase = async (): Promise<void> => {
         )
       `);
 
+      await pool.query(`
+        create table if not exists course_progress (
+          id uuid primary key default gen_random_uuid(),
+          user_id uuid not null references users(id) on delete cascade,
+          module_id integer not null,
+          completed boolean not null default false,
+          quiz_score integer,
+          quiz_answers jsonb,
+          completed_at timestamptz,
+          created_at timestamptz not null default now(),
+          unique(user_id, module_id)
+        )
+      `);
+
       // Mantém compatibilidade com bases de dados criadas antes desta versão.
       await pool.query("alter table users add column if not exists first_name text");
       await pool.query("alter table users add column if not exists last_name text");

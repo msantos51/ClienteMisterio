@@ -22,6 +22,13 @@ type UserProfile = {
   isAdmin: boolean;
 };
 
+type CourseProgressData = {
+  modules: Array<{ moduleId: number; completed: boolean; quizScore: number | null }>;
+  totalModules: number;
+  completedCount: number;
+  progressPercent: number;
+};
+
 type UserPreferences = {
   receiveNewsletter: boolean;
   allowNotifications: boolean;
@@ -140,6 +147,7 @@ export default function DashboardPage() {
   const [profileFeedback, setProfileFeedback] = useState<string | null>(null);
   const [firstAccessFeedback, setFirstAccessFeedback] = useState<string | null>(null);
   const [passwordFeedback, setPasswordFeedback] = useState<string | null>(null);
+  const [courseProgress, setCourseProgress] = useState<CourseProgressData | null>(null);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isCompletingFirstAccess, setIsCompletingFirstAccess] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
@@ -196,6 +204,20 @@ export default function DashboardPage() {
     };
 
     loadProfile();
+
+    const loadCourseProgress = async () => {
+      try {
+        const response = await fetch("/api/course/progress");
+        if (response.ok) {
+          const data = (await response.json()) as CourseProgressData;
+          setCourseProgress(data);
+        }
+      } catch {
+        // Progresso do curso não disponível.
+      }
+    };
+
+    loadCourseProgress();
 
     const storedPreferences = localStorage.getItem(preferencesStorageKey);
     if (storedPreferences) {
@@ -478,6 +500,43 @@ export default function DashboardPage() {
           <h1 className="page-title !text-black">Olá, {profile.firstName}</h1>
           <p className="mt-2 text-sm !text-black">Faça a gestão da sua conta e segurança.</p>
         </header>
+
+        {/* Secção do curso com barra de progresso */}
+        <div
+          className="dashboard-top-banner cursor-pointer transition-all hover:shadow-lg"
+          onClick={() => router.push("/curso")}
+          role="link"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === "Enter") router.push("/curso"); }}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <h2 className="text-lg font-bold !text-black">Curso de Cliente Mistério</h2>
+              <p className="text-xs !text-slate-500 mt-0.5">
+                {courseProgress
+                  ? courseProgress.completedCount === courseProgress.totalModules
+                    ? "Curso concluído — Parabéns!"
+                    : `${courseProgress.completedCount} de ${courseProgress.totalModules} módulos concluídos`
+                  : "Inicie a sua formação profissional"}
+              </p>
+            </div>
+            <span className="text-2xl font-bold" style={{ color: "#F6C25B" }}>
+              {courseProgress?.progressPercent ?? 0}%
+            </span>
+          </div>
+          <div className="h-3 w-full rounded-full bg-slate-200 overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-700"
+              style={{
+                width: `${courseProgress?.progressPercent ?? 0}%`,
+                background: "linear-gradient(90deg, #F6C25B, #f0a830)",
+              }}
+            />
+          </div>
+          <p className="mt-2 text-xs !text-slate-400 text-right">
+            Clique para continuar o curso &rarr;
+          </p>
+        </div>
 
         <div className="dashboard-layout-shell">
           <aside className="dashboard-sidebar">
