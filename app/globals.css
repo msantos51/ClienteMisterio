@@ -36,11 +36,12 @@ body {
   background-image:
     radial-gradient(circle at 50% 68%, #8f7bda 0%, #6c59b2 40%, #4e3e8f 68%, #30265d 100%),
     linear-gradient(160deg, #231a49 0%, #4a3a86 55%, #6655ae 100%);
-  background-attachment: fixed;
+  background-attachment: scroll;
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  position: relative;
 }
 
 /* Garante contraste consistente ao forçar texto branco nos elementos principais da interface. */
@@ -98,6 +99,7 @@ h6 {
     align-items: center;
     justify-content: center;
     height: var(--header-control-height);
+    min-height: 44px;
     border: 0;
     border-radius: 100px;
     padding: 0 30px;
@@ -113,6 +115,15 @@ h6 {
     touch-action: manipulation;
   }
 
+  @media (max-width: 640px) {
+    .site-pill-button,
+    .button-size-login {
+      min-height: 48px;
+      padding: 0 24px;
+      font-size: 0.8125rem;
+    }
+  }
+
   /* Realça o botão no hover mantendo o contraste de fundo branco com texto preto. */
   .site-pill-button:hover,
   .button-size-login:hover {
@@ -122,6 +133,15 @@ h6 {
     transform: translateZ(0) scale(1.03);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .site-pill-button:hover,
+    .button-size-login:hover {
+      transform: none;
+      box-shadow: none;
+      opacity: 0.9;
+    }
+  }
+
   /* Aplica estado de clique com redução de escala para feedback tátil. */
   .site-pill-button:active,
   .button-size-login:active {
@@ -129,6 +149,13 @@ h6 {
     filter: none !important;
     box-shadow: none;
     transform: translateZ(0) scale(0.98);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-pill-button:active,
+    .button-size-login:active {
+      transform: none;
+    }
   }
 
   /* Evita animações quando o botão está desativado para manter acessibilidade. */
@@ -145,16 +172,32 @@ h6 {
     justify-content: center;
     width: var(--header-control-height);
     height: var(--header-control-height);
+    min-width: 44px;
+    min-height: 44px;
     border: 0;
     border-radius: 0;
     background-color: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (max-width: 480px) {
+    .menu-toggle-button {
+      min-width: 48px;
+      min-height: 48px;
+    }
   }
 
   /* Mantém feedback no hover sem adicionar borda ou contorno extra. */
   .menu-toggle-button:hover {
     opacity: 0.85;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle-button {
+      transition: none;
+    }
   }
 
   /* Organiza as barras do ícone hamburguer sem texto associado. */
@@ -177,6 +220,12 @@ h6 {
     transition: all 0.35s ease;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle-line {
+      transition: none;
+    }
+  }
+
   /* Converte o ícone para X quando o menu abre, mantendo símbolo vermelho. */
   .menu-toggle-button.is-open .menu-toggle-line.top {
     transform: translateY(7px) rotate(45deg);
@@ -191,14 +240,43 @@ h6 {
     transform: translateY(-7px) rotate(-45deg);
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle-button.is-open .menu-toggle-line.top,
+    .menu-toggle-button.is-open .menu-toggle-line.bottom {
+      transform: none;
+    }
+    .menu-toggle-button.is-open .menu-toggle-line.middle {
+      opacity: 0;
+    }
+  }
+
   /* Define o cartão do menu aberto com aparência limpa semelhante à referência visual. */
   .mobile-menu-container {
     border-radius: 16px;
+    will-change: contents;
+  }
+
+  @media (max-width: 480px) {
+    .mobile-menu-container {
+      inset-left: 8px !important;
+      inset-right: 8px !important;
+      top: 80px !important;
+    }
   }
 
   /* Garante texto vermelho em todas as opções do menu mobile. */
   .mobile-menu-item {
     color: #F56151;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 480px) {
+    .mobile-menu-item {
+      min-height: 48px;
+      padding: 0.5rem 1.25rem !important;
+    }
   }
 
   /* Mantém estilo textual consistente para botões em páginas internas. */
@@ -242,8 +320,17 @@ h6 {
     position: relative;
     width: 25px;
     height: 25px;
+    min-width: 44px;
+    min-height: 44px;
     cursor: pointer;
     user-select: none;
+  }
+
+  @media (max-width: 480px) {
+    .checkbox-container {
+      min-width: 48px;
+      min-height: 48px;
+    }
   }
 
   /* Esconde o input nativo mas preserva acessibilidade e interação por teclado. */
@@ -337,6 +424,14 @@ h6 {
   animation: fadeIn 1.5s ease-out;
 }
 
+@media (max-width: 480px) {
+  .login-form {
+    padding: 20px;
+    margin: 0 auto;
+    width: 95%;
+  }
+}
+
 .dashboard-form {
   max-width: min(100%, 900px) !important;
   margin-inline: auto;
@@ -356,9 +451,23 @@ h6 {
   letter-spacing: 1px;
 }
 
+@media (max-width: 480px) {
+  .form-heading {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+}
+
 .input-group {
   position: relative;
   margin-bottom: 14px;
+}
+
+@media (max-width: 480px) {
+  .input-group {
+    margin-bottom: 12px;
+  }
 }
 
 .input-group .label {
@@ -384,11 +493,27 @@ h6 {
   border-radius: 8px;
   outline: none;
   transition: all 0.3s ease;
+  min-height: 44px;
+}
+
+@media (max-width: 480px) {
+  .input-group input,
+  .input-group textarea,
+  .input-group select {
+    font-size: 1rem;
+    padding: 12px 14px;
+  }
 }
 
 .input-group textarea {
   min-height: 110px;
   resize: vertical;
+}
+
+@media (max-width: 480px) {
+  .input-group textarea {
+    min-height: 100px;
+  }
 }
 
 .input-group input:focus,
@@ -400,7 +525,8 @@ h6 {
 
 .submit {
   width: 100%;
-  padding: 11px;
+  padding: 12px;
+  min-height: 44px;
   color: #fff !important;
   font-size: 1rem;
   font-weight: 600;
@@ -411,10 +537,24 @@ h6 {
   transition: all 0.3s ease;
 }
 
+@media (max-width: 480px) {
+  .submit {
+    min-height: 48px;
+  }
+}
+
 .submit:hover {
   background-color: #F6C25B;
   box-shadow: 0 5px 20px rgb(88 188 130 / 30%);
   transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit:hover {
+    transform: none;
+    box-shadow: none;
+    opacity: 0.9;
+  }
 }
 
 .form-link {
@@ -450,12 +590,14 @@ h6 {
   }
 }
 
-@media (max-width: 480px) {
-  .login-form {
-    width: 90%;
-    padding: 22px;
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
+
 
 /* Estrutura principal do dashboard com menu lateral, conteúdo e cartão de apoio. */
 .dashboard-layout-shell {

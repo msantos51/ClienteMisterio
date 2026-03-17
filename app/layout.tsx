@@ -2,7 +2,7 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/layout.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import AppShell from "./components/AppShell";
 import "./globals.css";
@@ -38,6 +38,14 @@ export const metadata: Metadata = {
     description: "Portal de participação cidadã e informação pública.",
     type: "website",
   },
+};
+
+// Otimiza viewport para melhor experiência mobile
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
 };
 
 export default function RootLayout({
