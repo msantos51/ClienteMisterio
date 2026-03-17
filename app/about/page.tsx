@@ -23,7 +23,7 @@ export default function AboutPage() {
       <article className="grid w-full gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         {/* Preserva o conteúdo da página e ajusta a hierarquia para texto branco com destaques amarelos. */}
         <div className="space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
             Sobre a Cliente Mistério
           </p>
 
