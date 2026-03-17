@@ -7,7 +7,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-import { courseModules, type QuizQuestion } from "./courseData";
+import { courseModules, type QuizQuestion, type ContentTopic } from "./courseData";
 
 type ModuleProgress = {
   moduleId: number;
@@ -136,15 +136,15 @@ export default function CursoPage() {
       if (quizAnswers[question.id] === optionIndex) {
         return `${base} border-[#F6C25B] bg-[#F6C25B]/10`;
       }
-      return `${base} border-slate-200 hover:border-slate-300 bg-white`;
+      return `${base} border-white/20 hover:border-white/40 bg-white/5`;
     }
     if (optionIndex === question.correctIndex) {
-      return `${base} border-green-500 bg-green-50`;
+      return `${base} border-green-500 bg-green-500/10`;
     }
     if (quizAnswers[question.id] === optionIndex && optionIndex !== question.correctIndex) {
-      return `${base} border-red-400 bg-red-50`;
+      return `${base} border-red-400 bg-red-400/10`;
     }
-    return `${base} border-slate-200 bg-white opacity-60`;
+    return `${base} border-white/10 bg-white/5 opacity-50`;
   };
 
   if (!isAuthenticated) {
@@ -257,14 +257,23 @@ export default function CursoPage() {
             &larr; Voltar aos módulos
           </button>
 
-          <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm space-y-6">
+          <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm space-y-2">
             <h2 className="text-2xl font-bold">{activeModule.title}</h2>
+            <p className="text-sm text-white/50 mb-4">{activeModule.description}</p>
 
-            <div className="space-y-4">
-              {activeModule.content.map((paragraph, idx) => (
-                <p key={idx} className="text-sm leading-7 text-white/85">
-                  {paragraph}
-                </p>
+            <div className="space-y-5">
+              {activeModule.content.map((topic: ContentTopic, idx: number) => (
+                <div key={idx} className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-3">
+                  <h3 className="text-base font-bold home-title-highlight-text">{topic.heading}</h3>
+                  <ul className="space-y-2">
+                    {topic.points.map((point, pIdx) => (
+                      <li key={pIdx} className="flex items-start gap-2.5 text-sm leading-6 text-white/85">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#F6C25B]" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
             </div>
           </div>
@@ -313,9 +322,7 @@ export default function CursoPage() {
                         onClick={() => selectAnswer(question.id, oIdx)}
                         className={getOptionClass(question, oIdx)}
                       >
-                        <span className="login-form" style={{ background: "transparent", padding: 0, boxShadow: "none", animation: "none" }}>
-                          {String.fromCharCode(65 + oIdx)}) {option}
-                        </span>
+                        {String.fromCharCode(65 + oIdx)}) {option}
                       </button>
                     ))}
                   </div>
