@@ -313,9 +313,7 @@ export default function CursoPage() {
                         onClick={() => selectAnswer(question.id, oIdx)}
                         className={getOptionClass(question, oIdx)}
                       >
-                        <span className="login-form" style={{ background: "transparent", padding: 0, boxShadow: "none", animation: "none" }}>
-                          {String.fromCharCode(65 + oIdx)}) {option}
-                        </span>
+                        {String.fromCharCode(65 + oIdx)}) {option}
                       </button>
                     ))}
                   </div>
