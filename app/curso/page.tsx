@@ -131,20 +131,20 @@ export default function CursoPage() {
   };
 
   const getOptionClass = (question: QuizQuestion, optionIndex: number): string => {
-    const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm";
+    const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm text-white";
     if (!quizSubmitted) {
       if (quizAnswers[question.id] === optionIndex) {
-        return `${base} border-[#F6C25B] bg-[#F6C25B]/10`;
+        return `${base} border-[#F6C25B] bg-white/10 hover:bg-white/15`;
       }
-      return `${base} border-slate-200 hover:border-slate-300 bg-white`;
+      return `${base} border-white/20 hover:border-white/40 bg-white/5`;
     }
     if (optionIndex === question.correctIndex) {
-      return `${base} border-green-500 bg-green-50`;
+      return `${base} border-green-500 bg-green-500/15`;
     }
     if (quizAnswers[question.id] === optionIndex && optionIndex !== question.correctIndex) {
-      return `${base} border-red-400 bg-red-50`;
+      return `${base} border-red-400 bg-red-400/15`;
     }
-    return `${base} border-slate-200 bg-white opacity-60`;
+    return `${base} border-white/20 bg-white/5 opacity-60`;
   };
 
   if (!isAuthenticated) {
