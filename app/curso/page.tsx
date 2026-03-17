@@ -292,7 +292,7 @@ export default function CursoPage() {
             &larr; Voltar ao conteúdo
           </button>
 
-          <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm">
+          <div className="rounded-2xl border border-white/20 bg-slate-950/80 p-6 backdrop-blur-sm">
             <h2 className="text-xl font-bold mb-1">{activeModule.title}</h2>
             <p className="text-sm text-white/60 mb-6">
               Responda a todas as questões. Necessita de 60% para concluir o módulo.
