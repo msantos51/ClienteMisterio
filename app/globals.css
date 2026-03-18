@@ -5,14 +5,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fe8f4a;
+  --background: #e9d8be;
   --foreground: #6db9c7;
   --surface: #000000;
   --surface-muted: #0f0f0f;
   --primary: #000000;
   --primary-soft: #111111;
-  --accent: #fe8f4a;
-  --accent-secondary: #fe8f4a;
+  --accent: #e9d8be;
+  --accent-secondary: #e9d8be;
   --accent-success: #58bc82;
   --line: #2a2a2a;
   --line-light: #404040;
@@ -34,8 +34,8 @@
 }
 
 body {
-  /* Fundo laranja */
-  background-color: #fe8f4a;
+  /* Fundo bege */
+  background-color: #e9d8be;
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
@@ -103,7 +103,7 @@ h6 {
     border: 0;
     border-radius: 12px;
     padding: 0 32px;
-    background: #fe8f4a;
+    background: #e9d8be;
     color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
@@ -129,7 +129,7 @@ h6 {
   /* Estado hover com efeito elevado e glow */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background: #fe8f4a;
+    background: #e9d8be;
     box-shadow: 0 12px 28px rgba(254, 143, 74, 0.4), 0 0 32px rgba(254, 143, 74, 0.3);
     transform: translateY(-3px);
   }
@@ -146,7 +146,7 @@ h6 {
   /* Estado ativo com feedback imediato */
   .site-pill-button:active,
   .button-size-login:active {
-    background: #fe8f4a;
+    background: #e9d8be;
     box-shadow: 0 2px 8px rgba(254, 143, 74, 0.3);
     transform: translateY(-1px);
   }
@@ -213,13 +213,13 @@ h6 {
     height: 22px;
   }
 
-  /* Desenha cada traço do símbolo em laranja e habilita transição para o X. */
+  /* Desenha cada traço do símbolo em bege e habilita transição para o X. */
   .menu-toggle-line {
     display: block;
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background-color: #fe8f4a;
+    background-color: #e9d8be;
     transition: all 0.35s ease;
   }
 
@@ -229,7 +229,7 @@ h6 {
     }
   }
 
-  /* Converte o ícone para X quando o menu abre, mantendo símbolo vermelho. */
+  /* Converte o ícone para X quando o menu abre, mantendo símbolo bege. */
   .menu-toggle-button.is-open .menu-toggle-line.top {
     transform: translateY(7px) rotate(45deg);
   }
@@ -269,9 +269,9 @@ h6 {
     }
   }
 
-  /* Garante texto laranja em todas as opções do menu mobile. */
+  /* Garante texto bege em todas as opções do menu mobile. */
   .mobile-menu-item {
-    color: #fe8f4a;
+    color: #e9d8be;
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -377,8 +377,8 @@ h6 {
 
   /* Estado checked com gradient e glow */
   .custom-checkbox:checked ~ .checkmark {
-    background: #fe8f4a;
-    border-color: #fe8f4a;
+    background: #e9d8be;
+    border-color: #e9d8be;
     box-shadow: 0 0 0 3px rgba(254, 143, 74, 0.2);
   }
 
@@ -472,7 +472,7 @@ h6 {
   position: absolute;
   top: -18px;
   left: 0;
-  color: #fe8f4a !important;
+  color: #e9d8be !important;
   font-size: 12px;
   font-weight: 700;
   opacity: 1;
@@ -526,7 +526,7 @@ h6 {
 .input-group input:focus,
 .input-group textarea:focus,
 .input-group select:focus {
-  border-color: #fe8f4a !important;
+  border-color: #e9d8be !important;
   box-shadow: 0 0 0 3px rgba(254, 143, 74, 0.15);
   background-color: #ffffff !important;
 }
@@ -540,7 +540,7 @@ h6 {
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  background: #fe8f4a;
+  background: #e9d8be;
   border: none;
   border-radius: 10px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -554,7 +554,7 @@ h6 {
 }
 
 .submit:hover {
-  background: #fe8f4a;
+  background: #e9d8be;
   box-shadow: 0 10px 32px rgba(254, 143, 74, 0.5);
   transform: translateY(-2px);
 }
@@ -579,7 +579,7 @@ h6 {
 }
 
 .form-link {
-  color: #fe8f4a !important;
+  color: #e9d8be !important;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -595,12 +595,12 @@ h6 {
   left: 0;
   width: 0;
   height: 2px;
-  background: #fe8f4a;
+  background: #e9d8be;
   transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .form-link:hover {
-  color: #fe8f4a !important;
+  color: #e9d8be !important;
 }
 
 .form-link:hover::after {
@@ -808,7 +808,7 @@ select {
 
 /* Melhor contraste em links dentro do conteúdo */
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link) {
-  color: #fe8f4a;
+  color: #e9d8be;
   text-decoration: none;
   border-bottom: 1px solid rgba(254, 143, 74, 0.3);
   transition: all 0.3s ease;
@@ -816,5 +816,5 @@ main a:not(.site-pill-button):not(.button-size-login):not(.form-link) {
 
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):hover {
   border-bottom-color: rgba(254, 143, 74, 0.8);
-  color: #fe8f4a;
+  color: #e9d8be;
 }
