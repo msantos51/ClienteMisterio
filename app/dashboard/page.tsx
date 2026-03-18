@@ -172,8 +172,12 @@ export default function DashboardPage() {
     setSessionEmail(storedSession);
 
     const loadProfile = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       try {
-        const response = await fetch("/api/user");
+        const response = await fetch("/api/user", { signal: controller.signal });
+        clearTimeout(timeoutId);
         const data = (await response.json()) as ProfileResponse;
 
         if (!response.ok || !data.user) {
@@ -199,6 +203,7 @@ export default function DashboardPage() {
         setProfile(normalizedProfile);
         localStorage.setItem(userStorageKey, JSON.stringify(normalizedProfile));
       } catch {
+        clearTimeout(timeoutId);
         router.push("/login");
       }
     };
@@ -206,13 +211,18 @@ export default function DashboardPage() {
     loadProfile();
 
     const loadCourseProgress = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+
       try {
-        const response = await fetch("/api/course/progress");
+        const response = await fetch("/api/course/progress", { signal: controller.signal });
+        clearTimeout(timeoutId);
         if (response.ok) {
           const data = (await response.json()) as CourseProgressData;
           setCourseProgress(data);
         }
       } catch {
+        clearTimeout(timeoutId);
         // Progresso do curso não disponível.
       }
     };
