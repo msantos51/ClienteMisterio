@@ -1,5 +1,5 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro renderiza a landing page principal e organiza o hero inicial com a mensagem, benefícios e CTA.
  */
 
 import Link from "next/link";
@@ -7,38 +7,39 @@ import Link from "next/link";
 export default function HomePage() {
   return (
     <section className="w-full">
-      {/* Mantém o hero com o mesmo content width e paddings das páginas internas para evitar "salto" visual na navegação. */}
+      {/* Mantém a secção principal com largura total para o hero ocupar todo o espaço disponível. */}
       <div className="relative w-full bg-transparent">
-        {/* Reaproveita o mesmo envelope horizontal (max-w-6xl + px responsivo) usado no AppShell das páginas internas. */}
+        {/* Centraliza o conteúdo num contentor responsivo alinhado com o restante layout da aplicação. */}
         <div className="mx-auto w-full max-w-6xl px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10">
-          {/* Em desktop, mantém duas colunas, mas com alinhamento inicial para sincronizar o ponto de arranque com a página Sobre. */}
-          <div className="grid w-full items-start gap-6 sm:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20">
-            {/* Agrupa o conteúdo textual com alinhamento consistente com a página sobre. */}
-            <div className="space-y-4 sm:space-y-6">
-              {/* Reforça o contexto da landing com uma etiqueta editorial discreta. */}
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
-                Formação e prática
-              </p>
-
-              {/* Destaca a proposta principal com cor de marca e peso tipográfico forte para aumentar o impacto. */}
-              <h1 className="text-3xl font-semibold leading-tight home-title-highlight-text sm:text-4xl lg:text-5xl">
+          {/* Usa uma grelha simples e centra o bloco principal para destacar a proposta de valor. */}
+          <div className="grid w-full justify-items-center gap-6 sm:gap-8">
+            {/* Agrupa o texto e o botão num bloco centralizado para melhorar a hierarquia visual. */}
+            <div className="flex w-full max-w-3xl flex-col items-center space-y-4 text-center sm:space-y-6">
+              {/* Destaca a mensagem principal no centro e com a mesma cor visual usada nos botões. */}
+              <h1 className="site-pill-button h-auto min-h-0 rounded-3xl px-6 py-4 text-center text-2xl leading-tight whitespace-normal sm:px-8 sm:py-5 sm:text-4xl lg:text-5xl">
                 Sê pago para testar produtos e serviços
               </h1>
 
-              {/* Mostra os benefícios em destaque com leitura vertical clara e espaçamento equilibrado. */}
-              <ul className="space-y-1 sm:space-y-2 text-sm sm:text-base leading-6 sm:leading-7 text-white">
-                <li>-Sem horários</li>
-                <li>-Escolhes as marcas</li>
-                <li>-Rendimento extra</li>
+              {/* Lista os benefícios de forma centralizada e com a mesma cor de destaque dos botões. */}
+              <ul className="space-y-1 text-center text-sm leading-6 sm:space-y-2 sm:text-base sm:leading-7">
+                <li className="site-pill-button h-auto min-h-0 rounded-2xl px-4 py-3 text-center text-sm whitespace-normal sm:text-base">
+                  -Sem horários
+                </li>
+                <li className="site-pill-button h-auto min-h-0 rounded-2xl px-4 py-3 text-center text-sm whitespace-normal sm:text-base">
+                  -Escolhes as marcas
+                </li>
+                <li className="site-pill-button h-auto min-h-0 rounded-2xl px-4 py-3 text-center text-sm whitespace-normal sm:text-base">
+                  -Rendimento extra
+                </li>
               </ul>
 
-              {/* Posiciona o CTA junto ao bloco textual para manter hierarquia e facilitar interação. */}
-              <div className="flex justify-start pt-2 sm:pt-4">
+              {/* Mantém o CTA centrado por baixo dos benefícios para reforçar a ação principal. */}
+              <div className="flex justify-center pt-2 sm:pt-4">
                 <Link
-                  className="site-pill-button px-8 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-[11px] uppercase tracking-[0.15em] sm:tracking-[0.2em] shadow-[0_10px_24px_rgba(0,0,0,0.18)]"
+                  className="site-pill-button px-8 py-3 text-[10px] uppercase tracking-[0.15em] shadow-[0_10px_24px_rgba(0,0,0,0.18)] sm:px-10 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]"
                   href="/about"
                 >
-                  Começa Já
+                  Começa já
                 </Link>
               </div>
             </div>
