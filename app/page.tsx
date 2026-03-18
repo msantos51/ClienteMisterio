@@ -2,7 +2,6 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
-import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -42,19 +41,6 @@ export default function HomePage() {
                   Começa Já
                 </Link>
               </div>
-            </div>
-
-            {/* Exibe a imagem na segunda coluna para criar separação real entre os blocos em desktop. */}
-            <div className="relative mx-auto hidden h-[70vh] min-h-[520px] w-full max-w-[620px] lg:block">
-              {/* Usa imagem local otimizada do Next para garantir desempenho e fidelidade visual. */}
-              <Image
-                src="/images/hero-bg.webp"
-                alt="Imagem decorativa do lado direito"
-                fill
-                sizes="(max-width: 1024px) 0px, 50vw"
-                className="object-contain object-center"
-                priority
-              />
             </div>
           </div>
         </div>
