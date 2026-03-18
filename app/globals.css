@@ -103,16 +103,15 @@ h6 {
     border: 0;
     border-radius: 12px;
     padding: 0 32px;
-    background: #e9d8be;
+    background: #fe8f4a;
     color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    will-change: transform, box-shadow;
+    will-change: transform;
     touch-action: manipulation;
-    box-shadow: 0 4px 16px rgba(254, 143, 74, 0.3);
     letter-spacing: 0.3px;
   }
 
@@ -126,29 +125,25 @@ h6 {
     }
   }
 
-  /* Estado hover com efeito elevado e glow */
+  /* Estado hover */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background: #e9d8be;
-    box-shadow: 0 12px 28px rgba(254, 143, 74, 0.4), 0 0 32px rgba(254, 143, 74, 0.3);
-    transform: translateY(-3px);
+    background: #fe8f4a;
+    opacity: 0.9;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .site-pill-button:hover,
     .button-size-login:hover {
-      transform: none;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      opacity: 0.95;
+      opacity: 0.9;
     }
   }
 
-  /* Estado ativo com feedback imediato */
+  /* Estado ativo */
   .site-pill-button:active,
   .button-size-login:active {
-    background: #e9d8be;
-    box-shadow: 0 2px 8px rgba(254, 143, 74, 0.3);
-    transform: translateY(-1px);
+    background: #fe8f4a;
+    opacity: 0.8;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -163,7 +158,6 @@ h6 {
   .button-size-login:disabled {
     opacity: 0.65;
     cursor: not-allowed;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   /* Botão toggle moderno com feedback visual */
@@ -540,11 +534,10 @@ h6 {
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  background: #e9d8be;
+  background: #fe8f4a;
   border: none;
   border-radius: 10px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 6px 20px rgba(254, 143, 74, 0.35);
 }
 
 @media (max-width: 480px) {
@@ -554,28 +547,23 @@ h6 {
 }
 
 .submit:hover {
-  background: #e9d8be;
-  box-shadow: 0 10px 32px rgba(254, 143, 74, 0.5);
-  transform: translateY(-2px);
+  background: #fe8f4a;
+  opacity: 0.9;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .submit:hover {
-    transform: none;
-    box-shadow: 0 6px 20px rgba(246, 194, 91, 0.35);
-    opacity: 0.95;
+    opacity: 0.9;
   }
 }
 
 .submit:active {
-  transform: translateY(0px);
-  box-shadow: 0 2px 10px rgba(254, 143, 74, 0.3);
+  opacity: 0.8;
 }
 
 .submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  box-shadow: 0 2px 10px rgba(254, 143, 74, 0.2);
 }
 
 .form-link {
