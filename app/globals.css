@@ -34,8 +34,12 @@
 }
 
 body {
-  /* Fundo cinzento claro */
-  background-color: #e2e0e0;
+  /* Fundo com gradiente */
+  background: #FFFFFFFF;
+  background: -webkit-linear-gradient(344deg, rgba(255, 255, 255, 1) 0%, rgba(226, 224, 224, 1) 100%);
+  background: -moz-linear-gradient(344deg, rgba(255, 255, 255, 1) 0%, rgba(226, 224, 224, 1) 100%);
+  background: linear-gradient(344deg, rgba(255, 255, 255, 1) 0%, rgba(226, 224, 224, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#FFFFFF", endColorstr="#E2E0E0", GradientType=0);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
