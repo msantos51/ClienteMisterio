@@ -5,14 +5,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #6f5eb2;
+  --background: #9D9AFF;
   --foreground: #ffffff;
   --surface: #000000;
   --surface-muted: #0f0f0f;
   --primary: #000000;
   --primary-soft: #111111;
-  --accent: #F56151;
-  --accent-secondary: #F6C25B;
+  --accent: #FF5B5C;
+  --accent-secondary: #FF5B5C;
   --accent-success: #58bc82;
   --line: #2a2a2a;
   --line-light: #404040;
@@ -34,11 +34,11 @@
 }
 
 body {
-  /* Fundo moderno com gradiente roxo sofisticado */
-  background-color: #2a1f4a;
+  /* Fundo azul moderno */
+  background-color: #9D9AFF;
   background-image:
-    radial-gradient(ellipse at 50% 50%, #9d8fc9 0%, #6d5db2 35%, #4a3a8f 60%, #281d42 100%),
-    linear-gradient(135deg, #1a0f2e 0%, #3a2860 30%, #5a3f99 70%, #4a2f80 100%);
+    radial-gradient(ellipse at 50% 50%, #AAAAFF 0%, #9D9AFF 35%, #8B87FF 60%, #7D7AFF 100%),
+    linear-gradient(135deg, #9D9AFF 0%, #9590FF 30%, #8B87FF 70%, #7D7AFF 100%);
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans);
@@ -63,16 +63,16 @@ body em {
 
 /* Permite destacar textos específicos da home sem ser afetado pela regra global de contraste. */
 .home-title-highlight-text {
-  color: #F6C25B !important;
+  color: #FF5B5C !important;
 }
 
 /* Aplica cor de destaque secundária aos benefícios da home com prioridade sobre a regra global. */
 .home-benefits-highlight-text {
-  color: #F6C25B !important;
+  color: #FF5B5C !important;
 }
 /* Destaca especificamente o benefício de rendimento com tom dourado mais intenso. */
 .home-benefit-extra-highlight-text {
-  color: #F6C25B !important;
+  color: #FF5B5C !important;
 }
 
 /* Mantém campos de formulário com fundo preto e texto branco em todas as páginas. */
@@ -107,8 +107,8 @@ h6 {
     border: 0;
     border-radius: 12px;
     padding: 0 32px;
-    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
-    color: #000000 !important;
+    background: linear-gradient(135deg, #FF5B5C 0%, #FF4A4C 100%);
+    color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 1;
@@ -116,7 +116,7 @@ h6 {
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     will-change: transform, box-shadow;
     touch-action: manipulation;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(255, 91, 92, 0.3);
     letter-spacing: 0.3px;
   }
 
@@ -133,8 +133,8 @@ h6 {
   /* Estado hover com efeito elevado e glow */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25), 0 0 32px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, #FF7172 0%, #FF6063 100%);
+    box-shadow: 0 12px 28px rgba(255, 91, 92, 0.4), 0 0 32px rgba(255, 91, 92, 0.3);
     transform: translateY(-3px);
   }
 
@@ -150,8 +150,8 @@ h6 {
   /* Estado ativo com feedback imediato */
   .site-pill-button:active,
   .button-size-login:active {
-    background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #FF4A4C 0%, #FF393B 100%);
+    box-shadow: 0 2px 8px rgba(255, 91, 92, 0.3);
     transform: translateY(-1px);
   }
 
@@ -217,13 +217,13 @@ h6 {
     height: 22px;
   }
 
-  /* Desenha cada traço do símbolo em vermelho e habilita transição para o X. */
+  /* Desenha cada traço do símbolo em laranja e habilita transição para o X. */
   .menu-toggle-line {
     display: block;
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background-color: #F56151;
+    background-color: #FF5B5C;
     transition: all 0.35s ease;
   }
 
@@ -273,9 +273,9 @@ h6 {
     }
   }
 
-  /* Garante texto vermelho em todas as opções do menu mobile. */
+  /* Garante texto laranja em todas as opções do menu mobile. */
   .mobile-menu-item {
-    color: #F56151;
+    color: #FF5B5C;
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -381,8 +381,8 @@ h6 {
 
   /* Estado checked com gradient e glow */
   .custom-checkbox:checked ~ .checkmark {
-    background: linear-gradient(135deg, #F6C25B 0%, #fbbf24 100%);
-    border-color: #F6C25B;
+    background: linear-gradient(135deg, #FF5B5C 0%, #fbbf24 100%);
+    border-color: #FF5B5C;
     box-shadow: 0 0 0 3px rgba(246, 194, 91, 0.2);
   }
 
@@ -490,7 +490,7 @@ h6 {
   position: absolute;
   top: -18px;
   left: 0;
-  color: #F6C25B !important;
+  color: #FF5B5C !important;
   font-size: 12px;
   font-weight: 700;
   opacity: 1;
@@ -544,7 +544,7 @@ h6 {
 .input-group input:focus,
 .input-group textarea:focus,
 .input-group select:focus {
-  border-color: #F6C25B !important;
+  border-color: #FF5B5C !important;
   box-shadow: 0 0 0 3px rgba(246, 194, 91, 0.15);
   background-color: #ffffff !important;
 }
@@ -558,7 +558,7 @@ h6 {
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  background: linear-gradient(135deg, #F6C25B 0%, #f0b840 100%);
+  background: linear-gradient(135deg, #FF5B5C 0%, #f0b840 100%);
   border: none;
   border-radius: 10px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -597,7 +597,7 @@ h6 {
 }
 
 .form-link {
-  color: #F6C25B !important;
+  color: #FF5B5C !important;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -613,7 +613,7 @@ h6 {
   left: 0;
   width: 0;
   height: 2px;
-  background: #F6C25B;
+  background: #FF5B5C;
   transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -826,7 +826,7 @@ select {
 
 /* Melhor contraste em links dentro do conteúdo */
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link) {
-  color: #F6C25B;
+  color: #FF5B5C;
   text-decoration: none;
   border-bottom: 1px solid rgba(246, 194, 91, 0.3);
   transition: all 0.3s ease;
