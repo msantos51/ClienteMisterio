@@ -5,14 +5,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e9d8be;
-  --foreground: #6db9c7;
+  --background: #e2e0e0;
+  --foreground: #000000;
   --surface: #000000;
   --surface-muted: #0f0f0f;
   --primary: #000000;
   --primary-soft: #111111;
-  --accent: #e9d8be;
-  --accent-secondary: #e9d8be;
+  --accent: #e2e0e0;
+  --accent-secondary: #e2e0e0;
   --accent-success: #58bc82;
   --line: #2a2a2a;
   --line-light: #404040;
@@ -34,8 +34,8 @@
 }
 
 body {
-  /* Fundo bege */
-  background-color: #e9d8be;
+  /* Fundo cinzento claro */
+  background-color: #e2e0e0;
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
@@ -59,16 +59,16 @@ body em {
 
 /* Permite destacar textos específicos da home sem ser afetado pela regra global de contraste. */
 .home-title-highlight-text {
-  color: #6db9c7 !important;
+  color: #000000 !important;
 }
 
 /* Aplica cor de destaque secundária aos benefícios da home com prioridade sobre a regra global. */
 .home-benefits-highlight-text {
-  color: #6db9c7 !important;
+  color: #000000 !important;
 }
 /* Destaca especificamente o benefício de rendimento com tom dourado mais intenso. */
 .home-benefit-extra-highlight-text {
-  color: #6db9c7 !important;
+  color: #000000 !important;
 }
 
 /* Mantém campos de formulário com fundo preto e texto branco em todas as páginas. */
@@ -103,7 +103,7 @@ h6 {
     border: 0;
     border-radius: 12px;
     padding: 0 32px;
-    background: #fe8f4a;
+    background: #8f0403;
     color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
@@ -128,7 +128,7 @@ h6 {
   /* Estado hover */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background: #fe8f4a;
+    background: #8f0403;
     opacity: 0.9;
   }
 
@@ -142,7 +142,7 @@ h6 {
   /* Estado ativo */
   .site-pill-button:active,
   .button-size-login:active {
-    background: #fe8f4a;
+    background: #8f0403;
     opacity: 0.8;
   }
 
@@ -207,13 +207,13 @@ h6 {
     height: 22px;
   }
 
-  /* Desenha cada traço do símbolo em bege e habilita transição para o X. */
+  /* Desenha cada traço do símbolo em cinzento e habilita transição para o X. */
   .menu-toggle-line {
     display: block;
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background-color: #e9d8be;
+    background-color: #e2e0e0;
     transition: all 0.35s ease;
   }
 
@@ -223,7 +223,7 @@ h6 {
     }
   }
 
-  /* Converte o ícone para X quando o menu abre, mantendo símbolo bege. */
+  /* Converte o ícone para X quando o menu abre, mantendo símbolo cinzento. */
   .menu-toggle-button.is-open .menu-toggle-line.top {
     transform: translateY(7px) rotate(45deg);
   }
@@ -263,9 +263,9 @@ h6 {
     }
   }
 
-  /* Garante texto bege em todas as opções do menu mobile. */
+  /* Garante texto cinzento em todas as opções do menu mobile. */
   .mobile-menu-item {
-    color: #e9d8be;
+    color: #e2e0e0;
     min-height: 44px;
     display: flex;
     align-items: center;
@@ -371,9 +371,9 @@ h6 {
 
   /* Estado checked com gradient e glow */
   .custom-checkbox:checked ~ .checkmark {
-    background: #e9d8be;
-    border-color: #e9d8be;
-    box-shadow: 0 0 0 3px rgba(254, 143, 74, 0.2);
+    background: #e2e0e0;
+    border-color: #e2e0e0;
+    box-shadow: 0 0 0 3px rgba(143, 4, 3, 0.2);
   }
 
   /* Exibe o check com animação suave */
@@ -384,7 +384,7 @@ h6 {
 
   /* Focus state acessível */
   .custom-checkbox:focus-visible ~ .checkmark {
-    box-shadow: 0 0 0 3px rgba(254, 143, 74, 0.3);
+    box-shadow: 0 0 0 3px rgba(143, 4, 3, 0.3);
   }
 
   /* Animação suave do check com efeito de desenho */
@@ -466,7 +466,7 @@ h6 {
   position: absolute;
   top: -18px;
   left: 0;
-  color: #e9d8be !important;
+  color: #000000 !important;
   font-size: 12px;
   font-weight: 700;
   opacity: 1;
@@ -520,8 +520,8 @@ h6 {
 .input-group input:focus,
 .input-group textarea:focus,
 .input-group select:focus {
-  border-color: #e9d8be !important;
-  box-shadow: 0 0 0 3px rgba(254, 143, 74, 0.15);
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 3px rgba(143, 4, 3, 0.15);
   background-color: #ffffff !important;
 }
 
@@ -534,7 +534,7 @@ h6 {
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  background: #fe8f4a;
+  background: #8f0403;
   border: none;
   border-radius: 10px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -547,7 +547,7 @@ h6 {
 }
 
 .submit:hover {
-  background: #fe8f4a;
+  background: #8f0403;
   opacity: 0.9;
 }
 
@@ -567,7 +567,7 @@ h6 {
 }
 
 .form-link {
-  color: #e9d8be !important;
+  color: #000000 !important;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
@@ -583,12 +583,12 @@ h6 {
   left: 0;
   width: 0;
   height: 2px;
-  background: #e9d8be;
+  background: #000000;
   transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .form-link:hover {
-  color: #e9d8be !important;
+  color: #000000 !important;
 }
 
 .form-link:hover::after {
@@ -796,13 +796,13 @@ select {
 
 /* Melhor contraste em links dentro do conteúdo */
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link) {
-  color: #e9d8be;
+  color: #000000;
   text-decoration: none;
-  border-bottom: 1px solid rgba(254, 143, 74, 0.3);
+  border-bottom: 1px solid rgba(143, 4, 3, 0.3);
   transition: all 0.3s ease;
 }
 
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):hover {
-  border-bottom-color: rgba(254, 143, 74, 0.8);
-  color: #e9d8be;
+  border-bottom-color: rgba(143, 4, 3, 0.8);
+  color: #000000;
 }
