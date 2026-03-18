@@ -176,7 +176,7 @@ export default function DashboardPage() {
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
       try {
-        const response = await fetch("/api/user", { signal: controller.signal });
+        const response = await fetch("/api/user", { credentials: "include", signal: controller.signal });
         clearTimeout(timeoutId);
         const data = (await response.json()) as ProfileResponse;
 
@@ -215,7 +215,7 @@ export default function DashboardPage() {
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
 
       try {
-        const response = await fetch("/api/course/progress", { signal: controller.signal });
+        const response = await fetch("/api/course/progress", { credentials: "include", signal: controller.signal });
         clearTimeout(timeoutId);
         if (response.ok) {
           const data = (await response.json()) as CourseProgressData;
@@ -273,6 +273,7 @@ export default function DashboardPage() {
     try {
       const response = await fetch("/api/user", {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: profile.email,
@@ -384,6 +385,7 @@ export default function DashboardPage() {
     try {
       const response = await fetch("/api/user/password", {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           currentPassword: passwordForm.currentPassword,
@@ -410,7 +412,7 @@ export default function DashboardPage() {
 
   const handleLogout = async () => {
     // Termina a sessão no servidor e remove os dados locais antes do redirecionamento.
-    await fetch("/api/auth/logout", { method: "POST" });
+    await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
     localStorage.removeItem(sessionStorageKey);
     localStorage.removeItem(userStorageKey);
     router.push("/login");

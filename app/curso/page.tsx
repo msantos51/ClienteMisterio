@@ -293,7 +293,7 @@ export default function CursoPage() {
 
   const loadProgress = useCallback(async () => {
     try {
-      const response = await fetch("/api/course/progress");
+      const response = await fetch("/api/course/progress", { credentials: "include" });
       if (response.ok) {
         const data = (await response.json()) as ProgressData;
         setProgress(data);
@@ -364,6 +364,7 @@ export default function CursoPage() {
       try {
         const response = await fetch("/api/course/progress", {
           method: "PUT",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             moduleId: activeModuleId,
