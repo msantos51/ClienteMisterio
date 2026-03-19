@@ -104,7 +104,7 @@ h6 {
     cursor: pointer;
     font-weight: 500;
     font-size: 14px;
-    padding: 0.6em 1.2em 0.6em 1em;
+    padding: 0.6em 1.2em;
     color: white;
     background: #F66856;
     border: none;
@@ -112,6 +112,8 @@ h6 {
     letter-spacing: 0.05em;
     border-radius: 20em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: auto;
+    min-width: auto;
   }
 
   .cssbuttons-io-button svg {
@@ -138,7 +140,7 @@ h6 {
     outline: none;
     cursor: pointer;
     border: none;
-    padding: 0.6em 1.2em 0.6em 1em;
+    padding: 0.6em 1.2em;
     margin: 0;
     font-family: inherit;
     font-size: inherit;
@@ -154,6 +156,8 @@ h6 {
     color: white;
     box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: auto;
+    min-width: auto;
   }
 
   button:hover {
@@ -186,7 +190,7 @@ h6 {
     cursor: pointer;
     font-weight: 500;
     font-size: 14px;
-    padding: 0.6em 1.2em 0.6em 1em;
+    padding: 0.6em 1.2em;
     color: white;
     background: #F66856;
     border: none;
@@ -197,6 +201,8 @@ h6 {
     white-space: nowrap;
     will-change: transform;
     touch-action: manipulation;
+    width: auto;
+    min-width: auto;
   }
 
   @media (max-width: 640px) {
@@ -610,7 +616,7 @@ h6 {
 }
 
 .submit {
-  width: 100%;
+  width: auto;
   padding: 0.6em 1.2em;
   min-height: 40px;
   color: white !important;
