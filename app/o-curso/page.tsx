@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import CheckoutButton from "../components/CheckoutButton";
 
 const sessionStorageKey = "vp_session";
 
@@ -149,14 +150,17 @@ export default function CoursePage() {
       </div>
 
       {!isLoggedIn && (
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-4">
           <p className="text-sm text-white/70">Crie uma conta ou inicie sessão para aceder ao curso completo com conteúdo teórico e questionários.</p>
-          <Link
-            href="/account"
-            className="submit inline-block max-w-sm text-center !no-underline"
-          >
-            Criar Conta Gratuita
-          </Link>
+          <div className="flex flex-col gap-3 justify-center items-center sm:flex-row sm:gap-4">
+            <Link
+              href="/account"
+              className="submit inline-block max-w-sm text-center !no-underline"
+            >
+              Criar Conta Gratuita
+            </Link>
+            <CheckoutButton label="Comprar Acesso Completo" />
+          </div>
         </div>
       )}
     </section>
