@@ -532,7 +532,7 @@ export default function DashboardPage() {
                   : "Inicie a sua formação profissional"}
               </p>
             </div>
-            <span className="text-2xl font-bold" style={{ color: "#F6C25B" }}>
+            <span className="text-2xl font-bold" style={{ color: "#F66856" }}>
               {courseProgress?.progressPercent ?? 0}%
             </span>
           </div>
@@ -541,7 +541,7 @@ export default function DashboardPage() {
               className="h-full rounded-full transition-all duration-700"
               style={{
                 width: `${courseProgress?.progressPercent ?? 0}%`,
-                background: "linear-gradient(90deg, #F6C25B, #f0a830)",
+                background: "linear-gradient(90deg, #F66856, #F66856)",
               }}
             />
           </div>

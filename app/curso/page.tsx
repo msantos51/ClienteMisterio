@@ -391,7 +391,7 @@ export default function CursoPage() {
     const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm text-slate-900";
     if (!quizSubmitted) {
       if (quizAnswers[question.id] === optionIndex) {
-        return `${base} border-[#F6C25B] bg-[#F6C25B]/10 text-white`;
+        return `${base} border-[#F66856] bg-[#F66856]/10 text-white`;
       }
       return `${base} border-slate-200 hover:border-slate-300 bg-white`;
     }
@@ -458,7 +458,7 @@ export default function CursoPage() {
         </div>
         <div className="h-3 w-full rounded-full bg-white/10 overflow-hidden">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#F6C25B] to-[#f0a830] transition-all duration-700"
+            className="h-full rounded-full bg-gradient-to-r from-[#F66856] to-[#F66856] transition-all duration-700"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -485,7 +485,7 @@ export default function CursoPage() {
                   completed
                     ? "border-green-400/40 bg-green-900/10 hover:bg-green-900/20"
                     : unlocked
-                      ? "border-white/30 hover:border-[#F6C25B] cursor-pointer"
+                      ? "border-white/30 hover:border-[#F66856] cursor-pointer"
                       : "border-white/10 opacity-40 cursor-not-allowed"
                 }`}
               >
@@ -496,7 +496,7 @@ export default function CursoPage() {
                         completed
                           ? "bg-green-500 text-white"
                           : unlocked
-                            ? "bg-[#F6C25B]/20 text-[#F6C25B]"
+                            ? "bg-[#F66856]/20 text-[#F66856]"
                             : "bg-white/10 text-white/30"
                       }`}
                     >

@@ -96,6 +96,59 @@ h6 {
 }
 
 @layer components {
+  /* Botão padrão com efeito deslizante - From Uiverse.io by BHARGAVPATEL1244 */
+  button {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    padding: 0.9rem 2rem;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 500px;
+    overflow: hidden;
+    background: #F66856;
+    color: ghostwhite;
+  }
+
+  button span {
+    position: relative;
+    z-index: 10;
+    transition: color 0.4s;
+  }
+
+  button:hover span {
+    color: black;
+  }
+
+  button::before,
+  button::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  button::before {
+    content: "";
+    background: #000;
+    width: 120%;
+    left: -10%;
+    transform: skew(30deg);
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+  }
+
+  button:hover::before {
+    transform: translate3d(100%, 0, 0);
+  }
+
   /* Define estilo base moderno para todos os botões */
   .site-pill-button,
   .button-size-login {
@@ -602,10 +655,10 @@ h6 {
 .form-feedback {
   padding: 12px 14px;
   font-size: 0.85rem;
-  border: 1px solid #fde68a;
+  border: 1px solid rgba(246, 104, 86, 0.3);
   border-radius: 10px;
-  background: linear-gradient(135deg, #fffbeb 0%, #fff8dc 100%);
-  color: #92400e !important;
+  background: linear-gradient(135deg, #fff5f1 0%, #fffaf8 100%);
+  color: #8b3d36 !important;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -701,8 +754,8 @@ h6 {
 /* Destaque visual da secção ativa com gradiente sutil */
 .dashboard-menu-item.is-active {
   background: linear-gradient(135deg, #fef9f3 0%, #fff5ea 100%);
-  border-color: #fbbf24;
-  box-shadow: inset 0 1px 2px rgba(251, 191, 36, 0.1);
+  border-color: #F66856;
+  box-shadow: inset 0 1px 2px rgba(246, 104, 86, 0.1);
 }
 
 .dashboard-menu-item:hover {
@@ -730,7 +783,7 @@ h6 {
 .dashboard-right-highlight-icon {
   font-size: 1.3rem;
   text-align: center;
-  color: #ec4899 !important;
+  color: #F66856 !important;
 }
 
 @media (min-width: 1024px) {
@@ -770,12 +823,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(246, 194, 91, 0.5);
+  background: rgba(246, 104, 86, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(246, 194, 91, 0.8);
+  background: rgba(246, 104, 86, 0.8);
 }
 
 /* Placeholder melhorado */

@@ -100,10 +100,10 @@ export default function AboutPage() {
           {courseAdvantages.map((advantage, index) => (
             <li
               key={advantage}
-              className="group rounded-2xl border border-white/30 p-3 sm:p-5 transition duration-300 hover:-translate-y-1 hover:border-[#F6C25B]"
+              className="group rounded-2xl border border-white/30 p-3 sm:p-5 transition duration-300 hover:-translate-y-1 hover:border-[#F66856]"
             >
               <div className="flex items-start gap-2 sm:gap-3">
-                <span className="mt-0.5 inline-flex h-5 sm:h-6 w-5 sm:w-6 shrink-0 items-center justify-center rounded-full bg-[#F6C25B] text-xs font-bold text-black">
+                <span className="mt-0.5 inline-flex h-5 sm:h-6 w-5 sm:w-6 shrink-0 items-center justify-center rounded-full bg-[#F66856] text-xs font-bold text-black">
                   {index + 1}
                 </span>
                 <p className="text-sm sm:text-base leading-6 sm:leading-7">{advantage}</p>
