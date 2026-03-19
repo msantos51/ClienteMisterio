@@ -272,6 +272,13 @@ h6 {
     touch-action: manipulation;
     width: auto;
     min-width: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
 
   @media (max-width: 640px) {
