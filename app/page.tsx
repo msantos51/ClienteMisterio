@@ -28,10 +28,10 @@ export default function HomePage() {
               {/* Mantém o CTA centrado por baixo dos benefícios para reforçar a ação principal. */}
               <div className="flex flex-col gap-3 justify-center pt-2 sm:pt-4 items-center sm:flex-row sm:gap-4">
                 <Link
-                  className="site-pill-button px-8 py-3 text-[10px] uppercase tracking-[0.15em] shadow-[0_10px_24px_rgba(0,0,0,0.18)] sm:px-10 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]"
+                  className="site-pill-button-secondary px-8 py-3 text-[10px] uppercase tracking-[0.15em] shadow-[0_10px_24px_rgba(0,0,0,0.18)] sm:px-10 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]"
                   href="/about"
                 >
-                  Começa já
+                  Sabe mais
                 </Link>
                 <CheckoutButton label="Comprar Curso" />
               </div>
