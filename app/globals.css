@@ -35,11 +35,11 @@
 
 body {
   /* Fundo com gradiente */
-  background: #FFFFFFFF;
-  background: -webkit-linear-gradient(344deg, rgba(255, 255, 255, 1) 0%, rgba(226, 224, 224, 1) 100%);
-  background: -moz-linear-gradient(344deg, rgba(255, 255, 255, 1) 0%, rgba(226, 224, 224, 1) 100%);
-  background: linear-gradient(344deg, rgba(255, 255, 255, 1) 0%, rgba(226, 224, 224, 1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#FFFFFF", endColorstr="#E2E0E0", GradientType=0);
+  background: #EBECE6;
+  background: #EBECE6;
+  background: #EBECE6;
+  background: #EBECE6;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#EBECE6", endColorstr="#EBECE6", GradientType=0);
   color: var(--foreground);
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
@@ -107,7 +107,7 @@ h6 {
     border: 0;
     border-radius: 12px;
     padding: 0 32px;
-    background: #8f0403;
+    background: #F66856;
     color: #ffffff !important;
     font-size: 0.875rem;
     font-weight: 700;
@@ -132,7 +132,7 @@ h6 {
   /* Estado hover */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background: #8f0403;
+    background: #F66856;
     opacity: 0.9;
   }
 
@@ -146,7 +146,7 @@ h6 {
   /* Estado ativo */
   .site-pill-button:active,
   .button-size-login:active {
-    background: #8f0403;
+    background: #F66856;
     opacity: 0.8;
   }
 
@@ -538,7 +538,7 @@ h6 {
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  background: #8f0403;
+  background: #F66856;
   border: none;
   border-radius: 10px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -551,7 +551,7 @@ h6 {
 }
 
 .submit:hover {
-  background: #8f0403;
+  background: #F66856;
   opacity: 0.9;
 }
 
