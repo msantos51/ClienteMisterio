@@ -129,7 +129,7 @@ export default function CoursePage() {
         {courseModules.map((moduleItem) => (
           <details
             key={moduleItem.title}
-            className="group rounded-2xl border border-white/30 p-5 open:border-[#F6C25B]"
+            className="group rounded-2xl border border-white/30 p-5 open:border-[#F66856]"
           >
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none">
               <span>{moduleItem.title}</span>
@@ -139,7 +139,7 @@ export default function CoursePage() {
             <ul className="mt-4 space-y-3 border-t border-white/20 pt-4 text-sm leading-6">
               {moduleItem.topics.map((topic) => (
                 <li key={topic} className="flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F6C25B]" />
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F66856]" />
                   <span>{topic}</span>
                 </li>
               ))}
