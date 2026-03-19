@@ -503,7 +503,7 @@ export default function CursoPage() {
                       {completed ? "\u2713" : mod.id}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-semibold text-sm truncate">{mod.title}</h3>
+                      <h3 className="font-semibold text-sm break-words">{mod.title}</h3>
                       <p className="text-xs text-white/60 mt-0.5">{mod.description}</p>
                     </div>
                   </div>
@@ -531,7 +531,7 @@ export default function CursoPage() {
           <button
             type="button"
             onClick={() => setActiveModuleId(null)}
-            className="text-sm home-title-highlight-text font-semibold hover:underline"
+            className="text-sm text-white font-semibold hover:underline"
           >
             &larr; Voltar aos módulos
           </button>
@@ -590,7 +590,7 @@ export default function CursoPage() {
                 type="button"
                 onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
                 disabled={theoryPage === 0}
-                className="submit max-w-[180px] !bg-white/15 disabled:opacity-40"
+                className="site-pill-button-secondary max-w-[180px] disabled:opacity-40"
               >
                 Página anterior
               </button>
@@ -627,7 +627,7 @@ export default function CursoPage() {
           <button
             type="button"
             onClick={() => setQuizMode(false)}
-            className="text-sm home-title-highlight-text font-semibold hover:underline"
+            className="text-sm text-white font-semibold hover:underline"
           >
             &larr; Voltar ao conteúdo
           </button>

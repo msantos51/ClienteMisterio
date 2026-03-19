@@ -74,7 +74,7 @@ export default function TopNav() {
 
       {/* Renderiza menu vertical no mobile com área clicável confortável e ordem visual consistente. */}
       {isMenuOpen ? (
-        <nav className="mobile-menu-container absolute right-3 top-[80px] z-40 sm:right-4 sm:top-[84px] flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] shadow-sm lg:hidden min-w-[200px]">
+        <nav className="mobile-menu-container absolute right-3 top-[80px] z-40 sm:right-4 sm:top-[84px] flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] shadow-sm lg:hidden min-w-[200px] !bg-[#feb1a5]">
           {navigationItems.map((item, index) => {
             const isActive = pathname === item.href;
             const isLast = index === navigationItems.length - 1;
@@ -82,11 +82,11 @@ export default function TopNav() {
             return (
               <Link
                 key={item.href}
-                className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold transition ${
+                className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold transition !text-white ${
                   isActive
-                    ? "bg-[#111111]"
-                    : "hover:bg-[#111111]"
-                } ${isLast ? "border-b-0" : "border-b border-[color:var(--line)]"}`}
+                    ? "bg-[#ff9b7f]"
+                    : "hover:bg-[#ff9b7f]"
+                } ${isLast ? "border-b-0" : "border-b border-white/30"}`}
                 href={item.href}
                 onClick={closeMenu}
               >
