@@ -103,34 +103,29 @@ h6 {
     font-family: inherit;
     cursor: pointer;
     font-weight: 500;
-    font-size: 17px;
-    padding: 0.8em 1.5em 0.8em 1.2em;
-    color: white;
-    background: #ff8c3a;
-    background: linear-gradient(
-      0deg,
-      rgba(255, 108, 0, 1) 0%,
-      rgba(255, 165, 0, 1) 100%
-    );
+    font-size: 14px;
+    padding: 0.5em 1em 0.5em 0.8em;
+    color: white !important;
+    background: #F66856;
     border: none;
-    box-shadow: 0 0.7em 1.5em -0.5em rgba(255, 108, 0, 0.74);
+    box-shadow: 0 0.5em 1em -0.3em rgba(246, 104, 86, 0.6);
     letter-spacing: 0.05em;
     border-radius: 20em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .cssbuttons-io-button svg {
-    margin-right: 8px;
+    margin-right: 6px;
   }
 
   .cssbuttons-io-button:hover {
-    box-shadow: 0 0.5em 1.5em -0.5em rgba(255, 108, 0, 0.74);
-    opacity: 0.95;
+    box-shadow: 0 0.4em 0.8em -0.3em rgba(246, 104, 86, 0.6);
+    opacity: 0.9;
   }
 
   .cssbuttons-io-button:active {
-    box-shadow: 0 0.3em 1em -0.5em rgba(255, 108, 0, 0.74);
-    opacity: 0.9;
+    box-shadow: 0 0.2em 0.5em -0.3em rgba(246, 104, 86, 0.6);
+    opacity: 0.85;
   }
 
   .cssbuttons-io-button:disabled {
@@ -143,36 +138,31 @@ h6 {
     outline: none;
     cursor: pointer;
     border: none;
-    padding: 0.8em 1.5em 0.8em 1.2em;
+    padding: 0.5em 1em 0.5em 0.8em;
     margin: 0;
     font-family: inherit;
-    font-size: inherit;
+    font-size: 14px;
     position: relative;
     display: inline-flex;
     align-items: center;
     letter-spacing: 0.05em;
     font-weight: 500;
-    font-size: 17px;
     border-radius: 20em;
     overflow: hidden;
-    background: linear-gradient(
-      0deg,
-      rgba(255, 108, 0, 1) 0%,
-      rgba(255, 165, 0, 1) 100%
-    );
-    color: white;
-    box-shadow: 0 0.7em 1.5em -0.5em rgba(255, 108, 0, 0.74);
+    background: #F66856;
+    color: white !important;
+    box-shadow: 0 0.5em 1em -0.3em rgba(246, 104, 86, 0.6);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   button:hover {
-    box-shadow: 0 0.5em 1.5em -0.5em rgba(255, 108, 0, 0.74);
-    opacity: 0.95;
+    box-shadow: 0 0.4em 0.8em -0.3em rgba(246, 104, 86, 0.6);
+    opacity: 0.9;
   }
 
   button:active {
-    box-shadow: 0 0.3em 1em -0.5em rgba(255, 108, 0, 0.74);
-    opacity: 0.9;
+    box-shadow: 0 0.2em 0.5em -0.3em rgba(246, 104, 86, 0.6);
+    opacity: 0.85;
   }
 
   button:disabled {
@@ -183,6 +173,7 @@ h6 {
   button span {
     position: relative;
     z-index: 10;
+    color: white !important;
   }
 
   /* Define estilo base moderno para todos os botões - utilizando o padrão Uiverse */
@@ -194,17 +185,12 @@ h6 {
     font-family: inherit;
     cursor: pointer;
     font-weight: 500;
-    font-size: 17px;
-    padding: 0.8em 1.5em 0.8em 1.2em;
-    color: white;
-    background: #ff8c3a;
-    background: linear-gradient(
-      0deg,
-      rgba(255, 108, 0, 1) 0%,
-      rgba(255, 165, 0, 1) 100%
-    );
+    font-size: 14px;
+    padding: 0.5em 1em 0.5em 0.8em;
+    color: white !important;
+    background: #F66856;
     border: none;
-    box-shadow: 0 0.7em 1.5em -0.5em rgba(255, 108, 0, 0.74);
+    box-shadow: 0 0.5em 1em -0.3em rgba(246, 104, 86, 0.6);
     letter-spacing: 0.05em;
     border-radius: 20em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -216,9 +202,9 @@ h6 {
   @media (max-width: 640px) {
     .site-pill-button,
     .button-size-login {
-      min-height: 48px;
-      padding: 0.8em 1.2em;
-      font-size: 15px;
+      min-height: 40px;
+      padding: 0.5em 0.8em;
+      font-size: 13px;
       border-radius: 18em;
     }
   }
@@ -226,28 +212,28 @@ h6 {
   /* Estado hover */
   .site-pill-button:hover,
   .button-size-login:hover {
-    box-shadow: 0 0.5em 1.5em -0.5em rgba(255, 108, 0, 0.74);
-    opacity: 0.95;
+    box-shadow: 0 0.4em 0.8em -0.3em rgba(246, 104, 86, 0.6);
+    opacity: 0.9;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .site-pill-button:hover,
     .button-size-login:hover {
-      opacity: 0.95;
+      opacity: 0.9;
     }
   }
 
   /* Estado ativo */
   .site-pill-button:active,
   .button-size-login:active {
-    box-shadow: 0 0.3em 1em -0.5em rgba(255, 108, 0, 0.74);
-    opacity: 0.9;
+    box-shadow: 0 0.2em 0.5em -0.3em rgba(246, 104, 86, 0.6);
+    opacity: 0.85;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .site-pill-button:active,
     .button-size-login:active {
-      opacity: 0.9;
+      opacity: 0.85;
     }
   }
 
@@ -471,7 +457,7 @@ h6 {
   .custom-checkbox:checked ~ .checkmark {
     background: #e2e0e0;
     border-color: #e2e0e0;
-    box-shadow: 0 0 0 3px rgba(255, 108, 0, 0.2);
+    box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.2);
   }
 
   /* Exibe o check com animação suave */
@@ -482,7 +468,7 @@ h6 {
 
   /* Focus state acessível */
   .custom-checkbox:focus-visible ~ .checkmark {
-    box-shadow: 0 0 0 3px rgba(255, 108, 0, 0.3);
+    box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.3);
   }
 
   /* Animação suave do check com efeito de desenho */
@@ -619,27 +605,22 @@ h6 {
 .input-group textarea:focus,
 .input-group select:focus {
   border-color: #000000 !important;
-  box-shadow: 0 0 0 3px rgba(255, 108, 0, 0.15);
+  box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.15);
   background-color: #ffffff !important;
 }
 
 .submit {
   width: 100%;
-  padding: 0.8em 1.5em;
-  min-height: 44px;
+  padding: 0.5em 1em;
+  min-height: 36px;
   color: white !important;
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.05em;
   cursor: pointer;
-  background: #ff8c3a;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 108, 0, 1) 0%,
-    rgba(255, 165, 0, 1) 100%
-  );
+  background: #F66856;
   border: none;
-  box-shadow: 0 0.7em 1.5em -0.5em rgba(255, 108, 0, 0.74);
+  box-shadow: 0 0.5em 1em -0.3em rgba(246, 104, 86, 0.6);
   border-radius: 20em;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: inline-flex;
@@ -650,27 +631,27 @@ h6 {
 
 @media (max-width: 480px) {
   .submit {
-    min-height: 48px;
-    padding: 0.8em 1.2em;
-    font-size: 15px;
+    min-height: 36px;
+    padding: 0.5em 0.8em;
+    font-size: 13px;
     border-radius: 18em;
   }
 }
 
 .submit:hover {
-  box-shadow: 0 0.5em 1.5em -0.5em rgba(255, 108, 0, 0.74);
-  opacity: 0.95;
+  box-shadow: 0 0.4em 0.8em -0.3em rgba(246, 104, 86, 0.6);
+  opacity: 0.9;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .submit:hover {
-    opacity: 0.95;
+    opacity: 0.9;
   }
 }
 
 .submit:active {
-  box-shadow: 0 0.3em 1em -0.5em rgba(255, 108, 0, 0.74);
-  opacity: 0.9;
+  box-shadow: 0 0.2em 0.5em -0.3em rgba(246, 104, 86, 0.6);
+  opacity: 0.85;
 }
 
 .submit:disabled {
@@ -710,10 +691,10 @@ h6 {
 .form-feedback {
   padding: 12px 14px;
   font-size: 0.85rem;
-  border: 1px solid rgba(255, 108, 0, 0.3);
+  border: 1px solid rgba(246, 104, 86, 0.3);
   border-radius: 10px;
   background: linear-gradient(135deg, #fff5f1 0%, #fffaf8 100%);
-  color: #d95800 !important;
+  color: #d95744 !important;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -809,8 +790,8 @@ h6 {
 /* Destaque visual da secção ativa com gradiente sutil */
 .dashboard-menu-item.is-active {
   background: linear-gradient(135deg, #fef9f3 0%, #fff5ea 100%);
-  border-color: #ff6c00;
-  box-shadow: inset 0 1px 2px rgba(255, 108, 0, 0.1);
+  border-color: #F66856;
+  box-shadow: inset 0 1px 2px rgba(246, 104, 86, 0.1);
 }
 
 .dashboard-menu-item:hover {
@@ -838,7 +819,7 @@ h6 {
 .dashboard-right-highlight-icon {
   font-size: 1.3rem;
   text-align: center;
-  color: #ff6c00 !important;
+  color: #F66856 !important;
 }
 
 @media (min-width: 1024px) {
@@ -878,12 +859,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 108, 0, 0.5);
+  background: rgba(246, 104, 86, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 108, 0, 0.8);
+  background: rgba(246, 104, 86, 0.8);
 }
 
 /* Placeholder melhorado */
@@ -910,11 +891,11 @@ select {
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link) {
   color: #000000;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 108, 0, 0.3);
+  border-bottom: 1px solid rgba(246, 104, 86, 0.3);
   transition: all 0.3s ease;
 }
 
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):hover {
-  border-bottom-color: rgba(255, 108, 0, 0.8);
+  border-bottom-color: rgba(246, 104, 86, 0.8);
   color: #000000;
 }
