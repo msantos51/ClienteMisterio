@@ -16,9 +16,9 @@ export default function HomePage() {
           <div className="grid w-full justify-items-center gap-6 sm:gap-8">
             {/* Agrupa o texto e o botão num bloco centralizado para melhorar a hierarquia visual. */}
             <div className="flex w-full max-w-3xl flex-col items-center space-y-4 text-center sm:space-y-6">
-              {/* Destaca a mensagem principal no centro e com a mesma cor visual usada nos botões. */}
-              <h1 className="site-pill-button h-auto min-h-0 rounded-3xl px-6 py-4 text-center text-2xl leading-tight whitespace-normal sm:px-8 sm:py-5 sm:text-4xl lg:text-5xl">
-                Sê pago para testar produtos e serviços
+              {/* Destaca a mensagem principal no centro com texto preto, sem caixa vermelha. */}
+              <h1 className="h-auto min-h-0 rounded-3xl px-6 py-4 text-center text-2xl leading-tight whitespace-normal sm:px-8 sm:py-5 sm:text-4xl lg:text-5xl text-black">
+                Cliente Mistério
               </h1>
 
               {/* Exibe os 3 pontos principais em cards animados. */}
