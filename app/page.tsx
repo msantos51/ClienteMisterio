@@ -3,6 +3,7 @@
  */
 
 import Link from "next/link";
+import ThreePointsCards from "./components/ThreePointsCards";
 
 export default function HomePage() {
   return (
@@ -20,18 +21,8 @@ export default function HomePage() {
                 Sê pago para testar produtos e serviços
               </h1>
 
-              {/* Lista os benefícios de forma centralizada e com a mesma cor de destaque dos botões. */}
-              <ul className="space-y-1 text-center text-sm leading-6 sm:space-y-2 sm:text-base sm:leading-7">
-                <li className="site-pill-button h-auto min-h-0 rounded-2xl px-4 py-3 text-center text-sm whitespace-normal sm:text-base">
-                  -Sem horários
-                </li>
-                <li className="site-pill-button h-auto min-h-0 rounded-2xl px-4 py-3 text-center text-sm whitespace-normal sm:text-base">
-                  -Escolhes as marcas
-                </li>
-                <li className="site-pill-button h-auto min-h-0 rounded-2xl px-4 py-3 text-center text-sm whitespace-normal sm:text-base">
-                  -Rendimento extra
-                </li>
-              </ul>
+              {/* Exibe os 3 pontos principais em cards animados. */}
+              <ThreePointsCards />
 
               {/* Mantém o CTA centrado por baixo dos benefícios para reforçar a ação principal. */}
               <div className="flex justify-center pt-2 sm:pt-4">
