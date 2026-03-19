@@ -28,12 +28,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </Link>
 
           {/* Mantém o menu centrado no cabeçalho em desktop, inclusive na home. */}
-          <div className="justify-self-end lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2">
             <TopNav />
           </div>
 
           {/* Mantém uma única instância das ações para evitar renderização duplicada e navegação menos fluída. */}
-          <div>
+          <div className="flex items-center gap-3">
             <HeaderActions />
           </div>
         </div>
