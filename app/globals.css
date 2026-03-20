@@ -4,7 +4,32 @@
 
 @import "tailwindcss";
 
-/* Declarações de fontes customizadas Basenji */
+/* Declarações de fontes customizadas CreatoDisplay */
+@font-face {
+  font-family: "CreatoDisplay";
+  src: url("/fonts/CreatoDisplay-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CreatoDisplay";
+  src: url("/fonts/CreatoDisplay-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CreatoDisplay";
+  src: url("/fonts/CreatoDisplay-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Declarações de fontes customizadas Basenji (fallback) */
 @font-face {
   font-family: "Basenji";
   src: url("/fonts/Basenji-SemiBold.otf") format("opentype");
@@ -46,7 +71,7 @@
   --color-primary-soft: var(--primary-soft);
   --color-accent: var(--accent);
   --color-line: var(--line);
-  --font-sans: "Basenji", sans-serif;
+  --font-sans: "CreatoDisplay", sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -58,7 +83,8 @@ body {
   background: #EBECE6;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#EBECE6", endColorstr="#EBECE6", GradientType=0);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: "CreatoDisplay", sans-serif;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   position: relative;
@@ -101,14 +127,14 @@ select {
   border-color: var(--line) !important;
 }
 
-/* Força todos os elementos tipográficos principais a usar Montserrat em negrito. */
+/* Força todos os elementos tipográficos principais a usar CreatoDisplay em negrito. */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-sans);
+  font-family: "CreatoDisplay", sans-serif;
   font-weight: 700;
 }
 
@@ -117,7 +143,7 @@ h6 {
   .cssbuttons-io-button {
     display: flex;
     align-items: center;
-    font-family: inherit;
+    font-family: "CreatoDisplay", sans-serif;
     cursor: pointer;
     font-weight: 500;
     font-size: 14px;
@@ -159,7 +185,7 @@ h6 {
     border: none;
     padding: 0.6em 1.2em;
     margin: 0;
-    font-family: inherit;
+    font-family: "CreatoDisplay", sans-serif;
     font-size: inherit;
     position: relative;
     display: inline-flex;
@@ -203,7 +229,7 @@ h6 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: inherit;
+    font-family: "CreatoDisplay", sans-serif;
     cursor: pointer;
     font-weight: 500;
     font-size: 14px;
@@ -272,7 +298,7 @@ h6 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: inherit;
+    font-family: "CreatoDisplay", sans-serif;
     cursor: pointer;
     font-weight: 500;
     font-size: 14px;
@@ -712,7 +738,7 @@ h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: inherit;
+  font-family: "CreatoDisplay", sans-serif;
 }
 
 @media (max-width: 480px) {
