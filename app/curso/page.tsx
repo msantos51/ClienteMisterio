@@ -503,8 +503,8 @@ export default function CursoPage() {
                       {completed ? "\u2713" : mod.id}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-semibold text-sm break-words">{mod.title}</h3>
-                      <p className="text-xs text-white/60 mt-0.5">{mod.description}</p>
+                      <h3 className="font-semibold text-sm break-words text-white">{mod.title}</h3>
+                      <p className="text-xs text-white/70 mt-0.5">{mod.description}</p>
                     </div>
                   </div>
                   <div className="shrink-0 text-sm">
@@ -590,7 +590,7 @@ export default function CursoPage() {
 
             <p className="text-xs uppercase tracking-[0.16em] text-white/60 border-t border-white/15 pt-4">{currentTheoryPage.title}</p>
 
-            <div className="rounded-lg p-6" style={{ backgroundColor: "#f2f2ee" }}>
+            <div className="rounded-lg p-6" style={{ backgroundColor: "#f9faf8" }}>
               <div className="space-y-4">
                 {currentTheoryPage.blocks.map((paragraph, idx) => (
                   <p key={idx} className="text-sm leading-7" style={{ color: "#2c2c2c" }}>

@@ -168,7 +168,6 @@ export default function CoursePage() {
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none text-white">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">{emojis[idx]}</span>
                   <span>{moduleItem.title}</span>
                 </div>
                 <span className="transition-transform duration-200 group-open:rotate-45">+</span>
