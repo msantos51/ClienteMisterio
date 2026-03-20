@@ -547,13 +547,13 @@ export default function CursoPage() {
               <div className="grid gap-3 md:grid-cols-2">
                 {/* Palavras-chave */}
                 {activeModule.keywords && activeModule.keywords.length > 0 && (
-                  <div className="rounded-lg border border-[#F66856]/30 bg-[#F66856]/5 p-4">
-                    <p className="text-xs font-semibold text-[#F66856] uppercase mb-2">Conceitos-chave</p>
+                  <div className="rounded-lg border border-[#f66856]/30 bg-[#f66856]/10 p-4">
+                    <p className="text-sm font-bold text-[#2a2a2a] mb-3">Conceitos-chave</p>
                     <div className="flex flex-wrap gap-2">
                       {activeModule.keywords.map((keyword) => (
                         <span
                           key={keyword}
-                          className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#F66856]/20 text-[#F66856] border border-[#F66856]/30"
+                          className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#f66856]/20 text-[#2a2a2a]"
                         >
                           {keyword}
                         </span>
@@ -564,71 +564,85 @@ export default function CursoPage() {
 
                 {/* Dica Prática */}
                 {activeModule.practicalTip && (
-                  <div className="rounded-lg border border-[#fde1dd]/30 bg-[#fde1dd]/10 p-4">
-                    <p className="text-xs font-semibold text-[#fde1dd] uppercase mb-2">Dica Prática</p>
-                    <p className="text-sm text-white/85">{activeModule.practicalTip}</p>
+                  <div className="rounded-lg border border-[#fde1dd]/30 bg-[#fde1dd] p-4">
+                    <p className="text-sm font-bold text-[#2a2a2a] mb-2">Dica Prática</p>
+                    <p className="text-sm text-[#2a2a2a]">{activeModule.practicalTip}</p>
                   </div>
                 )}
 
                 {/* Benefício */}
                 {activeModule.benefit && (
-                  <div className="rounded-lg border border-[#f99589]/30 bg-[#f99589]/10 p-4">
-                    <p className="text-xs font-semibold text-[#f99589] uppercase mb-2">Por que isto importa</p>
-                    <p className="text-sm text-white/85">{activeModule.benefit}</p>
+                  <div className="rounded-lg border border-[#f99589]/30 bg-[#f99589] p-4">
+                    <p className="text-sm font-bold text-[#2a2a2a] mb-2">Por que isto importa</p>
+                    <p className="text-sm text-[#2a2a2a]">{activeModule.benefit}</p>
                   </div>
                 )}
 
                 {/* Aviso */}
                 {activeModule.warning && (
-                  <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fbc3bb]/10 p-4">
-                    <p className="text-xs font-semibold text-[#fbc3bb] uppercase mb-2">Aviso Importante</p>
-                    <p className="text-sm text-white/85">{activeModule.warning}</p>
+                  <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fbc3bb] p-4">
+                    <p className="text-sm font-bold text-[#2a2a2a] mb-2">Aviso Importante</p>
+                    <p className="text-sm text-[#2a2a2a]">{activeModule.warning}</p>
                   </div>
                 )}
               </div>
             )}
 
-            <p className="text-xs uppercase tracking-[0.16em] text-white/60 border-t border-white/15 pt-4">{currentTheoryPage.title}</p>
+            <div className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-6">
+              <p className="text-xs uppercase tracking-[0.16em] text-[#666] font-semibold mb-4">{currentTheoryPage.title}</p>
 
-            <div className="space-y-4">
-              {currentTheoryPage.blocks.map((paragraph, idx) => (
-                <p key={idx} className="text-sm leading-7 text-white/85">
-                  {paragraph}
-                </p>
-              ))}
+              <div className="space-y-4">
+                {currentTheoryPage.blocks.map((paragraph, idx) => (
+                  <p key={idx} className="text-sm leading-7 text-[#2a2a2a]">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
 
             {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-xl border border-emerald-400/30 bg-emerald-900/10 p-4">
-                  <p className="font-semibold text-emerald-300 mb-2">Boas práticas</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-lg border border-[#fde1dd]/30 bg-[#fde1dd] p-4">
+                  <p className="font-bold text-[#2a2a2a] mb-3">Boas práticas</p>
+                  <ul className="space-y-2 text-sm text-[#2a2a2a]">
                     {activeSupportContent.goodPractices.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item} className="flex gap-2">
+                        <span className="shrink-0">–</span>
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-rose-400/30 bg-rose-900/10 p-4">
-                  <p className="font-semibold text-rose-300 mb-2">Más práticas</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fbc3bb] p-4">
+                  <p className="font-bold text-[#2a2a2a] mb-3">Más práticas</p>
+                  <ul className="space-y-2 text-sm text-[#2a2a2a]">
                     {activeSupportContent.badPractices.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item} className="flex gap-2">
+                        <span className="shrink-0">–</span>
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-sky-400/30 bg-sky-900/10 p-4 md:col-span-2">
-                  <p className="font-semibold text-sky-300 mb-2">Estratégias práticas</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-lg border border-[#f99589]/30 bg-[#f99589] p-4 md:col-span-2">
+                  <p className="font-bold text-[#2a2a2a] mb-3">Estratégias práticas</p>
+                  <ul className="space-y-2 text-sm text-[#2a2a2a]">
                     {activeSupportContent.strategies.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item} className="flex gap-2">
+                        <span className="shrink-0">–</span>
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-white/20 bg-black/20 p-4 md:col-span-2">
-                  <p className="font-semibold mb-2">Checklist de execução profissional</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-lg border border-[#f66856]/30 bg-[#f66856] p-4 md:col-span-2">
+                  <p className="font-bold text-white mb-3">Checklist de execução profissional</p>
+                  <ul className="space-y-2 text-sm text-white">
                     {activeSupportContent.executionChecklist.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item} className="flex gap-2">
+                        <span className="shrink-0">–</span>
+                        <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
