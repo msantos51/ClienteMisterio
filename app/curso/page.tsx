@@ -388,12 +388,12 @@ export default function CursoPage() {
   };
 
   const getOptionClass = (question: QuizQuestion, optionIndex: number): string => {
-    const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm text-slate-900";
+    const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm text-[#2a2a2a]";
     if (!quizSubmitted) {
       if (quizAnswers[question.id] === optionIndex) {
-        return `${base} border-[#F66856] bg-[#F66856]/10 text-white`;
+        return `${base} border-[#F66856] bg-[#F66856]/15`;
       }
-      return `${base} border-slate-200 hover:border-slate-300 bg-white`;
+      return `${base} border-[#D4B5A0]/30 hover:border-[#D4B5A0]/60 bg-white`;
     }
     if (optionIndex === question.correctIndex) {
       return `${base} border-green-500 bg-green-50`;
@@ -401,7 +401,7 @@ export default function CursoPage() {
     if (quizAnswers[question.id] === optionIndex && optionIndex !== question.correctIndex) {
       return `${base} border-red-400 bg-red-50`;
     }
-    return `${base} border-slate-200 bg-white opacity-60`;
+    return `${base} border-[#D4B5A0]/30 bg-white opacity-60`;
   };
 
   if (!isAuthenticated) {
@@ -436,7 +436,7 @@ export default function CursoPage() {
   const progressPercent = progress?.progressPercent ?? 0;
 
   return (
-    <section className="w-full space-y-8">
+    <section className="w-full space-y-8 bg-[#E8D5C8] p-8 rounded-2xl">
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
           Formação completa
@@ -444,25 +444,25 @@ export default function CursoPage() {
         <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">
           Curso de Cliente Mistério
         </h1>
-        <p className="max-w-3xl text-base leading-7">
+        <p className="max-w-3xl text-base leading-7 text-[#2a2a2a]">
           Complete todos os módulos para obter a sua certificação. Cada módulo inclui conteúdo
           teórico e um questionário de avaliação.
         </p>
       </header>
 
       {/* Barra de progresso global */}
-      <div className="rounded-2xl border border-white/20 bg-white/5 p-5 backdrop-blur-sm">
+      <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white/70 p-5">
         <div className="flex items-center justify-between text-sm mb-3">
-          <span className="font-semibold">Progresso do Curso</span>
-          <span className="home-title-highlight-text font-bold">{progressPercent}%</span>
+          <span className="font-semibold text-[#2a2a2a]">Progresso do Curso</span>
+          <span className="font-bold text-[#F66856]">{progressPercent}%</span>
         </div>
-        <div className="h-3 w-full rounded-full bg-white/10 overflow-hidden">
+        <div className="h-3 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
           <div
             className="h-full rounded-full bg-gradient-to-r from-[#F66856] to-[#F66856] transition-all duration-700"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
-        <p className="mt-2 text-xs text-white/60">
+        <p className="mt-2 text-xs text-[#666]">
           {completedCount} de {totalModules} módulos concluídos
         </p>
       </div>
@@ -483,10 +483,10 @@ export default function CursoPage() {
                 onClick={() => openModule(mod.id)}
                 className={`w-full text-left rounded-2xl border p-5 transition-all ${
                   completed
-                    ? "border-[#F66856]/40 bg-[#F66856]/10 hover:bg-[#F66856]/20"
+                    ? "border-[#F66856]/40 bg-[#F5E5DB] hover:bg-[#E8D5C8]"
                     : unlocked
-                      ? "border-white/30 hover:border-[#F66856] cursor-pointer hover:bg-white/5"
-                      : "border-white/10 opacity-40 cursor-not-allowed"
+                      ? "border-[#D4B5A0]/30 hover:border-[#F66856] cursor-pointer hover:bg-white/60"
+                      : "border-[#D4B5A0]/20 opacity-40 cursor-not-allowed"
                 }`}
               >
                 <div className="flex items-center justify-between gap-4">
@@ -497,14 +497,14 @@ export default function CursoPage() {
                           ? "bg-[#F66856] text-white"
                           : unlocked
                             ? "bg-[#F66856]/20 text-[#F66856]"
-                            : "bg-white/10 text-white/30"
+                            : "bg-[#D4B5A0]/20 text-[#2a2a2a]"
                       }`}
                     >
                       {completed ? "\u2713" : mod.id}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-semibold text-sm break-words text-white">{mod.title}</h3>
-                      <p className="text-xs text-white/70 mt-0.5">{mod.description}</p>
+                      <h3 className="font-semibold text-sm break-words text-[#2a2a2a]">{mod.title}</h3>
+                      <p className="text-xs text-[#666] mt-0.5">{mod.description}</p>
                     </div>
                   </div>
                   <div className="shrink-0 text-sm">
@@ -512,10 +512,10 @@ export default function CursoPage() {
                       <span className="text-[#F66856] font-semibold">{modProgress.quizScore}%</span>
                     )}
                     {!completed && unlocked && (
-                      <span className="home-title-highlight-text">&rarr;</span>
+                      <span className="text-[#2a2a2a]">&rarr;</span>
                     )}
                     {!unlocked && (
-                      <span className="text-white/30 text-xs">Bloqueado</span>
+                      <span className="text-[#999] text-xs">Bloqueado</span>
                     )}
                   </div>
                 </div>
@@ -531,15 +531,15 @@ export default function CursoPage() {
           <button
             type="button"
             onClick={() => setActiveModuleId(null)}
-            className="text-sm text-white font-semibold hover:underline"
+            className="text-sm text-[#2a2a2a] font-semibold hover:underline"
           >
             &larr; Voltar aos módulos
           </button>
 
-          <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm space-y-6">
+          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white/80 p-6 space-y-6">
             <div>
-              <h2 className="text-2xl font-bold">{activeModule.title}</h2>
-              <p className="text-sm text-white/70 mt-2">{activeModule.description}</p>
+              <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
+              <p className="text-sm text-[#666] mt-2">{activeModule.description}</p>
             </div>
 
             {/* Card de informação rápida — visível apenas na primeira página */}
@@ -649,7 +649,7 @@ export default function CursoPage() {
               </div>
             )}
 
-            <div className="flex items-center justify-between gap-3 border-t border-white/15 pt-4">
+            <div className="flex items-center justify-between gap-3 border-t border-[#D4B5A0]/20 pt-4">
               <button
                 type="button"
                 onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
@@ -658,7 +658,7 @@ export default function CursoPage() {
               >
                 Página anterior
               </button>
-              <p className="text-xs text-white/60">
+              <p className="text-xs text-[#666]">
                 Página {theoryPage + 1} de {allTheoryPages.length}
               </p>
               <button
@@ -691,21 +691,21 @@ export default function CursoPage() {
           <button
             type="button"
             onClick={() => setQuizMode(false)}
-            className="text-sm text-white font-semibold hover:underline"
+            className="text-sm text-[#2a2a2a] font-semibold hover:underline"
           >
             &larr; Voltar ao conteúdo
           </button>
 
-          <div className="rounded-2xl border border-white/20 bg-[#feb1a5] p-6 backdrop-blur-sm">
-            <h2 className="text-xl font-bold mb-1">{activeModule.title}</h2>
-            <p className="text-sm text-white/60 mb-6">
+          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-[#FDE8DD] p-6">
+            <h2 className="text-xl font-bold mb-1 text-[#2a2a2a]">{activeModule.title}</h2>
+            <p className="text-sm text-[#666] mb-6">
               Responda a todas as questões. Necessita de 60% para concluir o módulo.
             </p>
 
             <div className="space-y-8">
               {activeModule.quiz.map((question, qIdx) => (
                 <div key={question.id} className="space-y-3">
-                  <p className="font-semibold text-sm">
+                  <p className="font-semibold text-sm text-[#2a2a2a]">
                     {qIdx + 1}. {question.question}
                   </p>
                   <div className="grid gap-2">
@@ -740,15 +740,15 @@ export default function CursoPage() {
 
             {quizSubmitted && quizScore !== null && (
               <div className={`mt-8 rounded-xl p-5 text-center ${
-                quizScore >= 60 ? "bg-[#F66856]/10 border border-[#F66856]/30" : "bg-red-900/20 border border-red-400/30"
+                quizScore >= 60 ? "bg-[#F66856]/15 border border-[#F66856]/40" : "bg-red-100 border border-red-400/40"
               }`}>
-                <p className="text-2xl font-bold mb-2">
+                <p className="text-2xl font-bold mb-2 text-[#2a2a2a]">
                   {quizScore >= 60 ? "Parabéns!" : "Tente novamente"}
                 </p>
-                <p className="text-sm mb-1 text-white/90">
+                <p className="text-sm mb-1 text-[#2a2a2a]">
                   Obteve <span className="font-bold text-lg text-[#F66856]">{quizScore}%</span> neste questionário.
                 </p>
-                <p className="text-xs text-white/60 mb-4">
+                <p className="text-xs text-[#666] mb-4">
                   {quizScore >= 60
                     ? isSaving ? "A guardar progresso..." : "Módulo concluído com sucesso!"
                     : "Necessita de pelo menos 60% para avançar. Reveja o conteúdo e tente novamente."}
