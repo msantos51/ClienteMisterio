@@ -602,33 +602,33 @@ export default function CursoPage() {
 
             {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-xl border border-emerald-400/30 bg-emerald-900/10 p-4">
-                  <p className="font-semibold text-emerald-300 mb-2">Boas práticas</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-xl border border-[#F66856] bg-[#F66856] p-4">
+                  <p className="font-semibold text-white mb-2">Boas práticas</p>
+                  <ul className="space-y-2 text-sm text-white/90 list-disc pl-4">
                     {activeSupportContent.goodPractices.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-rose-400/30 bg-rose-900/10 p-4">
-                  <p className="font-semibold text-rose-300 mb-2">Más práticas</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-xl border border-[#F66856] bg-[#F66856] p-4">
+                  <p className="font-semibold text-white mb-2">Más práticas</p>
+                  <ul className="space-y-2 text-sm text-white/90 list-disc pl-4">
                     {activeSupportContent.badPractices.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-sky-400/30 bg-sky-900/10 p-4 md:col-span-2">
-                  <p className="font-semibold text-sky-300 mb-2">Estratégias práticas</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-xl border border-[#F66856] bg-[#F66856] p-4 md:col-span-2">
+                  <p className="font-semibold text-white mb-2">Estratégias práticas</p>
+                  <ul className="space-y-2 text-sm text-white/90 list-disc pl-4">
                     {activeSupportContent.strategies.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-xl border border-white/20 bg-black/20 p-4 md:col-span-2">
-                  <p className="font-semibold mb-2">Checklist de execução profissional</p>
-                  <ul className="space-y-2 text-sm text-white/85 list-disc pl-4">
+                <div className="rounded-xl border border-[#F66856] bg-[#F66856] p-4 md:col-span-2">
+                  <p className="font-semibold text-white mb-2">Checklist de execução profissional</p>
+                  <ul className="space-y-2 text-sm text-white/90 list-disc pl-4">
                     {activeSupportContent.executionChecklist.map((item) => (
                       <li key={item}>{item}</li>
                     ))}
