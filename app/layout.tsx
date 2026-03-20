@@ -3,17 +3,9 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Outfit } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import AppShell from "./components/AppShell";
 import "./globals.css";
-
-// Define a fonte principal Basenji para melhor legibilidade.
-const outfit = Outfit({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
-  display: "swap",
-});
 
 // Mantém as fontes auxiliares para áreas técnicas sem quebrar compatibilidade.
 const geistSans = Geist({
@@ -56,7 +48,8 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body
-        className={`${outfit.variable} ${geistSans.variable} ${geistMono.variable} bg-[color:var(--background)] text-[color:var(--foreground)] antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-[color:var(--background)] text-[color:var(--foreground)] antialiased`}
+        style={{ fontFamily: "Basenji, sans-serif" }}
       >
         <AppShell>{children}</AppShell>
       </body>

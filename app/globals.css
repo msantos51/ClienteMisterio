@@ -4,6 +4,23 @@
 
 @import "tailwindcss";
 
+/* Declarações de fontes customizadas Basenji */
+@font-face {
+  font-family: "Basenji";
+  src: url("/fonts/Basenji-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Basenji";
+  src: url("/fonts/Basenji-SemiBoldSlanted.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --background: #e2e0e0;
   --foreground: #000000;
@@ -29,7 +46,7 @@
   --color-primary-soft: var(--primary-soft);
   --color-accent: var(--accent);
   --color-line: var(--line);
-  --font-sans: var(--font-montserrat);
+  --font-sans: "Basenji", sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
