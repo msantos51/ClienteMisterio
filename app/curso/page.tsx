@@ -564,24 +564,24 @@ export default function CursoPage() {
 
                 {/* Dica Prática */}
                 {activeModule.practicalTip && (
-                  <div className="rounded-lg border border-emerald-400/30 bg-emerald-900/10 p-4">
-                    <p className="text-xs font-semibold text-emerald-300 uppercase mb-2">💡 Dica Prática</p>
+                  <div className="rounded-lg border border-[#fde1dd]/30 bg-[#fde1dd]/10 p-4">
+                    <p className="text-xs font-semibold text-[#fde1dd] uppercase mb-2">Dica Prática</p>
                     <p className="text-sm text-white/85">{activeModule.practicalTip}</p>
                   </div>
                 )}
 
                 {/* Benefício */}
                 {activeModule.benefit && (
-                  <div className="rounded-lg border border-sky-400/30 bg-sky-900/10 p-4">
-                    <p className="text-xs font-semibold text-sky-300 uppercase mb-2">⭐ Por que isto importa</p>
+                  <div className="rounded-lg border border-[#f99589]/30 bg-[#f99589]/10 p-4">
+                    <p className="text-xs font-semibold text-[#f99589] uppercase mb-2">Por que isto importa</p>
                     <p className="text-sm text-white/85">{activeModule.benefit}</p>
                   </div>
                 )}
 
                 {/* Aviso */}
                 {activeModule.warning && (
-                  <div className="rounded-lg border border-rose-400/30 bg-rose-900/10 p-4">
-                    <p className="text-xs font-semibold text-rose-300 uppercase mb-2">⚠️ Aviso Importante</p>
+                  <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fbc3bb]/10 p-4">
+                    <p className="text-xs font-semibold text-[#fbc3bb] uppercase mb-2">Aviso Importante</p>
                     <p className="text-sm text-white/85">{activeModule.warning}</p>
                   </div>
                 )}
