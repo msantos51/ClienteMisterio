@@ -436,7 +436,7 @@ export default function CursoPage() {
   const progressPercent = progress?.progressPercent ?? 0;
 
   return (
-    <section className="w-full space-y-8 bg-[#E8D5C8] p-8 rounded-2xl">
+    <section className="w-full space-y-8 bg-white p-8 rounded-2xl">
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
           Formação completa
@@ -451,7 +451,7 @@ export default function CursoPage() {
       </header>
 
       {/* Barra de progresso global */}
-      <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white/70 p-5">
+      <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-5">
         <div className="flex items-center justify-between text-sm mb-3">
           <span className="font-semibold text-[#2a2a2a]">Progresso do Curso</span>
           <span className="font-bold text-[#F66856]">{progressPercent}%</span>
@@ -536,7 +536,7 @@ export default function CursoPage() {
             &larr; Voltar aos módulos
           </button>
 
-          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white/80 p-6 space-y-6">
+          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6 space-y-6">
             <div>
               <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
               <p className="text-sm text-[#666] mt-2">{activeModule.description}</p>
@@ -696,7 +696,7 @@ export default function CursoPage() {
             &larr; Voltar ao conteúdo
           </button>
 
-          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-[#FDE8DD] p-6">
+          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
             <h2 className="text-xl font-bold mb-1 text-[#2a2a2a]">{activeModule.title}</h2>
             <p className="text-sm text-[#666] mb-6">
               Responda a todas as questões. Necessita de 60% para concluir o módulo.
