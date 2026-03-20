@@ -104,16 +104,46 @@ export default function CoursePage() {
     <section className="w-full space-y-8">
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
-          Estrutura do curso
+          Formação completa
         </p>
 
-        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">O Curso</h1>
+        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">O Curso de Cliente Mistério</h1>
 
         <p className="max-w-3xl text-base leading-7">
-          Clica em cada módulo para veres os submódulos e os tópicos abordados em cada etapa da
-          formação.
+          Um curso completo, 100% prático e desenhado para INICIANTES. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
         </p>
       </header>
+
+      {/* Benefícios do curso */}
+      <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm">
+        <h3 className="text-lg font-semibold mb-4">Por que fazer este curso?</h3>
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-lg border border-emerald-400/30 bg-emerald-900/10 p-4">
+            <p className="font-semibold text-emerald-300 mb-2">✓ Para Iniciantes</p>
+            <p className="text-sm text-white/85">Explicações simples, sem jargão. Começa do zero e aprende no teu ritmo.</p>
+          </div>
+          <div className="rounded-lg border border-sky-400/30 bg-sky-900/10 p-4">
+            <p className="font-semibold text-sky-300 mb-2">✓ Prático & Real</p>
+            <p className="text-sm text-white/85">Casos reais, dicas profissionais, checklis práticos. Tudo que precisas para ganhar já no mês 1.</p>
+          </div>
+          <div className="rounded-lg border border-[#F66856]/30 bg-[#F66856]/5 p-4">
+            <p className="font-semibold text-[#F66856] mb-2">✓ Ganha Desde Já</p>
+            <p className="text-sm text-white/85">5€ a 150€+ por missão. Flexibilidade total. Começa quando queres.</p>
+          </div>
+          <div className="rounded-lg border border-purple-400/30 bg-purple-900/10 p-4">
+            <p className="font-semibold text-purple-300 mb-2">✓ Carreira Escalável</p>
+            <p className="text-sm text-white/85">Começa simples, evolui para missões premium. Quanto melhor, mais ganhas.</p>
+          </div>
+          <div className="rounded-lg border border-amber-400/30 bg-amber-900/10 p-4">
+            <p className="font-semibold text-amber-300 mb-2">✓ Questões & Avaliação</p>
+            <p className="text-sm text-white/85">Testes em cada módulo. Certifica-te que compreendeste antes de avançar.</p>
+          </div>
+          <div className="rounded-lg border border-pink-400/30 bg-pink-900/10 p-4">
+            <p className="font-semibold text-pink-300 mb-2">✓ Comunidade & Apoio</p>
+            <p className="text-sm text-white/85">Aprende com outros avaliadores. Dicas, truques e apoio contínuo.</p>
+          </div>
+        </div>
+      </div>
 
       {isLoggedIn && (
         <div className="flex justify-center">
@@ -126,27 +156,48 @@ export default function CoursePage() {
         </div>
       )}
 
-      <div className="space-y-4">
-        {courseModules.map((moduleItem) => (
-          <details
-            key={moduleItem.title}
-            className="group rounded-2xl border border-white/30 p-5 open:border-[#F66856]"
-          >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none">
-              <span>{moduleItem.title}</span>
-              <span className="home-title-highlight-text transition-transform duration-200 group-open:rotate-45">+</span>
-            </summary>
+      <div className="space-y-3">
+        <h3 className="text-lg font-semibold mt-8 mb-4">10 Módulos Completos</h3>
+        {courseModules.map((moduleItem, idx) => {
+          const colors = [
+            "border-[#F66856] bg-[#F66856]/5",
+            "border-emerald-400 bg-emerald-900/5",
+            "border-sky-400 bg-sky-900/5",
+            "border-purple-400 bg-purple-900/5",
+            "border-amber-400 bg-amber-900/5",
+            "border-pink-400 bg-pink-900/5",
+            "border-cyan-400 bg-cyan-900/5",
+            "border-orange-400 bg-orange-900/5",
+            "border-rose-400 bg-rose-900/5",
+            "border-violet-400 bg-violet-900/5",
+          ];
+          const color = colors[idx % colors.length];
+          const emojis = ["🔍", "📈", "🎭", "✅", "📋", "👀", "📸", "📝", "💰", "🚀"];
 
-            <ul className="mt-4 space-y-3 border-t border-white/20 pt-4 text-sm leading-6">
-              {moduleItem.topics.map((topic) => (
-                <li key={topic} className="flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F66856]" />
-                  <span>{topic}</span>
-                </li>
-              ))}
-            </ul>
-          </details>
-        ))}
+          return (
+            <details
+              key={moduleItem.title}
+              className={`group rounded-2xl border p-5 open:shadow-lg transition-all cursor-pointer ${color}`}
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none">
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{emojis[idx]}</span>
+                  <span>{moduleItem.title}</span>
+                </div>
+                <span className="home-title-highlight-text transition-transform duration-200 group-open:rotate-45">+</span>
+              </summary>
+
+              <ul className="mt-4 space-y-3 border-t border-white/20 pt-4 text-sm leading-6">
+                {moduleItem.topics.map((topic) => (
+                  <li key={topic} className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-current opacity-60" />
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          );
+        })}
       </div>
 
       {!isLoggedIn && (

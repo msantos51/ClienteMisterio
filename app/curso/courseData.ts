@@ -15,6 +15,10 @@ export type CourseModule = {
   description: string;
   content: string[];
   quiz: QuizQuestion[];
+  keywords?: string[];
+  practicalTip?: string;
+  warning?: string;
+  benefit?: string;
 };
 
 export const courseModules: CourseModule[] = [
@@ -22,12 +26,16 @@ export const courseModules: CourseModule[] = [
     id: 1,
     title: "Módulo 1 — Enquadramento do Cliente Mistério",
     description: "Conceito, objetivos e intervenientes do Mystery Shopping.",
+    keywords: ["Mystery Shopping", "Avaliação de Serviço", "Cliente Anónimo", "Qualidade", "Padrões"],
+    practicalTip: "Pensa no Cliente Mistério como um 'inspetor invisível' que ajuda as marcas a melhorar. Tu és esse inspetor!",
+    warning: "Confidencialidade é SAGRADA. Nunca comentes as tuas avaliações em redes sociais ou conversas casuais.",
+    benefit: "Ganhas flexibilidade total, remuneras por cada missão e ainda ajudas as marcas a melhorar o serviço.",
     content: [
-      "O Cliente Mistério é uma metodologia de avaliação da qualidade do serviço. O avaliador atua como cliente comum para observar e reportar a experiência real de atendimento, medindo o cumprimento de padrões de serviço.",
-      "Oferece vantagens distintas dos inquéritos tradicionais: visão objetiva do ponto de contacto, dados padronizados e fiáveis para decisões empresariais.",
-      "Benefícios para empresas: identificar falhas no atendimento, verificar cumprimento de procedimentos, benchmarking entre lojas, formação de equipas. Benefícios para avaliadores: remuneração por missão, flexibilidade, desenvolvimento de competências.",
-      "Três atores principais: a marca (define padrões), a agência (recruta e coordena), o avaliador (executa e relata). Comunicação clara é essencial.",
-      "Tipos de projetos: visitas presenciais, mystery calling (telefónico), avaliações online, auditorias de conformidade.",
+      "🔍 **O que é Cliente Mistério?** É uma profissão moderna em crescimento! Atuas como cliente normal para avaliar a qualidade real do serviço. Observas, registas e reportas tudo — sem revelar que estás a avaliar. É como um jogo onde tens uma missão secreta!",
+      "✨ **Por que é diferente dos questionários normais?** Porque tu EXPERIMENTAS de verdade! Não é uma pergunta teórica — é a experiência real do cliente. As empresas adoram porque obtêm dados honestos e concretos.",
+      "🎯 **Ganha-se com isto?** Sim! Para empresas: descobrem problemas reais, medem se os procedimentos funcionam, comparam lojas entre si e formam as equipas. Para ti: remuneração por missão, trabalhas quando queres e ganhas experiência valiosa.",
+      "👥 **Os 3 heróis desta história:** A marca (diz o que quer saber), a agência (encontra-te a ti e coordena), tu (fazes a magia acontecer). Todos trabalham juntos!",
+      "🚀 **Tipos de missões:** Visitas normais às lojas, telefonemas (mystery calling), avaliações online, inspeções de conformidade. Há sempre algo diferente!",
     ],
     quiz: [
       {
@@ -91,12 +99,16 @@ export const courseModules: CourseModule[] = [
     id: 2,
     title: "Módulo 2 — Mercado e Oportunidades",
     description: "Setores com maior procura, modelos de colaboração e critérios de seleção.",
+    keywords: ["Retalho", "Restauração", "Banca", "Plataformas", "Agências", "Oportunidades"],
+    practicalTip: "Começa por setores acessíveis como retalho e restauração. Depois evolui para banca e hotelaria quando tiveres experiência!",
+    warning: "Nem todas as plataformas pagam bem. Compara as condições e remuneração ANTES de te registares.",
+    benefit: "O mercado está em crescimento — há MUITAS oportunidades e demanda por avaliadores de qualidade.",
     content: [
-      "Mercado em crescimento: Retalho, restauração, banca, telecomunicações, saúde, automóvel e serviços públicos procuram avaliadores com frequência.",
-      "Três modelos de colaboração: Agências especializadas (volume e estabilidade), plataformas digitais (flexibilidade), colaboração direta com empresas (maior rentabilidade).",
-      "Vantagens e desvantagens: Agências oferecem estabilidade mas requisitos exigentes. Plataformas oferecem variedade mas com maior concorrência. Direto é mais lucrativo mas exige negociação.",
-      "Para ter mais missões: Manter perfil atualizado, responder rápido, cumprir prazos, qualidade de relatórios, variar disponibilidade, construir reputação.",
-      "Iniciar em retalho, restauração rápida ou telecomunicações. Com experiência, aceder a projetos premium (banca, hotelaria de luxo) com melhor remuneração.",
+      "📈 **Mercado em fogo!** Retalho, restauração, banca, telecomunicações, farmácias, hotelaria, automóvel... Todas querem saber o que o cliente pensa. Há procura constante de avaliadores!",
+      "🤝 **3 maneiras de trabalhar:** Agências (é tipo um intermediário que te arranja trabalho), Plataformas digitais (tipo Uber do mystery shopping) ou direto com as marcas (melhor lucro, mas precisa de negociação).",
+      "⚖️ **Vantagens vs Desvantagens:** Agências = segurança + volume de missões, mas regras mais apertadas. Plataformas = variedade + flexibilidade, mas muita concorrência. Direto = lucro máximo, mas tu é que tens de negociar.",
+      "⭐ **Abre o teu potencial:** Perfil completo e atualizado → Respostas rápidas → Qualidade impecável nos relatórios → Mais missões para ti! É uma engrenagem simples.",
+      "🚀 **Caminho típico:** Começa no retalho ou restauração rápida (fácil) → Telecomunicações/Banca (intermédio) → Hotelaria de luxo ou auditorias (premium, melhor pago).",
     ],
     quiz: [
       {
@@ -160,12 +172,16 @@ export const courseModules: CourseModule[] = [
     id: 3,
     title: "Módulo 3 — Perfil, Conduta e Ética Profissional",
     description: "Requisitos do avaliador, confidencialidade e boas práticas.",
+    keywords: ["Discrição", "Confidencialidade", "Integridade", "Ética", "Profissionalismo"],
+    practicalTip: "Imagina que és um espião do bom, mas em vez de salvar o mundo, estás a ajudar as marcas a melhorar!",
+    warning: "Confidencialidade é INVIOLÁVEL. Se revelares uma avaliação, seras banido permanentemente. Não vale a pena!",
+    benefit: "Ao manteres padrões éticos altos, constrói-se uma reputação excelente e recebes missões melhores.",
     content: [
-      "Competências essenciais: Discrição (comportar-se naturalmente), rigor na observação e registo, imparcialidade (sem opiniões pessoais), consistência (mesmos critérios em todas as visitas).",
-      "Confidencialidade é crítica: Nunca revelar identidade, projetos, marcas avaliadas ou resultados. Não partilhar em redes sociais ou com terceiros. Quebra resulta em exclusão permanente.",
-      "Conflitos de interesse: Declarar antes de aceitar. Não avaliar onde trabalha ou tem familiares. Evitar marcas com ligação emocional forte que prejudique objetividade.",
-      "Comportamento durante avaliação: Agir naturalmente conforme briefing, não forçar situações artificiais, não provocar colaboradores, respeitar regras do local.",
-      "Valores inegociáveis: Pontualidade, profissionalismo, honestidade. Reportar apenas factos observados. Fraude compromete todo o sistema.",
+      "🎭 **O perfil ideal:** Discrição (ninguém pode saber que estás a avaliar), rigor (regista tudo com precisão), imparcialidade (sem deixar opiniões pessoais contaminar), consistência (mesmos critérios sempre). Basicamente, és um observador invisível!",
+      "🤐 **Confidencialidade = Profissão intacta:** Nunca, NUNCA contes ao teu amigo que foste avaliar a Starbucks. Não comentes no Instagram, no Whatsapp, na família. Isto é sagrado. Quebra = BAN permanente da profissão.",
+      "⚠️ **Conflitos de interesse — declarar logo!** Trabalhas na loja a avaliar? Tens um familiar lá? Amas muito a marca? Declara ANTES de aceitar. Não vale a pena arriscar.",
+      "🎯 **Durante a missão:** Comporta-te como cliente normal. Sem criar situações artificiais, sem provocar ninguém, sem fazer anotações visíveis. É como estar incognito!",
+      "💎 **Valores que não se negociam:** Estar a horas (sempre!), ser profissional (sempre!), ser honesto (sempre!). Só reporta factos, não inventas nada. Fraude = fim de carreira instantâneo.",
     ],
     quiz: [
       {
@@ -229,12 +245,16 @@ export const courseModules: CourseModule[] = [
     id: 4,
     title: "Módulo 4 — Metodologia de Avaliação e Critérios de Qualidade",
     description: "O que avaliar, indicadores frequentes e como evitar enviesamentos.",
+    keywords: ["Avaliação", "Critérios", "Indicadores", "Objetividade", "Checklist"],
+    practicalTip: "Esqueça a opinião pessoal. Se o critério é 'cumprimento em 30 segundos', é sim ou não — nada de 'quase'!",
+    warning: "Cuidado com os 'vieses': primeira impressão, tudo parecer médio, ou dar peso apenas ao final. Observa TUDO!",
+    benefit: "Ao segui-lo à risca, os teus relatórios são impecáveis e a taxa de aprovação sobe dramaticamente.",
     content: [
-      "Áreas avaliadas: Qualidade de atendimento, processos operacionais, produto/serviço, conformidade legal, experiência global (ambiente, limpeza, sinalética).",
-      "Indicadores comuns: Tempo de espera até atendimento, tempo total da interação, cumprimento de scripts, cross-selling, apresentação pessoal, limpeza, disponibilidade de produtos-chave, NPS.",
-      "Seguir rigorosamente a checklist do briefing. Registar factos, não opiniões. Se o critério é 'cumprimentar em 30 segundos', responder sim ou não baseado no facto observado, não na qualidade do cumprimento.",
-      "Enviesamentos a evitar: Efeito halo (primeira impressão domina), tendência central (tudo médio), viés de confirmação (procurar provas que confirmem expectativa), viés de recência (dar peso ao final). Focar em factos, registar imediatamente após visita.",
-      "Calibração entre avaliadores: Dois avaliadores no mesmo local devem ter avaliações semelhantes. Isto exige critérios claros, boa formação e guiões específicos.",
+      "✅ **O que se avalia?** Atendimento (o colaborador aborda-te?), processos (cumprem os procedimentos?), produto/serviço (está de qualidade?), conformidade (segue as regras legais?), experiência (limpeza, ambiente, sinalética). Tudo isto junto = avaliação completa.",
+      "📊 **Indicadores que encontras sempre:** Quanto tempo esperaste até ser atendido? Quanto tempo levou a interação toda? Disse o colaborador a frase de boas-vindas? Ofereceu produtos adicionais? Estava bem apresentado? Estava tudo limpo? E a música, o ambiente? É tudo medível!",
+      "🎯 **Regra de ouro:** Segue a checklist como um mapa. Se diz 'cumprimento em 30 segundos', é SIM ou NÃO baseado no facto, não na tua opinião. Não existe 'quase cumpriu'. É preto ou branco!",
+      "🧠 **Cuidado com as armadilhas mentais:** Efeito halo (primeira impressão contamina tudo), tendência central (tudo sai 'médio' para não compromissars), viés de confirmação (procuras provas que confirmem o que já pensas), viés de recência (o final marca mais que o resto). Luta contra isto!",
+      "📐 **Se 2 avaliadores entram no mesmo sítio:** Devem sair com avaliações parecidas. Isto prova que o critério é claro e funciona bem. Diferenças grandes = algo está mal no sistema.",
     ],
     quiz: [
       {
@@ -298,12 +318,16 @@ export const courseModules: CourseModule[] = [
     id: 5,
     title: "Módulo 5 — Preparação da Missão",
     description: "Análise do briefing, planeamento logístico e gestão de riscos.",
+    keywords: ["Briefing", "Planeamento", "Logística", "Riscos", "Preparação"],
+    practicalTip: "30 minutos a preparar = evita 30 horas de problemas. Prepara-te bem e tudo corre bem!",
+    warning: "Não verifiques horários? Podem estar fechados. Não leves dinheiro? Não podes fazer compra de prova. Planeia!",
+    benefit: "Preparação excelente = missão suave, sem stresses, e relatório top-notch que é aprovado de primeira.",
     content: [
-      "Preparação é crítica. Briefing contém: objetivos, perfil a assumir, checklist, requisitos de evidência, prazos e instruções especiais.",
-      "Análise do briefing: Compreender cada item, memorizar persona, esclarecer dúvidas com agência, preparar perguntas específicas.",
-      "Planeamento logístico: Definir melhor horário, planear trajeto e estacionamento, calcular tempo total (preparação + deslocamento + avaliação), prever custos, garantir materiais (telemóvel carregado, dinheiro, cartão).",
-      "Gestão de riscos: Antecipar estabelecimento fechado, produto indisponível, reconhecimento, condições meteorológicas, imprevisto pessoal.",
-      "Plano B para cada risco: Verificar horários antes de sair, ter segunda data no prazo, comunicar impedimentos à agência, nunca forçar visita em condições comprometidas.",
+      "📋 **O briefing é o teu mapa do tesouro:** Tem objetivos (o que queremos saber), persona (que tipo de cliente és), checklist (o que observar), evidências (fotos, talões, etc.), prazos (quando entregar) e instruções especiais (coisas únicas deste projeto).",
+      "🔍 **Leitura inteligente:** Lê uma vez para compreender. Lê outra para memorizar a persona. Se algo não faz sentido, pergunta à agência ANTES de sair. Não vale improvisar.",
+      "🚗 **Planeamento logístico = sucesso:** Que hora é melhor? Como chego lá? Há parque? Quanto tempo leva tudo (preparação + caminho + avaliação + registo)? Quanto me custa? Tenho telemóvel carregado? E dinheiro para compras? Cartão se precisar? Isto não é chato — é o caminho da vitória!",
+      "⚡ **Antecipa os problemas:** A loja pode estar fechada → verifica horários. O produto pode não estar → tem plan B. Pode chover → leva guarda-chuva. Tem um imprevisto pessoal → comunica já à agência. Nunca improves no terreno!",
+      "🛡️ **Plano B para tudo:** Loja fechada no dia previsto? Reagenda noutro dia (dentro do prazo). Produto indisponível? Adapta a avaliação. Muito barulho ou cheia? Regista de qualquer forma. Só cancela se realmente não conseguir.",
     ],
     quiz: [
       {
@@ -367,12 +391,16 @@ export const courseModules: CourseModule[] = [
     id: 6,
     title: "Módulo 6 — Execução no Terreno",
     description: "Abordagem natural, técnicas de observação e gestão de imprevistos.",
+    keywords: ["Naturalidade", "Observação", "Discrição", "Improvisos", "Execução"],
+    practicalTip: "Sê um cliente normal. Não apareças com um caderno de investigador ou pedindo informação estranha!",
+    warning: "Se te identificares como avaliador, a missão fica completamente inútil. Nunca reveles!",
+    benefit: "Execução natural e bem feita = dados reais e honestos = relatório que realmente ajuda a marca.",
     content: [
-      "Naturalidade é crítica: Comportar-se como cliente comum — ritmo, tom de voz, linguagem corporal. Qualquer comportamento fora do normal levanta suspeitas.",
-      "Técnicas de observação: Observação periférica (notar detalhes sem olhar fixamente), memorização estruturada (associar à checklist), ancoragem temporal (registar horas mentalmente), scan ambiental (limpeza, organização, sinalética).",
-      "Recolha discreta: Não tirar notas visíveis. Usar telemóvel naturalmente. Fotografar discretamente se briefing exigir. Memorizar e registar após sair.",
-      "Gerir imprevistos com flexibilidade: Produto em rutura — adaptar mantendo objetivos. Colaborador-alvo ausente — avaliar substituto. Fila/sobrelotação — incluir dados. Serviço indisponível — contactar agência.",
-      "Regras fundamentais: Nunca revelar identidade, não prolongar visita artificialmente, não criar situações artificiais, manter cordialidade, contactar agência em dúvidas.",
+      "🎭 **Naturalidade é tudo:** Comporta-te como cliente comum. Ritmo normal, voz natural, linguagem corporal relaxada. Se fizeres algo estranho, levantam suspeitas. Imagina que és tu mesmo naquele sítio, a fazer uma compra normal.",
+      "👀 **Como observar sem ser óbvio:** Observação do canto do olho (não olhes fixamente), memorização associada (relaciona os detalhes com a checklist para lembrar), marca as horas mentalmente (entrada 10:15, abordagem 10:18, etc.), observa ambiente inteiro (limpeza, organização, sinalética, outros clientes).",
+      "📱 **Regista de forma discreta:** Não sacas caderno e caneta! Usa telemóvel como cliente normal (consultando horários, enviando msg, etc.). Se tiveres de fotografar, faz como quem faz selfies. Não tires notas até sair do local.",
+      "🔄 **E se correr tudo ao contrário?** Produto indisponível? Adapta mantendo objetivo. Colaborador certo ausente? Avalia quem está. Loja cheia? Regista de qualquer forma. Sem serviço? Contacta agência. Há sempre solução.",
+      "🚫 **Linha vermelha:** Nunca revelis identidade, nunca prolongueis artificialmente (parece estranho), nunca criem situações fake (não é espião de Hollywood!), mantém sempre cordialidade, em dúvida contacta agência.",
     ],
     quiz: [
       {
@@ -436,12 +464,16 @@ export const courseModules: CourseModule[] = [
     id: 7,
     title: "Módulo 7 — Recolha e Gestão de Evidências",
     description: "Tipos de evidência, organização e checklist pós-visita.",
+    keywords: ["Evidências", "Documentação", "Fotos", "Talões", "Organização"],
+    practicalTip: "Guarda talão legível, tira fotos claras e organiza tudo em 15 minutos após a visita. Depois fica mais difícil!",
+    warning: "Fotos desfocadas, talão rasgado ou sem data = rejeição garantida. Qualidade de evidência é crítica!",
+    benefit: "Evidências excelentes = relatório aprovado rapidinho = reputação top = mais missões para ti!",
     content: [
-      "Tipos de evidência: Talões/recibos (prova da transação), fotografias (exterior, interior, produto), registos de hora, notas manuscritas, gravações áudio (se autorizadas).",
-      "Briefing especifica: Que evidência recolher, formato (foto, scan, digital), informação necessária (data, hora, valor), prazo. Não cumprir requisitos = rejeição.",
-      "Organização imediata: Nomear ficheiros claramente (ex.: 'modulo_data_local_tipo'), verificar qualidade de fotos (legíveis, sem dados pessoais), guardar talões originais, cópia de segurança digital.",
-      "Validação: Cruzar evidências com checklist, verificar coerência de dados, sem lacunas, todas as obrigatórias recolhidas.",
-      "Checklist pós-visita: Talão presente, fotos legíveis, revisar briefing, registar observações em 15 minutos, hora de entrada/saída, aspetos invulgares comunicar à agência.",
+      "📸 **Tipos de evidência que recolhes:** Talões/recibos (prova de que estive lá e comprei algo), fotografias (exterior da loja, interior, produto, etc.), registos de horas (quando cheguei, quando fui atendido), notas escritas (observações), gravação áudio (se o briefing permitir).",
+      "📋 **O briefing dita as regras:** Qual evidência? (talão obrigatório? fotos?), em que formato? (foto, scan, digital?), quais dados? (data, hora, valor?), prazos? Não cumpres = rejeição. É assim mesmo!",
+      "🗂️ **Organiza já, enquanto fresco:** Nomeia os ficheiros com padrão claro (ex.: '20250320_starbucks_talao_foto'), verifica se fotos estão legíveis (não desfocadas!), sem dados pessoais de terceiros, guarda talão original (não o destruas!), faz backup no computador.",
+      "✔️ **Validação simples:** Cruza evidências com checklist (tenho tudo?), verifica se dados batem (talão diz 10:15, eu coloquei 10:15?), nenhuma lacuna, todas as obrigatórias presentes?",
+      "⏱️ **Checklist de ouro pós-visita:** Tenho o talão legível? Fotos claras e bem focadas? Revis os briefing outra vez? Registei observações nos primeiros 15 minutos? Tenho horas de entrada e saída? Algo invulgar → comunica já à agência.",
     ],
     quiz: [
       {
@@ -505,12 +537,16 @@ export const courseModules: CourseModule[] = [
     id: 8,
     title: "Módulo 8 — Elaboração do Relatório e Submissão",
     description: "Estrutura do relatório, respostas objetivas e requisitos de qualidade.",
+    keywords: ["Relatório", "Escrita", "Objetividade", "Qualidade", "Submissão"],
+    practicalTip: "Escreve como jornalista: factos, contexto, evidências. Sem opinião pessoal. Seca e clara!",
+    warning: "Relatório contraditório (checklist diz um coisa, texto diz outra) = rejeição. Coerência é essencial!",
+    benefit: "Relatórios de qualidade = taxa de aprovação >95% = convidado para missões melhores e mais bem pagas.",
     content: [
-      "Relatório é o produto final. Três pilares: Factos (objetivos), contexto (circunstâncias), evidência (provas).",
-      "Estrutura: Dados da visita (data, hora, local, duração), respostas fechadas (sim/não, escalas), respostas abertas (descrição narrativa), classificação geral, anexos.",
-      "Respostas fechadas: Precisão baseada no critério definido. Se critério é 'cumprimentar em 30 segundos', sim ou não — sem 'quase' ou 'com pouco entusiasmo'.",
-      "Respostas abertas: Cronológicas e factuais. Detalhes relevantes (o que foi dito, reação do colaborador). Evitar opiniões pessoais. Linguagem clara e profissional. Extensão adequada.",
-      "Submissão: Respeitar prazos (12-48 horas). Rever erros/contradições, anexar evidências, itens obrigatórios, clareza final. Fora de prazo, incompletos ou contraditórios = rejeição.",
+      "🎯 **O relatório é o teu produto:** É o que a marca recebe. Tem de ser perfeito. 3 pilares: Factos (o que observei), contexto (circunstâncias da visita), evidência (provas que recolhi). Isto é ouro!",
+      "📐 **Estrutura padrão:** Dados da visita (data, hora, local, quanto tempo durou), respostas fechadas (SIM/NÃO, escalas de 1-5), respostas abertas (descrição cronológica do que aconteceu), classificação global, anexos (fotos, talão, etc.).",
+      "✔️ **Respostas fechadas:** Sem meio-termo! Se o critério é 'cumprimento em 30 segundos', é SIM ou NÃO. Não existe 'quase', 'com entusiasmo limitado' ou 'mais ou menos'. Factual!",
+      "📝 **Respostas abertas:** Cronológicas (1º isto aconteceu, depois aquilo) e factuais (o que foi DITO, como REAGIU). Sem opiniões tipo 'serviço péssimo' ou 'colaborador simpático'. Apenas observações mensuráveis. Linguagem clara, extensão adequada (nem muita, nem pouca).",
+      "📤 **Entrega impecável:** Prazo 12-48 horas (não tardes!). Reve tudo antes (erros, contradições entre checklist e texto), anexa TODAS as evidências obrigatórias, itens mandatórios todos preenchidos. Submete e pronto — está pronto para review!",
     ],
     quiz: [
       {
@@ -574,12 +610,16 @@ export const courseModules: CourseModule[] = [
     id: 9,
     title: "Módulo 9 — Remuneração, Reembolsos e Rentabilidade",
     description: "Pagamentos, cálculo de rentabilidade e estratégias de rendimento.",
+    keywords: ["Remuneração", "Rentabilidade", "Pagamentos", "Custos", "Lucro"],
+    practicalTip: "Calcula a rentabilidade: (remuneração - custos) / horas totais. Se for <6€/hora, pode não valer a pena.",
+    warning: "Nem todas as despesas são reembolsadas. Lê o briefing. Consumo não obrigatório = vem do teu bolso!",
+    benefit: "Bem gerido, isto é um rendimento extra legítimo e flexível. Desde moeda de bolso a rendimento significativo!",
     content: [
-      "Remuneração por missão: 5€ a 150€+ (depende complexidade, setor, requisitos). Reembolso de despesas obrigatórias quando documentadas (consumo, compra, estacionamento).",
-      "Modelos de pagamento: Transferência mensal, por projeto após validação, carteiras digitais. Prazo típico: 15-60 dias após validação.",
-      "Rentabilidade essencial: Considerar remuneração, tempo total (preparação + deslocação + execução + relatório), custos de deslocação, consumos não reembolsados, impostos. Missão 20€/3 horas + 15€ deslocação pode não ser rentável isoladamente.",
-      "Aumentar rendimento: Agrupar várias missões na mesma zona (otimizar rotas), tornar-se regular em projetos, especializar em setores de valor (banca, hotelaria), aumentar volume, evoluir para missões premium.",
-      "Gestão fiscal em Portugal: Rendimentos devem ser declarados. Pode ser prestador independente (recibos verdes) ou atividade ocasional. Consultar contabilista para otimização.",
+      "💰 **Quanto se ganha?** Varia MUITO: 5€ a 150€+ por missão. Depende de complexidade (simples vs audatoria), setor (retalho vs banca), requisitos (só observar vs fazer compra+relatório+foto). Reembolsos de despesas obrigatórias: compras, consumos, estacionamento (se documentados).",
+      "💳 **Como funciona o pagamento?** Varia: transferência mensal, por projeto após validação, carteiras digitais. Prazo típico: 15-60 dias após a agência validar. Sim, pode demorar. Prepara-te para isto!",
+      "📊 **Cálculo da rentabilidade — é simples!** Remuneração (20€) - custos (combustível 10€ + estacionamento 5€ + consumo não reembolsado 3€) = lucro real (2€). Tempo total: preparação 30min + deslocação 30min + execução 30min + relatório 45min = 2h 15min. Lucro/hora = 2€/2.25h = 0.88€/hora. Não vale a pena! Precisa ser >6€/hora (minimum).",
+      "🚀 **Aumenta o rendimento:** Agrupa missões na mesma zona (mesma manhã, várias lojas), torna-te regular em projetos (agência confia em ti), especializa em setores de valor (banca, hotelaria premium = mais dinheiro), aumenta volume (mais missões), evolui para premium (auditorias, consultoria).",
+      "⚖️ **Impostos em Portugal:** Tens de declarar! Podes ser prestador independente (recibos verdes), atividade ocasional, ou integrar uma empresa. Consulta contabilista para não dares tiros nos pés.",
     ],
     quiz: [
       {
@@ -643,12 +683,16 @@ export const courseModules: CourseModule[] = [
     id: 10,
     title: "Módulo 10 — Desenvolvimento Profissional e Plano de Ação",
     description: "Construção de reputação, evolução e plano prático de 30 dias.",
+    keywords: ["Carreira", "Reputação", "Desenvolvimento", "Plano de Ação", "Crescimento"],
+    practicalTip: "Guarda histórico de todas as missões e feedback. Isto é ouro — mostra tua evolução!",
+    warning: "Sem estratégia clara, ficas preso em missões simples e mal pagas. Define objetivos claros!",
+    benefit: "Com reputação excelente, és convidado para melhores projetos, ganhas mais e tens segurança de trabalho.",
     content: [
-      "Três pilares da reputação: Consistência (qualidade em todas as missões), qualidade (relatórios detalhados e precisos), cumprimento de prazos (entregar dentro do prazo). Avaliadores com boa reputação: contactados primeiro, acesso a projetos premium.",
-      "Evolução natural: Começa com missões simples (retalho) → complexidade média (telecomunicações) → premium (banca, hotelaria, auditorias). Cada nível: mais preparação, detalhe, melhor remuneração.",
-      "Acelerar evolução: Formação contínua (atendimento, observação, escrita), feedback das agências, analisar erros, diversificar setores, construir rede de contactos.",
-      "Plano 30 dias — Semana 1: registar 3-5 plataformas, completar perfis, primeira missão. Semana 2: 2-3 missões, qualidade + prazos. Semana 3: feedback, ajustar, 3-4 missões. Semana 4: consolidar rotina, calcular rentabilidade, definir objetivos.",
-      "Métricas a acompanhar: Número de missões/semana, taxa aceitação relatórios (>95%), qualidade média, rendimento líquido/mês, tempo médio/missão, agências ativas. Permite otimizar e crescer.",
+      "⭐ **Pilares de uma reputação ouro:** Consistência (mesma qualidade SEMPRE), qualidade dos relatórios (detalhados e precisos), cumprimento de prazos (nunca em cima da hora). Resultado? Contactam-te primeiro, recebes convites para projetos premium, ganhas mais!",
+      "📈 **Caminho de evolução típico:** Começar simples (retalho, restauração fast-food) → complexidade média (telecomunicações, farmácias) → premium (banca, hotelaria de luxo, auditorias). Cada salto = mais tempo de preparação, mais detalhe, remuneração 3-5x maior!",
+      "🚀 **Acelera a evolução:** Formação contínua (estuda observação, escrita, sectores), pede feedback das agências (porque foi rejeitado?), analisa erros (e não repetes), diversifica setores (conhecimento é poder), constrói rede (contactos = oportunidades).",
+      "📅 **Plano de 30 dias — Começa AGORA:** Semana 1: Regista em 3-5 plataformas, completa perfis 100%, faz 1ª missão com calma. Semana 2: 2-3 missões, prioriza qualidade. Semana 3: Pede feedback, ajusta, tenta 3-4 missões. Semana 4: Consolida rotina, calcula rentabilidade real, define objetivos para mês 2.",
+      "📊 **Métricas que controlam teu crescimento:** Quantas missões/semana? Taxa de aprovação >95%? Qualidade média dos relatórios? Rendimento líquido/mês? Tempo médio por missão? Quantas agências te contactam? Acompanha isto religiosamente!",
     ],
     quiz: [
       {

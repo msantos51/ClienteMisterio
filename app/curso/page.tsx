@@ -537,8 +537,58 @@ export default function CursoPage() {
           </button>
 
           <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm space-y-6">
-            <h2 className="text-2xl font-bold">{activeModule.title}</h2>
-            <p className="text-xs uppercase tracking-[0.16em] text-white/60">{currentTheoryPage.title}</p>
+            <div>
+              <h2 className="text-2xl font-bold">{activeModule.title}</h2>
+              <p className="text-sm text-white/70 mt-2">{activeModule.description}</p>
+            </div>
+
+            {/* Card de informação rápida — visível apenas na primeira página */}
+            {theoryPage === 0 && (
+              <div className="grid gap-3 md:grid-cols-2">
+                {/* Palavras-chave */}
+                {activeModule.keywords && activeModule.keywords.length > 0 && (
+                  <div className="rounded-lg border border-[#F66856]/30 bg-[#F66856]/5 p-4">
+                    <p className="text-xs font-semibold text-[#F66856] uppercase mb-2">Conceitos-chave</p>
+                    <div className="flex flex-wrap gap-2">
+                      {activeModule.keywords.map((keyword) => (
+                        <span
+                          key={keyword}
+                          className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#F66856]/20 text-[#F66856] border border-[#F66856]/30"
+                        >
+                          {keyword}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Dica Prática */}
+                {activeModule.practicalTip && (
+                  <div className="rounded-lg border border-emerald-400/30 bg-emerald-900/10 p-4">
+                    <p className="text-xs font-semibold text-emerald-300 uppercase mb-2">💡 Dica Prática</p>
+                    <p className="text-sm text-white/85">{activeModule.practicalTip}</p>
+                  </div>
+                )}
+
+                {/* Benefício */}
+                {activeModule.benefit && (
+                  <div className="rounded-lg border border-sky-400/30 bg-sky-900/10 p-4">
+                    <p className="text-xs font-semibold text-sky-300 uppercase mb-2">⭐ Por que isto importa</p>
+                    <p className="text-sm text-white/85">{activeModule.benefit}</p>
+                  </div>
+                )}
+
+                {/* Aviso */}
+                {activeModule.warning && (
+                  <div className="rounded-lg border border-rose-400/30 bg-rose-900/10 p-4">
+                    <p className="text-xs font-semibold text-rose-300 uppercase mb-2">⚠️ Aviso Importante</p>
+                    <p className="text-sm text-white/85">{activeModule.warning}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <p className="text-xs uppercase tracking-[0.16em] text-white/60 border-t border-white/15 pt-4">{currentTheoryPage.title}</p>
 
             <div className="space-y-4">
               {currentTheoryPage.blocks.map((paragraph, idx) => (
