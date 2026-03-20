@@ -23,7 +23,7 @@ export default function AboutPage() {
           </p>
 
           <h1 className="text-3xl font-semibold leading-tight home-title-highlight-text sm:text-4xl lg:text-5xl">
-            Aprende a atuar como cliente real com método e consistência.
+            Atua com método e consistência
           </h1>
 
           <p className="max-w-2xl text-sm sm:text-base leading-6 sm:leading-7">
