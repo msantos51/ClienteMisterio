@@ -18,12 +18,12 @@ export default function HomePage() {
             {/* Agrupa o texto e o botão num bloco centralizado para melhorar a hierarquia visual. */}
             <div className="flex w-full max-w-3xl flex-col items-center space-y-4 text-center sm:space-y-6">
               {/* Destaca a mensagem principal no centro com texto preto, sem caixa vermelha. */}
-              <h1 className="h-auto min-h-0 rounded-3xl px-6 py-4 text-center text-2xl leading-tight whitespace-normal sm:px-8 sm:py-5 sm:text-4xl lg:text-5xl text-black">
+              <h1 className="h-auto min-h-0 rounded-3xl px-6 py-4 text-center text-3xl font-semibold leading-tight sm:px-8 sm:py-5 sm:text-4xl lg:text-5xl home-title-highlight-text">
                 Cliente Mistério
               </h1>
 
               {/* Tagline por baixo do título principal */}
-              <p className="text-center text-sm sm:text-base text-gray-700">
+              <p className="text-center text-sm sm:text-base leading-6 sm:leading-7">
                 O único curso de Cliente Mistério em Portugal — aprende a ganhar enquanto avalias!
               </p>
 

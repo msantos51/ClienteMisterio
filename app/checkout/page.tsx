@@ -19,8 +19,8 @@ export default function CheckoutPage() {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="text-center space-y-4">
-        <h1 className="text-2xl font-semibold">Redirecionando para pagamento...</h1>
-        <p className="text-white/70">Se não for redirecionado automaticamente,</p>
+        <h1 className="text-3xl font-semibold home-title-highlight-text">Redirecionando para pagamento...</h1>
+        <p className="text-sm sm:text-base leading-6 sm:leading-7">Se não for redirecionado automaticamente,</p>
         {paymentLink && (
           <a
             href={paymentLink}
