@@ -3,12 +3,12 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import AppShell from "./components/AppShell";
 import "./globals.css";
 
-// Define a fonte principal com estilo geométrico para reforçar o visual editorial.
-const montserrat = Montserrat({
+// Define a fonte principal Basenji para melhor legibilidade.
+const outfit = Outfit({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "900"],
@@ -56,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body
-        className={`${montserrat.variable} ${geistSans.variable} ${geistMono.variable} bg-[color:var(--background)] text-[color:var(--foreground)] antialiased`}
+        className={`${outfit.variable} ${geistSans.variable} ${geistMono.variable} bg-[color:var(--background)] text-[color:var(--foreground)] antialiased`}
       >
         <AppShell>{children}</AppShell>
       </body>
