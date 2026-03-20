@@ -22,6 +22,11 @@ export default function HomePage() {
                 Cliente Mistério
               </h1>
 
+              {/* Tagline por baixo do título principal */}
+              <p className="text-center text-sm sm:text-base text-gray-700">
+                O único curso de Cliente Mistério em Portugal — aprende a ganhar enquanto avalias!
+              </p>
+
               {/* Exibe os 3 pontos principais em cards animados. */}
               <ThreePointsCards />
 
