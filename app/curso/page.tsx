@@ -483,9 +483,9 @@ export default function CursoPage() {
                 onClick={() => openModule(mod.id)}
                 className={`w-full text-left rounded-2xl border p-5 transition-all ${
                   completed
-                    ? "border-green-400/40 bg-green-900/10 hover:bg-green-900/20"
+                    ? "border-[#F66856]/40 bg-[#F66856]/10 hover:bg-[#F66856]/20"
                     : unlocked
-                      ? "border-white/30 hover:border-[#F66856] cursor-pointer"
+                      ? "border-white/30 hover:border-[#F66856] cursor-pointer hover:bg-white/5"
                       : "border-white/10 opacity-40 cursor-not-allowed"
                 }`}
               >
@@ -494,7 +494,7 @@ export default function CursoPage() {
                     <div
                       className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
                         completed
-                          ? "bg-green-500 text-white"
+                          ? "bg-[#F66856] text-white"
                           : unlocked
                             ? "bg-[#F66856]/20 text-[#F66856]"
                             : "bg-white/10 text-white/30"
@@ -503,13 +503,13 @@ export default function CursoPage() {
                       {completed ? "\u2713" : mod.id}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-semibold text-sm break-words">{mod.title}</h3>
-                      <p className="text-xs text-white/60 mt-0.5">{mod.description}</p>
+                      <h3 className="font-semibold text-sm break-words text-white">{mod.title}</h3>
+                      <p className="text-xs text-white/70 mt-0.5">{mod.description}</p>
                     </div>
                   </div>
                   <div className="shrink-0 text-sm">
                     {completed && modProgress?.quizScore !== null && (
-                      <span className="text-green-400 font-semibold">{modProgress.quizScore}%</span>
+                      <span className="text-[#F66856] font-semibold">{modProgress.quizScore}%</span>
                     )}
                     {!completed && unlocked && (
                       <span className="home-title-highlight-text">&rarr;</span>
@@ -740,13 +740,13 @@ export default function CursoPage() {
 
             {quizSubmitted && quizScore !== null && (
               <div className={`mt-8 rounded-xl p-5 text-center ${
-                quizScore >= 60 ? "bg-green-900/20 border border-green-500/30" : "bg-red-900/20 border border-red-400/30"
+                quizScore >= 60 ? "bg-[#F66856]/10 border border-[#F66856]/30" : "bg-red-900/20 border border-red-400/30"
               }`}>
                 <p className="text-2xl font-bold mb-2">
                   {quizScore >= 60 ? "Parabéns!" : "Tente novamente"}
                 </p>
-                <p className="text-sm mb-1">
-                  Obteve <span className="font-bold text-lg">{quizScore}%</span> neste questionário.
+                <p className="text-sm mb-1 text-white/90">
+                  Obteve <span className="font-bold text-lg text-[#F66856]">{quizScore}%</span> neste questionário.
                 </p>
                 <p className="text-xs text-white/60 mb-4">
                   {quizScore >= 60
