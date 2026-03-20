@@ -234,7 +234,7 @@ h6 {
     font-weight: 500;
     font-size: 14px;
     padding: 0.6em 1.2em;
-    color: white;
+    color: white !important;
     background: #F66856;
     border: none;
     box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
