@@ -87,6 +87,8 @@ body {
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  text-align: justify;
+  text-align-last: left;
   position: relative;
   overflow-x: hidden;
 }
