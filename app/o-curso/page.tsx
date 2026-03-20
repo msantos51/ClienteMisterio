@@ -107,16 +107,16 @@ export default function CoursePage() {
           Formação completa
         </p>
 
-        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">O Curso de Cliente Mistério</h1>
+        <h1 className="text-3xl font-semibold home-title-highlight-text sm:text-4xl lg:text-5xl">O Curso de Cliente Mistério</h1>
 
-        <p className="max-w-3xl text-base leading-7">
+        <p className="max-w-3xl text-sm sm:text-base leading-6 sm:leading-7">
           Um curso completo, 100% prático e desenhado para INICIANTES. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
         </p>
       </header>
 
       {/* Benefícios do curso */}
       <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm">
-        <h3 className="text-lg font-semibold mb-4">Por que fazer este curso?</h3>
+        <h3 className="text-2xl font-semibold sm:text-3xl home-title-highlight-text mb-4">Por que fazer este curso?</h3>
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
             <p className="font-semibold text-white mb-2">✓ Para Iniciantes</p>
@@ -157,7 +157,7 @@ export default function CoursePage() {
       )}
 
       <div className="space-y-3">
-        <h3 className="text-lg font-semibold mt-8 mb-4">10 Módulos Completos</h3>
+        <h3 className="text-2xl font-semibold sm:text-3xl home-title-highlight-text mt-8 mb-4">10 Módulos Completos</h3>
         {courseModules.map((moduleItem, idx) => {
           const emojis = ["🔍", "📈", "🎭", "✅", "📋", "👀", "📸", "📝", "💰", "🚀"];
 
