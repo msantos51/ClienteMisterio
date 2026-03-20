@@ -103,7 +103,7 @@ export default function CoursePage() {
   return (
     <section className="w-full space-y-8">
       <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
           Formação completa
         </p>
 

@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const navigationItems = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "Página Inicial" },
   { href: "/about", label: "Sobre" },
   { href: "/o-curso", label: "O Curso" },
   { href: "/contact", label: "Contacto" },
