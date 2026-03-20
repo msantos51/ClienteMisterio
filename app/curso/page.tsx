@@ -438,7 +438,7 @@ export default function CursoPage() {
   return (
     <section className="w-full space-y-8 bg-[#E8D5C8] p-8 rounded-2xl">
       <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] home-title-highlight-text">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
           Formação completa
         </p>
         <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">
