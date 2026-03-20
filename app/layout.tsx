@@ -49,7 +49,7 @@ export default function RootLayout({
     <html lang="pt">
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-[color:var(--background)] text-[color:var(--foreground)] antialiased`}
-        style={{ fontFamily: "Basenji, sans-serif" }}
+        style={{ fontFamily: "CreatoDisplay, sans-serif" }}
       >
         <AppShell>{children}</AppShell>
       </body>
