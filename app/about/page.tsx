@@ -2,7 +2,7 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/about/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
-import Image from 'next/image';
+import CheckoutButton from '../components/CheckoutButton';
 
 export default function AboutPage() {
   const courseAdvantages = [
@@ -72,6 +72,16 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
+      </article>
+
+      {/* Preço e CTA */}
+      <article className="flex flex-col items-center gap-4 rounded-2xl bg-white p-6 sm:p-8 text-center">
+        <div className="space-y-1">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Acesso Completo ao Curso</p>
+          <p className="text-5xl font-bold" style={{ color: "#F66856" }}>19,99€</p>
+          <p className="text-sm text-gray-400">Pagamento único · Acesso vitalício</p>
+        </div>
+        <CheckoutButton label="Comprar Curso Completo" />
       </article>
     </section>
   );
