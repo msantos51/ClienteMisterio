@@ -1,34 +1,48 @@
-import Image from "next/image";
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro renderiza a landing page principal e organiza o hero inicial com a mensagem, benefícios e CTA.
+ */
+
 import Link from "next/link";
+import ThreePointsCards from "./components/ThreePointsCards";
+import CheckoutButton from "./components/CheckoutButton";
 
 const mainHeroImagePath = "/images/Background.png";
 
 export default function HomePage() {
   return (
-    <section className="px-0 pb-10 pt-2">
-      {/* Cria duas colunas no desktop para posicionar o conteúdo textual à esquerda e a imagem à direita. */}
-      <div className="mx-auto grid min-h-[calc(100vh-130px)] w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(420px,520px)] lg:gap-12">
-        {/* Mantém o bloco textual encostado ao lado esquerdo para reproduzir o alinhamento da referência. */}
-        <article className="max-w-[640px] pt-6 lg:pt-0">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--accent)] sm:text-[11px] sm:tracking-[0.28em]">
-            Novo Curso
-          </p>
+    <section className="w-full">
+      {/* Mantém a secção principal com largura total para o hero ocupar todo o espaço disponível. */}
+      <div className="relative w-full bg-transparent">
+        {/* Centraliza o conteúdo num contentor responsivo alinhado com o restante layout da aplicação. */}
+        <div className="mx-auto w-full max-w-6xl px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10">
+          {/* Usa uma grelha simples e centra o bloco principal para destacar a proposta de valor. */}
+          <div className="grid w-full justify-items-center gap-6 sm:gap-8">
+            {/* Agrupa o texto e o botão num bloco centralizado para melhorar a hierarquia visual. */}
+            <div className="flex w-full max-w-3xl flex-col items-center space-y-4 text-center sm:space-y-6">
+              {/* Destaca a mensagem principal no centro com texto preto, sem caixa vermelha. */}
+              <h1 className="h-auto min-h-0 rounded-3xl px-6 py-4 text-center text-3xl font-semibold leading-tight sm:px-8 sm:py-5 sm:text-4xl lg:text-5xl home-title-highlight-text">
+                Cliente Mistério
+              </h1>
 
-          <h1 className="mt-4 text-4xl font-black uppercase leading-[0.95] tracking-tight text-[color:var(--foreground)] sm:mt-5 sm:text-5xl lg:text-6xl">
-            O único curso de <span className="text-[color:var(--accent)]">cliente mistério</span> em Portugal
-          </h1>
+              {/* Tagline por baixo do título principal */}
+              <p className="text-center text-sm sm:text-base leading-6 sm:leading-7">
+                O único curso de Cliente Mistério em Portugal — aprende a ganhar enquanto avalias!
+              </p>
 
-          <p className="mt-8 max-w-[560px] text-base font-medium leading-relaxed text-[#4a4a4a]">
-            Sê dos primeiros Clientes Mistério certificados!
-          </p>
+              {/* Exibe os 3 pontos principais em cards animados. */}
+              <ThreePointsCards />
 
-          <div className="mt-10">
-            <Link
-              className="site-pill-button text-[10px] uppercase tracking-[0.16em] sm:text-[11px] sm:tracking-[0.18em]"
-              href="/about"
-            >
-              Começa Já
-            </Link>
+              {/* Mantém o CTA centrado por baixo dos benefícios para reforçar a ação principal. */}
+              <div className="flex flex-col gap-3 justify-center pt-2 sm:pt-4 items-center sm:flex-row sm:gap-4">
+                <Link
+                  className="site-pill-button-secondary px-8 py-3 text-[10px] uppercase tracking-[0.15em] shadow-[0_10px_24px_rgba(0,0,0,0.18)] sm:px-10 sm:py-4 sm:text-[11px] sm:tracking-[0.2em]"
+                  href="/about"
+                >
+                  Sabe mais
+                </Link>
+                <CheckoutButton label="Comprar Curso" />
+              </div>
+            </div>
           </div>
         </article>
 

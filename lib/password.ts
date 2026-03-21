@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/password.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 
 const saltLength = 16;

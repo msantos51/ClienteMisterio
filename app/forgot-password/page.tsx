@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/forgot-password/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 "use client";
 
 import Link from "next/link";
@@ -26,6 +30,7 @@ export default function ForgotPasswordPage() {
     try {
       const response = await fetch("/api/auth/forgot-password", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
@@ -41,46 +46,32 @@ export default function ForgotPasswordPage() {
 
   return (
     <section className="space-y-8">
-      <div className="mx-auto w-full max-w-3xl space-y-8">
-        <header className="rounded-[32px] bg-[color:var(--surface)] p-8 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
-          <div className="space-y-3">
-            <h1 className="page-title">Recuperar password</h1>
-            <p className="text-base leading-7 text-justify text-slate-500">
-              Introduza o seu e-mail para receber o link de reposição da password.
-            </p>
-          </div>
-        </header>
-
-        <article className="rounded-[32px] bg-white p-8 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
-          <form className="grid gap-4" onSubmit={handleSubmit}>
-            <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-              E-mail
+      <div className="mx-auto flex w-full max-w-6xl justify-center">
+        <article className="login-form">
+          <h1 className="form-heading">Recuperar password</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
               <input
-                className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-[color:var(--primary)]"
                 name="email"
                 placeholder="voce@email.com"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
-            </label>
+              <span className="label">E-mail</span>
+            </div>
 
-            {feedback && (
-              <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-700">
-                {feedback}
-              </p>
-            )}
+            {feedback && <p className="form-feedback">{feedback}</p>}
 
-            <div className="flex flex-wrap items-center gap-3">
-              <button
-                className="button-size-login bg-[color:var(--primary)] text-white shadow-sm transition hover:brightness-95"
-                type="submit"
-              >
+            <div className="mt-5 space-y-3">
+              <button className="submit" type="submit">
                 {isSubmitting ? "A enviar..." : "Enviar link"}
               </button>
-              <Link className="text-sm font-semibold text-slate-500" href="/login">
-                Voltar ao login
-              </Link>
+              <div className="text-center">
+                <Link className="form-link" href="/login">
+                  Voltar ao login
+                </Link>
+              </div>
             </div>
           </form>
         </article>

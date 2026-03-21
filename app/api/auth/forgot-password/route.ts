@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/api/auth/forgot-password/route.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import { NextResponse } from "next/server";
 
 import { createPasswordResetTemplate } from "@/lib/authEmail";

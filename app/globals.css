@@ -1,16 +1,65 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro centraliza os estilos globais e utilitários visuais usados em toda a aplicação.
+ */
+
 @import "tailwindcss";
 
+/* Declarações de fontes customizadas CreatoDisplay */
+@font-face {
+  font-family: "CreatoDisplay";
+  src: url("/fonts/CreatoDisplay-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CreatoDisplay";
+  src: url("/fonts/CreatoDisplay-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CreatoDisplay";
+  src: url("/fonts/CreatoDisplay-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Declarações de fontes customizadas Basenji (fallback) */
+@font-face {
+  font-family: "Basenji";
+  src: url("/fonts/Basenji-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Basenji";
+  src: url("/fonts/Basenji-SemiBoldSlanted.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  --background: #f4f4f4;
-  --foreground: #111111;
-  --surface: #ffffff;
-  --surface-muted: #ececec;
-  --primary: #111111;
-  --primary-soft: #f0f0f0;
-  --accent: #f44336;
-  --line: #d5d5d5;
+  --background: #e2e0e0;
+  --foreground: #000000;
+  --surface: #000000;
+  --surface-muted: #0f0f0f;
+  --primary: #000000;
+  --primary-soft: #111111;
+  --accent: #e2e0e0;
+  --accent-secondary: #e2e0e0;
+  --accent-success: #58bc82;
+  --line: #2a2a2a;
+  --line-light: #404040;
   --header-control-height: 36px;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -22,87 +71,329 @@
   --color-primary-soft: var(--primary-soft);
   --color-accent: var(--accent);
   --color-line: var(--line);
-  --font-sans: var(--font-montserrat);
+  --font-sans: "CreatoDisplay", sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
 body {
-  background: var(--background);
+  /* Fundo com gradiente */
+  background: #EBECE6;
+  background: #EBECE6;
+  background: #EBECE6;
+  background: #EBECE6;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#EBECE6", endColorstr="#EBECE6", GradientType=0);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: "CreatoDisplay", sans-serif;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-align: justify;
+  text-align-last: left;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Gira texto para orientação vertical usada na barra lateral do hero. */
-.vertical-text {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+/* Garante contraste consistente ao forçar texto branco nos elementos principais da interface. */
+body p,
+body span,
+body a,
+body li,
+body label,
+body small,
+body strong,
+body em {
+  color: var(--foreground) !important;
+}
+
+/* Permite texto branco nos cards mesmo com regra global */
+.bg-\[\#F66856\] p,
+.bg-\[\#F66856\] span {
+  color: white !important;
+}
+
+
+/* Permite destacar textos específicos da home sem ser afetado pela regra global de contraste. */
+.home-title-highlight-text {
+  color: #000000 !important;
+}
+
+/* Aplica cor de destaque secundária aos benefícios da home com prioridade sobre a regra global. */
+.home-benefits-highlight-text {
+  color: #000000 !important;
+}
+/* Destaca especificamente o benefício de rendimento com tom dourado mais intenso. */
+.home-benefit-extra-highlight-text {
+  color: #000000 !important;
+}
+
+/* Mantém campos de formulário com fundo preto e texto branco em todas as páginas. */
+input,
+textarea,
+select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-color: var(--line) !important;
+}
+
+/* Força todos os elementos tipográficos principais a usar CreatoDisplay em negrito. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "CreatoDisplay", sans-serif;
+  font-weight: 700;
 }
 
 @layer components {
-  /* Define estilo base único para todos os botões com visual pill e destaque vermelho. */
+  /* From Uiverse.io by adamgiebl - Standardized button styles with orange theme */
+  .cssbuttons-io-button {
+    display: flex;
+    align-items: center;
+    font-family: "CreatoDisplay", sans-serif;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0.6em 1.2em;
+    color: white;
+    background: #F66856;
+    border: none;
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    letter-spacing: 0.05em;
+    border-radius: 20em;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: auto;
+    min-width: auto;
+  }
+
+  .cssbuttons-io-button svg {
+    margin-right: 8px;
+  }
+
+  .cssbuttons-io-button:hover {
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    opacity: 0.95;
+  }
+
+  .cssbuttons-io-button:active {
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+    opacity: 0.9;
+  }
+
+  .cssbuttons-io-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  /* Aliases para compatibilidade com código existente */
+  button {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    padding: 0.6em 1.2em;
+    margin: 0;
+    font-family: "CreatoDisplay", sans-serif;
+    font-size: inherit;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 20em;
+    overflow: hidden;
+    background: #F66856;
+    color: white;
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: auto;
+    min-width: auto;
+  }
+
+  button:hover {
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    opacity: 0.95;
+  }
+
+  button:active {
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+    opacity: 0.9;
+  }
+
+  button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  button span {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Define estilo base moderno para todos os botões - utilizando o padrão Uiverse */
   .site-pill-button,
   .button-size-login {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: var(--header-control-height);
-    border: 0;
-    border-radius: 100px;
-    padding: 0 30px;
-    background-color: #dc2626 !important;
-    color: #ffffff !important;
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1;
+    font-family: "CreatoDisplay", sans-serif;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0.6em 1.2em;
+    color: white !important;
+    background: #F66856;
+    border: none;
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    letter-spacing: 0.05em;
+    border-radius: 20em;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
+    will-change: transform;
+    touch-action: manipulation;
+    width: auto;
+    min-width: auto;
   }
 
-  /* Realça o botão no hover com aumento subtil e sombra difusa vermelha. */
+  @media (max-width: 640px) {
+    .site-pill-button,
+    .button-size-login {
+      min-height: 40px;
+      padding: 0.6em 1em;
+      font-size: 13px;
+      border-radius: 18em;
+    }
+  }
+
+  /* Estado hover */
   .site-pill-button:hover,
   .button-size-login:hover {
-    background-color: #ef4444 !important;
-    filter: none !important;
-    box-shadow: 0 0 20px rgb(239 68 68 / 32%);
-    transform: scale(1.1);
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    opacity: 0.95;
   }
 
-  /* Aplica estado de clique com redução de escala para feedback tátil. */
+  @media (prefers-reduced-motion: reduce) {
+    .site-pill-button:hover,
+    .button-size-login:hover {
+      opacity: 0.95;
+    }
+  }
+
+  /* Estado ativo */
   .site-pill-button:active,
   .button-size-login:active {
-    background-color: #b91c1c !important;
-    filter: none !important;
-    transition: all 0.25s;
-    -webkit-transition: all 0.25s;
-    box-shadow: none;
-    transform: scale(0.98);
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+    opacity: 0.9;
   }
 
-  /* Evita animações quando o botão está desativado para manter acessibilidade. */
+  @media (prefers-reduced-motion: reduce) {
+    .site-pill-button:active,
+    .button-size-login:active {
+      opacity: 0.9;
+    }
+  }
+
+  /* Estado desativado */
   .site-pill-button:disabled,
   .button-size-login:disabled {
-    transform: none;
-    box-shadow: none;
+    opacity: 0.65;
+    cursor: not-allowed;
   }
 
-  /* Mantém apenas a área clicável do botão, sem moldura visual. */
+  /* Variante secundária do botão com fundo branco e texto laranja */
+  .site-pill-button-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "CreatoDisplay", sans-serif;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0.6em 1.2em;
+    color: #F66856;
+    background: white;
+    border: 2px solid #F66856;
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.2);
+    letter-spacing: 0.05em;
+    border-radius: 20em;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    will-change: transform;
+    touch-action: manipulation;
+    width: auto;
+    min-width: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  @media (max-width: 640px) {
+    .site-pill-button-secondary {
+      min-height: 40px;
+      padding: 0.6em 1em;
+      font-size: 13px;
+      border-radius: 18em;
+    }
+  }
+
+  /* Estado hover */
+  .site-pill-button-secondary:hover {
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.4);
+    background: #fff5f1;
+  }
+
+  /* Estado ativo */
+  .site-pill-button-secondary:active {
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.4);
+    opacity: 0.9;
+  }
+
+  /* Estado desativado */
+  .site-pill-button-secondary:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  /* Botão toggle moderno com feedback visual */
   .menu-toggle-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: var(--header-control-height);
     height: var(--header-control-height);
+    min-width: 44px;
+    min-height: 44px;
     border: 0;
-    border-radius: 0;
-    background-color: transparent;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Mantém feedback no hover sem adicionar borda ou contorno extra. */
+  @media (max-width: 480px) {
+    .menu-toggle-button {
+      min-width: 48px;
+      min-height: 48px;
+      border-radius: 10px;
+    }
+  }
+
+  /* Feedback no hover com mudança sutil de fundo */
   .menu-toggle-button:hover {
-    opacity: 0.85;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle-button {
+      transition: none;
+    }
   }
 
   /* Organiza as barras do ícone hamburguer sem texto associado. */
@@ -115,17 +406,23 @@ body {
     height: 22px;
   }
 
-  /* Desenha cada traço do símbolo em vermelho e habilita transição para o X. */
+  /* Desenha cada traço do símbolo em cinzento e habilita transição para o X. */
   .menu-toggle-line {
     display: block;
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background-color: #dc2626;
+    background-color: #e2e0e0;
     transition: all 0.35s ease;
   }
 
-  /* Converte o ícone para X quando o menu abre, mantendo símbolo vermelho. */
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle-line {
+      transition: none;
+    }
+  }
+
+  /* Converte o ícone para X quando o menu abre, mantendo símbolo cinzento. */
   .menu-toggle-button.is-open .menu-toggle-line.top {
     transform: translateY(7px) rotate(45deg);
   }
@@ -139,14 +436,50 @@ body {
     transform: translateY(-7px) rotate(-45deg);
   }
 
-  /* Define o cartão do menu aberto com aparência limpa semelhante à referência visual. */
-  .mobile-menu-container {
-    border-radius: 16px;
+  @media (prefers-reduced-motion: reduce) {
+    .menu-toggle-button.is-open .menu-toggle-line.top,
+    .menu-toggle-button.is-open .menu-toggle-line.bottom {
+      transform: none;
+    }
+    .menu-toggle-button.is-open .menu-toggle-line.middle {
+      opacity: 0;
+    }
   }
 
-  /* Garante texto vermelho em todas as opções do menu mobile. */
+  /* Define o cartão do menu com design moderno */
+  .mobile-menu-container {
+    border-radius: 14px;
+    will-change: contents;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(0, 0, 0, 0.9) !important;
+  }
+
+  @media (max-width: 480px) {
+    .mobile-menu-container {
+      inset-left: 8px !important;
+      inset-right: 8px !important;
+      top: 80px !important;
+    }
+  }
+
+  /* Garante texto cinzento em todas as opções do menu mobile. */
   .mobile-menu-item {
-    color: #dc2626;
+    color: #e2e0e0 !important;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-menu-item:hover {
+    color: #ffffff !important;
+  }
+
+  @media (max-width: 480px) {
+    .mobile-menu-item {
+      min-height: 48px;
+      padding: 0.5rem 1.25rem !important;
+    }
   }
 
   /* Mantém estilo textual consistente para botões em páginas internas. */
@@ -154,33 +487,33 @@ body {
     @apply text-sm font-semibold;
   }
 
-  /* Define tipografia padrão para títulos principais do site. */
+  /* Define tipografia moderna para títulos */
   .page-title {
-    @apply text-3xl font-semibold text-[color:var(--foreground)];
+    @apply text-3xl font-bold text-[color:var(--foreground)] tracking-tight;
   }
 
   .section-title {
-    @apply text-2xl font-semibold text-[color:var(--foreground)];
+    @apply text-2xl font-bold text-[color:var(--foreground)] tracking-tight;
   }
 
   .section-title-inverse {
-    @apply text-2xl font-semibold text-white;
+    @apply text-2xl font-bold text-white tracking-tight;
   }
 
   .card-title {
-    @apply text-lg font-semibold text-[color:var(--foreground)];
+    @apply text-lg font-bold text-[color:var(--foreground)] tracking-tight;
   }
 
   .subsection-title {
-    @apply text-base font-semibold text-[color:var(--foreground)];
+    @apply text-base font-bold text-[color:var(--foreground)] tracking-tight;
   }
 
   .section-label {
-    @apply text-sm font-semibold text-[color:var(--primary)];
+    @apply text-xs font-bold uppercase text-[color:var(--primary)] tracking-[0.2em];
   }
 
   .section-label-uppercase {
-    @apply text-sm font-semibold uppercase tracking-[0.3em] text-[color:var(--primary)];
+    @apply text-xs font-bold uppercase tracking-[0.3em] text-[color:var(--primary)];
   }
 
 
@@ -190,8 +523,17 @@ body {
     position: relative;
     width: 25px;
     height: 25px;
+    min-width: 44px;
+    min-height: 44px;
     cursor: pointer;
     user-select: none;
+  }
+
+  @media (max-width: 480px) {
+    .checkbox-container {
+      min-width: 48px;
+      min-height: 48px;
+    }
   }
 
   /* Esconde o input nativo mas preserva acessibilidade e interação por teclado. */
@@ -203,17 +545,18 @@ body {
     width: 0;
   }
 
-  /* Cria a caixa visual padrão do checkbox com cantos arredondados e sombra suave. */
+  /* Cria a caixa visual moderna do checkbox */
   .checkbox-container .checkmark {
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    height: 24px;
+    width: 24px;
+    background-color: #f5f5f5;
+    border: 2px solid #d0d0d0;
+    border-radius: 6px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 
   /* Desenha o ícone de confirmação e mantém oculto até o estado marcado. */
@@ -230,32 +573,452 @@ body {
     transform: rotate(45deg);
   }
 
-  /* Aplica o tom vermelho solicitado e reforça destaque visual quando selecionado. */
+  /* Estado checked com gradient e glow */
   .custom-checkbox:checked ~ .checkmark {
-    background-color: #dc2626;
-    box-shadow: 0 3px 7px rgba(220, 38, 38, 0.3);
+    background: #e2e0e0;
+    border-color: #e2e0e0;
+    box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.2);
   }
 
-  /* Exibe o check e dispara animação curta para feedback da seleção. */
+  /* Exibe o check com animação suave */
   .custom-checkbox:checked ~ .checkmark::after {
     display: block;
-    animation: check-anim 0.2s forwards;
+    animation: check-anim 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
-  /* Remove contorno padrão e usa anel customizado para foco acessível. */
+  /* Focus state acessível */
   .custom-checkbox:focus-visible ~ .checkmark {
-    outline: 2px solid #dc2626;
-    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.3);
   }
 
-  /* Faz o traço do check crescer verticalmente para simular desenho do ícone. */
+  /* Animação suave do check com efeito de desenho */
   @keyframes check-anim {
     0% {
       height: 0;
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
     }
 
     100% {
       height: 10px;
+      opacity: 1;
     }
   }
+}
+
+
+.login-form {
+  width: 100%;
+  max-width: 460px;
+  padding: 40px;
+  background: rgb(255 255 255 / 95%);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  animation: fadeIn 1.5s ease-out;
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 20px;
+    margin: 0 auto;
+    width: 95%;
+  }
+}
+
+.dashboard-form {
+  max-width: min(100%, 900px) !important;
+  margin-inline: auto;
+}
+
+.login-form * {
+  color: #333 !important;
+}
+
+.form-heading {
+  margin-bottom: 24px;
+  color: #1a1a1a !important;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 480px) {
+  .form-heading {
+    font-size: 1.45rem;
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+  }
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 480px) {
+  .input-group {
+    margin-bottom: 16px;
+  }
+}
+
+.input-group .label {
+  position: absolute;
+  top: -18px;
+  left: 0;
+  color: #000000 !important;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 1;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 12px 14px;
+  color: #1a1a1a !important;
+  font-size: 0.92rem;
+  background-color: #f8f9fa !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  min-height: 44px;
+}
+
+@media (max-width: 480px) {
+  .input-group input,
+  .input-group textarea,
+  .input-group select {
+    font-size: 1rem;
+    padding: 13px 14px;
+  }
+}
+
+.input-group textarea {
+  min-height: 110px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+@media (max-width: 480px) {
+  .input-group textarea {
+    min-height: 100px;
+  }
+}
+
+.input-group input:hover,
+.input-group textarea:hover,
+.input-group select:hover {
+  border-color: #d0d0d0 !important;
+  background-color: #ffffff !important;
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  border-color: #000000 !important;
+  box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.15);
+  background-color: #ffffff !important;
+}
+
+.submit {
+  width: auto;
+  padding: 0.6em 1.2em;
+  min-height: 40px;
+  color: white !important;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  background: #F66856;
+  border: 1px solid #F66856;
+  box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+  border-radius: 20em;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "CreatoDisplay", sans-serif;
+}
+
+@media (max-width: 480px) {
+  .submit {
+    min-height: 40px;
+    padding: 0.6em 1em;
+    font-size: 13px;
+    border-radius: 18em;
+  }
+}
+
+.submit:hover {
+  box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+  opacity: 0.95;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit:hover {
+    opacity: 0.95;
+  }
+}
+
+.submit:active {
+  box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+  opacity: 0.9;
+}
+
+.submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.form-link {
+  color: #000000 !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  letter-spacing: 0.2px;
+  position: relative;
+}
+
+.form-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #000000;
+  transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.form-link:hover {
+  color: #000000 !important;
+}
+
+.form-link:hover::after {
+  width: 100%;
+}
+
+.form-feedback {
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(246, 104, 86, 0.3);
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fff5f1 0%, #fffaf8 100%);
+  color: #d95800 !important;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* Estrutura principal do dashboard com menu lateral, conteúdo e cartão de apoio. */
+.dashboard-layout-shell {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Cabeçalho superior do dashboard com design moderno */
+.dashboard-top-banner {
+  border-radius: 16px;
+  background: rgb(255 255 255 / 95%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+/* Cartão lateral de navegação com design moderno */
+.dashboard-sidebar {
+  border-radius: 16px;
+  background: rgb(255 255 255 / 95%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  padding: 1.25rem;
+  backdrop-filter: blur(8px);
+}
+
+/* Título principal do menu lateral. */
+.dashboard-sidebar-title {
+  color: #111827 !important;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Lista vertical de opções do dashboard com espaçamento consistente. */
+.dashboard-menu {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* Botão de menu com design moderno */
+.dashboard-menu-item {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.dashboard-menu-item span {
+  display: block;
+  color: #1a1a1a !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.dashboard-menu-item small {
+  display: block;
+  margin-top: 0.3rem;
+  color: #9ca3af !important;
+  font-size: 0.75rem;
+  letter-spacing: 0.1px;
+}
+
+/* Destaque visual da secção ativa com gradiente sutil */
+.dashboard-menu-item.is-active {
+  background: linear-gradient(135deg, #fef9f3 0%, #fff5ea 100%);
+  border-color: #F66856;
+  box-shadow: inset 0 1px 2px rgba(246, 104, 86, 0.1);
+}
+
+.dashboard-menu-item:hover {
+  border-color: #e5e7eb;
+  background: #fafafa;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Cartão lateral direito com design moderno */
+.dashboard-right-highlight {
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff9f3 0%, #fffbf8 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  padding: 1.5rem;
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.dashboard-right-highlight .card-title,
+.dashboard-right-highlight p {
+  color: #111827 !important;
+}
+
+/* Ícone decorativo simples para equilibrar a composição visual do painel. */
+.dashboard-right-highlight-icon {
+  font-size: 1.3rem;
+  text-align: center;
+  color: #F66856 !important;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-layout-shell {
+    grid-template-columns: 220px minmax(0, 1fr) 240px;
+  }
+
+  .dashboard-sidebar {
+    position: sticky;
+    top: 110px;
+  }
+
+  .dashboard-right-highlight {
+    position: sticky;
+    top: 110px;
+    display: block;
+  }
+}
+
+/* Estilos modernos adicionais */
+a {
+  transition: color 0.3s ease;
+}
+
+/* Scroll suave para a página */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Customização de scrollbar para navegadores webkit */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(246, 104, 86, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(246, 104, 86, 0.8);
+}
+
+/* Placeholder melhorado */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important;
+  opacity: 1;
+  font-weight: 400;
+}
+
+/* Select melhorado */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  padding-right: 36px !important;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Melhor contraste em links dentro do conteúdo */
+main a:not(.site-pill-button):not(.button-size-login):not(.form-link) {
+  color: #000000;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(246, 104, 86, 0.3);
+  transition: all 0.3s ease;
+}
+
+main a:not(.site-pill-button):not(.button-size-login):not(.form-link):hover {
+  border-bottom-color: rgba(246, 104, 86, 0.8);
+  color: #000000;
 }

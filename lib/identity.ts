@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/identity.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import { createHash } from "crypto";
 
 // Normaliza o identificador para comparar sempre no mesmo formato.

@@ -1,3 +1,15 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Página pública com a estrutura do curso e ligação para a formação completa.
+ */
+
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import CheckoutButton from "../components/CheckoutButton";
+
+const sessionStorageKey = "vp_session";
+
 const courseModules = [
   {
     title: 'Módulo 1 — Enquadramento do Cliente Mistério',
@@ -82,46 +94,121 @@ const courseModules = [
 ];
 
 export default function CoursePage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(Boolean(localStorage.getItem(sessionStorageKey)));
+  }, []);
+
   return (
-    <section className="mx-auto w-full max-w-5xl space-y-8 rounded-[32px] bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.08)] lg:p-10">
-      {/* Define o cabeçalho principal para contextualizar o conteúdo da página de módulos. */}
+    <section className="w-full space-y-8">
       <header className="space-y-3">
-        <p className="inline-flex rounded-full bg-red-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-red-600">
-          Estrutura do curso
+        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
+          Formação completa
         </p>
 
-        <h1 className="text-3xl font-semibold text-zinc-900 lg:text-4xl">O Curso</h1>
+        <h1 className="text-3xl font-semibold home-title-highlight-text sm:text-4xl lg:text-5xl">O Curso de Cliente Mistério</h1>
 
-        <p className="max-w-3xl text-base leading-7 text-zinc-600">
-          Clica em cada módulo para veres os submódulos e os tópicos abordados em cada etapa da
-          formação.
+        <p className="max-w-3xl text-sm sm:text-base leading-6 sm:leading-7">
+          Um curso completo, 100% prático e desenhado para INICIANTES. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
         </p>
       </header>
 
-      {/* Usa componentes nativos <details> para criar acordeões acessíveis sem lógica adicional no cliente. */}
-      <div className="space-y-4">
-        {courseModules.map((moduleItem) => (
-          <details
-            key={moduleItem.title}
-            className="group rounded-2xl border border-zinc-200 bg-zinc-50 p-5 open:border-red-200 open:bg-white"
-          >
-            {/* Mostra apenas o título do módulo fechado e revela os tópicos ao clicar. */}
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold text-zinc-800 marker:content-none">
-              <span>{moduleItem.title}</span>
-              <span className="text-red-600 transition-transform duration-200 group-open:rotate-45">+</span>
-            </summary>
-
-            <ul className="mt-4 space-y-3 border-t border-zinc-200 pt-4 text-sm leading-6 text-zinc-700">
-              {moduleItem.topics.map((topic) => (
-                <li key={topic} className="flex items-start gap-3">
-                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-red-500" />
-                  <span>{topic}</span>
-                </li>
-              ))}
-            </ul>
-          </details>
-        ))}
+      {/* Preço e CTA */}
+      <div className="flex flex-col items-center gap-4 rounded-2xl bg-white p-6 sm:p-8 text-center">
+        <div className="space-y-1">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Acesso Completo ao Curso</p>
+          <p className="text-5xl font-bold" style={{ color: "#F66856" }}>19,99€</p>
+          <p className="text-sm text-gray-400">Pagamento único · Acesso vitalício</p>
+        </div>
+        <CheckoutButton label="Comprar Curso Completo" />
       </div>
+
+      {/* Benefícios do curso */}
+      <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm">
+        <h3 className="text-2xl font-semibold sm:text-3xl home-title-highlight-text mb-4">Por que fazer este curso?</h3>
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+            <p className="font-semibold text-white mb-2">✓ Para Iniciantes</p>
+            <p className="text-sm text-white/90">Explicações simples, sem jargão. Começa do zero e aprende no teu ritmo.</p>
+          </div>
+          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+            <p className="font-semibold text-white mb-2">✓ Prático & Real</p>
+            <p className="text-sm text-white/90">Casos reais, dicas profissionais, checklis práticos. Tudo que precisas para ganhar já no mês 1.</p>
+          </div>
+          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+            <p className="font-semibold text-white mb-2">✓ Ganha Desde Já</p>
+            <p className="text-sm text-white/90">5€ a 150€+ por missão. Flexibilidade total. Começa quando queres.</p>
+          </div>
+          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+            <p className="font-semibold text-white mb-2">✓ Carreira Escalável</p>
+            <p className="text-sm text-white/90">Começa simples, evolui para missões premium. Quanto melhor, mais ganhas.</p>
+          </div>
+          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+            <p className="font-semibold text-white mb-2">✓ Questões & Avaliação</p>
+            <p className="text-sm text-white/90">Testes em cada módulo. Certifica-te que compreendeste antes de avançar.</p>
+          </div>
+          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+            <p className="font-semibold text-white mb-2">✓ Comunidade & Apoio</p>
+            <p className="text-sm text-white/90">Aprende com outros avaliadores. Dicas, truques e apoio contínuo.</p>
+          </div>
+        </div>
+      </div>
+
+      {isLoggedIn && (
+        <div className="flex justify-center">
+          <Link
+            href="/curso"
+            className="submit inline-block max-w-sm text-center !no-underline"
+          >
+            Aceder ao Curso Completo
+          </Link>
+        </div>
+      )}
+
+      <div className="space-y-3">
+        <h3 className="text-2xl font-semibold sm:text-3xl home-title-highlight-text mt-8 mb-4">10 Módulos Completos</h3>
+        {courseModules.map((moduleItem, idx) => {
+          const emojis = ["🔍", "📈", "🎭", "✅", "📋", "👀", "📸", "📝", "💰", "🚀"];
+
+          return (
+            <details
+              key={moduleItem.title}
+              className="group rounded-2xl border border-[#F66856] bg-[#F66856] p-5 open:shadow-lg transition-all cursor-pointer"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none text-white">
+                <div className="flex items-center gap-3">
+                  <span>{moduleItem.title}</span>
+                </div>
+                <span className="transition-transform duration-200 group-open:rotate-45">+</span>
+              </summary>
+
+              <ul className="mt-4 space-y-3 border-t border-white/30 pt-4 text-sm leading-6 text-white">
+                {moduleItem.topics.map((topic) => (
+                  <li key={topic} className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-white opacity-70" />
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          );
+        })}
+      </div>
+
+      {!isLoggedIn && (
+        <div className="text-center space-y-4">
+          <p className="text-sm text-white/70">Crie uma conta ou inicie sessão para aceder ao curso completo com conteúdo teórico e questionários.</p>
+          <div className="flex flex-col gap-3 justify-center items-center sm:flex-row sm:gap-4">
+            <Link
+              href="/account"
+              className="submit inline-block max-w-sm text-center !no-underline"
+            >
+              Criar Conta Gratuita
+            </Link>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

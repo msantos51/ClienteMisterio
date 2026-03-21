@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/token.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import { createHash, randomBytes } from "node:crypto";
 
 const tokenSize = 32;

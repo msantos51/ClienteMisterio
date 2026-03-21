@@ -1,7 +1,12 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/components/HeaderActions.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type SessionUser = {
   fullName: string;
@@ -13,12 +18,8 @@ const userStorageKey = "vp_user";
 const sessionStorageKey = "vp_session";
 
 export default function HeaderActions() {
+  const pathname = usePathname();
   const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
-
-  const profileHref = useMemo(() => {
-    // Mantém destino único para utilizadores autenticados.
-    return "/dashboard";
-  }, []);
 
   useEffect(() => {
     // Lê a sessão guardada no browser para alternar ação entre login e dashboard.
@@ -42,21 +43,21 @@ export default function HeaderActions() {
     } catch {
       setSessionUser(null);
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="flex items-center gap-2 sm:gap-3">
       {!sessionUser ? (
         <Link
-          className="site-pill-button text-[10px] uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.15em]"
+          className="site-pill-button px-6 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em]"
           href="/login"
         >
           Login
         </Link>
       ) : (
         <Link
-          className="site-pill-button text-[10px] uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.15em]"
-          href={profileHref}
+          className="site-pill-button px-6 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em]"
+          href="/dashboard"
         >
           Dashboard
         </Link>

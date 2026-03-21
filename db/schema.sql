@@ -1,3 +1,5 @@
+-- DESCRIÇÃO DO FICHEIRO: Este ficheiro define a estrutura da base de dados e os objetos SQL usados pela aplicação.
+
 -- Cria extensões necessárias para gerar UUIDs.
 create extension if not exists "pgcrypto";
 
@@ -29,3 +31,16 @@ create table if not exists users (
 create unique index if not exists users_national_id_hash_unique
   on users (national_id_hash)
   where national_id_hash is not null;
+
+-- Tabela de progresso do curso com estado de cada módulo por utilizador.
+create table if not exists course_progress (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  module_id integer not null,
+  completed boolean not null default false,
+  quiz_score integer,
+  quiz_answers jsonb,
+  completed_at timestamptz,
+  created_at timestamptz not null default now(),
+  unique(user_id, module_id)
+);

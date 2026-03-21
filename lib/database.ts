@@ -1,3 +1,7 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/database.ts` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 import { Pool } from "pg";
 
 const databaseUrl = process.env.DATABASE_URL;
@@ -59,6 +63,20 @@ const initializeDatabase = async (): Promise<void> => {
           email_delivery_status text not null default 'pending',
           email_delivery_error text,
           created_at timestamptz not null default now()
+        )
+      `);
+
+      await pool.query(`
+        create table if not exists course_progress (
+          id uuid primary key default gen_random_uuid(),
+          user_id uuid not null references users(id) on delete cascade,
+          module_id integer not null,
+          completed boolean not null default false,
+          quiz_score integer,
+          quiz_answers jsonb,
+          completed_at timestamptz,
+          created_at timestamptz not null default now(),
+          unique(user_id, module_id)
         )
       `);
 

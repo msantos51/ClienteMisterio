@@ -1,8 +1,12 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/account/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 "use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type RegisterForm = {
   firstName: string;
@@ -19,6 +23,7 @@ type FeedbackState = {
 
 export default function AccountPage() {
   const router = useRouter();
+  const [isCheckout, setIsCheckout] = useState(false);
   const [formData, setFormData] = useState<RegisterForm>({
     firstName: "",
     lastName: "",
@@ -28,6 +33,11 @@ export default function AccountPage() {
   });
   const [feedback, setFeedback] = useState<FeedbackState | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const urlParameters = new URLSearchParams(window.location.search);
+    setIsCheckout(urlParameters.get("checkout") === "1");
+  }, []);
 
   const handleChange = (field: keyof RegisterForm, value: string) => {
     setFormData((previous) => ({ ...previous, [field]: value }));
@@ -55,6 +65,7 @@ export default function AccountPage() {
     try {
       const response = await fetch("/api/auth/register", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
@@ -67,8 +78,8 @@ export default function AccountPage() {
       }
 
       setFeedback({ type: "success", message: "Registo efetuado com sucesso." });
-      router.push("/login?registered=1");
-    } catch (error) {
+      router.push(isCheckout ? "/login?registered=1&checkout=1" : "/login?registered=1");
+    } catch {
       setFeedback({
         type: "error",
         message: "Não foi possível criar a conta. Tente novamente.",
@@ -80,109 +91,84 @@ export default function AccountPage() {
 
   return (
     <section className="space-y-8">
-      <div className="mx-auto w-full max-w-5xl space-y-8">
-        <header className="rounded-[32px] bg-[color:var(--surface)] p-8 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
-          <div className="space-y-3">
-            <h1 className="page-title">Conta</h1>
-            <p className="text-base leading-7 text-justify text-slate-500">
-              Crie a sua conta com os dados essenciais. Os dados estatísticos serão pedidos apenas no primeiro login.
-            </p>
-          </div>
-        </header>
+      <div className="mx-auto flex w-full max-w-6xl justify-center">
+        <article className="login-form max-w-[620px]">
+          <h1 className="form-heading">Criar conta</h1>
+          {isCheckout && (
+            <p className="form-feedback mb-4">Para proceder com a compra é necessário criar uma conta ou <a className="form-link" href="/login?checkout=1">iniciar sessão</a>.</p>
+          )}
 
-        <article className="rounded-[32px] bg-white p-8 shadow-[0_20px_50px_rgba(31,41,55,0.08)]">
-          <div className="flex flex-col gap-6">
-            <div>
-              <p className="section-label">Criar conta</p>
-              <h2 className="mt-2 section-title">Registo rápido e seguro.</h2>
+          <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input
+                name="firstName"
+                placeholder="Digite o seu primeiro nome"
+                type="text"
+                value={formData.firstName}
+                onChange={(event) => handleChange("firstName", event.target.value)}
+              />
+              <span className="label">Primeiro nome</span>
             </div>
 
-            <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Primeiro nome
-                <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-[color:var(--primary)]"
-                  name="firstName"
-                  placeholder="Digite o seu primeiro nome"
-                  type="text"
-                  value={formData.firstName}
-                  onChange={(event) => handleChange("firstName", event.target.value)}
-                />
-              </label>
+            <div className="input-group">
+              <input
+                name="lastName"
+                placeholder="Digite o seu último nome"
+                type="text"
+                value={formData.lastName}
+                onChange={(event) => handleChange("lastName", event.target.value)}
+              />
+              <span className="label">Último nome</span>
+            </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Último nome
-                <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-[color:var(--primary)]"
-                  name="lastName"
-                  placeholder="Digite o seu último nome"
-                  type="text"
-                  value={formData.lastName}
-                  onChange={(event) => handleChange("lastName", event.target.value)}
-                />
-              </label>
+            <div className="input-group md:col-span-2">
+              <input
+                name="email"
+                placeholder="voce@email.com"
+                type="email"
+                value={formData.email}
+                onChange={(event) => handleChange("email", event.target.value)}
+              />
+              <span className="label">E-mail</span>
+            </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700 md:col-span-2">
-                E-mail
-                <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-[color:var(--primary)]"
-                  name="email"
-                  placeholder="voce@email.com"
-                  type="email"
-                  value={formData.email}
-                  onChange={(event) => handleChange("email", event.target.value)}
-                />
-              </label>
+            <div className="input-group">
+              <input
+                name="password"
+                placeholder="Crie uma senha segura"
+                type="password"
+                value={formData.password}
+                onChange={(event) => handleChange("password", event.target.value)}
+              />
+              <span className="label">Senha</span>
+            </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Senha
-                <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-[color:var(--primary)]"
-                  name="password"
-                  placeholder="Crie uma senha segura"
-                  type="password"
-                  value={formData.password}
-                  onChange={(event) => handleChange("password", event.target.value)}
-                />
-              </label>
+            <div className="input-group">
+              <input
+                name="confirmPassword"
+                placeholder="Repita a senha"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={(event) => handleChange("confirmPassword", event.target.value)}
+              />
+              <span className="label">Confirmar senha</span>
+            </div>
 
-              <label className="flex flex-col gap-2 text-sm font-medium text-slate-700">
-                Confirmar senha
-                <input
-                  className="soft-gradient-input rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-700 outline-none transition focus:border-[color:var(--primary)]"
-                  name="confirmPassword"
-                  placeholder="Repita a senha"
-                  type="password"
-                  value={formData.confirmPassword}
-                  onChange={(event) => handleChange("confirmPassword", event.target.value)}
-                />
-              </label>
+            {feedback && (
+              <p className="form-feedback md:col-span-2">{feedback.message}</p>
+            )}
 
-              {feedback && (
-                <p
-                  className={`rounded-2xl border px-4 py-3 text-sm text-justify md:col-span-2 ${
-                    feedback.type === "success"
-                      ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                      : "border-rose-200 bg-rose-50 text-rose-700"
-                  }`}
-                >
-                  {feedback.message}
-                </p>
-              )}
-
-              <div className="flex flex-wrap items-center gap-3 md:col-span-2">
-                <button
-                  className="button-size-login bg-[color:var(--primary)] text-white shadow-sm transition hover:brightness-95"
-                  type="submit"
-                >
-                  {isSubmitting ? "A criar..." : "Criar conta"}
-                </button>
-                <Link className="text-sm font-semibold text-slate-500" href="/login">
+            <div className="md:col-span-2 mt-2 space-y-3">
+              <button className="submit" type="submit">
+                {isSubmitting ? "A criar..." : "Criar conta"}
+              </button>
+              <div className="text-center">
+                <Link className="form-link" href={isCheckout ? "/login?checkout=1" : "/login"}>
                   Já tenho conta
                 </Link>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </article>
       </div>
     </section>

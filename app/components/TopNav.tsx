@@ -1,11 +1,15 @@
+/*
+ * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/components/TopNav.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
+ */
+
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navigationItems = [
-  { href: "/", label: "Home" },
+  { href: "/", label: "Página Inicial" },
   { href: "/about", label: "Sobre" },
   { href: "/o-curso", label: "O Curso" },
   { href: "/contact", label: "Contacto" },
@@ -15,6 +19,11 @@ const navigationItems = [
 export default function TopNav() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    // Fecha automaticamente o menu quando a rota muda para manter a navegação ágil no mobile.
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   const closeMenu = () => {
     // Fecha o menu após navegação para melhorar a experiência em ecrãs pequenos.
@@ -39,24 +48,24 @@ export default function TopNav() {
       </button>
 
       {/* Mantém os links centrados no desktop e destaca a página ativa com sublinhado. */}
-      <nav className="hidden items-center justify-center gap-8 xl:gap-10 lg:flex">
+      <nav className="hidden items-center justify-center gap-6 lg:gap-8 xl:gap-10 lg:flex">
         {navigationItems.map((item) => {
           const isActive = pathname === item.href;
 
           return (
             <Link
               key={item.href}
-              className={`relative pb-2 text-[14px] font-semibold transition ${
+              className={`relative pb-2 text-[14px] lg:text-[16px] font-semibold transition min-h-[44px] flex items-center ${
                 isActive
-                  ? "text-[color:var(--accent)]"
-                  : "text-[color:var(--foreground)] hover:text-[color:var(--accent)]"
+                  ? "text-white"
+                  : "text-white hover:text-white"
               }`}
               href={item.href}
             >
               {item.label}
 
               {isActive ? (
-                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[color:var(--accent)]" />
+                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-white" />
               ) : null}
             </Link>
           );
@@ -65,7 +74,7 @@ export default function TopNav() {
 
       {/* Renderiza menu vertical no mobile com área clicável confortável e ordem visual consistente. */}
       {isMenuOpen ? (
-        <nav className="mobile-menu-container absolute inset-x-4 top-[84px] z-40 flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] bg-[color:var(--surface)] shadow-sm lg:hidden">
+        <nav className="mobile-menu-container absolute right-3 top-[80px] z-40 sm:right-4 sm:top-[84px] flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] shadow-sm lg:hidden min-w-[200px] !bg-[#feb1a5]">
           {navigationItems.map((item, index) => {
             const isActive = pathname === item.href;
             const isLast = index === navigationItems.length - 1;
@@ -73,11 +82,11 @@ export default function TopNav() {
             return (
               <Link
                 key={item.href}
-                className={`mobile-menu-item px-5 py-4 text-sm font-semibold transition ${
+                className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold transition !text-white ${
                   isActive
-                    ? "text-[#b91c1c]"
-                    : "text-[color:var(--accent)] hover:bg-red-50"
-                } ${isLast ? "border-b-0" : "border-b border-[color:var(--line)]"}`}
+                    ? "bg-[#ff9b7f]"
+                    : "hover:bg-[#ff9b7f]"
+                } ${isLast ? "border-b-0" : "border-b border-white/30"}`}
                 href={item.href}
                 onClick={closeMenu}
               >
