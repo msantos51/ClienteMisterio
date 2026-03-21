@@ -6,7 +6,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type RegisterForm = {
   firstName: string;
@@ -23,6 +23,7 @@ type FeedbackState = {
 
 export default function AccountPage() {
   const router = useRouter();
+  const [isCheckout, setIsCheckout] = useState(false);
   const [formData, setFormData] = useState<RegisterForm>({
     firstName: "",
     lastName: "",
@@ -32,6 +33,11 @@ export default function AccountPage() {
   });
   const [feedback, setFeedback] = useState<FeedbackState | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const urlParameters = new URLSearchParams(window.location.search);
+    setIsCheckout(urlParameters.get("checkout") === "1");
+  }, []);
 
   const handleChange = (field: keyof RegisterForm, value: string) => {
     setFormData((previous) => ({ ...previous, [field]: value }));
@@ -72,7 +78,7 @@ export default function AccountPage() {
       }
 
       setFeedback({ type: "success", message: "Registo efetuado com sucesso." });
-      router.push("/login?registered=1");
+      router.push(isCheckout ? "/login?registered=1&checkout=1" : "/login?registered=1");
     } catch {
       setFeedback({
         type: "error",
@@ -88,6 +94,9 @@ export default function AccountPage() {
       <div className="mx-auto flex w-full max-w-6xl justify-center">
         <article className="login-form max-w-[620px]">
           <h1 className="form-heading">Criar conta</h1>
+          {isCheckout && (
+            <p className="form-feedback mb-4">Para proceder com a compra é necessário criar uma conta ou <a className="form-link" href="/login?checkout=1">iniciar sessão</a>.</p>
+          )}
 
           <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
             <div className="input-group">
@@ -154,7 +163,7 @@ export default function AccountPage() {
                 {isSubmitting ? "A criar..." : "Criar conta"}
               </button>
               <div className="text-center">
-                <Link className="form-link" href="/login">
+                <Link className="form-link" href={isCheckout ? "/login?checkout=1" : "/login"}>
                   Já tenho conta
                 </Link>
               </div>
