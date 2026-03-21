@@ -4,6 +4,8 @@
 
 "use client";
 
+import { useRouter } from "next/navigation";
+
 interface CheckoutButtonProps {
   label?: string;
   className?: string;
@@ -15,6 +17,7 @@ export default function CheckoutButton({
   className = "",
   variant = "primary",
 }: CheckoutButtonProps) {
+  const router = useRouter();
   const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
 
   if (!paymentLink) {
@@ -26,7 +29,12 @@ export default function CheckoutButton({
   }
 
   const handleCheckout = () => {
-    window.location.href = paymentLink;
+    const session = localStorage.getItem("vp_session");
+    if (session) {
+      window.location.href = paymentLink;
+    } else {
+      router.push("/login?checkout=1");
+    }
   };
 
   const buttonClasses =

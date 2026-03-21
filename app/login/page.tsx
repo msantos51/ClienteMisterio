@@ -46,13 +46,22 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isCheckout, setIsCheckout] = useState(false);
 
   useEffect(() => {
     const urlParameters = new URLSearchParams(window.location.search);
+    const checkout = urlParameters.get("checkout") === "1";
+    setIsCheckout(checkout);
 
     if (urlParameters.get("registered") === "1") {
       // Exibe confirmação de registo concluído e acesso imediato ao login.
-      setFeedback("Conta criada com sucesso. Já pode iniciar sessão.");
+      if (checkout) {
+        setFeedback("Conta criada com sucesso. Inicia sessão para continuar com a compra.");
+      } else {
+        setFeedback("Conta criada com sucesso. Já pode iniciar sessão.");
+      }
+    } else if (checkout) {
+      setFeedback("Para proceder com a compra é necessário iniciar sessão ou criar uma conta.");
     }
 
     // Mantém o utilizador autenticado ao regressar ao ecrã de login.
@@ -60,7 +69,7 @@ export default function LoginPage() {
     const storedUser = localStorage.getItem(userStorageKey);
 
     if (storedSession && storedUser) {
-      router.push("/dashboard");
+      router.push(checkout ? "/checkout" : "/dashboard");
     }
   }, [router]);
 
@@ -108,7 +117,7 @@ export default function LoginPage() {
         localStorage.setItem(userStorageKey, JSON.stringify(normalizedSessionUser));
       }
 
-      router.push("/dashboard");
+      router.push(isCheckout ? "/checkout" : "/dashboard");
     } catch {
       setFeedback("Não foi possível iniciar sessão. Tente novamente.");
     } finally {
@@ -151,7 +160,7 @@ export default function LoginPage() {
                 {isSubmitting ? "A entrar..." : "Entrar"}
               </button>
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <Link className="form-link" href="/account">
+                <Link className="form-link" href={isCheckout ? "/account?checkout=1" : "/account"}>
                   Criar conta
                 </Link>
                 <Link className="form-link" href="/forgot-password">
