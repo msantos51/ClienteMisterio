@@ -77,9 +77,9 @@ export default function AboutPage() {
       {/* Preço e CTA */}
       <article className="flex flex-col items-center gap-4 rounded-2xl bg-white p-6 sm:p-8 text-center">
         <div className="w-full space-y-1 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Acesso Completo ao Curso</p>
-          <p className="text-5xl font-bold" style={{ color: "#F66856" }}>19,99€</p>
-          <p className="text-sm text-gray-400">Pagamento único · Acesso vitalício</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 text-center">Acesso Completo ao Curso</p>
+          <p className="text-5xl font-bold text-center" style={{ color: "#F66856" }}>19,99€</p>
+          <p className="text-sm text-gray-400 text-center">Pagamento único · Acesso vitalício</p>
         </div>
         <CheckoutButton label="Comprar Curso Completo" />
       </article>
