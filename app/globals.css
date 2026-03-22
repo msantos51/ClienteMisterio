@@ -89,6 +89,14 @@ body {
   -webkit-font-smoothing: antialiased;
   text-align: justify;
   text-align-last: left;
+}
+
+/* Override text-align-last so .text-center elements are not affected by the body's text-align-last: left */
+.text-center {
+  text-align-last: center;
+}
+
+body {
   position: relative;
   overflow-x: hidden;
 }
