@@ -13,11 +13,11 @@ export default function Footer() {
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-xs">
           {/* Logo / Brand */}
           <div className="flex items-center gap-3">
-            <span className="font-black uppercase tracking-[0.25em] text-[color:var(--foreground)]">
+            <span className="font-black uppercase tracking-[0.25em] text-black">
               CM
             </span>
-            <span className="text-white/60">
-              Portal de participação cidadã e informação pública.
+            <span className="text-black/60">
+              O único curso de Cliente Mistério em Portugal.
             </span>
           </div>
 
@@ -25,20 +25,20 @@ export default function Footer() {
           <div className="flex items-center gap-6">
             <Link
               href="/termos-e-condicoes"
-              className="text-white/80 transition-colors hover:text-white"
+              className="text-black/70 transition-colors hover:text-black"
             >
               Termos e Condições
             </Link>
             <Link
               href="/contact"
-              className="text-white/80 transition-colors hover:text-white"
+              className="text-black/70 transition-colors hover:text-black"
             >
               Contacto
             </Link>
           </div>
 
           {/* Copyright */}
-          <p className="text-white/60">
+          <p className="text-black/50">
             &copy; {currentYear} Cliente Mistério. Todos os direitos reservados.
           </p>
         </div>

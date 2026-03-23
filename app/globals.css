@@ -47,19 +47,18 @@
 }
 
 :root {
-  --background: #e2e0e0;
+  --background: #EBECE6;
   --foreground: #000000;
-  --surface: #000000;
-  --surface-muted: #0f0f0f;
+  --surface: #ffffff;
+  --surface-muted: #f5f5f5;
   --primary: #000000;
   --primary-soft: #111111;
-  --accent: #e2e0e0;
-  --accent-secondary: #e2e0e0;
+  --accent: #F66856;
   --accent-success: #58bc82;
-  --line: #2a2a2a;
-  --line-light: #404040;
+  --line: #d0d0d0;
+  --line-light: #e5e5e5;
   --header-control-height: 36px;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -72,16 +71,10 @@
   --color-accent: var(--accent);
   --color-line: var(--line);
   --font-sans: "CreatoDisplay", sans-serif;
-  --font-mono: var(--font-geist-mono);
 }
 
 body {
-  /* Fundo com gradiente */
-  background: #EBECE6;
-  background: #EBECE6;
-  background: #EBECE6;
-  background: #EBECE6;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#EBECE6", endColorstr="#EBECE6", GradientType=0);
+  background: var(--background);
   color: var(--foreground);
   font-family: "CreatoDisplay", sans-serif;
   font-weight: 400;
@@ -101,16 +94,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Garante contraste consistente ao forçar texto branco nos elementos principais da interface. */
-body p,
-body span,
-body a,
-body li,
-body label,
-body small,
-body strong,
-body em {
-  color: var(--foreground) !important;
+/* Garante contraste mínimo no corpo de texto para fundo claro. */
+body {
+  color: var(--foreground);
 }
 
 /* Permite texto branco nos cards mesmo com regra global */
