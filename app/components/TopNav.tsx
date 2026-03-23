@@ -55,17 +55,15 @@ export default function TopNav() {
           return (
             <Link
               key={item.href}
-              className={`relative pb-2 text-[14px] lg:text-[16px] font-semibold transition min-h-[44px] flex items-center ${
-                isActive
-                  ? "text-white"
-                  : "text-white hover:text-white"
+              className={`relative pb-2 text-[14px] lg:text-[16px] font-semibold transition min-h-[44px] flex items-center text-black/80 hover:text-black ${
+                isActive ? "text-black" : ""
               }`}
               href={item.href}
             >
               {item.label}
 
               {isActive ? (
-                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-white" />
+                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[#F66856]" />
               ) : null}
             </Link>
           );
