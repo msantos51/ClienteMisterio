@@ -8,6 +8,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HeaderActions from "./HeaderActions";
 import TopNav from "./TopNav";
+import Footer from "./Footer";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -43,6 +44,8 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <main className={isHomePage ? "px-0 pb-0" : "px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10"}>
         {isHomePage ? children : <div className="mx-auto w-full max-w-6xl">{children}</div>}
       </main>
+
+      <Footer />
     </div>
   );
 }
