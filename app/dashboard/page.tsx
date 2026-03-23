@@ -13,11 +13,7 @@ type UserProfile = {
   fullName: string;
   email: string;
   birthDate: string;
-  city: string;
   gender: string;
-  educationLevel: string;
-  nationalId: string;
-  hasNationalId: boolean;
   profileCompleted: boolean;
   isAdmin: boolean;
 };
@@ -40,7 +36,7 @@ type PasswordForm = {
   confirmNewPassword: string;
 };
 
-type StoredUserProfile = Pick<UserProfile, "email" | "nationalId" | "birthDate">;
+type StoredUserProfile = Pick<UserProfile, "email" | "birthDate">;
 
 type DashboardSection = "account" | "security" | "preferences";
 
@@ -51,10 +47,7 @@ type ProfileResponse = {
     fullName: string;
     email: string;
     birthDate: string | null;
-    city: string | null;
     gender: string | null;
-    educationLevel: string | null;
-    hasNationalId: boolean;
     profileCompleted: boolean;
     isAdmin: boolean;
   };
@@ -69,41 +62,12 @@ const userStorageKey = "vp_user";
 const sessionStorageKey = "vp_session";
 const preferencesStorageKey = "vp_preferences";
 
-const educationOptions = [
-  { value: "6th_grade", label: "6º Ano" },
-  { value: "9th_grade", label: "9º Ano" },
-  { value: "12th_grade", label: "12º Ano" },
-  { value: "bachelor", label: "Licenciatura" },
-  { value: "master", label: "Mestrado" },
-  { value: "doctorate", label: "Doutoramento" },
-];
 
 const dashboardSections: Array<{ id: DashboardSection; label: string; description: string }> = [
   { id: "account", label: "Conta", description: "Dados pessoais e perfil" },
   { id: "security", label: "Segurança", description: "Palavra-passe e acesso" },
   { id: "preferences", label: "Preferências", description: "Comunicações e notificações" },
 ];
-
-const getStoredNationalId = (email: string) => {
-  // Reutiliza o NIF previamente guardado no browser para o mesmo e-mail.
-  const storedUserRaw = localStorage.getItem(userStorageKey);
-
-  if (!storedUserRaw) {
-    return "";
-  }
-
-  try {
-    const storedUser = JSON.parse(storedUserRaw) as StoredUserProfile;
-
-    if (storedUser.email === email) {
-      return storedUser.nationalId ?? "";
-    }
-  } catch {
-    return "";
-  }
-
-  return "";
-};
 
 const normalizeBirthDateForInput = (birthDate: string | null, email: string) => {
   // Garante formato YYYY-MM-DD no input date e usa fallback local quando necessário.
@@ -157,7 +121,7 @@ export default function DashboardPage() {
       return false;
     }
 
-    return !profile.profileCompleted || !profile.hasNationalId;
+    return !profile.profileCompleted;
   }, [profile]);
 
   useEffect(() => {
@@ -191,11 +155,7 @@ export default function DashboardPage() {
           fullName: data.user.fullName,
           email: data.user.email,
           birthDate: normalizeBirthDateForInput(data.user.birthDate, data.user.email),
-          city: data.user.city ?? "",
           gender: data.user.gender ?? "",
-          educationLevel: data.user.educationLevel ?? "",
-          nationalId: getStoredNationalId(data.user.email),
-          hasNationalId: data.user.hasNationalId,
           profileCompleted: data.user.profileCompleted,
           isAdmin: data.user.isAdmin,
         };
@@ -251,9 +211,6 @@ export default function DashboardPage() {
     setPasswordForm((previous) => ({ ...previous, [field]: value }));
   };
 
-  const hasNationalIdValue = (nationalId: string, hasNationalId: boolean) => {
-    return hasNationalId || nationalId.trim().length > 0;
-  };
 
   const saveProfile = async (isFirstAccessCompletion: boolean) => {
     if (!profile || !sessionEmail) {
@@ -280,10 +237,7 @@ export default function DashboardPage() {
           firstName: profile.firstName,
           lastName: profile.lastName,
           birthDate: profile.birthDate,
-          city: profile.city,
           gender: profile.gender,
-          educationLevel: profile.educationLevel,
-          nationalId: profile.nationalId,
         }),
       });
 
@@ -298,7 +252,6 @@ export default function DashboardPage() {
         ...profile,
         fullName: `${profile.firstName} ${profile.lastName}`.trim(),
         profileCompleted: true,
-        hasNationalId: hasNationalIdValue(profile.nationalId, profile.hasNationalId),
         isAdmin: profile.isAdmin,
       };
 
@@ -324,16 +277,8 @@ export default function DashboardPage() {
 
     setFirstAccessFeedback(null);
 
-    if (
-      !profile.birthDate ||
-      !profile.city ||
-      !profile.gender ||
-      !profile.educationLevel ||
-      !hasNationalIdValue(profile.nationalId, profile.hasNationalId)
-    ) {
-      setFirstAccessFeedback(
-        "Preencha NIF, data de nascimento, cidade, género e habilitações literárias para concluir o primeiro acesso."
-      );
+    if (!profile.birthDate || !profile.gender) {
+      setFirstAccessFeedback("Preencha data de nascimento e género para concluir o primeiro acesso.");
       return;
     }
 
@@ -347,16 +292,8 @@ export default function DashboardPage() {
 
     setProfileFeedback(null);
 
-    if (
-      !profile.birthDate ||
-      !profile.city ||
-      !profile.gender ||
-      !profile.educationLevel ||
-      !hasNationalIdValue(profile.nationalId, profile.hasNationalId)
-    ) {
-      setProfileFeedback(
-        "NIF, data de nascimento, cidade, género e habilitações literárias são obrigatórios."
-      );
+    if (!profile.birthDate || !profile.gender) {
+      setProfileFeedback("Data de nascimento e género são obrigatórios.");
       return;
     }
 
@@ -432,25 +369,10 @@ export default function DashboardPage() {
               Os dados seguintes nunca serão partilhados e servem apenas para fins estatísticos. Este preenchimento é obrigatório para concluir o primeiro acesso.
             </p>
             <p className="mt-3 text-sm font-semibold">
-              Preencha: NIF, data de nascimento, cidade, género e habilitações literárias.
+              Preencha: data de nascimento e género.
             </p>
 
             <div className="mt-4 grid gap-4 md:grid-cols-2">
-              <div className="input-group">
-                <input
-                  inputMode="numeric"
-                  maxLength={9}
-                  placeholder={
-                    profile.hasNationalId
-                      ? "NIF já guardado. Digite apenas para atualizar"
-                      : "Digite o seu NIF (9 dígitos)"
-                  }
-                  value={profile.nationalId}
-                  onChange={(event) => handleProfileChange("nationalId", event.target.value)}
-                />
-                <span className="label">NIF</span>
-              </div>
-
               <div className="input-group">
                 <input
                   type="date"
@@ -458,14 +380,6 @@ export default function DashboardPage() {
                   onChange={(event) => handleProfileChange("birthDate", event.target.value)}
                 />
                 <span className="label">Data de nascimento</span>
-              </div>
-
-              <div className="input-group">
-                <input
-                  value={profile.city}
-                  onChange={(event) => handleProfileChange("city", event.target.value)}
-                />
-                <span className="label">Cidade</span>
               </div>
 
               <div className="input-group">
@@ -478,21 +392,6 @@ export default function DashboardPage() {
                   <option value="female">Feminino</option>
                 </select>
                 <span className="label">Género</span>
-              </div>
-
-              <div className="input-group">
-                <select
-                  value={profile.educationLevel}
-                  onChange={(event) => handleProfileChange("educationLevel", event.target.value)}
-                >
-                  <option value="">Selecione</option>
-                  {educationOptions.map((educationOption) => (
-                    <option key={educationOption.value} value={educationOption.value}>
-                      {educationOption.label}
-                    </option>
-                  ))}
-                </select>
-                <span className="label">Habilitações literárias</span>
               </div>
             </div>
 
@@ -603,34 +502,11 @@ export default function DashboardPage() {
 
                   <div className="input-group">
                     <input
-                      inputMode="numeric"
-                      maxLength={9}
-                      placeholder={
-                        profile.hasNationalId
-                          ? "NIF já guardado. Digite apenas para atualizar"
-                          : "Digite o seu NIF (9 dígitos)"
-                      }
-                      value={profile.nationalId}
-                      onChange={(event) => handleProfileChange("nationalId", event.target.value)}
-                    />
-                    <span className="label">NIF</span>
-                  </div>
-
-                  <div className="input-group">
-                    <input
                       type="date"
                       value={profile.birthDate}
                       onChange={(event) => handleProfileChange("birthDate", event.target.value)}
                     />
                     <span className="label">Data de nascimento</span>
-                  </div>
-
-                  <div className="input-group">
-                    <input
-                      value={profile.city}
-                      onChange={(event) => handleProfileChange("city", event.target.value)}
-                    />
-                    <span className="label">Cidade</span>
                   </div>
 
                   <div className="input-group">
@@ -643,21 +519,6 @@ export default function DashboardPage() {
                       <option value="female">Feminino</option>
                     </select>
                     <span className="label">Género</span>
-                  </div>
-
-                  <div className="input-group">
-                    <select
-                      value={profile.educationLevel}
-                      onChange={(event) => handleProfileChange("educationLevel", event.target.value)}
-                    >
-                      <option value="">Selecione</option>
-                      {educationOptions.map((educationOption) => (
-                        <option key={educationOption.value} value={educationOption.value}>
-                          {educationOption.label}
-                        </option>
-                      ))}
-                    </select>
-                    <span className="label">Habilitações literárias</span>
                   </div>
                 </div>
 

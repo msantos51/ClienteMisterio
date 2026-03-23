@@ -16,9 +16,7 @@ type LoginResponse = {
     fullName: string;
     email: string;
     birthDate: string | null;
-    city: string | null;
     gender: string | null;
-    educationLevel: string | null;
     profileCompleted: boolean;
     isAdmin: boolean;
   };
@@ -30,9 +28,7 @@ type SessionUser = {
   fullName: string;
   email: string;
   birthDate: string;
-  city: string;
   gender: string;
-  educationLevel: string;
   profileCompleted: boolean;
   isAdmin: boolean;
 };
@@ -106,9 +102,7 @@ export default function LoginPage() {
           fullName: data.user.fullName,
           email: data.user.email,
           birthDate: data.user.birthDate ?? "",
-          city: data.user.city ?? "",
           gender: data.user.gender ?? "",
-          educationLevel: data.user.educationLevel ?? "",
           profileCompleted: data.user.profileCompleted,
           isAdmin: data.user.isAdmin,
         };

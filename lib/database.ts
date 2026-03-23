@@ -36,11 +36,8 @@ const initializeDatabase = async (): Promise<void> => {
           last_name text not null,
           full_name text not null,
           email text unique not null,
-          national_id_hash text unique,
           birth_date date,
-          city text,
           gender text,
-          education_level text,
           profile_completed boolean not null default false,
           email_confirmed boolean not null default true,
           email_confirmation_token_hash text,
@@ -84,11 +81,8 @@ const initializeDatabase = async (): Promise<void> => {
       await pool.query("alter table users add column if not exists first_name text");
       await pool.query("alter table users add column if not exists last_name text");
       await pool.query("alter table users add column if not exists full_name text");
-      await pool.query("alter table users add column if not exists national_id_hash text");
       await pool.query("alter table users add column if not exists birth_date date");
-      await pool.query("alter table users add column if not exists city text");
       await pool.query("alter table users add column if not exists gender text");
-      await pool.query("alter table users add column if not exists education_level text");
       await pool.query(
         "alter table users add column if not exists profile_completed boolean not null default false"
       );
@@ -99,11 +93,6 @@ const initializeDatabase = async (): Promise<void> => {
       await pool.query("alter table users add column if not exists password_reset_expires_at timestamptz");
       await pool.query(
         "alter table users add column if not exists is_admin boolean not null default false"
-      );
-
-      // Garante unicidade por NIF hash mesmo em bases de dados antigas.
-      await pool.query(
-        "create unique index if not exists users_national_id_hash_unique on users (national_id_hash) where national_id_hash is not null"
       );
 
       await pool.query(
