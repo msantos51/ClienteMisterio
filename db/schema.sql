@@ -10,12 +10,8 @@ create table if not exists users (
   last_name text not null,
   full_name text not null,
   email text unique not null,
-  national_id_hash text unique,
   birth_date date,
-  city text,
-  interest text,
   gender text,
-  education_level text,
   profile_completed boolean not null default false,
   email_confirmed boolean not null default true,
   email_confirmation_token_hash text,
@@ -26,11 +22,6 @@ create table if not exists users (
   password_hash text not null,
   created_at timestamptz not null default now()
 );
-
--- Índice único para garantir 1 registo por pessoa (via hash do NIF).
-create unique index if not exists users_national_id_hash_unique
-  on users (national_id_hash)
-  where national_id_hash is not null;
 
 -- Tabela de progresso do curso com estado de cada módulo por utilizador.
 create table if not exists course_progress (

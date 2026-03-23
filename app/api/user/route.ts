@@ -5,7 +5,6 @@
 import { NextResponse } from "next/server";
 
 import { query } from "@/lib/database";
-import { hashNationalId, isValidNationalIdFormat, normalizeNationalId } from "@/lib/identity";
 import { getSession } from "@/lib/session";
 
 type UserRow = {
@@ -15,12 +14,9 @@ type UserRow = {
   full_name: string;
   email: string;
   birth_date: string | null;
-  city: string | null;
   gender: string | null;
-  education_level: string | null;
   profile_completed: boolean;
   is_admin: boolean;
-  national_id_hash: string | null;
 };
 
 type UpdatePayload = {
@@ -28,21 +24,10 @@ type UpdatePayload = {
   firstName: string;
   lastName: string;
   birthDate: string;
-  city: string;
   gender: string;
-  educationLevel: string;
-  nationalId?: string;
 };
 
 const allowedGender = ["male", "female"];
-const allowedEducationLevels = [
-  "6th_grade",
-  "9th_grade",
-  "12th_grade",
-  "bachelor",
-  "master",
-  "doctorate",
-];
 
 export const GET = async () => {
   // Devolve o perfil do utilizador autenticado com base na sessão server-side.
@@ -56,7 +41,7 @@ export const GET = async () => {
   }
 
   const result = await query<UserRow>(
-    "select id, first_name, last_name, full_name, email, birth_date, city, gender, education_level, profile_completed, is_admin, national_id_hash from users where id = $1",
+    "select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin from users where id = $1",
     [session.userId]
   );
 
@@ -72,12 +57,9 @@ export const GET = async () => {
       fullName: result.rows[0].full_name,
       email: result.rows[0].email,
       birthDate: result.rows[0].birth_date,
-      city: result.rows[0].city,
       gender: result.rows[0].gender,
-      educationLevel: result.rows[0].education_level,
       profileCompleted: result.rows[0].profile_completed,
       isAdmin: result.rows[0].is_admin,
-      hasNationalId: Boolean(result.rows[0].national_id_hash),
     },
   });
 };
@@ -102,62 +84,15 @@ export const PUT = async (request: Request) => {
     );
   }
 
-  if (!payload.birthDate || !payload.city || !payload.gender || !payload.educationLevel) {
+  if (!payload.birthDate || !payload.gender) {
     return NextResponse.json(
-      { message: "Data de nascimento, cidade, género e habilitações são obrigatórios." },
+      { message: "Data de nascimento e género são obrigatórios." },
       { status: 400 }
     );
   }
 
   if (!allowedGender.includes(payload.gender)) {
     return NextResponse.json({ message: "Género inválido." }, { status: 400 });
-  }
-
-  if (!allowedEducationLevels.includes(payload.educationLevel)) {
-    return NextResponse.json(
-      { message: "Habilitação literária inválida." },
-      { status: 400 }
-    );
-  }
-
-  const currentUser = await query<Pick<UserRow, "national_id_hash">>(
-    "select national_id_hash from users where id = $1",
-    [session.userId]
-  );
-
-  if (!currentUser.rows[0]) {
-    return NextResponse.json({ message: "Utilizador não encontrado." }, { status: 404 });
-  }
-
-  const normalizedNationalId = normalizeNationalId(payload.nationalId ?? "");
-  let nationalIdHash = currentUser.rows[0].national_id_hash;
-
-  if (normalizedNationalId) {
-    if (!isValidNationalIdFormat(normalizedNationalId)) {
-      return NextResponse.json(
-        { message: "O NIF deve conter exatamente 9 dígitos." },
-        { status: 400 }
-      );
-    }
-
-    nationalIdHash = hashNationalId(normalizedNationalId);
-
-    const conflictingNationalId = await query<UserRow>(
-      "select id from users where national_id_hash = $1 and id <> $2",
-      [nationalIdHash, session.userId]
-    );
-
-    if (conflictingNationalId.rowCount) {
-      return NextResponse.json(
-        { message: "Já existe uma conta associada a este NIF." },
-        { status: 409 }
-      );
-    }
-  } else if (!nationalIdHash) {
-    return NextResponse.json(
-      { message: "O NIF é obrigatório para concluir o perfil." },
-      { status: 400 }
-    );
   }
   const normalizedEmail = payload.email.trim().toLowerCase();
 
@@ -184,22 +119,16 @@ export const PUT = async (request: Request) => {
          full_name = $3,
          email = $4,
          birth_date = $5,
-         city = $6,
-         gender = $7,
-         education_level = $8,
-         national_id_hash = $9,
+         gender = $6,
          profile_completed = true
-     where id = $10`,
+     where id = $7`,
     [
       firstName,
       lastName,
       fullName,
       normalizedEmail,
       payload.birthDate,
-      payload.city.trim(),
       payload.gender,
-      payload.educationLevel,
-      nationalIdHash,
       session.userId,
     ]
   );
