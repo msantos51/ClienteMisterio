@@ -15,7 +15,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const isHomePage = pathname === "/";
 
   return (
-    <div className="mx-auto min-h-screen w-full bg-transparent">
+    <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
       {/* Mantém o cabeçalho absoluto na home para sobrepor o hero, e sticky nas páginas internas. */}
       <header
         className="sticky top-0 z-50 border-b border-white/20 bg-transparent px-3 py-4 backdrop-blur-[2px] sm:px-6 md:px-10 md:py-6"
@@ -41,7 +41,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Remove margens na home para permitir hero full-bleed e mantém paddings nas páginas internas. */}
-      <main className={isHomePage ? "px-0 pb-0" : "px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10"}>
+      <main className={isHomePage ? "flex-1 px-0 pb-0" : "flex-1 px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10"}>
         {isHomePage ? children : <div className="mx-auto w-full max-w-6xl">{children}</div>}
       </main>
 
