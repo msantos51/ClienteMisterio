@@ -15,7 +15,7 @@ export default function AboutPage() {
   return (
     <section className="space-y-8 sm:space-y-12 pb-4">
       {/* Mantém a estrutura de duas colunas sem cartão branco para seguir o estilo da landing page. */}
-      <article className="grid w-full gap-6 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <article className="w-full">
         {/* Preserva o conteúdo da página e ajusta a hierarquia para texto branco com destaques amarelos. */}
         <div className="space-y-4 sm:space-y-6">
           <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
@@ -26,18 +26,18 @@ export default function AboutPage() {
             Atua com método e consistência
           </h1>
 
-          <p className="max-w-2xl text-sm sm:text-base leading-6 sm:leading-7">
+          <p className="text-sm sm:text-base leading-6 sm:leading-7">
             Um Cliente Mistério é um cliente "normal" contratado para avaliar serviços
             (atendimento, rapidez, qualidade e cumprimento de regras) e, ao mesmo tempo, gerar
             rendimento extra por cada avaliação realizada.
           </p>
 
-          <p className="max-w-2xl text-sm sm:text-base leading-6 sm:leading-7">
+          <p className="text-sm sm:text-base leading-6 sm:leading-7">
             Quanto melhor e mais consistente fores, mais convites costumas receber para novas
             visitas e análises.
           </p>
 
-          <p className="max-w-2xl text-sm sm:text-base leading-6 sm:leading-7">
+          <p className="text-sm sm:text-base leading-6 sm:leading-7">
             Neste curso, vais aprender do básico ao avançado como fazer visitas sem falhas,
             entregar relatórios profissionais e aumentar a tua taxa de aprovação para
             transformares isto num extra mensal realista.
