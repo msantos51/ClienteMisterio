@@ -105,6 +105,12 @@ npm start
 
 A base de dados é inicializada automaticamente na primeira execução (`lib/database.ts` cria as tabelas se não existirem).
 
+## Swagger (Teste no Browser)
+
+Com a aplicação em execução (`npm run dev`), abra: `http://localhost:3000/api-docs`
+
+Esta página carrega o Swagger UI e permite testar os endpoints manualmente no browser.
+
 ## Rotas da API
 
 | Método | Endpoint | Descrição |
