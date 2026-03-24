@@ -45,6 +45,8 @@ const initializeDatabase = async (): Promise<void> => {
           password_reset_token_hash text,
           password_reset_expires_at timestamptz,
           is_admin boolean not null default false,
+          has_course_access boolean not null default false,
+          course_access_granted_at timestamptz,
           password_hash text not null,
           created_at timestamptz not null default now()
         )
@@ -59,6 +61,22 @@ const initializeDatabase = async (): Promise<void> => {
           message text not null,
           email_delivery_status text not null default 'pending',
           email_delivery_error text,
+          created_at timestamptz not null default now()
+        )
+      `);
+
+
+      await pool.query(`
+        create table if not exists course_purchases (
+          id uuid primary key default gen_random_uuid(),
+          user_id uuid not null references users(id) on delete cascade,
+          stripe_event_id text unique not null,
+          stripe_checkout_session_id text unique not null,
+          stripe_payment_intent_id text,
+          stripe_customer_email text not null,
+          amount_total integer not null,
+          currency text not null,
+          paid_at timestamptz not null default now(),
           created_at timestamptz not null default now()
         )
       `);
@@ -97,6 +115,15 @@ const initializeDatabase = async (): Promise<void> => {
 
       await pool.query(
         "create index if not exists contact_messages_created_at_idx on contact_messages(created_at desc)"
+      );
+
+      await pool.query(
+        "alter table users add column if not exists has_course_access boolean not null default false"
+      );
+      await pool.query("alter table users add column if not exists course_access_granted_at timestamptz");
+
+      await pool.query(
+        "create index if not exists course_purchases_user_paid_at_idx on course_purchases(user_id, paid_at desc)"
       );
 
       // Converte contas antigas para o novo formato de nome para evitar dados incompletos.

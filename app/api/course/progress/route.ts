@@ -5,6 +5,7 @@
 import { NextResponse } from "next/server";
 
 import { query } from "@/lib/database";
+import { hasUserCourseAccess } from "@/lib/courseAccess";
 import { getSession } from "@/lib/session";
 
 type CourseProgressRow = {
@@ -30,6 +31,17 @@ export const GET = async () => {
     return NextResponse.json(
       { message: "É necessário iniciar sessão." },
       { status: 401 }
+    );
+  }
+
+
+
+  const hasCourseAccess = await hasUserCourseAccess(session.userId);
+
+  if (!hasCourseAccess) {
+    return NextResponse.json(
+      { message: "É necessário concluir o pagamento para aceder ao curso." },
+      { status: 403 }
     );
   }
 
@@ -63,6 +75,15 @@ export const PUT = async (request: Request) => {
     return NextResponse.json(
       { message: "É necessário iniciar sessão." },
       { status: 401 }
+    );
+  }
+
+  const hasCourseAccess = await hasUserCourseAccess(session.userId);
+
+  if (!hasCourseAccess) {
+    return NextResponse.json(
+      { message: "É necessário concluir o pagamento para aceder ao curso." },
+      { status: 403 }
     );
   }
 
