@@ -115,7 +115,7 @@ export default function CoursePage() {
       </header>
 
       {/* Preço e CTA */}
-      <div className="flex flex-col items-center gap-4 rounded-2xl bg-white p-6 sm:p-8 text-center">
+      <div className="flex flex-col items-center gap-3 rounded-2xl bg-white px-6 py-4 sm:px-10 sm:py-6 text-center">
         <div className="w-full space-y-1 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 text-center">Acesso Completo ao Curso</p>
           <p className="text-5xl font-bold text-center" style={{ color: "#F66856" }}>19,99€</p>
