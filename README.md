@@ -142,3 +142,11 @@ Configura as variáveis de ambiente no painel do Render antes do primeiro deploy
 ## Licença
 
 Todos os direitos reservados © Cliente Mistério. O conteúdo do curso e a plataforma não podem ser reproduzidos ou distribuídos sem autorização expressa.
+
+## Diretrizes de Escrita do Curso
+
+1. Sempre que o conteúdo do curso for apresentado em formato de pontos, cada ideia deve aparecer num parágrafo separado e numerado, em vez de texto corrido.
+
+2. Termos essenciais podem ser destacados com **negrito** para melhorar a leitura e a hierarquia visual do conteúdo.
+
+3. Evitar o uso de emojis, ícones e travessões como marcador de lista para manter uma apresentação mais natural e editorial.
