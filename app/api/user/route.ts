@@ -17,6 +17,7 @@ type UserRow = {
   gender: string | null;
   profile_completed: boolean;
   is_admin: boolean;
+  has_course_access: boolean;
 };
 
 type UpdatePayload = {
@@ -41,7 +42,7 @@ export const GET = async () => {
   }
 
   const result = await query<UserRow>(
-    "select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin from users where id = $1",
+    "select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin, has_course_access from users where id = $1",
     [session.userId]
   );
 
@@ -60,6 +61,7 @@ export const GET = async () => {
       gender: result.rows[0].gender,
       profileCompleted: result.rows[0].profile_completed,
       isAdmin: result.rows[0].is_admin,
+      hasCourseAccess: result.rows[0].has_course_access,
     },
   });
 };

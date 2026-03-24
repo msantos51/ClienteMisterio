@@ -23,6 +23,7 @@ type UserRow = {
   gender: string | null;
   profile_completed: boolean;
   is_admin: boolean;
+  has_course_access: boolean;
   password_hash: string;
 };
 
@@ -39,7 +40,7 @@ export const POST = async (request: Request) => {
 
   const normalizedEmail = payload.email.trim().toLowerCase();
   const result = await query<UserRow>(
-    `select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin, password_hash
+    `select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin, has_course_access, password_hash
      from users
      where email = $1`,
     [normalizedEmail]

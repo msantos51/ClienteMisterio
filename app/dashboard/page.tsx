@@ -16,6 +16,7 @@ type UserProfile = {
   gender: string;
   profileCompleted: boolean;
   isAdmin: boolean;
+  hasCourseAccess: boolean;
 };
 
 type CourseProgressData = {
@@ -50,6 +51,7 @@ type ProfileResponse = {
     gender: string | null;
     profileCompleted: boolean;
     isAdmin: boolean;
+    hasCourseAccess: boolean;
   };
   message?: string;
 };
@@ -158,6 +160,7 @@ export default function DashboardPage() {
           gender: data.user.gender ?? "",
           profileCompleted: data.user.profileCompleted,
           isAdmin: data.user.isAdmin,
+          hasCourseAccess: data.user.hasCourseAccess,
         };
 
         setProfile(normalizedProfile);
@@ -412,42 +415,60 @@ export default function DashboardPage() {
           <p className="mt-2 text-sm !text-black">Faça a gestão da sua conta e segurança.</p>
         </header>
 
-        {/* Secção do curso com barra de progresso */}
-        <div
-          className="dashboard-top-banner cursor-pointer transition-all hover:shadow-lg"
-          onClick={() => router.push("/curso")}
-          role="link"
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === "Enter") router.push("/curso"); }}
-        >
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <h2 className="text-lg font-bold !text-black">Curso de Cliente Mistério</h2>
-              <p className="text-xs !text-slate-500 mt-0.5">
-                {courseProgress
-                  ? courseProgress.completedCount === courseProgress.totalModules
-                    ? "Curso concluído — Parabéns!"
-                    : `${courseProgress.completedCount} de ${courseProgress.totalModules} módulos concluídos`
-                  : "Inicie a sua formação profissional"}
-              </p>
+        {/* Secção do curso com barra de progresso apenas para contas com pagamento confirmado. */}
+        {profile.hasCourseAccess ? (
+          <div
+            className="dashboard-top-banner cursor-pointer transition-all hover:shadow-lg"
+            onClick={() => router.push("/curso")}
+            role="link"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                router.push("/curso");
+              }
+            }}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <h2 className="text-lg font-bold !text-black">Curso de Cliente Mistério</h2>
+                <p className="text-xs !text-slate-500 mt-0.5">
+                  {courseProgress
+                    ? courseProgress.completedCount === courseProgress.totalModules
+                      ? "Curso concluído — Parabéns!"
+                      : `${courseProgress.completedCount} de ${courseProgress.totalModules} módulos concluídos`
+                    : "Inicie a sua formação profissional"}
+                </p>
+              </div>
+              <span className="text-2xl font-bold" style={{ color: "#F66856" }}>
+                {courseProgress?.progressPercent ?? 0}%
+              </span>
             </div>
-            <span className="text-2xl font-bold" style={{ color: "#F66856" }}>
-              {courseProgress?.progressPercent ?? 0}%
-            </span>
+            <div className="h-3 w-full rounded-full bg-slate-200 overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-700"
+                style={{
+                  width: `${courseProgress?.progressPercent ?? 0}%`,
+                  background: "linear-gradient(90deg, #F66856, #F66856)",
+                }}
+              />
+            </div>
+            <p className="mt-2 text-xs !text-slate-400 text-right">Clique para continuar o curso &rarr;</p>
           </div>
-          <div className="h-3 w-full rounded-full bg-slate-200 overflow-hidden">
-            <div
-              className="h-full rounded-full transition-all duration-700"
-              style={{
-                width: `${courseProgress?.progressPercent ?? 0}%`,
-                background: "linear-gradient(90deg, #F66856, #F66856)",
-              }}
-            />
+        ) : (
+          <div className="dashboard-top-banner">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-lg font-bold !text-black">Curso de Cliente Mistério</h2>
+                <p className="text-xs !text-slate-500 mt-0.5">
+                  O curso será disponibilizado automaticamente após confirmação do pagamento.
+                </p>
+              </div>
+              <button className="submit max-w-[180px]" type="button" onClick={() => router.push("/checkout")}>
+                Efetuar pagamento
+              </button>
+            </div>
           </div>
-          <p className="mt-2 text-xs !text-slate-400 text-right">
-            Clique para continuar o curso &rarr;
-          </p>
-        </div>
+        )}
 
         <div className="dashboard-layout-shell">
           <aside className="dashboard-sidebar">
