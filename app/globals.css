@@ -1005,14 +1005,14 @@ select {
 }
 
 /* Melhor contraste em links dentro do conteúdo */
-main a:not(.site-pill-button):not(.button-size-login):not(.form-link) {
+main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-pill-button-secondary) {
   color: #000000;
   text-decoration: none;
   border-bottom: 1px solid rgba(246, 104, 86, 0.3);
   transition: all 0.3s ease;
 }
 
-main a:not(.site-pill-button):not(.button-size-login):not(.form-link):hover {
+main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-pill-button-secondary):hover {
   border-bottom-color: rgba(246, 104, 86, 0.8);
   color: #000000;
 }
