@@ -12,7 +12,7 @@ const stripeWebhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const stripeClient = stripeSecretKey
   ? new Stripe(stripeSecretKey, {
-      apiVersion: "2024-06-20",
+      apiVersion: "2024-04-10",
     })
   : null;
 
