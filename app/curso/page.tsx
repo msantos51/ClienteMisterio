@@ -290,10 +290,18 @@ export default function CursoPage() {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [accessDenied, setAccessDenied] = useState(false);
 
   const loadProgress = useCallback(async () => {
+    setAccessDenied(false);
+
     try {
       const response = await fetch("/api/course/progress", { credentials: "include" });
+      if (response.status === 403) {
+        setAccessDenied(true);
+        return;
+      }
+
       if (response.ok) {
         const data = (await response.json()) as ProgressData;
         setProgress(data);
@@ -406,6 +414,29 @@ export default function CursoPage() {
 
   if (!isAuthenticated) {
     return <p className="text-sm text-slate-500">A verificar sessão...</p>;
+  }
+
+  if (accessDenied) {
+    return (
+      <section className="w-full space-y-6 bg-white p-8 rounded-2xl">
+        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">Curso de Cliente Mistério</h1>
+        <p className="text-base text-[#2a2a2a]">
+          O acesso ao curso só fica disponível após confirmação do pagamento.
+        </p>
+        <div className="flex gap-3">
+          <button className="submit max-w-[220px]" type="button" onClick={() => router.push("/checkout")}>
+            Ir para pagamento
+          </button>
+          <button
+            className="site-pill-button-secondary max-w-[220px]"
+            type="button"
+            onClick={() => router.push("/dashboard")}
+          >
+            Voltar ao dashboard
+          </button>
+        </div>
+      </section>
+    );
   }
 
   const activeModule = activeModuleId ? courseModules.find((m) => m.id === activeModuleId) : null;

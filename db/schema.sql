@@ -19,6 +19,8 @@ create table if not exists users (
   password_reset_token_hash text,
   password_reset_expires_at timestamptz,
   is_admin boolean not null default false,
+  has_course_access boolean not null default false,
+  course_access_granted_at timestamptz,
   password_hash text not null,
   created_at timestamptz not null default now()
 );
@@ -35,3 +37,20 @@ create table if not exists course_progress (
   created_at timestamptz not null default now(),
   unique(user_id, module_id)
 );
+
+
+-- Tabela de compras para auditar pagamentos e associar o curso ao utilizador.
+create table if not exists course_purchases (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references users(id) on delete cascade,
+  stripe_event_id text unique not null,
+  stripe_checkout_session_id text unique not null,
+  stripe_payment_intent_id text,
+  stripe_customer_email text not null,
+  amount_total integer not null,
+  currency text not null,
+  paid_at timestamptz not null default now(),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists course_purchases_user_paid_at_idx on course_purchases(user_id, paid_at desc);
