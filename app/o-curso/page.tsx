@@ -102,24 +102,24 @@ export default function CoursePage() {
 
   return (
     <section className="w-full space-y-8">
-      <header className="space-y-3">
+      <header className="w-full rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
           Formação completa
         </p>
 
         <h1 className="text-3xl font-semibold home-title-highlight-text sm:text-4xl lg:text-5xl">O Curso de Cliente Mistério</h1>
 
-        <p className="max-w-3xl text-sm sm:text-base leading-6 sm:leading-7">
+        <p className="max-w-4xl text-sm sm:text-base leading-6 sm:leading-7">
           Um curso completo, 100% prático e desenhado para INICIANTES. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
         </p>
       </header>
 
       {/* Preço e CTA */}
-      <div className="flex flex-col items-center gap-3 rounded-2xl bg-white px-6 py-4 sm:px-10 sm:py-6 text-center">
-        <div className="w-full space-y-1 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 text-center">Acesso Completo ao Curso</p>
+      <div className="mx-auto inline-flex w-auto flex-col items-center gap-3 rounded-2xl bg-white px-6 py-4 sm:px-10 sm:py-6 text-center">
+        <div className="space-y-1 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black text-center">Acesso Completo ao Curso</p>
           <p className="text-5xl font-bold text-center" style={{ color: "#F66856" }}>19,99€</p>
-          <p className="text-sm text-gray-400 text-center">Pagamento único · Acesso vitalício</p>
+          <p className="text-sm text-black text-center">Pagamento único · Acesso vitalício</p>
         </div>
         <CheckoutButton label="Comprar Curso Completo" />
       </div>
