@@ -4,17 +4,17 @@ const benefits = [
   {
     icon: "📋",
     title: "Aprende",
-    description: "10 módulos práticos do básico ao avançado — conceitos, ética, metodologia e relatórios profissionais.",
+    description: "Curso 100% online, ao teu ritmo e sem horários definidos. Aprende quando quiseres, com total flexibilidade.",
   },
   {
     icon: "🎯",
     title: "Pratica",
-    description: "Checklists reais, cenários do terreno e técnicas para passares despercebido em qualquer avaliação.",
+    description: "10 módulos práticos do básico ao avançado — conceitos, ética, metodologia e relatórios profissionais.",
   },
   {
     icon: "💶",
     title: "Ganha",
-    description: "5€ a 150€+ por missão. Flexibilidade total, sem patrão. Começa a ganhar já no primeiro mês.",
+    description: "15€ a 150€ por missão. Avalia hotéis, restaurantes, lojas e outros negócios. Todos os custos são totalmente suportados pelas marcas.",
   },
 ];
 
