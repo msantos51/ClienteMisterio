@@ -124,6 +124,7 @@ Esta página carrega o Swagger UI e permite testar os endpoints manualmente no b
 | GET | `/api/user` | Obter perfil do utilizador autenticado |
 | PUT | `/api/user` | Atualizar dados de perfil |
 | PUT | `/api/user/password` | Alterar senha |
+| PUT | `/api/admin/course-access` | Atualizar manualmente acesso pago ao curso (admin) |
 | POST | `/api/contact` | Enviar mensagem de contacto |
 | GET | `/api/course/progress` | Progresso do curso do utilizador |
 

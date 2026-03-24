@@ -19,6 +19,7 @@ export const openApiDocument = {
   tags: [
     { name: "Auth", description: "Registo, login, logout e recuperação de password." },
     { name: "User", description: "Gestão de perfil e palavra-passe." },
+    { name: "Admin", description: "Operações administrativas de gestão de acessos." },
     { name: "Course", description: "Gestão de progresso do curso." },
     { name: "Contact", description: "Envio de mensagens de contacto." },
     { name: "Stripe", description: "Integração de webhook Stripe." },
@@ -94,6 +95,14 @@ export const openApiDocument = {
           confirmNewPassword: { type: "string", format: "password", example: "NewPass123" },
         },
         required: ["currentPassword", "newPassword", "confirmNewPassword"],
+      },
+      AdminCourseAccessUpdateRequest: {
+        type: "object",
+        properties: {
+          email: { type: "string", format: "email", example: "joao@example.com" },
+          hasCourseAccess: { type: "boolean", example: true },
+        },
+        required: ["email", "hasCourseAccess"],
       },
       ContactRequest: {
         type: "object",
@@ -269,6 +278,30 @@ export const openApiDocument = {
           "200": { description: "Password atualizada com sucesso." },
           "400": { description: "Dados inválidos.", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } },
           "401": { description: "Sem sessão válida ou password atual incorreta.", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } },
+        },
+      },
+    },
+    "/api/admin/course-access": {
+      put: {
+        tags: ["Admin"],
+        summary: "Alterar manualmente estado de pagamento/acesso ao curso por utilizador",
+        description:
+          "Endpoint destinado a administradores para ativar/desativar hasCourseAccess através do e-mail do utilizador.",
+        security: [{ sessionCookie: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: { $ref: "#/components/schemas/AdminCourseAccessUpdateRequest" },
+            },
+          },
+        },
+        responses: {
+          "200": { description: "Acesso atualizado com sucesso." },
+          "400": { description: "Dados inválidos.", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } },
+          "401": { description: "Sem sessão válida.", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } },
+          "403": { description: "Utilizador sem permissão de administrador.", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } },
+          "404": { description: "Utilizador alvo não encontrado.", content: { "application/json": { schema: { $ref: "#/components/schemas/ErrorResponse" } } } },
         },
       },
     },
