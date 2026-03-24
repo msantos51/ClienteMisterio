@@ -115,13 +115,15 @@ export default function CoursePage() {
       </header>
 
       {/* Preço e CTA */}
-      <div className="mx-auto inline-flex w-auto flex-col items-center gap-3 rounded-2xl bg-white px-6 py-4 sm:px-10 sm:py-6 text-center">
-        <div className="space-y-1 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black text-center">Acesso Completo ao Curso</p>
-          <p className="text-5xl font-bold text-center" style={{ color: "#F66856" }}>19,99€</p>
-          <p className="text-sm text-black text-center">Pagamento único · Acesso vitalício</p>
+      <div className="flex w-full justify-center">
+        <div className="w-full max-w-md rounded-2xl bg-white px-6 py-4 sm:px-10 sm:py-6 text-center">
+          <div className="space-y-1 text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black text-center">Acesso Completo ao Curso</p>
+            <p className="text-5xl font-bold text-center" style={{ color: "#F66856" }}>19,99€</p>
+            <p className="text-sm text-black text-center">Pagamento único · Acesso vitalício</p>
+          </div>
+          <CheckoutButton label="Comprar Curso Completo" />
         </div>
-        <CheckoutButton label="Comprar Curso Completo" />
       </div>
 
       {/* Benefícios do curso */}
