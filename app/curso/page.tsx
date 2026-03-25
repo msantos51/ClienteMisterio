@@ -814,9 +814,12 @@ export default function CursoPage() {
               Responda a todas as questões. Necessita de 60% para concluir o módulo.
             </p>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               {activeModule.quiz.map((question, qIdx) => (
-                <div key={question.id} className="space-y-3">
+                <div
+                  key={question.id}
+                  className="space-y-3 rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 sm:p-5"
+                >
                   <p className="font-semibold text-sm text-[#2a2a2a]">
                     {qIdx + 1}. {question.question}
                   </p>
