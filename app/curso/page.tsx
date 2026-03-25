@@ -34,6 +34,91 @@ type TheorySupportContent = {
 const sessionStorageKey = "vp_session";
 
 /*
+ * DESCRIÇÃO DA CONSTANTE: Lista de siglas válidas que devem manter maiúsculas.
+ */
+const acronymWhitelist = new Set(["NPS", "SMS", "PDF", "JPG", "LED", "KPI", "FAQ", "URL", "APP", "API", "RH", "CV"]);
+
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Suaviza palavras totalmente em maiúsculas para melhorar leitura,
+ * preservando siglas comuns e texto curto.
+ */
+const softenAllCapsWords = (text: string) =>
+  text.replace(/\b\p{Lu}{4,}\b/gu, (word) => {
+    if (acronymWhitelist.has(word)) {
+      return word;
+    }
+
+    return `${word[0]}${word.slice(1).toLowerCase()}`;
+  });
+
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Divide parágrafos longos em blocos menores mantendo sequência textual.
+ */
+const splitLongParagraph = (text: string): string[] => {
+  const sentenceCandidates = text
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+
+  if (sentenceCandidates.length < 4) {
+    return [text];
+  }
+
+  const chunks: string[] = [];
+
+  for (let i = 0; i < sentenceCandidates.length; i += 2) {
+    chunks.push(sentenceCandidates.slice(i, i + 2).join(" "));
+  }
+
+  return chunks;
+};
+
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Converte texto corrido com enumerações "(1) ... (2) ..."
+ * em estrutura visual com lista e aplica melhorias de legibilidade em todos os módulos.
+ */
+const renderTheoryBlock = (paragraph: string, index: number) => {
+  const normalizedParagraph = softenAllCapsWords(paragraph);
+  const enumerationRegex = /\(\d+\)\s/g;
+  const matches = [...normalizedParagraph.matchAll(enumerationRegex)];
+
+  if (matches.length < 2) {
+    const paragraphChunks = splitLongParagraph(normalizedParagraph);
+
+    return (
+      <div key={index} className="space-y-3">
+        {paragraphChunks.map((chunk) => (
+          <p key={`${index}-${chunk}`} className="text-base leading-8 text-[#2a2a2a]">
+            {chunk}
+          </p>
+        ))}
+      </div>
+    );
+  }
+
+  const introText = normalizedParagraph.slice(0, matches[0].index).trim();
+  const items = matches.map((match, itemIndex) => {
+    const itemStart = match.index ?? 0;
+    const contentStart = itemStart + match[0].length;
+    const nextItemStart = matches[itemIndex + 1]?.index ?? normalizedParagraph.length;
+    const itemText = normalizedParagraph.slice(contentStart, nextItemStart).trim();
+
+    return itemText;
+  });
+
+  return (
+    <div key={index} className="space-y-3">
+      {introText && <p className="text-base leading-8 text-[#2a2a2a]">{introText}</p>}
+      <ul className="list-disc pl-6 space-y-2 text-base leading-8 text-[#2a2a2a]">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+/*
  * DESCRIÇÃO DO BLOCO: Conteúdo premium adicional por módulo para tornar a formação mais prática e diferenciadora.
  */
 const moduleSupportContent: Record<number, TheorySupportContent> = {
@@ -623,11 +708,7 @@ export default function CursoPage() {
               <p className="text-xs uppercase tracking-[0.16em] text-[#666] font-semibold mb-4">{currentTheoryPage.title}</p>
 
               <div className="space-y-4">
-                {currentTheoryPage.blocks.map((paragraph, idx) => (
-                  <p key={idx} className="text-sm leading-7 text-[#2a2a2a]">
-                    {paragraph}
-                  </p>
-                ))}
+                {currentTheoryPage.blocks.map((paragraph, idx) => renderTheoryBlock(paragraph, idx))}
               </div>
             </div>
 
