@@ -28,60 +28,72 @@ type UserRow = {
 };
 
 export const POST = async (request: Request) => {
-  // Lê o corpo da requisição para validar as credenciais.
-  const payload = (await request.json()) as LoginPayload;
-
-  if (!payload.email || !payload.password) {
-    return NextResponse.json(
-      { message: "Informe o e-mail e a senha para continuar." },
-      { status: 400 }
-    );
-  }
-
-  const normalizedEmail = payload.email.trim().toLowerCase();
-  const result = await query<UserRow>(
-    `select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin, has_course_access, password_hash
-     from users
-     where email = $1`,
-    [normalizedEmail]
-  );
-
-  const user = result.rows[0];
-
-  if (!user || !verifyPassword(payload.password, user.password_hash)) {
-    return NextResponse.json(
-      { message: "E-mail ou senha inválidos. Verifique os dados e tente novamente." },
-      { status: 401 }
-    );
-  }
-
-
   try {
-    // Cria a sessão autenticada e evita quebra total caso haja erro de configuração.
+    // Lê o corpo da requisição e valida o formato mínimo esperado para login.
+    const payload = (await request.json()) as Partial<LoginPayload>;
+
+    if (typeof payload.email !== "string" || typeof payload.password !== "string") {
+      return NextResponse.json(
+        { message: "Informe o e-mail e a senha para continuar." },
+        { status: 400 }
+      );
+    }
+
+    const normalizedEmail = payload.email.trim().toLowerCase();
+    const normalizedPassword = payload.password.trim();
+
+    if (!normalizedEmail || !normalizedPassword) {
+      return NextResponse.json(
+        { message: "Informe o e-mail e a senha para continuar." },
+        { status: 400 }
+      );
+    }
+
+    // Procura o utilizador pelo e-mail para validar credenciais de forma segura.
+    const result = await query<UserRow>(
+      `select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin, has_course_access, password_hash
+       from users
+       where email = $1`,
+      [normalizedEmail]
+    );
+
+    const user = result.rows[0];
+
+    if (!user || !verifyPassword(normalizedPassword, user.password_hash)) {
+      return NextResponse.json(
+        { message: "E-mail ou senha inválidos. Verifique os dados e tente novamente." },
+        { status: 401 }
+      );
+    }
+
+    // Cria a sessão autenticada do utilizador após validação das credenciais.
     await createSession({
       userId: user.id,
       email: user.email,
       isAdmin: user.is_admin,
     });
-  } catch {
+
+    return NextResponse.json({
+      message: "Login efetuado com sucesso.",
+      user: {
+        id: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        fullName: user.full_name,
+        email: user.email,
+        birthDate: user.birth_date,
+        gender: user.gender,
+        profileCompleted: user.profile_completed,
+        isAdmin: user.is_admin,
+      },
+    });
+  } catch (error: unknown) {
+    // Garante resposta controlada em qualquer falha inesperada sem expor detalhes sensíveis.
+    console.error("LOGIN_ROUTE_ERROR", error);
+
     return NextResponse.json(
-      { message: "Não foi possível iniciar a sessão no servidor. Contacte o suporte." },
+      { message: "Não foi possível concluir o login neste momento. Tente novamente." },
       { status: 500 }
     );
   }
-
-  return NextResponse.json({
-    message: "Login efetuado com sucesso.",
-    user: {
-      id: user.id,
-      firstName: user.first_name,
-      lastName: user.last_name,
-      fullName: user.full_name,
-      email: user.email,
-      birthDate: user.birth_date,
-      gender: user.gender,
-      profileCompleted: user.profile_completed,
-      isAdmin: user.is_admin,
-    },
-  });
 };
