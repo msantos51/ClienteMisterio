@@ -113,10 +113,13 @@ export default function DashboardPage() {
   const [profileFeedback, setProfileFeedback] = useState<string | null>(null);
   const [firstAccessFeedback, setFirstAccessFeedback] = useState<string | null>(null);
   const [passwordFeedback, setPasswordFeedback] = useState<string | null>(null);
+  const [deleteAccountPassword, setDeleteAccountPassword] = useState("");
+  const [deleteAccountFeedback, setDeleteAccountFeedback] = useState<string | null>(null);
   const [courseProgress, setCourseProgress] = useState<CourseProgressData | null>(null);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isCompletingFirstAccess, setIsCompletingFirstAccess] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
   const mustCompleteProfile = useMemo(() => {
     if (!profile) {
@@ -358,6 +361,55 @@ export default function DashboardPage() {
     router.push("/login");
   };
 
+  const handleDeleteAccount = async () => {
+    if (!sessionEmail || isDeletingAccount) {
+      return;
+    }
+
+    setDeleteAccountFeedback(null);
+
+    if (!deleteAccountPassword) {
+      setDeleteAccountFeedback("Informe a senha atual para confirmar a eliminação da conta.");
+      return;
+    }
+
+    const shouldDeleteAccount = window.confirm(
+      "Esta ação é irreversível. Tem a certeza de que pretende apagar a sua conta?"
+    );
+
+    if (!shouldDeleteAccount) {
+      return;
+    }
+
+    setIsDeletingAccount(true);
+
+    try {
+      const response = await fetch("/api/user", {
+        method: "DELETE",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ currentPassword: deleteAccountPassword }),
+      });
+
+      const data = (await response.json()) as UpdateResponse;
+
+      if (!response.ok) {
+        setDeleteAccountFeedback(data.message);
+        return;
+      }
+
+      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+      localStorage.removeItem(sessionStorageKey);
+      localStorage.removeItem(userStorageKey);
+      localStorage.removeItem(preferencesStorageKey);
+      router.push("/login?deleted=1");
+    } catch {
+      setDeleteAccountFeedback("Não foi possível apagar a conta. Tente novamente.");
+    } finally {
+      setIsDeletingAccount(false);
+    }
+  };
+
   if (!profile) {
     return <p className="text-sm text-slate-500">A carregar perfil...</p>;
   }
@@ -597,6 +649,35 @@ export default function DashboardPage() {
                 <button className="submit mt-4" type="button" onClick={handleChangePassword}>
                   {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
                 </button>
+
+                <div className="mt-8 rounded-xl border border-red-200 bg-red-50 p-4">
+                  <h3 className="text-base font-semibold text-red-700">Zona de perigo</h3>
+                  <p className="mt-2 text-sm text-red-700">
+                    Apagar a conta remove permanentemente o seu perfil, progresso e histórico.
+                  </p>
+
+                  <div className="input-group mt-4">
+                    <input
+                      placeholder="Confirme com a senha atual"
+                      type="password"
+                      value={deleteAccountPassword}
+                      onChange={(event) => setDeleteAccountPassword(event.target.value)}
+                    />
+                    <span className="label">Senha atual para apagar conta</span>
+                  </div>
+
+                  {deleteAccountFeedback && (
+                    <p className="form-feedback mt-2">{deleteAccountFeedback}</p>
+                  )}
+
+                  <button
+                    className="submit mt-4 max-w-[240px] bg-red-600 hover:bg-red-700"
+                    type="button"
+                    onClick={handleDeleteAccount}
+                  >
+                    {isDeletingAccount ? "A apagar conta..." : "Apagar conta"}
+                  </button>
+                </div>
               </>
             )}
 
