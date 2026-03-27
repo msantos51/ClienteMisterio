@@ -3,6 +3,7 @@
  */
 
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -10,7 +11,17 @@ export const metadata: Metadata = {
   description: "Documentação Swagger para testar endpoints manualmente no browser.",
 };
 
+const isPublicApiDocsEnabled = () => {
+  // Permite expor Swagger apenas quando explicitamente autorizado por variável de ambiente.
+  return process.env.ENABLE_PUBLIC_API_DOCS === "true";
+};
+
 export default function ApiDocsPage() {
+  if (process.env.NODE_ENV === "production" && !isPublicApiDocsEnabled()) {
+    // Oculta a rota em produção para reduzir exposição desnecessária de superfície da API.
+    notFound();
+  }
+
   return (
     <main className="min-h-screen bg-[#f8f8f8] px-4 py-6 sm:px-6 md:px-8">
       {/* Título e contexto rápido para orientar quem vai testar endpoints no browser. */}

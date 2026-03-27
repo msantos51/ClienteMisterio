@@ -85,6 +85,9 @@ APP_BASE_URL=https://clientemisterio.onrender.com
 
 # Stripe Payment Link
 NEXT_PUBLIC_STRIPE_PAYMENT_LINK=https://buy.stripe.com/xxxxxxxx
+
+# Opcional: expor Swagger/OpenAPI publicamente em produção
+ENABLE_PUBLIC_API_DOCS=false
 ```
 
 ## Instalação e Desenvolvimento
@@ -131,10 +134,13 @@ Esta página carrega o Swagger UI e permite testar os endpoints manualmente no b
 ## Segurança
 
 - **Sessões**: tokens HMAC-SHA256 assinados, armazenados em cookies HTTP-only com SameSite=Lax
+- **Segredo de sessão**: em produção, `SESSION_SECRET` é obrigatório (sem fallback automático)
 - **Senhas**: hash com `scrypt` e salt aleatório; comparação timing-safe
 - **Tokens de email**: gerados aleatoriamente, guardados em hash (SHA-256) na base de dados
 - **SQL**: queries parametrizadas em todos os endpoints (sem risco de SQL injection)
 - **Admin**: papel de administrador definido por variável de ambiente e validado na base de dados
+- **Hardening HTTP**: middleware global adiciona cabeçalhos de segurança (`HSTS`, `X-Frame-Options`, `nosniff`, `COOP`, `Permissions-Policy`)
+- **Exposição técnica controlada**: `/api-docs` e `/api/openapi` ficam ocultos por defeito em produção
 
 ## Deploy no Render
 
