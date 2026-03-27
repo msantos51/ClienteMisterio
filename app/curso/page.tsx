@@ -5,7 +5,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { courseModules, type QuizQuestion } from "./courseData";
 
@@ -369,39 +369,15 @@ const moduleSupportContent: Record<number, TheorySupportContent> = {
   },
 };
 
-/*
- * DESCRIÇÃO DA FUNÇÃO: Distribui o conteúdo teórico em 4 páginas equilibradas
- * para garantir profundidade antes de iniciar o questionário.
- */
-const buildBaseTheoryPages = (content: string[]): TheoryPage[] => {
-  const totalBasePages = 4;
-  const chunkSize = Math.max(1, Math.ceil(content.length / totalBasePages));
-  const pageTitles = [
-    "Página 1 — Antes da avaliação: contexto e objetivos",
-    "Página 2 — Antes da avaliação: preparação operacional",
-    "Página 3 — Durante a avaliação: execução no terreno",
-    "Página 4 — Após a avaliação: análise, relatório e melhoria",
-  ];
-
-  const pages: TheoryPage[] = [];
-
-  for (let pageIndex = 0; pageIndex < totalBasePages; pageIndex += 1) {
-    const start = pageIndex * chunkSize;
-    const end = start + chunkSize;
-    const pageBlocks = content.slice(start, end);
-
-    if (pageBlocks.length === 0) {
-      continue;
+function renderBold(text: string): React.ReactNode {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={i}>{part.slice(2, -2)}</strong>;
     }
-
-    pages.push({
-      title: pageTitles[pageIndex] ?? `Página ${pageIndex + 1}`,
-      blocks: pageBlocks,
-    });
-  }
-
-  return pages;
-};
+    return part;
+  });
+}
 
 export default function CursoPage() {
   const router = useRouter();
@@ -735,9 +711,16 @@ export default function CursoPage() {
             <div className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-6">
               <p className="text-xs uppercase tracking-[0.16em] text-[#666] font-semibold mb-4">{currentTheoryPage.title}</p>
 
-              <div className="space-y-4">
-                {currentTheoryPage.blocks.map((paragraph, idx) => renderTheoryBlock(paragraph, idx))}
-              </div>
+              <ul className="space-y-3">
+                {currentTheoryPage.blocks.map((paragraph, idx) => (
+                  <li key={idx} className="flex gap-3 items-start">
+                    <span className="mt-[10px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#2a2a2a] opacity-50" />
+                    <p className="text-sm leading-7 text-[#2a2a2a] flex-1">
+                      {renderBold(paragraph)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
