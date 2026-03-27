@@ -95,10 +95,33 @@ const courseModules = [
 
 export default function CoursePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isCourseModalOpen, setIsCourseModalOpen] = useState(false);
 
   useEffect(() => {
     setIsLoggedIn(Boolean(localStorage.getItem(sessionStorageKey)));
   }, []);
+
+  /*
+   * DESCRIÇÃO DO EFEITO: Fecha o modal com a tecla ESC e bloqueia o scroll da página
+   * enquanto o curso está aberto em janela sobreposta.
+   */
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsCourseModalOpen(false);
+      }
+    };
+
+    if (isCourseModalOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isCourseModalOpen]);
 
   return (
     <section className="w-full space-y-8">
@@ -159,12 +182,13 @@ export default function CoursePage() {
 
       {isLoggedIn && (
         <div className="flex justify-center">
-          <Link
-            href="/curso"
-            className="submit inline-block max-w-sm text-center !no-underline"
+          <button
+            type="button"
+            onClick={() => setIsCourseModalOpen(true)}
+            className="submit inline-block max-w-sm text-center"
           >
             Aceder ao Curso Completo
-          </Link>
+          </button>
         </div>
       )}
 
@@ -208,6 +232,32 @@ export default function CoursePage() {
             >
               Criar Conta Gratuita
             </Link>
+          </div>
+        </div>
+      )}
+
+      {isCourseModalOpen && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/70 p-3 sm:p-6">
+          <div className="flex h-[95vh] w-full max-w-[1400px] flex-col overflow-hidden rounded-2xl border border-white/20 bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 sm:px-6">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#F66856]">Curso em ecrã expandido</p>
+                <p className="text-sm font-medium text-black sm:text-base">Visualização focada para estudar sem scroll na página principal</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsCourseModalOpen(false)}
+                className="rounded-full border border-black/15 px-3 py-1.5 text-sm font-semibold text-black transition hover:bg-black/5"
+              >
+                Fechar
+              </button>
+            </div>
+
+            <iframe
+              title="Curso completo de Cliente Mistério"
+              src="/curso"
+              className="h-full w-full border-0"
+            />
           </div>
         </div>
       )}
