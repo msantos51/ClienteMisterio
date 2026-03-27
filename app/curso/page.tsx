@@ -369,6 +369,40 @@ const moduleSupportContent: Record<number, TheorySupportContent> = {
   },
 };
 
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Distribui o conteúdo teórico em 4 páginas equilibradas
+ * para garantir profundidade antes de iniciar o questionário.
+ */
+const buildBaseTheoryPages = (content: string[]): TheoryPage[] => {
+  const totalBasePages = 4;
+  const chunkSize = Math.max(1, Math.ceil(content.length / totalBasePages));
+  const pageTitles = [
+    "Página 1 — Antes da avaliação: contexto e objetivos",
+    "Página 2 — Antes da avaliação: preparação operacional",
+    "Página 3 — Durante a avaliação: execução no terreno",
+    "Página 4 — Após a avaliação: análise, relatório e melhoria",
+  ];
+
+  const pages: TheoryPage[] = [];
+
+  for (let pageIndex = 0; pageIndex < totalBasePages; pageIndex += 1) {
+    const start = pageIndex * chunkSize;
+    const end = start + chunkSize;
+    const pageBlocks = content.slice(start, end);
+
+    if (pageBlocks.length === 0) {
+      continue;
+    }
+
+    pages.push({
+      title: pageTitles[pageIndex] ?? `Página ${pageIndex + 1}`,
+      blocks: pageBlocks,
+    });
+  }
+
+  return pages;
+};
+
 function renderBold(text: string): React.ReactNode {
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((part, i) => {
