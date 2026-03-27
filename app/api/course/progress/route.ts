@@ -22,7 +22,7 @@ type SubmitPayload = {
   quizAnswers: Record<string, number>;
 };
 
-const totalModules = 10;
+const totalModules = 11;
 
 export const GET = async () => {
   const session = await getSession();

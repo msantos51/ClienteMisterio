@@ -1859,4 +1859,28 @@ export const courseModules: CourseModule[] = [
  },
  ],
  },
+ {
+ id: 11,
+ title: "Módulo 11 — Certificado de Conclusão",
+ description: "Emissão do certificado final com nome do formando.",
+ keywords: ["Certificado", "Conclusão", "PDF", "Nome Personalizado"],
+ practicalTip: "Descarrega o certificado e guarda uma cópia no teu portefólio profissional.",
+ warning: "O certificado só fica disponível após conclusão dos módulos 1 a 10.",
+ benefit: "Comprovas formalmente a conclusão da formação de Cliente Mistério.",
+ content: [
+  "Este módulo final existe apenas para disponibilizar o certificado oficial do curso.",
+  "Após concluir os módulos anteriores, podes gerar e descarregar o teu certificado em PDF já com o teu nome.",
+  "Guarda o documento para partilhar no teu CV, LinkedIn e candidaturas a missões premium.",
+ ],
+ pages: [
+  {
+   title: "Página 1 — Emissão do Certificado",
+   blocks: [
+    "Parabéns por chegares ao fim do curso. Neste módulo final, o objetivo é simples: gerar o teu certificado oficial de conclusão.",
+    "Clica no botão de descarga para obteres um PDF com o teu nome, data de emissão e design alinhado com as cores da plataforma.",
+   ],
+  },
+ ],
+ quiz: [],
+ },
 ];
