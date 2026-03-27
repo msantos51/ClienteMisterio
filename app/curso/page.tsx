@@ -31,6 +31,11 @@ type TheorySupportContent = {
   executionChecklist: string[];
 };
 
+type TheoryPage = {
+  title: string;
+  blocks: string[];
+};
+
 const sessionStorageKey = "vp_session";
 
 /*
@@ -364,6 +369,40 @@ const moduleSupportContent: Record<number, TheorySupportContent> = {
   },
 };
 
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Distribui o conteúdo teórico em 4 páginas equilibradas
+ * para garantir profundidade antes de iniciar o questionário.
+ */
+const buildBaseTheoryPages = (content: string[]): TheoryPage[] => {
+  const totalBasePages = 4;
+  const chunkSize = Math.max(1, Math.ceil(content.length / totalBasePages));
+  const pageTitles = [
+    "Página 1 — Antes da avaliação: contexto e objetivos",
+    "Página 2 — Antes da avaliação: preparação operacional",
+    "Página 3 — Durante a avaliação: execução no terreno",
+    "Página 4 — Após a avaliação: análise, relatório e melhoria",
+  ];
+
+  const pages: TheoryPage[] = [];
+
+  for (let pageIndex = 0; pageIndex < totalBasePages; pageIndex += 1) {
+    const start = pageIndex * chunkSize;
+    const end = start + chunkSize;
+    const pageBlocks = content.slice(start, end);
+
+    if (pageBlocks.length === 0) {
+      continue;
+    }
+
+    pages.push({
+      title: pageTitles[pageIndex] ?? `Página ${pageIndex + 1}`,
+      blocks: pageBlocks,
+    });
+  }
+
+  return pages;
+};
+
 export default function CursoPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -526,21 +565,10 @@ export default function CursoPage() {
 
   const activeModule = activeModuleId ? courseModules.find((m) => m.id === activeModuleId) : null;
   const activeSupportContent = activeModule ? moduleSupportContent[activeModule.id] : null;
-  const baseTheoryPages = activeModule
-    ? [
-        {
-          title: "Página 1 — Fundamentos e Contexto",
-          blocks: activeModule.content.slice(0, 2),
-        },
-        {
-          title: "Página 2 — Critérios Avançados e Aplicação",
-          blocks: activeModule.content.slice(2, 5),
-        },
-      ]
-    : [];
+  const baseTheoryPages = activeModule ? buildBaseTheoryPages(activeModule.content) : [];
   const premiumTheoryPage = activeSupportContent
     ? {
-        title: "Página 3 — Casos Reais, Boas/Más Práticas e Estratégia",
+        title: "Página 5 — Casos reais, estratégia e checklist final",
         blocks: [activeSupportContent.realScenario],
       }
     : null;
@@ -758,6 +786,27 @@ export default function CursoPage() {
                     ))}
                   </ul>
                 </div>
+                {activeModule.evaluationExamples && activeModule.evaluationExamples.length > 0 && (
+                  <div className="rounded-lg border border-[#D4B5A0]/30 bg-white p-4 md:col-span-2">
+                    <p className="font-bold text-[#2a2a2a] mb-3">Exemplos de decisão profissional</p>
+                    <div className="space-y-4">
+                      {activeModule.evaluationExamples.map((example) => (
+                        <article key={example.title} className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 space-y-2">
+                          <h3 className="text-sm font-bold text-[#2a2a2a]">{example.title}</h3>
+                          <p className="text-sm text-[#2a2a2a]">
+                            <span className="font-semibold">Cenário:</span> {example.scenario}
+                          </p>
+                          <p className="text-sm text-[#2a2a2a]">
+                            <span className="font-semibold">Abordagem correta:</span> {example.correctApproach}
+                          </p>
+                          <p className="text-sm text-[#2a2a2a]">
+                            <span className="font-semibold">Abordagem incorreta:</span> {example.incorrectApproach}
+                          </p>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
