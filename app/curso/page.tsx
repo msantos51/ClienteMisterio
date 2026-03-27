@@ -424,6 +424,7 @@ export default function CursoPage() {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [isDownloadingCertificate, setIsDownloadingCertificate] = useState(false);
   const [accessDenied, setAccessDenied] = useState(false);
 
   const loadProgress = useCallback(async () => {
@@ -525,6 +526,55 @@ export default function CursoPage() {
     }
   };
 
+  /*
+   * DESCRIÇÃO DA FUNÇÃO: Marca o módulo 11 como concluído e inicia a descarga do certificado PDF personalizado.
+   */
+  const downloadCertificate = async () => {
+    if (isDownloadingCertificate) return;
+
+    setIsDownloadingCertificate(true);
+
+    try {
+      await fetch("/api/course/progress", {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          moduleId: 11,
+          quizScore: 100,
+          quizAnswers: {},
+        }),
+      });
+
+      const certificateResponse = await fetch("/api/course/certificate", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (!certificateResponse.ok) return;
+
+      const pdfBlob = await certificateResponse.blob();
+      const objectUrl = URL.createObjectURL(pdfBlob);
+      const downloadAnchor = document.createElement("a");
+      const contentDisposition = certificateResponse.headers.get("content-disposition");
+      const fileNameMatch = contentDisposition?.match(/filename=([^;]+)/i);
+      const fileName = fileNameMatch?.[1]?.replace(/\"/g, "").trim() || "certificado.pdf";
+
+      downloadAnchor.href = objectUrl;
+      downloadAnchor.download = fileName;
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      document.body.removeChild(downloadAnchor);
+      URL.revokeObjectURL(objectUrl);
+
+      await loadProgress();
+    } catch {
+      // Silently fail.
+    } finally {
+      setIsDownloadingCertificate(false);
+    }
+  };
+
   const allQuestionsAnswered = (quiz: QuizQuestion[]): boolean => {
     return quiz.every((q) => quizAnswers[q.id] !== undefined);
   };
@@ -590,7 +640,7 @@ export default function CursoPage() {
   const currentTheoryPage = allTheoryPages[theoryPage];
   const isLastTheoryPage = theoryPage === allTheoryPages.length - 1;
   const completedCount = progress?.completedCount ?? 0;
-  const totalModules = progress?.totalModules ?? 10;
+  const totalModules = progress?.totalModules ?? 11;
   const progressPercent = progress?.progressPercent ?? 0;
 
   return (
@@ -854,21 +904,37 @@ export default function CursoPage() {
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <button
-              type="button"
-              onClick={startQuiz}
-              disabled={!isLastTheoryPage}
-              className="submit max-w-xs"
-            >
-              {isLastTheoryPage ? "Iniciar Questionário" : "Conclua a teoria para iniciar o questionário"}
-            </button>
-          </div>
+          {activeModule.id === 11 ? (
+            <div className="rounded-2xl border border-[#F66856]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
+              <p className="text-sm text-[#2a2a2a]">
+                Este módulo disponibiliza o seu Certificado de Conclusão em PDF com nome personalizado.
+              </p>
+              <button
+                type="button"
+                onClick={downloadCertificate}
+                disabled={isDownloadingCertificate}
+                className="submit max-w-sm disabled:opacity-40"
+              >
+                {isDownloadingCertificate ? "A preparar certificado..." : "Descarregar Certificado em PDF"}
+              </button>
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={startQuiz}
+                disabled={!isLastTheoryPage}
+                className="submit max-w-xs"
+              >
+                {isLastTheoryPage ? "Iniciar Questionário" : "Conclua a teoria para iniciar o questionário"}
+              </button>
+            </div>
+          )}
         </div>
       )}
 
       {/* Questionário */}
-      {activeModule && quizMode && (
+      {activeModule && quizMode && activeModule.quiz.length > 0 && (
         <div className="space-y-6">
           <button
             type="button"
