@@ -16,11 +16,17 @@ export type EvaluationExample = {
  incorrectApproach: string;
 };
 
+export type CoursePage = {
+ title: string;
+ blocks: string[];
+};
+
 export type CourseModule = {
  id: number;
  title: string;
  description: string;
  content: string[];
+ pages?: CoursePage[];
  quiz: QuizQuestion[];
  keywords?: string[];
  practicalTip?: string;
@@ -94,6 +100,42 @@ export const courseModules: CourseModule[] = [
   "Fitness: avalia-se desde o contacto inicial até à experiência da aula.",
   "Bricolage: avalia-se diagnóstico de necessidades e sugestão de serviços complementares (instalação, entrega).",
   "**Cada setor exige formação específica** e conhecimento das suas particularidades.",
+ ],
+ pages: [
+  {
+   title: "Página 1 — O que é o Cliente Mistério",
+   blocks: [
+    "O **Cliente Mistério** — também chamado *Mystery Shopping* — é uma metodologia de avaliação em que uma pessoa age como cliente comum para medir a qualidade real de um serviço. O avaliador observa, regista e reporta tudo o que acontece durante a visita, sem revelar que está a avaliar.",
+    "A origem remonta aos anos 1940 nos Estados Unidos, mas tornou-se amplamente utilizada apenas nos anos 2000. Hoje, é uma das ferramentas de gestão de qualidade mais usadas em todo o mundo.",
+    "**O que distingue o Cliente Mistério dos questionários tradicionais?** Os questionários de satisfação dependem da memória e perceção subjetiva do cliente. O Cliente Mistério regista a experiência em tempo real, com critérios objetivos e definidos. É a diferença entre perguntar 'foi bem atendido?' e medir 'o colaborador cumprimentou em menos de 30 segundos?'.",
+    "**Quem beneficia?** As empresas descobrem falhas reais no atendimento, medem se os procedimentos estão a ser cumpridos e comparam resultados entre lojas. O avaliador ganha remuneração por cada missão, trabalha com flexibilidade total e adquire experiência profissional valiosa.",
+   ],
+  },
+  {
+   title: "Página 2 — Os Três Intervenientes e a Mecânica do Processo",
+   blocks: [
+    "Num projeto de Cliente Mistério existem sempre três intervenientes principais. (1) **A marca ou empresa** — define o que quer medir (ex.: 'queremos saber se os colaboradores cumprimentam o cliente'). (2) **A agência ou plataforma** — coordena o projeto, recruta avaliadores, valida os relatórios e entrega resultados à marca. (3) **O avaliador** — executa a missão no terreno e produz a informação de valor.",
+    "**A mecânica funciona assim:** A marca submete um briefing com os objetivos. A agência publica a missão e seleciona os avaliadores adequados. O avaliador aceita, prepara-se e executa a visita. Depois, submete o relatório com evidências dentro do prazo. A agência valida e processa o pagamento.",
+    "Esta cadeia é simples, mas exige rigor em cada etapa. Uma falha no terreno — não guardar o talão, revelar a identidade — invalida toda a missão e compromete a remuneração.",
+   ],
+  },
+  {
+   title: "Página 3 — Tipos de Missões: do Presencial ao Digital",
+   blocks: [
+    "Existem vários formatos de missão, cada um com características específicas. O mais comum é o **mystery shopping presencial**: o avaliador visita uma loja como cliente normal e avalia atendimento, processos e ambiente.",
+    "Os principais tipos de missão são: (1) **Presencial** — visita física a loja, restaurante, banco, farmácia, etc. (2) **Mystery calling** — contacto telefónico para avaliar atendimento e cumprimento de protocolos. (3) **Avaliação online** — submissão de formulários, uso de apps, avaliando tempo de resposta e experiência digital. (4) **Auditoria de imagem** — avalia limpeza, uniformes e sinalética. (5) **Inspeção de conformidade** — verifica cumprimento de regras legais ou internas. (6) **Avaliação de delivery** — avalia como chegam os produtos encomendados.",
+    "O mercado é vasto. Os setores com maior procura são: retalho (supermercados, moda, eletrónica), restauração, banca, telecomunicações, farmácias, hotelaria, automóvel e seguros. Basicamente, qualquer setor com contacto direto com o cliente.",
+   ],
+  },
+  {
+   title: "Página 4 — Impacto Real e Responsabilidade do Avaliador",
+   blocks: [
+    "O impacto do Cliente Mistério é concreto e mensurável. Uma loja que descobre que apenas 40% dos clientes são cumprimentados — quando o protocolo exige 100% — pode, após formação da equipa, subir para 95% em três meses. Essa mudança reflete-se diretamente nas vendas e na satisfação dos clientes.",
+    "Alguns projetos envolvem **avaliações multi-fase**, que mapeiam toda a jornada do cliente: fase 1 — submeter formulário online; fase 2 — avaliar a chamada de resposta; fase 3 — visitar o local; fase 4 — avaliar o follow-up pós-visita. Cada fase é registada separadamente, mas faz parte do mesmo projeto.",
+    "Cada setor tem as suas particularidades. No retalho de eletrónica avalia-se o conhecimento técnico. No automóvel, o tempo de resposta a pedidos online (habitualmente até 3 horas). Na restauração, desde o empratamento à temperatura da comida. Conhecer estas especificidades é parte do trabalho profissional.",
+    "**A responsabilidade do avaliador é enorme.** O relatório influencia diretamente a carreira dos colaboradores avaliados — pode condicionar promoções, prémios ou renovações de contrato. Cada dado registado tem de ser rigorosamente verdadeiro e verificável. As marcas cruzam os relatórios com câmaras e outros registos. Integridade não é opcional: é a base de tudo.",
+   ],
+  },
  ],
  evaluationExamples: [
   {
@@ -244,6 +286,42 @@ export const courseModules: CourseModule[] = [
   "Estas avaliações são bem pagas porque exigem **conhecimento específico** e cenários complexos.",
   "É comum usar dados fictícios (nome, email, dados de veículo) fornecidos pela agência para simular um cliente real.",
  ],
+ pages: [
+  {
+   title: "Página 1 — O Mercado: Setores e Oportunidades",
+   blocks: [
+    "O mercado de mystery shopping está em crescimento acelerado em Portugal e na Europa. A procura por avaliadores qualificados é constante — e há oportunidades para quem entrar com o perfil certo.",
+    "Os setores com maior volume de missões são: (1) **Retalho alimentar e especializado** — supermercados, lojas de moda, eletrónica, bricolage. (2) **Restauração** — cadeias de fast-food, restaurantes, cafés. (3) **Telecomunicações** — lojas MEO, Vodafone, NOS e serviços de apoio ao cliente. (4) **Banca e seguros** — balcões, serviços online e processos de crédito. (5) **Hotelaria** — hotéis de 3 a 5 estrelas. (6) **Farmácias e saúde** — atendimento, conselho farmacêutico e conformidade. (7) **Automóvel** — concessionários, oficinas e leads online.",
+    "A diversidade de setores significa que há missões para todos os perfis. Avaliadores com mobilidade geográfica, disponibilidade horária e bom histórico têm acesso constante a novas oportunidades.",
+   ],
+  },
+  {
+   title: "Página 2 — Três Modelos de Colaboração",
+   blocks: [
+    "Existem três formas principais de trabalhar como avaliador. Cada uma tem vantagens e limitações específicas.",
+    "**Agências especializadas** — como a BMS Mystery Shopping ou a Teseo — coordenam tudo: briefing, seleção, validação e pagamento. Oferecem segurança, volume de missões e suporte. Em contrapartida, aplicam regras mais rigorosas e retêm uma comissão.",
+    "**Plataformas digitais** — como a Spotec ou a Streev — funcionam como um marketplace de missões, onde o avaliador aceita autonomamente o trabalho disponível. Oferecem flexibilidade e variedade, mas a concorrência é maior e os valores tendem a ser mais baixos.",
+    "**Trabalho direto com marcas** — a opção mais lucrativa, pois elimina intermediários. Requer rede de contactos própria e capacidade de negociação, sendo geralmente reservada a avaliadores com vasta experiência.",
+    "A estratégia mais inteligente para iniciantes é começar nas agências — para ganhar experiência e ratings — e ir adicionando plataformas digitais à medida que a confiança e o portfólio crescem.",
+   ],
+  },
+  {
+   title: "Página 3 — Remuneração por Setor e Critérios de Seleção",
+   blocks: [
+    "A remuneração varia consoante o setor e a complexidade da missão. Como referência geral: (1) Retalho e restauração simples — **5 a 15 € por missão**. (2) Telecomunicações, farmácias e seguros — **15 a 40 €**. (3) Hotelaria — **30 a 75 €**. (4) Auditorias complexas, banca e automóvel — **75 a 150 € ou mais**. Tudo depende do tempo exigido, do nível de detalhe e da especialização necessária.",
+    "As agências selecionam avaliadores com base em: (1) **Localização geográfica** — precisam de alguém na zona certa. (2) **Disponibilidade horária** — flexibilidade para missões em dias e horas variáveis. (3) **Histórico e ratings** — avaliadores com boa taxa de aprovação são escolhidos primeiro. (4) **Especialização setorial** — quem conhece o setor em profundidade é preferido para missões complexas. (5) **Fiabilidade** — resposta rápida a convites e cumprimento de prazos.",
+    "Para maximizar as oportunidades: mantém o perfil 100% preenchido e atualizado, responde aos convites nas primeiras 4 horas e entrega relatórios com taxa de aprovação acima de 95%. Estes três hábitos criam uma engrenagem de crescimento natural.",
+   ],
+  },
+  {
+   title: "Página 4 — Como Crescer na Profissão",
+   blocks: [
+    "A evolução na carreira de avaliador segue um percurso gradual. **Meses 1-2:** Retalho simples ou restauração rápida — remuneração de 5 a 15 €, mas o objetivo é ganhar confiança, aprender o processo e construir um portfólio. **Meses 3-4:** Telecomunicações, farmácias e seguros — mais complexidade, mais detalhe, de 15 a 40 €. **Mês 5 em diante:** Banca, hotelaria de luxo e auditorias certificadas — remuneração de 75 a 200 €, mas exigem perfecionismo e histórico impecável.",
+    "Para crescer mais depressa: (1) **Especialização em 1 ou 2 setores** — tornar-se o especialista que as agências chamam primeiro. (2) **Trabalhar com várias plataformas** — para não depender de uma única fonte. (3) **Agrupamento geográfico** — aceitar várias missões na mesma zona no mesmo dia reduz custos e aumenta rentabilidade. (4) **Histórico excelente** — leva 3 a 6 meses a construir, mas depois os convites chegam sem ser necessário procurar.",
+    "Alguns projetos são organizados em **packs de secções**: avalia várias áreas de uma loja numa única visita, com remuneração por secção (tipicamente 4 a 5 € cada). Uma deslocação a um centro comercial pode transformar-se em múltiplas avaliações rentáveis. No setor automóvel, é comum usar dados fictícios fornecidos pela agência para simular um cliente real — e os valores são dos mais competitivos do mercado.",
+   ],
+  },
+ ],
  quiz: [
  {
  id: "m2q1",
@@ -380,6 +458,43 @@ export const courseModules: CourseModule[] = [
   "Nem entusiasta demais nem fria.",
   "O objetivo: **teu comportamento não influencie o colaborador.**",
   "Avalia o que acontece naturalmente, não o que provocas.",
+ ],
+ pages: [
+  {
+   title: "Página 1 — O Perfil do Avaliador Profissional",
+   blocks: [
+    "Ser avaliador de Cliente Mistério exige um conjunto de qualidades específicas. **Discrição** é a mais crítica: ninguém deve perceber que está a decorrer uma avaliação. **Rigor** é igualmente essencial: regista-se apenas o que foi observado, nunca se inventam dados. **Imparcialidade** significa deixar opiniões pessoais de fora e avaliar apenas com base nos critérios definidos. **Consistência** garante que os mesmos critérios são aplicados em todas as missões.",
+    "Um bom avaliador tem capacidade de observação discreta — consegue notar detalhes sem fixar o olhar —, boa memória de curto prazo — para reter tempos, frases e sequências — e equilíbrio emocional — para não reagir de forma visível a mau atendimento.",
+    "Antes de cada missão, é essencial fazer um **reset mental**: limpar expectativas prévias, experiências anteriores naquele local e quaisquer opiniões sobre a marca. O estado ideal é neutro — nem entusiasta, nem crítico. A postura do avaliador não deve influenciar o comportamento dos colaboradores.",
+   ],
+  },
+  {
+   title: "Página 2 — Confidencialidade e Conflitos de Interesse",
+   blocks: [
+    "A confidencialidade é a regra mais importante da profissão. **Nunca se comenta** — com amigos, família, colegas ou nas redes sociais — qual foi a marca avaliada, o resultado, os problemas encontrados ou qualquer detalhe sobre a missão. Esta regra não tem exceções.",
+    "As consequências de quebrar a confidencialidade são severas: banimento permanente de todas as plataformas e possibilidade de ação legal por violação de contrato. Uma informação partilhada 'apenas com alguém de confiança' pode facilmente chegar à pessoa errada.",
+    "**Conflitos de interesse** devem ser declarados antes de aceitar qualquer missão. Existe conflito se: trabalhas ou trabalhaste na empresa a avaliar; tens familiar ou amigo próximo naquele local; conheces pessoalmente um colaborador; és cliente habitual reconhecível; ou trabalhas para a concorrência direta.",
+    "Os critérios de exclusão são inegociáveis. Se descobrires uma situação de conflito após aceitar a missão, declara imediatamente à agência — nunca avances com uma avaliação comprometida. Agências têm sistemas de verificação e cruzam dados de várias fontes.",
+   ],
+  },
+  {
+   title: "Página 3 — Comportamento no Terreno",
+   blocks: [
+    "Durante a missão, o objetivo é ser um cliente completamente comum: ritmo normal, voz natural, linguagem corporal relaxada, comportamento alinhado com a persona definida no briefing. A naturalidade não é opcional — qualquer comportamento anormal levanta suspeitas imediatamente.",
+    "O que fazer: entrar com um objetivo concreto, observar ao longo da visita sem fixar o olhar, memorizar tempos e frases em vez de tomar notas visíveis, e sair de forma natural.",
+    "O que nunca fazer: (1) Sacar caderno ou papel durante a visita. (2) Fotografar de forma óbvia. (3) Fazer perguntas artificiais para 'testar' a equipa. (4) Criar reclamações sem motivo real. (5) Permanecer no local por um tempo desproporcionado. (6) Percorrer a loja repetidamente de forma suspeita.",
+    "**Se alguém perguntar se é cliente mistério:** Nega de forma natural — diz que não conheces essa metodologia. Após sair, informa a agência imediatamente por email. A agência decide se a avaliação continua válida. **Nunca confirmes a identidade** — isso invalida a missão de forma definitiva.",
+   ],
+  },
+  {
+   title: "Página 4 — Valores Profissionais e Situações Sensíveis",
+   blocks: [
+    "Os valores profissionais são a base de tudo. **Pontualidade** — missões têm janelas horárias definidas. **Honestidade** — fraude significa fim de carreira imediato. **Profissionalismo** — comportamento civil e apresentação adequada ao contexto. Estes não são detalhes: são os pilares da reputação.",
+    "O relatório deve refletir factos observados, não interpretações. A diferença é clara: **correto** — 'o produto A não estava em stock'; **incorreto** — 'o gerente provavelmente escondeu o produto A'. O trabalho do avaliador é observar e registar, não aconselhar nem julgar intenções.",
+    "Situações sensíveis que podem ocorrer: (1) **Observar algo ilegal** — reporta à agência, não ages por conta própria. (2) **Sentir-te em perigo** — contacta a agência e abandona o local se necessário. (3) **Ser reconhecido** — mantém compostura, não confirmas nem negas, informa a agência depois. (4) **Alguém querer conversar** — respondes com educação e manténs naturalidade.",
+    "Lembra: o avaliador não é um fiscal nem um crítico. É um observador profissional que ajuda as marcas a melhorar. Esta perspetiva torna cada missão mais simples e mais eficaz.",
+   ],
+  },
  ],
  evaluationExamples: [
   {
@@ -540,6 +655,41 @@ export const courseModules: CourseModule[] = [
   "Não abandones a loja sem completar **todas as secções atribuídas**.",
   "Cada secção tem cenário específico: memoriza e aplica corretamente.",
   "**Confundir cenários = visita invalidada.**",
+ ],
+ pages: [
+  {
+   title: "Página 1 — O que se Avalia: as Cinco Dimensões",
+   blocks: [
+    "Cada missão de Cliente Mistério avalia a experiência do cliente em cinco grandes dimensões. (1) **Atendimento** — o colaborador aborda o cliente? Como e com que rapidez? É educado e atento? (2) **Processos** — os procedimentos definidos pela marca estão a ser cumpridos? (3) **Produto ou serviço** — está disponível, em boas condições e com a qualidade esperada? (4) **Conformidade** — regras legais, sinalética obrigatória e normas internas estão a ser respeitadas? (5) **Experiência global** — limpeza, temperatura, iluminação e organização do espaço.",
+    "Juntas, estas cinco dimensões formam uma avaliação holística da visita — não se trata apenas de 'o atendimento foi bom', mas de medir cada componente de forma independente e objetiva.",
+    "Os **indicadores padrão** mais comuns são: (1) Tempo até ser abordado (cronometrado com precisão). (2) Duração total da interação. (3) Apresentação do colaborador — uniforme, higiene, comportamento. (4) Oferecimento de produtos complementares. (5) Conhecimento do produto — responde a perguntas técnicas? (6) Processo de pagamento — rapidez e correção. (7) Limpeza geral — piso, balcão, superfícies. (8) Conformidade regulatória — placards e sinalética obrigatória.",
+   ],
+  },
+  {
+   title: "Página 2 — Escalas de Avaliação e a Regra de Ouro",
+   blocks: [
+    "Cada marca define a sua própria escala de avaliação. As mais comuns são: (1) **Binária SIM/NÃO** — a mais objetiva e frequente; sem margem para interpretação. (2) **SIM / PARCIALMENTE / NÃO** — permite registar situações intermédias. (3) **Escala 1 a 5** — onde 1 = nunca e 5 = sempre. (4) **N/A (não aplicável)** — para critérios que não se aplicam à situação específica. (5) **Classificação por prioridade** — crítico, importante ou menor.",
+    "A **regra de ouro** de toda a avaliação é esta: segue o critério como um mapa GPS. Se o critério diz 'o colaborador cumprimentou em menos de 30 segundos', a resposta é SIM ou NÃO — baseada apenas no facto observado. Não existe 'quase cumpriu' nem 'cumpriu com reservas'. Se esperaste 35 segundos e o critério era 30: **NÃO cumpriu**.",
+    "Independentemente da escala, a regra é sempre a mesma: regista exatamente o que foi observado, sem inflar nem deflacionar, sem deixar simpatia ou antipatia influenciar. O que não é observável não se regista.",
+   ],
+  },
+  {
+   title: "Página 3 — Vieses Cognitivos e Como os Evitar",
+   blocks: [
+    "Os **vieses cognitivos** são armadilhas mentais que distorcem a avaliação sem que o avaliador se aperceba. Conhecê-los é a melhor forma de os combater.",
+    "Os quatro vieses mais frequentes são: (1) **Efeito halo** — uma primeira impressão muito boa contamina toda a avaliação; exemplo: o colaborador foi simpático no cumprimento, logo avalia-se tudo bem, ignorando que não soube responder a perguntas técnicas. (2) **Tendência central** — dar notas médias em tudo para 'não comprometer'; resultado: dados inúteis. (3) **Viés de confirmação** — procurar provas que confirmem o que já se pensa sobre o local. (4) **Viés de recência** — o final da visita tem mais peso que tudo o resto.",
+    "Para combater estes vieses: (1) Segue a checklist item por item, em vez de avaliar no global. (2) Não formas conclusões até ao fim da visita. (3) Regista tempos exatos — não 'esperou muito', mas '4 minutos e 20 segundos'. (4) Compara apenas com o critério definido, não com experiências noutras lojas ou expectativas pessoais.",
+   ],
+  },
+  {
+   title: "Página 4 — Avaliação por Etapas e Múltiplas Secções",
+   blocks: [
+    "Muitas marcas estruturam a avaliação em **etapas da jornada do cliente**, avaliadas separadamente. (1) **Acolhimento** — reconheceu a presença, cumprimentou, ofereceu ajuda? (2) **Diagnóstico de necessidades** — fez perguntas, ouviu com atenção? (3) **Apresentação e aconselhamento** — sugeriu produtos, explicou diferenças? (4) **Venda complementar** — ofereceu adicionais, garantias ou acessórios? (5) **Fecho e despedida** — agradeceu, despediu-se, convidou a voltar?",
+    "Esta estrutura permite à marca identificar exatamente onde estão os pontos fortes e os pontos de melhoria — não apenas 'o atendimento foi bom ou mau', mas 'falhámos na venda complementar'.",
+    "Em lojas de grande dimensão — supermercados, bricolage, eletrónica — é comum avaliar **2 a 4 secções numa única visita**. Cada secção é completamente independente: não se pode ser atendido pelo mesmo colaborador em duas secções, não se menciona uma interação noutra, e não se abandona a loja sem completar todas as secções atribuídas. Confundir cenários entre secções invalida a visita.",
+    "A **calibração entre avaliadores** é essencial para a qualidade dos dados: se dois avaliadores visitam o mesmo local nas mesmas condições, as suas avaliações devem ser muito semelhantes (acima de 90% de correspondência). Quando isso não acontece, o critério está mal definido ou há um problema de formação.",
+   ],
+  },
  ],
  evaluationExamples: [
   {
@@ -705,6 +855,41 @@ export const courseModules: CourseModule[] = [
   "Espera que colaborador pergunte o método de pagamento.",
   "**Sem voucher ativado:** pagas do bolso sem garantia de reembolso.",
  ],
+ pages: [
+  {
+   title: "Página 1 — O Briefing: o teu Mapa de Missão",
+   blocks: [
+    "O **briefing** é o documento central de cada missão. Contém toda a informação necessária para executar a avaliação corretamente. Nunca se deve iniciar uma missão sem o ter lido completamente.",
+    "Os elementos essenciais de um briefing são: (1) **Objetivos** — o que a marca quer medir (ex.: 'verificar se os colaboradores cumprimentam em 30 segundos'). (2) **Persona** — o perfil a representar (ex.: 'homem entre 30 e 40 anos à procura de roupa casual'). (3) **Checklist** — lista exata de itens a observar e avaliar. (4) **Evidências** — o que recolher: talão, fotos, registos de tempo. (5) **Prazos** — janela de execução e data limite de entrega. (6) **Instruções especiais** — condições específicas do projeto.",
+    "A leitura ideal do briefing é feita em três passagens: **primeira leitura** para compreender o objetivo global; **segunda leitura** para memorizar a persona e o cenário; **terceira leitura** para reter cada detalhe da checklist, os prazos exatos e os requisitos de evidência.",
+    "Se algo não fizer sentido, pergunta à agência **antes de sair** — nunca depois. Improvisar no terreno é a causa mais comum de missões inválidas.",
+   ],
+  },
+  {
+   title: "Página 2 — Planeamento Logístico",
+   blocks: [
+    "Uma missão bem executada começa com um bom planeamento. Antes de sair, há quatro áreas a considerar: (1) **Horário** — a loja está aberta? Há produto disponível a essa hora? É hora de pico ou vazio? (2) **Trajeto** — rota, tempo estimado, transportes disponíveis, estacionamento (custo e localização). (3) **Tempo total** — preparação (30 min) + deslocação + execução + relatório; conhecer o total real é essencial para avaliar a rentabilidade. (4) **Custos** — combustível, estacionamento, consumo obrigatório.",
+    "O **equipamento obrigatório** para cada missão inclui: telemóvel com bateria a 100% e dados ativos; dinheiro e cartão para eventuais compras; documentação ou credenciais se exigidas pelo briefing; e, nos casos relevantes, voucher ativado antecipadamente.",
+    "Antecipa os problemas mais comuns: (1) **Loja fechada** — verifica horários em Google Maps ou por telefone antes de sair. (2) **Produto indisponível** — define um plano B com alternativa similar. (3) **Imprevisto pessoal** — comunica à agência imediatamente. (4) **Trânsito** — sai mais cedo do que o estimado.",
+   ],
+  },
+  {
+   title: "Página 3 — Checklist de Preparação e Plano B",
+   blocks: [
+    "Nos 30 minutos antes da missão, percorre esta checklist: (1) Briefing relido e compreendido. (2) Dúvidas esclarecidas com a agência. (3) Horários da loja verificados. (4) Rota planeada com tempo, custo e estacionamento. (5) Dinheiro e cartão disponíveis. (6) Roupa adequada à persona. (7) Telemóvel a 100% com dados ativos. (8) Documentos necessários reunidos. (9) Plano B definido para imprevistos. Se tudo OK: executa.",
+    "Para as situações mais comuns, há sempre uma solução: (1) **Loja fechada** — reagenda para o dia seguinte dentro do prazo. (2) **Produto indisponível** — adapta com alternativa similar ou reporta. (3) **Loja muito cheia** — continua a avaliação e regista o contexto (a agência quer saber como funcionam sob pressão). (4) **Colaborador ausente** — avalia quem está presente. (5) **Talão avariado** — fotografa o ecrã ou pede recibo alternativo.",
+    "A **gestão da ansiedade** nas primeiras missões é completamente normal. Começa com algo simples, perto de casa, de baixa complexidade. A partir da quinta ou décima missão, o processo torna-se automático e a naturalidade constrói-se com prática.",
+   ],
+  },
+  {
+   title: "Página 4 — Apps, Vouchers e Questões Formativas",
+   blocks: [
+    "Muitos projetos utilizam plataformas digitais de relatório como a **Mobiaudit** ou a **Shopmetrics**. Estas apps devem ser descarregadas, configuradas e testadas **antes do dia da missão** — nunca no terreno. Verifica o login, o acesso ao projeto e familiariza-te com a navegação. Algumas exigem preencher parte do relatório durante a visita, por isso a prática prévia é essencial.",
+    "Em projetos de restauração e serviços, é comum receber um **voucher** para cobrir o consumo obrigatório. O voucher deve estar ativado em casa, antes da visita. Não o apresentes proativamente — espera que o colaborador pergunte o método de pagamento. Sem voucher ativado, o consumo sai do bolso sem garantia de reembolso.",
+    "Muitas agências exigem um **questionário formativo** antes de aprovar o avaliador para a missão. Este teste verifica se compreendeste os cenários, a checklist, os comprovativos exigidos e os prazos. Só após aprovação é possível executar. Leva estes testes a sério — são a 'licença para operar' em cada projeto e protegem-te de erros evitáveis no terreno.",
+   ],
+  },
+ ],
  quiz: [
  {
  id: "m5q1",
@@ -853,6 +1038,40 @@ export const courseModules: CourseModule[] = [
   "**Telemóvel ativo** e atento a chamadas desconhecidas.",
   "Se perguntarem se queres avançar: responde que estás a pensar.",
   "**Nunca te comprometas** com uma compra real.",
+ ],
+ pages: [
+  {
+   title: "Página 1 — Naturalidade em Ação: ser um Cliente Normal",
+   blocks: [
+    "O princípio central da execução no terreno é simples: **comporta-te como um cliente completamente normal**. Ritmo natural, voz comum, linguagem corporal relaxada. Qualquer comportamento diferente do expectável levanta suspeitas e compromete a missão.",
+    "A sequência ideal de uma visita presencial segue esta lógica: (1) **Entrada** — olha à volta de forma natural (observas ambiente, limpeza, organização). (2) **Exploração** — passeias pela loja como cliente com um objetivo (produtos, preços, sinalética). (3) **Contacto com colaborador** — abordagem natural, pergunta como qualquer cliente faria. (4) **Interação** — conversa fluida, perguntas relacionadas com o produto ou serviço. (5) **Transação** — compra, se obrigatória, ou agradecimento natural. (6) **Saída** — sem pressa, sem olhar para trás repetidamente.",
+    "Antes de entrar, observa como os outros clientes se comportam no local e alinha o teu comportamento. Cada espaço tem o seu ritmo próprio — uma cafetaria é diferente de um concessionário automóvel.",
+   ],
+  },
+  {
+   title: "Página 2 — Técnicas de Observação Discreta",
+   blocks: [
+    "Observar sem ser óbvio é uma competência que se treina. Algumas técnicas eficazes: (1) **Canto do olho** — nunca fixes diretamente em pessoas ou detalhes; usa a visão periférica. (2) **Memorização por padrão** — associa cada detalhe observado a um item da checklist (uniforme = sim, cumprimento = 20 segundos, limpeza = sim). (3) **Ancoragem temporal** — regista mentalmente as horas exatas dos momentos-chave: entrada, abordagem, fim da interação, saída.",
+    "Para registar de forma discreta durante a visita, usa o telemóvel como qualquer cliente faria — ver horários, enviar mensagem, consultar algo. Se precisares de fotografar, faz como quem tira uma selfie. **Nunca saques caderno ou papel durante a visita** — é imediatamente suspeito.",
+    "Após sair, senta-te num local próximo durante 10 minutos e revê mentalmente a visita de forma cronológica. Reforça a memória de cada momento antes de começar a escrever. Expande para o relatório completo no máximo dentro de 24 horas — a memória degrada-se rapidamente e os detalhes perdem-se.",
+   ],
+  },
+  {
+   title: "Página 3 — Gestão de Imprevistos e Linhas Vermelhas",
+   blocks: [
+    "Situações inesperadas acontecem em missões. Saber como reagir faz parte do profissionalismo: (1) **Produto em falta** — adapta com alternativa similar ou reporta a indisponibilidade. (2) **Loja muito cheia** — continua; regista o contexto (a agência quer saber como funciona sob pressão). (3) **Colaborador ausente** — avalia quem está presente. (4) **Talão avariado** — fotografa o ecrã ou pede recibo alternativo. Em qualquer situação de bloqueio real, contacta a agência imediatamente.",
+    "Existem comportamentos que **nunca** se fazem em missão: (1) Revelar a identidade de avaliador — invalida a missão por completo. (2) Prolongar artificialmente a visita — uma hora numa loja de fast-food é imediatamente suspeito. (3) Criar situações falsas para testar reações dos colaboradores. (4) Perder a cordialidade — mesmo com mau atendimento, mantém sempre educação e calma. (5) Agir por conta própria em situações sensíveis — em caso de dúvida, contacta sempre a agência.",
+    "**Se suspeitarem de ti:** Mantém compostura. Nega de forma natural — diz que não conheces essa metodologia. Após sair, informa a agência imediatamente. Nunca confirmes, nunca fujas de forma abrupta, nunca te mostres nervoso.",
+   ],
+  },
+  {
+   title: "Página 4 — Abordagem Proativa, Cenários e Follow-up Pós-Visita",
+   blocks: [
+    "Uma das métricas mais comuns é a **abordagem proativa**: avaliar se o colaborador te aborda espontaneamente, sem que precises de pedir ajuda. O procedimento: diriges-te à secção e mostras interesse (mexes nos produtos, observas). Esperas 5 minutos. Se nenhum colaborador estiver disponível, esperas mais 5 minutos. Só depois é que podes procurar ajuda. **Nunca peças ajuda antes do tempo definido** — o objetivo é medir se eles vêm a ti.",
+    "O **cenário atribuído** no briefing deve ser seguido à risca — nunca se escolhe outro, nunca se improvisa. O cenário define o protocolo de comparação. A sua apresentação deve ser natural, com as tuas próprias palavras, sem liberar toda a informação de uma vez — cria espaço para o colaborador fazer perguntas.",
+    "Alguns projetos incluem **avaliação de follow-up pós-visita**: após a visita, a empresa contacta-te (chamada, SMS, WhatsApp ou email) normalmente dentro de 24 horas. Avalias se o contacto foi feito no prazo, o profissionalismo da abordagem e se tentaram concretizar uma venda ou marcar uma reunião. Mantém o telemóvel ativo. Se perguntarem se queres avançar, responde que estás a pensar. **Nunca te comprometas com uma compra real.**",
+   ],
+  },
  ],
  evaluationExamples: [
   {
@@ -1017,6 +1236,34 @@ export const courseModules: CourseModule[] = [
   "Essas fotos avaliam qualidade operacional da cozinha.",
   "Tão importante quanto o relatório escrito.",
  ],
+ pages: [
+  {
+   title: "Página 1 — Tipos de Evidência e Regras do Briefing",
+   blocks: [
+    "As **evidências** são a prova de que a missão foi realizada e de que as observações são verdadeiras. Sem evidências adequadas, o relatório não é aceite — independentemente da qualidade da narrativa.",
+    "Os tipos de evidência mais comuns são: (1) **Talão ou recibo** — prova essencial da transação, com data, hora e valor visíveis. (2) **Fotografias** — exterior do local, interior (limpeza, layout, sinalética), produto e não-conformidades. (3) **Registos de tempo** — hora de entrada, abordagem, pagamento e saída. (4) **Notas escritas** — observações e comportamentos registados após sair. (5) **Capturas de ecrã** — para avaliações online, com data e hora visíveis. (6) **Gravação áudio** — apenas quando o briefing o permite, o que é raro.",
+    "O briefing define exatamente que evidências são necessárias: formato (JPG, PDF), quais os dados que devem ser visíveis (data, hora, valor, local) e qual o prazo de entrega. **Não cumprir estas especificações resulta em rejeição automática, sem exceções.** Nunca improvises quanto ao tipo ou formato de evidência.",
+   ],
+  },
+  {
+   title: "Página 2 — Organização e Qualidade das Evidências",
+   blocks: [
+    "Nos primeiros 15 minutos após sair do local, organiza todas as evidências recolhidas. Cria uma pasta clara e consistente por missão, com nomenclatura padronizada: por exemplo, '20250320_Starbucks_Lisboa_talao.jpg' ou '20250320_Carrefour_Alvalade_exterior.jpg'.",
+    "Antes de submeter, valida cruzando com o briefing: (1) Tenho todas as evidências obrigatórias? (2) Os dados são consistentes — o horário do talão bate com as notas de tempo? (3) As fotos estão nítidas, bem enquadradas e sem rostos involuntários? (4) O talão está legível — data, hora, valor e local visíveis? (5) Não há dados pessoais de terceiros expostos?",
+    "Para **fotografias de qualidade**: usa luz natural ou LED branca (sem flash que crie reflexos). Posiciona o telemóvel perpendicularmente ao objeto. Tira 3 ou 4 fotos de segurança e fica com a melhor. Para o talão: coloca-o numa superfície plana com boa iluminação, sem dobras. Se o valor não estiver legível, não submetes.",
+    "Faz sempre **backup das evidências**: copia para o computador e guarda a pasta organizada por missão. Em dias com 2 ou 3 missões, a organização imediata por pasta evita confusões e erros de submissão.",
+   ],
+  },
+  {
+   title: "Página 3 — Talão, Evidências Digitais e Fotografias de Refeições",
+   blocks: [
+    "O **talão** é a evidência mais crítica da maioria das missões. Para ser válido, deve ter visíveis: data e hora da transação, valor pago, lista de produtos (alinhada com a persona e o briefing), identificação do local ou sucursal, e método de pagamento. Guarda sempre o original físico e digitaliza ou fotografa imediatamente após a visita.",
+    "Para **avaliações online**, as capturas de ecrã são o equivalente ao talão: devem ter a data e hora do computador visíveis no canto do ecrã, todos os campos de formulário legíveis, e emails ou SMS de confirmação guardados como prova. A agência usa estes timestamps para calcular tempos exatos de resposta.",
+    "Em **avaliações de restauração**, a fotografia da refeição é obrigatória em quase todos os projetos. Deve ser tirada de cima (vista aérea), antes de começar a comer, com todos os componentes do prato visíveis. Em take-away, destapa os recipientes antes de fotografar. Uma refeição fotografada incorretamente equivale a uma evidência em falta.",
+    "Situações especiais: (1) **Sem talão** — pede recibo alternativo ou documenta a situação no relatório. (2) **Múltiplas compras** — assegura que o talão reflete todos os itens. (3) **Dados sensíveis em foto** — remove ou pixela antes de submeter. (4) **Avaliações de fitness ou serviços** — regista chamadas, screenshot do voucher e foto da fachada.",
+   ],
+  },
+ ],
  evaluationExamples: [
   {
    title: "Exemplo 1: Organização Perfeita de Evidências",
@@ -1152,6 +1399,34 @@ export const courseModules: CourseModule[] = [
   "REGRA: Grava o relatório a cada secção que completares.",
   "Nas apps móveis: clica em 'guardar/home' antes de sair. Teu progresso fica salvo, podes continuar depois.",
   "Esta dica evita uma das frustrações mais comuns: ter de reescrever um relatório inteiro.",
+ ],
+ pages: [
+  {
+   title: "Página 1 — Os Três Pilares do Relatório",
+   blocks: [
+    "O relatório é o **produto final** da missão. É o que a marca recebe, analisa e usa para tomar decisões. A sua qualidade reflete diretamente a tua reputação profissional.",
+    "Todo o relatório assenta em três pilares: (1) **Factos** — o que foi observado exatamente, sem interpretações nem opiniões. (2) **Contexto** — as circunstâncias da visita: estava cheia? Era dia especial? Havia evento? (3) **Evidências** — as provas que comprovam o relatado: fotos, talão, registos de tempo.",
+    "A estrutura de um relatório completo inclui: **Cabeçalho** com data, hora, local exato, endereço, número da missão e persona utilizada. **Dados da visita**: duração total, hora de entrada e saída, caracterização do ambiente. **Respostas fechadas**: checklist SIM/NÃO, escalas, N/A — uma por uma, sem interpretação. **Respostas abertas**: descrição cronológica detalhada, comportamentos observados, diálogos relevantes. **Classificação global** se aplicável. **Anexos**: fotos, talão e restante documentação.",
+   ],
+  },
+  {
+   title: "Página 2 — Respostas Fechadas e Abertas: Como Escrever",
+   blocks: [
+    "Nas **respostas fechadas**, a regra é binária e absoluta: segue exatamente o critério definido. Se o critério é 'cumprimentou em 30 segundos', a resposta é SIM ou NÃO, baseada no tempo registado. Trinta e dois segundos é NÃO. Não existe 'quase' nem 'com reservas'. Se esperaste 35 segundos: NÃO cumpriu.",
+    "Nas **respostas abertas**, a narrativa deve ser cronológica, objetiva e verificável. Um exemplo de boa resposta: '10:15 — Entrada. Loja com cerca de 20 clientes. 10:18 — Abordagem por Carlos: \"Olá, bem-vindo.\" Perguntei a diferença entre modelo A e B. Resposta: \"O modelo A tem melhor processador, o B é mais económico.\" Não mencionou duração da bateria nem garantia. Compra: modelo A por 299 €. Pagamento: 10:28. Saída: 10:30. Total em loja: 15 minutos.'",
+    "**Linguagem profissional** significa: usar sempre a primeira pessoa no passado ('dirigi-me à secção', 'o colaborador cumprimentou-me'); evitar gírias, abreviações e emojis; substituir adjetivos vagos por factos observáveis — não 'simpático', mas 'sorriu durante toda a interação'; não 'incompetente', mas 'respondeu corretamente apenas 1 de 4 perguntas técnicas'.",
+    "**Justificação obrigatória de penalizações**: quando se avalia negativamente, é obrigatório justificar com facto específico. Exemplo correto: 'O colaborador não sugeriu produtos adicionais durante os 8 minutos de interação.' Exemplo inaceitável: 'O colaborador não se esforçou.' A marca precisa saber exatamente o que aconteceu para poder agir.",
+   ],
+  },
+  {
+   title: "Página 3 — Erros a Evitar e Checklist de Submissão",
+   blocks: [
+    "O **erro fatal** do relatório é a contradição: quando a checklist diz 'Critério X: SIM' mas o texto narrativo diz que não aconteceu. Este tipo de inconsistência leva a rejeição imediata e questiona a integridade de todo o relatório. Antes de submeter, verifica que checklist e texto estão alinhados. Se descobrires um erro, corrige em ambos os sítios.",
+    "Outros erros comuns: (1) Linguagem opinativa em vez de factual. (2) Dados de tempo vagos — 'esperou muito' em vez de '4 minutos e 20 segundos'. (3) Evidências em falta ou ilegíveis. (4) Entrega fora do prazo — a memória perde detalhe e relatórios tardios perdem credibilidade.",
+    "Muitas plataformas **não gravam automaticamente o progresso**. Grava o relatório a cada secção completada. Nas apps móveis, clica em 'guardar' antes de sair. Perder um relatório completo por falha de internet é uma das frustrações mais comuns — e completamente evitável.",
+    "**Checklist de submissão**: (1) Data, hora e local precisos. (2) Todas as respostas fechadas preenchidas. (3) Texto aberto coerente com a checklist — sem contradições. (4) Linguagem clara e profissional, sem opiniões. (5) Todas as evidências obrigatórias anexadas e legíveis. (6) Ficheiros nomeados corretamente. (7) Tamanho de imagens aceitável (normalmente até 5 MB). Se tudo OK: submete.",
+   ],
+  },
  ],
  evaluationExamples: [
   {
@@ -1306,6 +1581,41 @@ export const courseModules: CourseModule[] = [
   "Envia o novo número à agência para cada projeto.",
   "Este investimento de tempo traduz-se diretamente em mais oportunidades de trabalho.",
  ],
+ pages: [
+  {
+   title: "Página 1 — Como Funciona a Remuneração",
+   blocks: [
+    "A remuneração em Cliente Mistério funciona **por missão** — não há salário fixo nem pagamento por hora. Cada missão tem um valor definido previamente, que deve ser aceite antes de executar. Como referência geral: (1) Retalho e restauração simples — **5 a 20 € por missão**. (2) Telecomunicações, farmácias e seguros — **20 a 50 €**. (3) Banca e hotelaria — **50 a 100 €**. (4) Auditorias complexas e automóvel — **100 a 200 € ou mais**.",
+    "Os **reembolsos** cobrem os custos obrigatórios da missão: compra obrigatória (o talão é a prova), consumo obrigatório se definido no briefing, e estacionamento documentado com recibo. O que não é reembolsado: transporte não previsto no briefing, refeições pessoais, roupa e despesas pessoais. **Lê sempre o briefing antes de aceitar** — cada projeto tem regras diferentes.",
+    "O **prazo de pagamento** varia entre 15 a 60 dias após a agência validar o relatório. Não contes com o dinheiro imediatamente. Planeia o fluxo de caixa tendo em conta este desfasamento. Quanto mais rápido submetes o relatório, mais cedo começa a contagem do prazo de pagamento.",
+   ],
+  },
+  {
+   title: "Página 2 — Cálculo de Rentabilidade Real",
+   blocks: [
+    "Antes de aceitar qualquer missão, calcula a **rentabilidade real** com esta fórmula: **(Remuneração − Custos reais) ÷ Horas totais = € por hora.**",
+    "Exemplo prático: missão com remuneração de 25 €. Custos: combustível 8 € + estacionamento 3 € + café não reembolsado 2 € = 13 € total. Lucro real: 25 − 13 = **12 €**. Tempo total: preparação 30 min + deslocação 25 min + execução 40 min + relatório 1 h = **2 h 35 min**. Rentabilidade: 12 € ÷ 2,58 h = **4,65 €/hora** — abaixo do mínimo recomendado.",
+    "Como referência para decisão: (1) **Abaixo de 4 €/hora** — rejeita; não compensa. (2) **Entre 4 e 6 €/hora** — considera apenas se for útil para experiência ou portfólio. (3) **Entre 6 e 10 €/hora** — aceita; é uma missão normal e aceitável. (4) **Acima de 10 €/hora** — prioritário; aceita sempre que possível.",
+    "No início de carreira, é normal aceitar missões com rentabilidade mais baixa para construir portfólio e ratings. Mas a partir do segundo ou terceiro mês, o cálculo deve ser feito antes de cada aceitação.",
+   ],
+  },
+  {
+   title: "Página 3 — Estratégias para Maximizar o Rendimento",
+   blocks: [
+    "Aumentar o rendimento não significa fazer mais missões — significa fazer missões mais rentáveis e de forma mais eficiente. As estratégias mais eficazes são: (1) **Agrupamento geográfico** — aceita 2 ou 3 missões na mesma zona no mesmo dia; uma deslocação, múltiplos rendimentos. (2) **Especialização setorial** — torna-te especialista em banca, hotelaria ou automóvel; estes setores pagam 3 a 5 vezes mais que o retalho simples. (3) **Regularidade** — agências preferem avaliadores fiáveis e recorrentes, que recebem convites para projetos premium em primeira mão. (4) **Múltiplas plataformas** — não dependas de uma única fonte.",
+    "Em projetos com nome do colaborador, **obter o nome pode valer mais dinheiro** — é comum pagar mais 0,50 a 1 € por secção. Em 4 secções, isso representa 2 a 4 € adicionais. O nome é importante para a marca — permite feedback personalizado e formação específica. Observa o crachá ou pergunta naturalmente no final da interação.",
+    "Para receber todos os reembolsos corretamente: guarda sempre o talão original e um scan digital. Fotografa o recibo de estacionamento imediatamente. **Visita invalidada por parâmetro errado = zero remuneração e possível devolução de reembolso.** Verifica todos os parâmetros antes de executar.",
+   ],
+  },
+  {
+   title: "Página 4 — Fiscalidade, Gestão Financeira e Profissionalismo",
+   blocks: [
+    "Em Portugal, os rendimentos de Cliente Mistério devem ser declarados ao fisco. Como referência: (1) **Abaixo de 20 000 €/ano** — atividade ocasional; IRS simplificado, sem IVA. (2) **Entre 20 000 e 75 000 €** — regime real; recibos verdes, possibilidade de deduzir despesas. (3) **Acima de 75 000 €** — considera abertura de empresa. A recomendação é consultar um contabilista uma vez — o custo (50 a 100 €) é negligenciável face aos erros que previne.",
+    "Para a **gestão financeira**: define um objetivo mensal mínimo ('preciso de 150 €/mês — quantas missões?'). Guarda 30% dos ganhos para cobrir impostos. Reinveste gradualmente em equipamento (câmara, telemóvel) que melhore a qualidade das evidências.",
+    "Alguns projetos exigem **cartões SIM dedicados** — números diferentes para avaliações telefónicas distintas, para que a empresa avaliada não reconheça o número em futuras visitas. Podes pedir cartões pré-pagos gratuitamente nas operadoras. Quanto mais cartões disponíveis, mais projetos telefónicos podes aceitar.",
+   ],
+  },
+ ],
  quiz: [
  {
  id: "m9q1",
@@ -1439,6 +1749,34 @@ export const courseModules: CourseModule[] = [
   "**Controlo financeiro**: faturaste? quanto te devem? prazos de pagamento.",
   "**Gestão de cartões SIM**: qual número para qual projeto.",
   "Esta organização separa amadores de profissionais. Investe tempo em criar o teu sistema desde o início.",
+ ],
+ pages: [
+  {
+   title: "Página 1 — Os Pilares da Reputação Profissional",
+   blocks: [
+    "A reputação é o ativo mais importante de um avaliador. Constrói-se ao longo do tempo e é difícil de recuperar quando se perde. Assenta em três pilares: (1) **Consistência** — a mesma qualidade de missão para missão, sem altos e baixos. (2) **Qualidade** — relatórios detalhados, precisos e com evidências perfeitas; taxa de aprovação acima de 95%. (3) **Cumprimento de prazos** — entregar sempre dentro do prazo, idealmente antes. Quem cumpre estes três pilares é contactado primeiro para projetos premium.",
+    "A trajetória de evolução típica segue este percurso: **Meses 1-2** — Retalho simples e restauração rápida; objetivo: ganhar confiança, aprender o processo e construir portfólio (5 a 15 €/missão). **Meses 3-4** — Telecomunicações, farmácias, seguros; mais complexidade, mais detalhe (15 a 40 €/missão). **Mês 5 em diante** — Banca, hotelaria de luxo, auditorias certificadas; exigem excelência (75 a 200 €+/missão).",
+    "Para acelerar a evolução: (1) **Pede feedback** quando um relatório é rejeitado — 'por que não foi aprovado? o que posso melhorar?'. (2) **Mantém um log de erros** — o que correu mal, como corrigir. (3) **Diversifica setores** — trabalha em vários para ganhar versatilidade. (4) **Faz networking** — fóruns e comunidades de avaliadores são fontes de dicas práticas. (5) **Investe em formação** — técnicas de escrita, observação e especificidades de cada setor.",
+   ],
+  },
+  {
+   title: "Página 2 — Plano Prático de 30 Dias",
+   blocks: [
+    "**Semana 1 — Começo com estrutura.** Regista-te em 3 a 5 plataformas (BMS, Spotec, Teseo, NasoQ). Completa os perfis a 100%: foto, CV descritivo, áreas de interesse. Faz a primeira missão — escolhe algo simples, perto de casa e de baixa pressão. O objetivo desta semana é apenas ganhar confiança no processo.",
+    "**Semana 2 — Qualidade em primeiro lugar.** Realiza 2 a 3 missões. Prioriza qualidade sobre quantidade — cada relatório deve passar por uma revisão tripla antes de submeter. Anota todos os erros e o que poderias ter feito melhor.",
+    "**Semana 3 — Feedback e expansão.** Pede feedback explícito às agências por email: 'Como posso melhorar?'. Tenta 3 a 4 missões e explora um setor diferente do que já fizeste. Cada missão é uma oportunidade de aprendizagem.",
+    "**Semana 4 — Consolidação e planeamento.** Define a tua rotina: qual o horário ideal, qual a zona geográfica preferida, quais as plataformas mais ativas. Calcula a rentabilidade real de tudo o que fizeste no mês. Define um objetivo concreto para o mês 2: por exemplo, '10 missões com taxa de aprovação acima de 97%, pelo menos 2 em setor novo'.",
+   ],
+  },
+  {
+   title: "Página 3 — Métricas de Sucesso e Evolução de Carreira",
+   blocks: [
+    "O progresso mede-se com indicadores concretos: (1) **Número de missões por semana** — começa com 1-2, depois 3-5, depois 10+. (2) **Taxa de aprovação de relatórios** — almejar acima de 95%; essencial para reputação. (3) **Rendimento líquido mensal** após custos — o único número que importa, não o valor bruto. (4) **Tempo médio por missão** — reduzir de 2 horas para 1,5 com a experiência. (5) **Número de agências que te contactam proativamente** — sinal claro de boa reputação.",
+    "A evolução de **ratings** segue normalmente esta curva: mês 1 — 4,5/5 (normal para iniciante); meses 2-3 — 4,7/5 (melhoria visível, agências começam a notar); mês 4 em diante — 4,9/5 (acesso a projetos premium). Um rating acima de 4,7 já abre portas importantes. O 5/5 é raro — exige perfeição absoluta e consistente.",
+    "Os **sinais de prontidão para projetos premium** são: mais de 100 missões com taxa de aprovação acima de 95%; agências que te pedem pelo nome para projetos específicos; domínio técnico de 2 ou 3 setores; capacidade de realizar 2 a 3 missões por dia sem comprometer qualidade. Quando estes sinais estiverem presentes, **negoceia**: pede remuneração mais elevada e missões premium.",
+    "Para avaliadores experientes, o próximo passo pode ser a **especialização como consultor de qualidade** — guiar agências e marcas, com rendimentos de 200 €+/dia. Este nível resulta de anos de trabalho consistente, portfólio sólido e reputação comprovada. O Cliente Mistério não é enriquecimento rápido — é construir uma carreira flexível com crescimento real e progressivo.",
+   ],
+  },
  ],
  evaluationExamples: [
   {
