@@ -457,11 +457,11 @@ export default function CursoPage() {
   }, [router, loadProgress]);
 
   /*
-   * DESCRIÇÃO DO EFEITO: Bloqueia o scroll da página principal quando o conteúdo do módulo
-   * é apresentado em caixa sobreposta para manter o foco no estudo.
+   * DESCRIÇÃO DO EFEITO: Bloqueia o scroll da página principal sempre que um módulo
+   * está aberto em modo sobreposto (teoria ou questionário), mantendo o foco no conteúdo.
    */
   useEffect(() => {
-    if (!activeModuleId || quizMode) {
+    if (!activeModuleId) {
       document.body.style.overflow = "";
       return;
     }
@@ -471,7 +471,7 @@ export default function CursoPage() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [activeModuleId, quizMode]);
+  }, [activeModuleId]);
 
   const getModuleProgress = (moduleId: number): ModuleProgress | undefined => {
     return progress?.modules.find((m) => m.moduleId === moduleId);
@@ -956,108 +956,114 @@ export default function CursoPage() {
 
       {/* Questionário */}
       {activeModule && quizMode && activeModule.quiz.length > 0 && (
-        <div className="space-y-6">
-          <button
-            type="button"
-            onClick={() => setQuizMode(false)}
-            className="text-sm text-[#2a2a2a] font-semibold hover:underline"
-          >
-            &larr; Voltar ao conteúdo
-          </button>
-
-          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
-            <h2 className="text-xl font-bold mb-1 text-[#2a2a2a]">{activeModule.title}</h2>
-            <p className="text-sm text-[#666] mb-6">
-              Responda a todas as questões. Necessita de 60% para concluir o módulo.
-            </p>
-
-            <div className="space-y-6">
-              {activeModule.quiz.map((question, qIdx) => (
-                <div
-                  key={question.id}
-                  className="space-y-3 rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 sm:p-5"
-                >
-                  <p className="font-semibold text-sm text-[#2a2a2a]">
-                    {qIdx + 1}. {question.question}
-                  </p>
-                  <div className="grid gap-2">
-                    {question.options.map((option, oIdx) => (
-                      <button
-                        key={oIdx}
-                        type="button"
-                        disabled={quizSubmitted}
-                        onClick={() => selectAnswer(question.id, oIdx)}
-                        className={getOptionClass(question, oIdx)}
-                      >
-                        {String.fromCharCode(65 + oIdx)}) {option}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
+        <div className="fixed inset-0 z-[120] bg-black/60 p-3 sm:p-6">
+          <div className="mx-auto flex h-full w-full max-w-[1320px] flex-col rounded-2xl border border-[#D4B5A0]/30 bg-white p-4 sm:p-6">
+            <div className="mb-4">
+              <button
+                type="button"
+                onClick={() => setQuizMode(false)}
+                className="text-sm text-[#2a2a2a] font-semibold hover:underline"
+              >
+                &larr; Voltar ao conteúdo
+              </button>
             </div>
 
-            {!quizSubmitted && (
-              <div className="mt-8 flex justify-center">
-                <button
-                  type="button"
-                  disabled={!allQuestionsAnswered(activeModule.quiz) || isSaving}
-                  onClick={submitQuiz}
-                  className="submit max-w-xs disabled:opacity-40"
-                >
-                  Submeter Respostas
-                </button>
-              </div>
-            )}
+            <div className="overflow-y-auto pr-1 sm:pr-2">
+              <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
+                <h2 className="text-xl font-bold mb-1 text-[#2a2a2a]">{activeModule.title}</h2>
+                <p className="text-sm text-[#666] mb-6">
+                  Responda a todas as questões. Necessita de 60% para concluir o módulo.
+                </p>
 
-            {quizSubmitted && quizScore !== null && (
-              <div className={`mt-8 rounded-xl p-5 text-center ${
-                quizScore >= 60 ? "bg-[#F66856]/15 border border-[#F66856]/40" : "bg-red-100 border border-red-400/40"
-              }`}>
-                <p className="text-2xl font-bold mb-2 text-[#2a2a2a]">
-                  {quizScore >= 60 ? "Parabéns!" : "Tente novamente"}
-                </p>
-                <p className="text-sm mb-1 text-[#2a2a2a]">
-                  Obteve <span className="font-bold text-lg text-[#F66856]">{quizScore}%</span> neste questionário.
-                </p>
-                <p className="text-xs text-[#666] mb-4">
-                  {quizScore >= 60
-                    ? isSaving ? "A guardar progresso..." : "Módulo concluído com sucesso!"
-                    : "Necessita de pelo menos 60% para avançar. Reveja o conteúdo e tente novamente."}
-                </p>
-                <div className="flex justify-center gap-3">
-                  {quizScore >= 60 ? (
+                <div className="space-y-6">
+                  {activeModule.quiz.map((question, qIdx) => (
+                    <div
+                      key={question.id}
+                      className="space-y-3 rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 sm:p-5"
+                    >
+                      <p className="font-semibold text-sm text-[#2a2a2a]">
+                        {qIdx + 1}. {question.question}
+                      </p>
+                      <div className="grid gap-2">
+                        {question.options.map((option, oIdx) => (
+                          <button
+                            key={oIdx}
+                            type="button"
+                            disabled={quizSubmitted}
+                            onClick={() => selectAnswer(question.id, oIdx)}
+                            className={getOptionClass(question, oIdx)}
+                          >
+                            {String.fromCharCode(65 + oIdx)}) {option}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {!quizSubmitted && (
+                  <div className="mt-8 flex justify-center">
                     <button
                       type="button"
-                      onClick={() => {
-                        setActiveModuleId(null);
-                        setQuizMode(false);
-                      }}
-                      className="submit max-w-xs"
+                      disabled={!allQuestionsAnswered(activeModule.quiz) || isSaving}
+                      onClick={submitQuiz}
+                      className="submit max-w-xs disabled:opacity-40"
                     >
-                      Voltar aos Módulos
+                      Submeter Respostas
                     </button>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => setQuizMode(false)}
-                        className="submit max-w-[200px] !bg-white/20"
-                      >
-                        Rever Conteúdo
-                      </button>
-                      <button
-                        type="button"
-                        onClick={startQuiz}
-                        className="submit max-w-[200px]"
-                      >
-                        Repetir Quiz
-                      </button>
-                    </>
-                  )}
-                </div>
+                  </div>
+                )}
+
+                {quizSubmitted && quizScore !== null && (
+                  <div className={`mt-8 rounded-xl p-5 text-center ${
+                    quizScore >= 60 ? "bg-[#F66856]/15 border border-[#F66856]/40" : "bg-red-100 border border-red-400/40"
+                  }`}>
+                    <p className="text-2xl font-bold mb-2 text-[#2a2a2a]">
+                      {quizScore >= 60 ? "Parabéns!" : "Tente novamente"}
+                    </p>
+                    <p className="text-sm mb-1 text-[#2a2a2a]">
+                      Obteve <span className="font-bold text-lg text-[#F66856]">{quizScore}%</span> neste questionário.
+                    </p>
+                    <p className="text-xs text-[#666] mb-4">
+                      {quizScore >= 60
+                        ? isSaving ? "A guardar progresso..." : "Módulo concluído com sucesso!"
+                        : "Necessita de pelo menos 60% para avançar. Reveja o conteúdo e tente novamente."}
+                    </p>
+                    <div className="flex justify-center gap-3">
+                      {quizScore >= 60 ? (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveModuleId(null);
+                            setQuizMode(false);
+                          }}
+                          className="submit max-w-xs"
+                        >
+                          Voltar aos Módulos
+                        </button>
+                      ) : (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => setQuizMode(false)}
+                            className="submit max-w-[200px] !bg-white/20"
+                          >
+                            Rever Conteúdo
+                          </button>
+                          <button
+                            type="button"
+                            onClick={startQuiz}
+                            className="submit max-w-[200px]"
+                          >
+                            Repetir Quiz
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
       )}
