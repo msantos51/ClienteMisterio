@@ -17,9 +17,9 @@ type CompletionRow = {
 };
 
 /*
- * DESCRIÇÃO DA FUNÇÃO: Normaliza texto para ASCII básico para garantir compatibilidade com fonte standard do PDF.
+ * DESCRIÇÃO DA FUNÇÃO: Normaliza texto para ASCII básico para uso em nomes de ficheiro (headers HTTP).
  */
-const normalizeAscii = (value: string): string => {
+const normalizeAsciiFileName = (value: string): string => {
   return value
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -45,7 +45,7 @@ const encodePdfLatin1Text = (value: string): string => {
 const buildCertificatePdf = (studentName: string, issueDate: string): Uint8Array => {
   const pageWidth = 842;
   const centerX = pageWidth / 2;
-  const safeName = encodePdfLatin1Text(normalizeAscii(studentName) || "Participante");
+  const safeName = encodePdfLatin1Text(studentName.trim() || "Participante");
   const safeDate = encodePdfLatin1Text(issueDate);
   const measureCenteredX = (text: string, fontSize: number, widthFactor = 0.5): number => {
     return centerX - (text.length * fontSize * widthFactor) / 2;
@@ -126,8 +126,8 @@ const buildCertificatePdf = (studentName: string, issueDate: string): Uint8Array
     "1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n",
     "2 0 obj\n<< /Type /Pages /Count 1 /Kids [3 0 R] >>\nendobj\n",
     "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>\nendobj\n",
-    "4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n",
-    "5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>\nendobj\n",
+    "4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\nendobj\n",
+    "5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\nendobj\n",
     `6 0 obj\n<< /Length ${Buffer.byteLength(contentStream, "latin1")} >>\nstream\n${contentStream}\nendstream\nendobj\n`,
   ];
 
@@ -196,7 +196,7 @@ export const GET = async () => {
   }).format(new Date());
 
   const pdf = buildCertificatePdf(userName, issueDate);
-  const fileSafeName = normalizeAscii(userName).replace(/\s+/g, "_") || "participante";
+  const fileSafeName = normalizeAsciiFileName(userName).replace(/\s+/g, "_") || "participante";
 
   // Cria uma cópia explícita em ArrayBuffer para cumprir o tipo BodyInit esperado pelo Next.js 16.
   const pdfBinary = new Uint8Array(pdf.byteLength);
