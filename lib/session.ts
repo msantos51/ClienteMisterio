@@ -2,14 +2,13 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/session.ts` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
-import { createHash, createHmac, timingSafeEqual } from "node:crypto";
+import { createHmac, timingSafeEqual } from "node:crypto";
 
 import { cookies } from "next/headers";
 
 const sessionCookieName = "vp_session_token";
 const sessionDurationMs = 1000 * 60 * 60 * 24 * 7;
 let missingSecretWarningDisplayed = false;
-let derivedSecretWarningDisplayed = false;
 
 type SessionPayload = {
   userId: string;
@@ -18,21 +17,10 @@ type SessionPayload = {
   exp: number;
 };
 
-const deriveFallbackSecret = () => {
-  // Deriva uma chave estável para o ambiente atual quando a variável dedicada não foi definida.
-  const databaseUrl = process.env.DATABASE_URL?.trim();
-
-  if (!databaseUrl) {
-    return null;
-  }
-
-  return createHash("sha256").update(databaseUrl).digest("hex");
-};
-
 function getSessionSecret(options: { allowMissing: true }): string | null;
 function getSessionSecret(options?: { allowMissing?: false }): string;
 function getSessionSecret(options?: { allowMissing?: boolean }) {
-  // Obtém a chave principal de assinatura da sessão com suporte a fallback controlado.
+  // Obtém a chave principal de assinatura da sessão e bloqueia fallback implícito em produção.
   const configuredSecret = process.env.SESSION_SECRET?.trim() || process.env.NEXTAUTH_SECRET?.trim();
 
   if (configuredSecret) {
@@ -41,18 +29,6 @@ function getSessionSecret(options?: { allowMissing?: boolean }) {
 
   if (process.env.NODE_ENV !== "production") {
     return "development-only-session-secret";
-  }
-
-  const derivedSecret = deriveFallbackSecret();
-
-  if (derivedSecret) {
-    if (!derivedSecretWarningDisplayed) {
-      // Regista aviso único para incentivar configuração explícita da secret em produção.
-      console.error("SESSION_SECRET_NOT_CONFIGURED_USING_DATABASE_URL_FALLBACK");
-      derivedSecretWarningDisplayed = true;
-    }
-
-    return derivedSecret;
   }
 
   if (!missingSecretWarningDisplayed) {
