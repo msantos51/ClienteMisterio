@@ -575,7 +575,11 @@ export default function CursoPage() {
 
   const activeModule = activeModuleId ? courseModules.find((m) => m.id === activeModuleId) : null;
   const activeSupportContent = activeModule ? moduleSupportContent[activeModule.id] : null;
-  const baseTheoryPages = activeModule ? buildBaseTheoryPages(activeModule.content) : [];
+  const baseTheoryPages = activeModule
+    ? activeModule.pages
+      ? activeModule.pages.map((p) => ({ title: p.title, blocks: p.blocks }))
+      : buildBaseTheoryPages(activeModule.content)
+    : [];
   const premiumTheoryPage = activeSupportContent
     ? {
         title: "Página 5 — Casos reais, estratégia e checklist final",
