@@ -172,7 +172,10 @@ export const GET = async () => {
   const pdf = buildCertificatePdf(userName, issueDate);
   const fileSafeName = normalizeAscii(userName).replace(/\s+/g, "_") || "participante";
 
-  return new NextResponse(pdf, {
+  // Converte para Blob para satisfazer o tipo BodyInit usado pelo NextResponse no build do Next.js 16.
+  const pdfBlob = new Blob([pdf], { type: "application/pdf" });
+
+  return new NextResponse(pdfBlob, {
     status: 200,
     headers: {
       "Content-Type": "application/pdf",
