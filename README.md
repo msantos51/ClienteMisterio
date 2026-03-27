@@ -105,6 +105,12 @@ npm start
 
 A base de dados é inicializada automaticamente na primeira execução (`lib/database.ts` cria as tabelas se não existirem).
 
+## Swagger (Teste no Browser)
+
+Com a aplicação em execução (`npm run dev`), abra: `http://localhost:3000/api-docs`
+
+Esta página carrega o Swagger UI e permite testar os endpoints manualmente no browser.
+
 ## Rotas da API
 
 | Método | Endpoint | Descrição |
@@ -118,6 +124,7 @@ A base de dados é inicializada automaticamente na primeira execução (`lib/dat
 | GET | `/api/user` | Obter perfil do utilizador autenticado |
 | PUT | `/api/user` | Atualizar dados de perfil |
 | PUT | `/api/user/password` | Alterar senha |
+| PUT | `/api/admin/course-access` | Atualizar manualmente acesso pago ao curso (admin) |
 | POST | `/api/contact` | Enviar mensagem de contacto |
 | GET | `/api/course/progress` | Progresso do curso do utilizador |
 
@@ -142,3 +149,11 @@ Configura as variáveis de ambiente no painel do Render antes do primeiro deploy
 ## Licença
 
 Todos os direitos reservados © Cliente Mistério. O conteúdo do curso e a plataforma não podem ser reproduzidos ou distribuídos sem autorização expressa.
+
+## Diretrizes de Escrita do Curso
+
+1. Sempre que o conteúdo do curso for apresentado em formato de pontos, cada ideia deve aparecer num parágrafo separado e numerado, em vez de texto corrido.
+
+2. Termos essenciais podem ser destacados com **negrito** para melhorar a leitura e a hierarquia visual do conteúdo.
+
+3. Evitar o uso de emojis, ícones e travessões como marcador de lista para manter uma apresentação mais natural e editorial.

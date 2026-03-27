@@ -31,7 +31,97 @@ type TheorySupportContent = {
   executionChecklist: string[];
 };
 
+type TheoryPage = {
+  title: string;
+  blocks: string[];
+};
+
 const sessionStorageKey = "vp_session";
+
+/*
+ * DESCRIÇÃO DA CONSTANTE: Lista de siglas válidas que devem manter maiúsculas.
+ */
+const acronymWhitelist = new Set(["NPS", "SMS", "PDF", "JPG", "LED", "KPI", "FAQ", "URL", "APP", "API", "RH", "CV"]);
+
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Suaviza palavras totalmente em maiúsculas para melhorar leitura,
+ * preservando siglas comuns e texto curto.
+ */
+const softenAllCapsWords = (text: string) =>
+  text.replace(/\b\p{Lu}{4,}\b/gu, (word) => {
+    if (acronymWhitelist.has(word)) {
+      return word;
+    }
+
+    return `${word[0]}${word.slice(1).toLowerCase()}`;
+  });
+
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Divide parágrafos longos em blocos menores mantendo sequência textual.
+ */
+const splitLongParagraph = (text: string): string[] => {
+  const sentenceCandidates = text
+    .split(/(?<=[.!?])\s+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean);
+
+  if (sentenceCandidates.length < 4) {
+    return [text];
+  }
+
+  const chunks: string[] = [];
+
+  for (let i = 0; i < sentenceCandidates.length; i += 2) {
+    chunks.push(sentenceCandidates.slice(i, i + 2).join(" "));
+  }
+
+  return chunks;
+};
+
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Converte texto corrido com enumerações "(1) ... (2) ..."
+ * em estrutura visual com lista e aplica melhorias de legibilidade em todos os módulos.
+ */
+const renderTheoryBlock = (paragraph: string, index: number) => {
+  const normalizedParagraph = softenAllCapsWords(paragraph);
+  const enumerationRegex = /\(\d+\)\s/g;
+  const matches = [...normalizedParagraph.matchAll(enumerationRegex)];
+
+  if (matches.length < 2) {
+    const paragraphChunks = splitLongParagraph(normalizedParagraph);
+
+    return (
+      <div key={index} className="space-y-3">
+        {paragraphChunks.map((chunk) => (
+          <p key={`${index}-${chunk}`} className="text-base leading-8 text-[#2a2a2a]">
+            {chunk}
+          </p>
+        ))}
+      </div>
+    );
+  }
+
+  const introText = normalizedParagraph.slice(0, matches[0].index).trim();
+  const items = matches.map((match, itemIndex) => {
+    const itemStart = match.index ?? 0;
+    const contentStart = itemStart + match[0].length;
+    const nextItemStart = matches[itemIndex + 1]?.index ?? normalizedParagraph.length;
+    const itemText = normalizedParagraph.slice(contentStart, nextItemStart).trim();
+
+    return itemText;
+  });
+
+  return (
+    <div key={index} className="space-y-3">
+      {introText && <p className="text-base leading-8 text-[#2a2a2a]">{introText}</p>}
+      <ul className="list-disc pl-6 space-y-2 text-base leading-8 text-[#2a2a2a]">
+        {items.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 /*
  * DESCRIÇÃO DO BLOCO: Conteúdo premium adicional por módulo para tornar a formação mais prática e diferenciadora.
@@ -300,10 +390,18 @@ export default function CursoPage() {
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [quizScore, setQuizScore] = useState<number | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [accessDenied, setAccessDenied] = useState(false);
 
   const loadProgress = useCallback(async () => {
+    setAccessDenied(false);
+
     try {
       const response = await fetch("/api/course/progress", { credentials: "include" });
+      if (response.status === 403) {
+        setAccessDenied(true);
+        return;
+      }
+
       if (response.ok) {
         const data = (await response.json()) as ProgressData;
         setProgress(data);
@@ -418,23 +516,35 @@ export default function CursoPage() {
     return <p className="text-sm text-slate-500">A verificar sessão...</p>;
   }
 
+  if (accessDenied) {
+    return (
+      <section className="w-full space-y-6 bg-white p-8 rounded-2xl">
+        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">Curso de Cliente Mistério</h1>
+        <p className="text-base text-[#2a2a2a]">
+          O acesso ao curso só fica disponível após confirmação do pagamento.
+        </p>
+        <div className="flex gap-3">
+          <button className="submit max-w-[220px]" type="button" onClick={() => router.push("/checkout")}>
+            Ir para pagamento
+          </button>
+          <button
+            className="site-pill-button-secondary max-w-[220px]"
+            type="button"
+            onClick={() => router.push("/dashboard")}
+          >
+            Voltar ao dashboard
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   const activeModule = activeModuleId ? courseModules.find((m) => m.id === activeModuleId) : null;
   const activeSupportContent = activeModule ? moduleSupportContent[activeModule.id] : null;
-  const baseTheoryPages = activeModule
-    ? [
-        {
-          title: "Página 1 — Fundamentos e Contexto",
-          blocks: activeModule.content.slice(0, 2),
-        },
-        {
-          title: "Página 2 — Critérios Avançados e Aplicação",
-          blocks: activeModule.content.slice(2, 5),
-        },
-      ]
-    : [];
+  const baseTheoryPages = activeModule ? buildBaseTheoryPages(activeModule.content) : [];
   const premiumTheoryPage = activeSupportContent
     ? {
-        title: "Página 3 — Casos Reais, Boas/Más Práticas e Estratégia",
+        title: "Página 5 — Casos reais, estratégia e checklist final",
         blocks: [activeSupportContent.realScenario],
       }
     : null;
@@ -659,6 +769,27 @@ export default function CursoPage() {
                     ))}
                   </ul>
                 </div>
+                {activeModule.evaluationExamples && activeModule.evaluationExamples.length > 0 && (
+                  <div className="rounded-lg border border-[#D4B5A0]/30 bg-white p-4 md:col-span-2">
+                    <p className="font-bold text-[#2a2a2a] mb-3">Exemplos de decisão profissional</p>
+                    <div className="space-y-4">
+                      {activeModule.evaluationExamples.map((example) => (
+                        <article key={example.title} className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 space-y-2">
+                          <h3 className="text-sm font-bold text-[#2a2a2a]">{example.title}</h3>
+                          <p className="text-sm text-[#2a2a2a]">
+                            <span className="font-semibold">Cenário:</span> {example.scenario}
+                          </p>
+                          <p className="text-sm text-[#2a2a2a]">
+                            <span className="font-semibold">Abordagem correta:</span> {example.correctApproach}
+                          </p>
+                          <p className="text-sm text-[#2a2a2a]">
+                            <span className="font-semibold">Abordagem incorreta:</span> {example.incorrectApproach}
+                          </p>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
@@ -715,9 +846,12 @@ export default function CursoPage() {
               Responda a todas as questões. Necessita de 60% para concluir o módulo.
             </p>
 
-            <div className="space-y-8">
+            <div className="space-y-6">
               {activeModule.quiz.map((question, qIdx) => (
-                <div key={question.id} className="space-y-3">
+                <div
+                  key={question.id}
+                  className="space-y-3 rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 sm:p-5"
+                >
                   <p className="font-semibold text-sm text-[#2a2a2a]">
                     {qIdx + 1}. {question.question}
                   </p>

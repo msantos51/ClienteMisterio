@@ -5,6 +5,7 @@
 import { NextResponse } from "next/server";
 
 import { query } from "@/lib/database";
+import { verifyPassword } from "@/lib/password";
 import { getSession } from "@/lib/session";
 
 type UserRow = {
@@ -17,6 +18,7 @@ type UserRow = {
   gender: string | null;
   profile_completed: boolean;
   is_admin: boolean;
+  has_course_access: boolean;
 };
 
 type UpdatePayload = {
@@ -25,6 +27,14 @@ type UpdatePayload = {
   lastName: string;
   birthDate: string;
   gender: string;
+};
+
+type DeletePayload = {
+  currentPassword: string;
+};
+
+type PasswordRow = {
+  password_hash: string;
 };
 
 const allowedGender = ["male", "female"];
@@ -41,7 +51,7 @@ export const GET = async () => {
   }
 
   const result = await query<UserRow>(
-    "select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin from users where id = $1",
+    "select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin, has_course_access from users where id = $1",
     [session.userId]
   );
 
@@ -60,6 +70,7 @@ export const GET = async () => {
       gender: result.rows[0].gender,
       profileCompleted: result.rows[0].profile_completed,
       isAdmin: result.rows[0].is_admin,
+      hasCourseAccess: result.rows[0].has_course_access,
     },
   });
 };
@@ -134,4 +145,47 @@ export const PUT = async (request: Request) => {
   );
 
   return NextResponse.json({ message: "Perfil atualizado com sucesso." });
+};
+
+export const DELETE = async (request: Request) => {
+  // Exige sessão autenticada e validação da senha atual antes de remover a conta.
+  const session = await getSession();
+
+  if (!session?.userId) {
+    return NextResponse.json(
+      { message: "É necessário iniciar sessão para apagar a conta." },
+      { status: 401 }
+    );
+  }
+
+  const payload = (await request.json()) as DeletePayload;
+
+  if (!payload.currentPassword) {
+    return NextResponse.json(
+      { message: "Informe a senha atual para confirmar a eliminação da conta." },
+      { status: 400 }
+    );
+  }
+
+  const userResult = await query<PasswordRow>(
+    "select password_hash from users where id = $1",
+    [session.userId]
+  );
+
+  const user = userResult.rows[0];
+
+  if (!user) {
+    return NextResponse.json({ message: "Utilizador não encontrado." }, { status: 404 });
+  }
+
+  if (!verifyPassword(payload.currentPassword, user.password_hash)) {
+    return NextResponse.json(
+      { message: "A senha atual está incorreta." },
+      { status: 401 }
+    );
+  }
+
+  await query("delete from users where id = $1", [session.userId]);
+
+  return NextResponse.json({ message: "Conta apagada com sucesso." });
 };
