@@ -110,7 +110,7 @@ export default function CoursePage() {
         <h1 className="text-3xl font-semibold home-title-highlight-text sm:text-4xl lg:text-5xl">O Curso de Cliente Mistério</h1>
 
         <p className="max-w-4xl text-sm sm:text-base leading-6 sm:leading-7">
-          Um curso completo, 100% prático e desenhado para INICIANTES. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
+          Um curso completo, 100% prático e desenhado para iniciantes. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
         </p>
       </header>
 
