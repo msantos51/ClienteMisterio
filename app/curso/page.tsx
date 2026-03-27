@@ -456,6 +456,23 @@ export default function CursoPage() {
     loadProgress();
   }, [router, loadProgress]);
 
+  /*
+   * DESCRIÇÃO DO EFEITO: Bloqueia o scroll da página principal quando o conteúdo do módulo
+   * é apresentado em caixa sobreposta para manter o foco no estudo.
+   */
+  useEffect(() => {
+    if (!activeModuleId || quizMode) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModuleId, quizMode]);
+
   const getModuleProgress = (moduleId: number): ModuleProgress | undefined => {
     return progress?.modules.find((m) => m.moduleId === moduleId);
   };
@@ -735,20 +752,23 @@ export default function CursoPage() {
 
       {/* Conteúdo do módulo ativo */}
       {activeModule && !quizMode && currentTheoryPage && (
-        <div className="space-y-6">
-          <button
-            type="button"
-            onClick={() => setActiveModuleId(null)}
-            className="text-sm text-[#2a2a2a] font-semibold hover:underline"
-          >
-            &larr; Voltar aos módulos
-          </button>
-
-          <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6 space-y-6">
-            <div>
-              <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
-              <p className="text-sm text-[#666] mt-2">{activeModule.description}</p>
+        <div className="fixed inset-0 z-[120] bg-black/60 p-3 sm:p-6">
+          <div className="mx-auto flex h-full w-full max-w-[1320px] flex-col rounded-2xl border border-[#D4B5A0]/30 bg-white p-4 sm:p-6">
+            <div className="mb-4">
+              <button
+                type="button"
+                onClick={() => setActiveModuleId(null)}
+                className="text-sm text-[#2a2a2a] font-semibold hover:underline"
+              >
+                &larr; Voltar aos módulos
+              </button>
             </div>
+
+            <div className="space-y-6 overflow-y-auto pr-1 sm:pr-2">
+              <div>
+                <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
+                <p className="text-sm text-[#666] mt-2">{activeModule.description}</p>
+              </div>
 
             {/* Card de informação rápida — visível apenas na primeira página */}
             {theoryPage === 0 && (
@@ -881,55 +901,56 @@ export default function CursoPage() {
               </div>
             )}
 
-            <div className="flex items-center justify-between gap-3 border-t border-[#D4B5A0]/20 pt-4">
-              <button
-                type="button"
-                onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
-                disabled={theoryPage === 0}
-                className="site-pill-button-secondary max-w-[180px] disabled:opacity-40"
-              >
-                Página anterior
-              </button>
-              <p className="text-xs text-[#666]">
-                Página {theoryPage + 1} de {allTheoryPages.length}
-              </p>
-              <button
-                type="button"
-                onClick={() => setTheoryPage((prev) => Math.min(prev + 1, allTheoryPages.length - 1))}
-                disabled={isLastTheoryPage}
-                className="submit max-w-[180px] disabled:opacity-40"
-              >
-                Próxima página
-              </button>
+              <div className="flex items-center justify-between gap-3 border-t border-[#D4B5A0]/20 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
+                  disabled={theoryPage === 0}
+                  className="site-pill-button-secondary max-w-[180px] disabled:opacity-40"
+                >
+                  Página anterior
+                </button>
+                <p className="text-xs text-[#666]">
+                  Página {theoryPage + 1} de {allTheoryPages.length}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setTheoryPage((prev) => Math.min(prev + 1, allTheoryPages.length - 1))}
+                  disabled={isLastTheoryPage}
+                  className="submit max-w-[180px] disabled:opacity-40"
+                >
+                  Próxima página
+                </button>
+              </div>
+
+              {activeModule.id === 11 ? (
+                <div className="rounded-2xl border border-[#F66856]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
+                  <p className="text-sm text-[#2a2a2a]">
+                    Este módulo disponibiliza o seu Certificado de Conclusão em PDF com nome personalizado.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={downloadCertificate}
+                    disabled={isDownloadingCertificate}
+                    className="submit max-w-sm disabled:opacity-40"
+                  >
+                    {isDownloadingCertificate ? "A preparar certificado..." : "Descarregar Certificado em PDF"}
+                  </button>
+                </div>
+              ) : (
+                <div className="flex justify-center">
+                  <button
+                    type="button"
+                    onClick={startQuiz}
+                    disabled={!isLastTheoryPage}
+                    className="submit max-w-xs"
+                  >
+                    {isLastTheoryPage ? "Iniciar Questionário" : "Conclua a teoria para iniciar o questionário"}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-
-          {activeModule.id === 11 ? (
-            <div className="rounded-2xl border border-[#F66856]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
-              <p className="text-sm text-[#2a2a2a]">
-                Este módulo disponibiliza o seu Certificado de Conclusão em PDF com nome personalizado.
-              </p>
-              <button
-                type="button"
-                onClick={downloadCertificate}
-                disabled={isDownloadingCertificate}
-                className="submit max-w-sm disabled:opacity-40"
-              >
-                {isDownloadingCertificate ? "A preparar certificado..." : "Descarregar Certificado em PDF"}
-              </button>
-            </div>
-          ) : (
-            <div className="flex justify-center">
-              <button
-                type="button"
-                onClick={startQuiz}
-                disabled={!isLastTheoryPage}
-                className="submit max-w-xs"
-              >
-                {isLastTheoryPage ? "Iniciar Questionário" : "Conclua a teoria para iniciar o questionário"}
-              </button>
-            </div>
-          )}
         </div>
       )}
 
