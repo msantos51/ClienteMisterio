@@ -17,17 +17,6 @@ type CompletionRow = {
 };
 
 /*
- * DESCRIÇÃO DA FUNÇÃO: Escapa caracteres especiais para evitar quebra de sintaxe dentro de objetos de texto PDF.
- */
-const escapePdfText = (value: string): string => {
-  return value
-    .replace(/\\/g, "\\\\")
-    .replace(/\(/g, "\\(")
-    .replace(/\)/g, "\\)")
-    .replace(/\r?\n/g, " ");
-};
-
-/*
  * DESCRIÇÃO DA FUNÇÃO: Normaliza texto para ASCII básico para garantir compatibilidade com fonte standard do PDF.
  */
 const normalizeAscii = (value: string): string => {
@@ -39,11 +28,36 @@ const normalizeAscii = (value: string): string => {
 };
 
 /*
+ * DESCRIÇÃO DA FUNÇÃO: Converte texto Unicode para bytes Latin-1 compatíveis com fontes Type1 standard no PDF.
+ */
+const encodePdfLatin1Text = (value: string): string => {
+  const latin1Value = value.normalize("NFC").replace(/[^\u0000-\u00FF]/g, "");
+
+  return latin1Value
+    .replace(/\\/g, "\\\\")
+    .replace(/\(/g, "\\(")
+    .replace(/\)/g, "\\)");
+};
+
+/*
  * DESCRIÇÃO DA FUNÇÃO: Constrói um PDF simples (1 página) com identidade visual da plataforma.
  */
 const buildCertificatePdf = (studentName: string, issueDate: string): Uint8Array => {
-  const safeName = escapePdfText(normalizeAscii(studentName) || "Participante");
-  const safeDate = escapePdfText(issueDate);
+  const pageWidth = 842;
+  const centerX = pageWidth / 2;
+  const safeName = encodePdfLatin1Text(normalizeAscii(studentName) || "Participante");
+  const safeDate = encodePdfLatin1Text(issueDate);
+  const measureCenteredX = (text: string, fontSize: number, widthFactor = 0.5): number => {
+    return centerX - (text.length * fontSize * widthFactor) / 2;
+  };
+
+  const titleText = "CERTIFICADO DE CONCLUSÃO";
+  const introText = "Certificamos que";
+  const completionText = "concluiu com sucesso o Curso de Cliente Mistério.";
+  const noteLineOne = "Este certificado serve exclusivamente como comprovativo de que o formando adquiriu";
+  const noteLineTwo = "os conhecimentos necessários para iniciar a atividade enquanto Cliente Mistério.";
+  const issueDateText = `Data de emissão: ${safeDate}`;
+  const websiteText = "www.clientemisterio.com";
 
   const contentStream = [
     "q",
@@ -61,50 +75,50 @@ const buildCertificatePdf = (studentName: string, issueDate: string): Uint8Array
     "BT",
     "/F2 20 Tf",
     "0.9647 0.4078 0.3373 rg",
-    "220 500 Td",
-    "(CERTIFICADO DE CONCLUSÃO) Tj",
+    `${measureCenteredX(titleText, 20, 0.56)} 500 Td`,
+    `(${encodePdfLatin1Text(titleText)}) Tj`,
     "ET",
     "BT",
     "/F1 15 Tf",
     "0.1647 0.1647 0.1647 rg",
-    "320 455 Td",
-    "(Certificamos que) Tj",
+    `${measureCenteredX(introText, 15, 0.5)} 455 Td`,
+    `(${encodePdfLatin1Text(introText)}) Tj`,
     "ET",
     "BT",
     "/F2 34 Tf",
     "0.1647 0.1647 0.1647 rg",
-    "210 402 Td",
+    `${measureCenteredX(safeName, 34, 0.56)} 402 Td`,
     `(${safeName}) Tj`,
     "ET",
     "BT",
     "/F1 15 Tf",
     "0.1647 0.1647 0.1647 rg",
-    "185 352 Td",
-    "(concluiu com sucesso o Curso de Cliente Mistério.) Tj",
+    `${measureCenteredX(completionText, 15, 0.5)} 352 Td`,
+    `(${encodePdfLatin1Text(completionText)}) Tj`,
     "ET",
     "BT",
     "/F1 11 Tf",
     "0.28 0.28 0.28 rg",
-    "85 312 Td",
-    "(Este certificado serve exclusivamente como comprovativo de que o formando adquiriu) Tj",
+    "120 312 Td",
+    `(${encodePdfLatin1Text(noteLineOne)}) Tj`,
     "ET",
     "BT",
     "/F1 11 Tf",
     "0.28 0.28 0.28 rg",
-    "155 294 Td",
-    "(os conhecimentos necessários para iniciar a atividade enquanto Cliente Mistério.) Tj",
+    "120 294 Td",
+    `(${encodePdfLatin1Text(noteLineTwo)}) Tj`,
     "ET",
     "BT",
     "/F1 12 Tf",
     "0.4 0.4 0.4 rg",
-    "120 236 Td",
-    `(Data de emissao: ${safeDate}) Tj`,
+    `${measureCenteredX(issueDateText, 12, 0.5)} 236 Td`,
+    `(${issueDateText}) Tj`,
     "ET",
     "BT",
     "/F1 12 Tf",
     "0.4 0.4 0.4 rg",
-    "333 96 Td",
-    "(www.clientemisterio.com) Tj",
+    `${measureCenteredX(websiteText, 12, 0.5)} 96 Td`,
+    `(${websiteText}) Tj`,
     "ET",
   ].join("\n");
 
@@ -114,18 +128,18 @@ const buildCertificatePdf = (studentName: string, issueDate: string): Uint8Array
     "3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>\nendobj\n",
     "4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\n",
     "5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>\nendobj\n",
-    `6 0 obj\n<< /Length ${Buffer.byteLength(contentStream, "utf8")} >>\nstream\n${contentStream}\nendstream\nendobj\n`,
+    `6 0 obj\n<< /Length ${Buffer.byteLength(contentStream, "latin1")} >>\nstream\n${contentStream}\nendstream\nendobj\n`,
   ];
 
   let pdf = "%PDF-1.4\n";
   const xrefPositions: number[] = [0];
 
   for (const object of objects) {
-    xrefPositions.push(Buffer.byteLength(pdf, "utf8"));
+    xrefPositions.push(Buffer.byteLength(pdf, "latin1"));
     pdf += object;
   }
 
-  const xrefStart = Buffer.byteLength(pdf, "utf8");
+  const xrefStart = Buffer.byteLength(pdf, "latin1");
   pdf += `xref\n0 ${objects.length + 1}\n`;
   pdf += "0000000000 65535 f \n";
 
@@ -135,7 +149,7 @@ const buildCertificatePdf = (studentName: string, issueDate: string): Uint8Array
 
   pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
 
-  return new Uint8Array(Buffer.from(pdf, "utf8"));
+  return new Uint8Array(Buffer.from(pdf, "latin1"));
 };
 
 export const GET = async () => {
