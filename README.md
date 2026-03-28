@@ -134,7 +134,7 @@ Esta página carrega o Swagger UI e permite testar os endpoints manualmente no b
 ## Segurança
 
 - **Sessões**: tokens HMAC-SHA256 assinados, armazenados em cookies HTTP-only com SameSite=Lax
-- **Segredo de sessão**: em produção, `SESSION_SECRET` é obrigatório (sem fallback automático)
+- **Segredo de sessão**: em produção, `SESSION_SECRET` é recomendado; em Render existe fallback automático por `RENDER_SERVICE_ID` para evitar indisponibilidade de login
 - **Senhas**: hash com `scrypt` e salt aleatório; comparação timing-safe
 - **Tokens de email**: gerados aleatoriamente, guardados em hash (SHA-256) na base de dados
 - **SQL**: queries parametrizadas em todos os endpoints (sem risco de SQL injection)

@@ -31,6 +31,14 @@ function getSessionSecret(options?: { allowMissing?: boolean }) {
     return "development-only-session-secret";
   }
 
+  const renderServiceId = process.env.RENDER_SERVICE_ID?.trim();
+
+  if (renderServiceId) {
+    // Em plataformas geridas (ex.: Render), gera uma chave determinística por serviço para evitar quebra total de login.
+    // Nota: continua recomendado definir SESSION_SECRET manualmente para maior controlo de rotação e segurança.
+    return `render-service-secret-${renderServiceId}`;
+  }
+
   if (!missingSecretWarningDisplayed) {
     // Regista aviso único quando não há qualquer fonte para assinar ou validar sessões.
     console.error("SESSION_SECRET_NOT_CONFIGURED");
