@@ -55,10 +55,10 @@ export default function HeaderActions() {
   }, [pathname]);
 
   return (
-    <div className="flex items-center gap-2 sm:gap-3">
+    <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
       {!sessionUser ? (
         <Link
-          className="site-pill-button px-6 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em]"
+          className="site-pill-button px-4 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em] leading-none"
           href="/login"
         >
           Login
@@ -66,14 +66,14 @@ export default function HeaderActions() {
       ) : (
         <>
           <Link
-            className="site-pill-button px-6 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em]"
+            className="site-pill-button px-4 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em] leading-none"
             href="/dashboard"
           >
             Dashboard
           </Link>
           <button
             onClick={handleLogout}
-            className="site-pill-button-secondary px-6 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em]"
+            className="site-pill-button-secondary px-4 sm:px-8 py-2 sm:py-3 text-[10px] uppercase tracking-[0.12em] sm:text-[12px] sm:tracking-[0.15em] leading-none"
           >
             Terminar Sessão
           </button>
