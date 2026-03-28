@@ -13,6 +13,7 @@ import Footer from "./Footer";
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const isCoursePage = pathname === "/curso";
 
   return (
     <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
@@ -42,7 +43,11 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       {/* Remove margens na home para permitir hero full-bleed e mantém paddings nas páginas internas. */}
       <main className={isHomePage ? "flex-1 px-0 pb-0" : "flex-1 px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10"}>
-        {isHomePage ? children : <div className="mx-auto w-full max-w-6xl">{children}</div>}
+        {isHomePage ? (
+          children
+        ) : (
+          <div className={isCoursePage ? "mx-auto w-full max-w-none sm:max-w-6xl" : "mx-auto w-full max-w-6xl"}>{children}</div>
+        )}
       </main>
 
       <Footer />
