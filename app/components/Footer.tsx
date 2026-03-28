@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/20 bg-transparent px-3 py-4 sm:px-6 md:px-10">
       <div className="mx-auto w-full max-w-6xl">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-xs">
+        <div className="flex flex-col items-start gap-3 text-xs sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:gap-y-2">
           {/* Logo / Brand */}
           <div className="flex items-center gap-3">
             <span className="font-black uppercase tracking-[0.25em] text-black">
@@ -22,7 +22,7 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             <Link
               href="/termos-e-condicoes"
               className="text-black/70 transition-colors hover:text-black"

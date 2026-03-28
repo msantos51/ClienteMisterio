@@ -444,23 +444,21 @@ h6 {
   .mobile-menu-container {
     border-radius: 14px;
     will-change: contents;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    background: rgba(0, 0, 0, 0.9) !important;
+    background: #feb1a5 !important;
   }
 
   @media (max-width: 480px) {
     .mobile-menu-container {
-      inset-left: 8px !important;
-      inset-right: 8px !important;
-      top: 80px !important;
+      top: 74px !important;
     }
   }
 
-  /* Garante texto cinzento em todas as opções do menu mobile. */
+  /* Garante contraste e área de toque confortável nas opções do menu mobile. */
   .mobile-menu-item {
-    color: #e2e0e0 !important;
-    min-height: 44px;
+    color: #ffffff !important;
+    min-height: 48px;
     display: flex;
     align-items: center;
   }
@@ -472,7 +470,7 @@ h6 {
   @media (max-width: 480px) {
     .mobile-menu-item {
       min-height: 48px;
-      padding: 0.5rem 1.25rem !important;
+      padding: 0.65rem 1.1rem !important;
     }
   }
 

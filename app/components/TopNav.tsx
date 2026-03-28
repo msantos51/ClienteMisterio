@@ -6,7 +6,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navigationItems = [
   { href: "/", label: "Página Inicial" },
@@ -19,6 +19,7 @@ const navigationItems = [
 export default function TopNav() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     // Fecha automaticamente o menu quando a rota muda para manter a navegação ágil no mobile.
@@ -29,6 +30,28 @@ export default function TopNav() {
     // Fecha o menu após navegação para melhorar a experiência em ecrãs pequenos.
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    // Fecha o menu ao clicar fora do contêiner para evitar sobreposição visual persistente.
+    const handleOutsidePointerDown = (event: PointerEvent) => {
+      if (!menuContainerRef.current) {
+        return;
+      }
+
+      const targetNode = event.target as Node | null;
+      if (targetNode && !menuContainerRef.current.contains(targetNode)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("pointerdown", handleOutsidePointerDown);
+    }
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsidePointerDown);
+    };
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -72,27 +95,33 @@ export default function TopNav() {
 
       {/* Renderiza menu vertical no mobile com área clicável confortável e ordem visual consistente. */}
       {isMenuOpen ? (
-        <nav className="mobile-menu-container absolute right-3 top-[80px] z-40 sm:right-4 sm:top-[84px] flex flex-col overflow-hidden rounded-[10px] border border-[color:var(--line)] shadow-sm lg:hidden min-w-[200px] !bg-[#feb1a5]">
-          {navigationItems.map((item, index) => {
-            const isActive = pathname === item.href;
-            const isLast = index === navigationItems.length - 1;
+        <div className="fixed inset-0 z-40 bg-black/20 lg:hidden" role="presentation">
+          <nav
+            aria-label="Menu principal mobile"
+            className="mobile-menu-container absolute left-3 right-3 top-[76px] flex flex-col overflow-hidden rounded-[12px] border border-[color:var(--line)] shadow-sm sm:left-4 sm:right-4 sm:top-[82px]"
+            ref={menuContainerRef}
+          >
+            {navigationItems.map((item, index) => {
+              const isActive = pathname === item.href;
+              const isLast = index === navigationItems.length - 1;
 
-            return (
-              <Link
-                key={item.href}
-                className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold transition !text-white ${
-                  isActive
-                    ? "bg-[#ff9b7f]"
-                    : "hover:bg-[#ff9b7f]"
-                } ${isLast ? "border-b-0" : "border-b border-white/30"}`}
-                href={item.href}
-                onClick={closeMenu}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
+              return (
+                <Link
+                  key={item.href}
+                  className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold transition ${
+                    isActive
+                      ? "bg-[#ff9b7f]"
+                      : "hover:bg-[#ff9b7f]"
+                  } ${isLast ? "border-b-0" : "border-b border-white/30"}`}
+                  href={item.href}
+                  onClick={closeMenu}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
       ) : null}
     </>
   );

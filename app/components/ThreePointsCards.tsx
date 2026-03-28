@@ -22,11 +22,11 @@ export default function ThreePointsCards() {
       {benefits.map((benefit) => (
         <div
           key={benefit.title}
-          className="flex flex-col items-center gap-3 rounded-2xl p-6 sm:p-8 text-center transition duration-300 hover:-translate-y-1 hover:shadow-md min-h-[200px] sm:min-h-[220px] justify-center"
+          className="flex min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl p-4 text-center transition duration-300 hover:-translate-y-1 hover:shadow-md sm:min-h-[220px] sm:gap-3 sm:p-8"
           style={{ backgroundColor: "#F66856" }}
         >
-          <h3 className="text-xl font-bold text-white">{benefit.title}</h3>
-          <p className="text-xs sm:text-sm leading-5 text-white text-justify">{benefit.description}</p>
+          <h3 className="text-lg font-bold text-white sm:text-xl">{benefit.title}</h3>
+          <p className="text-xs leading-5 text-white sm:text-sm">{benefit.description}</p>
         </div>
       ))}
     </div>
