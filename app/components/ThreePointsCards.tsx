@@ -1,20 +1,18 @@
 "use client";
 
+// Define os três cartões de benefícios apresentados na landing page.
 const benefits = [
   {
-    icon: "📋",
     title: "Aprende",
-    description: "Curso 100% online, ao teu ritmo e sem horários definidos. Aprende quando quiseres, com total flexibilidade.",
+    description: "Curso 100% online, sem horários e ao teu ritmo.",
   },
   {
-    icon: "🎯",
-    title: "Pratica",
-    description: "10 módulos práticos do básico ao avançado — conceitos, ética, metodologia e relatórios profissionais.",
+    title: "Certificado",
+    description: "Direito a documento que comprova conclusão do curso.",
   },
   {
-    icon: "💶",
-    title: "Ganha",
-    description: "15€ a 150€ por missão. Avalia hotéis, restaurantes, lojas e outros negócios. Todos os custos são totalmente suportados pelas marcas.",
+    title: "Oportunidades",
+    description: "Testa produtos, lojas, restaurantes e hotéis sem qualquer custo.",
   },
 ];
 
