@@ -6,6 +6,8 @@ import Link from "next/link";
 import ThreePointsCards from "./components/ThreePointsCards";
 import CheckoutButton from "./components/CheckoutButton";
 
+const mainHeroImagePath = "/images/Background.png";
+
 export default function HomePage() {
   return (
     <section className="w-full">
@@ -42,6 +44,18 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </article>
+
+        {/* Reserva uma área alta para a imagem e ancora o conteúdo no fundo para equilibrar a composição. */}
+        <div className="relative mx-auto h-[360px] w-full max-w-[390px] sm:h-[460px] sm:max-w-[440px] lg:h-[720px] lg:max-w-[520px]">
+          <Image
+            alt="Cliente mistério em destaque"
+            className="object-contain object-bottom lg:object-right-bottom"
+            fill
+            priority
+            sizes="(max-width: 640px) 92vw, (max-width: 1024px) 68vw, 520px"
+            src={mainHeroImagePath}
+          />
         </div>
       </div>
     </section>
