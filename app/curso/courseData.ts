@@ -1798,7 +1798,7 @@ export const courseModules: CourseModule[] = [
    scenario: "Estás no fim do mês 1. Tens 8 missões feitas, taxa aprovação 92%. Como procedes mês 2?",
    correctApproach: "Análise: 92% é bom, mas precisa >95%. Próximo mês: (1) Foco em qualidade, não quantidade — 5 missões mas PERFEITAS. (2) Pede feedback específico de 2 agências. (3) Tenta 1 setor novo (telecomunicações, farmácia) para diversificar. (4) Revê cada relatório rejeitado (entende padrão de erro). (5) Objetivos mês 2: 10 missões com 97%+ aprovação, pelo menos 2 de setores novos."
 ,
-   incorrectApproach: "Quer 'ganhar mais rápido', tenta 20 missões em mês 2, qualidade cai para 85% aprovação, reputação destrói-se. Mano a reparar leva 3-4 meses."
+   incorrectApproach: "Quer 'ganhar mais rápido', tenta 20 missões em mês 2, a qualidade cai para 85% de aprovação e a reputação destrói-se. Reparar esse dano pode levar 3-4 meses."
   }
  ],
  quiz: [
