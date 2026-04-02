@@ -124,7 +124,7 @@ export default function AccountPage() {
             <div className="input-group md:col-span-2">
               <input
                 name="email"
-                placeholder="voce@email.com"
+                placeholder="nome@exemplo.com"
                 type="email"
                 value={formData.email}
                 onChange={(event) => handleChange("email", event.target.value)}

@@ -51,8 +51,8 @@ ClienteMisterio/
 ├── lib/
 │   ├── database.ts         # Pool PostgreSQL com auto-inicialização
 │   ├── session.ts          # Gestão de sessões com HMAC-SHA256
-│   ├── password.ts         # Hash de senhas com scrypt
-│   ├── token.ts            # Tokens para confirmação de email e reset de senha
+│   ├── password.ts         # Hash de palavras-passe com scrypt
+│   ├── token.ts            # Tokens para confirmação de email e reposição de palavra-passe
 │   ├── email.ts            # Wrapper da API Resend
 │   ├── authEmail.ts        # Templates de email transacional
 │   └── admin.ts            # Verificação de permissões de administrador
@@ -122,8 +122,8 @@ Esta página carrega o Swagger UI e permite testar os endpoints manualmente no b
 | POST | `/api/auth/login` | Autenticação |
 | POST | `/api/auth/logout` | Terminar sessão |
 | GET | `/api/auth/confirm-email` | Confirmação de email por token |
-| POST | `/api/auth/forgot-password` | Pedido de reset de senha |
-| POST | `/api/auth/reset-password` | Redefinir senha com token |
+| POST | `/api/auth/forgot-password` | Pedido de reposição de palavra-passe |
+| POST | `/api/auth/reset-password` | Redefinir palavra-passe com token |
 | GET | `/api/user` | Obter perfil do utilizador autenticado |
 | PUT | `/api/user` | Atualizar dados de perfil |
 | PUT | `/api/user/password` | Alterar senha |

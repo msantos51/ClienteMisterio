@@ -128,7 +128,7 @@ export default function LoginPage() {
             <div className="input-group">
               <input
                 name="email"
-                placeholder="voce@email.com"
+                placeholder="nome@exemplo.com"
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
