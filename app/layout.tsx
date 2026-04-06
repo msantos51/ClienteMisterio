@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="pt">
       <body
         className="bg-[color:var(--background)] text-[color:var(--foreground)] antialiased"
-        style={{ fontFamily: "CreatoDisplay, sans-serif" }}
+        style={{ fontFamily: "Google Sans, sans-serif" }}
       >
         <AppShell>{children}</AppShell>
       </body>
