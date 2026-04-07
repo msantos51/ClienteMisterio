@@ -78,7 +78,7 @@ export default function TopNav() {
           return (
             <Link
               key={item.href}
-              className={`relative pb-2 text-[14px] lg:text-[16px] font-semibold transition min-h-[44px] flex items-center text-black/80 hover:text-black ${
+              className={`relative pb-2 text-[16px] lg:text-[18px] font-semibold transition min-h-[44px] flex items-center text-black/80 hover:text-black ${
                 isActive ? "text-black" : ""
               }`}
               href={item.href}
@@ -108,7 +108,7 @@ export default function TopNav() {
               return (
                 <Link
                   key={item.href}
-                  className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-semibold transition ${
+                  className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg font-semibold transition ${
                     isActive
                       ? "bg-[#ff9b7f]"
                       : "hover:bg-[#ff9b7f]"
