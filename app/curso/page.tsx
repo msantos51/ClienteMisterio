@@ -600,7 +600,7 @@ export default function CursoPage() {
     const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm text-[#2a2a2a]";
     if (!quizSubmitted) {
       if (quizAnswers[question.id] === optionIndex) {
-        return `${base} border-[#F66856] bg-[#F66856]/15`;
+        return `${base} border-[#22a094] bg-[#22a094]/15`;
       }
       return `${base} border-[#D4B5A0]/30 hover:border-[#D4B5A0]/60 bg-white`;
     }
@@ -663,7 +663,7 @@ export default function CursoPage() {
   return (
     <section className="w-full space-y-8 bg-white p-8 rounded-2xl">
       <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#22a094" }}>
           Formação completa
         </p>
         <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">
@@ -679,11 +679,11 @@ export default function CursoPage() {
       <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-5">
         <div className="flex items-center justify-between text-sm mb-3">
           <span className="font-semibold text-[#2a2a2a]">Progresso do Curso</span>
-          <span className="font-bold text-[#F66856]">{progressPercent}%</span>
+          <span className="font-bold text-[#22a094]">{progressPercent}%</span>
         </div>
         <div className="h-3 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#F66856] to-[#F66856] transition-all duration-700"
+            className="h-full rounded-full bg-gradient-to-r from-[#22a094] to-[#22a094] transition-all duration-700"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -708,9 +708,9 @@ export default function CursoPage() {
                 onClick={() => openModule(mod.id)}
                 className={`w-full text-left rounded-2xl border p-5 transition-all ${
                   completed
-                    ? "border-[#F66856]/40 bg-[#F5E5DB] hover:bg-[#E8D5C8]"
+                    ? "border-[#22a094]/40 bg-[#F5E5DB] hover:bg-[#E8D5C8]"
                     : unlocked
-                      ? "border-[#D4B5A0]/30 hover:border-[#F66856] cursor-pointer hover:bg-white/60"
+                      ? "border-[#D4B5A0]/30 hover:border-[#22a094] cursor-pointer hover:bg-white/60"
                       : "border-[#D4B5A0]/20 opacity-40 cursor-not-allowed"
                 }`}
               >
@@ -719,9 +719,9 @@ export default function CursoPage() {
                     <div
                       className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
                         completed
-                          ? "bg-[#F66856] text-white"
+                          ? "bg-[#22a094] text-white"
                           : unlocked
-                            ? "bg-[#F66856]/20 text-[#F66856]"
+                            ? "bg-[#22a094]/20 text-[#22a094]"
                             : "bg-[#D4B5A0]/20 text-[#2a2a2a]"
                       }`}
                     >
@@ -734,7 +734,7 @@ export default function CursoPage() {
                   </div>
                   <div className="shrink-0 text-sm">
                     {completed && modProgress?.quizScore !== null && (
-                      <span className="text-[#F66856] font-semibold">{modProgress.quizScore}%</span>
+                      <span className="text-[#22a094] font-semibold">{modProgress.quizScore}%</span>
                     )}
                     {!completed && unlocked && (
                       <span className="text-[#2a2a2a]">&rarr;</span>
@@ -775,13 +775,13 @@ export default function CursoPage() {
               <div className="grid gap-3 md:grid-cols-2">
                 {/* Palavras-chave */}
                 {activeModule.keywords && activeModule.keywords.length > 0 && (
-                  <div className="rounded-lg border border-[#f66856]/30 bg-[#f66856]/10 p-4">
+                  <div className="rounded-lg border border-[#22a094]/30 bg-[#22a094]/10 p-4">
                     <p className="text-sm font-bold text-[#2a2a2a] mb-3">Conceitos-chave</p>
                     <div className="flex flex-wrap gap-2">
                       {activeModule.keywords.map((keyword) => (
                         <span
                           key={keyword}
-                          className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#f66856]/20 text-[#2a2a2a]"
+                          className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#22a094]/20 text-[#2a2a2a]"
                         >
                           {keyword}
                         </span>
@@ -866,7 +866,7 @@ export default function CursoPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-lg border border-[#f66856]/30 bg-[#f66856] p-4 md:col-span-2">
+                <div className="rounded-lg border border-[#22a094]/30 bg-[#22a094] p-4 md:col-span-2">
                   <p className="font-bold text-white mb-3">Checklist de execução profissional</p>
                   <ul className="space-y-2 text-sm text-white">
                     {activeSupportContent.executionChecklist.map((item) => (
@@ -924,7 +924,7 @@ export default function CursoPage() {
               </div>
 
               {activeModule.id === 11 ? (
-                <div className="rounded-2xl border border-[#F66856]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
+                <div className="rounded-2xl border border-[#22a094]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
                   <p className="text-sm text-[#2a2a2a]">
                     Este módulo disponibiliza o seu Certificado de Conclusão em PDF com nome personalizado.
                   </p>
@@ -1016,13 +1016,13 @@ export default function CursoPage() {
 
                 {quizSubmitted && quizScore !== null && (
                   <div className={`mt-8 rounded-xl p-5 text-center ${
-                    quizScore >= 60 ? "bg-[#F66856]/15 border border-[#F66856]/40" : "bg-red-100 border border-red-400/40"
+                    quizScore >= 60 ? "bg-[#22a094]/15 border border-[#22a094]/40" : "bg-red-100 border border-red-400/40"
                   }`}>
                     <p className="text-2xl font-bold mb-2 text-[#2a2a2a]">
                       {quizScore >= 60 ? "Parabéns!" : "Tente novamente"}
                     </p>
                     <p className="text-sm mb-1 text-[#2a2a2a]">
-                      Obteve <span className="font-bold text-lg text-[#F66856]">{quizScore}%</span> neste questionário.
+                      Obteve <span className="font-bold text-lg text-[#22a094]">{quizScore}%</span> neste questionário.
                     </p>
                     <p className="text-xs text-[#666] mb-4">
                       {quizScore >= 60

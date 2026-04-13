@@ -86,7 +86,7 @@ export default function TopNav() {
               {item.label}
 
               {isActive ? (
-                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[#F66856]" />
+                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[#22a094]" />
               ) : null}
             </Link>
           );
@@ -110,8 +110,8 @@ export default function TopNav() {
                   key={item.href}
                   className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg font-semibold transition ${
                     isActive
-                      ? "bg-[#ff9b7f]"
-                      : "hover:bg-[#ff9b7f]"
+                      ? "bg-[#1d8478]"
+                      : "hover:bg-[#1d8478]"
                   } ${isLast ? "border-b-0" : "border-b border-white/30"}`}
                   href={item.href}
                   onClick={closeMenu}

@@ -126,7 +126,7 @@ export default function CoursePage() {
   return (
     <section className="w-full space-y-8">
       <header className="w-full rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
+        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#22a094" }}>
           Formação completa
         </p>
 
@@ -142,7 +142,7 @@ export default function CoursePage() {
         <div className="w-full max-w-md rounded-2xl bg-white px-6 py-4 sm:px-10 sm:py-6 text-center">
           <div className="space-y-1 text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black text-center">Acesso Completo ao Curso</p>
-            <p className="text-5xl font-bold text-center" style={{ color: "#F66856" }}>19,99€</p>
+            <p className="text-5xl font-bold text-center" style={{ color: "#22a094" }}>19,99€</p>
             <p className="text-sm text-black text-center">Pagamento único · Acesso vitalício</p>
           </div>
           <CheckoutButton label="Comprar Curso Completo" />
@@ -153,27 +153,27 @@ export default function CoursePage() {
       <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm">
         <h3 className="text-2xl font-semibold sm:text-3xl home-title-highlight-text mb-4">Por que fazer este curso?</h3>
         <div className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
             <p className="font-semibold text-white mb-2">✓ Para Iniciantes</p>
             <p className="text-sm text-white/90">Explicações simples, sem jargão. Começa do zero e aprende no teu ritmo.</p>
           </div>
-          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
             <p className="font-semibold text-white mb-2">✓ Prático & Real</p>
             <p className="text-sm text-white/90">Casos reais, dicas profissionais, checklis práticos. Tudo que precisas para ganhar já no mês 1.</p>
           </div>
-          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
             <p className="font-semibold text-white mb-2">✓ Ganha Desde Já</p>
             <p className="text-sm text-white/90">5€ a 150€+ por missão. Flexibilidade total. Começa quando queres.</p>
           </div>
-          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
             <p className="font-semibold text-white mb-2">✓ Carreira Escalável</p>
             <p className="text-sm text-white/90">Começa simples, evolui para missões premium. Quanto melhor, mais ganhas.</p>
           </div>
-          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
             <p className="font-semibold text-white mb-2">✓ Questões & Avaliação</p>
             <p className="text-sm text-white/90">Testes em cada módulo. Certifica-te que compreendeste antes de avançar.</p>
           </div>
-          <div className="rounded-lg border border-[#F66856] bg-[#F66856] p-4">
+          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
             <p className="font-semibold text-white mb-2">✓ Comunidade & Apoio</p>
             <p className="text-sm text-white/90">Aprende com outros avaliadores. Dicas, truques e apoio contínuo.</p>
           </div>
@@ -200,7 +200,7 @@ export default function CoursePage() {
           return (
             <details
               key={moduleItem.title}
-              className="group rounded-2xl border border-[#F66856] bg-[#F66856] p-5 open:shadow-lg transition-all cursor-pointer"
+              className="group rounded-2xl border border-[#22a094] bg-[#22a094] p-5 open:shadow-lg transition-all cursor-pointer"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold marker:content-none text-white">
                 <div className="flex items-center gap-3">
@@ -241,7 +241,7 @@ export default function CoursePage() {
           <div className="flex h-[95vh] w-full max-w-[1400px] flex-col overflow-hidden rounded-2xl border border-white/20 bg-white shadow-2xl">
             <div className="flex items-center justify-between border-b border-black/10 px-4 py-3 sm:px-6">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#F66856]">Curso em ecrã expandido</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#22a094]">Curso em ecrã expandido</p>
                 <p className="text-sm font-medium text-black sm:text-base">Visualização focada para estudar sem scroll na página principal</p>
               </div>
               <button

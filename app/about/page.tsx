@@ -18,7 +18,7 @@ export default function AboutPage() {
       <article className="w-full">
         {/* Preserva o conteúdo da página e ajusta a hierarquia para texto branco com destaques amarelos. */}
         <div className="space-y-4 sm:space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#F66856" }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#22a094" }}>
             Sobre a Cliente Mistério
           </p>
 
@@ -61,10 +61,10 @@ export default function AboutPage() {
           {courseAdvantages.map((advantage, index) => (
             <li
               key={advantage}
-              className="group rounded-2xl border border-white/30 p-3 sm:p-5 transition duration-300 hover:-translate-y-1 hover:border-[#F66856]"
+              className="group rounded-2xl border border-white/30 p-3 sm:p-5 transition duration-300 hover:-translate-y-1 hover:border-[#22a094]"
             >
               <div className="flex items-start gap-2 sm:gap-3">
-                <span className="mt-0.5 inline-flex h-5 sm:h-6 w-5 sm:w-6 shrink-0 items-center justify-center rounded-full bg-[#F66856] text-xs font-bold text-black">
+                <span className="mt-0.5 inline-flex h-5 sm:h-6 w-5 sm:w-6 shrink-0 items-center justify-center rounded-full bg-[#22a094] text-xs font-bold text-black">
                   {index + 1}
                 </span>
                 <p className="text-sm sm:text-base leading-6 sm:leading-7">{advantage}</p>
@@ -78,7 +78,7 @@ export default function AboutPage() {
       <article className="flex flex-col items-center gap-4 rounded-2xl bg-white p-6 sm:p-8 text-center">
         <div className="w-full space-y-1 text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 text-center">Acesso Completo ao Curso</p>
-          <p className="text-5xl font-bold text-center" style={{ color: "#F66856" }}>19,99€</p>
+          <p className="text-5xl font-bold text-center" style={{ color: "#22a094" }}>19,99€</p>
           <p className="text-sm text-gray-400 text-center">Pagamento único · Acesso vitalício</p>
         </div>
         <CheckoutButton label="Comprar Curso Completo" />
