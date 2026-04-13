@@ -30,7 +30,7 @@
   --surface-muted: #f5f5f5;
   --primary: #000000;
   --primary-soft: #111111;
-  --accent: #F66856;
+  --accent: #22a094;
   --accent-success: #58bc82;
   --line: #d0d0d0;
   --line-light: #e5e5e5;
@@ -77,8 +77,8 @@ body {
 }
 
 /* Permite texto branco nos cards mesmo com regra global */
-.bg-\[\#F66856\] p,
-.bg-\[\#F66856\] span {
+.bg-\[\#22a094\] p,
+.bg-\[\#22a094\] span {
   color: white !important;
 }
 
@@ -128,9 +128,9 @@ h6 {
     font-size: 14px;
     padding: 0.6em 1.2em;
     color: white;
-    background: #F66856;
+    background: #22a094;
     border: none;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
     letter-spacing: 0.05em;
     border-radius: 20em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -143,12 +143,12 @@ h6 {
   }
 
   .cssbuttons-io-button:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
     opacity: 0.95;
   }
 
   .cssbuttons-io-button:active {
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
     opacity: 0.9;
   }
 
@@ -174,21 +174,21 @@ h6 {
     font-size: 14px;
     border-radius: 20em;
     overflow: hidden;
-    background: #F66856;
+    background: #22a094;
     color: white;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     width: auto;
     min-width: auto;
   }
 
   button:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
     opacity: 0.95;
   }
 
   button:active {
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
     opacity: 0.9;
   }
 
@@ -214,9 +214,9 @@ h6 {
     font-size: 14px;
     padding: 0.6em 1.2em;
     color: white !important;
-    background: #F66856;
+    background: #22a094;
     border: none;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
     letter-spacing: 0.05em;
     border-radius: 20em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -240,7 +240,7 @@ h6 {
   /* Estado hover */
   .site-pill-button:hover,
   .button-size-login:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
     opacity: 0.95;
   }
 
@@ -254,7 +254,7 @@ h6 {
   /* Estado ativo */
   .site-pill-button:active,
   .button-size-login:active {
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
     opacity: 0.9;
   }
 
@@ -282,10 +282,10 @@ h6 {
     font-weight: 500;
     font-size: 14px;
     padding: 0.6em 1.2em;
-    color: #F66856;
+    color: #22a094;
     background: white;
-    border: 2px solid #F66856;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.2);
+    border: 2px solid #22a094;
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.2);
     letter-spacing: 0.05em;
     border-radius: 20em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -314,13 +314,13 @@ h6 {
 
   /* Estado hover */
   .site-pill-button-secondary:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.4);
-    background: #fff5f1;
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.4);
+    background: #f0faf8;
   }
 
   /* Estado ativo */
   .site-pill-button-secondary:active {
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.4);
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.4);
     opacity: 0.9;
   }
 
@@ -546,7 +546,7 @@ h6 {
   .custom-checkbox:checked ~ .checkmark {
     background: #e2e0e0;
     border-color: #e2e0e0;
-    box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.2);
+    box-shadow: 0 0 0 3px rgba(34, 160, 148, 0.2);
   }
 
   /* Exibe o check com animação suave */
@@ -557,7 +557,7 @@ h6 {
 
   /* Focus state acessível */
   .custom-checkbox:focus-visible ~ .checkmark {
-    box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.3);
+    box-shadow: 0 0 0 3px rgba(34, 160, 148, 0.3);
   }
 
   /* Animação suave do check com efeito de desenho */
@@ -694,7 +694,7 @@ h6 {
 .input-group textarea:focus,
 .input-group select:focus {
   border-color: #000000 !important;
-  box-shadow: 0 0 0 3px rgba(246, 104, 86, 0.15);
+  box-shadow: 0 0 0 3px rgba(34, 160, 148, 0.15);
   background-color: #ffffff !important;
 }
 
@@ -707,9 +707,9 @@ h6 {
   font-weight: 500;
   letter-spacing: 0.05em;
   cursor: pointer;
-  background: #F66856;
-  border: 1px solid #F66856;
-  box-shadow: 0 0.5em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+  background: #22a094;
+  border: 1px solid #22a094;
+  box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
   border-radius: 20em;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: inline-flex;
@@ -728,7 +728,7 @@ h6 {
 }
 
 .submit:hover {
-  box-shadow: 0 0.4em 1.2em -0.5em rgba(246, 104, 86, 0.6);
+  box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
   opacity: 0.95;
 }
 
@@ -739,7 +739,7 @@ h6 {
 }
 
 .submit:active {
-  box-shadow: 0 0.2em 0.8em -0.5em rgba(246, 104, 86, 0.6);
+  box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
   opacity: 0.9;
 }
 
@@ -780,10 +780,10 @@ h6 {
 .form-feedback {
   padding: 12px 14px;
   font-size: 0.85rem;
-  border: 1px solid rgba(246, 104, 86, 0.3);
+  border: 1px solid rgba(34, 160, 148, 0.3);
   border-radius: 10px;
-  background: linear-gradient(135deg, #fff5f1 0%, #fffaf8 100%);
-  color: #d95800 !important;
+  background: linear-gradient(135deg, #f0faf8 0%, #f5fdfb 100%);
+  color: #1b7661 !important;
   font-weight: 500;
   line-height: 1.5;
 }
@@ -881,9 +881,9 @@ h6 {
 
 /* Destaque visual da secção ativa com gradiente sutil */
 .dashboard-menu-item.is-active {
-  background: linear-gradient(135deg, #fef9f3 0%, #fff5ea 100%);
-  border-color: #F66856;
-  box-shadow: inset 0 1px 2px rgba(246, 104, 86, 0.1);
+  background: linear-gradient(135deg, #f0faf8 0%, #f5fdfb 100%);
+  border-color: #22a094;
+  box-shadow: inset 0 1px 2px rgba(34, 160, 148, 0.1);
 }
 
 .dashboard-menu-item:hover {
@@ -911,7 +911,7 @@ h6 {
 .dashboard-right-highlight-icon {
   font-size: 1.3rem;
   text-align: center;
-  color: #F66856 !important;
+  color: #22a094 !important;
 }
 
 @media (min-width: 1024px) {
@@ -951,12 +951,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(246, 104, 86, 0.5);
+  background: rgba(34, 160, 148, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(246, 104, 86, 0.8);
+  background: rgba(34, 160, 148, 0.8);
 }
 
 /* Placeholder melhorado */
@@ -983,11 +983,11 @@ select {
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-pill-button-secondary) {
   color: #000000;
   text-decoration: none;
-  border-bottom: 1px solid rgba(246, 104, 86, 0.3);
+  border-bottom: 1px solid rgba(34, 160, 148, 0.3);
   transition: all 0.3s ease;
 }
 
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-pill-button-secondary):hover {
-  border-bottom-color: rgba(246, 104, 86, 0.8);
+  border-bottom-color: rgba(34, 160, 148, 0.8);
   color: #000000;
 }

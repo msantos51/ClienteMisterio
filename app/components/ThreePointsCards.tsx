@@ -23,7 +23,7 @@ export default function ThreePointsCards() {
         <div
           key={benefit.title}
           className="flex min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl p-4 text-center transition duration-300 hover:-translate-y-1 hover:shadow-md sm:min-h-[220px] sm:gap-3 sm:p-8"
-          style={{ backgroundColor: "#F66856" }}
+          style={{ backgroundColor: "#22a094" }}
         >
           <h3 className="text-lg font-bold text-white sm:text-xl">{benefit.title}</h3>
           <p className="text-xs leading-5 text-white sm:text-sm">{benefit.description}</p>
