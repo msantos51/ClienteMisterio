@@ -2,6 +2,8 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/email.ts` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
+import nodemailer from "nodemailer";
+
 type MailPayload = {
   to: string;
   subject: string;
@@ -10,35 +12,33 @@ type MailPayload = {
   replyTo?: string;
 };
 
-type ResendConfig = {
-  apiKey: string;
-  from: string;
-  apiUrl: string;
+type GmailConfig = {
+  email: string;
+  appPassword: string;
   timeoutMs: number;
 };
 
-const defaultSender = "Cliente Mistério <onboarding@resend.dev>";
-const defaultApiUrl = "https://api.resend.com/emails";
+const getGmailConfig = (): GmailConfig => {
+  // Lê configuração do Gmail para envio de e-mails transacionais via SMTP.
+  const email = process.env.GMAIL_EMAIL?.trim() || "";
+  const appPassword = process.env.GMAIL_APP_PASSWORD?.trim() || "";
+  const timeoutMs = Number(process.env.EMAIL_TIMEOUT_MS?.trim() || "10000");
 
-const getResendConfig = (): ResendConfig => {
-  // Lê configuração central do Resend para manter envio consistente entre registo e recuperação de conta.
-  const apiKey = process.env.RESEND_API_KEY?.trim() || "";
-  const from = process.env.RESEND_FROM?.trim() || defaultSender;
-  const apiUrl = process.env.RESEND_API_URL?.trim() || defaultApiUrl;
-  const timeoutMs = Number(process.env.RESEND_TIMEOUT_MS?.trim() || "10000");
+  if (!email) {
+    throw new Error("GMAIL_EMAIL não está definida para envio de e-mails transacionais.");
+  }
 
-  if (!apiKey) {
-    throw new Error("RESEND_API_KEY não está definida para envio de e-mails transacionais.");
+  if (!appPassword) {
+    throw new Error("GMAIL_APP_PASSWORD não está definida para envio de e-mails transacionais.");
   }
 
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
-    throw new Error("RESEND_TIMEOUT_MS inválida.");
+    throw new Error("EMAIL_TIMEOUT_MS inválida.");
   }
 
   return {
-    apiKey,
-    from,
-    apiUrl,
+    email,
+    appPassword,
     timeoutMs,
   };
 };
@@ -53,41 +53,43 @@ const getSafeErrorMessage = (error: unknown, fallbackMessage: string) => {
 };
 
 export const sendEmail = async (payload: MailPayload) => {
-  // Envia e-mail transacional via API HTTP do Resend para evitar bloqueios de saída em portas SMTP.
-  const config = getResendConfig();
-  const abortController = new AbortController();
-  const timeoutHandle = setTimeout(() => abortController.abort(), config.timeoutMs);
+  // Envia e-mail transacional via SMTP do Gmail para verificação de conta e reset de password.
+  const config = getGmailConfig();
+
+  // Cria transportador SMTP com configuração do Gmail
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: config.email,
+      pass: config.appPassword,
+    },
+  });
 
   try {
-    const response = await fetch(config.apiUrl, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: config.from,
-        to: [payload.to],
+    // Envia o e-mail com timeout
+    const result = await Promise.race([
+      transporter.sendMail({
+        from: config.email,
+        to: payload.to,
         subject: payload.subject,
         html: payload.html,
         text: payload.text,
-        reply_to: payload.replyTo,
+        replyTo: payload.replyTo,
       }),
-      signal: abortController.signal,
-    });
+      new Promise<never>((_, reject) =>
+        setTimeout(
+          () => reject(new Error(`Timeout ao enviar e-mail após ${config.timeoutMs}ms.`)),
+          config.timeoutMs
+        )
+      ),
+    ]);
 
-    if (!response.ok) {
-      const responseText = await response.text();
-      throw new Error(`Resend API ${response.status}: ${responseText}`);
-    }
+    return result;
   } catch (error) {
-    const message =
-      error instanceof Error && error.name === "AbortError"
-        ? `Timeout ao enviar e-mail via Resend após ${config.timeoutMs}ms.`
-        : getSafeErrorMessage(error, "Erro desconhecido durante o envio via Resend.");
+    const message = getSafeErrorMessage(error, "Erro desconhecido durante o envio de e-mail via Gmail.");
 
-    throw new Error(`${message} Verifique RESEND_API_KEY/RESEND_FROM e permissões do domínio configurado.`);
-  } finally {
-    clearTimeout(timeoutHandle);
+    throw new Error(
+      `${message} Verifique GMAIL_EMAIL/GMAIL_APP_PASSWORD e permissões da conta. Certifique-se que criou uma "App Password" no Gmail.`
+    );
   }
 };
