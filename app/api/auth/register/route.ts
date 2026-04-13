@@ -4,8 +4,11 @@
 
 import { NextResponse } from "next/server";
 
+import { createEmailConfirmationTemplate } from "@/lib/authEmail";
 import { query } from "@/lib/database";
 import { hashPassword } from "@/lib/password";
+import { sendEmail } from "@/lib/email";
+import { createToken, hashToken } from "@/lib/token";
 
 type RegisterPayload = {
   firstName: string;
@@ -61,6 +64,10 @@ export const POST = async (request: Request) => {
   const firstAdminEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
   const shouldBeAdmin = Boolean(firstAdminEmail) && normalizedEmail === firstAdminEmail;
 
+  // Gera token de confirmação de email
+  const confirmationToken = createToken();
+  const confirmationTokenHash = hashToken(confirmationToken);
+
   const result = await query<UserRow>(
     `insert into users (
       first_name,
@@ -70,22 +77,39 @@ export const POST = async (request: Request) => {
       password_hash,
       profile_completed,
       email_confirmed,
+      email_confirmation_token_hash,
       is_admin
     )
-     values ($1, $2, $3, $4, $5, false, true, $6)
+     values ($1, $2, $3, $4, $5, false, false, $6, $7)
      returning id, first_name, last_name, full_name, email, is_admin, created_at`,
-    [firstName, lastName, fullName, normalizedEmail, passwordHash, shouldBeAdmin]
+    [firstName, lastName, fullName, normalizedEmail, passwordHash, confirmationTokenHash, shouldBeAdmin]
   );
 
+  // Envia email de confirmação
+  const user = result.rows[0];
+  if (user) {
+    const template = createEmailConfirmationTemplate(confirmationToken);
+    try {
+      await sendEmail({
+        to: user.email,
+        subject: template.subject,
+        html: template.html,
+      });
+    } catch (error) {
+      // Log do erro mas não falha o registo
+      console.error("Falha ao enviar e-mail de confirmação:", error);
+    }
+  }
+
   return NextResponse.json({
-    message: "Conta criada com sucesso. Já pode iniciar sessão.",
+    message: "Conta criada com sucesso. Confirme o seu e-mail para continuar.",
     user: {
-      id: result.rows[0]?.id,
-      firstName: result.rows[0]?.first_name,
-      lastName: result.rows[0]?.last_name,
-      fullName: result.rows[0]?.full_name,
-      email: result.rows[0]?.email,
-      isAdmin: result.rows[0]?.is_admin ?? false,
+      id: user?.id,
+      firstName: user?.first_name,
+      lastName: user?.last_name,
+      fullName: user?.full_name,
+      email: user?.email,
+      isAdmin: user?.is_admin ?? false,
     },
   });
 };
