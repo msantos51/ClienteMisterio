@@ -10,6 +10,7 @@ declare module "nodemailer" {
 
   export type Transporter = {
     sendMail: (mailOptions: SendMailOptions) => Promise<unknown>;
+    close: () => void;
   };
 
   export type TransportOptions = {
@@ -18,6 +19,9 @@ declare module "nodemailer" {
       user: string;
       pass: string;
     };
+    connectionTimeout?: number;
+    greetingTimeout?: number;
+    socketTimeout?: number;
   };
 
   export function createTransport(options: TransportOptions): Transporter;
