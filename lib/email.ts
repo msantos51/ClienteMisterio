@@ -22,7 +22,7 @@ const getGmailConfig = (): GmailConfig => {
   // Lê configuração do Gmail para envio de e-mails transacionais via SMTP.
   const email = process.env.GMAIL_EMAIL?.trim() || "";
   const appPassword = process.env.GMAIL_APP_PASSWORD?.trim() || "";
-  const timeoutMs = Number(process.env.EMAIL_TIMEOUT_MS?.trim() || "10000");
+  const timeoutMs = Number(process.env.EMAIL_TIMEOUT_MS?.trim() || "30000");
 
   if (!email) {
     throw new Error("GMAIL_EMAIL não está definida para envio de e-mails transacionais.");
@@ -63,10 +63,15 @@ export const sendEmail = async (payload: MailPayload) => {
       user: config.email,
       pass: config.appPassword,
     },
+    connectionTimeout: config.timeoutMs,
+    greetingTimeout: config.timeoutMs,
+    socketTimeout: config.timeoutMs,
   });
 
+  let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
+
   try {
-    // Envia o e-mail com timeout
+    // Envia o e-mail com timeout de segurança
     const result = await Promise.race([
       transporter.sendMail({
         from: config.email,
@@ -76,20 +81,31 @@ export const sendEmail = async (payload: MailPayload) => {
         text: payload.text,
         replyTo: payload.replyTo,
       }),
-      new Promise<never>((_, reject) =>
-        setTimeout(
+      new Promise<never>((_, reject) => {
+        timeoutHandle = setTimeout(
           () => reject(new Error(`Timeout ao enviar e-mail após ${config.timeoutMs}ms.`)),
           config.timeoutMs
-        )
-      ),
+        );
+      }),
     ]);
 
     return result;
   } catch (error) {
     const message = getSafeErrorMessage(error, "Erro desconhecido durante o envio de e-mail via Gmail.");
 
+    if (message.startsWith("Timeout")) {
+      throw new Error(
+        `${message} Verifique a conectividade de rede com os servidores SMTP do Gmail (portas 465/587).`
+      );
+    }
+
     throw new Error(
       `${message} Verifique GMAIL_EMAIL/GMAIL_APP_PASSWORD e permissões da conta. Certifique-se que criou uma "App Password" no Gmail.`
     );
+  } finally {
+    if (timeoutHandle !== undefined) {
+      clearTimeout(timeoutHandle);
+    }
+    transporter.close();
   }
 };
