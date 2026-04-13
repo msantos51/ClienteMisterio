@@ -2,7 +2,7 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/email.ts` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 type MailPayload = {
   to: string;
@@ -12,100 +12,39 @@ type MailPayload = {
   replyTo?: string;
 };
 
-type GmailConfig = {
-  email: string;
-  appPassword: string;
-  timeoutMs: number;
-};
+const getResendConfig = () => {
+  // Lê configuração do Resend para envio de e-mails transacionais via API HTTPS.
+  const apiKey = process.env.RESEND_API_KEY?.trim() || "";
+  const fromEmail = process.env.RESEND_FROM_EMAIL?.trim() || "";
 
-const getGmailConfig = (): GmailConfig => {
-  // Lê configuração do Gmail para envio de e-mails transacionais via SMTP.
-  const email = process.env.GMAIL_EMAIL?.trim() || "";
-  const appPassword = process.env.GMAIL_APP_PASSWORD?.trim() || "";
-  const timeoutMs = Number(process.env.EMAIL_TIMEOUT_MS?.trim() || "30000");
-
-  if (!email) {
-    throw new Error("GMAIL_EMAIL não está definida para envio de e-mails transacionais.");
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY não está definida para envio de e-mails transacionais.");
   }
 
-  if (!appPassword) {
-    throw new Error("GMAIL_APP_PASSWORD não está definida para envio de e-mails transacionais.");
+  if (!fromEmail) {
+    throw new Error("RESEND_FROM_EMAIL não está definida para envio de e-mails transacionais.");
   }
 
-  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
-    throw new Error("EMAIL_TIMEOUT_MS inválida.");
-  }
-
-  return {
-    email,
-    appPassword,
-    timeoutMs,
-  };
-};
-
-const getSafeErrorMessage = (error: unknown, fallbackMessage: string) => {
-  // Normaliza erros para garantir mensagem útil nos logs e respostas do servidor.
-  if (error instanceof Error && error.message.trim()) {
-    return error.message.trim();
-  }
-
-  return fallbackMessage;
+  return { apiKey, fromEmail };
 };
 
 export const sendEmail = async (payload: MailPayload) => {
-  // Envia e-mail transacional via SMTP do Gmail para verificação de conta e reset de password.
-  const config = getGmailConfig();
+  // Envia e-mail transacional via API HTTPS do Resend (não usa SMTP — compatível com Render).
+  const config = getResendConfig();
+  const resend = new Resend(config.apiKey);
 
-  // Cria transportador SMTP com configuração do Gmail
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: config.email,
-      pass: config.appPassword,
-    },
-    connectionTimeout: config.timeoutMs,
-    greetingTimeout: config.timeoutMs,
-    socketTimeout: config.timeoutMs,
+  const { data, error } = await resend.emails.send({
+    from: config.fromEmail,
+    to: payload.to,
+    subject: payload.subject,
+    html: payload.html,
+    ...(payload.text ? { text: payload.text } : {}),
+    ...(payload.replyTo ? { replyTo: payload.replyTo } : {}),
   });
 
-  let timeoutHandle: ReturnType<typeof setTimeout> | undefined;
-
-  try {
-    // Envia o e-mail com timeout de segurança
-    const result = await Promise.race([
-      transporter.sendMail({
-        from: config.email,
-        to: payload.to,
-        subject: payload.subject,
-        html: payload.html,
-        text: payload.text,
-        replyTo: payload.replyTo,
-      }),
-      new Promise<never>((_, reject) => {
-        timeoutHandle = setTimeout(
-          () => reject(new Error(`Timeout ao enviar e-mail após ${config.timeoutMs}ms.`)),
-          config.timeoutMs
-        );
-      }),
-    ]);
-
-    return result;
-  } catch (error) {
-    const message = getSafeErrorMessage(error, "Erro desconhecido durante o envio de e-mail via Gmail.");
-
-    if (message.startsWith("Timeout")) {
-      throw new Error(
-        `${message} Verifique a conectividade de rede com os servidores SMTP do Gmail (portas 465/587).`
-      );
-    }
-
-    throw new Error(
-      `${message} Verifique GMAIL_EMAIL/GMAIL_APP_PASSWORD e permissões da conta. Certifique-se que criou uma "App Password" no Gmail.`
-    );
-  } finally {
-    if (timeoutHandle !== undefined) {
-      clearTimeout(timeoutHandle);
-    }
-    transporter.close();
+  if (error) {
+    throw new Error(`Falha ao enviar e-mail via Resend: ${error.message}`);
   }
+
+  return data;
 };
