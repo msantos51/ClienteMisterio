@@ -2,8 +2,8 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro centraliza os estilos globais e utilitários visuais usados em toda a aplicação.
  */
 
-@import "tailwindcss";
 @import url("https://fonts.cdnfonts.com/css/google-sans");
+@import "tailwindcss";
 
 /* Google Sans carregada via CDN para aplicar tipografia global do site. */
 /* Declarações de fontes customizadas Basenji (fallback) */
