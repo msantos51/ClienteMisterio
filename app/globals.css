@@ -203,74 +203,99 @@ h6 {
     z-index: 10;
   }
 
-  /* Define estilo base moderno para todos os botões - utilizando o padrão Uiverse */
-  .site-pill-button,
-  .button-size-login {
+  /* === STANDARDIZED BUTTON SYSTEM === */
+
+  /* Primary Button (Teal) */
+  .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-family: "Google Sans", sans-serif;
     cursor: pointer;
-    font-weight: 500;
-    font-size: 14px;
-    padding: 0.6em 1.2em;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
     color: white !important;
     background: #22a094;
     border: none;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    border-radius: 999px;
     letter-spacing: 0.05em;
-    border-radius: 20em;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
-    will-change: transform;
     touch-action: manipulation;
-    width: auto;
-    min-width: auto;
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
   }
 
-  @media (max-width: 640px) {
-    .site-pill-button,
-    .button-size-login {
-      min-height: 40px;
-      padding: 0.6em 1em;
-      font-size: 13px;
-      border-radius: 18em;
-    }
-  }
-
-  /* Estado hover */
-  .site-pill-button:hover,
-  .button-size-login:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+  .btn-primary:hover {
     opacity: 0.95;
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .site-pill-button:hover,
-    .button-size-login:hover {
-      opacity: 0.95;
-    }
-  }
-
-  /* Estado ativo */
-  .site-pill-button:active,
-  .button-size-login:active {
+  .btn-primary:active {
+    opacity: 0.9;
     box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  /* Secondary Button (Outline) */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Google Sans", sans-serif;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    color: #22a094;
+    background: white;
+    border: 2px solid #22a094;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    touch-action: manipulation;
+  }
+
+  .btn-secondary:hover {
+    background: #f0faf8;
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.4);
+  }
+
+  .btn-secondary:active {
     opacity: 0.9;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .site-pill-button:active,
-    .button-size-login:active {
-      opacity: 0.9;
-    }
-  }
-
-  /* Estado desativado */
-  .site-pill-button:disabled,
-  .button-size-login:disabled {
+  .btn-secondary:disabled {
     opacity: 0.65;
     cursor: not-allowed;
+  }
+
+  /* Small Button */
+  .btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  /* Large Button */
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  /* Full Width Button */
+  .btn-block {
+    width: 100%;
+  }
+
+  /* Legacy compatibility */
+  .site-pill-button,
+  .button-size-login {
+    @apply btn-primary;
   }
 
   /* Variante secundária do botão com fundo branco e texto laranja */
@@ -457,33 +482,82 @@ h6 {
     @apply text-sm font-semibold;
   }
 
-  /* Define tipografia moderna para títulos */
+  /* === STANDARDIZED TYPOGRAPHY SYSTEM === */
+
+  /* Headings */
+  .h1 {
+    @apply text-4xl sm:text-5xl font-bold leading-tight text-gray-900 tracking-tight;
+  }
+
+  .h2 {
+    @apply text-3xl sm:text-4xl font-bold leading-tight text-gray-900 tracking-tight;
+  }
+
+  .h3 {
+    @apply text-2xl font-bold text-gray-900 tracking-tight;
+  }
+
+  .h4 {
+    @apply text-xl font-bold text-gray-900 tracking-tight;
+  }
+
+  .h5 {
+    @apply text-lg font-bold text-gray-900 tracking-tight;
+  }
+
+  /* Body Text */
+  .text-body-lg {
+    @apply text-lg leading-7 text-gray-700;
+  }
+
+  .text-body {
+    @apply text-base leading-7 text-gray-700;
+  }
+
+  .text-body-sm {
+    @apply text-sm leading-6 text-gray-700;
+  }
+
+  .text-body-xs {
+    @apply text-xs leading-5 text-gray-600;
+  }
+
+  /* Labels and Small Text */
+  .text-label {
+    @apply text-xs font-semibold uppercase tracking-[0.1em] text-teal-700;
+  }
+
+  .text-muted {
+    @apply text-sm text-gray-600;
+  }
+
+  /* Legacy classes for backward compatibility */
   .page-title {
-    @apply text-3xl font-bold text-[color:var(--foreground)] tracking-tight;
+    @apply h1;
   }
 
   .section-title {
-    @apply text-2xl font-bold text-[color:var(--foreground)] tracking-tight;
+    @apply h2;
   }
 
   .section-title-inverse {
-    @apply text-2xl font-bold text-white tracking-tight;
+    @apply h2 text-white;
   }
 
   .card-title {
-    @apply text-lg font-bold text-[color:var(--foreground)] tracking-tight;
+    @apply h5;
   }
 
   .subsection-title {
-    @apply text-base font-bold text-[color:var(--foreground)] tracking-tight;
+    @apply h4;
   }
 
   .section-label {
-    @apply text-xs font-bold uppercase text-[color:var(--primary)] tracking-[0.2em];
+    @apply text-label;
   }
 
   .section-label-uppercase {
-    @apply text-xs font-bold uppercase tracking-[0.3em] text-[color:var(--primary)];
+    @apply text-label;
   }
 
 
