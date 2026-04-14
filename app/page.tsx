@@ -10,7 +10,7 @@ export default function HomePage() {
     <section className="w-full">
       <div className="relative w-full bg-transparent">
         {/* Hero Section */}
-        <div className="mx-auto w-full max-w-4xl px-3 py-12 sm:px-6 sm:py-16 md:px-10 md:py-20">
+        <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
           {/* Badge */}
           <div className="mb-8 flex justify-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2">
