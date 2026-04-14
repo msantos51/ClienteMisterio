@@ -10,7 +10,7 @@ export default function HomePage() {
     <section className="w-full">
       <div className="relative w-full bg-transparent">
         {/* Hero Section */}
-        <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+        <div className="mx-auto w-full max-w-6xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
           {/* Badge */}
           <div className="mb-8 flex justify-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2">
@@ -41,22 +41,24 @@ export default function HomePage() {
           </div>
 
           {/* Stats Section */}
-          <div className="mb-16 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8">
-            <div className="text-center">
-              <div className="mb-2 h3">100%</div>
-              <p className="text-body-xs">Online e ao teu ritmo</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-2 h3">+500</div>
-              <p className="text-body-xs">Alunos formados</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-2 h3">0€</div>
-              <p className="text-body-xs">Custos das avaliações</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-2 h3">4.9★</div>
-              <p className="text-body-xs">Avaliação média</p>
+          <div className="mb-16 rounded-lg bg-white p-8 shadow-sm">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8">
+              <div className="text-center">
+                <div className="mb-2 h3">100%</div>
+                <p className="text-body-xs">Online e ao teu ritmo</p>
+              </div>
+              <div className="text-center">
+                <div className="mb-2 h3">+500</div>
+                <p className="text-body-xs">Alunos formados</p>
+              </div>
+              <div className="text-center">
+                <div className="mb-2 h3">0€</div>
+                <p className="text-body-xs">Custos das avaliações</p>
+              </div>
+              <div className="text-center">
+                <div className="mb-2 h3">4.9★</div>
+                <p className="text-body-xs">Avaliação média</p>
+              </div>
             </div>
           </div>
 
