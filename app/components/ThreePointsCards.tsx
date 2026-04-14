@@ -18,15 +18,15 @@ const benefits = [
 
 export default function ThreePointsCards() {
   return (
-    <div className="grid w-full gap-3 sm:gap-4 sm:grid-cols-3">
+    <div className="grid w-full gap-4 sm:gap-5 md:gap-6 sm:grid-cols-3">
       {benefits.map((benefit) => (
         <div
           key={benefit.title}
-          className="flex min-h-[172px] flex-col items-center justify-center gap-2 rounded-2xl p-4 text-center transition duration-300 hover:-translate-y-1 hover:shadow-md sm:min-h-[220px] sm:gap-3 sm:p-8"
+          className="flex min-h-[180px] flex-col items-center justify-center gap-3 rounded-[24px] p-6 text-center transition duration-300 hover:-translate-y-2 hover:shadow-lg sm:min-h-[240px] sm:gap-4 sm:p-10 md:min-h-[260px]"
           style={{ backgroundColor: "#22a094" }}
         >
-          <h3 className="text-lg font-bold text-white sm:text-xl">{benefit.title}</h3>
-          <p className="text-xs leading-5 text-white sm:text-sm">{benefit.description}</p>
+          <h3 className="text-xl font-bold text-white sm:text-2xl leading-tight">{benefit.title}</h3>
+          <p className="text-sm leading-6 text-white sm:text-base sm:leading-7">{benefit.description}</p>
         </div>
       ))}
     </div>
