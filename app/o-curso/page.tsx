@@ -124,61 +124,103 @@ export default function CoursePage() {
   }, [isCourseModalOpen]);
 
   return (
-    <section className="w-full space-y-8">
-      <header className="w-full rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#22a094" }}>
-          Formação completa
-        </p>
-
-        <h1 className="text-3xl font-semibold home-title-highlight-text sm:text-4xl lg:text-5xl">O Curso de Cliente Mistério</h1>
-
-        <p className="text-sm sm:text-base leading-6 sm:leading-7">
-          Um curso completo, 100% prático e desenhado para iniciantes. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
-        </p>
-      </header>
-
-      {/* Preço e CTA */}
-      <div className="flex w-full justify-center">
-        <div className="w-full max-w-md rounded-2xl bg-white px-6 py-4 sm:px-10 sm:py-6 text-center">
-          <div className="space-y-1 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black text-center">Acesso Completo ao Curso</p>
-            <p className="text-5xl font-bold text-center" style={{ color: "#22a094" }}>19,99€</p>
-            <p className="text-sm text-black text-center">Pagamento único · Acesso vitalício</p>
+    <section className="w-full">
+      <div className="mx-auto w-full max-w-4xl">
+        {/* Header */}
+        <div className="mb-16 space-y-6 sm:space-y-8">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
+            <span className="h-2 w-2 rounded-full bg-teal-500"></span>
+            <span className="text-xs font-semibold uppercase tracking-[0.15em] text-teal-700">Formação Completa</span>
           </div>
-          <CheckoutButton label="Comprar Curso Completo" />
+
+          {/* Title */}
+          <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+            O Curso de <span className="text-teal-600">Cliente Mistério</span>
+          </h1>
+
+          {/* Description */}
+          <p className="text-sm sm:text-base leading-7 text-gray-700">
+            Um curso completo, 100% prático e desenhado para iniciantes. Aprende tudo que precisas para começar a ganhar dinheiro como Cliente Mistério — desde os conceitos básicos até estratégias de carreira avançadas.
+          </p>
         </div>
-      </div>
 
-      {/* Benefícios do curso */}
-      <div className="rounded-2xl border border-white/20 bg-white/5 p-6 backdrop-blur-sm">
-        <h3 className="text-2xl font-semibold sm:text-3xl home-title-highlight-text mb-4">Por que fazer este curso?</h3>
-        <div className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
-            <p className="font-semibold text-white mb-2">✓ Para Iniciantes</p>
-            <p className="text-sm text-white/90">Explicações simples, sem jargão. Começa do zero e aprende no teu ritmo.</p>
+        {/* Pricing Section */}
+        <div className="mb-16 grid gap-8 lg:grid-cols-3">
+          {/* Left Column - Content */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Por que fazer este curso */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-gray-900">Por que fazer este curso?</h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-lg bg-white p-6 shadow-sm">
+                  <p className="font-semibold text-gray-900 mb-2">✓ Para Iniciantes</p>
+                  <p className="text-sm text-gray-600">Explicações simples, sem jargão. Começa do zero e aprende no teu ritmo.</p>
+                </div>
+                <div className="rounded-lg bg-white p-6 shadow-sm">
+                  <p className="font-semibold text-gray-900 mb-2">✓ Prático & Real</p>
+                  <p className="text-sm text-gray-600">Casos reais, dicas profissionais, checklis práticos. Tudo que precisas para ganhar já no mês 1.</p>
+                </div>
+                <div className="rounded-lg bg-white p-6 shadow-sm">
+                  <p className="font-semibold text-gray-900 mb-2">✓ Ganha Desde Já</p>
+                  <p className="text-sm text-gray-600">5€ a 150€+ por missão. Flexibilidade total. Começa quando queres.</p>
+                </div>
+                <div className="rounded-lg bg-white p-6 shadow-sm">
+                  <p className="font-semibold text-gray-900 mb-2">✓ Carreira Escalável</p>
+                  <p className="text-sm text-gray-600">Começa simples, evolui para missões premium. Quanto melhor, mais ganhas.</p>
+                </div>
+                <div className="rounded-lg bg-white p-6 shadow-sm">
+                  <p className="font-semibold text-gray-900 mb-2">✓ Questões & Avaliação</p>
+                  <p className="text-sm text-gray-600">Testes em cada módulo. Certifica-te que compreendeste antes de avançar.</p>
+                </div>
+                <div className="rounded-lg bg-white p-6 shadow-sm">
+                  <p className="font-semibold text-gray-900 mb-2">✓ Comunidade & Apoio</p>
+                  <p className="text-sm text-gray-600">Aprende com outros avaliadores. Dicas, truques e apoio contínuo.</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
-            <p className="font-semibold text-white mb-2">✓ Prático & Real</p>
-            <p className="text-sm text-white/90">Casos reais, dicas profissionais, checklis práticos. Tudo que precisas para ganhar já no mês 1.</p>
-          </div>
-          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
-            <p className="font-semibold text-white mb-2">✓ Ganha Desde Já</p>
-            <p className="text-sm text-white/90">5€ a 150€+ por missão. Flexibilidade total. Começa quando queres.</p>
-          </div>
-          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
-            <p className="font-semibold text-white mb-2">✓ Carreira Escalável</p>
-            <p className="text-sm text-white/90">Começa simples, evolui para missões premium. Quanto melhor, mais ganhas.</p>
-          </div>
-          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
-            <p className="font-semibold text-white mb-2">✓ Questões & Avaliação</p>
-            <p className="text-sm text-white/90">Testes em cada módulo. Certifica-te que compreendeste antes de avançar.</p>
-          </div>
-          <div className="rounded-lg border border-[#22a094] bg-[#22a094] p-4">
-            <p className="font-semibold text-white mb-2">✓ Comunidade & Apoio</p>
-            <p className="text-sm text-white/90">Aprende com outros avaliadores. Dicas, truques e apoio contínuo.</p>
+
+          {/* Right Column - Pricing Card */}
+          <div className="h-fit rounded-2xl bg-white p-6 sm:p-8 shadow-sm">
+            <div className="mb-6 space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-teal-600">
+                Acesso Completo
+              </p>
+              <div className="space-y-1">
+                <p className="text-4xl font-bold text-gray-900">€19.99</p>
+                <p className="text-xs text-gray-600">Pagamento único · Acesso vitalício</p>
+              </div>
+            </div>
+            <div className="mb-6 space-y-3 border-b border-gray-200 pb-6">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-500">
+                  <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="text-sm text-gray-700">10 módulos completos</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-500">
+                  <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="text-sm text-gray-700">Certificado de conclusão</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-500">
+                  <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="text-sm text-gray-700">Acesso ilimitado</p>
+              </div>
+            </div>
+            <CheckoutButton label="Comprar curso" />
           </div>
         </div>
-      </div>
 
       {isLoggedIn && (
         <div className="flex justify-center">
