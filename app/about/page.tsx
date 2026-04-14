@@ -37,7 +37,7 @@ export default function AboutPage() {
           </h1>
 
           {/* Description */}
-          <div className="space-y-4 text-body-sm">
+          <div className="space-y-4 text-body-sm text-justify">
             <p>
               Um Cliente Mistério é um cliente "normal" contratado para avaliar serviços
               (atendimento, rapidez, qualidade e cumprimento de regras) e, ao mesmo tempo, gerar

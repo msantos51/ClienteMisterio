@@ -25,7 +25,7 @@ export default function HomePage() {
           </h1>
 
           {/* Description */}
-          <p className="mb-10 text-center text-body-sm">
+          <p className="mb-10 text-center text-body-sm text-justify">
             Avalia produtos, lojas e restaurantes ao teu ritmo — e recebe por isso. Certificado incluído.
           </p>
 
