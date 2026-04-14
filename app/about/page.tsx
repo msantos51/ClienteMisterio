@@ -28,16 +28,16 @@ export default function AboutPage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-            <span className="text-xs font-semibold uppercase tracking-[0.15em] text-teal-700">Sobre a Cliente Mistério</span>
+            <span className="text-label">Sobre a Cliente Mistério</span>
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+          <h1 className="h1">
             Atua com <span className="text-teal-600">método e consistência</span>
           </h1>
 
           {/* Description */}
-          <div className="space-y-4 text-sm sm:text-base leading-7 text-gray-700">
+          <div className="space-y-4 text-body-sm">
             <p>
               Um Cliente Mistério é um cliente "normal" contratado para avaliar serviços
               (atendimento, rapidez, qualidade e cumprimento de regras) e, ao mesmo tempo, gerar
@@ -63,8 +63,8 @@ export default function AboutPage() {
           <div className="lg:col-span-2 space-y-8">
             {/* Course Advantages */}
             <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-gray-900">Vantagens do curso</h2>
-              <p className="text-sm text-gray-600">
+              <h2 className="h3">Vantagens do curso</h2>
+              <p className="text-body-sm">
                 Estrutura prática para melhorares a qualidade das avaliações e aumentares o teu
                 rendimento com consistência.
               </p>
@@ -86,12 +86,12 @@ export default function AboutPage() {
           <div className="h-fit rounded-2xl bg-white p-6 sm:p-8 shadow-sm">
             {/* Course Title */}
             <div className="mb-6 space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-teal-600">
+              <p className="text-label">
                 Curso Cliente Mistério
               </p>
               <div className="space-y-1">
-                <p className="text-4xl font-bold text-gray-900">€19.99</p>
-                <p className="text-xs text-gray-600">Pagamento único · Acesso vitalício</p>
+                <p className="h2 text-gray-900">€19.99</p>
+                <p className="text-body-xs">Pagamento único · Acesso vitalício</p>
               </div>
             </div>
 
