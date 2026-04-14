@@ -295,7 +295,41 @@ h6 {
   /* Legacy compatibility */
   .site-pill-button,
   .button-size-login {
-    @apply btn-primary;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Google Sans", sans-serif;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    color: white !important;
+    background: #22a094;
+    border: none;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+    touch-action: manipulation;
+    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+  }
+
+  .site-pill-button:hover,
+  .button-size-login:hover {
+    opacity: 0.95;
+    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+  }
+
+  .site-pill-button:active,
+  .button-size-login:active {
+    opacity: 0.9;
+    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
+  }
+
+  .site-pill-button:disabled,
+  .button-size-login:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
   }
 
   /* Variante secundária do botão com fundo branco e texto laranja */
@@ -479,85 +513,172 @@ h6 {
 
   /* Mantém estilo textual consistente para botões em páginas internas. */
   .button-text-standard {
-    @apply text-sm font-semibold;
+    font-size: 0.875rem;
+    font-weight: 600;
   }
 
   /* === STANDARDIZED TYPOGRAPHY SYSTEM === */
 
   /* Headings */
   .h1 {
-    @apply text-4xl sm:text-5xl font-bold leading-tight text-gray-900 tracking-tight;
+    font-size: 2.25rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 640px) {
+    .h1 {
+      font-size: 3rem;
+    }
   }
 
   .h2 {
-    @apply text-3xl sm:text-4xl font-bold leading-tight text-gray-900 tracking-tight;
+    font-size: 1.875rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 640px) {
+    .h2 {
+      font-size: 2.25rem;
+    }
   }
 
   .h3 {
-    @apply text-2xl font-bold text-gray-900 tracking-tight;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
   }
 
   .h4 {
-    @apply text-xl font-bold text-gray-900 tracking-tight;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
   }
 
   .h5 {
-    @apply text-lg font-bold text-gray-900 tracking-tight;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
   }
 
   /* Body Text */
   .text-body-lg {
-    @apply text-lg leading-7 text-gray-700;
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: #374151;
   }
 
   .text-body {
-    @apply text-base leading-7 text-gray-700;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #374151;
   }
 
   .text-body-sm {
-    @apply text-sm leading-6 text-gray-700;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #374151;
   }
 
   .text-body-xs {
-    @apply text-xs leading-5 text-gray-600;
+    font-size: 0.75rem;
+    line-height: 1.25;
+    color: #4b5563;
   }
 
   /* Labels and Small Text */
   .text-label {
-    @apply text-xs font-semibold uppercase tracking-[0.1em] text-teal-700;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #0d7377;
   }
 
   .text-muted {
-    @apply text-sm text-gray-600;
+    font-size: 0.875rem;
+    color: #4b5563;
   }
 
   /* Legacy classes for backward compatibility */
   .page-title {
-    @apply h1;
+    font-size: 2.25rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 640px) {
+    .page-title {
+      font-size: 3rem;
+    }
   }
 
   .section-title {
-    @apply h2;
+    font-size: 1.875rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 640px) {
+    .section-title {
+      font-size: 2.25rem;
+    }
   }
 
   .section-title-inverse {
-    @apply h2 text-white;
+    font-size: 1.875rem;
+    line-height: 1.2;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 640px) {
+    .section-title-inverse {
+      font-size: 2.25rem;
+    }
   }
 
   .card-title {
-    @apply h5;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
   }
 
   .subsection-title {
-    @apply h4;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
   }
 
   .section-label {
-    @apply text-label;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #0d7377;
   }
 
   .section-label-uppercase {
-    @apply text-label;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #0d7377;
   }
 
 
