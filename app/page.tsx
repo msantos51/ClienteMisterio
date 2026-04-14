@@ -65,21 +65,21 @@ export default function HomePage() {
             {/* Card 1 */}
             <div className="rounded-lg bg-white p-3 text-center shadow-sm sm:p-4">
               <div className="mb-2 flex justify-center text-2xl">💳</div>
-              <h3 className="mb-1 h6 text-sm sm:text-base">Aprende</h3>
+              <h3 className="mb-1 h5 text-sm sm:text-base">Aprende</h3>
               <p className="text-body-sm text-xs sm:text-sm">Curso 100% online, sem horários e ao teu ritmo. Acesso ilimitado.</p>
             </div>
 
             {/* Card 2 */}
             <div className="rounded-lg bg-white p-3 text-center shadow-sm sm:p-4">
               <div className="mb-2 flex justify-center text-2xl">📋</div>
-              <h3 className="mb-1 h6 text-sm sm:text-base">Certificado</h3>
+              <h3 className="mb-1 h5 text-sm sm:text-base">Certificado</h3>
               <p className="text-body-sm text-xs sm:text-sm">Documento oficial que comprova a conclusão do curso.</p>
             </div>
 
             {/* Card 3 */}
             <div className="rounded-lg bg-white p-3 text-center shadow-sm sm:p-4">
               <div className="mb-2 flex justify-center text-2xl">🎁</div>
-              <h3 className="mb-1 h6 text-sm sm:text-base">Oportunidades</h3>
+              <h3 className="mb-1 h5 text-sm sm:text-base">Oportunidades</h3>
               <p className="text-body-sm text-xs sm:text-sm">Testa produtos, lojas e restaurantes sem custo.</p>
             </div>
           </div>
