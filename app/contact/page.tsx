@@ -76,12 +76,12 @@ export default function ContactPage() {
         <div className="mb-12 space-y-4 sm:space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-            <span className="text-xs font-semibold uppercase tracking-[0.15em] text-teal-700">Contacto</span>
+            <span className="text-label">Contacto</span>
           </div>
 
           <div>
-            <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl text-gray-900">Fala connosco</h1>
-            <p className="mt-3 text-sm text-gray-600">
+            <h1 className="h1">Fala connosco</h1>
+            <p className="mt-3 text-body-sm">
               Temos algumas dúvidas sobre o curso, o certificado ou o processo de pagamento? Estamos aqui para ajudar.
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function ContactPage() {
           {/* Left Column - Contact Info */}
           <div className="space-y-6">
             <div className="space-y-4">
-              <h2 className="text-lg font-bold text-gray-900">Entre em contacto</h2>
+              <h2 className="h5">Entre em contacto</h2>
 
               {/* Email */}
               <div className="flex items-start gap-4">
@@ -103,8 +103,8 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Email</p>
-                  <a href="mailto:email@clientemisterio.pt" className="text-sm text-gray-600 hover:text-teal-600">
+                  <p className="text-body-sm font-semibold">Email</p>
+                  <a href="mailto:email@clientemisterio.pt" className="text-body-sm text-gray-600 hover:text-teal-600">
                     email@clientemisterio.pt
                   </a>
                 </div>
@@ -118,8 +118,8 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Telefone</p>
-                  <a href="tel:+351912345678" className="text-sm text-gray-600 hover:text-teal-600">
+                  <p className="text-body-sm font-semibold">Telefone</p>
+                  <a href="tel:+351912345678" className="text-body-sm text-gray-600 hover:text-teal-600">
                     +351 91 234 5678
                   </a>
                 </div>
@@ -133,8 +133,8 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">Morada</p>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-body-sm font-semibold">Morada</p>
+                  <p className="text-body-sm text-gray-600">
                     Rua da Inovação, 10<br />
                     1900-001 Lisboa, Portugal
                   </p>
@@ -145,13 +145,13 @@ export default function ContactPage() {
             {/* Response Time Badge */}
             <div className="flex items-center gap-2 rounded-full bg-teal-50 px-4 py-3">
               <div className="h-2 w-2 rounded-full bg-teal-500"></div>
-              <p className="text-xs font-semibold text-teal-700">Respondemos em até 2 dias úteis</p>
+              <p className="text-label">Respondemos em até 2 dias úteis</p>
             </div>
           </div>
 
           {/* Right Column - Form */}
           <div className="rounded-lg bg-white p-6 sm:p-8 shadow-sm">
-            <h2 className="mb-6 text-lg font-bold text-gray-900">Envia-nos uma mensagem</h2>
+            <h2 className="mb-6 h5">Envia-nos uma mensagem</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
               {/* Name and Email Row */}
               <div className="grid gap-4 sm:grid-cols-2">
@@ -208,9 +208,9 @@ export default function ContactPage() {
               {/* Status Message */}
               {statusMessage ? (
                 <div className="rounded-lg border border-teal-200 bg-teal-50 p-4">
-                  <p className="text-sm text-teal-900">{statusMessage}</p>
+                  <p className="text-body-sm text-teal-900">{statusMessage}</p>
                   {statusReference ? (
-                    <p className="mt-2 text-xs text-teal-700">
+                    <p className="mt-2 text-body-xs text-teal-700">
                       Referência: <span className="font-semibold">{statusReference}</span>
                     </p>
                   ) : null}

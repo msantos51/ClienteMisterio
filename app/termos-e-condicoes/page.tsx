@@ -75,12 +75,12 @@ export default function TermosECondicoes() {
         <div className="mb-12 space-y-4 sm:space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-            <span className="text-xs font-semibold uppercase tracking-[0.15em] text-teal-700">Política & Regulamento</span>
+            <span className="text-label">Política & Regulamento</span>
           </div>
 
           <div>
-            <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl text-gray-900">Termos e Condições de Utilização</h1>
-            <p className="mt-3 text-sm text-gray-600">Última atualização: {new Date().toLocaleDateString("pt-PT")}</p>
+            <h1 className="h1">Termos e Condições de Utilização</h1>
+            <p className="mt-3 text-body-sm">Última atualização: {new Date().toLocaleDateString("pt-PT")}</p>
           </div>
         </div>
 
@@ -91,11 +91,11 @@ export default function TermosECondicoes() {
             <div key={section.number} className="rounded-lg bg-white p-6 sm:p-8 shadow-sm">
               <div className="mb-4 flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-100">
-                  <span className="text-lg font-bold text-teal-600">{section.number}</span>
+                  <span className="h4 text-teal-600">{section.number}</span>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">{section.title}</h2>
+                <h2 className="h3">{section.title}</h2>
               </div>
-              <p className="text-gray-700 leading-7">{section.content}</p>
+              <p className="text-body">{section.content}</p>
             </div>
           ))}
         </div>
