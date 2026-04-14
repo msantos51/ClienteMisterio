@@ -7,26 +7,26 @@ import CheckoutButton from "./components/CheckoutButton";
 
 export default function HomePage() {
   return (
-    <section className="w-full">
-      <div className="relative w-full bg-transparent">
+    <section className="w-full bg-gray-50">
+      <div className="relative w-full">
         {/* Hero Section */}
-        <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+        <div className="mx-auto w-full max-w-6xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
           {/* Badge */}
           <div className="mb-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-              <span className="text-label">O único curso de Cliente Misterio em Portugal</span>
+            <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-teal-600"></span>
+              <span className="text-sm font-medium text-gray-900">O ÚNICO CURSO EM PORTUGAL</span>
             </div>
           </div>
 
           {/* Main Title */}
-          <h1 className="mb-6 text-center h1">
-            Aprende a ganhar<br />como <span className="text-teal-600">Cliente Misterio</span>
+          <h1 className="mb-6 text-center text-4xl sm:text-5xl font-bold leading-tight">
+            Aprende a ganhar<br />como <span className="text-teal-600">Cliente<br />Mistério</span>
           </h1>
 
           {/* Description */}
-          <p className="mb-10 text-center text-body-sm">
-            Avalia produtos, lojas e restaurantes ao teu ritmo — e recebe por isso. Certificado incluído.
+          <p className="mb-10 text-center text-gray-600 max-w-2xl mx-auto">
+            Avalia lojas, restaurantes e produtos ao teu ritmo — e recebe por isso. Certificado incluído.
           </p>
 
           {/* CTA Buttons */}
@@ -34,78 +34,80 @@ export default function HomePage() {
             <CheckoutButton label="Comprar o curso — 19.99€" />
             <Link
               href="#what-included"
-              className="btn-secondary"
+              className="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-900 hover:bg-gray-100 transition"
             >
-              Saber mais
+              Ver o programa
             </Link>
           </div>
 
           {/* Stats Section */}
-          <div className="mb-16 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8">
-            <div className="text-center">
-              <div className="mb-2 h3">100%</div>
-              <p className="text-body-xs">Online e ao teu ritmo</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-2 h3">+500</div>
-              <p className="text-body-xs">Alunos formados</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-2 h3">0€</div>
-              <p className="text-body-xs">Custos das avaliações</p>
-            </div>
-            <div className="text-center">
-              <div className="mb-2 h3">4.9★</div>
-              <p className="text-body-xs">Avaliação média</p>
+          <div className="mb-16 rounded-lg bg-white p-8 shadow-sm">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8">
+              <div className="text-center">
+                <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">100%</div>
+                <p className="text-sm text-teal-600 font-medium">Críticas</p>
+              </div>
+              <div className="text-center">
+                <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">+500</div>
+                <p className="text-sm text-teal-600 font-medium">Alunos</p>
+              </div>
+              <div className="text-center">
+                <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">0€</div>
+                <p className="text-sm text-teal-600 font-medium">Horas módulos</p>
+              </div>
+              <div className="text-center">
+                <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">4.9★</div>
+                <p className="text-sm text-teal-600 font-medium">Avaliação</p>
+              </div>
             </div>
           </div>
 
           {/* Section: O QUE INCLUI */}
           <div id="what-included" className="mb-16">
             <div className="mb-8 text-center">
-              <p className="mb-2 text-label text-teal-600">O QUE INCLUI</p>
-              <h2 className="mb-3 h2">Tudo o que precisas para começar</h2>
-              <p className="text-body-sm text-gray-600">Estrutura completa, do zero à primeira missão paga.</p>
+              <p className="mb-2 text-sm font-medium text-teal-600">O QUE INCLUI</p>
+              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">Tudo o que precisas para começar</h2>
+              <p className="text-gray-600">Do zero à primeira missão paga, com estrutura completa.</p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3 sm:gap-6">
+            <div className="grid gap-6 sm:grid-cols-3">
               {/* Card 1 */}
-              <div className="rounded-lg bg-white p-6 text-center shadow-sm sm:p-8">
+              <div className="rounded-lg bg-white p-8 text-center shadow-sm">
                 <div className="mb-4 flex justify-center">
-                  <div className="rounded-lg bg-teal-50 p-3">
+                  <div className="rounded-full bg-teal-100 p-3">
                     <svg className="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                 </div>
-                <h3 className="mb-3 h5">Aprende ao teu ritmo</h3>
-                <p className="text-body-sm">Curso 100% online, sem horários fixes. Acesso vitalício aos conteúdos e tutoriais atualizações.</p>
+                <h3 className="mb-3 text-lg font-bold text-gray-900">Aprende ao teu ritmo</h3>
+                <p className="text-sm text-gray-600">100% online, sem horários. Acesso vitalício aos conteúdos e atualizações futuras.</p>
               </div>
 
               {/* Card 2 */}
-              <div className="rounded-lg bg-white p-6 text-center shadow-sm sm:p-8">
+              <div className="rounded-lg bg-white p-8 text-center shadow-sm">
                 <div className="mb-4 flex justify-center">
-                  <div className="rounded-lg bg-teal-50 p-3">
+                  <div className="rounded-full bg-teal-100 p-3">
                     <svg className="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </div>
                 </div>
-                <h3 className="mb-3 h5">Certificado incluído</h3>
-                <p className="text-body-sm">Documento que comprova a conclusão do curso e as tuas competências como avaliador.</p>
+                <h3 className="mb-3 text-lg font-bold text-gray-900">Certificado incluído</h3>
+                <p className="text-sm text-gray-600">Documento que comprova a conclusão do curso e as tuas competências como avaliador.</p>
               </div>
 
               {/* Card 3 */}
-              <div className="rounded-lg bg-white p-6 text-center shadow-sm sm:p-8">
+              <div className="rounded-lg bg-white p-8 text-center shadow-sm">
                 <div className="mb-4 flex justify-center">
-                  <div className="rounded-lg bg-teal-50 p-3">
+                  <div className="rounded-full bg-teal-100 p-3">
                     <svg className="h-6 w-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                 </div>
-                <h3 className="mb-3 h5">Oportunidades reais</h3>
-                <p className="text-body-sm">Testa produtos, lojas, restaurantes e hotéis — sem qualquer custo do teu bolso.</p>
+                <h3 className="mb-3 text-lg font-bold text-gray-900">Oportunidades reais</h3>
+                <p className="text-sm text-gray-600">Testa produtos, lojas e restaurantes sem qualquer custo — e ainda recebes por cada visita.</p>
               </div>
             </div>
           </div>
@@ -113,8 +115,9 @@ export default function HomePage() {
           {/* Section: COMO FUNCIONA */}
           <div className="mb-16">
             <div className="mb-8 text-center">
-              <p className="mb-2 text-label text-teal-600">COMO FUNCIONA</p>
-              <h2 className="mb-3 h2">Do curso à primeira missão paga</h2>
+              <p className="mb-2 text-sm font-medium text-teal-600">COMO FUNCIONA</p>
+              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">Do curso à primeira missão</h2>
+              <p className="text-gray-600">Quatro passos simples para começares a ganhar.</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
@@ -123,8 +126,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">1</div>
                 </div>
-                <h3 className="mb-2 font-semibold text-gray-900">Compra o curso</h3>
-                <p className="text-body-xs text-gray-600">Pagamento único de 19.99€. Acesso imediato a todos os módulos.</p>
+                <h3 className="mb-2 font-bold text-gray-900">Compra o curso</h3>
+                <p className="text-sm text-gray-600">Pagamento único de 19.99€. Acesso imediato a todos os módulos.</p>
               </div>
 
               {/* Step 2 */}
@@ -132,8 +135,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">2</div>
                 </div>
-                <h3 className="mb-2 font-semibold text-gray-900">Aprende</h3>
-                <p className="text-body-xs text-gray-600">10 módulos práticos, do enquadramento à elaboração de relatórios.</p>
+                <h3 className="mb-2 font-bold text-gray-900">Aprende</h3>
+                <p className="text-sm text-gray-600">10 módulos práticos do enquadramento ao relacionamento.</p>
               </div>
 
               {/* Step 3 */}
@@ -141,8 +144,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">3</div>
                 </div>
-                <h3 className="mb-2 font-semibold text-gray-900">Regista-te em plataformas</h3>
-                <p className="text-body-xs text-gray-600">Acesso aos vários sites de plataformas de mystery shopping em Portugal.</p>
+                <h3 className="mb-2 font-bold text-gray-900">Regista-te</h3>
+                <p className="text-sm text-gray-600">Acesso às plataformas de mystery shopping em Portugal.</p>
               </div>
 
               {/* Step 4 */}
@@ -150,8 +153,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">4</div>
                 </div>
-                <h3 className="mb-2 font-semibold text-gray-900">Ganhas</h3>
-                <p className="text-body-xs text-gray-600">Recebe reembolsos entre 5€ e 150€ por avaliação realizada.</p>
+                <h3 className="mb-2 font-bold text-gray-900">Ganhas</h3>
+                <p className="text-sm text-gray-600">De 5 a 150€ por avaliação concluída.</p>
               </div>
             </div>
           </div>
@@ -159,8 +162,9 @@ export default function HomePage() {
           {/* Section: TESTEMUNHOS */}
           <div className="mb-16">
             <div className="mb-8 text-center">
-              <p className="mb-2 text-label text-teal-600">TESTEMUNHOS</p>
-              <h2 className="mb-3 h2">O que dizem os alunos</h2>
+              <p className="mb-2 text-sm font-medium text-teal-600">TESTEMUNHOS</p>
+              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">O que dizem os alunos</h2>
+              <p className="text-gray-600">Mais de 500 pessoas já completaram o curso.</p>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-3">
@@ -168,17 +172,17 @@ export default function HomePage() {
               <div className="rounded-lg bg-white p-6 shadow-sm">
                 <div className="mb-4 flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-teal-600">★</span>
+                    <span key={i} className="text-teal-600 text-lg">★</span>
                   ))}
                 </div>
-                <p className="mb-4 text-body-sm italic text-gray-700">
-                  "Comecei sem saber nada e no primeiro mês já tinha completado 4 missões. O curso é muito prático e direto ao ponto."
+                <p className="mb-4 text-sm text-gray-700">
+                  Comecei sem saber nada e no primeiro mês já tinha completado 4 missões. Muito prático e direto ao ponto.
                 </p>
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 text-sm font-semibold text-teal-600">AP</div>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-600">AP</div>
                   <div>
-                    <p className="font-semibold text-gray-900">Ana P.</p>
-                    <p className="text-body-xs text-gray-600">Lisboa</p>
+                    <p className="font-bold text-gray-900">Ana P.</p>
+                    <p className="text-xs text-gray-500">Lisboa</p>
                   </div>
                 </div>
               </div>
@@ -187,17 +191,17 @@ export default function HomePage() {
               <div className="rounded-lg bg-white p-6 shadow-sm">
                 <div className="mb-4 flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-teal-600">★</span>
+                    <span key={i} className="text-teal-600 text-lg">★</span>
                   ))}
                 </div>
-                <p className="mb-4 text-body-sm italic text-gray-700">
-                  "Excelente investimento. Recomendo o curso logo na primeira avaliação e já amortizei o investimento."
+                <p className="mb-4 text-sm text-gray-700">
+                  Recomendo o valor do curso logo na primeira avaliação. Excelente investimento.
                 </p>
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 text-sm font-semibold text-teal-600">RC</div>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-600">RC</div>
                   <div>
-                    <p className="font-semibold text-gray-900">Rui C.</p>
-                    <p className="text-body-xs text-gray-600">Porto</p>
+                    <p className="font-bold text-gray-900">Rui C.</p>
+                    <p className="text-xs text-gray-500">Porto</p>
                   </div>
                 </div>
               </div>
@@ -206,17 +210,17 @@ export default function HomePage() {
               <div className="rounded-lg bg-white p-6 shadow-sm">
                 <div className="mb-4 flex gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-teal-600">★</span>
+                    <span key={i} className="text-teal-600 text-lg">★</span>
                   ))}
                 </div>
-                <p className="mb-4 text-body-sm italic text-gray-700">
-                  "Adorei a forma como o curso está estruturado. Ótimas informações e suporte ao longo de todo o processo."
+                <p className="mb-4 text-sm text-gray-700">
+                  Curso bem estruturado. Ótimas informações e suporte ao longo de todo o processo. Já realizei concluída.
                 </p>
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100 text-sm font-semibold text-teal-600">MF</div>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-600">MF</div>
                   <div>
-                    <p className="font-semibold text-gray-900">Maria F.</p>
-                    <p className="text-body-xs text-gray-600">Braga</p>
+                    <p className="font-bold text-gray-900">Maria F.</p>
+                    <p className="text-xs text-gray-500">Braga</p>
                   </div>
                 </div>
               </div>
@@ -224,13 +228,28 @@ export default function HomePage() {
           </div>
 
           {/* CTA Section */}
-          <div className="rounded-2xl bg-teal-700 p-8 text-center text-white sm:p-10">
-            <h2 className="mb-3 h3 text-white">Pronto para começar?</h2>
-            <p className="mb-6 text-body-sm text-teal-100">
+          <div className="rounded-3xl bg-gray-900 p-10 sm:p-12 text-center text-white">
+            <h2 className="mb-4 text-3xl sm:text-4xl font-bold">Pronto para começar?</h2>
+            <p className="mb-8 text-gray-300 max-w-2xl mx-auto">
               Junta-te a mais de 500 alunos que já avaliam e ganham em Portugal.
             </p>
+
+            <div className="mb-8 flex flex-col items-center justify-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 text-sm">
+                <span>✓</span>
+                <span>Acesso imediato</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <span>✓</span>
+                <span>Certificado incluído</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <span>✓</span>
+                <span>Suporte vitalício</span>
+              </div>
+            </div>
+
             <CheckoutButton label="Comprar o curso — 19.99€" />
-            <p className="mt-4 text-body-xs text-teal-200">Acesso imediato · Certificado incluído</p>
           </div>
         </div>
       </div>
