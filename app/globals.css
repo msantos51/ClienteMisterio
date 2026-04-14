@@ -521,7 +521,7 @@ h6 {
 
   /* Headings */
   .h1 {
-    font-size: 2.25rem;
+    font-size: 1.75rem;
     line-height: 1.2;
     font-weight: 700;
     color: #111827;
@@ -530,12 +530,12 @@ h6 {
 
   @media (min-width: 640px) {
     .h1 {
-      font-size: 3rem;
+      font-size: 2.25rem;
     }
   }
 
   .h2 {
-    font-size: 1.875rem;
+    font-size: 1.5rem;
     line-height: 1.2;
     font-weight: 700;
     color: #111827;
@@ -544,26 +544,26 @@ h6 {
 
   @media (min-width: 640px) {
     .h2 {
-      font-size: 2.25rem;
+      font-size: 1.875rem;
     }
   }
 
   .h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111827;
-    letter-spacing: -0.02em;
-  }
-
-  .h4 {
     font-size: 1.25rem;
     font-weight: 700;
     color: #111827;
     letter-spacing: -0.02em;
   }
 
-  .h5 {
+  .h4 {
     font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.02em;
+  }
+
+  .h5 {
+    font-size: 1rem;
     font-weight: 700;
     color: #111827;
     letter-spacing: -0.02em;
@@ -571,19 +571,19 @@ h6 {
 
   /* Body Text */
   .text-body-lg {
-    font-size: 1.125rem;
-    line-height: 1.75;
-    color: #374151;
-  }
-
-  .text-body {
     font-size: 1rem;
     line-height: 1.75;
     color: #374151;
   }
 
+  .text-body {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #374151;
+  }
+
   .text-body-sm {
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     line-height: 1.5;
     color: #374151;
   }
@@ -806,7 +806,7 @@ h6 {
 .form-heading {
   margin-bottom: 24px;
   color: #1a1a1a !important;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
   letter-spacing: 0.5px;
@@ -814,7 +814,7 @@ h6 {
 
 @media (max-width: 480px) {
   .form-heading {
-    font-size: 1.45rem;
+    font-size: 1.25rem;
     margin-bottom: 20px;
     letter-spacing: 0.3px;
   }
@@ -849,7 +849,7 @@ h6 {
   width: 100%;
   padding: 12px 14px;
   color: #1a1a1a !important;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   background-color: #f8f9fa !important;
   border: 1px solid #e0e0e0 !important;
   border-radius: 10px;
@@ -1033,7 +1033,7 @@ h6 {
 /* Título principal do menu lateral. */
 .dashboard-sidebar-title {
   color: #111827 !important;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 700;
 }
 
@@ -1062,7 +1062,7 @@ h6 {
 .dashboard-menu-item span {
   display: block;
   color: #1a1a1a !important;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.2px;
 }
