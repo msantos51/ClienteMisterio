@@ -7,7 +7,7 @@ import CheckoutButton from "./components/CheckoutButton";
 
 export default function HomePage() {
   return (
-    <section className="w-full bg-gray-50">
+    <section className="w-full">
       <div className="relative w-full">
         {/* Hero Section */}
         <div className="mx-auto w-full max-w-6xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">

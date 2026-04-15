@@ -90,7 +90,7 @@ export default function AccountPage() {
   };
 
   return (
-    <section className="space-y-8 bg-gray-50">
+    <section className="space-y-8">
       <div className="mx-auto flex w-full max-w-6xl justify-center">
         <article className="login-form max-w-[620px]">
           <h1 className="form-heading">Criar conta</h1>

@@ -8,7 +8,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/20 bg-transparent px-3 py-4 sm:px-6 md:px-10">
+    <footer className="border-t border-gray-200 bg-white/95 px-3 py-4 sm:px-6 md:px-10">
       <div className="mx-auto w-full max-w-6xl">
         <div className="flex flex-col items-start gap-3 text-xs sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:gap-y-2">
           {/* Logo / Brand */}
