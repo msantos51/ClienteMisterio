@@ -795,191 +795,216 @@ export default function CursoPage() {
               </button>
             </div>
 
-            <div className="space-y-6 overflow-y-auto pr-1 sm:pr-2">
-              <div>
-                <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
-                <p className="text-sm text-[#666] mt-2">{activeModule.description}</p>
+            <div className="overflow-y-auto pr-1 sm:pr-2">
+              <div className="mb-6 space-y-3">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
+                  <p className="text-sm text-[#666] mt-2">{activeModule.description}</p>
+                </div>
+
+                {/* Barra de progresso do módulo */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#666]">Página {theoryPage + 1} de {allTheoryPages.length}</p>
+                    <p className="text-sm font-bold text-[#22a094]">{Math.round(((theoryPage + 1) / allTheoryPages.length) * 100)}% concluído</p>
+                  </div>
+                  <div className="h-2 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-[#22a094] transition-all duration-500"
+                      style={{ width: `${((theoryPage + 1) / allTheoryPages.length) * 100}%` }}
+                    />
+                  </div>
+                </div>
               </div>
 
-            {/* Card de informação rápida — visível apenas na primeira página */}
-            {theoryPage === 0 && (
-              <div className="grid gap-3 md:grid-cols-2">
-                {/* Palavras-chave */}
-                {activeModule.keywords && activeModule.keywords.length > 0 && (
-                  <div className="rounded-lg border border-[#22a094]/30 bg-[#22a094]/10 p-4">
-                    <p className="text-sm font-bold text-[#2a2a2a] mb-3">Conceitos-chave</p>
-                    <div className="flex flex-wrap gap-2">
-                      {activeModule.keywords.map((keyword) => (
-                        <span
-                          key={keyword}
-                          className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#22a094]/20 text-[#2a2a2a]"
-                        >
-                          {keyword}
-                        </span>
-                      ))}
+              {/* Layout de duas colunas: conteúdo + sidebar */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                {/* Coluna esquerda - conteúdo principal */}
+                <div className="lg:col-span-2 space-y-6">
+                  {/* Título da página */}
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.16em] text-[#666] font-semibold mb-3">{currentTheoryPage.title}</p>
+                  </div>
+
+                  {/* Conteúdo teórico */}
+                  <div className="space-y-4">
+                    {currentTheoryPage.blocks.map((paragraph, idx) => (
+                      <p key={idx} className="text-base leading-8 text-[#2a2a2a]">
+                        {renderBold(paragraph)}
+                      </p>
+                    ))}
+                  </div>
+
+                  {/* Conteúdo premium - no final */}
+                  {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
+                    <div className="space-y-4 mt-8 pt-6 border-t border-[#D4B5A0]/20">
+                      <div className="rounded-lg border border-[#a0d5be]/30 bg-[#f0f7f4] p-4">
+                        <p className="font-bold text-[#2a2a2a] mb-3">Boas práticas</p>
+                        <ul className="space-y-2 text-sm text-[#2a2a2a]">
+                          {activeSupportContent.goodPractices.map((item) => (
+                            <li key={item} className="flex gap-2">
+                              <span className="shrink-0">–</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
+                        <p className="font-bold text-[#2a2a2a] mb-3">Más práticas</p>
+                        <ul className="space-y-2 text-sm text-[#2a2a2a]">
+                          {activeSupportContent.badPractices.map((item) => (
+                            <li key={item} className="flex gap-2">
+                              <span className="shrink-0">–</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fffbfa] p-4">
+                        <p className="font-bold text-[#2a2a2a] mb-3">Estratégias práticas</p>
+                        <ul className="space-y-2 text-sm text-[#2a2a2a]">
+                          {activeSupportContent.strategies.map((item) => (
+                            <li key={item} className="flex gap-2">
+                              <span className="shrink-0">–</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="rounded-lg border border-[#22a094]/30 bg-[#22a094] p-4">
+                        <p className="font-bold text-white mb-3">Checklist de execução profissional</p>
+                        <ul className="space-y-2 text-sm text-white">
+                          {activeSupportContent.executionChecklist.map((item) => (
+                            <li key={item} className="flex gap-2">
+                              <span className="shrink-0">–</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {activeModule.evaluationExamples && activeModule.evaluationExamples.length > 0 && (
+                        <div className="rounded-lg border border-[#D4B5A0]/30 bg-white p-4">
+                          <p className="font-bold text-[#2a2a2a] mb-3">Exemplos de decisão profissional</p>
+                          <div className="space-y-4">
+                            {activeModule.evaluationExamples.map((example) => (
+                              <article key={example.title} className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 space-y-2">
+                                <h3 className="text-sm font-bold text-[#2a2a2a]">{example.title}</h3>
+                                <p className="text-sm text-[#2a2a2a]">
+                                  <span className="font-semibold">Cenário:</span> {example.scenario}
+                                </p>
+                                <p className="text-sm text-[#2a2a2a]">
+                                  <span className="font-semibold">Abordagem correta:</span> {example.correctApproach}
+                                </p>
+                                <p className="text-sm text-[#2a2a2a]">
+                                  <span className="font-semibold">Abordagem incorreta:</span> {example.incorrectApproach}
+                                </p>
+                              </article>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                )}
-
-                {/* Dica Prática */}
-                {activeModule.practicalTip && (
-                  <div className="rounded-lg border border-[#fde1dd]/30 bg-[#fde1dd] p-4">
-                    <p className="text-sm font-bold text-[#2a2a2a] mb-2">Dica Prática</p>
-                    <p className="text-sm text-[#2a2a2a]">{activeModule.practicalTip}</p>
-                  </div>
-                )}
-
-                {/* Benefício */}
-                {activeModule.benefit && (
-                  <div className="rounded-lg border border-[#f99589]/30 bg-[#f99589] p-4">
-                    <p className="text-sm font-bold text-[#2a2a2a] mb-2">Por que isto importa</p>
-                    <p className="text-sm text-[#2a2a2a]">{activeModule.benefit}</p>
-                  </div>
-                )}
-
-                {/* Aviso */}
-                {activeModule.warning && (
-                  <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fbc3bb] p-4">
-                    <p className="text-sm font-bold text-[#2a2a2a] mb-2">Aviso Importante</p>
-                    <p className="text-sm text-[#2a2a2a]">{activeModule.warning}</p>
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-6">
-              <p className="text-xs uppercase tracking-[0.16em] text-[#666] font-semibold mb-4">{currentTheoryPage.title}</p>
-
-              <ul className="space-y-3">
-                {currentTheoryPage.blocks.map((paragraph, idx) => (
-                  <li key={idx} className="flex gap-3 items-start">
-                    <span className="mt-[10px] shrink-0 w-1.5 h-1.5 rounded-full bg-[#2a2a2a] opacity-50" />
-                    <p className="text-sm leading-7 text-[#2a2a2a] flex-1">
-                      {renderBold(paragraph)}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-lg border border-[#fde1dd]/30 bg-[#fde1dd] p-4">
-                  <p className="font-bold text-[#2a2a2a] mb-3">Boas práticas</p>
-                  <ul className="space-y-2 text-sm text-[#2a2a2a]">
-                    {activeSupportContent.goodPractices.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="shrink-0">–</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  )}
                 </div>
-                <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fbc3bb] p-4">
-                  <p className="font-bold text-[#2a2a2a] mb-3">Más práticas</p>
-                  <ul className="space-y-2 text-sm text-[#2a2a2a]">
-                    {activeSupportContent.badPractices.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="shrink-0">–</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-lg border border-[#f99589]/30 bg-[#f99589] p-4 md:col-span-2">
-                  <p className="font-bold text-[#2a2a2a] mb-3">Estratégias práticas</p>
-                  <ul className="space-y-2 text-sm text-[#2a2a2a]">
-                    {activeSupportContent.strategies.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="shrink-0">–</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-lg border border-[#22a094]/30 bg-[#22a094] p-4 md:col-span-2">
-                  <p className="font-bold text-white mb-3">Checklist de execução profissional</p>
-                  <ul className="space-y-2 text-sm text-white">
-                    {activeSupportContent.executionChecklist.map((item) => (
-                      <li key={item} className="flex gap-2">
-                        <span className="shrink-0">–</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                {activeModule.evaluationExamples && activeModule.evaluationExamples.length > 0 && (
-                  <div className="rounded-lg border border-[#D4B5A0]/30 bg-white p-4 md:col-span-2">
-                    <p className="font-bold text-[#2a2a2a] mb-3">Exemplos de decisão profissional</p>
-                    <div className="space-y-4">
-                      {activeModule.evaluationExamples.map((example) => (
-                        <article key={example.title} className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 space-y-2">
-                          <h3 className="text-sm font-bold text-[#2a2a2a]">{example.title}</h3>
-                          <p className="text-sm text-[#2a2a2a]">
-                            <span className="font-semibold">Cenário:</span> {example.scenario}
-                          </p>
-                          <p className="text-sm text-[#2a2a2a]">
-                            <span className="font-semibold">Abordagem correta:</span> {example.correctApproach}
-                          </p>
-                          <p className="text-sm text-[#2a2a2a]">
-                            <span className="font-semibold">Abordagem incorreta:</span> {example.incorrectApproach}
-                          </p>
-                        </article>
-                      ))}
+
+                {/* Coluna direita - sidebar com cards de contexto */}
+                <div className="lg:col-span-1 space-y-4">
+                  {/* Conceitos-chave */}
+                  {activeModule.keywords && activeModule.keywords.length > 0 && (
+                    <div className="rounded-lg border border-[#b8d5ce]/30 bg-[#eef9f6] p-4">
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-3">Conceitos-chave</p>
+                      <div className="flex flex-wrap gap-2">
+                        {activeModule.keywords.map((keyword) => (
+                          <span
+                            key={keyword}
+                            className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#22a094]/20 text-[#2a2a2a]"
+                          >
+                            {keyword}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            )}
+                  )}
 
-              <div className="flex items-center justify-between gap-3 border-t border-[#D4B5A0]/20 pt-4">
+                  {/* Dica Prática */}
+                  {activeModule.practicalTip && (
+                    <div className="rounded-lg border border-[#a0d5be]/30 bg-[#f0f7f4] p-4">
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">Dica Prática</p>
+                      <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.practicalTip}</p>
+                    </div>
+                  )}
+
+                  {/* Benefício */}
+                  {activeModule.benefit && (
+                    <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">Por que isto importa</p>
+                      <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.benefit}</p>
+                    </div>
+                  )}
+
+                  {/* Aviso */}
+                  {activeModule.warning && (
+                    <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">Aviso Importante</p>
+                      <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.warning}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Navegação de páginas */}
+              <div className="flex items-center justify-between gap-3 border-t border-[#D4B5A0]/20 pt-6">
                 <button
                   type="button"
                   onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
                   disabled={theoryPage === 0}
-                  className="site-pill-button-secondary max-w-[180px] disabled:opacity-40"
+                  className="site-pill-button-secondary disabled:opacity-40"
                 >
-                  Página anterior
+                  ← Anterior
                 </button>
-                <p className="text-xs text-[#666]">
+                <p className="text-sm font-semibold text-[#2a2a2a]">
                   Página {theoryPage + 1} de {allTheoryPages.length}
                 </p>
                 <button
                   type="button"
                   onClick={() => setTheoryPage((prev) => Math.min(prev + 1, allTheoryPages.length - 1))}
                   disabled={isLastTheoryPage}
-                  className="submit max-w-[180px] disabled:opacity-40"
+                  className="submit disabled:opacity-40"
                 >
-                  Próxima página
+                  Próxima página →
                 </button>
               </div>
 
-              {activeModule.id === 11 ? (
-                <div className="rounded-2xl border border-[#22a094]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
-                  <p className="text-sm text-[#2a2a2a]">
-                    Este módulo disponibiliza o seu Certificado de Conclusão em PDF com nome personalizado.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={downloadCertificate}
-                    disabled={isDownloadingCertificate}
-                    className="submit max-w-sm disabled:opacity-40"
-                  >
-                    {isDownloadingCertificate ? "A preparar certificado..." : "Descarregar Certificado em PDF"}
-                  </button>
-                </div>
-              ) : (
-                <div className="flex justify-center">
-                  <button
-                    type="button"
-                    onClick={startQuiz}
-                    disabled={!isLastTheoryPage}
-                    className="submit max-w-xs"
-                  >
-                    {isLastTheoryPage ? "Iniciar Questionário" : "Conclua a teoria para iniciar o questionário"}
-                  </button>
-                </div>
-              )}
+              {/* Botão final - Quiz ou Certificado */}
+              <div className="mt-6">
+                {activeModule.id === 11 ? (
+                  <div className="rounded-2xl border border-[#22a094]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
+                    <p className="text-sm text-[#2a2a2a]">
+                      Este módulo disponibiliza o seu Certificado de Conclusão em PDF com nome personalizado.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={downloadCertificate}
+                      disabled={isDownloadingCertificate}
+                      className="submit max-w-sm disabled:opacity-40"
+                    >
+                      {isDownloadingCertificate ? "A preparar certificado..." : "Descarregar Certificado em PDF"}
+                    </button>
+                  </div>
+                ) : (
+                  isLastTheoryPage && (
+                    <div className="flex justify-center">
+                      <button
+                        type="button"
+                        onClick={startQuiz}
+                        className="submit"
+                      >
+                        Iniciar Questionário
+                      </button>
+                    </div>
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>
