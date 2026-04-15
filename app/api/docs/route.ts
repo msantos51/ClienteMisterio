@@ -50,9 +50,14 @@ const HTML_CONTENT = `
 `;
 
 export const GET = async () => {
-  if (process.env.NODE_ENV === 'production' && process.env.ENABLE_PUBLIC_API_DOCS !== 'true') {
+  // Permite documentação em desenvolvimento ou quando explicitamente ativada
+  const isDocsEnabled =
+    process.env.NODE_ENV === 'development' ||
+    process.env.ENABLE_PUBLIC_API_DOCS === 'true';
+
+  if (!isDocsEnabled) {
     return NextResponse.json(
-      { message: 'Documentação da API não disponível em produção.' },
+      { message: 'Documentação da API não disponível.' },
       { status: 404 }
     );
   }
@@ -60,6 +65,7 @@ export const GET = async () => {
   return new NextResponse(HTML_CONTENT, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
     },
   });
 };

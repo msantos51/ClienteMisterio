@@ -1,31 +1,45 @@
 # 📚 Guia de Teste da API - Cliente Mistério
 
-## Acesso à Documentação Interativa
+## 🌍 Acesso à Documentação Interativa
 
-Você tem **duas formas** de acessar a documentação interativa da API:
+Você tem **três formas** de acessar a documentação interativa da API:
 
 ### **Opção 1: Via Endpoint HTML** (Recomendado)
-```
-http://localhost:3000/api/docs
-```
+- **Desenvolvimento (localhost)**: `http://localhost:3000/api/docs`
+- **Em Produção**: `https://seu-dominio.com/api/docs`
 
 ### **Opção 2: Via Página React**
-```
-http://localhost:3000/docs
-```
+- **Desenvolvimento (localhost)**: `http://localhost:3000/docs`
+- **Em Produção**: `https://seu-dominio.com/docs`
+
+### **Opção 3: Swagger UI Alternativa**
+Pode usar também o Swagger Editor online: https://editor.swagger.io
+- Selecione "File" > "Import URL"
+- Cole: `https://seu-dominio.com/api/openapi`
 
 ---
 
 ## ✅ Configuração Necessária
 
-### Para Desenvolvimento (localhost)
-Nenhuma configuração necessária! A documentação está ativa por padrão em desenvolvimento.
+### Em Desenvolvimento (localhost)
+Nenhuma configuração necessária! A documentação está ativa por padrão.
 
-### Para Produção
-Se quiser expor a documentação em produção, adicione na variável de ambiente:
+**Acesse:** `http://localhost:3000/api/docs`
+
+### Em Staging/Produção
+Para expor a documentação em ambiente público, adicione a variável de ambiente:
+
 ```bash
+# No seu .env ou variáveis de ambiente do servidor:
 ENABLE_PUBLIC_API_DOCS=true
 ```
+
+Depois a documentação estará disponível em:
+```
+https://seu-dominio.com/api/docs
+```
+
+**⚠️ Segurança:** Esta documentação expõe a estrutura da API publicamente. Use apenas em ambientes de staging/teste.
 
 ---
 
@@ -168,10 +182,70 @@ O webhook requer:
 
 ---
 
+## 🌐 Testando em Diferentes Ambientes
+
+### 1️⃣ Desenvolvimento Local
+```bash
+# Terminal
+npm run dev
+
+# Browser
+http://localhost:3000/api/docs
+```
+✅ Documentação sempre ativa
+
+### 2️⃣ Staging/Servidor de Teste
+```bash
+# Configure a variável de ambiente no seu servidor:
+export ENABLE_PUBLIC_API_DOCS=true
+
+# Se usar arquivo .env:
+ENABLE_PUBLIC_API_DOCS=true
+
+# Depois acesse:
+https://seu-servidor-staging.com/api/docs
+```
+
+### 3️⃣ Produção (se necessário)
+```bash
+# Num arquivo .env.production ou variáveis do servidor:
+ENABLE_PUBLIC_API_DOCS=true
+
+# Acesso:
+https://seu-dominio.com/api/docs
+```
+
+---
+
+## 🔐 Protegendo a Documentação
+
+Se quiser **manter a documentação privada em produção**, você tem 2 opções:
+
+### Opção A: Desativar Completamente
+```bash
+# Não defina ENABLE_PUBLIC_API_DOCS ou defina como false
+# A documentação voltará a estar inacessível em produção
+```
+
+### Opção B: Proteger com Password (Middleware)
+Você pode adicionar autenticação HTTP básica ao endpoint `/api/docs` criando um middleware personalizado.
+
+---
+
 ## 📞 Suporte
 
 Se encontrar problemas:
-1. Verifique os logs do servidor: `npm run dev`
+1. Verifique os logs do servidor: `npm run dev` (desenvolvimento) ou `npm run build && npm start` (produção)
 2. Verifique a consola do browser (F12)
-3. Certifique-se que todas as variáveis de ambiente estão configuradas
+3. Certifique-se que:
+   - A variável `ENABLE_PUBLIC_API_DOCS=true` está configurada (se em produção)
+   - Todas as variáveis de ambiente necessárias estão presentes
+   - O servidor está a correr corretamente
+
+### Checklist para Deploy
+- [ ] Decidir se expõe documentação em produção (`ENABLE_PUBLIC_API_DOCS`)
+- [ ] Verificar se todas as variáveis de ambiente estão presentes no servidor
+- [ ] Testar endpoints no Swagger UI antes de publicar
+- [ ] Testar autenticação (login/logout com cookies)
+- [ ] Testar alteração de permissões de admin
 
