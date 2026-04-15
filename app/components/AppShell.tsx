@@ -16,10 +16,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const isCoursePage = pathname === "/curso";
 
   return (
-    <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
+    <div className="mx-auto flex min-h-screen w-full flex-col">
       {/* Mantém o cabeçalho absoluto na home para sobrepor o hero, e sticky nas páginas internas. */}
       <header
-        className="sticky top-0 z-50 border-b border-white/20 bg-transparent px-3 py-3 backdrop-blur-[2px] sm:px-6 sm:py-4 md:px-10 md:py-6"
+        className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 px-3 py-3 backdrop-blur-[2px] sm:px-6 sm:py-4 md:px-10 md:py-6"
       >
         <div className="relative flex w-full items-center justify-between gap-2 sm:gap-3">
           <Link
@@ -42,7 +42,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Remove margens na home para permitir hero full-bleed e mantém paddings nas páginas internas. */}
-      <main className={isHomePage ? "flex-1 px-0 pb-0" : "flex-1 px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10"}>
+      <main className={`flex-1 ${isHomePage ? "px-0 pb-0" : "px-3 pb-8 pt-6 sm:px-6 sm:pb-10 sm:pt-10 md:px-10 bg-gray-50"}`}>
         {isHomePage ? (
           children
         ) : (

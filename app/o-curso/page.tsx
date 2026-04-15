@@ -21,7 +21,7 @@ export default function CoursePage() {
   }, []);
 
   return (
-    <section className="w-full bg-gray-50">
+    <section className="w-full">
       <div className="mx-auto w-full max-w-5xl">
         {/* Header Section */}
         <div className="mb-16 grid gap-8 lg:grid-cols-2">
