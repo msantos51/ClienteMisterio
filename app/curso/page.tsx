@@ -675,6 +675,22 @@ export default function CursoPage() {
         </p>
       </header>
 
+      {/* Estatísticas do curso */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
+          <p className="text-3xl font-bold text-[#2a2a2a]">{totalModules}</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">Módulos Alvo</p>
+        </div>
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
+          <p className="text-3xl font-bold text-[#2a2a2a]">{totalModules - (progress?.completedCount ?? 0)}</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">Lecionados</p>
+        </div>
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
+          <p className="text-3xl font-bold text-[#2a2a2a]">{completedCount}</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">Completados</p>
+        </div>
+      </div>
+
       {/* Barra de progresso global */}
       <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-5">
         <div className="flex items-center justify-between text-sm mb-3">
@@ -694,7 +710,21 @@ export default function CursoPage() {
 
       {/* Lista de módulos */}
       {!activeModule && (
-        <div className="space-y-3">
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-[#2a2a2a]">Módulos do curso</h2>
+            <div className="flex gap-4 text-sm">
+              <div className="text-right">
+                <span className="font-bold text-[#22a094]">{totalModules}</span>
+                <p className="text-xs text-[#666]">Disponíveis</p>
+              </div>
+              <div className="text-right">
+                <span className="font-bold text-[#2a2a2a]">{completedCount}</span>
+                <p className="text-xs text-[#666]">Concluídos</p>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-3">
           {courseModules.map((mod) => {
             const modProgress = getModuleProgress(mod.id);
             const unlocked = isModuleUnlocked(mod.id);
@@ -747,6 +777,7 @@ export default function CursoPage() {
               </button>
             );
           })}
+          </div>
         </div>
       )}
 
