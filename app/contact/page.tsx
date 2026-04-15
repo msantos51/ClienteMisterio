@@ -70,7 +70,7 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="w-full">
+    <section className="w-full bg-gray-50">
       <div className="mx-auto w-full max-w-4xl">
         {/* Header */}
         <div className="mb-12 space-y-4 sm:space-y-6">

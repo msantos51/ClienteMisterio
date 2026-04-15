@@ -23,7 +23,7 @@ export default function ApiDocsPage() {
   }
 
   return (
-    <div className="min-h-screen px-4 py-6 sm:px-6 md:px-8">
+    <main className="min-h-screen bg-[#f8f8f8] px-4 py-6 sm:px-6 md:px-8">
       {/* Título e contexto rápido para orientar quem vai testar endpoints no browser. */}
       <header className="mx-auto mb-4 max-w-6xl">
         <h1 className="text-2xl font-bold text-[#171717]">Swagger API Explorer</h1>
@@ -62,6 +62,6 @@ export default function ApiDocsPage() {
           };
         `}
       </Script>
-    </div>
+    </main>
   );
 }
