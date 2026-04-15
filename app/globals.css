@@ -218,8 +218,9 @@ h6 {
     color: white !important;
     background: #22a094;
     border: none;
-    border-radius: 999px;
-    letter-spacing: 0.05em;
+    border-radius: 10px;
+    letter-spacing: 0;
+    text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
@@ -251,11 +252,12 @@ h6 {
     font-weight: 600;
     font-size: 0.875rem;
     padding: 0.75rem 1.5rem;
-    color: #22a094;
+    color: #333;
     background: white;
-    border: 2px solid #22a094;
-    border-radius: 999px;
-    letter-spacing: 0.05em;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    letter-spacing: 0;
+    text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
@@ -306,8 +308,9 @@ h6 {
     color: white !important;
     background: #22a094;
     border: none;
-    border-radius: 999px;
-    letter-spacing: 0.05em;
+    border-radius: 10px;
+    letter-spacing: 0;
+    text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
@@ -332,6 +335,39 @@ h6 {
     cursor: not-allowed;
   }
 
+  /* Botão de navegação - Login com borda verde subtil */
+  .site-pill-button.nav-login-btn {
+    background: white;
+    color: #22a094 !important;
+    border: 1px solid #22a094;
+    box-shadow: none;
+  }
+
+  .site-pill-button.nav-login-btn:hover {
+    background: #f0faf8;
+    opacity: 1;
+    box-shadow: 0 0.2em 0.6em -0.5em rgba(34, 160, 148, 0.3);
+  }
+
+  .site-pill-button.nav-login-btn:active {
+    opacity: 0.9;
+  }
+
+  /* Botão de navegação - Dashboard sólido verde */
+  .site-pill-button.nav-dashboard-btn {
+    background: #22a094;
+    color: white !important;
+    border: none;
+  }
+
+  .site-pill-button.nav-dashboard-btn:hover {
+    opacity: 0.95;
+  }
+
+  .site-pill-button.nav-dashboard-btn:active {
+    opacity: 0.9;
+  }
+
   /* Variante secundária do botão com fundo branco e texto laranja */
   .site-pill-button-secondary {
     display: inline-flex;
@@ -339,15 +375,16 @@ h6 {
     justify-content: center;
     font-family: "Google Sans", sans-serif;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     padding: 0.6em 1.2em;
-    color: #22a094;
+    color: #333;
     background: white;
-    border: 2px solid #22a094;
+    border: 1px solid rgba(0, 0, 0, 0.12);
     box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.2);
-    letter-spacing: 0.05em;
-    border-radius: 20em;
+    letter-spacing: 0;
+    text-transform: none;
+    border-radius: 10px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     will-change: transform;
@@ -368,7 +405,7 @@ h6 {
       min-height: 40px;
       padding: 0.6em 1em;
       font-size: 13px;
-      border-radius: 18em;
+      border-radius: 10px;
     }
   }
 
