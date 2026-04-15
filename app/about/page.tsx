@@ -21,7 +21,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <section className="w-full">
+    <section className="w-full bg-gray-50">
       <div className="mx-auto w-full max-w-4xl">
         {/* Main Content */}
         <div className="mb-16 space-y-6 sm:space-y-8">
