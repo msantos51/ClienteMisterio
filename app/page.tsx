@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import CheckoutButton from "./components/CheckoutButton";
+import PromoPrice from "./components/PromoPrice";
 
 export default function HomePage() {
   return (
@@ -30,8 +31,12 @@ export default function HomePage() {
           </p>
 
           {/* CTA Buttons */}
-          <div className="mb-16 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <CheckoutButton label="Comprar o curso — 19.99€" />
+          <div className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-4">
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Comprar o curso</p>
+              <PromoPrice />
+              <CheckoutButton label="Comprar agora" />
+            </div>
             <Link
               href="#what-included"
               className="site-pill-button-secondary"
@@ -127,7 +132,10 @@ export default function HomePage() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">1</div>
                 </div>
                 <h3 className="mb-2 font-bold text-gray-900">Compra o curso</h3>
-                <p className="text-sm text-gray-600">Pagamento único de 19.99€. Acesso imediato a todos os módulos.</p>
+                <p className="text-sm text-gray-600 mb-2">Pagamento único com desconto promocional</p>
+                <div className="flex justify-center">
+                  <PromoPrice />
+                </div>
               </div>
 
               {/* Step 2 */}
@@ -249,7 +257,11 @@ export default function HomePage() {
               </div>
             </div>
 
-            <CheckoutButton label="Comprar o curso — 19.99€" />
+            <div className="mb-8 flex justify-center">
+              <PromoPrice />
+            </div>
+
+            <CheckoutButton label="Comprar agora" />
           </div>
         </div>
       </div>
