@@ -70,7 +70,7 @@ const sections = [
 export default function TermosECondicoes() {
   return (
     <section className="w-full bg-gray-50">
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         {/* Header */}
         <div className="mb-12 space-y-4 sm:space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">

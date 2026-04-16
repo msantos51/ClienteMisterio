@@ -415,7 +415,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <section className="space-y-8 bg-gray-50">
+    <section className="w-full space-y-8 bg-gray-50 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/40 p-4">
           <div className="login-form w-full max-w-2xl">
