@@ -23,19 +23,19 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       >
         <div className="relative flex w-full items-center justify-between gap-2 sm:gap-3">
           <Link
-            className="text-[10px] font-black uppercase tracking-[0.25em] text-[color:var(--foreground)] sm:text-sm sm:tracking-[0.35em]"
+            className="order-2 lg:order-first text-[10px] font-black uppercase tracking-[0.25em] text-[color:var(--foreground)] sm:text-sm sm:tracking-[0.35em]"
             href="/"
           >
             CM
           </Link>
 
-          {/* Mantém o menu centrado no cabeçalho em desktop, inclusive na home. */}
-          <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+          {/* Mobile: hamburger fica à esquerda (order-first); desktop: nav centrada via absolute. */}
+          <div className="order-first lg:order-none lg:absolute lg:left-1/2 lg:-translate-x-1/2">
             <TopNav />
           </div>
 
           {/* Mantém uma única instância das ações para evitar renderização duplicada e navegação menos fluída. */}
-          <div className="max-w-[calc(100%-120px)] sm:max-w-none">
+          <div className="order-last max-w-[calc(100%-120px)] sm:max-w-none">
             <HeaderActions />
           </div>
         </div>

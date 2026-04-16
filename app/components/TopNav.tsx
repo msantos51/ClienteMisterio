@@ -112,7 +112,7 @@ export default function TopNav() {
                     isActive
                       ? "bg-[#1d8478]"
                       : "hover:bg-[#1d8478]"
-                  } ${isLast ? "border-b-0" : "border-b border-white/30"}`}
+                  } ${isLast ? "border-b-0" : "border-b border-[#22a094]/20"}`}
                   href={item.href}
                   onClick={closeMenu}
                 >
