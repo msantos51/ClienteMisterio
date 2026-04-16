@@ -22,7 +22,7 @@ export default function CoursePage() {
 
   return (
     <section className="w-full bg-gray-50">
-      <div className="mx-auto w-full max-w-5xl">
+      <div className="mx-auto w-full max-w-5xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         {/* Header Section */}
         <div className="mb-16 grid gap-8 lg:grid-cols-2">
           {/* Left Column */}

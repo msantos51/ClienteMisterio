@@ -90,8 +90,8 @@ export default function AccountPage() {
   };
 
   return (
-    <section className="space-y-8 bg-gray-50">
-      <div className="mx-auto flex w-full max-w-6xl justify-center">
+    <section className="w-full space-y-8 bg-gray-50">
+      <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form max-w-[620px]">
           <h1 className="form-heading">Criar conta</h1>
           {isCheckout && (
