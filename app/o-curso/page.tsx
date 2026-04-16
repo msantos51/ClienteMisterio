@@ -4,8 +4,6 @@
 
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import CheckoutButton from "../components/CheckoutButton";
 import { courseModules as courseData } from "../curso/courseData";
@@ -13,7 +11,6 @@ import { courseModules as courseData } from "../curso/courseData";
 const sessionStorageKey = "vp_session";
 
 export default function CoursePage() {
-  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -45,16 +42,16 @@ export default function CoursePage() {
 
             {/* Stats */}
             <div className="flex items-center gap-8 py-4 border-t border-gray-200">
-              <div>
+              <div className="text-center">
                 <p className="h3">10</p>
                 <p className="text-body-xs">Módulos</p>
               </div>
-              <div>
+              <div className="text-center">
                 <p className="h4 text-teal-600">5€–</p>
                 <p className="h4 text-teal-600">150€+</p>
                 <p className="text-body-xs">Por mês</p>
               </div>
-              <div>
+              <div className="text-center">
                 <p className="h3 text-teal-600">Vitalício</p>
                 <p className="text-body-xs">Acesso</p>
               </div>
@@ -97,12 +94,6 @@ export default function CoursePage() {
             {/* Buttons */}
             <div className="space-y-3">
               <CheckoutButton label="Comprar o curso" />
-              <button
-                onClick={() => router.push("/account")}
-                className="site-pill-button w-full"
-              >
-                Criar conta gratuita
-              </button>
             </div>
             <p className="text-center text-xs text-gray-500 mt-3">
               Pagamento seguro via Stripe · Sem subscrição
@@ -176,12 +167,6 @@ export default function CoursePage() {
             <p className="text-body-sm">Crie uma conta ou inicie sessão para aceder ao curso completo com conteúdo teórico e questionários.</p>
             <div className="flex flex-col gap-3 justify-center items-center sm:flex-row sm:gap-4">
               <CheckoutButton label="Comprar o curso" />
-              <Link
-                href="/account"
-                className="site-pill-button"
-              >
-                Criar conta gratuita
-              </Link>
             </div>
           </div>
         )}
