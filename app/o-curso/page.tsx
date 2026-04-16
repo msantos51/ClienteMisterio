@@ -47,8 +47,7 @@ export default function CoursePage() {
                 <p className="text-body-xs">Módulos</p>
               </div>
               <div className="text-center">
-                <p className="h4 text-teal-600">5€–</p>
-                <p className="h4 text-teal-600">150€+</p>
+                <p className="h4 text-teal-600 whitespace-nowrap">5€–150€+</p>
                 <p className="text-body-xs">Por mês</p>
               </div>
               <div className="text-center">
