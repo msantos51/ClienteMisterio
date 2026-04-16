@@ -31,7 +31,7 @@ export default function HomePage() {
 
           {/* CTA Buttons */}
           <div className="mb-16 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <CheckoutButton label="Comprar o curso — 19.99€" />
+            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span> <span>24,99€</span></>} />
             <Link
               href="/o-curso"
               className="site-pill-button-secondary"
@@ -127,7 +127,7 @@ export default function HomePage() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">1</div>
                 </div>
                 <h3 className="mb-2 font-bold text-gray-900">Compra o curso</h3>
-                <p className="text-sm text-gray-600">Pagamento único de 19.99€. Acesso imediato a todos os módulos.</p>
+                <p className="text-sm text-gray-600">Pagamento único de <span className="line-through text-gray-400">64,99€</span> <strong className="text-gray-700">24,99€</strong>. Acesso imediato a todos os módulos.</p>
               </div>
 
               {/* Step 2 */}
@@ -249,7 +249,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <CheckoutButton label="Comprar o curso — 19.99€" />
+            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span> <span>24,99€</span></>} />
           </div>
         </div>
       </div>

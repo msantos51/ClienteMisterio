@@ -5,9 +5,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import React from "react";
 
 interface CheckoutButtonProps {
-  label?: string;
+  label?: React.ReactNode;
   className?: string;
   variant?: "primary" | "secondary";
 }
