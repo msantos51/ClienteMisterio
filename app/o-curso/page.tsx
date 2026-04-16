@@ -66,7 +66,8 @@ export default function CoursePage() {
               </div>
               <div>
                 <p className="h5">Curso Cliente Mistério</p>
-                <p className="h1">€19.99</p>
+                <p className="text-body-sm text-gray-400 line-through">64,99€</p>
+                <p className="h1 text-teal-600">24,99€</p>
                 <p className="text-body-xs">Pagamento único · Acesso vitalício</p>
               </div>
             </div>
