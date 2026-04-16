@@ -99,7 +99,7 @@ export default function CoursePage() {
               <CheckoutButton label="Comprar o curso" />
               <button
                 onClick={() => router.push("/account")}
-                className="w-full px-4 py-3 text-sm font-semibold text-teal-600 border-2 border-teal-600 rounded-full hover:bg-teal-50 transition"
+                className="site-pill-button w-full"
               >
                 Criar conta gratuita
               </button>
@@ -237,7 +237,7 @@ export default function CoursePage() {
               <CheckoutButton label="Comprar o curso" />
               <Link
                 href="/account"
-                className="btn-secondary"
+                className="site-pill-button"
               >
                 Criar conta gratuita
               </Link>
