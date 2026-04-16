@@ -5,7 +5,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { courseModules, type QuizQuestion } from "./courseData";
 
@@ -427,6 +427,12 @@ export default function CursoPage() {
   const [isDownloadingCertificate, setIsDownloadingCertificate] = useState(false);
   const [accessDenied, setAccessDenied] = useState(false);
 
+  const moduleContentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    moduleContentRef.current?.scrollTo({ top: 0 });
+  }, [theoryPage, activeModuleId, quizMode]);
+
   const loadProgress = useCallback(async () => {
     setAccessDenied(false);
 
@@ -795,7 +801,7 @@ export default function CursoPage() {
               </button>
             </div>
 
-            <div className="overflow-y-auto pr-1 sm:pr-2">
+            <div ref={moduleContentRef} className="overflow-y-auto pr-1 sm:pr-2">
               <div className="mb-6 space-y-3">
                 <div>
                   <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
@@ -1024,7 +1030,7 @@ export default function CursoPage() {
               </button>
             </div>
 
-            <div className="overflow-y-auto pr-1 sm:pr-2">
+            <div ref={moduleContentRef} className="overflow-y-auto pr-1 sm:pr-2">
               <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
                 <h2 className="text-xl font-bold mb-1 text-[#2a2a2a]">{activeModule.title}</h2>
                 <p className="text-sm text-[#666] mb-6">
