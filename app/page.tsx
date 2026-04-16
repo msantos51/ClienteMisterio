@@ -52,8 +52,8 @@ export default function HomePage() {
                 <p className="text-sm text-teal-600 font-medium">Alunos</p>
               </div>
               <div className="text-center">
-                <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">0€</div>
-                <p className="text-sm text-teal-600 font-medium">Horas módulos</p>
+                <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">10</div>
+                <p className="text-sm text-teal-600 font-medium">Módulos</p>
               </div>
               <div className="text-center">
                 <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">4.9★</div>
@@ -214,7 +214,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="mb-4 text-sm text-gray-700">
-                  Curso bem estruturado. Ótimas informações e suporte ao longo de todo o processo. Já realizei concluída.
+                  Curso bem estruturado. Ótimas informações e suporte ao longo de todo o processo. Já realizei mais de 10 missões.
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-600">MF</div>

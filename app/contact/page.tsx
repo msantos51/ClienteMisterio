@@ -82,7 +82,7 @@ export default function ContactPage() {
           <div>
             <h1 className="h1">Fala connosco</h1>
             <p className="mt-3 text-body-sm">
-              Temos algumas dúvidas sobre o curso, o certificado ou o processo de pagamento? Estamos aqui para ajudar.
+              Tens dúvidas sobre o curso, o certificado ou o processo de pagamento? Estamos aqui para ajudar.
             </p>
           </div>
         </div>
