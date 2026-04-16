@@ -213,18 +213,26 @@ h6 {
     font-family: "Google Sans", sans-serif;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
     color: white !important;
     background: #22a094;
     border: none;
     border-radius: 10px;
-    letter-spacing: 0;
+    letter-spacing: 0.02em;
     text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
     box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    line-height: 1;
+  }
+
+  @media (min-width: 640px) {
+    .btn-primary {
+      font-size: 0.75rem;
+      padding: 0.625rem 2rem;
+    }
   }
 
   .btn-primary:hover {
@@ -250,17 +258,25 @@ h6 {
     font-family: "Google Sans", sans-serif;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
     color: #333;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 10px;
-    letter-spacing: 0;
+    letter-spacing: 0.02em;
     text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
+    line-height: 1;
+  }
+
+  @media (min-width: 640px) {
+    .btn-secondary {
+      font-size: 0.75rem;
+      padding: 0.625rem 2rem;
+    }
   }
 
   .btn-secondary:hover {
@@ -303,18 +319,27 @@ h6 {
     font-family: "Google Sans", sans-serif;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.75rem 1.5rem;
+    font-size: 0.625rem;
+    padding: 0.5rem 1rem;
     color: white !important;
     background: #22a094;
     border: none;
     border-radius: 10px;
-    letter-spacing: 0;
+    letter-spacing: 0.02em;
     text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
     box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    line-height: 1;
+  }
+
+  @media (min-width: 640px) {
+    .site-pill-button,
+    .button-size-login {
+      font-size: 0.75rem;
+      padding: 0.625rem 2rem;
+    }
   }
 
   .site-pill-button:hover,
@@ -376,13 +401,13 @@ h6 {
     font-family: "Google Sans", sans-serif;
     cursor: pointer;
     font-weight: 600;
-    font-size: 14px;
-    padding: 0.6em 1.2em;
+    font-size: 0.625rem;
+    padding: 0.5rem 1rem;
     color: #333;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.12);
     box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.2);
-    letter-spacing: 0;
+    letter-spacing: 0.02em;
     text-transform: none;
     border-radius: 10px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -398,14 +423,13 @@ h6 {
     transform: translateZ(0);
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
+    line-height: 1;
   }
 
-  @media (max-width: 640px) {
+  @media (min-width: 640px) {
     .site-pill-button-secondary {
-      min-height: 40px;
-      padding: 0.6em 1em;
-      font-size: 13px;
-      border-radius: 10px;
+      font-size: 0.75rem;
+      padding: 0.625rem 2rem;
     }
   }
 
@@ -933,42 +957,34 @@ h6 {
 
 .submit {
   width: auto;
-  padding: 0.6em 1.2em;
-  min-height: 40px;
+  padding: 0.5rem 1rem;
   color: white !important;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
   background: #22a094;
-  border: 1px solid #22a094;
+  border: none;
   box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
-  border-radius: 20em;
+  border-radius: 10px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: "Google Sans", sans-serif;
+  line-height: 1;
 }
 
-@media (max-width: 480px) {
+@media (min-width: 640px) {
   .submit {
-    min-height: 40px;
-    padding: 0.6em 1em;
-    font-size: 13px;
-    border-radius: 18em;
+    font-size: 0.75rem;
+    padding: 0.625rem 2rem;
   }
 }
 
 .submit:hover {
   box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
   opacity: 0.95;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .submit:hover {
-    opacity: 0.95;
-  }
 }
 
 .submit:active {

@@ -34,7 +34,7 @@ export default function HomePage() {
             <CheckoutButton label="Comprar o curso — 19.99€" />
             <Link
               href="#what-included"
-              className="px-6 py-3 border border-gray-300 rounded-lg font-medium text-gray-900 hover:bg-gray-100 transition"
+              className="site-pill-button-secondary"
             >
               Ver o programa
             </Link>
