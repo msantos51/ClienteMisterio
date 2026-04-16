@@ -33,7 +33,7 @@ export default function HomePage() {
           <div className="mb-16 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
             <CheckoutButton label="Comprar o curso — 19.99€" />
             <Link
-              href="#what-included"
+              href="/o-curso"
               className="site-pill-button-secondary"
             >
               Ver o programa

@@ -498,13 +498,13 @@ h6 {
     height: 22px;
   }
 
-  /* Desenha cada traço do símbolo em cinzento e habilita transição para o X. */
+  /* Desenha cada traço do símbolo em verde e habilita transição para o X. */
   .menu-toggle-line {
     display: block;
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background-color: #e2e0e0;
+    background-color: #22a094;
     transition: all 0.35s ease;
   }
 
@@ -543,8 +543,8 @@ h6 {
     border-radius: 14px;
     will-change: contents;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    background: #feb1a5 !important;
+    border: 1px solid rgba(34, 160, 148, 0.2) !important;
+    background: #ffffff !important;
   }
 
   @media (max-width: 480px) {
@@ -555,7 +555,7 @@ h6 {
 
   /* Garante contraste e área de toque confortável nas opções do menu mobile. */
   .mobile-menu-item {
-    color: #ffffff !important;
+    color: #22a094 !important;
     min-height: 48px;
     display: flex;
     align-items: center;
