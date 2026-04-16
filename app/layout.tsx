@@ -27,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt">
+      <head>
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" crossOrigin="anonymous" />
+      </head>
       <body
         className="bg-[color:var(--background)] text-[color:var(--foreground)] antialiased"
         style={{ fontFamily: "Google Sans, sans-serif" }}

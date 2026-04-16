@@ -40,7 +40,7 @@ export const POST = async (request: Request) => {
     }
 
     const normalizedEmail = payload.email.trim().toLowerCase();
-    const normalizedPassword = payload.password.trim();
+    const normalizedPassword = payload.password;
 
     if (!normalizedEmail || !normalizedPassword) {
       return NextResponse.json(

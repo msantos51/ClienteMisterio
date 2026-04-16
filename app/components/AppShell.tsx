@@ -5,19 +5,13 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import HeaderActions from "./HeaderActions";
 import TopNav from "./TopNav";
 import Footer from "./Footer";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const isHomePage = pathname === "/";
-  const isCoursePage = pathname === "/curso";
-
   return (
     <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
-      {/* Mantém o cabeçalho absoluto na home para sobrepor o hero, e sticky nas páginas internas. */}
       <header
         className="sticky top-0 z-50 border-b border-white/20 bg-transparent px-3 py-3 backdrop-blur-[2px] sm:px-6 sm:py-4 md:px-10 md:py-6"
       >
@@ -41,8 +35,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      {/* Remove margens na home e em páginas com fundo full-width para permitir hero/section full-bleed. */}
-      <main className={isHomePage ? "flex-1 px-0 pb-0" : "flex-1 px-0 pb-0"}>
+      <main className="flex-1 px-0 pb-0">
         {children}
       </main>
 

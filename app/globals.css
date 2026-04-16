@@ -57,23 +57,8 @@ body {
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  text-align: justify;
-  text-align-last: left;
-}
-
-/* Override text-align-last so .text-center elements are not affected by the body's text-align-last: left */
-.text-center {
-  text-align-last: center;
-}
-
-body {
   position: relative;
   overflow-x: hidden;
-}
-
-/* Garante contraste mínimo no corpo de texto para fundo claro. */
-body {
-  color: var(--foreground);
 }
 
 /* Permite texto branco nos cards mesmo com regra global */
@@ -96,15 +81,6 @@ body {
 /* Destaca especificamente o benefício de rendimento com tom dourado mais intenso. */
 .home-benefit-extra-highlight-text {
   color: #000000 !important;
-}
-
-/* Mantém campos de formulário com fundo preto e texto branco em todas as páginas. */
-input,
-textarea,
-select {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border-color: var(--line) !important;
 }
 
 /* Força todos os elementos tipográficos principais a usar Google Sans em negrito. */
@@ -166,13 +142,12 @@ h6 {
     padding: 0.6em 1.2em;
     margin: 0;
     font-family: "Google Sans", sans-serif;
-    font-size: inherit;
+    font-size: 14px;
     position: relative;
     display: inline-flex;
     align-items: center;
     letter-spacing: 0.05em;
     font-weight: 500;
-    font-size: 14px;
     border-radius: 20em;
     overflow: hidden;
     background: #22a094;
@@ -412,17 +387,9 @@ h6 {
     border-radius: 10px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
-    will-change: transform;
     touch-action: manipulation;
     width: auto;
     min-width: auto;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translateZ(0);
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
     line-height: 1;
   }
 
