@@ -90,7 +90,8 @@ export default function AboutPage() {
                 Curso Cliente Mistério
               </p>
               <div className="space-y-1">
-                <p className="h2 text-gray-900">€19.99</p>
+                <p className="text-body-sm text-gray-400 line-through">64,99€</p>
+                <p className="h2 text-teal-600">24,99€</p>
                 <p className="text-body-xs">Pagamento único · Acesso vitalício</p>
               </div>
             </div>
