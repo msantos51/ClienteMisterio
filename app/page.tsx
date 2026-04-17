@@ -31,7 +31,7 @@ export default function HomePage() {
 
           {/* CTA Buttons */}
           <div className="mb-16 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span> <span>24,99€</span></>} />
+            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span> <span> 24,99€</span></>} />
             <Link
               href="/o-curso"
               className="site-pill-button-secondary"
