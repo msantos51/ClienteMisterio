@@ -249,7 +249,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span> <span>24,99€</span></>} />
+            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span> <span> 24,99€</span></>} />
           </div>
         </div>
       </div>
