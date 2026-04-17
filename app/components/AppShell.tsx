@@ -13,7 +13,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
       <header
-        className="sticky top-0 z-50 border-b border-white/20 bg-transparent px-3 py-3 backdrop-blur-[2px] sm:px-6 sm:py-4 md:px-10 md:py-6"
+        className="sticky top-0 z-50 border-b border-white/20 bg-[#E8EAED] px-3 py-3 backdrop-blur-[2px] sm:px-6 sm:py-4 md:px-10 md:py-6"
       >
         <div className="relative flex w-full items-center justify-between gap-2 sm:gap-3">
           <Link
