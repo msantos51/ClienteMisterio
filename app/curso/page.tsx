@@ -768,7 +768,10 @@ export default function CursoPage() {
                       <p className="text-xs text-[#666] mt-0.5">{mod.description}</p>
                     </div>
                   </div>
-                  <div className="shrink-0 text-sm">
+                  <div className="shrink-0 text-sm flex flex-col items-end gap-0.5">
+                    {completed && (
+                      <span className="text-[#22a094] font-semibold text-xs">Completo</span>
+                    )}
                     {completed && modProgress?.quizScore !== null && (
                       <span className="text-[#22a094] font-semibold">{modProgress.quizScore}%</span>
                     )}
