@@ -667,7 +667,9 @@ export default function CursoPage() {
   const progressPercent = progress?.progressPercent ?? 0;
 
   return (
-    <section className="w-full space-y-8 bg-white p-8 rounded-2xl">
+    <section className="w-full bg-gray-50">
+      <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+        <div className="space-y-8 bg-white p-8 rounded-2xl">
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#22a094" }}>
           Formação completa
@@ -1132,6 +1134,8 @@ export default function CursoPage() {
           </div>
         </div>
       )}
+        </div>
+      </div>
     </section>
   );
 }
