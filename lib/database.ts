@@ -4,23 +4,33 @@
 
 import { Pool } from "pg";
 
-const databaseUrl = process.env.DATABASE_URL;
+let cachedPool: Pool | null = null;
 
-if (!databaseUrl) {
-  throw new Error("DATABASE_URL não está definida nas variáveis de ambiente.");
-}
+const getPool = (): Pool => {
+  // Inicializa o pool apenas no primeiro acesso para permitir build sem variáveis de ambiente de base de dados.
+  if (cachedPool) {
+    return cachedPool;
+  }
 
-// Lê o parâmetro sslmode para respeitar configurações explícitas na connection string.
-const sslMode = new URL(databaseUrl).searchParams.get("sslmode")?.toLowerCase();
+  const databaseUrl = process.env.DATABASE_URL;
 
-// Ativa SSL por omissão em ambientes remotos e desativa apenas quando sslmode=disable.
-const shouldUseSsl = sslMode !== "disable";
+  if (!databaseUrl) {
+    throw new Error("DATABASE_URL não está definida nas variáveis de ambiente.");
+  }
 
-// Cria um pool de ligações para reutilizar conexões com a base de dados.
-const pool = new Pool({
-  connectionString: databaseUrl,
-  ssl: shouldUseSsl ? { rejectUnauthorized: false } : undefined,
-});
+  // Lê o parâmetro sslmode para respeitar configurações explícitas na connection string.
+  const sslMode = new URL(databaseUrl).searchParams.get("sslmode")?.toLowerCase();
+
+  // Ativa SSL por omissão em ambientes remotos e desativa apenas quando sslmode=disable.
+  const shouldUseSsl = sslMode !== "disable";
+
+  cachedPool = new Pool({
+    connectionString: databaseUrl,
+    ssl: shouldUseSsl ? { rejectUnauthorized: false } : undefined,
+  });
+
+  return cachedPool;
+};
 
 let initializationPromise: Promise<void> | null = null;
 
@@ -28,8 +38,8 @@ const initializeDatabase = async (): Promise<void> => {
   if (!initializationPromise) {
     // Garante que a estrutura mínima da base de dados existe antes das queries da aplicação.
     initializationPromise = (async () => {
-      await pool.query('create extension if not exists "pgcrypto"');
-      await pool.query(`
+      await getPool().query('create extension if not exists "pgcrypto"');
+      await getPool().query(`
         create table if not exists users (
           id uuid primary key default gen_random_uuid(),
           first_name text not null,
@@ -52,7 +62,7 @@ const initializeDatabase = async (): Promise<void> => {
         )
       `);
 
-      await pool.query(`
+      await getPool().query(`
         create table if not exists contact_messages (
           id uuid primary key default gen_random_uuid(),
           name text not null,
@@ -66,7 +76,7 @@ const initializeDatabase = async (): Promise<void> => {
       `);
 
 
-      await pool.query(`
+      await getPool().query(`
         create table if not exists course_purchases (
           id uuid primary key default gen_random_uuid(),
           user_id uuid not null references users(id) on delete cascade,
@@ -81,7 +91,7 @@ const initializeDatabase = async (): Promise<void> => {
         )
       `);
 
-      await pool.query(`
+      await getPool().query(`
         create table if not exists course_progress (
           id uuid primary key default gen_random_uuid(),
           user_id uuid not null references users(id) on delete cascade,
@@ -96,38 +106,38 @@ const initializeDatabase = async (): Promise<void> => {
       `);
 
       // Mantém compatibilidade com bases de dados criadas antes desta versão.
-      await pool.query("alter table users add column if not exists first_name text");
-      await pool.query("alter table users add column if not exists last_name text");
-      await pool.query("alter table users add column if not exists full_name text");
-      await pool.query("alter table users add column if not exists birth_date date");
-      await pool.query("alter table users add column if not exists gender text");
-      await pool.query(
+      await getPool().query("alter table users add column if not exists first_name text");
+      await getPool().query("alter table users add column if not exists last_name text");
+      await getPool().query("alter table users add column if not exists full_name text");
+      await getPool().query("alter table users add column if not exists birth_date date");
+      await getPool().query("alter table users add column if not exists gender text");
+      await getPool().query(
         "alter table users add column if not exists profile_completed boolean not null default false"
       );
-      await pool.query("alter table users add column if not exists email_confirmed boolean not null default true");
-      await pool.query("alter table users add column if not exists email_confirmation_token_hash text");
-      await pool.query("alter table users add column if not exists email_confirmation_sent_at timestamptz");
-      await pool.query("alter table users add column if not exists password_reset_token_hash text");
-      await pool.query("alter table users add column if not exists password_reset_expires_at timestamptz");
-      await pool.query(
+      await getPool().query("alter table users add column if not exists email_confirmed boolean not null default true");
+      await getPool().query("alter table users add column if not exists email_confirmation_token_hash text");
+      await getPool().query("alter table users add column if not exists email_confirmation_sent_at timestamptz");
+      await getPool().query("alter table users add column if not exists password_reset_token_hash text");
+      await getPool().query("alter table users add column if not exists password_reset_expires_at timestamptz");
+      await getPool().query(
         "alter table users add column if not exists is_admin boolean not null default false"
       );
 
-      await pool.query(
+      await getPool().query(
         "create index if not exists contact_messages_created_at_idx on contact_messages(created_at desc)"
       );
 
-      await pool.query(
+      await getPool().query(
         "alter table users add column if not exists has_course_access boolean not null default false"
       );
-      await pool.query("alter table users add column if not exists course_access_granted_at timestamptz");
+      await getPool().query("alter table users add column if not exists course_access_granted_at timestamptz");
 
-      await pool.query(
+      await getPool().query(
         "create index if not exists course_purchases_user_paid_at_idx on course_purchases(user_id, paid_at desc)"
       );
 
       // Converte contas antigas para o novo formato de nome para evitar dados incompletos.
-      await pool.query(`
+      await getPool().query(`
         update users
         set
           first_name = coalesce(nullif(first_name, ''), split_part(full_name, ' ', 1), 'Utilizador'),
@@ -164,5 +174,5 @@ export const query = async <Result>(
   params: Array<string | number | boolean | null | string[]> = []
 ) => {
   await initializeDatabase();
-  return pool.query<Result>(text, params);
+  return getPool().query<Result>(text, params);
 };

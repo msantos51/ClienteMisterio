@@ -29,6 +29,8 @@ const getPaymentIntentId = (paymentIntent: string | Stripe.PaymentIntent | null)
   return paymentIntent.id;
 };
 
+type GrantResult = "granted" | "user_not_found";
+
 const grantCourseAccessByEmail = async (payload: {
   eventId: string;
   checkoutSessionId: string;
@@ -36,7 +38,7 @@ const grantCourseAccessByEmail = async (payload: {
   customerEmail: string;
   amountTotal: number;
   currency: string;
-}) => {
+}): Promise<GrantResult> => {
   // Atualiza o utilizador e regista a compra de forma idempotente para evitar duplicações.
   const userResult = await query<{ id: string }>(
     "select id from users where lower(email) = $1 limit 1",
@@ -46,7 +48,13 @@ const grantCourseAccessByEmail = async (payload: {
   const userId = userResult.rows[0]?.id;
 
   if (!userId) {
-    throw new Error("USER_NOT_FOUND_FOR_PAID_EMAIL");
+    // Sem conta associada no momento do pagamento; regista alerta e confirma recepção ao Stripe.
+    console.warn("STRIPE_WEBHOOK_USER_NOT_FOUND", {
+      eventId: payload.eventId,
+      checkoutSessionId: payload.checkoutSessionId,
+      customerEmail: payload.customerEmail,
+    });
+    return "user_not_found";
   }
 
   await query(
@@ -80,6 +88,8 @@ const grantCourseAccessByEmail = async (payload: {
      where id = $1`,
     [userId]
   );
+
+  return "granted";
 };
 
 export const POST = async (request: Request) => {
@@ -116,14 +126,13 @@ export const POST = async (request: Request) => {
       const currency = session.currency;
 
       if (!customerEmail || amountTotal === null || !currency) {
-        return NextResponse.json(
-          { message: "Dados do pagamento incompletos para ativar acesso." },
-          { status: 400 }
-        );
+        // Responde 200 para não forçar retries indefinidos; regista para análise manual.
+        console.warn("STRIPE_WEBHOOK_INCOMPLETE_PAYLOAD", { eventId: event.id });
+        return NextResponse.json({ received: true, warning: "incomplete_payload" });
       }
 
       try {
-        await grantCourseAccessByEmail({
+        const outcome = await grantCourseAccessByEmail({
           eventId: event.id,
           checkoutSessionId: session.id,
           paymentIntentId: getPaymentIntentId(session.payment_intent),
@@ -131,10 +140,17 @@ export const POST = async (request: Request) => {
           amountTotal,
           currency,
         });
-      } catch {
+
+        if (outcome === "user_not_found") {
+          // Confirma recepção ao Stripe e deixa alerta nos logs para reconciliação manual.
+          return NextResponse.json({ received: true, warning: "user_not_found" });
+        }
+      } catch (error: unknown) {
+        // Erro transitório de base de dados — devolver 500 permite Stripe tentar de novo.
+        console.error("STRIPE_WEBHOOK_GRANT_ERROR", error);
         return NextResponse.json(
-          { message: "Não foi possível associar pagamento a uma conta existente." },
-          { status: 404 }
+          { message: "Falha temporária ao processar pagamento." },
+          { status: 500 }
         );
       }
     }

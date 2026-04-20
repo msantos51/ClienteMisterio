@@ -30,21 +30,32 @@ const appendSecurityHeaders = (response: NextResponse) => {
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
+
+  const isProduction = process.env.NODE_ENV === "production";
+  // Em produção removemos 'unsafe-eval' para endurecer a política contra execução dinâmica.
+  const scriptSrc = isProduction
+    ? "script-src 'self' 'unsafe-inline'"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval'";
+
   response.headers.set(
     "Content-Security-Policy",
     [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      scriptSrc,
       "style-src 'self' 'unsafe-inline' https://fonts.cdnfonts.com",
-      "font-src 'self' https://fonts.cdnfonts.com",
-      "img-src 'self' data: blob:",
-      "connect-src 'self'",
-      "frame-src https://js.stripe.com",
+      "font-src 'self' https://fonts.cdnfonts.com data:",
+      "img-src 'self' data: blob: https:",
+      "connect-src 'self' https://api.stripe.com",
+      "frame-src https://js.stripe.com https://hooks.stripe.com",
+      "form-action 'self' https://checkout.stripe.com",
+      "base-uri 'self'",
+      "object-src 'none'",
       "frame-ancestors 'none'",
+      ...(isProduction ? ["upgrade-insecure-requests"] : []),
     ].join("; ")
   );
 
-  if (process.env.NODE_ENV === "production") {
+  if (isProduction) {
     response.headers.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
   }
 

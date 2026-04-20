@@ -19,12 +19,16 @@ const navigationItems = [
 export default function TopNav() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [lastPathname, setLastPathname] = useState(pathname);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    // Fecha automaticamente o menu quando a rota muda para manter a navegação ágil no mobile.
-    setIsMenuOpen(false);
-  }, [pathname]);
+  // Deriva o fecho do menu a partir da alteração da rota sem disparar efeitos em cascata.
+  if (lastPathname !== pathname) {
+    setLastPathname(pathname);
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+  }
 
   const closeMenu = () => {
     // Fecha o menu após navegação para melhorar a experiência em ecrãs pequenos.
