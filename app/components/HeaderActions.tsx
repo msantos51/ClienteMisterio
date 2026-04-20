@@ -14,8 +14,8 @@ type SessionUser = {
   isAdmin?: boolean;
 };
 
-const userStorageKey = "vp_user";
-const sessionStorageKey = "vp_session";
+// Chaves legadas mantidas para limpar estado antigo em browsers já utilizados.
+const legacyStorageKeys = ["vp_user", "vp_session"];
 
 export default function HeaderActions() {
   const pathname = usePathname();
@@ -24,34 +24,57 @@ export default function HeaderActions() {
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
-    localStorage.removeItem(userStorageKey);
-    localStorage.removeItem(sessionStorageKey);
+
+    if (typeof window !== "undefined") {
+      legacyStorageKeys.forEach((key) => window.localStorage.removeItem(key));
+    }
+
     setSessionUser(null);
     router.push("/");
+    router.refresh();
   }
 
   useEffect(() => {
-    // Lê a sessão guardada no browser para alternar ação entre login e dashboard.
-    const storedSession = localStorage.getItem(sessionStorageKey);
-    const storedUser = localStorage.getItem(userStorageKey);
+    // Verifica o estado real da sessão no servidor para evitar divergência em relação ao cookie HTTP-only.
+    let cancelled = false;
 
-    if (!storedSession || !storedUser) {
-      setSessionUser(null);
-      return;
-    }
+    const loadSession = async () => {
+      try {
+        const response = await fetch("/api/auth/session", { cache: "no-store" });
 
-    try {
-      const parsedUser = JSON.parse(storedUser) as SessionUser;
+        if (!response.ok) {
+          if (!cancelled) setSessionUser(null);
+          return;
+        }
 
-      if (parsedUser.email !== storedSession) {
-        setSessionUser(null);
-        return;
+        const data = (await response.json()) as {
+          authenticated: boolean;
+          user?: { fullName: string; email: string; isAdmin: boolean };
+        };
+
+        if (cancelled) return;
+
+        if (!data.authenticated || !data.user) {
+          setSessionUser(null);
+          legacyStorageKeys.forEach((key) => window.localStorage.removeItem(key));
+          return;
+        }
+
+        setSessionUser({
+          fullName: data.user.fullName,
+          email: data.user.email,
+          isAdmin: data.user.isAdmin,
+        });
+      } catch {
+        if (!cancelled) setSessionUser(null);
       }
+    };
 
-      setSessionUser(parsedUser);
-    } catch {
-      setSessionUser(null);
-    }
+    loadSession();
+
+    return () => {
+      cancelled = true;
+    };
   }, [pathname]);
 
   return (

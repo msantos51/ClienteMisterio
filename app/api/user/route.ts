@@ -7,6 +7,7 @@ import { NextResponse } from "next/server";
 import { query } from "@/lib/database";
 import { verifyPassword } from "@/lib/password";
 import { getSession } from "@/lib/session";
+import { isValidEmail, isReasonableText } from "@/lib/validation";
 
 type UserRow = {
   id: string;
@@ -76,116 +77,150 @@ export const GET = async () => {
 };
 
 export const PUT = async (request: Request) => {
-  // Atualiza o perfil do utilizador autenticado sem confiar em e-mail enviado pelo cliente.
-  const session = await getSession();
+  try {
+    // Atualiza o perfil do utilizador autenticado sem confiar em e-mail enviado pelo cliente.
+    const session = await getSession();
 
-  if (!session?.userId) {
+    if (!session?.userId) {
+      return NextResponse.json(
+        { message: "É necessário iniciar sessão para atualizar o perfil." },
+        { status: 401 }
+      );
+    }
+
+    const payload = (await request.json()) as Partial<UpdatePayload>;
+
+    if (!isReasonableText(payload.firstName, 80) || !isReasonableText(payload.lastName, 80)) {
+      return NextResponse.json(
+        { message: "Primeiro nome e último nome são obrigatórios." },
+        { status: 400 }
+      );
+    }
+
+    if (!isValidEmail(payload.email)) {
+      return NextResponse.json(
+        { message: "Informe um e-mail válido." },
+        { status: 400 }
+      );
+    }
+
+    if (typeof payload.birthDate !== "string" || !payload.birthDate || typeof payload.gender !== "string") {
+      return NextResponse.json(
+        { message: "Data de nascimento e género são obrigatórios." },
+        { status: 400 }
+      );
+    }
+
+    // Valida formato ISO (YYYY-MM-DD) e que a data é real e razoável.
+    const birthDateMatch = /^\d{4}-\d{2}-\d{2}$/.test(payload.birthDate);
+    const birthDate = birthDateMatch ? new Date(`${payload.birthDate}T00:00:00Z`) : null;
+    const today = new Date();
+    const minBirthYear = today.getUTCFullYear() - 120;
+
+    if (!birthDate || Number.isNaN(birthDate.getTime()) || birthDate > today || birthDate.getUTCFullYear() < minBirthYear) {
+      return NextResponse.json({ message: "Data de nascimento inválida." }, { status: 400 });
+    }
+
+    if (!allowedGender.includes(payload.gender)) {
+      return NextResponse.json({ message: "Género inválido." }, { status: 400 });
+    }
+
+    const normalizedEmail = payload.email.trim().toLowerCase();
+
+    const conflictingUser = await query<UserRow>(
+      "select id from users where email = $1 and id <> $2",
+      [normalizedEmail, session.userId]
+    );
+
+    if (conflictingUser.rowCount) {
+      return NextResponse.json(
+        { message: "Já existe uma conta registada com este e-mail." },
+        { status: 409 }
+      );
+    }
+
+    const firstName = payload.firstName.trim();
+    const lastName = payload.lastName.trim();
+    const fullName = `${firstName} ${lastName}`.trim();
+
+    await query(
+      `update users
+       set first_name = $1,
+           last_name = $2,
+           full_name = $3,
+           email = $4,
+           birth_date = $5,
+           gender = $6,
+           profile_completed = true
+       where id = $7`,
+      [
+        firstName,
+        lastName,
+        fullName,
+        normalizedEmail,
+        payload.birthDate,
+        payload.gender,
+        session.userId,
+      ]
+    );
+
+    return NextResponse.json({ message: "Perfil atualizado com sucesso." });
+  } catch (error: unknown) {
+    console.error("USER_UPDATE_ROUTE_ERROR", error);
     return NextResponse.json(
-      { message: "É necessário iniciar sessão para atualizar o perfil." },
-      { status: 401 }
+      { message: "Não foi possível atualizar o perfil neste momento. Tente novamente." },
+      { status: 500 }
     );
   }
-
-  const payload = (await request.json()) as UpdatePayload;
-
-  if (!payload.email || !payload.firstName || !payload.lastName) {
-    return NextResponse.json(
-      { message: "Primeiro nome, último nome e e-mail são obrigatórios." },
-      { status: 400 }
-    );
-  }
-
-  if (!payload.birthDate || !payload.gender) {
-    return NextResponse.json(
-      { message: "Data de nascimento e género são obrigatórios." },
-      { status: 400 }
-    );
-  }
-
-  if (!allowedGender.includes(payload.gender)) {
-    return NextResponse.json({ message: "Género inválido." }, { status: 400 });
-  }
-  const normalizedEmail = payload.email.trim().toLowerCase();
-
-  const conflictingUser = await query<UserRow>(
-    "select id from users where email = $1 and id <> $2",
-    [normalizedEmail, session.userId]
-  );
-
-  if (conflictingUser.rowCount) {
-    return NextResponse.json(
-      { message: "Já existe uma conta registada com este e-mail." },
-      { status: 409 }
-    );
-  }
-
-  const firstName = payload.firstName.trim();
-  const lastName = payload.lastName.trim();
-  const fullName = `${firstName} ${lastName}`.trim();
-
-  await query(
-    `update users
-     set first_name = $1,
-         last_name = $2,
-         full_name = $3,
-         email = $4,
-         birth_date = $5,
-         gender = $6,
-         profile_completed = true
-     where id = $7`,
-    [
-      firstName,
-      lastName,
-      fullName,
-      normalizedEmail,
-      payload.birthDate,
-      payload.gender,
-      session.userId,
-    ]
-  );
-
-  return NextResponse.json({ message: "Perfil atualizado com sucesso." });
 };
 
 export const DELETE = async (request: Request) => {
-  // Exige sessão autenticada e validação da senha atual antes de remover a conta.
-  const session = await getSession();
+  try {
+    // Exige sessão autenticada e validação da senha atual antes de remover a conta.
+    const session = await getSession();
 
-  if (!session?.userId) {
+    if (!session?.userId) {
+      return NextResponse.json(
+        { message: "É necessário iniciar sessão para apagar a conta." },
+        { status: 401 }
+      );
+    }
+
+    const payload = (await request.json()) as Partial<DeletePayload>;
+
+    if (typeof payload.currentPassword !== "string" || !payload.currentPassword) {
+      return NextResponse.json(
+        { message: "Informe a senha atual para confirmar a eliminação da conta." },
+        { status: 400 }
+      );
+    }
+
+    const userResult = await query<PasswordRow>(
+      "select password_hash from users where id = $1",
+      [session.userId]
+    );
+
+    const user = userResult.rows[0];
+
+    if (!user) {
+      return NextResponse.json({ message: "Utilizador não encontrado." }, { status: 404 });
+    }
+
+    if (!verifyPassword(payload.currentPassword, user.password_hash)) {
+      return NextResponse.json(
+        { message: "A senha atual está incorreta." },
+        { status: 401 }
+      );
+    }
+
+    await query("delete from users where id = $1", [session.userId]);
+
+    return NextResponse.json({ message: "Conta apagada com sucesso." });
+  } catch (error: unknown) {
+    console.error("USER_DELETE_ROUTE_ERROR", error);
     return NextResponse.json(
-      { message: "É necessário iniciar sessão para apagar a conta." },
-      { status: 401 }
+      { message: "Não foi possível apagar a conta neste momento. Tente novamente." },
+      { status: 500 }
     );
   }
-
-  const payload = (await request.json()) as DeletePayload;
-
-  if (!payload.currentPassword) {
-    return NextResponse.json(
-      { message: "Informe a senha atual para confirmar a eliminação da conta." },
-      { status: 400 }
-    );
-  }
-
-  const userResult = await query<PasswordRow>(
-    "select password_hash from users where id = $1",
-    [session.userId]
-  );
-
-  const user = userResult.rows[0];
-
-  if (!user) {
-    return NextResponse.json({ message: "Utilizador não encontrado." }, { status: 404 });
-  }
-
-  if (!verifyPassword(payload.currentPassword, user.password_hash)) {
-    return NextResponse.json(
-      { message: "A senha atual está incorreta." },
-      { status: 401 }
-    );
-  }
-
-  await query("delete from users where id = $1", [session.userId]);
-
-  return NextResponse.json({ message: "Conta apagada com sucesso." });
 };

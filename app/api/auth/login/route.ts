@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 
 import { query } from "@/lib/database";
 import { verifyPassword } from "@/lib/password";
+import { checkRateLimit, getClientIdentifier } from "@/lib/rateLimit";
 import { createSession } from "@/lib/session";
 
 type LoginPayload = {
@@ -22,6 +23,7 @@ type UserRow = {
   birth_date: string | null;
   gender: string | null;
   profile_completed: boolean;
+  email_confirmed: boolean;
   is_admin: boolean;
   has_course_access: boolean;
   password_hash: string;
@@ -49,9 +51,22 @@ export const POST = async (request: Request) => {
       );
     }
 
+    // Reduz superfície de ataque de brute-force por combinação de IP e e-mail.
+    const rateKey = `login:${getClientIdentifier(request)}:${normalizedEmail}`;
+    const rate = checkRateLimit({ key: rateKey, windowMs: 15 * 60 * 1000, max: 10 });
+
+    if (rate.limited) {
+      return NextResponse.json(
+        {
+          message: "Demasiadas tentativas de login. Aguarde alguns minutos antes de tentar novamente.",
+        },
+        { status: 429, headers: { "Retry-After": rate.retryAfterSeconds.toString() } }
+      );
+    }
+
     // Procura o utilizador pelo e-mail para validar credenciais de forma segura.
     const result = await query<UserRow>(
-      `select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, is_admin, has_course_access, password_hash
+      `select id, first_name, last_name, full_name, email, birth_date, gender, profile_completed, email_confirmed, is_admin, has_course_access, password_hash
        from users
        where email = $1`,
       [normalizedEmail]
@@ -63,6 +78,16 @@ export const POST = async (request: Request) => {
       return NextResponse.json(
         { message: "E-mail ou senha inválidos. Verifique os dados e tente novamente." },
         { status: 401 }
+      );
+    }
+
+    if (!user.email_confirmed) {
+      return NextResponse.json(
+        {
+          message:
+            "Confirme o seu e-mail antes de iniciar sessão. Verifique a sua caixa de entrada e a pasta de spam.",
+        },
+        { status: 403 }
       );
     }
 

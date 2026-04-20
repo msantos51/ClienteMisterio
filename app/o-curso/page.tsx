@@ -8,13 +8,25 @@ import { useEffect, useState } from "react";
 import CheckoutButton from "../components/CheckoutButton";
 import { courseModules as courseData } from "../curso/courseData";
 
-const sessionStorageKey = "vp_session";
-
 export default function CoursePage() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(Boolean(localStorage.getItem(sessionStorageKey)));
+    // Consulta sessão ao servidor para garantir que a UI reflete o estado real do cookie HTTP-only.
+    let cancelled = false;
+
+    fetch("/api/auth/session", { cache: "no-store" })
+      .then((response) => (response.ok ? response.json() : { authenticated: false }))
+      .then((data: { authenticated: boolean }) => {
+        if (!cancelled) setIsLoggedIn(Boolean(data?.authenticated));
+      })
+      .catch(() => {
+        if (!cancelled) setIsLoggedIn(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (

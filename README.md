@@ -9,7 +9,7 @@ Plataforma online para o único curso de Cliente Mistério em Portugal. Os utili
 - Aceder a um curso completo de 10 módulos sobre como ser Cliente Mistério
 - Registar conta, fazer login e gerir perfil
 - Acompanhar o progresso do curso e resultados dos questionários
-- Adquirir o acesso ao curso via Stripe (pagamento único de 19,99€)
+- Adquirir o acesso ao curso via Stripe (pagamento único de 24,99€)
 - Contactar a equipa através de formulário integrado
 
 ## Stack Tecnológica
@@ -83,8 +83,14 @@ RESEND_FROM="Cliente Mistério <noreply@seudominio.com>"
 # URL base da aplicação (para links nos emails)
 APP_BASE_URL=https://clientemisterio.onrender.com
 
-# Stripe Payment Link
+# Stripe Payment Link (apresentado aos visitantes no checkout)
 NEXT_PUBLIC_STRIPE_PAYMENT_LINK=https://buy.stripe.com/xxxxxxxx
+
+# Stripe - Chave secreta do servidor (necessária para verificar webhooks)
+STRIPE_SECRET_KEY=sk_live_xxxxxxxxxxxxxxxxxxxx
+
+# Stripe - Segredo do endpoint webhook (painel Stripe > Developers > Webhooks)
+STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxxxxxx
 
 # Opcional: expor Swagger/OpenAPI publicamente em produção
 ENABLE_PUBLIC_API_DOCS=false
@@ -130,6 +136,10 @@ Esta página carrega o Swagger UI e permite testar os endpoints manualmente no b
 | PUT | `/api/admin/course-access` | Atualizar manualmente acesso pago ao curso (admin) |
 | POST | `/api/contact` | Enviar mensagem de contacto |
 | GET | `/api/course/progress` | Progresso do curso do utilizador |
+| PUT | `/api/course/progress` | Atualizar progresso/nota do utilizador |
+| GET | `/api/course/certificate` | Gerar PDF de certificado após conclusão |
+| POST | `/api/stripe/webhook` | Webhook Stripe para libertar acesso após pagamento |
+| GET | `/api/auth/session` | Estado atual da sessão do browser |
 
 ## Segurança
 

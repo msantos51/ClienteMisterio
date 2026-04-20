@@ -15,14 +15,15 @@ type MailPayload = {
 const getResendConfig = () => {
   // Lê configuração do Resend para envio de e-mails transacionais via API HTTPS.
   const apiKey = process.env.RESEND_API_KEY?.trim() || "";
-  const fromEmail = process.env.RESEND_FROM_EMAIL?.trim() || "";
+  // Aceita RESEND_FROM (nome documentado no README/render.yaml) e RESEND_FROM_EMAIL (nome histórico) para evitar regressões no deploy.
+  const fromEmail = process.env.RESEND_FROM?.trim() || process.env.RESEND_FROM_EMAIL?.trim() || "";
 
   if (!apiKey) {
     throw new Error("RESEND_API_KEY não está definida para envio de e-mails transacionais.");
   }
 
   if (!fromEmail) {
-    throw new Error("RESEND_FROM_EMAIL não está definida para envio de e-mails transacionais.");
+    throw new Error("RESEND_FROM não está definida para envio de e-mails transacionais.");
   }
 
   return { apiKey, fromEmail };

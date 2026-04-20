@@ -7,6 +7,29 @@ import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 const saltLength = 16;
 const keyLength = 64;
 
+// Define o tamanho mínimo aceite para novas palavras-passe no fluxo de registo e reposição.
+export const MIN_PASSWORD_LENGTH = 8;
+
+// Valida a força mínima da palavra-passe de forma partilhada entre rotas de autenticação.
+export const validatePasswordStrength = (password: string): string | null => {
+  if (typeof password !== "string" || password.length < MIN_PASSWORD_LENGTH) {
+    return `A palavra-passe deve ter pelo menos ${MIN_PASSWORD_LENGTH} caracteres.`;
+  }
+
+  if (password.length > 200) {
+    return "A palavra-passe é demasiado longa.";
+  }
+
+  const hasLetter = /[A-Za-z]/.test(password);
+  const hasDigit = /\d/.test(password);
+
+  if (!hasLetter || !hasDigit) {
+    return "A palavra-passe deve incluir pelo menos uma letra e um número.";
+  }
+
+  return null;
+};
+
 // Gera um hash seguro a partir da senha usando scrypt e um salt aleatório.
 export const hashPassword = (password: string) => {
   const salt = randomBytes(saltLength).toString("hex");

@@ -5,12 +5,12 @@
 Você tem **três formas** de acessar a documentação interativa da API:
 
 ### **Opção 1: Via Endpoint HTML** (Recomendado)
-- **Desenvolvimento (localhost)**: `http://localhost:3000/api/docs`
-- **Em Produção**: `https://seu-dominio.com/api/docs`
+- **Desenvolvimento (localhost)**: `http://localhost:3000/api-docs`
+- **Em Produção**: `https://seu-dominio.com/api-docs`
 
 ### **Opção 2: Via Página React**
-- **Desenvolvimento (localhost)**: `http://localhost:3000/docs`
-- **Em Produção**: `https://seu-dominio.com/docs`
+- **Desenvolvimento (localhost)**: `http://localhost:3000/api-docs`
+- **Em Produção**: `https://seu-dominio.com/api-docs`
 
 ### **Opção 3: Swagger UI Alternativa**
 Pode usar também o Swagger Editor online: https://editor.swagger.io
@@ -24,7 +24,7 @@ Pode usar também o Swagger Editor online: https://editor.swagger.io
 ### Em Desenvolvimento (localhost)
 Nenhuma configuração necessária! A documentação está ativa por padrão.
 
-**Acesse:** `http://localhost:3000/api/docs`
+**Acesse:** `http://localhost:3000/api-docs`
 
 ### Em Staging/Produção
 Para expor a documentação em ambiente público, adicione a variável de ambiente:
@@ -36,7 +36,7 @@ ENABLE_PUBLIC_API_DOCS=true
 
 Depois a documentação estará disponível em:
 ```
-https://seu-dominio.com/api/docs
+https://seu-dominio.com/api-docs
 ```
 
 **⚠️ Segurança:** Esta documentação expõe a estrutura da API publicamente. Use apenas em ambientes de staging/teste.
@@ -138,7 +138,7 @@ Este endpoint é especial para **administradores**:
 
 ### Swagger UI não carrega
 1. Certifique-se que o servidor está a correr: `npm run dev`
-2. Acesse: `http://localhost:3000/api/docs`
+2. Acesse: `http://localhost:3000/api-docs`
 3. Verifique a consola do browser (F12) para erros
 
 ### Erro 500 em webhooks Stripe
@@ -190,7 +190,7 @@ O webhook requer:
 npm run dev
 
 # Browser
-http://localhost:3000/api/docs
+http://localhost:3000/api-docs
 ```
 ✅ Documentação sempre ativa
 
@@ -203,7 +203,7 @@ export ENABLE_PUBLIC_API_DOCS=true
 ENABLE_PUBLIC_API_DOCS=true
 
 # Depois acesse:
-https://seu-servidor-staging.com/api/docs
+https://seu-servidor-staging.com/api-docs
 ```
 
 ### 3️⃣ Produção (se necessário)
@@ -212,7 +212,7 @@ https://seu-servidor-staging.com/api/docs
 ENABLE_PUBLIC_API_DOCS=true
 
 # Acesso:
-https://seu-dominio.com/api/docs
+https://seu-dominio.com/api-docs
 ```
 
 ---
@@ -228,7 +228,7 @@ Se quiser **manter a documentação privada em produção**, você tem 2 opçõe
 ```
 
 ### Opção B: Proteger com Password (Middleware)
-Você pode adicionar autenticação HTTP básica ao endpoint `/api/docs` criando um middleware personalizado.
+Você pode adicionar autenticação HTTP básica ao endpoint `/api-docs` criando um middleware personalizado.
 
 ---
 
