@@ -21,7 +21,7 @@ export default function HomePage() {
 
           {/* Main Title */}
           <h1 className="mb-6 text-center text-4xl sm:text-5xl font-bold leading-tight">
-            Aprende a ganhar<br />como <span className="text-teal-600">Cliente<br />Mistério</span>
+            Quer rendimento extra?<br />Torne-se <span className="text-teal-600">Cliente Mistério</span>
           </h1>
 
           {/* Description */}
