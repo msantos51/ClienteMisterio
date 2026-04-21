@@ -17,7 +17,7 @@ type ContactMessageRow = {
   id: string;
 };
 
-const contactRecipient = "vozpublica.contacto@gmail.com";
+const contactRecipient = "clientemisterio.suporte@gmail.com";
 
 const sanitizeText = (value: string) => value.replace(/\s+/g, " ").trim();
 
@@ -147,7 +147,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message:
-            "A sua mensagem foi registada, mas o envio para vozpublica.contacto@gmail.com falhou porque a conta de e-mail está em modo de testes. Verifique a configuração do domínio no Resend.",
+            "A sua mensagem foi registada, mas o envio para clientemisterio.suporte@gmail.com falhou porque a conta de e-mail está em modo de testes. Verifique a configuração do domínio no Resend.",
           reference: contactId,
         },
         { status: 503 },
@@ -157,7 +157,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message:
-          "A sua mensagem foi registada, mas não foi possível enviar o e-mail para vozpublica.contacto@gmail.com neste momento.",
+          "A sua mensagem foi registada, mas não foi possível enviar o e-mail para clientemisterio.suporte@gmail.com neste momento.",
         reference: contactId,
       },
       { status: 502 },
