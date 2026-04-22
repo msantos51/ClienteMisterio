@@ -236,6 +236,65 @@ export const translations = {
       opportunitiesDesc: "Testa produtos, lojas, restaurantes e hotéis sem qualquer custo.",
     },
 
+    // Terms and Conditions
+    termsAndConditions: [
+      {
+        number: "1",
+        title: "Aceitação dos Termos",
+        content: "Ao aceder, adquirir ou utilizar o curso disponibilizado no portal Cliente Mistério, o utilizador concorda em aceitar integralmente estes termos e condições. Se não concorda com alguma parte destes termos, por favor não prossiga com a compra ou utilização do curso.",
+      },
+      {
+        number: "2",
+        title: "Serviço Fornecido",
+        content: "O portal Cliente Mistério comercializa um curso online de formação para quem pretende iniciar a atividade de cliente mistério. O curso inclui módulos de aprendizagem, materiais de apoio e, após conclusão, a emissão de um certificado de participação. O serviço é fornecido em formato digital, acessível através da plataforma online.",
+      },
+      {
+        number: "3",
+        title: "Certificado de Conclusão",
+        content: "Após a conclusão do curso, o utilizador recebe um certificado de participação. O certificado não possui validade legal nem é reconhecido por qualquer entidade reguladora. O certificado serve exclusivamente como comprovativo de que o utilizador frequentou e concluiu o curso. O certificado não substitui qualquer formação profissional certificada, acreditada ou regulamentada por lei.",
+      },
+      {
+        number: "4",
+        title: "Compra e Pagamento",
+        content: "A aquisição do curso é feita mediante pagamento único, processado de forma segura através da plataforma de pagamentos Stripe. Após confirmação do pagamento, o acesso ao curso é ativado de forma imediata. Não são oferecidos reembolsos após o acesso ao curso ter sido disponibilizado, salvo nos casos previstos na legislação do consumidor em vigor.",
+      },
+      {
+        number: "5",
+        title: "Responsabilidades do Utilizador",
+        content: "O utilizador é integralmente responsável pela confidencialidade das suas credenciais de acesso e pela segurança da sua conta. O utilizador compromete-se a não partilhar o acesso ao curso com terceiros, não reproduzir ou distribuir os conteúdos, não utilizar a plataforma para fins ilegais e informar imediatamente sobre qualquer uso não autorizado da sua conta.",
+      },
+      {
+        number: "6",
+        title: "Propriedade Intelectual",
+        content: "Todo o conteúdo presente no portal e no curso, incluindo textos, gráficos, logos, imagens, vídeos e software, é propriedade de Cliente Mistério ou dos seus fornecedores de conteúdo e está protegido pelas leis de propriedade intelectual. O utilizador é autorizado a aceder ao conteúdo apenas para uso pessoal e não comercial.",
+      },
+      {
+        number: "7",
+        title: "Limitação de Responsabilidade",
+        content: "Cliente Mistério não será responsável por danos diretos, indiretos, incidentais, especiais ou consequentes resultantes do acesso ou uso do portal ou do curso. O portal não garante resultados profissionais ou de emprego decorrentes da frequência do curso.",
+      },
+      {
+        number: "8",
+        title: "Privacidade e Dados Pessoais",
+        content: "O tratamento de dados pessoais no portal segue a legislação em vigor, nomeadamente o Regulamento Geral sobre a Proteção de Dados (RGPD). Os dados recolhidos são utilizados exclusivamente para a gestão da conta, acesso ao curso e emissão do certificado.",
+      },
+      {
+        number: "9",
+        title: "Modificações dos Termos",
+        content: "Cliente Mistério reserva-se o direito de modificar estes termos e condições a qualquer momento. As alterações serão publicadas nesta página e entrarão em vigor imediatamente após a publicação. Recomenda-se a consulta periódica desta página.",
+      },
+      {
+        number: "10",
+        title: "Lei Aplicável",
+        content: "Estes termos e condições são regidos pelas leis de Portugal. Qualquer disputa decorrente do uso do portal ou da aquisição do curso será resolvida nos tribunais competentes de Portugal.",
+      },
+      {
+        number: "11",
+        title: "Contacto",
+        content: "Se tiver dúvidas sobre estes termos e condições ou sobre o curso, por favor contacte-nos através da página de contacto do portal.",
+      },
+    ],
+
     // Common
     common: {
       loading: "A carregar...",
@@ -482,6 +541,65 @@ export const translations = {
       opportunities: "Opportunities",
       opportunitiesDesc: "Test products, shops, restaurants and hotels at no cost.",
     },
+
+    // Terms and Conditions
+    termsAndConditions: [
+      {
+        number: "1",
+        title: "Acceptance of Terms",
+        content: "By accessing, purchasing, or using the course available on the Mystery Shopper portal, you agree to fully accept these terms and conditions. If you do not agree with any part of these terms, please do not proceed with the purchase or use of the course.",
+      },
+      {
+        number: "2",
+        title: "Service Provided",
+        content: "The Mystery Shopper portal sells an online training course for those who want to start a mystery shopper activity. The course includes learning modules, support materials, and, upon completion, the issuance of a participation certificate. The service is provided in digital format, accessible through the online platform.",
+      },
+      {
+        number: "3",
+        title: "Completion Certificate",
+        content: "Upon course completion, the user receives a participation certificate. The certificate has no legal validity and is not recognized by any regulatory entity. The certificate serves solely as proof that the user attended and completed the course. The certificate does not replace any professional, accredited, or legally regulated training.",
+      },
+      {
+        number: "4",
+        title: "Purchase and Payment",
+        content: "The course is purchased through a one-time payment, securely processed through the Stripe payment platform. After payment confirmation, access to the course is activated immediately. No refunds are offered after the course access has been provided, except in cases provided for in current consumer protection legislation.",
+      },
+      {
+        number: "5",
+        title: "User Responsibilities",
+        content: "The user is fully responsible for the confidentiality of their access credentials and the security of their account. The user agrees not to share course access with third parties, not to reproduce or distribute content, not to use the platform for illegal purposes, and to immediately report any unauthorized use of their account.",
+      },
+      {
+        number: "6",
+        title: "Intellectual Property",
+        content: "All content on the portal and in the course, including text, graphics, logos, images, videos, and software, is the property of Mystery Shopper or its content suppliers and is protected by intellectual property laws. The user is authorized to access the content only for personal, non-commercial use.",
+      },
+      {
+        number: "7",
+        title: "Limitation of Liability",
+        content: "Mystery Shopper will not be liable for direct, indirect, incidental, special, or consequential damages resulting from access to or use of the portal or course. The portal does not guarantee professional or employment results from course attendance.",
+      },
+      {
+        number: "8",
+        title: "Privacy and Personal Data",
+        content: "The processing of personal data on the portal follows current legislation, namely the General Data Protection Regulation (GDPR). The data collected is used exclusively for account management, course access, and certificate issuance.",
+      },
+      {
+        number: "9",
+        title: "Modifications to Terms",
+        content: "Mystery Shopper reserves the right to modify these terms and conditions at any time. Changes will be published on this page and will take effect immediately upon publication. We recommend that you periodically review this page.",
+      },
+      {
+        number: "10",
+        title: "Applicable Law",
+        content: "These terms and conditions are governed by the laws of Portugal. Any dispute arising from the use of the portal or the purchase of the course will be resolved in the competent courts of Portugal.",
+      },
+      {
+        number: "11",
+        title: "Contact",
+        content: "If you have questions about these terms and conditions or the course, please contact us through the contact page on the portal.",
+      },
+    ],
 
     // Common
     common: {
