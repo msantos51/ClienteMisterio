@@ -7,6 +7,8 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type SessionUser = {
   fullName: string;
@@ -21,6 +23,7 @@ export default function HeaderActions() {
   const pathname = usePathname();
   const router = useRouter();
   const [sessionUser, setSessionUser] = useState<SessionUser | null>(null);
+  const { t } = useLanguage();
 
   async function handleLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -79,12 +82,13 @@ export default function HeaderActions() {
 
   return (
     <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
+      <LanguageSwitcher />
       {!sessionUser ? (
         <Link
           className="site-pill-button nav-login-btn px-4 sm:px-8 py-2 sm:py-3 text-[10px] tracking-[0.02em] sm:text-[12px] sm:tracking-[0.02em] leading-none"
           href="/login"
         >
-          Login
+          {t.nav.login}
         </Link>
       ) : (
         <>
@@ -92,13 +96,13 @@ export default function HeaderActions() {
             className="site-pill-button nav-dashboard-btn px-4 sm:px-8 py-2 sm:py-3 text-[10px] tracking-[0.02em] sm:text-[12px] sm:tracking-[0.02em] leading-none"
             href="/dashboard"
           >
-            Dashboard
+            {t.nav.dashboard}
           </Link>
           <button
             onClick={handleLogout}
             className="site-pill-button-secondary px-4 sm:px-8 py-2 sm:py-3 text-[10px] tracking-[0.02em] sm:text-[12px] sm:tracking-[0.02em] leading-none"
           >
-            Terminar Sessão
+            {t.nav.logout}
           </button>
         </>
       )}

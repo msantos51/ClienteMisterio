@@ -7,20 +7,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-const navigationItems = [
-  { href: "/", label: "Página Inicial" },
-  { href: "/about", label: "Sobre" },
-  { href: "/o-curso", label: "O Curso" },
-  { href: "/contact", label: "Contacto" },
-  { href: "/account", label: "Conta" },
-];
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function TopNav() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const navigationItems = [
+    { href: "/", label: t.nav.home },
+    { href: "/about", label: t.nav.about },
+    { href: "/o-curso", label: t.nav.course },
+    { href: "/contact", label: t.nav.contact },
+    { href: "/account", label: t.nav.account },
+  ];
 
   // Deriva o fecho do menu a partir da alteração da rota sem disparar efeitos em cascata.
   if (lastPathname !== pathname) {

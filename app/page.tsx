@@ -2,10 +2,14 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro renderiza a landing page principal com o novo design.
  */
 
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/app/context/LanguageContext";
 import CheckoutButton from "./components/CheckoutButton";
 
 export default function HomePage() {
+  const { t } = useLanguage();
   return (
     <section className="w-full bg-gray-50">
       <div className="relative w-full">
@@ -15,28 +19,28 @@ export default function HomePage() {
           <div className="mb-8 flex justify-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-sm">
               <span className="h-2 w-2 rounded-full bg-teal-600"></span>
-              <span className="text-sm font-medium text-gray-900">O ÚNICO CURSO EM PORTUGAL</span>
+              <span className="text-sm font-medium text-gray-900">{t.home.badge}</span>
             </div>
           </div>
 
           {/* Main Title */}
           <h1 className="mb-6 text-center text-4xl sm:text-5xl font-bold leading-tight">
-            Quer rendimento extra?<br />Torne-se <span className="text-teal-600">Cliente Mistério</span>
+            {t.home.title}<br />Torne-se <span className="text-teal-600">{t.home.titleHighlight}</span>
           </h1>
 
           {/* Description */}
           <p className="mb-10 text-center text-gray-600 max-w-2xl mx-auto">
-            Avalia lojas, restaurantes e produtos ao teu ritmo — e recebe por isso. Certificado incluído.
+            {t.home.description}
           </p>
 
           {/* CTA Buttons */}
           <div className="mb-16 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span>  <span>24,99€</span></>} />
+            <CheckoutButton label={<>{t.home.buyButton} — <span className="line-through opacity-70">{t.home.originalPrice}</span>  <span>{t.home.discountPrice}</span></>} />
             <Link
               href="/o-curso"
               className="site-pill-button-secondary"
             >
-              Ver o programa
+              {t.home.viewProgram}
             </Link>
           </div>
 
@@ -45,19 +49,19 @@ export default function HomePage() {
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-8">
               <div className="text-center">
                 <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">100%</div>
-                <p className="text-sm text-teal-600 font-medium">Críticas</p>
+                <p className="text-sm text-teal-600 font-medium">{t.home.stats.reviews}</p>
               </div>
               <div className="text-center">
                 <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">+500</div>
-                <p className="text-sm text-teal-600 font-medium">Alunos</p>
+                <p className="text-sm text-teal-600 font-medium">{t.home.stats.students}</p>
               </div>
               <div className="text-center">
                 <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">10</div>
-                <p className="text-sm text-teal-600 font-medium">Módulos</p>
+                <p className="text-sm text-teal-600 font-medium">{t.home.stats.modules}</p>
               </div>
               <div className="text-center">
                 <div className="mb-2 text-3xl sm:text-4xl font-bold text-gray-900">4.9★</div>
-                <p className="text-sm text-teal-600 font-medium">Avaliação</p>
+                <p className="text-sm text-teal-600 font-medium">{t.home.stats.rating}</p>
               </div>
             </div>
           </div>
@@ -65,9 +69,9 @@ export default function HomePage() {
           {/* Section: O QUE INCLUI */}
           <div id="what-included" className="mb-16">
             <div className="mb-8 text-center">
-              <p className="mb-2 text-sm font-medium text-teal-600">O QUE INCLUI</p>
-              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">Tudo o que precisas para começar</h2>
-              <p className="text-gray-600">Do zero à primeira missão paga, com estrutura completa.</p>
+              <p className="mb-2 text-sm font-medium text-teal-600">{t.home.whatIncluded.label}</p>
+              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">{t.home.whatIncluded.title}</h2>
+              <p className="text-gray-600">{t.home.whatIncluded.description}</p>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-3">
@@ -80,8 +84,8 @@ export default function HomePage() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="mb-3 text-lg font-bold text-gray-900">Aprende ao teu ritmo</h3>
-                <p className="text-sm text-gray-600">100% online, sem horários. Acesso vitalício aos conteúdos e atualizações futuras.</p>
+                <h3 className="mb-3 text-lg font-bold text-gray-900">{t.home.whatIncluded.card1Title}</h3>
+                <p className="text-sm text-gray-600">{t.home.whatIncluded.card1Desc}</p>
               </div>
 
               {/* Card 2 */}
@@ -93,8 +97,8 @@ export default function HomePage() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="mb-3 text-lg font-bold text-gray-900">Certificado incluído</h3>
-                <p className="text-sm text-gray-600">Documento que comprova a conclusão do curso e as tuas competências como avaliador.</p>
+                <h3 className="mb-3 text-lg font-bold text-gray-900">{t.home.whatIncluded.card2Title}</h3>
+                <p className="text-sm text-gray-600">{t.home.whatIncluded.card2Desc}</p>
               </div>
 
               {/* Card 3 */}
@@ -106,8 +110,8 @@ export default function HomePage() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="mb-3 text-lg font-bold text-gray-900">Oportunidades reais</h3>
-                <p className="text-sm text-gray-600">Testa produtos, lojas e restaurantes sem qualquer custo — e ainda recebes por cada visita.</p>
+                <h3 className="mb-3 text-lg font-bold text-gray-900">{t.home.whatIncluded.card3Title}</h3>
+                <p className="text-sm text-gray-600">{t.home.whatIncluded.card3Desc}</p>
               </div>
             </div>
           </div>
@@ -115,9 +119,9 @@ export default function HomePage() {
           {/* Section: COMO FUNCIONA */}
           <div className="mb-16">
             <div className="mb-8 text-center">
-              <p className="mb-2 text-sm font-medium text-teal-600">COMO FUNCIONA</p>
-              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">Do curso à primeira missão</h2>
-              <p className="text-gray-600">Quatro passos simples para começares a ganhar.</p>
+              <p className="mb-2 text-sm font-medium text-teal-600">{t.home.howWorks.label}</p>
+              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">{t.home.howWorks.title}</h2>
+              <p className="text-gray-600">{t.home.howWorks.description}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
@@ -126,8 +130,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">1</div>
                 </div>
-                <h3 className="mb-2 font-bold text-gray-900">Compra o curso</h3>
-                <p className="text-sm text-gray-600">Pagamento único de <span className="line-through text-gray-400">64,99€</span> <strong className="text-gray-700">24,99€</strong>. Acesso imediato a todos os módulos.</p>
+                <h3 className="mb-2 font-bold text-gray-900">{t.home.howWorks.step1Title}</h3>
+                <p className="text-sm text-gray-600">{t.home.howWorks.step1Desc}</p>
               </div>
 
               {/* Step 2 */}
@@ -135,8 +139,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">2</div>
                 </div>
-                <h3 className="mb-2 font-bold text-gray-900">Aprende</h3>
-                <p className="text-sm text-gray-600">10 módulos práticos do enquadramento ao relacionamento.</p>
+                <h3 className="mb-2 font-bold text-gray-900">{t.home.howWorks.step2Title}</h3>
+                <p className="text-sm text-gray-600">{t.home.howWorks.step2Desc}</p>
               </div>
 
               {/* Step 3 */}
@@ -144,8 +148,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">3</div>
                 </div>
-                <h3 className="mb-2 font-bold text-gray-900">Regista-te</h3>
-                <p className="text-sm text-gray-600">Acesso às plataformas de mystery shopping em Portugal.</p>
+                <h3 className="mb-2 font-bold text-gray-900">{t.home.howWorks.step3Title}</h3>
+                <p className="text-sm text-gray-600">{t.home.howWorks.step3Desc}</p>
               </div>
 
               {/* Step 4 */}
@@ -153,8 +157,8 @@ export default function HomePage() {
                 <div className="mb-4 flex justify-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal-600 text-white font-bold text-lg">4</div>
                 </div>
-                <h3 className="mb-2 font-bold text-gray-900">Ganhas</h3>
-                <p className="text-sm text-gray-600">De 5 a 150€ por avaliação concluída.</p>
+                <h3 className="mb-2 font-bold text-gray-900">{t.home.howWorks.step4Title}</h3>
+                <p className="text-sm text-gray-600">{t.home.howWorks.step4Desc}</p>
               </div>
             </div>
           </div>
@@ -162,9 +166,9 @@ export default function HomePage() {
           {/* Section: TESTEMUNHOS */}
           <div className="mb-16">
             <div className="mb-8 text-center">
-              <p className="mb-2 text-sm font-medium text-teal-600">TESTEMUNHOS</p>
-              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">O que dizem os alunos</h2>
-              <p className="text-gray-600">Mais de 500 pessoas já completaram o curso.</p>
+              <p className="mb-2 text-sm font-medium text-teal-600">{t.home.testimonials.label}</p>
+              <h2 className="mb-3 text-3xl sm:text-4xl font-bold text-gray-900">{t.home.testimonials.title}</h2>
+              <p className="text-gray-600">{t.home.testimonials.description}</p>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-3">
@@ -176,7 +180,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="mb-4 text-sm text-gray-700">
-                  Comecei sem saber nada e no primeiro mês já tinha completado 4 missões. Muito prático e direto ao ponto.
+                  {t.home.testimonials.testimonial1}
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-600">AP</div>
@@ -195,7 +199,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="mb-4 text-sm text-gray-700">
-                  Recomendo o valor do curso logo na primeira avaliação. Excelente investimento.
+                  {t.home.testimonials.testimonial2}
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-600">RC</div>
@@ -214,7 +218,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="mb-4 text-sm text-gray-700">
-                  Curso bem estruturado. Ótimas informações e suporte ao longo de todo o processo. Já realizei mais de 10 missões.
+                  {t.home.testimonials.testimonial3}
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-xs font-bold text-teal-600">MF</div>
@@ -229,27 +233,27 @@ export default function HomePage() {
 
           {/* CTA Section */}
           <div className="rounded-3xl bg-gray-900 p-10 sm:p-12 text-center text-white">
-            <h2 className="mb-4 text-3xl sm:text-4xl font-bold">Pronto para começar?</h2>
+            <h2 className="mb-4 text-3xl sm:text-4xl font-bold">{t.home.cta.title}</h2>
             <p className="mb-8 text-gray-300 max-w-2xl mx-auto">
-              Junta-te a mais de 500 alunos que já avaliam e ganham em Portugal.
+              {t.home.cta.description}
             </p>
 
             <div className="mb-8 flex flex-col items-center justify-center gap-3 sm:gap-4">
               <div className="flex items-center gap-2 text-sm">
                 <span>✓</span>
-                <span>Acesso imediato</span>
+                <span>{t.home.cta.immediateAccess}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <span>✓</span>
-                <span>Certificado incluído</span>
+                <span>{t.home.cta.certificateIncluded}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <span>✓</span>
-                <span>Suporte vitalício</span>
+                <span>{t.home.cta.lifetimeSupport}</span>
               </div>
             </div>
 
-            <CheckoutButton label={<>Comprar o curso — <span className="line-through opacity-70">64,99€</span>  <span>24,99€</span></>} />
+            <CheckoutButton label={<>{t.home.buyButton} — <span className="line-through opacity-70">{t.home.originalPrice}</span>  <span>{t.home.discountPrice}</span></>} />
           </div>
         </div>
       </div>
