@@ -46,7 +46,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (context === undefined) {
-    throw new Error("useLanguage must be used within LanguageProvider");
+    // Return default Portuguese context when used outside LanguageProvider (e.g., during SSR)
+    return {
+      language: "pt" as Language,
+      setLanguage: () => {},
+      t: getTranslation("pt"),
+    };
   }
   return context;
 }
