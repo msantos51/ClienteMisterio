@@ -1,22 +1,25 @@
 "use client";
 
-// Define os três cartões de benefícios apresentados na landing page.
-const benefits = [
-  {
-    title: "Aprende",
-    description: "Curso 100% online, sem horários e ao teu ritmo.",
-  },
-  {
-    title: "Certificado",
-    description: "Direito a documento que comprova conclusão do curso.",
-  },
-  {
-    title: "Oportunidades",
-    description: "Testa produtos, lojas, restaurantes e hotéis sem qualquer custo.",
-  },
-];
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function ThreePointsCards() {
+  const { t } = useLanguage();
+
+  const benefits = [
+    {
+      title: t.threePoints.learn,
+      description: t.threePoints.learnDesc,
+    },
+    {
+      title: t.threePoints.certificate,
+      description: t.threePoints.certificateDesc,
+    },
+    {
+      title: t.threePoints.opportunities,
+      description: t.threePoints.opportunitiesDesc,
+    },
+  ];
+
   return (
     <div className="grid w-full gap-4 sm:gap-5 md:gap-6 sm:grid-cols-3">
       {benefits.map((benefit) => (

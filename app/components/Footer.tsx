@@ -1,11 +1,11 @@
-/*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa o Footer da aplicação, incluindo links úteis e legais.
- */
+"use client";
 
 import Link from "next/link";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="border-t border-white/20 bg-[#E8EAED] px-3 py-4 sm:px-6 md:px-10">
@@ -17,7 +17,7 @@ export default function Footer() {
               CM
             </span>
             <span className="text-black/60">
-              O único curso de Cliente Mistério em Portugal.
+              {t.footer.tagline}
             </span>
           </div>
 
@@ -27,19 +27,19 @@ export default function Footer() {
               href="/termos-e-condicoes"
               className="text-black/70 transition-colors hover:text-black"
             >
-              Termos e Condições
+              {t.footer.termsLink}
             </Link>
             <Link
               href="/contact"
               className="text-black/70 transition-colors hover:text-black"
             >
-              Contacto
+              {t.footer.contactLink}
             </Link>
           </div>
 
           {/* Copyright */}
           <p className="text-black/50">
-            &copy; {currentYear} Cliente Mistério. Todos os direitos reservados.
+            &copy; {currentYear} {t.footer.copyright}
           </p>
         </div>
       </div>

@@ -1,12 +1,9 @@
-/*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/login/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
- */
-
 "use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type LoginResponse = {
   message: string;
@@ -38,6 +35,7 @@ const sessionStorageKey = "vp_session";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -50,30 +48,27 @@ export default function LoginPage() {
     setIsCheckout(checkout);
 
     if (urlParameters.get("registered") === "1") {
-      // Exibe confirmação de registo concluído e acesso imediato ao login.
       if (checkout) {
-        setFeedback("Conta criada com sucesso. Inicia sessão para continuar com a compra.");
+        setFeedback(t.auth.loginSuccessCheckout);
       } else {
-        setFeedback("Conta criada com sucesso. Já pode iniciar sessão.");
+        setFeedback(t.auth.loginSuccess);
       }
     } else if (checkout) {
-      setFeedback("Para proceder com a compra é necessário iniciar sessão ou criar uma conta.");
+      setFeedback(t.auth.checkoutRequired);
     }
 
-    // Mantém o utilizador autenticado ao regressar ao ecrã de login.
     const storedSession = localStorage.getItem(sessionStorageKey);
     const storedUser = localStorage.getItem(userStorageKey);
 
     if (storedSession && storedUser) {
       router.push(checkout ? "/checkout" : "/dashboard");
     }
-  }, [router]);
+  }, [router, t]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFeedback(null);
 
-    // Evita múltiplos envios enquanto a requisição está em andamento.
     if (isSubmitting) {
       return;
     }
@@ -113,7 +108,7 @@ export default function LoginPage() {
 
       router.push(isCheckout ? "/checkout" : "/dashboard");
     } catch {
-      setFeedback("Não foi possível iniciar sessão. Tente novamente.");
+      setFeedback(t.auth.loginError);
     } finally {
       setIsSubmitting(false);
     }
@@ -123,42 +118,42 @@ export default function LoginPage() {
     <section className="w-full space-y-8 bg-gray-50">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form">
-          <h1 className="form-heading">Login</h1>
+          <h1 className="form-heading">{t.auth.loginTitle}</h1>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <input
                 name="email"
-                placeholder="nome@exemplo.com"
+                placeholder={t.auth.emailPlaceholder}
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
-              <span className="label">E-mail</span>
+              <span className="label">{t.auth.emailLabel}</span>
             </div>
 
             <div className="input-group">
               <input
                 name="password"
-                placeholder="Digite a sua senha"
+                placeholder={t.auth.passwordPlaceholder}
                 type="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
-              <span className="label">Senha</span>
+              <span className="label">{t.auth.passwordLabel}</span>
             </div>
 
             {feedback && <p className="form-feedback">{feedback}</p>}
 
             <div className="mt-5 space-y-3">
               <button className="submit" type="submit">
-                {isSubmitting ? "A entrar..." : "Entrar"}
+                {isSubmitting ? t.auth.loginSubmitting : t.auth.loginButton}
               </button>
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <Link className="form-link" href={isCheckout ? "/account?checkout=1" : "/account"}>
-                  Criar conta
+                  {t.auth.createAccount}
                 </Link>
                 <Link className="form-link" href="/forgot-password">
-                  Esqueci-me da password
+                  {t.auth.forgotPassword}
                 </Link>
               </div>
             </div>

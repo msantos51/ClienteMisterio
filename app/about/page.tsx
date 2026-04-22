@@ -1,23 +1,24 @@
-/*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a página "Sobre" com o novo design.
- */
+"use client";
 
+import { useLanguage } from '@/app/context/LanguageContext';
 import CheckoutButton from '../components/CheckoutButton';
 
 export default function AboutPage() {
+  const { t } = useLanguage();
+
   const courseAdvantages = [
-    'Checklists práticos para não esqueceres detalhes',
-    'Técnicas para pareceres um cliente normal (sem te denunciares)',
-    'Relatórios claros e bem avaliados pelas empresas',
-    'Estratégias para conseguir mais avaliações e aumentar o rendimento',
+    t.about.advantage1,
+    t.about.advantage2,
+    t.about.advantage3,
+    t.about.advantage4,
   ];
 
   const courseFeatures = [
-    'Acesso completo',
-    'Certificado de conclusão',
-    'Acesso ilimitado',
-    'Curso 100% online, ao teu ritmo',
-    'Oportunidades de avaliação gratuitas',
+    t.about.feature1,
+    t.about.feature2,
+    t.about.feature3,
+    t.about.feature4,
+    t.about.feature5,
   ];
 
   return (
@@ -28,31 +29,26 @@ export default function AboutPage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-            <span className="text-label">Sobre a Cliente Mistério</span>
+            <span className="text-label">{t.about.badge}</span>
           </div>
 
           {/* Title */}
           <h1 className="h1">
-            Atua com <span className="text-teal-600">método e consistência</span>
+            {t.about.title} <span className="text-teal-600">{t.about.titleHighlight}</span>
           </h1>
 
           {/* Description */}
           <div className="space-y-4 text-body-sm text-justify">
             <p>
-              Um Cliente Mistério é um cliente &ldquo;normal&rdquo; contratado para avaliar serviços
-              (atendimento, rapidez, qualidade e cumprimento de regras) e, ao mesmo tempo, gerar
-              rendimento extra por cada avaliação realizada.
+              {t.about.description1}
             </p>
 
             <p>
-              Quanto melhor e mais consistente fores, mais convites costumas receber para novas
-              visitas e análises.
+              {t.about.description2}
             </p>
 
             <p>
-              Neste curso, vais aprender do básico ao avançado como fazer visitas sem falhas,
-              entregar relatórios profissionais e aumentar a tua taxa de aprovação para
-              transformares isto num extra mensal realista.
+              {t.about.description3}
             </p>
           </div>
         </div>
@@ -63,10 +59,9 @@ export default function AboutPage() {
           <div className="lg:col-span-2 space-y-8">
             {/* Course Advantages */}
             <div className="space-y-4">
-              <h2 className="h3">Vantagens do curso</h2>
+              <h2 className="h3">{t.about.advantagesTitle}</h2>
               <p className="text-body-sm">
-                Estrutura prática para melhorares a qualidade das avaliações e aumentares o teu
-                rendimento com consistência.
+                {t.about.advantagesDesc}
               </p>
 
               <div className="space-y-3">
@@ -87,11 +82,11 @@ export default function AboutPage() {
             {/* Course Title */}
             <div className="mb-6 space-y-2">
               <p className="text-label">
-                Curso Cliente Mistério
+                {t.about.courseTitle}
               </p>
               <div className="space-y-1">
-                <p className="h2 text-gray-900">24,99€</p>
-                <p className="text-body-xs">Pagamento único · Acesso vitalício</p>
+                <p className="h2 text-gray-900">{t.about.price}</p>
+                <p className="text-body-xs">{t.about.paymentInfo}</p>
               </div>
             </div>
 
@@ -110,7 +105,7 @@ export default function AboutPage() {
             </div>
 
             {/* CTA Button */}
-            <CheckoutButton label="Comprar curso" />
+            <CheckoutButton label={t.about.buyCourseButton} />
           </div>
         </div>
       </div>

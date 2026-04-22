@@ -1,76 +1,52 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleOutsideClick = (event: PointerEvent) => {
-      if (!menuRef.current?.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("pointerdown", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("pointerdown", handleOutsideClick);
-    };
-  }, [isOpen]);
-
-  const languages = [
-    { code: "pt" as const, label: "Português", flag: "🇵🇹" },
-    { code: "en" as const, label: "English", flag: "🇬🇧" },
-  ];
-
-  const currentLang = languages.find((l) => l.code === language);
 
   return (
-    <div ref={menuRef} className="relative">
+    <div className="flex items-center justify-center gap-2 py-2">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-200 transition text-sm font-medium"
-        aria-label="Change language"
+        type="button"
+        onClick={() => setLanguage("pt")}
+        aria-label="Português"
+        aria-pressed={language === "pt"}
+        className={`flex h-7 w-10 items-center justify-center overflow-hidden rounded-sm border-2 transition-all ${
+          language === "pt"
+            ? "border-[#22a094] opacity-100 shadow-sm"
+            : "border-transparent opacity-60 hover:opacity-100"
+        }`}
+        title="Português"
       >
-        <span>{currentLang?.flag}</span>
-        <span className="hidden sm:inline">{currentLang?.label}</span>
-        <svg
-          className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        <svg viewBox="0 0 600 400" className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="400" fill="#006600" />
+          <rect x="240" width="360" height="400" fill="#FF0000" />
+          <circle cx="240" cy="200" r="80" fill="#FFFF00" stroke="#000" strokeWidth="2" />
+          <circle cx="240" cy="200" r="55" fill="#0033A0" />
         </svg>
       </button>
 
-      {isOpen && (
-        <div className="absolute right-0 mt-2 bg-white border border-gray-300 rounded-lg shadow-lg z-50 min-w-[140px]">
-          {languages.map((lang) => (
-            <button
-              key={lang.code}
-              onClick={() => {
-                setLanguage(lang.code);
-                setIsOpen(false);
-              }}
-              className={`w-full px-4 py-2 text-left text-sm font-medium transition ${
-                language === lang.code
-                  ? "bg-teal-100 text-teal-900"
-                  : "hover:bg-gray-100 text-gray-900"
-              } first:rounded-t-lg last:rounded-b-lg`}
-            >
-              <span className="mr-2">{lang.flag}</span>
-              {lang.label}
-            </button>
-          ))}
-        </div>
-      )}
+      <button
+        type="button"
+        onClick={() => setLanguage("en")}
+        aria-label="English"
+        aria-pressed={language === "en"}
+        className={`flex h-7 w-10 items-center justify-center overflow-hidden rounded-sm border-2 transition-all ${
+          language === "en"
+            ? "border-[#22a094] opacity-100 shadow-sm"
+            : "border-transparent opacity-60 hover:opacity-100"
+        }`}
+        title="English"
+      >
+        <svg viewBox="0 0 60 40" className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+          <rect width="60" height="40" fill="#012169" />
+          <path d="M0,0 L60,40 M60,0 L0,40" stroke="#FFFFFF" strokeWidth="6" />
+          <path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" strokeWidth="3" />
+          <path d="M30,0 L30,40 M0,20 L60,20" stroke="#FFFFFF" strokeWidth="10" />
+          <path d="M30,0 L30,40 M0,20 L60,20" stroke="#C8102E" strokeWidth="6" />
+        </svg>
+      </button>
     </div>
   );
 }
