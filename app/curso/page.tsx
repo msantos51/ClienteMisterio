@@ -691,11 +691,11 @@ export default function CursoPage() {
         </div>
         <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
           <p className="text-3xl font-bold text-[#2a2a2a]">{totalModules - (progress?.completedCount ?? 0)}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">Lecionados</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">Em falta</p>
         </div>
         <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
           <p className="text-3xl font-bold text-[#2a2a2a]">{completedCount}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">Completados</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">Finalizado(s)</p>
         </div>
       </div>
 
