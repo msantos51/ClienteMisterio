@@ -1,10 +1,7 @@
-/*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/contact/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
- */
-
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type FormData = {
   name: string;
@@ -26,13 +23,13 @@ const initialFormData: FormData = {
 };
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [statusMessage, setStatusMessage] = useState("");
   const [statusReference, setStatusReference] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFieldChange = (field: keyof FormData, value: string) => {
-    // Atualiza apenas o campo alterado, mantendo o restante estado intacto.
     setFormData((previousData) => ({
       ...previousData,
       [field]: value,
@@ -57,13 +54,13 @@ export default function ContactPage() {
 
       const data = (await response.json()) as ContactApiResponse;
       setStatusReference(data.reference || "");
-      setStatusMessage(data.message || "Não foi possível enviar a sua mensagem.");
+      setStatusMessage(data.message || t.contact.formErrorMessage);
 
       if (response.ok) {
         setFormData(initialFormData);
       }
     } catch {
-      setStatusMessage("Erro de ligação. Tente novamente dentro de alguns instantes.");
+      setStatusMessage(t.contact.formConnectionError);
     } finally {
       setIsSubmitting(false);
     }
@@ -76,13 +73,13 @@ export default function ContactPage() {
         <div className="mb-12 space-y-4 sm:space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
             <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-            <span className="text-label">Contacto</span>
+            <span className="text-label">{t.contact.badge}</span>
           </div>
 
           <div>
-            <h1 className="h1">Fala connosco</h1>
+            <h1 className="h1">{t.contact.title}</h1>
             <p className="mt-3 text-body-sm">
-              Tens dúvidas sobre o curso, o certificado ou o processo de pagamento? Estamos aqui para ajudar.
+              {t.contact.description}
             </p>
           </div>
         </div>
@@ -92,7 +89,7 @@ export default function ContactPage() {
           {/* Left Column - Contact Info */}
           <div className="space-y-6">
             <div className="space-y-4">
-              <h2 className="h5">Entre em contacto</h2>
+              <h2 className="h5">{t.contact.contactHeader}</h2>
 
               {/* Email */}
               <div className="flex items-start gap-4">
@@ -103,9 +100,9 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-body-sm font-semibold">Email</p>
+                  <p className="text-body-sm font-semibold">{t.contact.emailLabel}</p>
                   <a href="mailto:email@clientemisterio.pt" className="text-body-sm text-gray-600 hover:text-teal-600">
-                    email@clientemisterio.pt
+                    {t.contact.email}
                   </a>
                 </div>
               </div>
@@ -118,9 +115,9 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-body-sm font-semibold">Telefone</p>
+                  <p className="text-body-sm font-semibold">{t.contact.phoneLabel}</p>
                   <a href="tel:+351912345678" className="text-body-sm text-gray-600 hover:text-teal-600">
-                    +351 91 234 5678
+                    {t.contact.phone}
                   </a>
                 </div>
               </div>
@@ -133,10 +130,9 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-body-sm font-semibold">Morada</p>
+                  <p className="text-body-sm font-semibold">{t.contact.addressLabel}</p>
                   <p className="text-body-sm text-gray-600">
-                    Rua da Inovação, 10<br />
-                    1900-001 Lisboa, Portugal
+                    {t.contact.address}
                   </p>
                 </div>
               </div>
@@ -145,13 +141,13 @@ export default function ContactPage() {
             {/* Response Time Badge */}
             <div className="flex items-center gap-2 rounded-full bg-teal-50 px-4 py-3">
               <div className="h-2 w-2 rounded-full bg-teal-500"></div>
-              <p className="text-label">Respondemos em até 2 dias úteis</p>
+              <p className="text-label">{t.contact.responseTime}</p>
             </div>
           </div>
 
           {/* Right Column - Form */}
           <div className="rounded-lg bg-white p-6 sm:p-8 shadow-sm">
-            <h2 className="mb-6 h5">Envia-nos uma mensagem</h2>
+            <h2 className="mb-6 h5">{t.contact.formNameLabel}</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
               {/* Name and Email Row */}
               <div className="grid gap-4 sm:grid-cols-2">
@@ -159,24 +155,24 @@ export default function ContactPage() {
                   <input
                     name="name"
                     onChange={(event) => handleFieldChange("name", event.target.value)}
-                    placeholder="O seu nome"
+                    placeholder={t.contact.formNamePlaceholder}
                     required
                     type="text"
                     value={formData.name}
                   />
-                  <span className="label">Nome</span>
+                  <span className="label">{t.contact.formNameLabel}</span>
                 </div>
 
                 <div className="input-group">
                   <input
                     name="email"
                     onChange={(event) => handleFieldChange("email", event.target.value)}
-                    placeholder="nome@exemplo.com"
+                    placeholder={t.contact.formEmailPlaceholder}
                     required
                     type="email"
                     value={formData.email}
                   />
-                  <span className="label">E-mail</span>
+                  <span className="label">{t.contact.formEmailLabel}</span>
                 </div>
               </div>
 
@@ -185,12 +181,12 @@ export default function ContactPage() {
                 <input
                   name="subject"
                   onChange={(event) => handleFieldChange("subject", event.target.value)}
-                  placeholder="Seleciona um assunto"
+                  placeholder={t.contact.formSubjectPlaceholder}
                   required
                   type="text"
                   value={formData.subject}
                 />
-                <span className="label">Assunto</span>
+                <span className="label">{t.contact.formSubjectLabel}</span>
               </div>
 
               {/* Message */}
@@ -198,11 +194,11 @@ export default function ContactPage() {
                 <textarea
                   name="message"
                   onChange={(event) => handleFieldChange("message", event.target.value)}
-                  placeholder="Descreve a tua questão com o máximo de detalhe possível."
+                  placeholder={t.contact.formMessagePlaceholder}
                   required
                   value={formData.message}
                 />
-                <span className="label">Mensagem</span>
+                <span className="label">{t.contact.formMessageLabel}</span>
               </div>
 
               {/* Status Message */}
@@ -223,7 +219,7 @@ export default function ContactPage() {
                 disabled={isSubmitting}
                 type="submit"
               >
-                {isSubmitting ? "A enviar..." : "Enviar mensagem"}
+                {isSubmitting ? t.contact.formSubmittingButton : t.contact.formSubmitButton}
               </button>
             </form>
           </div>

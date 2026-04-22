@@ -1,12 +1,9 @@
-/*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/account/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
- */
-
 "use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type RegisterForm = {
   firstName: string;
@@ -23,6 +20,7 @@ type FeedbackState = {
 
 export default function AccountPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [isCheckout, setIsCheckout] = useState(false);
   const [formData, setFormData] = useState<RegisterForm>({
     firstName: "",
@@ -47,7 +45,6 @@ export default function AccountPage() {
     event.preventDefault();
     setFeedback(null);
 
-    // Evita múltiplos envios enquanto a requisição está em andamento.
     if (isSubmitting) {
       return;
     }
@@ -55,7 +52,7 @@ export default function AccountPage() {
     if (formData.password !== formData.confirmPassword) {
       setFeedback({
         type: "error",
-        message: "A confirmação da senha não coincide com a senha informada.",
+        message: "Password confirmation does not match the password entered.",
       });
       return;
     }
@@ -77,12 +74,12 @@ export default function AccountPage() {
         return;
       }
 
-      setFeedback({ type: "success", message: "Registo efetuado com sucesso." });
+      setFeedback({ type: "success", message: "Registration successful." });
       router.push(isCheckout ? "/login?registered=1&checkout=1" : "/login?registered=1");
     } catch {
       setFeedback({
         type: "error",
-        message: "Não foi possível criar a conta. Tente novamente.",
+        message: t.auth.registrationError,
       });
     } finally {
       setIsSubmitting(false);
@@ -93,65 +90,65 @@ export default function AccountPage() {
     <section className="w-full space-y-8 bg-gray-50">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form max-w-[620px]">
-          <h1 className="form-heading">Criar conta</h1>
+          <h1 className="form-heading">{t.auth.registerTitle}</h1>
           {isCheckout && (
-            <p className="form-feedback mb-4">Para proceder com a compra é necessário criar uma conta ou <a className="form-link" href="/login?checkout=1">iniciar sessão</a>.</p>
+            <p className="form-feedback mb-4">To proceed with the purchase, you need to create an account or <a className="form-link" href="/login?checkout=1">sign in</a>.</p>
           )}
 
           <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
                 name="firstName"
-                placeholder="Digite o seu primeiro nome"
+                placeholder="Enter your first name"
                 type="text"
                 value={formData.firstName}
                 onChange={(event) => handleChange("firstName", event.target.value)}
               />
-              <span className="label">Primeiro nome</span>
+              <span className="label">{t.auth.firstNameLabel}</span>
             </div>
 
             <div className="input-group">
               <input
                 name="lastName"
-                placeholder="Digite o seu último nome"
+                placeholder="Enter your last name"
                 type="text"
                 value={formData.lastName}
                 onChange={(event) => handleChange("lastName", event.target.value)}
               />
-              <span className="label">Último nome</span>
+              <span className="label">{t.auth.lastNameLabel}</span>
             </div>
 
             <div className="input-group md:col-span-2">
               <input
                 name="email"
-                placeholder="nome@exemplo.com"
+                placeholder="name@example.com"
                 type="email"
                 value={formData.email}
                 onChange={(event) => handleChange("email", event.target.value)}
               />
-              <span className="label">E-mail</span>
+              <span className="label">{t.auth.emailLabel}</span>
             </div>
 
             <div className="input-group">
               <input
                 name="password"
-                placeholder="Crie uma senha segura"
+                placeholder="Create a secure password"
                 type="password"
                 value={formData.password}
                 onChange={(event) => handleChange("password", event.target.value)}
               />
-              <span className="label">Senha</span>
+              <span className="label">{t.auth.passwordLabel}</span>
             </div>
 
             <div className="input-group">
               <input
                 name="confirmPassword"
-                placeholder="Repita a senha"
+                placeholder="Repeat the password"
                 type="password"
                 value={formData.confirmPassword}
                 onChange={(event) => handleChange("confirmPassword", event.target.value)}
               />
-              <span className="label">Confirmar senha</span>
+              <span className="label">{t.auth.passwordConfirmLabel}</span>
             </div>
 
             {feedback && (
@@ -160,11 +157,11 @@ export default function AccountPage() {
 
             <div className="md:col-span-2 mt-2 space-y-3">
               <button className="submit" type="submit">
-                {isSubmitting ? "A criar..." : "Criar conta"}
+                {isSubmitting ? t.auth.registerSubmitting : t.auth.registerButton}
               </button>
               <div className="text-center">
                 <Link className="form-link" href={isCheckout ? "/login?checkout=1" : "/login"}>
-                  Já tenho conta
+                  {t.auth.alreadyHaveAccount}
                 </Link>
               </div>
             </div>

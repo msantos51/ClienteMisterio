@@ -7,7 +7,6 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/app/context/LanguageContext";
 
 type SessionUser = {
@@ -82,7 +81,6 @@ export default function HeaderActions() {
 
   return (
     <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
-      <LanguageSwitcher />
       {!sessionUser ? (
         <Link
           className="site-pill-button nav-login-btn px-4 sm:px-8 py-2 sm:py-3 text-[10px] tracking-[0.02em] sm:text-[12px] sm:tracking-[0.02em] leading-none"

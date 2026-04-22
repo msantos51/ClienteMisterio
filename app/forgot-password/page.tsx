@@ -1,17 +1,15 @@
-/*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `app/forgot-password/page.tsx` no projeto, incluindo as responsabilidades principais desta unidade.
- */
-
 "use client";
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type ForgotResponse = {
   message: string;
 };
 
 export default function ForgotPasswordPage() {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,7 +17,6 @@ export default function ForgotPasswordPage() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Controla estado de submissão para impedir pedidos duplicados.
     if (isSubmitting) {
       return;
     }
@@ -38,7 +35,7 @@ export default function ForgotPasswordPage() {
       const data = (await response.json()) as ForgotResponse;
       setFeedback(data.message);
     } catch {
-      setFeedback("Não foi possível processar o pedido. Tente novamente.");
+      setFeedback(t.auth.resetError);
     } finally {
       setIsSubmitting(false);
     }
@@ -48,28 +45,28 @@ export default function ForgotPasswordPage() {
     <section className="w-full space-y-8 bg-gray-50">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form">
-          <h1 className="form-heading">Recuperar password</h1>
+          <h1 className="form-heading">{t.auth.forgotPasswordTitle}</h1>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <input
                 name="email"
-                placeholder="nome@exemplo.com"
+                placeholder={t.auth.emailPlaceholder}
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
-              <span className="label">E-mail</span>
+              <span className="label">{t.auth.emailLabel}</span>
             </div>
 
             {feedback && <p className="form-feedback">{feedback}</p>}
 
             <div className="mt-5 space-y-3">
               <button className="submit" type="submit">
-                {isSubmitting ? "A enviar..." : "Enviar link"}
+                {isSubmitting ? t.auth.resetSubmitting : t.auth.resetButton}
               </button>
               <div className="text-center">
                 <Link className="form-link" href="/login">
-                  Voltar ao login
+                  {t.auth.goToLogin}
                 </Link>
               </div>
             </div>
