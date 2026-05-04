@@ -2,6 +2,46 @@
 
 import { useLanguage } from "@/app/context/LanguageContext";
 
+function PortugalFlag() {
+  return (
+    <svg
+      width="20"
+      height="14"
+      viewBox="0 0 20 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="inline-block"
+      aria-hidden="true"
+    >
+      <rect width="10" height="14" fill="#006600" />
+      <rect x="10" y="0" width="10" height="14" fill="#FF0000" />
+      <circle cx="10" cy="7" r="3" fill="#FFD700" />
+    </svg>
+  );
+}
+
+function UKFlag() {
+  return (
+    <svg
+      width="20"
+      height="14"
+      viewBox="0 0 20 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="inline-block"
+      aria-hidden="true"
+    >
+      <rect width="20" height="14" fill="#012169" />
+      <path d="M0 0L20 14M20 0L0 14" stroke="white" strokeWidth="2.8" />
+      <path
+        d="M10 0V14M0 7H20"
+        stroke="#C8102E"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
 export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
@@ -22,7 +62,7 @@ export default function LanguageSwitcher() {
         className={buttonClass(language === "pt")}
         title="Português"
       >
-        <span className="text-lg">🇵🇹</span>
+        <PortugalFlag />
         <span className="hidden sm:inline">PT</span>
       </button>
 
@@ -34,7 +74,7 @@ export default function LanguageSwitcher() {
         className={buttonClass(language === "en")}
         title="English"
       >
-        <span className="text-lg">🇬🇧</span>
+        <UKFlag />
         <span className="hidden sm:inline">EN</span>
       </button>
     </div>
