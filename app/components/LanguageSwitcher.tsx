@@ -6,14 +6,14 @@ export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
   const buttonClass = (isActive: boolean) =>
-    `flex items-center justify-center gap-1 px-3 py-1.5 rounded-md border-2 font-medium text-sm transition-all ${
+    `flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 font-semibold transition-all ${
       isActive
-        ? "border-[#22a094] bg-teal-50 text-gray-900 shadow-sm"
-        : "border-transparent text-gray-600 hover:bg-gray-100"
+        ? "border-[#22a094] bg-teal-100 text-gray-900 shadow-md scale-105"
+        : "border-teal-200 text-gray-700 hover:bg-teal-50 hover:scale-105"
     }`;
 
   return (
-    <div className="flex items-center justify-center gap-1">
+    <div className="flex items-center justify-center gap-2">
       <button
         type="button"
         onClick={() => setLanguage("pt")}
@@ -22,8 +22,8 @@ export default function LanguageSwitcher() {
         className={buttonClass(language === "pt")}
         title="Português"
       >
-        <span className="text-lg">🇵🇹</span>
-        <span className="hidden sm:inline">PT</span>
+        <span className="text-3xl">🇵🇹</span>
+        <span className="hidden sm:inline text-sm">PT</span>
       </button>
 
       <button
@@ -34,8 +34,8 @@ export default function LanguageSwitcher() {
         className={buttonClass(language === "en")}
         title="English"
       >
-        <span className="text-lg">🇬🇧</span>
-        <span className="hidden sm:inline">EN</span>
+        <span className="text-3xl">🇬🇧</span>
+        <span className="hidden sm:inline text-sm">EN</span>
       </button>
     </div>
   );
