@@ -1,6 +1,6 @@
 # Cliente Mistério
 
-Plataforma online para o único curso de Cliente Mistério em Portugal. Os utilizadores aprendem a tornar-se avaliadores profissionais de serviços — de forma discreta, metódica e remunerada.
+Plataforma online para o único curso de Cliente Mistério em Portugal. Os utilizadores aprendem a tornar-se avaliadores profissionais de serviços, de forma discreta, metódica e remunerada.
 
 ## Sobre o Projeto
 

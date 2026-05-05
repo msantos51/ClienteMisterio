@@ -1,5 +1,5 @@
 /*
- * FILE DESCRIPTION: Complete course data for Mystery Shopper Course — theoretical content and quizzes for each module.
+ * FILE DESCRIPTION: Complete course data for Mystery Shopper Course, theoretical content and quizzes for each module.
  */
 
 export type QuizQuestion = {
@@ -38,7 +38,7 @@ export type CourseModule = {
 export const courseModules: CourseModule[] = [
  {
  id: 1,
- title: "Module 1 — Mystery Shopper Framework",
+ title: "Module 1. Mystery Shopper Framework",
  description: "Concepts, objectives and stakeholders in Mystery Shopping.",
  keywords: ["Mystery Shopping", "Service Evaluation", "Anonymous Customer", "Quality", "Standards"],
  practicalTip: "Think of Mystery Shopping as an 'invisible inspector' helping brands improve. You're that inspector!",
@@ -93,37 +93,37 @@ export const courseModules: CourseModule[] = [
  ],
  pages: [
   {
-   title: "Page 1 — What is Mystery Shopping",
+   title: "Page 1. What is Mystery Shopping",
    blocks: [
-    "**Mystery Shopping** — also called *Mystery Shopper* — is an evaluation methodology where a person acts as a normal customer to measure the real quality of a service. The evaluator observes, records and reports everything that happens during the visit, without revealing they are evaluating.",
+    "**Mystery Shopping**: also called *Mystery Shopper*, is an evaluation methodology where a person acts as a normal customer to measure the real quality of a service. The evaluator observes, records and reports everything that happens during the visit, without revealing they are evaluating.",
     "Its origins date back to the 1940s in the United States, but it only became widely used in the 2000s. Today, it's one of the most used quality management tools worldwide.",
     "**What distinguishes Mystery Shopping from traditional surveys?** Satisfaction surveys depend on customer memory and subjective perception. Mystery Shopping records the experience in real time, with objective and defined criteria. It's the difference between asking 'were you well served?' and measuring 'did the staff greet within 30 seconds?'.",
     "**Who benefits?** Companies discover real service failures, measure if procedures are being followed and compare results across locations. The evaluator earns payment per mission, works with total flexibility and gains valuable professional experience.",
    ],
   },
   {
-   title: "Page 2 — The Three Stakeholders and Process Mechanics",
+   title: "Page 2. The Three Stakeholders and Process Mechanics",
    blocks: [
-    "In a Mystery Shopping project there are always three main stakeholders. (1) **The brand or company** — defines what they want to measure (e.g., 'do staff greet customers?'). (2) **The agency or platform** — coordinates the project, recruits evaluators, validates reports and delivers results to the brand. (3) **The evaluator** — executes the mission in the field and produces valuable information.",
+    "In a Mystery Shopping project there are always three main stakeholders. (1) **The brand or company**: defines what they want to measure (e.g., 'do staff greet customers?'). (2) **The agency or platform**: coordinates the project, recruits evaluators, validates reports and delivers results to the brand. (3) **The evaluator**: executes the mission in the field and produces valuable information.",
     "**The mechanics work like this:** The brand submits a briefing with objectives. The agency publishes the mission and selects suitable evaluators. The evaluator accepts, prepares and executes the visit. Then submits the report with evidence within the deadline. The agency validates and processes payment.",
-    "This chain is simple, but requires rigor at each step. A field failure — not keeping the receipt, revealing your identity — invalidates the entire mission and compromises payment.",
+    "This chain is simple, but requires rigor at each step. A field failure, not keeping the receipt, revealing your identity, invalidates the entire mission and compromises payment.",
    ],
   },
   {
-   title: "Page 3 — Mission Types: From In-Store to Digital",
+   title: "Page 3. Mission Types: From In-Store to Digital",
    blocks: [
     "There are several mission formats, each with specific characteristics. The most common is **in-store mystery shopping**: the evaluator visits a store as a normal customer and evaluates service, processes and environment.",
-    "The main mission types are: (1) **In-store** — physical visit to shop, restaurant, bank, pharmacy, etc. (2) **Mystery calling** — phone contact to evaluate service and protocol compliance. (3) **Online evaluation** — submit forms, use apps, evaluating response time and digital experience. (4) **Image audit** — evaluate cleanliness, uniforms and signage. (5) **Compliance inspection** — verify compliance with legal or internal rules. (6) **Delivery evaluation** — evaluate how ordered products arrive.",
+    "The main mission types are: (1) **In-store**: physical visit to shop, restaurant, bank, pharmacy, etc. (2) **Mystery calling**: phone contact to evaluate service and protocol compliance. (3) **Online evaluation**: submit forms, use apps, evaluating response time and digital experience. (4) **Image audit**: evaluate cleanliness, uniforms and signage. (5) **Compliance inspection**: verify compliance with legal or internal rules. (6) **Delivery evaluation**: evaluate how ordered products arrive.",
     "The market is vast. Sectors with highest mission volume are: retail (supermarkets, fashion, electronics), food service, banking, telecommunications, pharmacies, hospitality, automotive and insurance. Basically any sector with direct customer contact.",
    ],
   },
   {
-   title: "Page 4 — Real Impact and Evaluator Responsibility",
+   title: "Page 4. Real Impact and Evaluator Responsibility",
    blocks: [
-    "The impact of Mystery Shopping is concrete and measurable. A store that discovers only 40% of customers are greeted — when protocol requires 100% — can, after staff training, rise to 95% in three months. That change directly reflects in sales and customer satisfaction.",
-    "Some projects involve **multi-phase evaluations**, which map the entire customer journey: phase 1 — submit online form; phase 2 — evaluate response call; phase 3 — visit location; phase 4 — evaluate post-visit follow-up. Each phase is recorded separately but is part of the same project.",
+    "The impact of Mystery Shopping is concrete and measurable. A store that discovers only 40% of customers are greeted when protocol requires 100% can, after staff training, rise to 95% in three months. That change directly reflects in sales and customer satisfaction.",
+    "Some projects involve **multi-phase evaluations**, which map the entire customer journey: phase 1: submit online form; phase 2: evaluate response call; phase 3: visit location; phase 4: evaluate post-visit follow-up. Each phase is recorded separately but is part of the same project.",
     "Each sector has its particularities. In electronics retail, technical knowledge is evaluated. In automotive, response time to online requests (typically up to 3 hours). In food service, from plating to food temperature. Knowing these specificities is part of professional work.",
-    "**The evaluator's responsibility is enormous.** Your report directly influences evaluated employees' careers — it can affect promotions, bonuses or contract renewals. Every recorded data must be rigorously true and verifiable. Brands cross-reference reports with cameras and other records. Integrity isn't optional: it's the foundation of everything.",
+    "**The evaluator's responsibility is enormous.** Your report directly influences evaluated employees' careers, it can affect promotions, bonuses or contract renewals. Every recorded data must be rigorously true and verifiable. Brands cross-reference reports with cameras and other records. Integrity isn't optional: it's the foundation of everything.",
    ],
   },
  ],
@@ -207,12 +207,12 @@ export const courseModules: CourseModule[] = [
  },
  {
  id: 2,
- title: "Module 2 — Market and Opportunities",
+ title: "Module 2. Market and Opportunities",
  description: "Sectors with highest demand, collaboration models and selection criteria.",
  keywords: ["Retail", "Food Service", "Banking", "Platforms", "Agencies", "Opportunities"],
  practicalTip: "Start with accessible sectors like retail and food service. Then advance to banking and hospitality when you have experience!",
  warning: "Not all platforms pay well. Compare conditions and payment BEFORE registering.",
- benefit: "The market is growing — there are MANY opportunities and demand for quality evaluators.",
+ benefit: "The market is growing, there are MANY opportunities and demand for quality evaluators.",
  content: [
   "**Market on fire:** the mystery shopping sector is growing rapidly. Sectors participating: retail (Carrefour, Continente, Intermarché), food service (Burger King, Telepizza), banking (Caixa, Millennium), telecommunications (Vodafone, MEO, NOS), pharmacies, hospitality (3-5 stars), automotive, insurance.",
   "**Everyone wants to know what customers think.** There's constant demand for evaluators in expansion.",
@@ -276,37 +276,37 @@ export const courseModules: CourseModule[] = [
  ],
  pages: [
   {
-   title: "Page 1 — The Market: Sectors and Opportunities",
+   title: "Page 1. The Market: Sectors and Opportunities",
    blocks: [
-    "The mystery shopping market is growing rapidly in Portugal and Europe. Demand for qualified evaluators is constant — and there are opportunities for those entering with the right profile.",
-    "Sectors with highest mission volume are: (1) **Retail food and specialty** — supermarkets, fashion stores, electronics, DIY. (2) **Food service** — fast-food chains, restaurants, cafés. (3) **Telecommunications** — MEO, Vodafone, NOS stores and customer support services. (4) **Banking and insurance** — branches, online services and loan processes. (5) **Hospitality** — 3 to 5 star hotels. (6) **Pharmacies and health** — service, pharmaceutical advice and compliance. (7) **Automotive** — dealerships, workshops and online leads.",
+    "The mystery shopping market is growing rapidly in Portugal and Europe. Demand for qualified evaluators is constant, and there are opportunities for those entering with the right profile.",
+    "Sectors with highest mission volume are: (1) **Retail food and specialty**: supermarkets, fashion stores, electronics, DIY. (2) **Food service**: fast-food chains, restaurants, cafés. (3) **Telecommunications**. MEO, Vodafone, NOS stores and customer support services. (4) **Banking and insurance**: branches, online services and loan processes. (5) **Hospitality**: 3 to 5 star hotels. (6) **Pharmacies and health**: service, pharmaceutical advice and compliance. (7) **Automotive**: dealerships, workshops and online leads.",
     "The diversity of sectors means there are missions for all profiles. Evaluators with geographic mobility, schedule flexibility and good history have constant access to new opportunities.",
    ],
   },
   {
-   title: "Page 2 — Three Collaboration Models",
+   title: "Page 2. Three Collaboration Models",
    blocks: [
     "There are three main ways to work as an evaluator. Each has specific advantages and limitations.",
-    "**Specialized agencies** — like BMS Mystery Shopping or Teseo — coordinate everything: briefing, selection, validation and payment. They offer security, mission volume and support. In return, they apply stricter rules and retain a commission.",
-    "**Digital platforms** — like Spotec or Streev — function as a mission marketplace, where the evaluator autonomously accepts available work. They offer flexibility and variety, but competition is greater and values tend to be lower.",
-    "**Direct work with brands** — the most profitable option, as it eliminates intermediaries. Requires your own network and negotiation skills, usually reserved for experienced evaluators.",
-    "The smartest strategy for beginners is starting with agencies — to gain experience and ratings — and adding digital platforms as confidence and portfolio grow.",
+    "**Specialized agencies**: like BMS Mystery Shopping or Teseo, coordinate everything: briefing, selection, validation and payment. They offer security, mission volume and support. In return, they apply stricter rules and retain a commission.",
+    "**Digital platforms**: like Spotec or Streev, function as a mission marketplace, where the evaluator autonomously accepts available work. They offer flexibility and variety, but competition is greater and values tend to be lower.",
+    "**Direct work with brands**: the most profitable option, as it eliminates intermediaries. Requires your own network and negotiation skills, usually reserved for experienced evaluators.",
+    "The smartest strategy for beginners is starting with agencies, to gain experience and ratings, and adding digital platforms as confidence and portfolio grow.",
    ],
   },
   {
-   title: "Page 3 — Payment by Sector and Selection Criteria",
+   title: "Page 3. Payment by Sector and Selection Criteria",
    blocks: [
-    "Payment varies according to sector and mission complexity. As general reference: (1) Simple retail and food service — **€5 to €15 per mission**. (2) Telecommunications, pharmacies and insurance — **€15 to €40**. (3) Hospitality — **€30 to €75**. (4) Complex audits, banking and automotive — **€75 to €150 or more**. Everything depends on time required, detail level and specialization needed.",
-    "Agencies select evaluators based on: (1) **Geographic location** — they need someone in the right area. (2) **Schedule availability** — flexibility for missions at varying days and times. (3) **History and ratings** — evaluators with good approval rates are chosen first. (4) **Sector specialization** — those who know the sector deeply are preferred for complex missions. (5) **Reliability** — quick response to invites and deadline compliance.",
+    "Payment varies according to sector and mission complexity. As general reference: (1) Simple retail and food service: **€5 to €15 per mission**. (2) Telecommunications, pharmacies and insurance: **€15 to €40**. (3) Hospitality: **€30 to €75**. (4) Complex audits, banking and automotive: **€75 to €150 or more**. Everything depends on time required, detail level and specialization needed.",
+    "Agencies select evaluators based on: (1) **Geographic location**: they need someone in the right area. (2) **Schedule availability**: flexibility for missions at varying days and times. (3) **History and ratings**: evaluators with good approval rates are chosen first. (4) **Sector specialization**: those who know the sector deeply are preferred for complex missions. (5) **Reliability**: quick response to invites and deadline compliance.",
     "To maximize opportunities: keep your profile 100% filled and updated, respond to invites within the first 4 hours and deliver reports with approval rate above 95%. These three habits create natural growth momentum.",
    ],
   },
   {
-   title: "Page 4 — How to Grow in the Profession",
+   title: "Page 4. How to Grow in the Profession",
    blocks: [
-    "Career evolution as an evaluator follows a gradual path. **Months 1-2:** Simple retail or quick food service — €5 to €15 payment, but the goal is gaining confidence, learning the process and building a portfolio. **Months 3-4:** Telecommunications, pharmacies and insurance — more complexity, more detail, €15 to €40. **Month 5 onwards:** Banking, luxury hospitality and certified audits — €75 to €200 payment, but demand perfection and flawless history.",
-    "To grow faster: (1) **Specialize in 1 or 2 sectors** — become the specialist agencies call first. (2) **Work with multiple platforms** — to not depend on a single source. (3) **Geographic clustering** — accept several missions in same area same day to reduce costs and increase profitability. (4) **Excellent history** — takes 3 to 6 months to build, but then invites come without searching.",
-    "Some projects are organized in **section packs**: evaluate several areas of a store in one visit, with payment per section (typically €4 to €5 each). A trip to a shopping center can become multiple profitable evaluations. In the automotive sector, it's common to use fictitious data provided by the agency to simulate a real customer — and the rates are among the most competitive in the market.",
+    "Career evolution as an evaluator follows a gradual path. **Months 1-2:** Simple retail or quick food service: €5 to €15 payment, but the goal is gaining confidence, learning the process and building a portfolio. **Months 3-4:** Telecommunications, pharmacies and insurance, more complexity, more detail, €15 to €40. **Month 5 onwards:** Banking, luxury hospitality and certified audits: €75 to €200 payment, but demand perfection and flawless history.",
+    "To grow faster: (1) **Specialize in 1 or 2 sectors**: become the specialist agencies call first. (2) **Work with multiple platforms**: to not depend on a single source. (3) **Geographic clustering**: accept several missions in same area same day to reduce costs and increase profitability. (4) **Excellent history**: takes 3 to 6 months to build, but then invites come without searching.",
+    "Some projects are organized in **section packs**: evaluate several areas of a store in one visit, with payment per section (typically €4 to €5 each). A trip to a shopping center can become multiple profitable evaluations. In the automotive sector, it's common to use fictitious data provided by the agency to simulate a real customer, and the rates are among the most competitive in the market.",
    ],
   },
  ],
@@ -370,7 +370,7 @@ export const courseModules: CourseModule[] = [
  },
  {
  id: 3,
- title: "Module 3 — Profile, Conduct and Professional Ethics",
+ title: "Module 3. Profile, Conduct and Professional Ethics",
  description: "Evaluator requirements, confidentiality and best practices.",
  keywords: ["Discretion", "Confidentiality", "Integrity", "Ethics", "Professionalism"],
  practicalTip: "Imagine you're a good spy, but instead of saving the world, you're helping brands improve!",
@@ -392,37 +392,37 @@ export const courseModules: CourseModule[] = [
  ],
  pages: [
   {
-   title: "Page 1 — The Professional Evaluator Profile",
+   title: "Page 1. The Professional Evaluator Profile",
    blocks: [
     "Being a Mystery Shopper evaluator requires a specific set of qualities. **Discretion** is the most critical: nobody should realize an evaluation is taking place. **Rigor** is equally essential: only what was observed is recorded, never are data invented. **Impartiality** means leaving personal opinions out and evaluating only based on defined criteria. **Consistency** ensures the same criteria are applied in all missions.",
-    "A good evaluator has the ability to observe discreetly — can notice details without fixating the gaze —, good short-term memory — to retain times, phrases and sequences — and emotional balance — to not react visibly to poor service.",
-    "Before each mission, it's essential to do a **mental reset**: clear prior expectations, previous experiences at that location and any opinions about the brand. The ideal state is neutral — neither enthusiastic nor critical. The evaluator's posture should not influence staff behavior."
+    "A good evaluator has the ability to observe discreetly, can notice details without fixating the gaze, good short-term memory, to retain times, phrases and sequences, and emotional balance, to not react visibly to poor service.",
+    "Before each mission, it's essential to do a **mental reset**: clear prior expectations, previous experiences at that location and any opinions about the brand. The ideal state is neutral, neither enthusiastic nor critical. The evaluator's posture should not influence staff behavior."
    ],
   },
   {
-   title: "Page 2 — Confidentiality and Conflicts of Interest",
+   title: "Page 2. Confidentiality and Conflicts of Interest",
    blocks: [
-    "Confidentiality is the most important rule of the profession. **Never comment** — with friends, family, colleagues or on social media — which brand was evaluated, the result, problems found or any detail about the mission. This rule has no exceptions.",
+    "Confidentiality is the most important rule of the profession. **Never comment**: with friends, family, colleagues or on social media, which brand was evaluated, the result, problems found or any detail about the mission. This rule has no exceptions.",
     "The consequences of breaking confidentiality are severe: permanent ban from all platforms and possibility of legal action for contract violation. Information shared 'only with someone trustworthy' can easily reach the wrong person.",
     "**Conflicts of interest** must be declared before accepting any mission. There's a conflict if: you work or worked in the company being evaluated; you have a close family member or friend there; you personally know a staff member; you're a recognizable regular customer; or you work for a direct competitor.",
-    "Exclusion criteria are non-negotiable. If you discover a conflict situation after accepting the mission, declare to the agency immediately — never proceed with a compromised evaluation. Agencies have verification systems and cross-reference data from multiple sources."
+    "Exclusion criteria are non-negotiable. If you discover a conflict situation after accepting the mission, declare to the agency immediately, never proceed with a compromised evaluation. Agencies have verification systems and cross-reference data from multiple sources."
    ],
   },
   {
-   title: "Page 3 — Behavior in the Field",
+   title: "Page 3. Behavior in the Field",
    blocks: [
-    "During the mission, the goal is to be a completely normal customer: normal pace, natural voice, relaxed body language, behavior aligned with the persona defined in the briefing. Naturalness is not optional — any abnormal behavior raises suspicions immediately.",
+    "During the mission, the goal is to be a completely normal customer: normal pace, natural voice, relaxed body language, behavior aligned with the persona defined in the briefing. Naturalness is not optional, any abnormal behavior raises suspicions immediately.",
     "What to do: enter with a concrete objective, observe throughout the visit without fixating the gaze, memorize times and phrases instead of taking visible notes, and leave naturally.",
     "What never to do: (1) Take out a notebook or paper during the visit. (2) Photograph obviously. (3) Ask artificial questions to 'test' the team. (4) Create complaints without real reason. (5) Stay at the location for a disproportionate time. (6) Walk through the store repeatedly in a suspicious manner.",
-    "**If someone asks if you're a mystery shopper:** Deny naturally — say you don't know that methodology. After leaving, inform the agency immediately by email. The agency decides if the evaluation remains valid. **Never confirm your identity** — that completely invalidates the mission."
+    "**If someone asks if you're a mystery shopper:** Deny naturally, say you don't know that methodology. After leaving, inform the agency immediately by email. The agency decides if the evaluation remains valid. **Never confirm your identity**: that completely invalidates the mission."
    ],
   },
   {
-   title: "Page 4 — Professional Values and Sensitive Situations",
+   title: "Page 4. Professional Values and Sensitive Situations",
    blocks: [
-    "Professional values are the foundation of everything. **Punctuality** — missions have defined time windows. **Honesty** — fraud means instant end of career. **Professionalism** — civil behavior and presentation appropriate to the context. These are not details: they are the pillars of reputation.",
-    "The report should reflect observed facts, not interpretations. The difference is clear: **correct** — 'product A was not in stock'; **incorrect** — 'the manager probably hid product A'. The evaluator's job is to observe and record, not advise or judge intentions.",
-    "Sensitive situations that may occur: (1) **Observe something illegal** — report to the agency, don't act on your own. (2) **Feel in danger** — contact the agency and abandon the location if necessary. (3) **Be recognized** — maintain composure, don't confirm nor deny, inform the agency later. (4) **Someone wants to chat** — respond politely and maintain naturalness.",
+    "Professional values are the foundation of everything. **Punctuality**: missions have defined time windows. **Honesty**: fraud means instant end of career. **Professionalism**: civil behavior and presentation appropriate to the context. These are not details: they are the pillars of reputation.",
+    "The report should reflect observed facts, not interpretations. The difference is clear: **correct**: 'product A was not in stock'; **incorrect**: 'the manager probably hid product A'. The evaluator's job is to observe and record, not advise or judge intentions.",
+    "Sensitive situations that may occur: (1) **Observe something illegal**: report to the agency, don't act on your own. (2) **Feel in danger**: contact the agency and abandon the location if necessary. (3) **Be recognized**: maintain composure, don't confirm nor deny, inform the agency later. (4) **Someone wants to chat**: respond politely and maintain naturalness.",
     "Remember: the evaluator is not a inspector nor a critic. They're a professional observer who helps brands improve. This perspective makes each mission simpler and more effective."
    ],
   },
@@ -433,7 +433,7 @@ export const courseModules: CourseModule[] = [
  question: "What is the most important quality of an evaluator during a mission?",
  options: [
  "Negotiation ability",
- "Discretion — behave as a normal customer",
+ "Discretion: behave as a normal customer",
  "Technical product knowledge",
  "Leadership ability",
  ],

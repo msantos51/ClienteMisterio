@@ -35,7 +35,7 @@ export default function HomePage() {
 
           {/* CTA Buttons */}
           <div className="mb-16 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <CheckoutButton label={<>{t.home.buyButton} — <span className="line-through opacity-70">{t.home.originalPrice}</span>  <span>{t.home.discountPrice}</span></>} />
+            <CheckoutButton label={<>{t.home.buyButton} <span className="line-through opacity-70">{t.home.originalPrice}</span>  <span>{t.home.discountPrice}</span></>} />
             <Link
               href="/o-curso"
               className="site-pill-button-secondary"
@@ -253,7 +253,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <CheckoutButton label={<>{t.home.buyButton} — <span className="line-through opacity-70">{t.home.originalPrice}</span>  <span>{t.home.discountPrice}</span></>} />
+            <CheckoutButton label={<>{t.home.buyButton} <span className="line-through opacity-70">{t.home.originalPrice}</span>  <span>{t.home.discountPrice}</span></>} />
           </div>
         </div>
       </div>

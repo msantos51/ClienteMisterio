@@ -377,10 +377,10 @@ const buildBaseTheoryPages = (content: string[]): TheoryPage[] => {
   const totalBasePages = 4;
   const chunkSize = Math.max(1, Math.ceil(content.length / totalBasePages));
   const pageTitles = [
-    "Página 1 — Antes da avaliação: contexto e objetivos",
-    "Página 2 — Antes da avaliação: preparação operacional",
-    "Página 3 — Durante a avaliação: execução no terreno",
-    "Página 4 — Após a avaliação: análise, relatório e melhoria",
+    "Página 1 - Antes da avaliação: contexto e objetivos",
+    "Página 2 - Antes da avaliação: preparação operacional",
+    "Página 3 - Durante a avaliação: execução no terreno",
+    "Página 4 - Após a avaliação: análise, relatório e melhoria",
   ];
 
   const pages: TheoryPage[] = [];
@@ -448,7 +448,7 @@ export default function CursoPage() {
         setProgress(data);
       }
     } catch {
-      // Silently fail — progress will show as empty.
+      // Silently fail: progress will show as empty.
     }
   }, []);
 
@@ -655,7 +655,7 @@ export default function CursoPage() {
     : [];
   const premiumTheoryPage = activeSupportContent
     ? {
-        title: "Página 5 — Casos reais, estratégia e checklist final",
+        title: "Página 5 - Casos reais, estratégia e checklist final",
         blocks: [activeSupportContent.realScenario],
       }
     : null;
