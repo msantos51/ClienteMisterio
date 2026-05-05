@@ -30,7 +30,7 @@ const getResendConfig = () => {
 };
 
 export const sendEmail = async (payload: MailPayload) => {
-  // Envia e-mail transacional via API HTTPS do Resend (não usa SMTP — compatível com Render).
+  // Envia e-mail transacional via API HTTPS do Resend (não usa SMTP, compatível com Render).
   const config = getResendConfig();
   const resend = new Resend(config.apiKey);
 

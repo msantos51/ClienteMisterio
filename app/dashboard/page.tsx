@@ -486,7 +486,7 @@ export default function DashboardPage() {
                 <p className="text-xs !text-slate-500 mt-0.5">
                   {courseProgress
                     ? courseProgress.completedCount === courseProgress.totalModules
-                      ? "Curso concluído — Parabéns!"
+                      ? "Curso concluído. Parabéns!"
                       : `${courseProgress.completedCount} de ${courseProgress.totalModules} módulos concluídos`
                     : "Inicie a sua formação profissional"}
                 </p>

@@ -18,7 +18,7 @@ export const translations = {
       badge: "O ÚNICO CURSO EM PORTUGAL",
       title: "Quer rendimento extra?",
       titleHighlight: "Cliente Mistério",
-      description: "Avalia lojas, restaurantes e produtos ao teu ritmo — e recebe por isso. Certificado incluído.",
+      description: "Avalia lojas, restaurantes e produtos ao teu ritmo, e recebe por isso. Certificado incluído.",
       buyButton: "Comprar o curso",
       viewProgram: "Ver o programa",
       originalPrice: "64,99€",
@@ -42,7 +42,7 @@ export const translations = {
         card2Title: "Certificado incluído",
         card2Desc: "Documento que comprova a conclusão do curso e as tuas competências como avaliador.",
         card3Title: "Oportunidades reais",
-        card3Desc: "Testa produtos, lojas e restaurantes sem qualquer custo — e ainda recebes por cada visita.",
+        card3Desc: "Testa produtos, lojas e restaurantes sem qualquer custo, e ainda recebes por cada visita.",
       },
 
       // How It Works Section
@@ -109,7 +109,7 @@ export const translations = {
     coursePage: {
       badge: "Formação Completa",
       title: "O Curso de<br />Cliente Mistério",
-      description: "100% prático e desenhado para iniciantes. Aprende tudo o que precisas para começar a ganhar como Cliente Mistério — dos conceitos básicos às estratégias de carreira avançadas.",
+      description: "100% prático e desenhado para iniciantes. Aprende tudo o que precisas para começar a ganhar como Cliente Mistério, dos conceitos básicos às estratégias de carreira avançadas.",
       statsModules: "Módulos",
       statsEarnings: "Por mês",
       statsAccess: "Acesso",
@@ -244,7 +244,7 @@ export const translations = {
       hello: "Olá",
       manageAccount: "Faça a gestão da sua conta e segurança.",
       courseTitle: "Curso de Cliente Mistério",
-      courseCompleted: "Curso concluído — Parabéns!",
+      courseCompleted: "Curso concluído. Parabéns!",
       modulesCompleted: "de {{total}} módulos concluídos",
       startTraining: "Inicie a sua formação profissional",
       continueButton: "Clique para continuar o curso →",
@@ -404,7 +404,7 @@ export const translations = {
       badge: "THE ONLY COURSE IN PORTUGAL",
       title: "Want extra income?",
       titleHighlight: "Become a Mystery Shopper",
-      description: "Evaluate shops, restaurants and products at your own pace — and get paid for it. Certificate included.",
+      description: "Evaluate shops, restaurants and products at your own pace, and get paid for it. Certificate included.",
       buyButton: "Buy the course",
       viewProgram: "View the program",
       originalPrice: "€64.99",
@@ -428,7 +428,7 @@ export const translations = {
         card2Title: "Certificate included",
         card2Desc: "Document that proves course completion and your skills as an evaluator.",
         card3Title: "Real opportunities",
-        card3Desc: "Test products, shops and restaurants at no cost — and still get paid for each visit.",
+        card3Desc: "Test products, shops and restaurants at no cost, and still get paid for each visit.",
       },
 
       // How It Works Section
@@ -495,7 +495,7 @@ export const translations = {
     coursePage: {
       badge: "Complete Training",
       title: "The Mystery Shopper<br />Course",
-      description: "100% practical and designed for beginners. Learn everything you need to start earning as a Mystery Shopper — from basic concepts to advanced career strategies.",
+      description: "100% practical and designed for beginners. Learn everything you need to start earning as a Mystery Shopper, from basic concepts to advanced career strategies.",
       statsModules: "Modules",
       statsEarnings: "Per month",
       statsAccess: "Access",
@@ -630,7 +630,7 @@ export const translations = {
       hello: "Hi",
       manageAccount: "Manage your account and security.",
       courseTitle: "Mystery Shopper Course",
-      courseCompleted: "Course completed — Congratulations!",
+      courseCompleted: "Course completed. Congratulations!",
       modulesCompleted: "of {{total}} modules completed",
       startTraining: "Start your professional training",
       continueButton: "Click to continue the course →",

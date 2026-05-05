@@ -146,7 +146,7 @@ export const POST = async (request: Request) => {
           return NextResponse.json({ received: true, warning: "user_not_found" });
         }
       } catch (error: unknown) {
-        // Erro transitório de base de dados — devolver 500 permite Stripe tentar de novo.
+        // Erro transitório de base de dados: devolver 500 permite Stripe tentar de novo.
         console.error("STRIPE_WEBHOOK_GRANT_ERROR", error);
         return NextResponse.json(
           { message: "Falha temporária ao processar pagamento." },

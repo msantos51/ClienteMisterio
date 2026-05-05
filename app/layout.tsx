@@ -10,7 +10,7 @@ const siteDescription =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} — Curso online em Portugal`,
+    default: `${siteName}. Curso online em Portugal`,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
