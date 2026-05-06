@@ -93,7 +93,7 @@ const renderTheoryBlock = (paragraph: string, index: number) => {
     return (
       <div key={index} className="space-y-3">
         {paragraphChunks.map((chunk) => (
-          <p key={`${index}-${chunk}`} className="text-base leading-8 text-[#2a2a2a]">
+          <p key={`${index}-${chunk}`} className="text-base leading-8 text-[#2a2a2a] text-justify">
             {chunk}
           </p>
         ))}
@@ -113,8 +113,8 @@ const renderTheoryBlock = (paragraph: string, index: number) => {
 
   return (
     <div key={index} className="space-y-3">
-      {introText && <p className="text-base leading-8 text-[#2a2a2a]">{introText}</p>}
-      <ul className="list-disc pl-6 space-y-2 text-base leading-8 text-[#2a2a2a]">
+      {introText && <p className="text-base leading-8 text-[#2a2a2a] text-justify">{introText}</p>}
+      <ul className="list-disc pl-6 space-y-2 text-base leading-8 text-[#2a2a2a] text-justify">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -671,7 +671,7 @@ export default function CursoPage() {
       <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <div className="space-y-8 bg-white p-8 rounded-2xl">
       <header className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: "#22a094" }}>
+        <p className="text-xs font-semibold" style={{ color: "#22a094" }}>
           Formação completa
         </p>
         <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">
@@ -816,7 +816,7 @@ export default function CursoPage() {
                 {/* Barra de progresso do módulo */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#666]">Página {theoryPage + 1} de {allTheoryPages.length}</p>
+                    <p className="text-xs font-semibold text-[#666]">Página {theoryPage + 1} de {allTheoryPages.length}</p>
                     <p className="text-sm font-bold text-[#22a094]">{Math.round(((theoryPage + 1) / allTheoryPages.length) * 100)}% concluído</p>
                   </div>
                   <div className="h-2 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
@@ -834,13 +834,13 @@ export default function CursoPage() {
                 <div className="lg:col-span-2 space-y-6">
                   {/* Título da página */}
                   <div>
-                    <p className="text-xs uppercase tracking-[0.16em] text-[#666] font-semibold mb-3">{currentTheoryPage.title}</p>
+                    <p className="text-xs text-[#666] font-semibold mb-3">{currentTheoryPage.title}</p>
                   </div>
 
                   {/* Conteúdo teórico */}
                   <div className="space-y-4">
                     {currentTheoryPage.blocks.map((paragraph, idx) => (
-                      <p key={idx} className="text-base leading-8 text-[#2a2a2a]">
+                      <p key={idx} className="text-base leading-8 text-[#2a2a2a] text-justify">
                         {renderBold(paragraph)}
                       </p>
                     ))}
