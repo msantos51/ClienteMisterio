@@ -7,7 +7,9 @@
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { courseModules, type QuizQuestion } from "./courseData";
+import { courseModules as courseModulesPt, type QuizQuestion } from "./courseData";
+import { courseModules as courseModulesEn } from "./courseDataEn";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type ModuleProgress = {
   moduleId: number;
@@ -124,9 +126,9 @@ const renderTheoryBlock = (paragraph: string, index: number) => {
 };
 
 /*
- * DESCRIÇÃO DO BLOCO: Conteúdo premium adicional por módulo para tornar a formação mais prática e diferenciadora.
+ * DESCRIÇÃO DO BLOCO: Conteúdo premium adicional por módulo (versão portuguesa).
  */
-const moduleSupportContent: Record<number, TheorySupportContent> = {
+const moduleSupportContentPt: Record<number, TheorySupportContent> = {
   1: {
     realScenario:
       "Caso real (retalho alimentar): uma cadeia com 80 lojas descobriu que o maior problema não era o preço, mas a inconsistência no acolhimento inicial. Ao medir tempo de abordagem, saudação e linguagem consultiva, subiu 14 pontos no NPS em 3 meses.",
@@ -369,19 +371,256 @@ const moduleSupportContent: Record<number, TheorySupportContent> = {
   },
 };
 
+const moduleSupportContentEn: Record<number, TheorySupportContent> = {
+  1: {
+    realScenario:
+      "Real case (food retail): a chain with 80 stores discovered the main problem wasn't price but inconsistency in initial greeting. By measuring approach time, greeting and consultative language, NPS rose 14 points in 3 months.",
+    goodPractices: [
+      "Always validate project objectives before the visit.",
+      "Record observable and comparable facts across stores.",
+      "Separate emotional experience from operational evidence.",
+    ],
+    badPractices: [
+      "Evaluate solely based on personal liking of the employee.",
+      "Generalise a single interaction to the whole operation.",
+      "Ignore briefing context and improvise criteria.",
+    ],
+    strategies: [
+      "Use objective matrix (service, operations, compliance, sales).",
+      "Compare results by journey moments: entry, interaction, close.",
+      "Create quick notes with chronological evidence to reduce bias.",
+    ],
+    executionChecklist: [
+      "Did I understand the brand's objectives?",
+      "Do I know exactly what to measure in this mission?",
+      "Can I justify each answer with a fact?",
+    ],
+  },
+  2: {
+    realScenario:
+      "Real case (telecom): evaluators with a complete profile and response within 30 minutes received 2.3x more invitations for premium missions than evaluators with a generic profile.",
+    goodPractices: [
+      "Specialise in 2 to 3 sectors to build consistency.",
+      "Respond to invitations quickly with objective confirmation.",
+      "Keep a history of missions, notes and feedback per client.",
+    ],
+    badPractices: [
+      "Accept missions without calculating actual costs.",
+      "Depend on a single work platform.",
+      "Miss deadlines due to too many simultaneous missions.",
+    ],
+    strategies: [
+      "Apply the 70/20/10 rule: 70% stable missions, 20% new, 10% strategic.",
+      "Set a minimum net hourly rate to accept missions.",
+      "Create a weekly schedule with commute blocks by area.",
+    ],
+    executionChecklist: [
+      "Does the mission cover costs and generate margin?",
+      "Do I have the capacity to deliver with quality?",
+      "Does this mission strengthen my professional positioning?",
+    ],
+  },
+  3: {
+    realScenario:
+      "Real case (banking): an evaluator was removed from the panel after sharing details about a branch in a public group. The confidentiality breach invalidated 46 historical reports.",
+    goodPractices: [
+      "Declare conflicts of interest before accepting assignments.",
+      "Maintain a neutral stance, without provoking employees.",
+      "Treat project information as confidential by default.",
+    ],
+    badPractices: [
+      "Commenting on missions on social media or informal groups.",
+      "Accepting evaluations at locations with personal relationships.",
+      "Manipulating the narrative to seem 'more interesting'.",
+    ],
+    strategies: [
+      "Create a personal ethics protocol with refusal criteria.",
+      "Do a final review to remove opinionated language.",
+      "Use observable descriptors (who, what, when).",
+    ],
+    executionChecklist: [
+      "Is there a conflict of interest in this mission?",
+      "Can I maintain complete impartiality?",
+      "Is there any risk of improper data exposure?",
+    ],
+  },
+  4: {
+    realScenario:
+      "Real case (hospitality): two teams evaluating the same hotel with a 28-point gap due to lack of calibration. After a guide with observable examples, the difference dropped to 6 points.",
+    goodPractices: [
+      "Apply closed and measurable criteria.",
+      "Distinguish observed behaviour from interpretation.",
+      "Time critical moments of the journey.",
+    ],
+    badPractices: [
+      "Using subjective scales without evaluation anchors.",
+      "Penalising based on personal service expectations.",
+      "Rating everything as 'average' to avoid commitment.",
+    ],
+    strategies: [
+      "Adopt the A-B-C protocol: Occurrence, Basis of criterion, Consequence.",
+      "Compare checklist with evidence before scoring.",
+      "Review common biases before submitting the report.",
+    ],
+    executionChecklist: [
+      "Is each answer anchored to a criterion?",
+      "Did I record times and behaviours accurately?",
+      "Did I avoid conclusions not supported by facts?",
+    ],
+  },
+  5: {
+    realScenario:
+      "Real case (automotive): a mission was rejected due to lack of proof of visit because the evaluator had not previously validated photographic evidence requirements and parking policy.",
+    goodPractices: [
+      "Read the briefing in full twice before execution.",
+      "Simulate the route and decision points before leaving.",
+      "Have a contingency plan for operational unforeseen events.",
+    ],
+    badPractices: [
+      "Relying only on memory of the briefing.",
+      "Arriving without validating the actual opening hours of the point of sale.",
+      "Ignoring travel costs in profitability calculations.",
+    ],
+    strategies: [
+      "Create a pre-departure checklist with 10 mandatory items.",
+      "Define a primary and secondary time window.",
+      "Prepare neutral questions aligned with the persona.",
+    ],
+    executionChecklist: [
+      "Has the briefing been converted into an action plan?",
+      "Do I have a plan B if the store is closed?",
+      "Do I have all the necessary resources for evidence?",
+    ],
+  },
+  6: {
+    realScenario:
+      "Real case (food service): evaluators who used time anchoring (entry, order, delivery) reduced corrections requested by the agency for time inconsistency by 40%.",
+    goodPractices: [
+      "Maintain organic and credible behaviour.",
+      "Observe with focus on objective service signals.",
+      "Mentally record time milestones of the interaction.",
+    ],
+    badPractices: [
+      "Questioning artificially to test limits.",
+      "Taking explicit notes in front of the team.",
+      "Changing the persona narrative during the visit.",
+    ],
+    strategies: [
+      "Use the 3x3 technique: 3 times, 3 behaviours, 3 proofs.",
+      "Plan a discreet exit for immediate recording.",
+      "Contact the agency quickly in critical blockages.",
+    ],
+    executionChecklist: [
+      "Did I maintain naturalness throughout the journey?",
+      "Did I collect observations without raising suspicion?",
+      "Did I record the main operational times?",
+    ],
+  },
+  7: {
+    realScenario:
+      "Real case (pharmacy): a report was rejected because the receipt was illegible and had no visible time. The mission had to be redone without additional payment.",
+    goodPractices: [
+      "Validate the legibility of evidence before leaving the location.",
+      "Name files with a consistent pattern.",
+      "Keep a digital copy and physical original when necessary.",
+    ],
+    badPractices: [
+      "Submitting blurry or cropped photos.",
+      "Mixing evidence from different missions in the same folder.",
+      "Exposing third-party personal data in attachments.",
+    ],
+    strategies: [
+      "Apply a 3-step triage: quality, completeness, coherence.",
+      "Use a folder structure by client/month/mission.",
+      "Create an immediate backup routine after each visit.",
+    ],
+    executionChecklist: [
+      "Do I have all mandatory evidence?",
+      "Is the evidence legible and dated?",
+      "Do the attachments match exactly what was reported?",
+    ],
+  },
+  8: {
+    realScenario:
+      "Real case (energy): a report initially returned for opinionated language was, after a factual chronological rewrite, used as an internal training reference.",
+    goodPractices: [
+      "Write in a chronological and verifiable manner.",
+      "Use professional and objective language.",
+      "Check consistency between closed and open answers.",
+    ],
+    badPractices: [
+      "Using vague adjectives like 'good' or 'terrible' without proof.",
+      "Contradicting the checklist in the narrative text.",
+      "Submitting at the last minute without a final review.",
+    ],
+    strategies: [
+      "Apply the factual STAR pattern: Situation, Task, Observed Action, Result.",
+      "Review spelling and consistency by reading aloud.",
+      "Create personal templates by sector to accelerate quality.",
+    ],
+    executionChecklist: [
+      "Can every statement be verified?",
+      "Is there full consistency between questionnaire fields?",
+      "Was the submission reviewed before final sending?",
+    ],
+  },
+  9: {
+    realScenario:
+      "Real case (multi-client): an evaluator increased monthly margin by 31% by reorganising routes by area and eliminating missions with an hourly rate below the defined minimum.",
+    goodPractices: [
+      "Calculate net pay per hour.",
+      "Consolidate geographically close missions.",
+      "Track payments and reimbursements with traceability.",
+    ],
+    badPractices: [
+      "Accepting a mission based only on the gross announced value.",
+      "Ignoring administrative time for reports and uploads.",
+      "Not validating payment deadlines in each contract.",
+    ],
+    strategies: [
+      "Create a simple income, cost and margin dashboard.",
+      "Negotiate recurring missions with a quality track record.",
+      "Use minimum price limits by visit type.",
+    ],
+    executionChecklist: [
+      "Do I know the real net value of this mission?",
+      "Is the route optimised to reduce costs?",
+      "Is the payment deadline compatible with my cash flow?",
+    ],
+  },
+  10: {
+    realScenario:
+      "Real case (progression): a junior evaluator became a premium auditor in 8 months by documenting a quality portfolio, obtaining sector certifications and maintaining an approval rate above 95%.",
+    goodPractices: [
+      "Set quarterly professional development goals.",
+      "Collect feedback and turn it into an improvement plan.",
+      "Build positioning around the highest-value niche.",
+    ],
+    badPractices: [
+      "Operating without a career strategy.",
+      "Repeating recurring errors without process review.",
+      "Accepting any mission without alignment to professional objectives.",
+    ],
+    strategies: [
+      "Create an annual roadmap with technical and commercial competencies.",
+      "Measure personal KPIs: approval, deadline, margin, recurrence.",
+      "Invest in networking with agencies and project managers.",
+    ],
+    executionChecklist: [
+      "Does this mission advance my desired positioning?",
+      "What competency am I developing in this cycle?",
+      "Do I have evidence of progress to show the market?",
+    ],
+  },
+};
+
 /*
  * DESCRIÇÃO DA FUNÇÃO: Distribui o conteúdo teórico em 4 páginas equilibradas
  * para garantir profundidade antes de iniciar o questionário.
  */
-const buildBaseTheoryPages = (content: string[]): TheoryPage[] => {
+const buildBaseTheoryPages = (content: string[], pageTitles: string[]): TheoryPage[] => {
   const totalBasePages = 4;
   const chunkSize = Math.max(1, Math.ceil(content.length / totalBasePages));
-  const pageTitles = [
-    "Página 1 - Antes da avaliação: contexto e objetivos",
-    "Página 2 - Antes da avaliação: preparação operacional",
-    "Página 3 - Durante a avaliação: execução no terreno",
-    "Página 4 - Após a avaliação: análise, relatório e melhoria",
-  ];
 
   const pages: TheoryPage[] = [];
 
@@ -415,6 +654,10 @@ function renderBold(text: string): React.ReactNode {
 
 export default function CursoPage() {
   const router = useRouter();
+  const { language, t } = useLanguage();
+  const cp = t.coursePlayer;
+  const courseModules = language === "en" ? courseModulesEn : courseModulesPt;
+  const moduleSupportContent = language === "en" ? moduleSupportContentEn : moduleSupportContentPt;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [progress, setProgress] = useState<ProgressData | null>(null);
   const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
@@ -620,26 +863,26 @@ export default function CursoPage() {
   };
 
   if (!isAuthenticated) {
-    return <p className="text-sm text-slate-500">A verificar sessão...</p>;
+    return <p className="text-sm text-slate-500">{cp.verifyingSession}</p>;
   }
 
   if (accessDenied) {
     return (
       <section className="w-full space-y-6 bg-white p-8 rounded-2xl">
-        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">Curso de Cliente Mistério</h1>
+        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">{cp.courseTitle}</h1>
         <p className="text-base text-[#2a2a2a]">
-          O acesso ao curso só fica disponível após confirmação do pagamento.
+          {cp.accessDeniedDesc}
         </p>
         <div className="flex gap-3">
           <button className="submit max-w-[220px]" type="button" onClick={() => router.push("/checkout")}>
-            Ir para pagamento
+            {cp.goToPayment}
           </button>
           <button
             className="site-pill-button-secondary max-w-[220px]"
             type="button"
             onClick={() => router.push("/dashboard")}
           >
-            Voltar ao dashboard
+            {cp.backToDashboard}
           </button>
         </div>
       </section>
@@ -651,11 +894,11 @@ export default function CursoPage() {
   const baseTheoryPages = activeModule
     ? activeModule.pages
       ? activeModule.pages.map((p) => ({ title: p.title, blocks: p.blocks }))
-      : buildBaseTheoryPages(activeModule.content)
+      : buildBaseTheoryPages(activeModule.content, cp.theoryPageTitles)
     : [];
   const premiumTheoryPage = activeSupportContent
     ? {
-        title: "Página 5 - Casos reais, estratégia e checklist final",
+        title: cp.premiumPageTitle,
         blocks: [activeSupportContent.realScenario],
       }
     : null;
@@ -672,37 +915,36 @@ export default function CursoPage() {
         <div className="space-y-8 bg-white p-8 rounded-2xl">
       <header className="space-y-3">
         <p className="text-xs font-semibold" style={{ color: "#22a094" }}>
-          Formação completa
+          {cp.completeTraining}
         </p>
         <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">
-          Curso de Cliente Mistério
+          {cp.courseTitle}
         </h1>
         <p className="max-w-3xl text-base leading-7 text-[#2a2a2a]">
-          Complete todos os módulos para obter a sua certificação. Cada módulo inclui conteúdo
-          teórico e um questionário de avaliação.
+          {cp.completionDesc}
         </p>
       </header>
 
-      {/* Estatísticas do curso */}
+      {/* Course stats */}
       <div className="grid grid-cols-3 gap-4">
         <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
           <p className="text-3xl font-bold text-[#2a2a2a]">{totalModules}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">Módulos Alvo</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">{cp.targetModules}</p>
         </div>
         <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
           <p className="text-3xl font-bold text-[#2a2a2a]">{totalModules - (progress?.completedCount ?? 0)}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">Em falta</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">{cp.missing}</p>
         </div>
         <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
           <p className="text-3xl font-bold text-[#2a2a2a]">{completedCount}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">Finalizado(s)</p>
+          <p className="text-xs text-[#666] mt-2 font-medium">{cp.finished}</p>
         </div>
       </div>
 
-      {/* Barra de progresso global */}
+      {/* Global progress bar */}
       <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-5">
         <div className="flex items-center justify-between text-sm mb-3">
-          <span className="font-semibold text-[#2a2a2a]">Progresso do Curso</span>
+          <span className="font-semibold text-[#2a2a2a]">{cp.courseProgress}</span>
           <span className="font-bold text-[#22a094]">{progressPercent}%</span>
         </div>
         <div className="h-3 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
@@ -712,23 +954,23 @@ export default function CursoPage() {
           />
         </div>
         <p className="mt-2 text-xs text-[#666]">
-          {completedCount} de {totalModules} módulos concluídos
+          {completedCount} {cp.of} {totalModules} {cp.modulesCompleted}
         </p>
       </div>
 
-      {/* Lista de módulos */}
+      {/* Module list */}
       {!activeModule && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-[#2a2a2a]">Módulos do curso</h2>
+            <h2 className="text-lg font-semibold text-[#2a2a2a]">{cp.courseModulesTitle}</h2>
             <div className="flex gap-4 text-sm">
               <div className="text-right">
                 <span className="font-bold text-[#22a094]">{totalModules}</span>
-                <p className="text-xs text-[#666]">Disponíveis</p>
+                <p className="text-xs text-[#666]">{cp.available}</p>
               </div>
               <div className="text-right">
                 <span className="font-bold text-[#2a2a2a]">{completedCount}</span>
-                <p className="text-xs text-[#666]">Concluídos</p>
+                <p className="text-xs text-[#666]">{cp.completed}</p>
               </div>
             </div>
           </div>
@@ -772,7 +1014,7 @@ export default function CursoPage() {
                   </div>
                   <div className="shrink-0 text-sm flex flex-col items-end gap-0.5">
                     {completed && (
-                      <span className="text-[#22a094] font-semibold text-xs">Completo</span>
+                      <span className="text-[#22a094] font-semibold text-xs">{cp.complete}</span>
                     )}
                     {completed && modProgress?.quizScore !== null && (
                       <span className="text-[#22a094] font-semibold">{modProgress.quizScore}%</span>
@@ -781,7 +1023,7 @@ export default function CursoPage() {
                       <span className="text-[#2a2a2a]">&rarr;</span>
                     )}
                     {!unlocked && (
-                      <span className="text-[#999] text-xs">Bloqueado</span>
+                      <span className="text-[#999] text-xs">{cp.locked}</span>
                     )}
                   </div>
                 </div>
@@ -802,7 +1044,7 @@ export default function CursoPage() {
                 onClick={() => setActiveModuleId(null)}
                 className="text-sm text-[#2a2a2a] font-semibold hover:underline"
               >
-                &larr; Voltar aos módulos
+                {cp.backToModules}
               </button>
             </div>
 
@@ -816,8 +1058,8 @@ export default function CursoPage() {
                 {/* Barra de progresso do módulo */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-semibold text-[#666]">Página {theoryPage + 1} de {allTheoryPages.length}</p>
-                    <p className="text-sm font-bold text-[#22a094]">{Math.round(((theoryPage + 1) / allTheoryPages.length) * 100)}% concluído</p>
+                    <p className="text-xs font-semibold text-[#666]">{cp.page} {theoryPage + 1} {cp.of} {allTheoryPages.length}</p>
+                    <p className="text-sm font-bold text-[#22a094]">{Math.round(((theoryPage + 1) / allTheoryPages.length) * 100)}{cp.percentComplete}</p>
                   </div>
                   <div className="h-2 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
                     <div
@@ -850,7 +1092,7 @@ export default function CursoPage() {
                   {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
                     <div className="space-y-4 mt-8 pt-6 border-t border-[#D4B5A0]/20">
                       <div className="rounded-lg border border-[#a0d5be]/30 bg-[#f0f7f4] p-4">
-                        <p className="font-bold text-[#2a2a2a] mb-3">Boas práticas</p>
+                        <p className="font-bold text-[#2a2a2a] mb-3">{cp.goodPractices}</p>
                         <ul className="space-y-2 text-sm text-[#2a2a2a]">
                           {activeSupportContent.goodPractices.map((item) => (
                             <li key={item} className="flex gap-2">
@@ -861,7 +1103,7 @@ export default function CursoPage() {
                         </ul>
                       </div>
                       <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
-                        <p className="font-bold text-[#2a2a2a] mb-3">Más práticas</p>
+                        <p className="font-bold text-[#2a2a2a] mb-3">{cp.badPractices}</p>
                         <ul className="space-y-2 text-sm text-[#2a2a2a]">
                           {activeSupportContent.badPractices.map((item) => (
                             <li key={item} className="flex gap-2">
@@ -872,7 +1114,7 @@ export default function CursoPage() {
                         </ul>
                       </div>
                       <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fffbfa] p-4">
-                        <p className="font-bold text-[#2a2a2a] mb-3">Estratégias práticas</p>
+                        <p className="font-bold text-[#2a2a2a] mb-3">{cp.practicalStrategies}</p>
                         <ul className="space-y-2 text-sm text-[#2a2a2a]">
                           {activeSupportContent.strategies.map((item) => (
                             <li key={item} className="flex gap-2">
@@ -883,7 +1125,7 @@ export default function CursoPage() {
                         </ul>
                       </div>
                       <div className="rounded-lg border border-[#22a094]/30 bg-[#22a094] p-4">
-                        <p className="font-bold text-white mb-3">Checklist de execução profissional</p>
+                        <p className="font-bold text-white mb-3">{cp.executionChecklist}</p>
                         <ul className="space-y-2 text-sm text-white">
                           {activeSupportContent.executionChecklist.map((item) => (
                             <li key={item} className="flex gap-2">
@@ -895,19 +1137,19 @@ export default function CursoPage() {
                       </div>
                       {activeModule.evaluationExamples && activeModule.evaluationExamples.length > 0 && (
                         <div className="rounded-lg border border-[#D4B5A0]/30 bg-white p-4">
-                          <p className="font-bold text-[#2a2a2a] mb-3">Exemplos de decisão profissional</p>
+                          <p className="font-bold text-[#2a2a2a] mb-3">{cp.decisionExamples}</p>
                           <div className="space-y-4">
                             {activeModule.evaluationExamples.map((example) => (
                               <article key={example.title} className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 space-y-2">
                                 <h3 className="text-sm font-bold text-[#2a2a2a]">{example.title}</h3>
                                 <p className="text-sm text-[#2a2a2a]">
-                                  <span className="font-semibold">Cenário:</span> {example.scenario}
+                                  <span className="font-semibold">{cp.scenario}</span> {example.scenario}
                                 </p>
                                 <p className="text-sm text-[#2a2a2a]">
-                                  <span className="font-semibold">Abordagem correta:</span> {example.correctApproach}
+                                  <span className="font-semibold">{cp.correctApproach}</span> {example.correctApproach}
                                 </p>
                                 <p className="text-sm text-[#2a2a2a]">
-                                  <span className="font-semibold">Abordagem incorreta:</span> {example.incorrectApproach}
+                                  <span className="font-semibold">{cp.incorrectApproach}</span> {example.incorrectApproach}
                                 </p>
                               </article>
                             ))}
@@ -923,7 +1165,7 @@ export default function CursoPage() {
                   {/* Conceitos-chave */}
                   {activeModule.keywords && activeModule.keywords.length > 0 && (
                     <div className="rounded-lg border border-[#b8d5ce]/30 bg-[#eef9f6] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-3">Conceitos-chave</p>
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-3">{cp.keyConceptsTitle}</p>
                       <div className="flex flex-wrap gap-2">
                         {activeModule.keywords.map((keyword) => (
                           <span
@@ -940,7 +1182,7 @@ export default function CursoPage() {
                   {/* Dica Prática */}
                   {activeModule.practicalTip && (
                     <div className="rounded-lg border border-[#a0d5be]/30 bg-[#f0f7f4] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">Dica Prática</p>
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">{cp.practicalTipTitle}</p>
                       <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.practicalTip}</p>
                     </div>
                   )}
@@ -948,7 +1190,7 @@ export default function CursoPage() {
                   {/* Benefício */}
                   {activeModule.benefit && (
                     <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">Por que isto importa</p>
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">{cp.whyItMatters}</p>
                       <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.benefit}</p>
                     </div>
                   )}
@@ -956,7 +1198,7 @@ export default function CursoPage() {
                   {/* Aviso */}
                   {activeModule.warning && (
                     <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">Aviso Importante</p>
+                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">{cp.importantWarning}</p>
                       <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.warning}</p>
                     </div>
                   )}
@@ -971,10 +1213,10 @@ export default function CursoPage() {
                   disabled={theoryPage === 0}
                   className="site-pill-button-secondary disabled:opacity-40"
                 >
-                  ← Anterior
+                  {cp.previous}
                 </button>
                 <p className="text-sm font-semibold text-[#2a2a2a]">
-                  Página {theoryPage + 1} de {allTheoryPages.length}
+                  {cp.page} {theoryPage + 1} {cp.of} {allTheoryPages.length}
                 </p>
                 <button
                   type="button"
@@ -982,7 +1224,7 @@ export default function CursoPage() {
                   disabled={isLastTheoryPage}
                   className="submit disabled:opacity-40"
                 >
-                  Próxima página →
+                  {cp.nextPage}
                 </button>
               </div>
 
@@ -991,7 +1233,7 @@ export default function CursoPage() {
                 {activeModule.id === 11 ? (
                   <div className="rounded-2xl border border-[#22a094]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
                     <p className="text-sm text-[#2a2a2a]">
-                      Este módulo disponibiliza o seu Certificado de Conclusão em PDF com nome personalizado.
+                      {cp.certificateDesc}
                     </p>
                     <button
                       type="button"
@@ -999,7 +1241,7 @@ export default function CursoPage() {
                       disabled={isDownloadingCertificate}
                       className="submit max-w-sm disabled:opacity-40"
                     >
-                      {isDownloadingCertificate ? "A preparar certificado..." : "Descarregar Certificado em PDF"}
+                      {isDownloadingCertificate ? cp.preparingCertificate : cp.downloadCertificate}
                     </button>
                   </div>
                 ) : (
@@ -1010,7 +1252,7 @@ export default function CursoPage() {
                         onClick={startQuiz}
                         className="submit"
                       >
-                        Iniciar Questionário
+                        {cp.startQuiz}
                       </button>
                     </div>
                   )
@@ -1031,7 +1273,7 @@ export default function CursoPage() {
                 onClick={() => setQuizMode(false)}
                 className="text-sm text-[#2a2a2a] font-semibold hover:underline"
               >
-                &larr; Voltar ao conteúdo
+                {cp.backToContent}
               </button>
             </div>
 
@@ -1039,7 +1281,7 @@ export default function CursoPage() {
               <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
                 <h2 className="text-xl font-bold mb-1 text-[#2a2a2a]">{activeModule.title}</h2>
                 <p className="text-sm text-[#666] mb-6">
-                  Responda a todas as questões. Necessita de 60% para concluir o módulo.
+                  {cp.quizInstruction}
                 </p>
 
                 <div className="space-y-6">
@@ -1076,7 +1318,7 @@ export default function CursoPage() {
                       onClick={submitQuiz}
                       className="submit max-w-xs disabled:opacity-40"
                     >
-                      Submeter Respostas
+                      {cp.submitAnswers}
                     </button>
                   </div>
                 )}
@@ -1086,15 +1328,15 @@ export default function CursoPage() {
                     quizScore >= 60 ? "bg-[#22a094]/15 border border-[#22a094]/40" : "bg-red-100 border border-red-400/40"
                   }`}>
                     <p className="text-2xl font-bold mb-2 text-[#2a2a2a]">
-                      {quizScore >= 60 ? "Parabéns!" : "Tente novamente"}
+                      {quizScore >= 60 ? cp.congrats : cp.tryAgainQuiz}
                     </p>
                     <p className="text-sm mb-1 text-[#2a2a2a]">
-                      Obteve <span className="font-bold text-lg text-[#22a094]">{quizScore}%</span> neste questionário.
+                      {cp.scored} <span className="font-bold text-lg text-[#22a094]">{quizScore}%</span> {cp.inThisQuiz}
                     </p>
                     <p className="text-xs text-[#666] mb-4">
                       {quizScore >= 60
-                        ? isSaving ? "A guardar progresso..." : "Módulo concluído com sucesso!"
-                        : "Necessita de pelo menos 60% para avançar. Reveja o conteúdo e tente novamente."}
+                        ? isSaving ? cp.savingProgress : cp.moduleCompleted
+                        : cp.needMorePoints}
                     </p>
                     <div className="flex justify-center gap-3">
                       {quizScore >= 60 ? (
@@ -1106,7 +1348,7 @@ export default function CursoPage() {
                           }}
                           className="submit max-w-xs"
                         >
-                          Voltar aos Módulos
+                          {cp.backToModulesList}
                         </button>
                       ) : (
                         <>
@@ -1115,14 +1357,14 @@ export default function CursoPage() {
                             onClick={() => setQuizMode(false)}
                             className="submit max-w-[200px] !bg-white/20"
                           >
-                            Rever Conteúdo
+                            {cp.reviewContent}
                           </button>
                           <button
                             type="button"
                             onClick={startQuiz}
                             className="submit max-w-[200px]"
                           >
-                            Repetir Quiz
+                            {cp.retakeQuiz}
                           </button>
                         </>
                       )}
