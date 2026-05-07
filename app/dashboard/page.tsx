@@ -6,6 +6,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import { useLanguage } from "@/app/context/LanguageContext";
 
 type UserProfile = {
   firstName: string;
@@ -65,11 +66,6 @@ const sessionStorageKey = "vp_session";
 const preferencesStorageKey = "vp_preferences";
 
 
-const dashboardSections: Array<{ id: DashboardSection; label: string; description: string }> = [
-  { id: "account", label: "Conta", description: "Dados pessoais e perfil" },
-  { id: "security", label: "Segurança", description: "Palavra-passe e acesso" },
-  { id: "preferences", label: "Preferências", description: "Comunicações e notificações" },
-];
 
 const normalizeBirthDateForInput = (birthDate: string | null, email: string) => {
   // Garante formato YYYY-MM-DD no input date e usa fallback local quando necessário.
@@ -98,6 +94,14 @@ const normalizeBirthDateForInput = (birthDate: string | null, email: string) => 
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { t } = useLanguage();
+  const d = t.dashboard;
+
+  const dashboardSections: Array<{ id: DashboardSection; label: string; description: string }> = [
+    { id: "account", label: d.account, description: d.accountDescription },
+    { id: "security", label: d.security, description: d.securityDescription },
+    { id: "preferences", label: d.preferences, description: d.preferencesDescription },
+  ];
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [sessionEmail, setSessionEmail] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<DashboardSection>("account");
@@ -270,7 +274,7 @@ export default function DashboardPage() {
       setProfile(refreshedProfile);
       setFeedbackState(data.message);
     } catch {
-      setFeedbackState("Não foi possível guardar as alterações. Tente novamente.");
+      setFeedbackState(t.common.error);
     } finally {
       setSavingState(false);
     }
@@ -284,7 +288,7 @@ export default function DashboardPage() {
     setFirstAccessFeedback(null);
 
     if (!profile.birthDate || !profile.gender) {
-      setFirstAccessFeedback("Preencha data de nascimento e género para concluir o primeiro acesso.");
+      setFirstAccessFeedback(d.birthDateRequired);
       return;
     }
 
@@ -299,7 +303,7 @@ export default function DashboardPage() {
     setProfileFeedback(null);
 
     if (!profile.birthDate || !profile.gender) {
-      setProfileFeedback("Data de nascimento e género são obrigatórios.");
+      setProfileFeedback(d.birthDateRequired);
       return;
     }
 
@@ -314,12 +318,12 @@ export default function DashboardPage() {
     setPasswordFeedback(null);
 
     if (!passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmNewPassword) {
-      setPasswordFeedback("Preencha a senha atual e a nova senha com confirmação.");
+      setPasswordFeedback(d.passwordFieldsRequired);
       return;
     }
 
     if (passwordForm.newPassword !== passwordForm.confirmNewPassword) {
-      setPasswordFeedback("A confirmação da nova senha deve ser igual à nova senha.");
+      setPasswordFeedback(d.passwordMismatch);
       return;
     }
 
@@ -347,7 +351,7 @@ export default function DashboardPage() {
       setPasswordFeedback(data.message);
       setPasswordForm({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
     } catch {
-      setPasswordFeedback("Não foi possível atualizar a senha. Tente novamente.");
+      setPasswordFeedback(t.common.error);
     } finally {
       setIsSavingPassword(false);
     }
@@ -369,13 +373,11 @@ export default function DashboardPage() {
     setDeleteAccountFeedback(null);
 
     if (!deleteAccountPassword) {
-      setDeleteAccountFeedback("Informe a senha atual para confirmar a eliminação da conta.");
+      setDeleteAccountFeedback(d.deletePasswordRequired);
       return;
     }
 
-    const shouldDeleteAccount = window.confirm(
-      "Esta ação é irreversível. Tem a certeza de que pretende apagar a sua conta?"
-    );
+    const shouldDeleteAccount = window.confirm(d.deleteConfirmation);
 
     if (!shouldDeleteAccount) {
       return;
@@ -404,14 +406,14 @@ export default function DashboardPage() {
       localStorage.removeItem(preferencesStorageKey);
       router.push("/login?deleted=1");
     } catch {
-      setDeleteAccountFeedback("Não foi possível apagar a conta. Tente novamente.");
+      setDeleteAccountFeedback(t.common.error);
     } finally {
       setIsDeletingAccount(false);
     }
   };
 
   if (!profile) {
-    return <p className="text-sm text-slate-500">A carregar perfil...</p>;
+    return <p className="text-sm text-slate-500">{d.loading}</p>;
   }
 
   return (
@@ -419,12 +421,12 @@ export default function DashboardPage() {
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/40 p-4">
           <div className="login-form w-full max-w-2xl">
-            <h2 className="section-title">Complete o seu perfil</h2>
+            <h2 className="section-title">{d.completeProfile}</h2>
             <p className="mt-2 text-sm text-justify">
-              Os dados seguintes nunca serão partilhados e servem apenas para fins estatísticos. Este preenchimento é obrigatório para concluir o primeiro acesso.
+              {d.profileNote}
             </p>
             <p className="mt-3 text-sm font-semibold">
-              Preencha: data de nascimento e género.
+              {d.fillRequired}
             </p>
 
             <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -434,7 +436,7 @@ export default function DashboardPage() {
                   value={profile.birthDate}
                   onChange={(event) => handleProfileChange("birthDate", event.target.value)}
                 />
-                <span className="label">Data de nascimento</span>
+                <span className="label">{d.birthDate}</span>
               </div>
 
               <div className="input-group">
@@ -442,11 +444,11 @@ export default function DashboardPage() {
                   value={profile.gender}
                   onChange={(event) => handleProfileChange("gender", event.target.value)}
                 >
-                  <option value="">Selecione</option>
-                  <option value="male">Masculino</option>
-                  <option value="female">Feminino</option>
+                  <option value="">{d.select}</option>
+                  <option value="male">{d.male}</option>
+                  <option value="female">{d.female}</option>
                 </select>
-                <span className="label">Género</span>
+                <span className="label">{d.gender}</span>
               </div>
             </div>
 
@@ -454,7 +456,7 @@ export default function DashboardPage() {
 
             <div className="mt-4">
               <button className="submit" type="button" onClick={handleCompleteFirstAccess}>
-                {isCompletingFirstAccess ? "A concluir..." : "Concluir primeiro acesso"}
+                {isCompletingFirstAccess ? d.completing : d.completeAccess}
               </button>
             </div>
           </div>
@@ -463,8 +465,8 @@ export default function DashboardPage() {
 
       <div className="mx-auto w-full max-w-6xl space-y-6">
         <header className="dashboard-top-banner">
-          <h1 className="page-title !text-black">Olá, {profile.firstName}</h1>
-          <p className="mt-2 text-sm !text-black">Faça a gestão da sua conta e segurança.</p>
+          <h1 className="page-title !text-black">{d.hello}, {profile.firstName}</h1>
+          <p className="mt-2 text-sm !text-black">{d.manageAccount}</p>
         </header>
 
         {/* Secção do curso com barra de progresso apenas para contas com pagamento confirmado. */}
@@ -482,13 +484,13 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h2 className="text-lg font-bold !text-black">Curso de Cliente Mistério</h2>
+                <h2 className="text-lg font-bold !text-black">{d.courseTitle}</h2>
                 <p className="text-xs !text-slate-500 mt-0.5">
                   {courseProgress
                     ? courseProgress.completedCount === courseProgress.totalModules
-                      ? "Curso concluído. Parabéns!"
-                      : `${courseProgress.completedCount} de ${courseProgress.totalModules} módulos concluídos`
-                    : "Inicie a sua formação profissional"}
+                      ? d.courseCompleted
+                      : `${courseProgress.completedCount} ${d.modulesCompleted.replace("{{total}}", String(courseProgress.totalModules))}`
+                    : d.startTraining}
                 </p>
               </div>
               <span className="text-2xl font-bold" style={{ color: "#22a094" }}>
@@ -504,19 +506,19 @@ export default function DashboardPage() {
                 }}
               />
             </div>
-            <p className="mt-2 text-xs !text-slate-400 text-right">Clique para continuar o curso &rarr;</p>
+            <p className="mt-2 text-xs !text-slate-400 text-right">{d.continueButton}</p>
           </div>
         ) : (
           <div className="dashboard-top-banner">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-bold !text-black">Curso de Cliente Mistério</h2>
+                <h2 className="text-lg font-bold !text-black">{d.courseTitle}</h2>
                 <p className="text-xs !text-slate-500 mt-0.5">
-                  O curso será disponibilizado automaticamente após confirmação do pagamento.
+                  {d.paymentMessage}
                 </p>
               </div>
               <button className="submit max-w-[180px]" type="button" onClick={() => router.push("/checkout")}>
-                Efetuar pagamento
+                {d.paymentButton}
               </button>
             </div>
           </div>
@@ -524,8 +526,8 @@ export default function DashboardPage() {
 
         <div className="dashboard-layout-shell">
           <aside className="dashboard-sidebar">
-            <h2 className="dashboard-sidebar-title">Definições</h2>
-            <nav className="dashboard-menu" aria-label="Navegação do dashboard">
+            <h2 className="dashboard-sidebar-title">{d.settings}</h2>
+            <nav className="dashboard-menu" aria-label={d.navigation}>
               {dashboardSections.map((menuSection) => (
                 <button
                   key={menuSection.id}
@@ -545,8 +547,8 @@ export default function DashboardPage() {
           <article className="login-form dashboard-form max-w-none">
             {activeSection === "account" && (
               <>
-                <h2 className="section-title">Informação da conta</h2>
-                <p className="mt-2 text-sm">Atualize os seus dados pessoais e guarde as alterações.</p>
+                <h2 className="section-title">{d.accountInfo}</h2>
+                <p className="mt-2 text-sm">{d.updatePersonal}</p>
 
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
                   <div className="input-group">
@@ -554,7 +556,7 @@ export default function DashboardPage() {
                       value={profile.firstName}
                       onChange={(event) => handleProfileChange("firstName", event.target.value)}
                     />
-                    <span className="label">Primeiro nome</span>
+                    <span className="label">{d.firstName}</span>
                   </div>
 
                   <div className="input-group">
@@ -562,7 +564,7 @@ export default function DashboardPage() {
                       value={profile.lastName}
                       onChange={(event) => handleProfileChange("lastName", event.target.value)}
                     />
-                    <span className="label">Último nome</span>
+                    <span className="label">{d.lastName}</span>
                   </div>
 
                   <div className="input-group md:col-span-2">
@@ -570,7 +572,7 @@ export default function DashboardPage() {
                       value={profile.email}
                       onChange={(event) => handleProfileChange("email", event.target.value)}
                     />
-                    <span className="label">E-mail</span>
+                    <span className="label">{d.email}</span>
                   </div>
 
                   <div className="input-group">
@@ -579,7 +581,7 @@ export default function DashboardPage() {
                       value={profile.birthDate}
                       onChange={(event) => handleProfileChange("birthDate", event.target.value)}
                     />
-                    <span className="label">Data de nascimento</span>
+                    <span className="label">{d.birthDate}</span>
                   </div>
 
                   <div className="input-group">
@@ -587,11 +589,11 @@ export default function DashboardPage() {
                       value={profile.gender}
                       onChange={(event) => handleProfileChange("gender", event.target.value)}
                     >
-                      <option value="">Selecione</option>
-                      <option value="male">Masculino</option>
-                      <option value="female">Feminino</option>
+                      <option value="">{d.select}</option>
+                      <option value="male">{d.male}</option>
+                      <option value="female">{d.female}</option>
                     </select>
-                    <span className="label">Género</span>
+                    <span className="label">{d.gender}</span>
                   </div>
                 </div>
 
@@ -599,7 +601,7 @@ export default function DashboardPage() {
 
                 <div className="mt-4">
                   <button className="submit" type="button" onClick={handleSaveProfile}>
-                    {isSavingProfile ? "A guardar..." : "Guardar perfil"}
+                    {isSavingProfile ? d.saving : d.saveProfile}
                   </button>
                 </div>
               </>
@@ -607,63 +609,63 @@ export default function DashboardPage() {
 
             {activeSection === "security" && (
               <>
-                <h2 className="section-title">Segurança da conta</h2>
-                <p className="mt-2 text-sm">Defina uma palavra-passe forte para proteger o seu acesso.</p>
+                <h2 className="section-title">{d.securityTitle}</h2>
+                <p className="mt-2 text-sm">{d.securePassword}</p>
 
                 <div className="mt-5 grid gap-4 md:grid-cols-2">
                   <div className="input-group md:col-span-2">
                     <input
-                      placeholder="Senha atual"
+                      placeholder={d.currentPassword}
                       type="password"
                       value={passwordForm.currentPassword}
                       onChange={(event) =>
                         handlePasswordFieldChange("currentPassword", event.target.value)
                       }
                     />
-                    <span className="label">Senha atual</span>
+                    <span className="label">{d.currentPassword}</span>
                   </div>
                   <div className="input-group">
                     <input
-                      placeholder="Nova senha"
+                      placeholder={d.newPassword}
                       type="password"
                       value={passwordForm.newPassword}
                       onChange={(event) => handlePasswordFieldChange("newPassword", event.target.value)}
                     />
-                    <span className="label">Nova senha</span>
+                    <span className="label">{d.newPassword}</span>
                   </div>
                   <div className="input-group">
                     <input
-                      placeholder="Confirmar nova senha"
+                      placeholder={d.confirmPassword}
                       type="password"
                       value={passwordForm.confirmNewPassword}
                       onChange={(event) =>
                         handlePasswordFieldChange("confirmNewPassword", event.target.value)
                       }
                     />
-                    <span className="label">Confirmar nova senha</span>
+                    <span className="label">{d.confirmPassword}</span>
                   </div>
                 </div>
 
                 {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
 
                 <button className="submit mt-4" type="button" onClick={handleChangePassword}>
-                  {isSavingPassword ? "A atualizar..." : "Atualizar senha"}
+                  {isSavingPassword ? d.updating : d.updatePassword}
                 </button>
 
                 <div className="mt-8 rounded-xl border border-red-200 bg-red-50 p-4">
-                  <h3 className="text-base font-semibold text-red-700">Zona de perigo</h3>
+                  <h3 className="text-base font-semibold text-red-700">{d.dangerZone}</h3>
                   <p className="mt-2 text-sm text-red-700">
-                    Apagar a conta remove permanentemente o seu perfil, progresso e histórico.
+                    {d.deleteWarning}
                   </p>
 
                   <div className="input-group mt-4">
                     <input
-                      placeholder="Confirme com a senha atual"
+                      placeholder={d.currentPassword}
                       type="password"
                       value={deleteAccountPassword}
                       onChange={(event) => setDeleteAccountPassword(event.target.value)}
                     />
-                    <span className="label">Senha atual para apagar conta</span>
+                    <span className="label">{d.deleteAccountPassword}</span>
                   </div>
 
                   {deleteAccountFeedback && (
@@ -675,7 +677,7 @@ export default function DashboardPage() {
                     type="button"
                     onClick={handleDeleteAccount}
                   >
-                    {isDeletingAccount ? "A apagar conta..." : "Apagar conta"}
+                    {isDeletingAccount ? d.deleting : d.deleteAccount}
                   </button>
                 </div>
               </>
@@ -683,12 +685,12 @@ export default function DashboardPage() {
 
             {activeSection === "preferences" && (
               <>
-                <h2 className="section-title">Preferências</h2>
-                <p className="mt-2 text-sm">Escolha como pretende receber atualizações da plataforma.</p>
+                <h2 className="section-title">{d.preferencesTitle}</h2>
+                <p className="mt-2 text-sm">{d.chooseUpdates}</p>
 
                 <div className="mt-5 space-y-3 rounded-xl border border-slate-200 bg-white p-4">
                   <div className="flex items-center justify-between text-sm">
-                    <label htmlFor="receive-newsletter">Receber newsletter</label>
+                    <label htmlFor="receive-newsletter">{d.newsletter}</label>
                     <label className="checkbox-container" htmlFor="receive-newsletter">
                       <input
                         id="receive-newsletter"
@@ -701,7 +703,7 @@ export default function DashboardPage() {
                     </label>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <label htmlFor="allow-notifications">Notificações da comunidade</label>
+                    <label htmlFor="allow-notifications">{d.notifications}</label>
                     <label className="checkbox-container" htmlFor="allow-notifications">
                       <input
                         id="allow-notifications"
@@ -716,7 +718,7 @@ export default function DashboardPage() {
                 </div>
 
                 <button className="submit mt-8" type="button" onClick={handleLogout}>
-                  Terminar sessão
+                  {d.logout}
                 </button>
               </>
             )}
@@ -726,9 +728,9 @@ export default function DashboardPage() {
             <p className="dashboard-right-highlight-icon" aria-hidden="true">
               ✧
             </p>
-            <h3 className="card-title">Conta segura</h3>
+            <h3 className="card-title">{d.secureAccount}</h3>
             <p className="mt-3 text-sm text-center">
-              Use o menu lateral para navegar entre perfil, segurança e preferências sem perder o foco.
+              {d.accountTip}
             </p>
           </aside>
         </div>
