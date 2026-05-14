@@ -2,8 +2,71 @@
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
-import CheckoutButton from "../components/CheckoutButton";
+import { useRouter } from "next/navigation";
 import { courseModules as courseData } from "../curso/courseData";
+import styles from "./page.module.css";
+
+const CheckIcon = ({ size = 11 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+const ArrowIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+  </svg>
+);
+
+function BuyButton({ children, className }: { children: React.ReactNode; className?: string }) {
+  const router = useRouter();
+  const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
+  const handleCheckout = () => {
+    if (!paymentLink) return;
+    const session = typeof window !== "undefined" ? localStorage.getItem("vp_session") : null;
+    if (session) { window.location.href = paymentLink; }
+    else { router.push("/login?checkout=1"); }
+  };
+  return (
+    <button type="button" onClick={handleCheckout} disabled={!paymentLink} className={className}>
+      {children}
+    </button>
+  );
+}
+
+/* Benefit icons */
+const benefitIcons = [
+  /* Beginners */ (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  ),
+  /* Practical */ (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>
+  ),
+  /* Earn */ (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+    </svg>
+  ),
+  /* Career */ (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
+    </svg>
+  ),
+  /* Tests */ (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+    </svg>
+  ),
+  /* Community */ (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  ),
+];
 
 export default function CoursePage() {
   const { t } = useLanguage();
@@ -11,19 +74,13 @@ export default function CoursePage() {
 
   useEffect(() => {
     let cancelled = false;
-
     fetch("/api/auth/session", { cache: "no-store" })
-      .then((response) => (response.ok ? response.json() : { authenticated: false }))
+      .then((r) => (r.ok ? r.json() : { authenticated: false }))
       .then((data: { authenticated: boolean }) => {
         if (!cancelled) setIsLoggedIn(Boolean(data?.authenticated));
       })
-      .catch(() => {
-        if (!cancelled) setIsLoggedIn(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
+      .catch(() => { if (!cancelled) setIsLoggedIn(false); });
+    return () => { cancelled = true; };
   }, []);
 
   const pricingFeatures = [
@@ -35,137 +92,166 @@ export default function CoursePage() {
   ];
 
   const benefits = [
-    { title: t.coursePage.benefitBeginners, desc: t.coursePage.benefitBeginnersDesc, emoji: "👩‍💼" },
-    { title: t.coursePage.benefitPractical, desc: t.coursePage.benefitPracticalDesc, emoji: "⚡" },
-    { title: t.coursePage.benefitEarn, desc: t.coursePage.benefitEarnDesc, emoji: "💰" },
-    { title: t.coursePage.benefitCareer, desc: t.coursePage.benefitCareerDesc, emoji: "📈" },
-    { title: t.coursePage.benefitTests, desc: t.coursePage.benefitTestsDesc, emoji: "✅" },
-    { title: t.coursePage.benefitCommunity, desc: t.coursePage.benefitCommunityDesc, emoji: "🤝" },
+    { title: t.coursePage.benefitBeginners, desc: t.coursePage.benefitBeginnersDesc },
+    { title: t.coursePage.benefitPractical, desc: t.coursePage.benefitPracticalDesc },
+    { title: t.coursePage.benefitEarn, desc: t.coursePage.benefitEarnDesc },
+    { title: t.coursePage.benefitCareer, desc: t.coursePage.benefitCareerDesc },
+    { title: t.coursePage.benefitTests, desc: t.coursePage.benefitTestsDesc },
+    { title: t.coursePage.benefitCommunity, desc: t.coursePage.benefitCommunityDesc },
   ];
 
   return (
-    <section className="w-full bg-gray-50">
-      <div className="mx-auto w-full max-w-5xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
-        {/* Header Section */}
-        <div className="mb-16 grid gap-8 lg:grid-cols-2">
-          {/* Left Column */}
-          <div className="space-y-6">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
-              <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-              <span className="text-label">{t.coursePage.badge}</span>
-            </div>
-
-            {/* Title */}
-            <h1 className="h1" dangerouslySetInnerHTML={{ __html: t.coursePage.title }} />
-
-            {/* Description */}
-            <p className="text-body">
-              {t.coursePage.description}
-            </p>
-
-            {/* Stats */}
-            <div className="flex items-center gap-8 py-4 border-t border-gray-200">
-              <div className="text-center">
-                <p className="h3">10</p>
-                <p className="text-body-xs">{t.coursePage.statsModules}</p>
-              </div>
-              <div className="text-center">
-                <p className="h4 text-teal-600 whitespace-nowrap">€5–€150+</p>
-                <p className="text-body-xs">{t.coursePage.statsEarnings}</p>
-              </div>
-              <div className="text-center">
-                <p className="h3 text-teal-600">Lifetime</p>
-                <p className="text-body-xs">{t.coursePage.statsAccess}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Pricing Card */}
-          <div className="rounded-lg bg-white p-6 sm:p-8 shadow-sm h-fit">
-            <div className="mb-6 space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
-                <span className="text-label">{t.coursePage.pricingBadge}</span>
-              </div>
-              <div>
-                <p className="h5">{t.coursePage.pricingTitle}</p>
-                <p className="text-body-sm text-gray-400 line-through">{t.coursePage.pricingOriginal}</p>
-                <p className="h1 text-teal-600">{t.coursePage.pricingPrice}</p>
-                <p className="text-body-xs">{t.coursePage.pricingPayment}</p>
-              </div>
-            </div>
-
-            {/* Checklist */}
-            <div className="mb-6 space-y-3 border-b border-gray-200 pb-6">
-              {pricingFeatures.map((item) => (
-                <div key={item} className="flex items-start gap-3">
-                  <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-500">
-                    <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-gray-700">{item}</p>
+    <div className={styles.page}>
+      {/* ============================================================
+          HERO
+          ============================================================ */}
+      <header className={styles.hero}>
+        <div className={styles.wrap}>
+          <div className={styles.heroGrid}>
+            {/* Left — copy */}
+            <div>
+              <div className={styles.eyebrow}>{t.coursePage.badge}</div>
+              <h1 className={`${styles.displayLg} ${styles.heroTitle}`}
+                dangerouslySetInnerHTML={{ __html: t.coursePage.title }} />
+              <p className={`${styles.lead} ${styles.heroSub}`}>
+                {t.coursePage.description}
+              </p>
+              <div className={styles.stats}>
+                <div className={styles.stat}>
+                  <div className={styles.statNum}>10</div>
+                  <div className={styles.statLabel}>{t.coursePage.statsModules}</div>
                 </div>
-              ))}
+                <div className={styles.stat}>
+                  <div className={styles.statNum}><em>5–150</em>€</div>
+                  <div className={styles.statLabel}>{t.coursePage.statsEarnings}</div>
+                </div>
+                <div className={styles.stat}>
+                  <div className={styles.statNum}>∞</div>
+                  <div className={styles.statLabel}>{t.coursePage.statsAccess}</div>
+                </div>
+              </div>
             </div>
 
-            {/* Buttons */}
-            <div className="space-y-3">
-              <CheckoutButton label={t.coursePage.buyButton} />
+            {/* Right — pricing card */}
+            <div className={styles.card}>
+              <div className={styles.cardBadge}>{t.coursePage.pricingBadge}</div>
+              <div className={styles.cardTitle}>{t.coursePage.pricingTitle}</div>
+              <div className={styles.cardPriceRow}>
+                <span className={styles.cardOrig}>{t.coursePage.pricingOriginal}</span>
+                <span className={styles.cardPrice}>{t.coursePage.pricingPrice}</span>
+              </div>
+              <div className={styles.cardPayment}>{t.coursePage.pricingPayment}</div>
+
+              <div className={styles.featureList}>
+                {pricingFeatures.map((item) => (
+                  <div key={item} className={styles.featureItem}>
+                    <span className={styles.check}><CheckIcon size={11} /></span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+
+              <BuyButton className={`${styles.btn} ${styles.btnDark}`} >
+                {t.coursePage.buyButton}
+                <ArrowIcon />
+              </BuyButton>
+              <p className={styles.secureNote}>{t.coursePage.paymentSecure}</p>
             </div>
-            <p className="text-center text-xs text-gray-500 mt-3">
-              {t.coursePage.paymentSecure}
-            </p>
           </div>
         </div>
+      </header>
 
-        {/* Benefits Section */}
-        <div className="mb-16">
-          <h2 className="h3 mb-8">{t.coursePage.benefitsTitle}</h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="rounded-lg bg-white p-6 shadow-sm">
-                <p className="text-3xl mb-3">{benefit.emoji}</p>
-                <p className="h5 mb-2">{benefit.title}</p>
-                <p className="text-body-sm">{benefit.desc}</p>
+      {/* ============================================================
+          BENEFITS
+          ============================================================ */}
+      <section className={styles.section}>
+        <div className={styles.wrap}>
+          <div className={styles.head}>
+            <div>
+              <div className={styles.eyebrow}>Vantagens</div>
+              <h2 className={styles.displayLg}>{t.coursePage.benefitsTitle}</h2>
+            </div>
+            <p className={styles.headSub}>
+              Do zero à primeira missão paga, com estrutura, casos reais e certificado incluído.
+            </p>
+          </div>
+          <div className={styles.benefits}>
+            {benefits.map((b, i) => (
+              <div key={b.title} className={styles.benefit}>
+                <div className={styles.benefitIcon}>
+                  {benefitIcons[i]}
+                </div>
+                <h3 className={styles.benefitTitle}>{b.title}</h3>
+                <p className={styles.benefitDesc}>{b.desc}</p>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Modules Section */}
-        <div className="mb-16">
-          <h2 className="h3 mb-2">{t.coursePage.modulesTitle}</h2>
-          <div className="space-y-3">
-            {courseData.map((module) => (
-              <div
-                key={module.id}
-                className="rounded-lg border border-gray-200 bg-white px-6 py-4"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100">
-                    <span className="text-body-sm font-bold text-teal-600">{module.id}</span>
+      {/* ============================================================
+          CURRICULUM
+          ============================================================ */}
+      <section className={styles.sectionTight}>
+        <div className={styles.wrap}>
+          <div className={styles.curr}>
+            <div className={styles.currInner}>
+              <div className={styles.currHead}>
+                <div>
+                  <div className={`${styles.eyebrow} ${styles.currEyebrow}`}>
+                    {t.coursePage.modulesTitle}
                   </div>
-                  <div>
-                    <p className="h5">{module.title}</p>
-                    <p className="text-body-xs text-gray-600">{module.description}</p>
-                  </div>
+                  <h2 className={`${styles.displayLg} ${styles.currDisplay}`}>
+                    Do zero à primeira missão <em className={styles.italic}>paga</em>.
+                  </h2>
                 </div>
+                <p className={styles.currSub}>
+                  Vídeo + PDFs descarregáveis. Cada módulo termina com um quiz; no final recebes o certificado.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Final CTA */}
-        {!isLoggedIn && (
-          <div className="text-center space-y-4 py-8 border-t border-gray-200">
-            <p className="text-body-sm">{t.coursePage.ctaText}</p>
-            <div className="flex flex-col gap-3 justify-center items-center sm:flex-row sm:gap-4">
-              <CheckoutButton label={t.coursePage.buyButton} />
+              <div className={styles.modules}>
+                {courseData.map((module) => (
+                  <div className={styles.module} key={module.id}>
+                    <div className={styles.moduleNum}>
+                      {String(module.id).padStart(2, "0")}
+                    </div>
+                    <div>
+                      <h3 className={styles.moduleTitle}>{module.title}</h3>
+                      <p className={styles.moduleDesc}>{module.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        )}
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {/* ============================================================
+          FINAL CTA (only shown when not logged in)
+          ============================================================ */}
+      {!isLoggedIn && (
+        <section className={styles.section}>
+          <div className={styles.wrap}>
+            <div className={styles.final}>
+              <div className={styles.finalInner}>
+                <div className={`${styles.eyebrow} ${styles.finalEyebrow}`}>Pronto para começar</div>
+                <h2 className={styles.finalTitle}>
+                  Começa a ganhar com <em>cada visita</em>.
+                </h2>
+                <p className={styles.finalSub}>{t.coursePage.ctaText}</p>
+                <div className={styles.finalCta}>
+                  <BuyButton className={`${styles.btn} ${styles.btnAccent} ${styles.btnBlock}`}>
+                    {t.coursePage.buyButton}
+                    <ArrowIcon />
+                  </BuyButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+    </div>
   );
 }
