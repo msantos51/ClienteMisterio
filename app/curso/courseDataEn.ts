@@ -15,6 +15,7 @@ export type EvaluationExample = {
  scenario: string;
  correctApproach: string;
  incorrectApproach: string;
+ animationType?: "pharmacy" | "none";
 };
 
 export type CoursePage = {
@@ -139,7 +140,8 @@ export const courseModules: CourseModule[] = [
    title: "Example 2: Evaluate Protocol Compliance",
    scenario: "You enter a pharmacy. According to the briefing, each customer should receive an informational leaflet about current promotions. You receive nothing.",
    correctApproach: "Record: 'I requested recommendation for headache. Pharmacist offered medicine and explained usage, BUT DID NOT hand out promotion leaflet. Did not comply with protocol item 5.'",
-   incorrectApproach: "Record: 'Forgot to give the leaflet' (lacks context, may seem like your error, not the brand's)"
+   incorrectApproach: "Record: 'Forgot to give the leaflet' (lacks context, may seem like your error, not the brand's)",
+   animationType: "pharmacy"
   },
   {
    title: "Example 3: Multiple Chronological Observations",

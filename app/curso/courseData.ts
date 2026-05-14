@@ -14,6 +14,7 @@ export type EvaluationExample = {
  scenario: string;
  correctApproach: string;
  incorrectApproach: string;
+ animationType?: "pharmacy" | "none";
 };
 
 export type CoursePage = {
@@ -148,7 +149,8 @@ export const courseModules: CourseModule[] = [
    title: "Exemplo 2: Avaliar Conformidade com Protocolo",
    scenario: "Entras numa farmácia. Segundo o briefing, cada cliente deve receber um folheto informativo sobre promoções atuais. Tu não recebes nada.",
    correctApproach: "Registar: 'Solicitei recomendação para dor de cabeça. Colaboradora ofereceu medicamento e explicou modo de uso, MAS NÃO entregou folheto de promoções. Não cumpriu item 5 do protocolo.'",
-   incorrectApproach: "Registar: 'Esqueceu-se de dar o folheto' (falta contexto, pode parecer um erro seu, não da marca)"
+   incorrectApproach: "Registar: 'Esqueceu-se de dar o folheto' (falta contexto, pode parecer um erro seu, não da marca)",
+   animationType: "pharmacy"
   },
   {
    title: "Exemplo 3: Múltiplas Observações Cronológicas",
