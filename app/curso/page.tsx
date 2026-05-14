@@ -10,6 +10,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { courseModules as courseModulesPt, type QuizQuestion } from "./courseData";
 import { courseModules as courseModulesEn } from "./courseDataEn";
 import { useLanguage } from "@/app/context/LanguageContext";
+import { PharmacyAnimation } from "@/app/components/PharmacyAnimation";
 import styles from "./page.module.css";
 
 type ModuleProgress = {
@@ -1169,6 +1170,7 @@ export default function CursoPage() {
                           {activeModule.evaluationExamples.map((example) => (
                             <article key={example.title} className={styles.example}>
                               <h3 className={styles.exampleTitle}>{example.title}</h3>
+                              {example.animationType === "pharmacy" && <PharmacyAnimation />}
                               <p><span className={styles.exampleLabel}>{cp.scenario}</span> {example.scenario}</p>
                               <p><span className={styles.exampleLabel}>{cp.correctApproach}</span> {example.correctApproach}</p>
                               <p><span className={styles.exampleLabel}>{cp.incorrectApproach}</span> {example.incorrectApproach}</p>

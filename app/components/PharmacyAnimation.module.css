@@ -1,0 +1,424 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.animationBox {
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe6f0 100%);
+  border: 2px solid #e8b4d4;
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.pharmacy {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background: linear-gradient(to bottom, #f0f0f0 0%, #e8e8e8 100%);
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* Counter */
+.counter {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 120px;
+  height: 80px;
+  background: #d4a574;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.counterText {
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Pharmacist */
+.pharmacist {
+  position: absolute;
+  left: 150px;
+  bottom: 80px;
+  width: 80px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.pharmacistHead {
+  width: 40px;
+  height: 40px;
+  background: #f4a460;
+  border-radius: 50%;
+  position: relative;
+}
+
+.pharmacistHead::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+  left: 12px;
+  top: 15px;
+}
+
+.pharmacistHead::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+  right: 12px;
+  top: 15px;
+}
+
+.pharmacistBody {
+  width: 50px;
+  height: 50px;
+  background: #ffffff;
+  border-radius: 4px;
+  border: 2px solid #333;
+  position: relative;
+}
+
+.pharmacistBody::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 20px;
+  background: #666;
+  left: 50%;
+  transform: translateX(-2px);
+  top: -20px;
+}
+
+.pharmacistArms {
+  position: absolute;
+  top: 40px;
+  left: -30px;
+  width: 110px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pharmacistArms::before,
+.pharmacistArms::after {
+  content: "";
+  width: 40px;
+  height: 6px;
+  background: #f4a460;
+  border-radius: 3px;
+}
+
+/* Customer */
+.customer {
+  position: absolute;
+  right: 100px;
+  bottom: 80px;
+  width: 80px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.customer.hidden {
+  opacity: 0;
+}
+
+.customer.entering {
+  animation: enterCustomer 2s ease-out;
+  opacity: 1;
+}
+
+.customer.present {
+  opacity: 1;
+}
+
+@keyframes enterCustomer {
+  0% {
+    opacity: 0;
+    transform: translateX(150px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.customerHead {
+  width: 40px;
+  height: 40px;
+  background: #e8b4a8;
+  border-radius: 50%;
+  position: relative;
+}
+
+.customerHead::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+  left: 12px;
+  top: 15px;
+}
+
+.customerHead::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+  right: 12px;
+  top: 15px;
+}
+
+.customerBody {
+  width: 50px;
+  height: 50px;
+  background: #4a90e2;
+  border-radius: 4px;
+  position: relative;
+}
+
+/* Speech Bubbles */
+.speechBubble {
+  position: absolute;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  max-width: 140px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: popIn 0.3s ease-out;
+}
+
+.speechBubble p {
+  margin: 0;
+  color: #333;
+}
+
+.pharmacistSpeech {
+  left: 100px;
+  top: 40px;
+}
+
+.customerSpeech {
+  right: 80px;
+  top: 40px;
+  background: #e3f2fd;
+  border-color: #4a90e2;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* X Mark */
+.xMark {
+  position: absolute;
+  font-size: 80px;
+  font-weight: bold;
+  color: #e74c3c;
+  opacity: 0.8;
+  animation: appear 0.4s ease-out;
+  top: 80px;
+  right: 150px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-30deg);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Warning Text */
+.warningText {
+  position: absolute;
+  right: 70px;
+  bottom: 80px;
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 13px;
+  background: rgba(231, 76, 60, 0.1);
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #e74c3c;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Conclusion Box */
+.conclusionBox {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 16px;
+  width: 80%;
+  max-width: 400px;
+  animation: slideUp 0.4s ease-out;
+}
+
+.conclusionTitle {
+  margin: 0 0 8px 0;
+  font-weight: bold;
+  font-size: 15px;
+  color: #856404;
+}
+
+.conclusionText {
+  margin: 0;
+  font-size: 13px;
+  color: #856404;
+  line-height: 1.4;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Progress Bar */
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a90e2, #f39c12);
+  transition: width 0.1s linear;
+}
+
+.timeLabel {
+  position: absolute;
+  bottom: -25px;
+  left: 10px;
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 10px 20px;
+  border: 2px solid #4a90e2;
+  background: white;
+  color: #4a90e2;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: #4a90e2;
+  color: white;
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .animationBox {
+    padding: 20px;
+    min-height: 350px;
+  }
+
+  .pharmacy {
+    height: 250px;
+  }
+
+  .speechBubble {
+    font-size: 12px;
+    padding: 8px;
+    max-width: 100px;
+  }
+
+  .conclusionBox {
+    max-width: 90%;
+  }
+}
