@@ -1312,6 +1312,19 @@ export default function CursoPage() {
                   <div key={question.id} className={styles.q}>
                     <p className={styles.qNum}>{String(qIdx + 1).padStart(2, "0")}</p>
                     <h3 className={styles.qText}>{question.question}</h3>
+                    {question.videoUrl && (
+                      <div style={{ marginBottom: 24, marginTop: 16 }}>
+                        <video
+                          width="100%"
+                          height="auto"
+                          controls
+                          style={{ borderRadius: 8, backgroundColor: "#000", maxWidth: "100%" }}
+                        >
+                          <source src={question.videoUrl} type="video/mp4" />
+                          Seu navegador não suporta vídeos HTML5.
+                        </video>
+                      </div>
+                    )}
                     <div className={styles.qOpts}>
                       {question.options.map((option, oIdx) => (
                         <button

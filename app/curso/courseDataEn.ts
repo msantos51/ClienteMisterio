@@ -203,6 +203,18 @@ export const courseModules: CourseModule[] = [
  ],
  correctIndex: 0,
  },
+ {
+ id: "m1q6",
+ question: "Watch the video below and choose the CORRECT approach to register the situation.",
+ options: [
+ "She forgot to give the brochure",
+ "I requested a recommendation for a headache. The pharmacist offered medication and explained how to use it, BUT DID NOT provide the promotions brochure. Did not comply with item 5 of the protocol.",
+ "The pharmacist didn't know she should give brochures to customers",
+ "The customer didn't receive the brochure because they forgot to ask",
+ ],
+ correctIndex: 1,
+ videoUrl: "/videos/pharmacy_example.mp4",
+ },
  ],
  },
  {
