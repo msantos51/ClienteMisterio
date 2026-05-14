@@ -7,6 +7,7 @@ export type QuizQuestion = {
  question: string;
  options: string[];
  correctIndex: number;
+ videoUrl?: string;
 };
 
 export type EvaluationExample = {
