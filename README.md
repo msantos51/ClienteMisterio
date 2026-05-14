@@ -1,175 +1,106 @@
-# Cliente Mistério
+# Redesign da Landing Page — Instruções de PR
 
-Plataforma online para o único curso de Cliente Mistério em Portugal. Os utilizadores aprendem a tornar-se avaliadores profissionais de serviços, de forma discreta, metódica e remunerada.
+Este PR substitui a homepage actual (`app/page.tsx`) por um redesign editorial focado em conversão.
 
-## Sobre o Projeto
-
-**Cliente Mistério** é uma aplicação web full-stack que permite:
-
-- Aceder a um curso completo de 10 módulos sobre como ser Cliente Mistério
-- Registar conta, fazer login e gerir perfil
-- Acompanhar o progresso do curso e resultados dos questionários
-- Adquirir o acesso ao curso via Stripe (pagamento único de 24,99€)
-- Contactar a equipa através de formulário integrado
-
-## Stack Tecnológica
-
-| Camada | Tecnologia |
-|--------|-----------|
-| Framework | Next.js 16 (App Router) |
-| Frontend | React 19, TypeScript |
-| Estilos | Tailwind CSS 4, fontes customizadas (CreatoDisplay, Basenji) |
-| Base de dados | PostgreSQL (`pg`) |
-| Autenticação | Sessões HMAC-SHA256 com cookies HTTP-only |
-| Pagamentos | Stripe Payment Links |
-| Email | Resend API |
-| Deploy | Render.com (Node 22) |
-
-## Estrutura do Projeto
+## Ficheiros alterados / criados
 
 ```
-ClienteMisterio/
-├── app/
-│   ├── components/         # Componentes reutilizáveis (AppShell, TopNav, Footer, etc.)
-│   ├── api/                # Rotas API (auth, user, contact, course)
-│   ├── about/              # Página "Sobre"
-│   ├── account/            # Registo de conta
-│   ├── checkout/           # Redirecionamento para Stripe
-│   ├── contact/            # Formulário de contacto
-│   ├── curso/              # Curso completo (requer autenticação)
-│   ├── dashboard/          # Área do utilizador
-│   ├── forgot-password/    # Recuperação de senha
-│   ├── login/              # Autenticação
-│   ├── o-curso/            # Página pública com estrutura do curso
-│   ├── reset-password/     # Redefinição de senha via token
-│   ├── termos-e-condicoes/ # Termos legais
-│   ├── globals.css         # Estilos globais e variáveis CSS
-│   ├── layout.tsx          # Layout raiz com metadados
-│   └── loading.tsx         # Estado de carregamento global
-├── db/
-│   └── schema.sql          # Esquema PostgreSQL (users, contact_messages, course_progress)
-├── lib/
-│   ├── database.ts         # Pool PostgreSQL com auto-inicialização
-│   ├── session.ts          # Gestão de sessões com HMAC-SHA256
-│   ├── password.ts         # Hash de palavras-passe com scrypt
-│   ├── token.ts            # Tokens para confirmação de email e reposição de palavra-passe
-│   ├── email.ts            # Wrapper da API Resend
-│   ├── authEmail.ts        # Templates de email transacional
-│   └── admin.ts            # Verificação de permissões de administrador
-├── public/                 # Fontes e assets estáticos
-├── next.config.ts          # Configuração Next.js (imagens, cache, compressão)
-├── render.yaml             # Configuração de deploy no Render
-└── package.json
+app/
+  page.tsx          ← SUBSTITUÍDO
+  page.module.css   ← NOVO (CSS scoped, não toca em globals.css)
 ```
 
-## Variáveis de Ambiente
+**Só 2 ficheiros.** Não toquei em `globals.css`, `layout.tsx`, `TopNav`, `Footer`, nem em mais nenhum componente. O `CheckoutButton` existente também não é modificado — a lógica do Stripe está replicada inline no `page.tsx` (componente `BuyButton`) para evitar conflitos de estilo.
 
-Cria um ficheiro `.env.local` na raiz com as seguintes variáveis:
+## O que muda visualmente
 
-```env
-# Base de dados PostgreSQL
-DATABASE_URL=postgresql://user:password@host:5432/dbname
+- **Hero** asimétrico (texto + mockup tangível de uma missão + cartão de módulo)
+- **Strip de stats** sem fundo de card (mais confiante)
+- **Grid "O que vais avaliar"** — 6 categorias com pagamento típico
+- **Currículo dos 10 módulos** num bloco escuro com numeração editorial em itálico (Basenji)
+- **Tabela de ganhos honesta** por tipo de missão
+- **Como funciona** em zigzag editorial (não 4 cards iguais)
+- **Testemunho destacado** + 2 mais pequenos (não 3 iguais)
+- **FAQ** com 7 objeções comuns (acordeão)
+- **CTA final escuro** com efeitos radiais
+- **Sticky buy-bar** que aparece no scroll
 
-# Segredo da sessão (mínimo 32 caracteres aleatórios)
-SESSION_SECRET=um-segredo-muito-longo-e-aleatorio-aqui
+## Como aplicar
 
-# Email de administrador (fica com is_admin=true automaticamente)
-ADMIN_EMAIL=admin@exemplo.com
-
-# Resend (envio de emails)
-RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
-RESEND_FROM="Cliente Mistério <noreply@seudominio.com>"
-
-# URL base da aplicação (para links nos emails)
-APP_BASE_URL=https://clientemisterio.onrender.com
-
-# Stripe Payment Link (apresentado aos visitantes no checkout)
-NEXT_PUBLIC_STRIPE_PAYMENT_LINK=https://buy.stripe.com/xxxxxxxx
-
-# Stripe - Chave secreta do servidor (necessária para verificar webhooks)
-STRIPE_SECRET_KEY=sk_live_xxxxxxxxxxxxxxxxxxxx
-
-# Stripe - Segredo do endpoint webhook (painel Stripe > Developers > Webhooks)
-STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxxxxxx
-
-# Opcional: expor Swagger/OpenAPI publicamente em produção
-ENABLE_PUBLIC_API_DOCS=false
-```
-
-## Instalação e Desenvolvimento
+### Passo 1 — Criar branch
 
 ```bash
-# Instalar dependências
-npm install
-
-# Iniciar em modo de desenvolvimento
-npm run dev
-
-# Build de produção
-npm run build
-
-# Iniciar servidor de produção
-npm start
+git checkout -b redesign/landing-page
 ```
 
-A base de dados é inicializada automaticamente na primeira execução (`lib/database.ts` cria as tabelas se não existirem).
+### Passo 2 — Copiar os 2 ficheiros
 
-## Swagger (Teste no Browser)
+A partir desta pasta `pr/`, copia para o teu repo:
 
-Com a aplicação em execução (`npm run dev`), abra: `http://localhost:3000/api-docs`
+```
+pr/app/page.tsx          →  app/page.tsx          (SUBSTITUI)
+pr/app/page.module.css   →  app/page.module.css   (NOVO)
+```
 
-Esta página carrega o Swagger UI e permite testar os endpoints manualmente no browser.
+### Passo 3 — Testar localmente
 
-## Rotas da API
+```bash
+npm run dev
+```
 
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| POST | `/api/auth/register` | Registo de novo utilizador |
-| POST | `/api/auth/login` | Autenticação |
-| POST | `/api/auth/logout` | Terminar sessão |
-| GET | `/api/auth/confirm-email` | Confirmação de email por token |
-| POST | `/api/auth/forgot-password` | Pedido de reposição de palavra-passe |
-| POST | `/api/auth/reset-password` | Redefinir palavra-passe com token |
-| GET | `/api/user` | Obter perfil do utilizador autenticado |
-| PUT | `/api/user` | Atualizar dados de perfil |
-| PUT | `/api/user/password` | Alterar senha |
-| PUT | `/api/admin/course-access` | Atualizar manualmente acesso pago ao curso (admin) |
-| POST | `/api/contact` | Enviar mensagem de contacto |
-| GET | `/api/course/progress` | Progresso do curso do utilizador |
-| PUT | `/api/course/progress` | Atualizar progresso/nota do utilizador |
-| GET | `/api/course/certificate` | Gerar PDF de certificado após conclusão |
-| POST | `/api/stripe/webhook` | Webhook Stripe para libertar acesso após pagamento |
-| GET | `/api/auth/session` | Estado atual da sessão do browser |
+Abre `http://localhost:3000` e verifica:
+- O hero rende com os 2 mock cards visíveis (não colapsados)
+- Os botões "Comprar agora" funcionam (vão para Stripe se autenticado, senão para `/login?checkout=1`)
+- O sticky buy-bar aparece quando scrollas para baixo
+- A FAQ abre/fecha
+- Mobile (≤ 720px) reorganiza tudo numa coluna
 
-## Segurança
+### Passo 4 — Commit + Push + PR
 
-- **Sessões**: tokens HMAC-SHA256 assinados, armazenados em cookies HTTP-only com SameSite=Lax
-- **Segredo de sessão**: em produção, `SESSION_SECRET` é recomendado; em Render existe fallback automático por `RENDER_SERVICE_ID` para evitar indisponibilidade de login
-- **Senhas**: hash com `scrypt` e salt aleatório; comparação timing-safe
-- **Tokens de email**: gerados aleatoriamente, guardados em hash (SHA-256) na base de dados
-- **SQL**: queries parametrizadas em todos os endpoints (sem risco de SQL injection)
-- **Admin**: papel de administrador definido por variável de ambiente e validado na base de dados
-- **Hardening HTTP**: middleware global adiciona cabeçalhos de segurança (`HSTS`, `X-Frame-Options`, `nosniff`, `COOP`, `Permissions-Policy`)
-- **Exposição técnica controlada**: `/api-docs` e `/api/openapi` ficam ocultos por defeito em produção
+```bash
+git add app/page.tsx app/page.module.css
+git commit -m "redesign(home): editorial layout focado em conversão"
+git push origin redesign/landing-page
+```
 
-## Deploy no Render
+Depois abre o PR no GitHub UI: https://github.com/msantos51/ClienteMisterio/compare/main...redesign/landing-page
 
-O ficheiro `render.yaml` configura o serviço automaticamente:
+## Dependências externas
 
-- **Runtime**: Node 22
-- **Build**: `npm install && npm run build`
-- **Start**: `npm start`
+**Nada novo.** O redesign usa só:
+- Tailwind 4 (já tens) — apenas para estrutura básica em alguns lugares
+- CSS Modules (built-in do Next.js)
+- Fontes já carregadas: Google Sans (CDN em globals.css), Basenji (font-face em globals.css)
+- Variável `--accent` (#22a094) já definida em globals.css
 
-Configura as variáveis de ambiente no painel do Render antes do primeiro deploy.
+## Notas de design / decisões
 
-## Licença
+1. **Sem i18n por agora.** O texto está hard-coded em PT. Para adicionar EN depois, basta extrair as strings para `t.home.*` no `LanguageContext`.
 
-Todos os direitos reservados © Cliente Mistério. O conteúdo do curso e a plataforma não podem ser reproduzidos ou distribuídos sem autorização expressa.
+2. **CSS Module em vez de globals.css.** Mantém o scope local e evita conflitos com as regras globais agressivas que tens (ex.: `button { background: #22a094 ... }` no globals.css). O `.page button { all: unset }` no topo do CSS module faz o reset apenas dentro desta página.
 
-## Diretrizes de Escrita do Curso
+3. **Replicação do `CheckoutButton`.** O componente `<BuyButton>` dentro do `page.tsx` replica a lógica de auth + Stripe payment link. Se preferires reusar o componente original, podes adicionar uma `variant="unstyled"` ao `CheckoutButton.tsx` que ignora `site-pill-button` — mas isso obriga a mais um ficheiro no PR. Como está, o PR fica em 2 ficheiros.
 
-1. Sempre que o conteúdo do curso for apresentado em formato de pontos, cada ideia deve aparecer num parágrafo separado e numerado, em vez de texto corrido.
+4. **Acessibilidade.** Botões de FAQ têm `aria-expanded`; SVGs decorativos têm `aria-hidden`; sticky buy-bar tem `aria-hidden` quando escondida.
 
-2. Termos essenciais podem ser destacados com **negrito** para melhorar a leitura e a hierarquia visual do conteúdo.
+5. **Performance.** O scroll listener é `passive: true`. Não há `requestAnimationFrame` porque o trabalho por evento é mínimo (1 getBoundingClientRect).
 
-3. Evitar o uso de emojis, ícones e travessões como marcador de lista para manter uma apresentação mais natural e editorial.
+## Rollback rápido
+
+Se algo correr mal:
+
+```bash
+git checkout main -- app/page.tsx
+rm app/page.module.css
+```
+
+E voltas à versão actual.
+
+---
+
+## Próximos passos (não bloqueantes)
+
+- [ ] Adicionar tradução EN (extrair strings para `t.home.*`)
+- [ ] Substituir mock card no hero por screenshot real de uma missão dentro do dashboard
+- [ ] Adicionar logos de marcas avaliadas (banca, hotelaria) à secção de categorias
+- [ ] A/B testar o preço no buy-bar (24,99€ vs. 64,99€ → 24,99€)
