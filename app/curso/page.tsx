@@ -10,6 +10,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { courseModules as courseModulesPt, type QuizQuestion } from "./courseData";
 import { courseModules as courseModulesEn } from "./courseDataEn";
 import { useLanguage } from "@/app/context/LanguageContext";
+import styles from "./page.module.css";
 
 type ModuleProgress = {
   moduleId: number;
@@ -846,20 +847,15 @@ export default function CursoPage() {
   };
 
   const getOptionClass = (question: QuizQuestion, optionIndex: number): string => {
-    const base = "w-full text-left p-3 rounded-lg border-2 transition-all text-sm text-[#2a2a2a]";
+    const classes = [styles.qOpt];
     if (!quizSubmitted) {
-      if (quizAnswers[question.id] === optionIndex) {
-        return `${base} border-[#22a094] bg-[#22a094]/15`;
-      }
-      return `${base} border-[#D4B5A0]/30 hover:border-[#D4B5A0]/60 bg-white`;
+      if (quizAnswers[question.id] === optionIndex) classes.push(styles.qOptSelected);
+    } else {
+      if (optionIndex === question.correctIndex) classes.push(styles.qOptCorrect);
+      else if (quizAnswers[question.id] === optionIndex) classes.push(styles.qOptWrong);
+      else classes.push(styles.qOptDim);
     }
-    if (optionIndex === question.correctIndex) {
-      return `${base} border-green-500 bg-green-50`;
-    }
-    if (quizAnswers[question.id] === optionIndex && optionIndex !== question.correctIndex) {
-      return `${base} border-red-400 bg-red-50`;
-    }
-    return `${base} border-[#D4B5A0]/30 bg-white opacity-60`;
+    return classes.join(" ");
   };
 
   if (!isAuthenticated) {
@@ -868,24 +864,23 @@ export default function CursoPage() {
 
   if (accessDenied) {
     return (
-      <section className="w-full space-y-6 bg-white p-8 rounded-2xl">
-        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">{cp.courseTitle}</h1>
-        <p className="text-base text-[#2a2a2a]">
-          {cp.accessDeniedDesc}
-        </p>
-        <div className="flex gap-3">
-          <button className="submit max-w-[220px]" type="button" onClick={() => router.push("/checkout")}>
-            {cp.goToPayment}
-          </button>
-          <button
-            className="site-pill-button-secondary max-w-[220px]"
-            type="button"
-            onClick={() => router.push("/dashboard")}
-          >
-            {cp.backToDashboard}
-          </button>
+      <div className={styles.page}>
+        <div className={styles.wrap} style={{ padding: "80px 28px" }}>
+          <div className={styles.eyebrow}>Acesso restrito</div>
+          <h1 className={`${styles.display} ${styles.displayLg}`} style={{ marginBottom: 16 }}>
+            {cp.courseTitle}
+          </h1>
+          <p className={styles.lead} style={{ marginBottom: 32 }}>{cp.accessDeniedDesc}</p>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => router.push("/checkout")}>
+              {cp.goToPayment}
+            </button>
+            <button type="button" className={`${styles.btn} ${styles.btnGhost}`} onClick={() => router.push("/dashboard")}>
+              {cp.backToDashboard}
+            </button>
+          </div>
         </div>
-      </section>
+      </div>
     );
   }
 
@@ -909,475 +904,502 @@ export default function CursoPage() {
   const totalModules = progress?.totalModules ?? 11;
   const progressPercent = progress?.progressPercent ?? 0;
 
+  // Helpers for derived UI state
+  const currentMod = !activeModule
+    ? courseModules.find((m) => {
+        const p = getModuleProgress(m.id);
+        return !p?.completed && isModuleUnlocked(m.id);
+      })
+    : null;
+  const allDone = completedCount >= totalModules - 1; // 10 base modules done unlocks cert (module 11)
+
   return (
-    <section className="w-full bg-gray-50">
-      <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
-        <div className="space-y-8 bg-white p-8 rounded-2xl">
-      <header className="space-y-3">
-        <p className="text-xs font-semibold" style={{ color: "#22a094" }}>
-          {cp.completeTraining}
-        </p>
-        <h1 className="text-3xl font-semibold home-title-highlight-text lg:text-4xl">
-          {cp.courseTitle}
-        </h1>
-        <p className="max-w-3xl text-base leading-7 text-[#2a2a2a]">
-          {cp.completionDesc}
-        </p>
-      </header>
-
-      {/* Course stats */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
-          <p className="text-3xl font-bold text-[#2a2a2a]">{totalModules}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">{cp.targetModules}</p>
-        </div>
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
-          <p className="text-3xl font-bold text-[#2a2a2a]">{totalModules - (progress?.completedCount ?? 0)}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">{cp.missing}</p>
-        </div>
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
-          <p className="text-3xl font-bold text-[#2a2a2a]">{completedCount}</p>
-          <p className="text-xs text-[#666] mt-2 font-medium">{cp.finished}</p>
-        </div>
-      </div>
-
-      {/* Global progress bar */}
-      <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-5">
-        <div className="flex items-center justify-between text-sm mb-3">
-          <span className="font-semibold text-[#2a2a2a]">{cp.courseProgress}</span>
-          <span className="font-bold text-[#22a094]">{progressPercent}%</span>
-        </div>
-        <div className="h-3 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
-          <div
-            className="h-full rounded-full bg-gradient-to-r from-[#22a094] to-[#22a094] transition-all duration-700"
-            style={{ width: `${progressPercent}%` }}
-          />
-        </div>
-        <p className="mt-2 text-xs text-[#666]">
-          {completedCount} {cp.of} {totalModules} {cp.modulesCompleted}
-        </p>
-      </div>
-
-      {/* Module list */}
+    <div className={styles.page}>
+      {/* ============================================================
+          STATE 1 — Module index
+          ============================================================ */}
       {!activeModule && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-[#2a2a2a]">{cp.courseModulesTitle}</h2>
-            <div className="flex gap-4 text-sm">
-              <div className="text-right">
-                <span className="font-bold text-[#22a094]">{totalModules}</span>
-                <p className="text-xs text-[#666]">{cp.available}</p>
-              </div>
-              <div className="text-right">
-                <span className="font-bold text-[#2a2a2a]">{completedCount}</span>
-                <p className="text-xs text-[#666]">{cp.completed}</p>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-3">
-          {courseModules.map((mod) => {
-            const modProgress = getModuleProgress(mod.id);
-            const unlocked = isModuleUnlocked(mod.id);
-            const completed = modProgress?.completed === true;
-
-            return (
-              <button
-                key={mod.id}
-                type="button"
-                disabled={!unlocked}
-                onClick={() => openModule(mod.id)}
-                className={`w-full text-left rounded-2xl border p-5 transition-all ${
-                  completed
-                    ? "border-[#22a094]/40 bg-[#F5E5DB] hover:bg-[#E8D5C8]"
-                    : unlocked
-                      ? "border-[#D4B5A0]/30 hover:border-[#22a094] cursor-pointer hover:bg-white/60"
-                      : "border-[#D4B5A0]/20 opacity-40 cursor-not-allowed"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
-                        completed
-                          ? "bg-[#22a094] text-white"
-                          : unlocked
-                            ? "bg-[#22a094]/20 text-[#22a094]"
-                            : "bg-[#D4B5A0]/20 text-[#2a2a2a]"
-                      }`}
-                    >
-                      {completed ? "\u2713" : mod.id}
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="font-semibold text-sm break-words text-[#2a2a2a]">{mod.title}</h3>
-                      <p className="text-xs text-[#666] mt-0.5">{mod.description}</p>
-                    </div>
-                  </div>
-                  <div className="shrink-0 text-sm flex flex-col items-end gap-0.5">
-                    {completed && (
-                      <span className="text-[#22a094] font-semibold text-xs">{cp.complete}</span>
-                    )}
-                    {completed && modProgress?.quizScore !== null && (
-                      <span className="text-[#22a094] font-semibold">{modProgress.quizScore}%</span>
-                    )}
-                    {!completed && unlocked && (
-                      <span className="text-[#2a2a2a]">&rarr;</span>
-                    )}
-                    {!unlocked && (
-                      <span className="text-[#999] text-xs">{cp.locked}</span>
-                    )}
-                  </div>
-                </div>
-              </button>
-            );
-          })}
-          </div>
-        </div>
-      )}
-
-      {/* Conteúdo do módulo ativo */}
-      {activeModule && !quizMode && currentTheoryPage && (
-        <div className="fixed inset-0 z-[120] bg-black/60 p-3 sm:p-6">
-          <div className="mx-auto flex h-full w-full max-w-[1320px] flex-col rounded-2xl border border-[#D4B5A0]/30 bg-white p-4 sm:p-6">
-            <div className="mb-4">
-              <button
-                type="button"
-                onClick={() => setActiveModuleId(null)}
-                className="text-sm text-[#2a2a2a] font-semibold hover:underline"
-              >
-                {cp.backToModules}
-              </button>
-            </div>
-
-            <div ref={moduleContentRef} className="overflow-y-auto pr-1 sm:pr-2">
-              <div className="mb-6 space-y-3">
+        <>
+          <section className={styles.courseHead}>
+            <div className={styles.wrap}>
+              <div className={styles.courseHeadGrid}>
                 <div>
-                  <h2 className="text-2xl font-bold text-[#2a2a2a]">{activeModule.title}</h2>
-                  <p className="text-sm text-[#666] mt-2">{activeModule.description}</p>
+                  <div className={styles.eyebrow}>{cp.completeTraining}</div>
+                  <h1 className={`${styles.display} ${styles.displayXl} ${styles.courseHeadTitle}`}>
+                    {cp.courseTitle.split(" ").map((w, i, arr) => (
+                      <React.Fragment key={i}>
+                        {i === arr.length - 1 ? <em>{w}</em> : w}
+                        {i < arr.length - 1 ? " " : ""}
+                      </React.Fragment>
+                    ))}
+                  </h1>
+                  <p className={styles.courseHeadSub}>{cp.completionDesc}</p>
                 </div>
 
-                {/* Barra de progresso do módulo */}
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <p className="text-xs font-semibold text-[#666]">{cp.page} {theoryPage + 1} {cp.of} {allTheoryPages.length}</p>
-                    <p className="text-sm font-bold text-[#22a094]">{Math.round(((theoryPage + 1) / allTheoryPages.length) * 100)}{cp.percentComplete}</p>
+                <div className={styles.progressCard}>
+                  <div className={styles.progressCardRow}>
+                    <div className={styles.progressCardCount}>
+                      <em>{completedCount}</em>
+                      <span>/&nbsp;{totalModules}</span>
+                    </div>
+                    <div className={styles.progressCardPct}>{progressPercent}% {cp.completed}</div>
                   </div>
-                  <div className="h-2 w-full rounded-full bg-[#D4B5A0]/20 overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-[#22a094] transition-all duration-500"
-                      style={{ width: `${((theoryPage + 1) / allTheoryPages.length) * 100}%` }}
-                    />
+                  <div className={styles.progressBar}>
+                    <div className={styles.progressBarFill} style={{ width: `${progressPercent}%` }} />
                   </div>
+                  <p className={styles.progressCardLabel}>
+                    {currentMod ? (
+                      <>Continua no módulo <strong>{String(currentMod.id).padStart(2, "0")} · {currentMod.title}</strong></>
+                    ) : completedCount >= totalModules ? (
+                      <strong>{cp.courseTitle} — concluído.</strong>
+                    ) : (
+                      <>{completedCount} {cp.of} {totalModules} {cp.modulesCompleted}</>
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className={styles.modList}>
+            <div className={styles.wrap}>
+              <div className={styles.modListHead}>
+                <h2 className={styles.modListTitle}>{cp.courseModulesTitle}</h2>
+                <div className={styles.modListLegend}>
+                  <span className={styles.legDone}>{cp.completed}</span>
+                  <span className={styles.legNow}>A decorrer</span>
+                  <span>{cp.locked}</span>
                 </div>
               </div>
 
-              {/* Layout de duas colunas: conteúdo + sidebar */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                {/* Coluna esquerda - conteúdo principal */}
-                <div className="lg:col-span-2 space-y-6">
-                  {/* Título da página */}
-                  <div>
-                    <p className="text-xs text-[#666] font-semibold mb-3">{currentTheoryPage.title}</p>
-                  </div>
+              {courseModules.filter((m) => m.id !== 11).map((mod) => {
+                const modProgress = getModuleProgress(mod.id);
+                const unlocked = isModuleUnlocked(mod.id);
+                const completed = modProgress?.completed === true;
+                const isCurrent = !completed && unlocked && currentMod?.id === mod.id;
 
-                  {/* Conteúdo teórico */}
-                  <div className="space-y-4">
-                    {currentTheoryPage.blocks.map((paragraph, idx) => (
-                      <p key={idx} className="text-base leading-8 text-[#2a2a2a] text-justify">
-                        {renderBold(paragraph)}
-                      </p>
-                    ))}
-                  </div>
+                const cls = [styles.mod];
+                if (completed) cls.push(styles.modDone);
+                else if (isCurrent) cls.push(styles.modCurrent);
+                else if (!unlocked) cls.push(styles.modLocked);
 
-                  {/* Conteúdo premium - no final */}
-                  {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
-                    <div className="space-y-4 mt-8 pt-6 border-t border-[#D4B5A0]/20">
-                      <div className="rounded-lg border border-[#a0d5be]/30 bg-[#f0f7f4] p-4">
-                        <p className="font-bold text-[#2a2a2a] mb-3">{cp.goodPractices}</p>
-                        <ul className="space-y-2 text-sm text-[#2a2a2a]">
-                          {activeSupportContent.goodPractices.map((item) => (
-                            <li key={item} className="flex gap-2">
-                              <span className="shrink-0">–</span>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
-                        <p className="font-bold text-[#2a2a2a] mb-3">{cp.badPractices}</p>
-                        <ul className="space-y-2 text-sm text-[#2a2a2a]">
-                          {activeSupportContent.badPractices.map((item) => (
-                            <li key={item} className="flex gap-2">
-                              <span className="shrink-0">–</span>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="rounded-lg border border-[#fbc3bb]/30 bg-[#fffbfa] p-4">
-                        <p className="font-bold text-[#2a2a2a] mb-3">{cp.practicalStrategies}</p>
-                        <ul className="space-y-2 text-sm text-[#2a2a2a]">
-                          {activeSupportContent.strategies.map((item) => (
-                            <li key={item} className="flex gap-2">
-                              <span className="shrink-0">–</span>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="rounded-lg border border-[#22a094]/30 bg-[#22a094] p-4">
-                        <p className="font-bold text-white mb-3">{cp.executionChecklist}</p>
-                        <ul className="space-y-2 text-sm text-white">
-                          {activeSupportContent.executionChecklist.map((item) => (
-                            <li key={item} className="flex gap-2">
-                              <span className="shrink-0">–</span>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      {activeModule.evaluationExamples && activeModule.evaluationExamples.length > 0 && (
-                        <div className="rounded-lg border border-[#D4B5A0]/30 bg-white p-4">
-                          <p className="font-bold text-[#2a2a2a] mb-3">{cp.decisionExamples}</p>
-                          <div className="space-y-4">
-                            {activeModule.evaluationExamples.map((example) => (
-                              <article key={example.title} className="rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 space-y-2">
-                                <h3 className="text-sm font-bold text-[#2a2a2a]">{example.title}</h3>
-                                <p className="text-sm text-[#2a2a2a]">
-                                  <span className="font-semibold">{cp.scenario}</span> {example.scenario}
-                                </p>
-                                <p className="text-sm text-[#2a2a2a]">
-                                  <span className="font-semibold">{cp.correctApproach}</span> {example.correctApproach}
-                                </p>
-                                <p className="text-sm text-[#2a2a2a]">
-                                  <span className="font-semibold">{cp.incorrectApproach}</span> {example.incorrectApproach}
-                                </p>
-                              </article>
-                            ))}
-                          </div>
-                        </div>
+                return (
+                  <button
+                    key={mod.id}
+                    type="button"
+                    disabled={!unlocked}
+                    onClick={() => openModule(mod.id)}
+                    className={cls.join(" ")}
+                  >
+                    <div className={styles.modNum}>{String(mod.id).padStart(2, "0")}</div>
+                    <div className={styles.modBody}>
+                      <h3 className={styles.modTitle}>{mod.title}</h3>
+                      <p className={styles.modDesc}>{mod.description}</p>
+                    </div>
+                    <div className={styles.modMeta}>
+                      {completed ? (
+                        <span className={`${styles.modBadge} ${styles.modBadgeDone}`}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          {modProgress?.quizScore ?? 100}%
+                        </span>
+                      ) : isCurrent ? (
+                        <span className={`${styles.modBadge} ${styles.modBadgeCurrent}`}>A decorrer</span>
+                      ) : unlocked ? (
+                        <span className={styles.modBadge}>{cp.available}</span>
+                      ) : (
+                        <span className={`${styles.modBadge} ${styles.modBadgeLocked}`}>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                          {cp.locked}
+                        </span>
+                      )}
+                      {unlocked && (
+                        <span className={styles.modArrow}>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </span>
                       )}
                     </div>
-                  )}
-                </div>
+                  </button>
+                );
+              })}
 
-                {/* Coluna direita - sidebar com cards de contexto */}
-                <div className="lg:col-span-1 space-y-4">
-                  {/* Conceitos-chave */}
-                  {activeModule.keywords && activeModule.keywords.length > 0 && (
-                    <div className="rounded-lg border border-[#b8d5ce]/30 bg-[#eef9f6] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-3">{cp.keyConceptsTitle}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {activeModule.keywords.map((keyword) => (
-                          <span
-                            key={keyword}
-                            className="inline-block px-2.5 py-1 text-xs font-medium rounded-full bg-[#22a094]/20 text-[#2a2a2a]"
-                          >
-                            {keyword}
-                          </span>
-                        ))}
-                      </div>
+              {/* Certificate block (module 11) */}
+              {courseModules.find((m) => m.id === 11) && (() => {
+                const cert = courseModules.find((m) => m.id === 11)!;
+                const certProgress = getModuleProgress(11);
+                const certUnlocked = isModuleUnlocked(11);
+                const certCompleted = certProgress?.completed === true;
+
+                return (
+                  <div className={styles.certBlock}>
+                    <div className={styles.certBlockCopy}>
+                      <div className={`${styles.eyebrow} ${styles.eyebrowAccent}`}>{cp.complete}</div>
+                      <h3 className={styles.certBlockTitle}>
+                        {cert.title.split(" ").slice(0, -1).join(" ")}{" "}
+                        <em>{cert.title.split(" ").slice(-1)}</em>.
+                      </h3>
+                      <p className={styles.certBlockSub}>
+                        {certUnlocked ? cp.certificateDesc : `Disponível após concluíres os ${totalModules - 1} módulos.`}
+                      </p>
                     </div>
-                  )}
-
-                  {/* Dica Prática */}
-                  {activeModule.practicalTip && (
-                    <div className="rounded-lg border border-[#a0d5be]/30 bg-[#f0f7f4] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">{cp.practicalTipTitle}</p>
-                      <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.practicalTip}</p>
+                    <div className={styles.certBlockCta}>
+                      {certUnlocked ? (
+                        <button
+                          type="button"
+                          onClick={() => openModule(11)}
+                          className={`${styles.btn} ${styles.btnAccent}`}
+                        >
+                          {certCompleted ? cp.downloadCertificate : "Ver e descarregar"}
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        </button>
+                      ) : (
+                        <button type="button" disabled className={`${styles.btn} ${styles.btnAccent}`}>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                          {cp.locked}
+                        </button>
+                      )}
                     </div>
-                  )}
-
-                  {/* Benefício */}
-                  {activeModule.benefit && (
-                    <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">{cp.whyItMatters}</p>
-                      <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.benefit}</p>
-                    </div>
-                  )}
-
-                  {/* Aviso */}
-                  {activeModule.warning && (
-                    <div className="rounded-lg border border-[#f4b9ae]/30 bg-[#fef5f3] p-4">
-                      <p className="text-sm font-bold text-[#2a2a2a] mb-2">{cp.importantWarning}</p>
-                      <p className="text-sm text-[#2a2a2a] leading-6">{activeModule.warning}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Navegação de páginas */}
-              <div className="flex items-center justify-between gap-3 border-t border-[#D4B5A0]/20 pt-6">
-                <button
-                  type="button"
-                  onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
-                  disabled={theoryPage === 0}
-                  className="site-pill-button-secondary disabled:opacity-40"
-                >
-                  {cp.previous}
-                </button>
-                <p className="text-sm font-semibold text-[#2a2a2a]">
-                  {cp.page} {theoryPage + 1} {cp.of} {allTheoryPages.length}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setTheoryPage((prev) => Math.min(prev + 1, allTheoryPages.length - 1))}
-                  disabled={isLastTheoryPage}
-                  className="submit disabled:opacity-40"
-                >
-                  {cp.nextPage}
-                </button>
-              </div>
-
-              {/* Botão final - Quiz ou Certificado */}
-              <div className="mt-6">
-                {activeModule.id === 11 ? (
-                  <div className="rounded-2xl border border-[#22a094]/30 bg-[#F5E5DB] p-6 text-center space-y-4">
-                    <p className="text-sm text-[#2a2a2a]">
-                      {cp.certificateDesc}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={downloadCertificate}
-                      disabled={isDownloadingCertificate}
-                      className="submit max-w-sm disabled:opacity-40"
-                    >
-                      {isDownloadingCertificate ? cp.preparingCertificate : cp.downloadCertificate}
-                    </button>
                   </div>
-                ) : (
-                  isLastTheoryPage && (
-                    <div className="flex justify-center">
-                      <button
-                        type="button"
-                        onClick={startQuiz}
-                        className="submit"
-                      >
-                        {cp.startQuiz}
-                      </button>
-                    </div>
-                  )
-                )}
-              </div>
+                );
+              })()}
             </div>
-          </div>
-        </div>
+          </section>
+        </>
       )}
 
-      {/* Questionário */}
-      {activeModule && quizMode && activeModule.quiz.length > 0 && (
-        <div className="fixed inset-0 z-[120] bg-black/60 p-3 sm:p-6">
-          <div className="mx-auto flex h-full w-full max-w-[1320px] flex-col rounded-2xl border border-[#D4B5A0]/30 bg-white p-4 sm:p-6">
-            <div className="mb-4">
-              <button
-                type="button"
-                onClick={() => setQuizMode(false)}
-                className="text-sm text-[#2a2a2a] font-semibold hover:underline"
-              >
-                {cp.backToContent}
-              </button>
+      {/* ============================================================
+          STATE 2 — Reader (theory)
+          ============================================================ */}
+      {activeModule && !quizMode && currentTheoryPage && (
+        <div className={`${styles.reader} ${styles.readerOpen}`}>
+          <div className={styles.readerTop}>
+            <button type="button" className={styles.readerBack} onClick={() => setActiveModuleId(null)}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              {cp.backToModules}
+            </button>
+            <div className={styles.readerTitle}>
+              <em>{String(activeModule.id).padStart(2, "0")}</em>
+              <span className={styles.readerTitleName}>{activeModule.title}</span>
             </div>
+            <div className={styles.readerProgress}>
+              <div className={styles.readerProgressDots}>
+                {allTheoryPages.map((_, i) => (
+                  <span
+                    key={i}
+                    className={
+                      i < theoryPage ? styles.dotDone :
+                      i === theoryPage ? styles.dotCurrent :
+                      ""
+                    }
+                  />
+                ))}
+              </div>
+              <span className={styles.readerProgressLabel}>{theoryPage + 1} / {allTheoryPages.length}</span>
+            </div>
+          </div>
 
-            <div ref={moduleContentRef} className="overflow-y-auto pr-1 sm:pr-2">
-              <div className="rounded-2xl border border-[#D4B5A0]/30 bg-white p-6">
-                <h2 className="text-xl font-bold mb-1 text-[#2a2a2a]">{activeModule.title}</h2>
-                <p className="text-sm text-[#666] mb-6">
-                  {cp.quizInstruction}
-                </p>
+          <div ref={moduleContentRef} className={styles.readerBody}>
+            <div className={styles.readerContainer}>
+              {/* MAIN COLUMN */}
+              <article>
+                <p className={styles.readerChap}>{currentTheoryPage.title}</p>
+                <h1 className={styles.readerHeading}>{activeModule.title}</h1>
+                {activeModule.description && (
+                  <p className={styles.readerLede}>{activeModule.description}</p>
+                )}
 
-                <div className="space-y-6">
-                  {activeModule.quiz.map((question, qIdx) => (
-                    <div
-                      key={question.id}
-                      className="space-y-3 rounded-lg border border-[#e0ddd8] bg-[#f2f2ee] p-4 sm:p-5"
-                    >
-                      <p className="font-semibold text-sm text-[#2a2a2a]">
-                        {qIdx + 1}. {question.question}
-                      </p>
-                      <div className="grid gap-2">
-                        {question.options.map((option, oIdx) => (
-                          <button
-                            key={oIdx}
-                            type="button"
-                            disabled={quizSubmitted}
-                            onClick={() => selectAnswer(question.id, oIdx)}
-                            className={getOptionClass(question, oIdx)}
-                          >
-                            {String.fromCharCode(65 + oIdx)}) {option}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                <div className={styles.readerProse}>
+                  {currentTheoryPage.blocks.map((paragraph, idx) => (
+                    <p key={idx}>{renderBold(paragraph)}</p>
                   ))}
                 </div>
 
+                {/* Premium content on last page */}
+                {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
+                  <>
+                    <div className={styles.readerBreak}>
+                      <span className={styles.readerBreakIcon}>§</span>
+                    </div>
+
+                    <h2 className={styles.readerH2}>Caso real</h2>
+                    <p className={styles.readerLede} style={{ marginBottom: 32 }}>
+                      {activeSupportContent.realScenario}
+                    </p>
+
+                    <h2 className={styles.readerH2}>{cp.premiumPageTitle}</h2>
+
+                    <div className={styles.premGrid}>
+                      <div className={`${styles.prem} ${styles.premGood}`}>
+                        <p className={styles.premTitle}>{cp.goodPractices}</p>
+                        <ul className={styles.premList}>
+                          {activeSupportContent.goodPractices.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={`${styles.prem} ${styles.premBad}`}>
+                        <p className={styles.premTitle}>{cp.badPractices}</p>
+                        <ul className={styles.premList}>
+                          {activeSupportContent.badPractices.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={`${styles.prem} ${styles.premStrat}`}>
+                        <p className={styles.premTitle}>{cp.practicalStrategies}</p>
+                        <ul className={styles.premList}>
+                          {activeSupportContent.strategies.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={`${styles.prem} ${styles.premCheck}`}>
+                        <p className={styles.premTitle}>{cp.executionChecklist}</p>
+                        <ul className={styles.premList}>
+                          {activeSupportContent.executionChecklist.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {activeModule.evaluationExamples && activeModule.evaluationExamples.length > 0 && (
+                      <div style={{ marginTop: 32 }}>
+                        <h2 className={styles.readerH2}>{cp.decisionExamples}</h2>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                          {activeModule.evaluationExamples.map((example) => (
+                            <article key={example.title} className={styles.example}>
+                              <h3 className={styles.exampleTitle}>{example.title}</h3>
+                              <p><span className={styles.exampleLabel}>{cp.scenario}</span> {example.scenario}</p>
+                              <p><span className={styles.exampleLabel}>{cp.correctApproach}</span> {example.correctApproach}</p>
+                              <p><span className={styles.exampleLabel}>{cp.incorrectApproach}</span> {example.incorrectApproach}</p>
+                            </article>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </article>
+
+              {/* SIDEBAR */}
+              <aside className={styles.aside}>
+                {activeModule.keywords && activeModule.keywords.length > 0 && (
+                  <div className={styles.asideCard}>
+                    <p className={styles.asideLabel}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                      {cp.keyConceptsTitle}
+                    </p>
+                    <div className={styles.asideChips}>
+                      {activeModule.keywords.map((keyword) => (
+                        <span key={keyword} className={styles.asideChip}>{keyword}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {activeModule.practicalTip && (
+                  <div className={styles.asideCard}>
+                    <p className={styles.asideLabel}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v4"/><path d="m16.24 7.76 2.83-2.83"/><path d="M18 12h4"/><path d="m16.24 16.24 2.83 2.83"/><path d="M12 18v4"/><path d="m7.76 16.24-2.83 2.83"/><path d="M6 12H2"/><path d="m7.76 7.76-4.83-2.83"/></svg>
+                      {cp.practicalTipTitle}
+                    </p>
+                    <p className={styles.asideText}>{activeModule.practicalTip}</p>
+                  </div>
+                )}
+
+                {activeModule.benefit && (
+                  <div className={styles.asideCard}>
+                    <p className={styles.asideLabel}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                      {cp.whyItMatters}
+                    </p>
+                    <p className={styles.asideText}>{activeModule.benefit}</p>
+                  </div>
+                )}
+
+                {activeModule.warning && (
+                  <div className={`${styles.asideCard} ${styles.asideCardWarn}`}>
+                    <p className={styles.asideLabel}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                      {cp.importantWarning}
+                    </p>
+                    <p className={styles.asideText}>{activeModule.warning}</p>
+                  </div>
+                )}
+              </aside>
+            </div>
+          </div>
+
+          <div className={styles.readerBottom}>
+            <div className={styles.readerBottomInner}>
+              <button
+                type="button"
+                className={`${styles.btn} ${styles.btnGhost} ${styles.btnSmall} ${styles.btnBack}`}
+                onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
+                disabled={theoryPage === 0}
+              >
+                <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                {cp.previous}
+              </button>
+              <div className={styles.readerPageInfo}>
+                {cp.page} <strong>{theoryPage + 1}</strong> {cp.of} {allTheoryPages.length}
+              </div>
+              {activeModule.id === 11 && isLastTheoryPage ? (
+                <button
+                  type="button"
+                  onClick={downloadCertificate}
+                  disabled={isDownloadingCertificate}
+                  className={`${styles.btn} ${styles.btnAccent} ${styles.btnSmall}`}
+                >
+                  {isDownloadingCertificate ? cp.preparingCertificate : cp.downloadCertificate}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+              ) : isLastTheoryPage ? (
+                <button
+                  type="button"
+                  onClick={startQuiz}
+                  className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
+                >
+                  {cp.startQuiz}
+                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setTheoryPage((prev) => Math.min(prev + 1, allTheoryPages.length - 1))}
+                  className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
+                >
+                  {cp.nextPage}
+                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================
+          STATE 3 — Quiz
+          ============================================================ */}
+      {activeModule && quizMode && activeModule.quiz.length > 0 && (
+        <div className={`${styles.reader} ${styles.readerOpen}`}>
+          <div className={styles.readerTop}>
+            <button type="button" className={styles.readerBack} onClick={() => setQuizMode(false)}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              {cp.backToContent}
+            </button>
+            <div className={styles.readerTitle}>
+              <em>{String(activeModule.id).padStart(2, "0")}</em>
+              <span className={styles.readerTitleName}>{activeModule.title} · Quiz</span>
+            </div>
+            <div className={styles.readerProgress}>
+              <span className={styles.readerProgressLabel}>
+                {Object.keys(quizAnswers).length} / {activeModule.quiz.length}
+              </span>
+            </div>
+          </div>
+
+          <div ref={moduleContentRef} className={styles.readerBody}>
+            {!quizSubmitted || quizScore === null ? (
+              <div className={styles.quiz}>
+                <div className={styles.quizHead}>
+                  <div className={styles.eyebrow}>{cp.completeTraining}</div>
+                  <h1 className={styles.quizTitle}>{activeModule.title}</h1>
+                  <p className={styles.quizSub}>{cp.quizInstruction}</p>
+                </div>
+
+                {activeModule.quiz.map((question, qIdx) => (
+                  <div key={question.id} className={styles.q}>
+                    <p className={styles.qNum}>{String(qIdx + 1).padStart(2, "0")}</p>
+                    <h3 className={styles.qText}>{question.question}</h3>
+                    <div className={styles.qOpts}>
+                      {question.options.map((option, oIdx) => (
+                        <button
+                          key={oIdx}
+                          type="button"
+                          disabled={quizSubmitted}
+                          onClick={() => selectAnswer(question.id, oIdx)}
+                          className={getOptionClass(question, oIdx)}
+                        >
+                          <span className={styles.qOptLetter}>{String.fromCharCode(65 + oIdx)}</span>
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+
                 {!quizSubmitted && (
-                  <div className="mt-8 flex justify-center">
+                  <div className={styles.quizSubmit}>
+                    <span className={styles.quizHint}>
+                      {allQuestionsAnswered(activeModule.quiz)
+                        ? "Pronto para submeter."
+                        : "Responde a todas para submeter."}
+                    </span>
                     <button
                       type="button"
                       disabled={!allQuestionsAnswered(activeModule.quiz) || isSaving}
                       onClick={submitQuiz}
-                      className="submit max-w-xs disabled:opacity-40"
+                      className={`${styles.btn} ${styles.btnPrimary}`}
                     >
                       {cp.submitAnswers}
+                      <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                   </div>
                 )}
-
-                {quizSubmitted && quizScore !== null && (
-                  <div className={`mt-8 rounded-xl p-5 text-center ${
-                    quizScore >= 60 ? "bg-[#22a094]/15 border border-[#22a094]/40" : "bg-red-100 border border-red-400/40"
-                  }`}>
-                    <p className="text-2xl font-bold mb-2 text-[#2a2a2a]">
-                      {quizScore >= 60 ? cp.congrats : cp.tryAgainQuiz}
-                    </p>
-                    <p className="text-sm mb-1 text-[#2a2a2a]">
-                      {cp.scored} <span className="font-bold text-lg text-[#22a094]">{quizScore}%</span> {cp.inThisQuiz}
-                    </p>
-                    <p className="text-xs text-[#666] mb-4">
-                      {quizScore >= 60
-                        ? isSaving ? cp.savingProgress : cp.moduleCompleted
-                        : cp.needMorePoints}
-                    </p>
-                    <div className="flex justify-center gap-3">
-                      {quizScore >= 60 ? (
+              </div>
+            ) : (
+              <div className={styles.quiz}>
+                <div className={styles.result}>
+                  <p className={`${styles.resultScore} ${quizScore < 60 ? styles.resultScoreFail : ""}`}>
+                    {quizScore}<span>%</span>
+                  </p>
+                  <p className={styles.resultLabel}>
+                    {cp.scored} {quizScore}{cp.percentComplete} {cp.inThisQuiz}
+                  </p>
+                  <h2 className={styles.resultTitle}>
+                    {quizScore >= 60 ? cp.congrats : cp.tryAgainQuiz}
+                  </h2>
+                  <p className={styles.resultSub}>
+                    {quizScore >= 60
+                      ? isSaving ? cp.savingProgress : cp.moduleCompleted
+                      : cp.needMorePoints}
+                  </p>
+                  <div className={styles.resultCta}>
+                    {quizScore >= 60 ? (
+                      <button
+                        type="button"
+                        className={`${styles.btn} ${styles.btnPrimary}`}
+                        onClick={() => { setActiveModuleId(null); setQuizMode(false); }}
+                      >
+                        {cp.backToModulesList}
+                        <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                      </button>
+                    ) : (
+                      <>
                         <button
                           type="button"
-                          onClick={() => {
-                            setActiveModuleId(null);
-                            setQuizMode(false);
-                          }}
-                          className="submit max-w-xs"
+                          className={`${styles.btn} ${styles.btnGhost}`}
+                          onClick={() => setQuizMode(false)}
                         >
-                          {cp.backToModulesList}
+                          {cp.reviewContent}
                         </button>
-                      ) : (
-                        <>
-                          <button
-                            type="button"
-                            onClick={() => setQuizMode(false)}
-                            className="submit max-w-[200px] !bg-white/20"
-                          >
-                            {cp.reviewContent}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={startQuiz}
-                            className="submit max-w-[200px]"
-                          >
-                            {cp.retakeQuiz}
-                          </button>
-                        </>
-                      )}
-                    </div>
+                        <button
+                          type="button"
+                          className={`${styles.btn} ${styles.btnPrimary}`}
+                          onClick={startQuiz}
+                        >
+                          {cp.retakeQuiz}
+                        </button>
+                      </>
+                    )}
                   </div>
-                )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }
