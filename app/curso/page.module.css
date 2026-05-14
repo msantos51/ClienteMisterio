@@ -222,6 +222,10 @@
    MODULE LIST
    ============================================================ */
 .modList { padding-bottom: 96px; }
+.modList > .wrap {
+  display: flex;
+  flex-direction: column;
+}
 .modListHead {
   display: flex;
   align-items: center;
