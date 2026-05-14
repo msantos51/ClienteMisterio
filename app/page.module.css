@@ -3,12 +3,31 @@
  * Located next to app/page.tsx as a CSS Module.
  */
 
-/* Reset global rules from globals.css inside this page only */
+/* Reset global rules from globals.css inside this page only.
+   NOTE: avoid `all: unset` — its specificity (0,1,1) outranks our component
+   classes (0,1,0) and would wipe out their layout properties. Reset only
+   the cosmetic properties globals.css sets aggressively on bare `button`. */
 .page button {
-  all: unset;
-  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 0;
+  margin: 0;
   font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  border-radius: 0;
+  box-shadow: none;
+  width: auto;
+  min-width: 0;
+  overflow: visible;
+  text-align: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
 }
+.page button:disabled { cursor: not-allowed; }
 .page a {
   border-bottom: none !important;
   color: inherit;
