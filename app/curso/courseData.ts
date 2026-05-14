@@ -7,7 +7,6 @@ export type QuizQuestion = {
  question: string;
  options: string[];
  correctIndex: number;
- videoUrl?: string;
 };
 
 export type EvaluationExample = {
@@ -213,18 +212,6 @@ export const courseModules: CourseModule[] = [
  "Mystery advertising (avaliação de publicidade)",
  ],
  correctIndex: 0,
- },
- {
- id: "m1q6",
- question: "Vê o vídeo abaixo e escolhe a abordagem CORRETA para registar a situação.",
- options: [
- "Esqueceu-se de dar o folheto",
- "Solicitei recomendação para dor de cabeça. Colaboradora ofereceu medicamento e explicou modo de uso, MAS NÃO entregou folheto de promoções. Não cumpriu item 5 do protocolo.",
- "A farmacêutica não sabia que devia dar folhetos aos clientes",
- "Cliente não recebeu o folheto porque esqueceu de pedir",
- ],
- correctIndex: 1,
- videoUrl: "/videos/pharmacy_example.mp4",
  },
  ],
  },
