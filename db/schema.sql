@@ -39,6 +39,20 @@ create table if not exists course_progress (
 );
 
 
+-- Tabela de mensagens de contacto com estado de entrega de e-mail.
+create table if not exists contact_messages (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  email text not null,
+  subject text not null,
+  message text not null,
+  email_delivery_status text not null default 'pending',
+  email_delivery_error text,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists contact_messages_created_at_idx on contact_messages(created_at desc);
+
 -- Tabela de compras para auditar pagamentos e associar o curso ao utilizador.
 create table if not exists course_purchases (
   id uuid primary key default gen_random_uuid(),

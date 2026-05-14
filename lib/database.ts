@@ -128,6 +128,10 @@ const initializeDatabase = async (): Promise<void> => {
       );
 
       await getPool().query(
+        "delete from contact_messages where created_at < now() - interval '90 days'"
+      );
+
+      await getPool().query(
         "alter table users add column if not exists has_course_access boolean not null default false"
       );
       await getPool().query("alter table users add column if not exists course_access_granted_at timestamptz");
