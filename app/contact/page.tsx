@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import styles from "./page.module.css";
 
 type FormData = {
   name: string;
@@ -22,6 +23,12 @@ const initialFormData: FormData = {
   message: "",
 };
 
+const ArrowIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+  </svg>
+);
+
 export default function ContactPage() {
   const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -30,10 +37,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFieldChange = (field: keyof FormData, value: string) => {
-    setFormData((previousData) => ({
-      ...previousData,
-      [field]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -46,9 +50,7 @@ export default function ContactPage() {
       const response = await fetch("/api/contact", {
         method: "POST",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -67,164 +69,164 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="w-full bg-gray-50">
-      <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
-        {/* Header */}
-        <div className="mb-12 space-y-4 sm:space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
-            <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-            <span className="text-label">{t.contact.badge}</span>
-          </div>
-
-          <div>
-            <h1 className="h1">{t.contact.title}</h1>
-            <p className="mt-3 text-body-sm">
-              {t.contact.description}
-            </p>
-          </div>
+    <div className={styles.page}>
+      {/* ============================================================
+          HERO
+          ============================================================ */}
+      <header className={styles.hero}>
+        <div className={styles.wrap}>
+          <div className={styles.eyebrow}>{t.contact.badge}</div>
+          <h1 className={`${styles.displayLg} ${styles.heroTitle}`}>
+            Fala <em className={styles.italic}>connosco</em>.
+          </h1>
+          <p className={`${styles.lead} ${styles.heroSub}`}>
+            {t.contact.description}
+          </p>
         </div>
+      </header>
 
-        {/* Content Grid */}
-        <div className="grid gap-8 lg:grid-cols-2">
-          {/* Left Column - Contact Info */}
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <h2 className="h5">{t.contact.contactHeader}</h2>
-
-              {/* Email */}
-              <div className="flex items-start gap-4">
-                <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-100">
-                  <svg className="h-4 w-4 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
+      {/* ============================================================
+          CONTENT
+          ============================================================ */}
+      <section className={styles.section}>
+        <div className={styles.wrap}>
+          <div className={styles.grid}>
+            {/* Left — contact info */}
+            <div>
+              <h2 className={styles.infoTitle}>{t.contact.contactHeader}</h2>
+              <div className={styles.infoItems}>
+                {/* Email */}
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div className={styles.infoLabel}>{t.contact.emailLabel}</div>
+                    <div className={styles.infoValue}>
+                      <a href={`mailto:${t.contact.email}`}>{t.contact.email}</a>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-body-sm font-semibold">{t.contact.emailLabel}</p>
-                  <a href="mailto:email@clientemisterio.pt" className="text-body-sm text-gray-600 hover:text-teal-600">
-                    {t.contact.email}
-                  </a>
+
+                {/* Phone */}
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6.29 6.29l.72-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div className={styles.infoLabel}>{t.contact.phoneLabel}</div>
+                    <div className={styles.infoValue}>
+                      <a href={`tel:${t.contact.phone.replace(/\s/g, "")}`}>{t.contact.phone}</a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div className={styles.infoLabel}>{t.contact.addressLabel}</div>
+                    <div className={styles.infoValue} style={{ whiteSpace: "pre-line" }}>
+                      {t.contact.address}
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Phone */}
-              <div className="flex items-start gap-4">
-                <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-100">
-                  <svg className="h-4 w-4 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773c.418 1.265 1.215 2.807 2.453 4.045 1.238 1.238 2.78 2.035 4.045 2.453l.773-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2.57c-6.607 0-12-5.393-12-12V3z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-body-sm font-semibold">{t.contact.phoneLabel}</p>
-                  <a href="tel:+351912345678" className="text-body-sm text-gray-600 hover:text-teal-600">
-                    {t.contact.phone}
-                  </a>
-                </div>
-              </div>
-
-              {/* Address */}
-              <div className="flex items-start gap-4">
-                <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-100">
-                  <svg className="h-4 w-4 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-body-sm font-semibold">{t.contact.addressLabel}</p>
-                  <p className="text-body-sm text-gray-600">
-                    {t.contact.address}
-                  </p>
-                </div>
+              <div className={styles.badge}>
+                <span className={styles.badgeDot} />
+                {t.contact.responseTime}
               </div>
             </div>
 
-            {/* Response Time Badge */}
-            <div className="flex items-center gap-2 rounded-full bg-teal-50 px-4 py-3">
-              <div className="h-2 w-2 rounded-full bg-teal-500"></div>
-              <p className="text-label">{t.contact.responseTime}</p>
-            </div>
-          </div>
+            {/* Right — form card */}
+            <div className={styles.card}>
+              <h2 className={styles.cardTitle}>Enviar mensagem</h2>
+              <form className={styles.form} onSubmit={handleSubmit}>
+                <div className={styles.row}>
+                  <div className={styles.field}>
+                    <label className={styles.label}>{t.contact.formNameLabel}</label>
+                    <input
+                      className={styles.input}
+                      name="name"
+                      type="text"
+                      placeholder={t.contact.formNamePlaceholder}
+                      required
+                      value={formData.name}
+                      onChange={(e) => handleFieldChange("name", e.target.value)}
+                    />
+                  </div>
+                  <div className={styles.field}>
+                    <label className={styles.label}>{t.contact.formEmailLabel}</label>
+                    <input
+                      className={styles.input}
+                      name="email"
+                      type="email"
+                      placeholder={t.contact.formEmailPlaceholder}
+                      required
+                      value={formData.email}
+                      onChange={(e) => handleFieldChange("email", e.target.value)}
+                    />
+                  </div>
+                </div>
 
-          {/* Right Column - Form */}
-          <div className="rounded-lg bg-white p-6 sm:p-8 shadow-sm">
-            <h2 className="mb-6 h5">{t.contact.formNameLabel}</h2>
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              {/* Name and Email Row */}
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="input-group">
+                <div className={styles.field}>
+                  <label className={styles.label}>{t.contact.formSubjectLabel}</label>
                   <input
-                    name="name"
-                    onChange={(event) => handleFieldChange("name", event.target.value)}
-                    placeholder={t.contact.formNamePlaceholder}
-                    required
+                    className={styles.input}
+                    name="subject"
                     type="text"
-                    value={formData.name}
-                  />
-                  <span className="label">{t.contact.formNameLabel}</span>
-                </div>
-
-                <div className="input-group">
-                  <input
-                    name="email"
-                    onChange={(event) => handleFieldChange("email", event.target.value)}
-                    placeholder={t.contact.formEmailPlaceholder}
+                    placeholder={t.contact.formSubjectPlaceholder}
                     required
-                    type="email"
-                    value={formData.email}
+                    value={formData.subject}
+                    onChange={(e) => handleFieldChange("subject", e.target.value)}
                   />
-                  <span className="label">{t.contact.formEmailLabel}</span>
                 </div>
-              </div>
 
-              {/* Subject */}
-              <div className="input-group">
-                <input
-                  name="subject"
-                  onChange={(event) => handleFieldChange("subject", event.target.value)}
-                  placeholder={t.contact.formSubjectPlaceholder}
-                  required
-                  type="text"
-                  value={formData.subject}
-                />
-                <span className="label">{t.contact.formSubjectLabel}</span>
-              </div>
-
-              {/* Message */}
-              <div className="input-group">
-                <textarea
-                  name="message"
-                  onChange={(event) => handleFieldChange("message", event.target.value)}
-                  placeholder={t.contact.formMessagePlaceholder}
-                  required
-                  value={formData.message}
-                />
-                <span className="label">{t.contact.formMessageLabel}</span>
-              </div>
-
-              {/* Status Message */}
-              {statusMessage ? (
-                <div className="rounded-lg border border-teal-200 bg-teal-50 p-4">
-                  <p className="text-body-sm text-teal-900">{statusMessage}</p>
-                  {statusReference ? (
-                    <p className="mt-2 text-body-xs text-teal-700">
-                      Referência: <span className="font-semibold">{statusReference}</span>
-                    </p>
-                  ) : null}
+                <div className={styles.field}>
+                  <label className={styles.label}>{t.contact.formMessageLabel}</label>
+                  <textarea
+                    className={styles.textarea}
+                    name="message"
+                    placeholder={t.contact.formMessagePlaceholder}
+                    required
+                    value={formData.message}
+                    onChange={(e) => handleFieldChange("message", e.target.value)}
+                  />
                 </div>
-              ) : null}
 
-              {/* Submit Button */}
-              <button
-                className="submit w-full"
-                disabled={isSubmitting}
-                type="submit"
-              >
-                {isSubmitting ? t.contact.formSubmittingButton : t.contact.formSubmitButton}
-              </button>
-            </form>
+                {statusMessage && (
+                  <div className={styles.status}>
+                    <div>{statusMessage}</div>
+                    {statusReference && (
+                      <div className={styles.statusRef}>
+                        Referência: <strong>{statusReference}</strong>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className={styles.submit}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? t.contact.formSubmittingButton : t.contact.formSubmitButton}
+                  {!isSubmitting && <ArrowIcon />}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

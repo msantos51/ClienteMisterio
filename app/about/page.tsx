@@ -1,19 +1,48 @@
 "use client";
 
-import { useLanguage } from '@/app/context/LanguageContext';
-import CheckoutButton from '../components/CheckoutButton';
+import { useLanguage } from "@/app/context/LanguageContext";
+import { useRouter } from "next/navigation";
+import styles from "./page.module.css";
+
+const CheckIcon = ({ size = 11 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+const ArrowIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+  </svg>
+);
+
+function BuyButton({ children, className }: { children: React.ReactNode; className?: string }) {
+  const router = useRouter();
+  const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
+  const handleCheckout = () => {
+    if (!paymentLink) return;
+    const session = typeof window !== "undefined" ? localStorage.getItem("vp_session") : null;
+    if (session) { window.location.href = paymentLink; }
+    else { router.push("/login?checkout=1"); }
+  };
+  return (
+    <button type="button" onClick={handleCheckout} disabled={!paymentLink} className={className}>
+      {children}
+    </button>
+  );
+}
 
 export default function AboutPage() {
   const { t } = useLanguage();
 
-  const courseAdvantages = [
+  const advantages = [
     t.about.advantage1,
     t.about.advantage2,
     t.about.advantage3,
     t.about.advantage4,
   ];
 
-  const courseFeatures = [
+  const features = [
     t.about.feature1,
     t.about.feature2,
     t.about.feature3,
@@ -22,93 +51,73 @@ export default function AboutPage() {
   ];
 
   return (
-    <section className="w-full bg-gray-50">
-      <div className="mx-auto w-full max-w-4xl px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
-        {/* Main Content */}
-        <div className="mb-16 space-y-6 sm:space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-2">
-            <span className="h-2 w-2 rounded-full bg-teal-500"></span>
-            <span className="text-label">{t.about.badge}</span>
-          </div>
-
-          {/* Title */}
-          <h1 className="h1">
-            {t.about.title} <span className="text-teal-600">{t.about.titleHighlight}</span>
-          </h1>
-
-          {/* Description */}
-          <div className="space-y-4 text-body-sm text-justify">
-            <p>
+    <div className={styles.page}>
+      {/* ============================================================
+          HERO
+          ============================================================ */}
+      <header className={styles.hero}>
+        <div className={styles.wrap}>
+          <div className={styles.heroInner}>
+            <div className={styles.eyebrow}>{t.about.badge}</div>
+            <h1 className={`${styles.displayLg} ${styles.heroTitle}`}>
+              {t.about.title}{" "}
+              <em className={styles.italic}>{t.about.titleHighlight}</em>
+            </h1>
+            <p className={`${styles.lead} ${styles.heroSub}`}>
               {t.about.description1}
-            </p>
-
-            <p>
-              {t.about.description2}
-            </p>
-
-            <p>
-              {t.about.description3}
             </p>
           </div>
         </div>
+      </header>
 
-        {/* Pricing Section */}
-        <div className="mb-16 grid gap-8 lg:grid-cols-3">
-          {/* Left Column - Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Course Advantages */}
-            <div className="space-y-4">
-              <h2 className="h3">{t.about.advantagesTitle}</h2>
-              <p className="text-body-sm">
-                {t.about.advantagesDesc}
-              </p>
-
-              <div className="space-y-3">
-                {courseAdvantages.map((advantage, index) => (
-                  <div key={advantage} className="flex items-start gap-4">
-                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-600 text-xs font-bold text-white">
-                      {index + 1}
-                    </div>
-                    <p className="text-sm text-gray-700 pt-0.5">{advantage}</p>
+      {/* ============================================================
+          CONTENT
+          ============================================================ */}
+      <section className={styles.section}>
+        <div className={styles.wrap}>
+          <div className={styles.grid}>
+            {/* Left column — advantages */}
+            <div>
+              <div className={styles.eyebrow}>{t.about.advantagesTitle}</div>
+              <p className={styles.advDesc}>{t.about.advantagesDesc}</p>
+              <div className={styles.advList}>
+                {advantages.map((adv, i) => (
+                  <div key={i} className={styles.adv}>
+                    <span className={styles.advNum}>{i + 1}</span>
+                    <span>{adv}</span>
                   </div>
                 ))}
               </div>
+              <p className={styles.bodyText}>{t.about.description2}</p>
+              <p className={styles.bodyText}>{t.about.description3}</p>
             </div>
-          </div>
 
-          {/* Right Column - Pricing Card */}
-          <div className="h-fit rounded-2xl bg-white p-6 sm:p-8 shadow-sm">
-            {/* Course Title */}
-            <div className="mb-6 space-y-2">
-              <p className="text-label">
-                {t.about.courseTitle}
-              </p>
-              <div className="space-y-1">
-                <p className="h2 text-gray-900">{t.about.price}</p>
-                <p className="text-body-xs">{t.about.paymentInfo}</p>
+            {/* Right column — pricing card */}
+            <div className={styles.card}>
+              <div className={`${styles.eyebrow} ${styles.cardEyebrow}`}>{t.about.courseTitle}</div>
+              <div className={styles.price}>
+                <span className={styles.priceOriginal}>64,99€</span>
+                {t.about.price}
               </div>
-            </div>
-
-            {/* Features */}
-            <div className="mb-6 space-y-3 border-b border-gray-200 pb-6">
-              {courseFeatures.map((feature) => (
-                <div key={feature} className="flex items-start gap-3">
-                  <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-500">
-                    <svg className="h-3 w-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+              <div className={styles.priceNote}>{t.about.paymentInfo}</div>
+              <div className={styles.featureList}>
+                {features.map((feat) => (
+                  <div key={feat} className={styles.featureItem}>
+                    <span className={styles.check}>
+                      <CheckIcon size={11} />
+                    </span>
+                    {feat}
                   </div>
-                  <p className="text-sm text-gray-700">{feature}</p>
-                </div>
-              ))}
+                ))}
+              </div>
+              <BuyButton className={`${styles.btn} ${styles.btnDark}`}>
+                {t.about.buyCourseButton}
+                <ArrowIcon />
+              </BuyButton>
             </div>
-
-            {/* CTA Button */}
-            <CheckoutButton label={t.about.buyCourseButton} />
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
