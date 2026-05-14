@@ -3,14 +3,31 @@
  * Convenção: classes camelCase para acesso direto via styles.xxx
  */
 
-/* Reset global rules that leak from globals.css inside this page */
+/* Reset global rules that leak from globals.css inside this page.
+   IMPORTANT: do NOT use `all: unset` here — it has higher specificity than
+   single-class rules below and would wipe out their `display: grid/flex` etc.
+   Instead, reset only the cosmetic properties globals.css sets aggressively. */
 .page button {
-  all: unset;
-  cursor: pointer;
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 0;
+  margin: 0;
   font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  border-radius: 0;
+  box-shadow: none;
+  width: auto;
+  min-width: 0;
+  overflow: visible;
+  text-align: inherit;
+  cursor: pointer;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
 }
-.page button:disabled { cursor: not-allowed; opacity: .4; }
+.page button:disabled { cursor: not-allowed; }
 .page a {
   border-bottom: none !important;
   color: inherit;
