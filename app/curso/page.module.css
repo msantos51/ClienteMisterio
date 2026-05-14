@@ -127,7 +127,10 @@
    COURSE HEAD
    ============================================================ */
 .courseHead {
-  padding: 56px 0 40px;
+  padding: 48px 0 32px;
+}
+@media (max-width: 720px) {
+  .courseHead { padding: 32px 0 24px; }
 }
 .courseHeadGrid {
   display: grid;
@@ -153,7 +156,11 @@
   line-height: 1.55;
   color: #4b5563;
   margin: 0;
-  max-width: 44ch;
+  max-width: 48ch;
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .progressCard {
@@ -221,16 +228,15 @@
 /* ============================================================
    MODULE LIST
    ============================================================ */
-.modList { padding-bottom: 96px; }
-.modList > .wrap {
-  display: flex;
-  flex-direction: column;
+.modList { padding-bottom: 80px; }
+@media (max-width: 720px) {
+  .modList { padding-bottom: 56px; }
 }
 .modListHead {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 0 16px;
+  padding: 28px 0 12px;
   border-top: 1px solid #e5e5e5;
   margin-top: 24px;
   flex-wrap: wrap;
@@ -268,7 +274,7 @@
   display: grid;
   grid-template-columns: 70px 1fr auto;
   gap: 20px;
-  padding: 24px 0;
+  padding: 20px 0;
   align-items: center;
   border-top: 1px solid #e5e5e5;
   transition: background .2s, padding .2s;
@@ -310,9 +316,13 @@
 .modDesc {
   font-size: 14.5px;
   color: #4b5563;
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
-  max-width: 64ch;
+  max-width: 68ch;
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 .modMeta {
   display: flex;
@@ -364,7 +374,7 @@
   background: #111827;
   color: #fff;
   border-radius: 24px;
-  padding: 40px;
+  padding: 36px 40px;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 32px;
@@ -400,6 +410,11 @@
   font-size: 14.5px;
   color: rgba(255,255,255,.65);
   margin: 0;
+  max-width: 56ch;
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 .certBlockCta { position: relative; display: flex; gap: 12px; flex-wrap: wrap; }
 @media (max-width: 720px) {
@@ -511,20 +526,20 @@
 .readerBody {
   flex: 1;
   overflow-y: auto;
-  padding: 56px 32px 80px;
+  padding: 48px 32px 64px;
 }
 @media (max-width: 720px) {
-  .readerBody { padding: 32px 20px 60px; }
+  .readerBody { padding: 32px 20px 48px; }
 }
 .readerContainer {
   max-width: 1180px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 48px;
+  gap: 40px;
 }
 @media (min-width: 980px) {
-  .readerContainer { grid-template-columns: minmax(0, 1fr) 320px; gap: 64px; }
+  .readerContainer { grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; }
 }
 
 .readerChap {
@@ -549,14 +564,14 @@
   letter-spacing: -0.03em;
   line-height: 1.05;
   color: #111827;
-  margin: 0 0 32px;
+  margin: 0 0 28px;
   max-width: 22ch;
 }
 .readerH2 {
   font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin: 40px 0 24px;
+  margin: 32px 0 20px;
   color: #111827;
 }
 .readerLede {
@@ -567,26 +582,32 @@
   line-height: 1.4;
   letter-spacing: -0.01em;
   color: #111827;
-  margin: 0 0 40px;
+  margin: 0 0 32px;
   padding-left: 20px;
   border-left: 2px solid var(--accent);
-  max-width: 56ch;
+  max-width: 52ch;
+  text-wrap: pretty;
 }
 .readerProse {
   font-size: 18px;
   line-height: 1.7;
   color: #374151;
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 .readerProse p {
-  margin: 0 0 22px;
-  max-width: 62ch;
+  margin: 0 0 18px;
+  max-width: 64ch;
 }
 .readerProse strong { color: #111827; font-weight: 600; }
 .readerProse ul {
   margin: 0 0 22px;
   padding-left: 0;
   list-style: none;
-  max-width: 62ch;
+  max-width: 64ch;
+  text-align: left;
 }
 .readerProse li {
   padding: 10px 0 10px 32px;
@@ -607,7 +628,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 56px 0;
+  margin: 48px 0 32px;
   color: var(--accent);
 }
 .readerBreak::before, .readerBreak::after {
@@ -661,7 +682,8 @@
   padding: 10px 0 10px 24px;
   border-top: 1px solid rgba(0,0,0,.06);
   position: relative;
-  line-height: 1.5;
+  line-height: 1.55;
+  text-align: left;
 }
 .premList li:first-child { border-top: 0; padding-top: 0; }
 .premList li:first-child::before { top: 0; }
@@ -732,9 +754,13 @@
 .asideLabel svg { color: var(--accent); }
 .asideText {
   font-size: 14.5px;
-  line-height: 1.55;
+  line-height: 1.6;
   color: #374151;
   margin: 0;
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 .asideChips {
   display: flex;
@@ -760,11 +786,11 @@
   background: rgba(235,236,230,.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  padding: 18px 32px;
+  padding: 16px 32px;
   flex-shrink: 0;
 }
 @media (max-width: 720px) {
-  .readerBottom { padding: 14px 20px; }
+  .readerBottom { padding: 12px 20px; }
 }
 .readerBottomInner {
   max-width: 1180px;
@@ -790,7 +816,7 @@
   max-width: 760px;
   margin: 0 auto;
 }
-.quizHead { margin-bottom: 40px; }
+.quizHead { margin-bottom: 32px; }
 .quizTitle {
   font-size: clamp(28px, 3.4vw, 40px);
   font-weight: 700;
@@ -802,15 +828,19 @@
   font-size: 16px;
   color: #4b5563;
   margin: 0;
-  max-width: 56ch;
+  max-width: 60ch;
+  text-align: justify;
+  text-wrap: pretty;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .q {
   background: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 20px;
-  padding: 32px;
-  margin-bottom: 18px;
+  padding: 28px;
+  margin-bottom: 16px;
 }
 @media (max-width: 600px) {
   .q { padding: 22px; }
@@ -829,8 +859,9 @@
   letter-spacing: -0.015em;
   line-height: 1.4;
   color: #111827;
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   max-width: 52ch;
+  text-wrap: pretty;
 }
 .qOpts { display: flex; flex-direction: column; gap: 10px; }
 .qOpt {
@@ -913,12 +944,12 @@
   background: #fff;
   border-radius: 24px;
   border: 1px solid #e5e5e5;
-  padding: 56px;
+  padding: 48px;
   text-align: center;
   margin-bottom: 24px;
 }
 @media (max-width: 600px) {
-  .result { padding: 36px 24px; }
+  .result { padding: 32px 24px; }
 }
 .resultScore {
   font-family: "Basenji", Georgia, serif;
@@ -953,8 +984,9 @@
 .resultSub {
   font-size: 15.5px;
   color: #4b5563;
-  margin: 0 auto 32px;
-  max-width: 48ch;
+  line-height: 1.55;
+  margin: 0 auto 28px;
+  max-width: 50ch;
 }
 .resultCta {
   display: flex;
