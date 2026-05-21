@@ -16,6 +16,8 @@ type ContactApiResponse = {
   reference?: string;
 };
 
+type FormErrors = Partial<Record<keyof FormData, string>>;
+
 const initialFormData: FormData = {
   name: "",
   email: "",
@@ -29,21 +31,74 @@ const ArrowIcon = () => (
   </svg>
 );
 
+const validateField = (name: keyof FormData, value: string): string | null => {
+  switch (name) {
+    case "name":
+      if (!value.trim()) return "O nome é obrigatório";
+      if (value.length < 2) return "O nome deve ter pelo menos 2 caracteres";
+      return null;
+    case "email":
+      if (!value.trim()) return "O email é obrigatório";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Email inválido";
+      return null;
+    case "subject":
+      if (!value.trim()) return "O assunto é obrigatório";
+      if (value.length < 3) return "O assunto deve ter pelo menos 3 caracteres";
+      return null;
+    case "message":
+      if (!value.trim()) return "A mensagem é obrigatória";
+      if (value.length < 10) return "A mensagem deve ter pelo menos 10 caracteres";
+      return null;
+    default:
+      return null;
+  }
+};
+
 export default function ContactPage() {
   const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [statusMessage, setStatusMessage] = useState("");
   const [statusReference, setStatusReference] = useState("");
+  const [statusType, setStatusType] = useState<"success" | "error" | "">("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFieldChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+
+    const error = validateField(field, value);
+    setFormErrors((prev) => {
+      if (error) {
+        return { ...prev, [field]: error };
+      } else {
+        const { [field]: _, ...rest } = prev;
+        return rest;
+      }
+    });
+  };
+
+  const isFormValid = () => {
+    return (
+      formData.name.trim() &&
+      formData.email.trim() &&
+      formData.subject.trim() &&
+      formData.message.trim() &&
+      Object.keys(formErrors).length === 0
+    );
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatusMessage("");
     setStatusReference("");
+    setStatusType("");
+
+    if (!isFormValid()) {
+      setStatusMessage("Por favor, preenche corretamente todos os campos.");
+      setStatusType("error");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -57,12 +112,15 @@ export default function ContactPage() {
       const data = (await response.json()) as ContactApiResponse;
       setStatusReference(data.reference || "");
       setStatusMessage(data.message || t.contact.formErrorMessage);
+      setStatusType(response.ok ? "success" : "error");
 
       if (response.ok) {
         setFormData(initialFormData);
+        setFormErrors({});
       }
     } catch {
       setStatusMessage(t.contact.formConnectionError);
+      setStatusType("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -150,63 +208,96 @@ export default function ContactPage() {
             {/* Right — form card */}
             <div className={styles.card}>
               <h2 className={styles.cardTitle}>Enviar mensagem</h2>
-              <form className={styles.form} onSubmit={handleSubmit}>
+              <form className={styles.form} onSubmit={handleSubmit} noValidate>
                 <div className={styles.row}>
                   <div className={styles.field}>
                     <label className={styles.label}>{t.contact.formNameLabel}</label>
                     <input
-                      className={styles.input}
+                      className={`${styles.input} ${formErrors.name ? styles.inputError : ""}`}
                       name="name"
                       type="text"
                       placeholder={t.contact.formNamePlaceholder}
-                      required
                       value={formData.name}
                       onChange={(e) => handleFieldChange("name", e.target.value)}
+                      aria-invalid={!!formErrors.name}
+                      aria-describedby={formErrors.name ? "name-error" : undefined}
                     />
+                    {formErrors.name && (
+                      <span className={styles.error} id="name-error">
+                        {formErrors.name}
+                      </span>
+                    )}
                   </div>
                   <div className={styles.field}>
                     <label className={styles.label}>{t.contact.formEmailLabel}</label>
                     <input
-                      className={styles.input}
+                      className={`${styles.input} ${formErrors.email ? styles.inputError : ""}`}
                       name="email"
                       type="email"
                       placeholder={t.contact.formEmailPlaceholder}
-                      required
                       value={formData.email}
                       onChange={(e) => handleFieldChange("email", e.target.value)}
+                      aria-invalid={!!formErrors.email}
+                      aria-describedby={formErrors.email ? "email-error" : undefined}
                     />
+                    {formErrors.email && (
+                      <span className={styles.error} id="email-error">
+                        {formErrors.email}
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 <div className={styles.field}>
                   <label className={styles.label}>{t.contact.formSubjectLabel}</label>
                   <input
-                    className={styles.input}
+                    className={`${styles.input} ${formErrors.subject ? styles.inputError : ""}`}
                     name="subject"
                     type="text"
                     placeholder={t.contact.formSubjectPlaceholder}
-                    required
                     value={formData.subject}
                     onChange={(e) => handleFieldChange("subject", e.target.value)}
+                    aria-invalid={!!formErrors.subject}
+                    aria-describedby={formErrors.subject ? "subject-error" : undefined}
                   />
+                  {formErrors.subject && (
+                    <span className={styles.error} id="subject-error">
+                      {formErrors.subject}
+                    </span>
+                  )}
                 </div>
 
                 <div className={styles.field}>
-                  <label className={styles.label}>{t.contact.formMessageLabel}</label>
+                  <label className={styles.label}>
+                    {t.contact.formMessageLabel}
+                    <span className={styles.charCount}>
+                      {formData.message.length}/500
+                    </span>
+                  </label>
                   <textarea
-                    className={styles.textarea}
+                    className={`${styles.textarea} ${formErrors.message ? styles.inputError : ""}`}
                     name="message"
                     placeholder={t.contact.formMessagePlaceholder}
-                    required
                     value={formData.message}
                     onChange={(e) => handleFieldChange("message", e.target.value)}
+                    maxLength={500}
+                    aria-invalid={!!formErrors.message}
+                    aria-describedby={formErrors.message ? "message-error" : undefined}
                   />
+                  {formErrors.message && (
+                    <span className={styles.error} id="message-error">
+                      {formErrors.message}
+                    </span>
+                  )}
                 </div>
 
                 {statusMessage && (
-                  <div className={styles.status}>
-                    <div>{statusMessage}</div>
-                    {statusReference && (
+                  <div className={`${styles.status} ${styles[`status${statusType === "success" ? "Success" : "Error"}`]}`}>
+                    <div className={styles.statusContent}>
+                      {statusType === "success" ? "✓ " : "⚠ "}
+                      {statusMessage}
+                    </div>
+                    {statusReference && statusType === "success" && (
                       <div className={styles.statusRef}>
                         Referência: <strong>{statusReference}</strong>
                       </div>
@@ -217,7 +308,8 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   className={styles.submit}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !isFormValid()}
+                  title={!isFormValid() ? "Preenche corretamente todos os campos" : ""}
                 >
                   {isSubmitting ? t.contact.formSubmittingButton : t.contact.formSubmitButton}
                   {!isSubmitting && <ArrowIcon />}
