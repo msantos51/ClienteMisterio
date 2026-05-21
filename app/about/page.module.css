@@ -228,3 +228,204 @@
   align-items: center;
   justify-content: center;
 }
+
+/* ============================================================
+   TRUST SIGNALS
+   ============================================================ */
+.trustSection {
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  background: #f9fafb;
+  padding: 64px 0;
+}
+.trustGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+@media (min-width: 640px) { .trustGrid { grid-template-columns: repeat(4, 1fr); } }
+.trustItem { text-align: center; }
+.trustValue {
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #111827;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.trustLabel { font-size: 14px; color: #4b5563; }
+
+/* ============================================================
+   GUARANTEES SECTION
+   ============================================================ */
+.guaranteesSection {
+  border-top: 1px solid #e5e5e5;
+  padding: 96px 0;
+}
+@media (max-width: 720px) { .guaranteesSection { padding: 64px 0; } }
+.guaranteesHead { max-width: 640px; margin-bottom: 56px; }
+.guaranteesDesc {
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.65;
+  margin-top: 16px;
+}
+.guaranteesList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+@media (min-width: 640px) { .guaranteesList { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 880px) { .guaranteesList { grid-template-columns: repeat(4, 1fr); } }
+.guaranteeItem {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 18px;
+  padding: 28px;
+  transition: border-color .2s, transform .25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.guaranteeItem:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.guaranteeIcon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+.guaranteeTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 8px;
+}
+.guaranteeDesc {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ============================================================
+   IMPACT SECTION
+   ============================================================ */
+.impactSection {
+  background: linear-gradient(135deg, #f0fdf9 0%, rgba(34,160,148,.05) 100%);
+  border-top: 1px solid #e5e5e5;
+  padding: 96px 0;
+}
+@media (max-width: 720px) { .impactSection { padding: 64px 0; } }
+.impactGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  align-items: start;
+}
+@media (min-width: 880px) { .impactGrid { grid-template-columns: 1.2fr 1fr; } }
+.impactDesc {
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.65;
+  margin: 16px 0 28px;
+}
+.impactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.impactList li {
+  font-size: 15px;
+  color: #374151;
+  line-height: 1.6;
+  padding-left: 28px;
+  position: relative;
+}
+.impactList li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+.impactCard {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 18px;
+  padding: 28px;
+  position: sticky;
+  top: 100px;
+}
+.impactCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.impactCardStar {
+  color: var(--accent);
+  font-size: 14px;
+}
+.impactCardQuote {
+  font-size: 15px;
+  color: #374151;
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0 0 20px;
+}
+.impactCardAuthor {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.impactCardAuthor strong {
+  font-size: 15px;
+  color: #111827;
+}
+.impactCardAuthor span {
+  font-size: 13px;
+  color: #4b5563;
+}
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+.ctaSection {
+  background: #111827;
+  color: #fff;
+  padding: 96px 0;
+}
+@media (max-width: 720px) { .ctaSection { padding: 64px 0; } }
+.ctaInner {
+  max-width: 680px;
+  text-align: center;
+}
+.ctaInner .displayLg {
+  color: #fff;
+  margin-bottom: 20px;
+}
+.ctaDesc {
+  font-size: 18px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.55;
+  margin: 0 0 32px;
+}
+.ctaSection .btn {
+  background: var(--accent);
+  color: #111827;
+  max-width: 400px;
+  margin: 0 auto 20px;
+}
+.ctaSection .btn:hover {
+  background: #1d8478;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.ctaNote {
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  margin: 0;
+}

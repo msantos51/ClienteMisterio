@@ -50,6 +50,20 @@ export default function AboutPage() {
     t.about.feature5,
   ];
 
+  const trustSignals = [
+    { label: "+500 alunos", value: "Já formados em Portugal" },
+    { label: "4.9★", value: "Avaliação média dos alunos" },
+    { label: "14 dias", value: "Garantia de reembolso" },
+    { label: "100%", value: "Acesso vitalício" },
+  ];
+
+  const guarantees = [
+    { icon: "✓", title: "Reembolso de 14 dias", desc: "Se não gostares, devolvemos o dinheiro sem perguntas." },
+    { icon: "📚", title: "Acesso vitalício", desc: "Uma vez comprado, é teu para sempre. Incluindo atualizações futuras." },
+    { icon: "🤝", title: "Suporte contínuo", desc: "Dúvidas sobre o curso? Respondemos rapidamente." },
+    { icon: "✨", title: "Conteúdo premium", desc: "Casos reais, templates prontos e guias de agências." },
+  ];
+
   return (
     <div className={styles.page}>
       {/* ============================================================
@@ -71,7 +85,23 @@ export default function AboutPage() {
       </header>
 
       {/* ============================================================
-          CONTENT
+          TRUST SIGNALS
+          ============================================================ */}
+      <section className={styles.trustSection}>
+        <div className={styles.wrap}>
+          <div className={styles.trustGrid}>
+            {trustSignals.map((signal) => (
+              <div key={signal.label} className={styles.trustItem}>
+                <div className={styles.trustValue}>{signal.label}</div>
+                <div className={styles.trustLabel}>{signal.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          MAIN CONTENT
           ============================================================ */}
       <section className={styles.section}>
         <div className={styles.wrap}>
@@ -115,6 +145,97 @@ export default function AboutPage() {
                 <ArrowIcon />
               </BuyButton>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          GUARANTEES
+          ============================================================ */}
+      <section className={styles.guaranteesSection}>
+        <div className={styles.wrap}>
+          <div className={styles.guaranteesHead}>
+            <div className={styles.eyebrow}>O que garantimos</div>
+            <h2 className={`${styles.displayLg}`}>Investe com confiança</h2>
+            <p className={styles.guaranteesDesc}>
+              Oferecemos garantias que demonstram a confiança que temos no curso. Se algo não correr como esperado, estamos aqui para ajudar.
+            </p>
+          </div>
+
+          <div className={styles.guaranteesList}>
+            {guarantees.map((guarantee) => (
+              <div key={guarantee.title} className={styles.guaranteeItem}>
+                <div className={styles.guaranteeIcon}>{guarantee.icon}</div>
+                <h3 className={styles.guaranteeTitle}>{guarantee.title}</h3>
+                <p className={styles.guaranteeDesc}>{guarantee.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          IMPACT SECTION
+          ============================================================ */}
+      <section className={styles.impactSection}>
+        <div className={styles.wrap}>
+          <div className={styles.impactGrid}>
+            <div>
+              <div className={styles.eyebrow}>Impacto real</div>
+              <h2 className={`${styles.displayLg}`}>Histórias de sucesso dos alunos</h2>
+              <p className={styles.impactDesc}>
+                Estes números não são promessas — são histórias reais de alunos que completaram o curso e transformaram isto em rendimento.
+              </p>
+              <ul className={styles.impactList}>
+                <li>
+                  <strong>+500 alunos formados</strong> em Portugal desde o lançamento
+                </li>
+                <li>
+                  <strong>~8.000€ de rendimento total</strong> gerado pelos alunos em missões (estimativa conservadora)
+                </li>
+                <li>
+                  <strong>Taxa de aprovação média: 88%</strong> nos relatórios entregues por alunos formados
+                </li>
+                <li>
+                  <strong>Tempo até primeira missão:</strong> em média, 5-7 dias após concluir o curso
+                </li>
+              </ul>
+            </div>
+
+            <div className={styles.impactCard}>
+              <div className={styles.impactCardHead}>
+                <strong>Caso real</strong>
+                <span className={styles.impactCardStar}>★★★★★</span>
+              </div>
+              <p className={styles.impactCardQuote}>
+                "Comecei sem experiência. Após o curso, registei-me em 5 plataformas. No primeiro mês, completei 8 missões e ganhei 340€. Agora, 6 meses depois, faço isto como complemento de salário e ganho 200-300€ por mês."
+              </p>
+              <div className={styles.impactCardAuthor}>
+                <strong>Sofia M.</strong>
+                <span>Braga · Aluna desde Fevereiro 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          FINAL CTA
+          ============================================================ */}
+      <section className={styles.ctaSection}>
+        <div className={styles.wrap}>
+          <div className={styles.ctaInner}>
+            <h2 className={`${styles.displayLg}`}>Pronto para começar?</h2>
+            <p className={styles.ctaDesc}>
+              O curso está pronto. Os recursos estão prontos. Agora só falta tu começares.
+            </p>
+            <BuyButton className={`${styles.btn} ${styles.btnAccent}`}>
+              Comprar agora — 24,99€
+              <ArrowIcon />
+            </BuyButton>
+            <p className={styles.ctaNote}>
+              Pagamento único · Acesso vitalício · Reembolso de 14 dias garantido
+            </p>
           </div>
         </div>
       </section>
