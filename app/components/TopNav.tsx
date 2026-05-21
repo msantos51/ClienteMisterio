@@ -20,6 +20,7 @@ export default function TopNav() {
     { href: "/", label: t.nav.home },
     { href: "/about", label: t.nav.about },
     { href: "/o-curso", label: t.nav.course },
+    { href: "/recursos", label: t.nav.resources },
     { href: "/contact", label: t.nav.contact },
     { href: "/account", label: t.nav.account },
   ];
