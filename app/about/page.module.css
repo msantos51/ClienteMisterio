@@ -12,7 +12,7 @@
 .page {
   background: var(--background);
   color: #111827;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 1.65;
   font-family: "Google Sans", sans-serif;
 }
@@ -50,7 +50,7 @@
   letter-spacing: -0.035em;
   line-height: 0.98;
   color: #111827;
-  font-size: clamp(40px, 5.5vw, 72px);
+  font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
 .italic {
@@ -60,7 +60,7 @@
   color: var(--accent);
 }
 .lead {
-  font-size: clamp(17px, 1.4vw, 21px);
+  font-size: clamp(14px, 1.1vw, 17px);
   line-height: 1.55;
   color: #374151;
   max-width: 56ch;
@@ -125,7 +125,7 @@
 
 /* Advantages */
 .advTitle {
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: clamp(18px, 2.2vw, 28px);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -133,7 +133,7 @@
   margin: 0 0 16px;
 }
 .advDesc {
-  font-size: 17px;
+  font-size: 15px;
   color: #4b5563;
   line-height: 1.6;
   margin: 0 0 32px;
@@ -183,7 +183,7 @@
 }
 .cardEyebrow { margin-bottom: 16px; }
 .price {
-  font-size: 52px;
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.04em;
   color: #111827;
