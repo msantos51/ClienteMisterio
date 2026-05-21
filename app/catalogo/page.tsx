@@ -72,7 +72,7 @@ export default function CatalogPage() {
                 <p className="mb-2 text-sm font-semibold tracking-wide text-white/70">
                   {c.trainingLabel}
                 </p>
-                <h1 className="text-3xl font-bold leading-tight">
+                <h1 className="text-xl font-bold leading-tight">
                   {c.courseTitle}
                 </h1>
                 <p className="mt-3 max-w-md text-base leading-relaxed text-white/85">
@@ -80,7 +80,7 @@ export default function CatalogPage() {
                 </p>
               </div>
               <div className="shrink-0 text-right">
-                <p className="text-4xl font-bold">24,99€</p>
+                <p className="text-lg font-bold">24,99€</p>
                 <p className="text-sm text-white/70 line-through">64,99€</p>
                 <p className="mt-1 text-xs text-white/70">{c.lifetimeAccess}</p>
               </div>
@@ -89,19 +89,19 @@ export default function CatalogPage() {
             {/* Stats */}
             <div className="mt-8 grid grid-cols-4 gap-4 border-t border-white/20 pt-6">
               <div className="text-center">
-                <p className="text-2xl font-bold">10</p>
+                <p className="text-lg font-bold">10</p>
                 <p className="text-xs text-white/75 mt-0.5">{c.statsModules}</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold">+500</p>
+                <p className="text-lg font-bold">+500</p>
                 <p className="text-xs text-white/75 mt-0.5">{c.statsStudents}</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold">100%</p>
+                <p className="text-lg font-bold">100%</p>
                 <p className="text-xs text-white/75 mt-0.5">{c.statsOnline}</p>
               </div>
               <div className="text-center">
-                <p className="text-2xl font-bold">PDF</p>
+                <p className="text-lg font-bold">PDF</p>
                 <p className="text-xs text-white/75 mt-0.5">{c.statsCertificate}</p>
               </div>
             </div>
@@ -197,7 +197,7 @@ export default function CatalogPage() {
                 <p className="text-xs text-[#666] mt-0.5">{c.footerUrl}</p>
               </div>
               <div className="text-right">
-                <p className="text-2xl font-bold text-[#22a094]">24,99€</p>
+                <p className="text-lg font-bold text-[#22a094]">24,99€</p>
                 <p className="text-xs text-[#666]">{c.footerAccessNote}</p>
               </div>
             </div>
