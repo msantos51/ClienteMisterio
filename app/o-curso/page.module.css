@@ -351,11 +351,11 @@
 .modules { display: flex; flex-direction: column; }
 .module {
   display: grid;
-  grid-template-columns: 80px 1fr auto;
+  grid-template-columns: 80px 1fr;
   gap: 20px;
   padding: 24px 12px;
   border-top: 1px solid rgba(255,255,255,.12);
-  align-items: baseline;
+  align-items: start;
   transition: background .2s;
 }
 .module:last-child { border-bottom: 1px solid rgba(255,255,255,.12); }
@@ -369,18 +369,25 @@
   line-height: 1;
   color: var(--accent);
 }
+.moduleContent { flex: 1; }
 .moduleTitle {
   font-size: clamp(14px, 1.5vw, 18px);
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #fff;
-  margin: 0 0 6px;
+  margin: 0 0 4px;
+}
+.moduleSubtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  font-style: italic;
+  margin: 0 0 8px;
 }
 .moduleDesc {
   font-size: 14px;
   color: rgba(255,255,255,.6);
   line-height: 1.5;
-  margin: 0;
+  margin: 0 0 12px;
   max-width: 52ch;
 }
 .moduleTime {
@@ -389,6 +396,84 @@
   color: rgba(255,255,255,.5);
   letter-spacing: 0.04em;
   white-space: nowrap;
+}
+
+/* Expanded Module Details */
+.moduleDetails {
+  margin-top: 12px;
+}
+.moduleDetails[open] {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+.moduleSummary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: color .2s;
+  padding: 4px 0;
+}
+.moduleSummary:hover {
+  color: rgba(255,255,255,.9);
+}
+.moduleSummary svg {
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.moduleDetails[open] .moduleSummary svg {
+  transform: rotate(180deg);
+}
+
+.moduleExpanded {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.expandedItem {
+  font-size: 13px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.6;
+}
+.expandedItem > strong {
+  color: rgba(255,255,255,.9);
+  display: block;
+  margin-bottom: 6px;
+}
+.objectivesList, .resourcesList {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.objectivesList li, .resourcesList li {
+  padding-left: 18px;
+  position: relative;
+}
+.objectivesList li::before, .resourcesList li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+.caseExample {
+  background: rgba(255,255,255,.05);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.75);
 }
 
 /* ============================================================
