@@ -64,7 +64,7 @@ const categories = [
     pay: "20–60€",
     note: "refeição incluída",
     icon: (
-      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <path d="M6 2v6a4 4 0 0 0 8 0V2" />
         <path d="M10 2v20" />
         <path d="M20 2c.5 4 .5 8 0 12-1 .5-2 1-2 4v4" />
@@ -76,7 +76,7 @@ const categories = [
     pay: "10–40€",
     note: "30–60 min",
     icon: (
-      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <path d="M3 3h18l-2 4H5z" />
         <path d="M5 7v13h14V7" />
         <path d="M9 12h6" />
@@ -88,7 +88,7 @@ const categories = [
     pay: "80–150€",
     note: "estadia paga",
     icon: (
-      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <path d="M3 21V8l9-5 9 5v13" />
         <path d="M9 21v-8h6v8" />
         <path d="M3 21h18" />
@@ -100,7 +100,7 @@ const categories = [
     pay: "15–50€",
     note: "atendimento",
     icon: (
-      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <rect x="3" y="6" width="18" height="13" rx="1" />
         <path d="M3 11h18" />
         <path d="M7 16h4" />
@@ -112,7 +112,7 @@ const categories = [
     pay: "10–30€",
     note: "ágil",
     icon: (
-      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <path d="M12 3v18" />
         <path d="M3 12h18" />
         <circle cx="12" cy="12" r="9" />
@@ -124,7 +124,7 @@ const categories = [
     pay: "15–40€",
     note: "presencial",
     icon: (
-      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <svg className={styles.catIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
         <rect x="5" y="2" width="14" height="20" rx="2" />
         <path d="M11 18h2" />
       </svg>
