@@ -445,7 +445,7 @@ export default function HomePage() {
                 O valor depende do tipo, da duração e do nível de detalhe. Há quem faça 2 missões por mês como complemento; outros constroem uma rotina semanal.
               </p>
               <p style={{ fontSize: 14, color: "#4b5563", margin: 0 }}>
-                <strong style={{ color: "#111827" }}>Importante:</strong> não prometemos rendimento garantido. Os valores variam por região e disponibilidade.
+                <strong style={{ color: "var(--ink)" }}>Importante:</strong> não prometemos rendimento garantido. Os valores variam por região e disponibilidade.
               </p>
             </div>
 

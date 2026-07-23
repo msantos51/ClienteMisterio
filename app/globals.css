@@ -1,12 +1,14 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Este ficheiro centraliza os estilos globais e utilitários visuais usados em toda a aplicação.
+ * DESCRIÇÃO DO FICHEIRO: Estilos globais e sistema de design "Índigo & Coral".
+ * Centraliza tokens de cor, tipografia, botões, formulários e o painel (dashboard)
+ * usados em toda a aplicação. Paleta moderna de e-learning: índigo principal,
+ * coral como cor de destaque/energia e âmbar para badges.
  */
 
-@import url("https://fonts.cdnfonts.com/css/google-sans");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
-/* Google Sans carregada via CDN para aplicar tipografia global do site. */
-/* Declarações de fontes customizadas Basenji (fallback) */
+/* Fonte de destaque local (números, ênfase editorial). */
 @font-face {
   font-family: "Basenji";
   src: url("/fonts/Basenji-SemiBold.otf") format("opentype");
@@ -24,17 +26,41 @@
 }
 
 :root {
-  --background: #EBECE6;
-  --foreground: #000000;
+  /* Superfícies e texto */
+  --background: #f4f4fd;
+  --foreground: #1e1b33;
   --surface: #ffffff;
-  --surface-muted: #f5f5f5;
-  --primary: #000000;
-  --primary-soft: #111111;
-  --accent: #22a094;
-  --accent-success: #58bc82;
-  --line: #d0d0d0;
-  --line-light: #e5e5e5;
-  --header-control-height: 36px;
+  --surface-muted: #f0f0fb;
+  --ink: #1e1b33;
+  --body: #4b4869;
+  --muted: #6e6b8a;
+  --line: #e6e5f5;
+  --line-light: #efeefa;
+
+  /* Marca — índigo */
+  --brand: #4f46e5;
+  --brand-500: #6366f1;
+  --brand-600: #4f46e5;
+  --brand-700: #4338ca;
+  --brand-deep: #312e81;
+  --brand-ink: #211d54;
+  --brand-soft: #eef0ff;
+  --brand-tint: #f5f5ff;
+
+  /* Destaque — coral + âmbar + menta */
+  --accent: #ff6b4a;
+  --accent-600: #f5502e;
+  --accent-soft: #ffece7;
+  --amber: #fbbf24;
+  --amber-soft: #fff5db;
+  --mint: #34d399;
+
+  /* Compat. com nomes antigos usados no código */
+  --primary: #4f46e5;
+  --primary-soft: #4338ca;
+  --accent-success: #34d399;
+
+  --header-control-height: 38px;
   color-scheme: light;
 }
 
@@ -45,15 +71,19 @@
   --color-surface-muted: var(--surface-muted);
   --color-primary: var(--primary);
   --color-primary-soft: var(--primary-soft);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
   --color-accent: var(--accent);
+  --color-amber: var(--amber);
+  --color-mint: var(--mint);
   --color-line: var(--line);
-  --font-sans: "Google Sans", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Google Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -61,55 +91,61 @@ body {
   overflow-x: hidden;
 }
 
-/* Permite texto branco nos cards mesmo com regra global */
-.bg-\[\#22a094\] p,
-.bg-\[\#22a094\] span {
-  color: white !important;
+/* Mantém texto branco legível em cartões de fundo colorido. */
+.on-brand p,
+.on-brand span,
+.on-brand h1,
+.on-brand h2,
+.on-brand h3 {
+  color: #fff;
 }
 
-
-/* Permite destacar textos específicos da home sem ser afetado pela regra global de contraste. */
+/* Realces específicos da home, com prioridade sobre regras globais. */
 .home-title-highlight-text {
-  color: #000000 !important;
+  color: var(--ink) !important;
   letter-spacing: -0.5px;
 }
 
-/* Aplica cor de destaque secundária aos benefícios da home com prioridade sobre a regra global. */
 .home-benefits-highlight-text {
-  color: #000000 !important;
-}
-/* Destaca especificamente o benefício de rendimento com tom dourado mais intenso. */
-.home-benefit-extra-highlight-text {
-  color: #000000 !important;
+  color: var(--ink) !important;
 }
 
-/* Força todos os elementos tipográficos principais a usar Google Sans em negrito. */
+.home-benefit-extra-highlight-text {
+  color: var(--accent) !important;
+}
+
+/* Tipografia principal. */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Google Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
+  color: var(--ink);
 }
 
 @layer components {
-  /* From Uiverse.io by adamgiebl - Standardized button styles with orange theme */
+  /* ===================================================================
+     BOTÕES
+     =================================================================== */
+
+  /* Botão base decorativo (mantido por compatibilidade). */
   .cssbuttons-io-button {
     display: flex;
     align-items: center;
-    font-family: "Google Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     cursor: pointer;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
-    padding: 0.6em 1.2em;
+    padding: 0.7em 1.4em;
     color: white;
-    background: #22a094;
+    background: var(--brand);
     border: none;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
-    letter-spacing: 0.05em;
-    border-radius: 20em;
+    box-shadow: 0 12px 24px -10px rgba(79, 70, 229, 0.55);
+    letter-spacing: 0.01em;
+    border-radius: 14px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     width: auto;
     min-width: auto;
@@ -120,57 +156,57 @@ h6 {
   }
 
   .cssbuttons-io-button:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
-    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px -12px rgba(79, 70, 229, 0.6);
   }
 
   .cssbuttons-io-button:active {
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
-    opacity: 0.9;
+    transform: translateY(0);
   }
 
   .cssbuttons-io-button:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
-  /* Aliases para compatibilidade com código existente */
+  /* Estilo global aplicado a <button> sem classe utilitária. */
   button {
     outline: none;
     cursor: pointer;
     border: none;
-    padding: 0.6em 1.2em;
+    padding: 0.65em 1.4em;
     margin: 0;
-    font-family: "Google Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 14px;
     position: relative;
     display: inline-flex;
     align-items: center;
-    letter-spacing: 0.05em;
-    font-weight: 500;
-    border-radius: 20em;
+    letter-spacing: 0.01em;
+    font-weight: 600;
+    border-radius: 14px;
     overflow: hidden;
-    background: #22a094;
+    background: var(--brand);
     color: white;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    box-shadow: 0 12px 24px -12px rgba(79, 70, 229, 0.55);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     width: auto;
     min-width: auto;
   }
 
   button:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
-    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px -12px rgba(79, 70, 229, 0.6);
   }
 
   button:active {
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
-    opacity: 0.9;
+    transform: translateY(0);
+    box-shadow: 0 8px 16px -10px rgba(79, 70, 229, 0.5);
   }
 
   button:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
   }
 
   button span {
@@ -178,68 +214,69 @@ h6 {
     z-index: 10;
   }
 
-  /* === STANDARDIZED BUTTON SYSTEM === */
+  /* === SISTEMA PADRONIZADO DE BOTÕES === */
 
-  /* Primary Button (Teal) */
+  /* Primário (índigo) */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: "Google Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.6rem 1.1rem;
     color: white !important;
-    background: #22a094;
+    background: var(--brand);
     border: none;
-    border-radius: 10px;
-    letter-spacing: 0.02em;
+    border-radius: 12px;
+    letter-spacing: 0.01em;
     text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    box-shadow: 0 12px 24px -12px rgba(79, 70, 229, 0.6);
     line-height: 1;
   }
 
   @media (min-width: 640px) {
     .btn-primary {
-      font-size: 0.75rem;
-      padding: 0.625rem 2rem;
+      font-size: 0.8rem;
+      padding: 0.7rem 2rem;
     }
   }
 
   .btn-primary:hover {
-    opacity: 0.95;
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    background: var(--brand-700);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px -12px rgba(79, 70, 229, 0.65);
   }
 
   .btn-primary:active {
-    opacity: 0.9;
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
+    transform: translateY(0);
   }
 
   .btn-primary:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
   }
 
-  /* Secondary Button (Outline) */
+  /* Secundário (contorno) */
   .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: "Google Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
-    color: #333;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 0.6rem 1.1rem;
+    color: var(--brand-700);
     background: white;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 10px;
-    letter-spacing: 0.02em;
+    border: 1.5px solid var(--brand-soft);
+    border-radius: 12px;
+    letter-spacing: 0.01em;
     text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
@@ -249,142 +286,131 @@ h6 {
 
   @media (min-width: 640px) {
     .btn-secondary {
-      font-size: 0.75rem;
-      padding: 0.625rem 2rem;
+      font-size: 0.8rem;
+      padding: 0.7rem 2rem;
     }
   }
 
   .btn-secondary:hover {
-    background: #f0faf8;
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.4);
+    background: var(--brand-soft);
+    border-color: var(--brand-500);
   }
 
   .btn-secondary:active {
-    opacity: 0.9;
+    transform: translateY(1px);
   }
 
   .btn-secondary:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
-  /* Small Button */
   .btn-sm {
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.8rem;
   }
 
-  /* Large Button */
   .btn-lg {
     padding: 1rem 2rem;
     font-size: 1rem;
   }
 
-  /* Full Width Button */
   .btn-block {
     width: 100%;
   }
 
-  /* Legacy compatibility */
+  /* Compat. legada — pílulas de navegação/ações. */
   .site-pill-button,
   .button-size-login {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: "Google Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.625rem;
-    padding: 0.5rem 1rem;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 0.55rem 1.1rem;
     color: white !important;
-    background: #22a094;
+    background: var(--brand);
     border: none;
-    border-radius: 10px;
-    letter-spacing: 0.02em;
+    border-radius: 12px;
+    letter-spacing: 0.01em;
     text-transform: none;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    box-shadow: 0 12px 22px -12px rgba(79, 70, 229, 0.6);
     line-height: 1;
   }
 
   @media (min-width: 640px) {
     .site-pill-button,
     .button-size-login {
-      font-size: 0.75rem;
-      padding: 0.625rem 2rem;
+      font-size: 0.78rem;
+      padding: 0.65rem 1.9rem;
     }
   }
 
   .site-pill-button:hover,
   .button-size-login:hover {
-    opacity: 0.95;
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 28px -12px rgba(79, 70, 229, 0.6);
   }
 
   .site-pill-button:active,
   .button-size-login:active {
-    opacity: 0.9;
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
+    transform: translateY(0);
   }
 
   .site-pill-button:disabled,
   .button-size-login:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
   }
 
-  /* Botão de navegação - Login com borda verde subtil */
+  /* Login — contorno índigo sobre fundo claro. */
   .site-pill-button.nav-login-btn {
     background: white;
-    color: #22a094 !important;
-    border: 1px solid #22a094;
+    color: var(--brand) !important;
+    border: 1.5px solid var(--brand-soft);
     box-shadow: none;
   }
 
   .site-pill-button.nav-login-btn:hover {
-    background: #f0faf8;
-    opacity: 1;
-    box-shadow: 0 0.2em 0.6em -0.5em rgba(34, 160, 148, 0.3);
+    background: var(--brand-soft);
+    border-color: var(--brand-500);
+    transform: translateY(-1px);
   }
 
-  .site-pill-button.nav-login-btn:active {
-    opacity: 0.9;
-  }
-
-  /* Botão de navegação - Dashboard sólido verde */
+  /* Dashboard — sólido índigo. */
   .site-pill-button.nav-dashboard-btn {
-    background: #22a094;
+    background: var(--brand);
     color: white !important;
     border: none;
   }
 
   .site-pill-button.nav-dashboard-btn:hover {
-    opacity: 0.95;
+    background: var(--brand-700);
   }
 
-  .site-pill-button.nav-dashboard-btn:active {
-    opacity: 0.9;
-  }
-
-  /* Variante secundária do botão com fundo branco e texto laranja */
+  /* Variante secundária clara. */
   .site-pill-button-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-family: "Google Sans", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.625rem;
-    padding: 0.5rem 1rem;
-    color: #333;
+    font-weight: 700;
+    font-size: 0.7rem;
+    padding: 0.55rem 1.1rem;
+    color: var(--body);
     background: white;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.2);
-    letter-spacing: 0.02em;
+    border: 1.5px solid var(--line);
+    box-shadow: none;
+    letter-spacing: 0.01em;
     text-transform: none;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     white-space: nowrap;
     touch-action: manipulation;
@@ -395,30 +421,27 @@ h6 {
 
   @media (min-width: 640px) {
     .site-pill-button-secondary {
-      font-size: 0.75rem;
-      padding: 0.625rem 2rem;
+      font-size: 0.78rem;
+      padding: 0.65rem 1.9rem;
     }
   }
 
-  /* Estado hover */
   .site-pill-button-secondary:hover {
-    box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.4);
-    background: #f0faf8;
+    background: var(--surface-muted);
+    border-color: var(--brand-soft);
+    transform: translateY(-1px);
   }
 
-  /* Estado ativo */
   .site-pill-button-secondary:active {
-    box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.4);
-    opacity: 0.9;
+    transform: translateY(0);
   }
 
-  /* Estado desativado */
   .site-pill-button-secondary:disabled {
-    opacity: 0.65;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 
-  /* Botão toggle moderno com feedback visual */
+  /* Botão hamburguer. */
   .menu-toggle-button {
     display: inline-flex;
     align-items: center;
@@ -428,8 +451,9 @@ h6 {
     min-width: 44px;
     min-height: 44px;
     border: 0;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background-color: var(--brand-soft);
+    box-shadow: none;
     cursor: pointer;
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
@@ -439,14 +463,13 @@ h6 {
     .menu-toggle-button {
       min-width: 48px;
       min-height: 48px;
-      border-radius: 10px;
     }
   }
 
-  /* Feedback no hover com mudança sutil de fundo */
   .menu-toggle-button:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #e3e5ff;
+    transform: none;
+    box-shadow: 0 6px 14px rgba(79, 70, 229, 0.15);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -455,7 +478,6 @@ h6 {
     }
   }
 
-  /* Organiza as barras do ícone hamburguer sem texto associado. */
   .menu-toggle-bar {
     display: flex;
     flex-direction: column;
@@ -465,13 +487,12 @@ h6 {
     height: 22px;
   }
 
-  /* Desenha cada traço do símbolo em verde e habilita transição para o X. */
   .menu-toggle-line {
     display: block;
     width: 100%;
     height: 3px;
     border-radius: 999px;
-    background-color: #22a094;
+    background-color: var(--brand);
     transition: all 0.35s ease;
   }
 
@@ -481,7 +502,6 @@ h6 {
     }
   }
 
-  /* Converte o ícone para X quando o menu abre, mantendo símbolo cinzento. */
   .menu-toggle-button.is-open .menu-toggle-line.top {
     transform: translateY(7px) rotate(45deg);
   }
@@ -505,12 +525,12 @@ h6 {
     }
   }
 
-  /* Define o cartão do menu com design moderno */
+  /* Cartão do menu mobile. */
   .mobile-menu-container {
-    border-radius: 14px;
+    border-radius: 18px;
     will-change: contents;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18) !important;
-    border: 1px solid rgba(34, 160, 148, 0.2) !important;
+    box-shadow: 0 24px 48px -16px rgba(33, 29, 84, 0.28) !important;
+    border: 1px solid var(--line) !important;
     background: #ffffff !important;
   }
 
@@ -520,16 +540,16 @@ h6 {
     }
   }
 
-  /* Garante contraste e área de toque confortável nas opções do menu mobile. */
   .mobile-menu-item {
-    color: #22a094 !important;
+    color: var(--ink) !important;
     min-height: 48px;
     display: flex;
     align-items: center;
   }
 
   .mobile-menu-item:hover {
-    color: #ffffff !important;
+    color: var(--brand) !important;
+    background: var(--brand-soft) !important;
   }
 
   @media (max-width: 480px) {
@@ -539,178 +559,168 @@ h6 {
     }
   }
 
-  /* Mantém estilo textual consistente para botões em páginas internas. */
   .button-text-standard {
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
   }
 
-  /* === STANDARDIZED TYPOGRAPHY SYSTEM === */
-
-  /* Headings */
+  /* ===================================================================
+     TIPOGRAFIA
+     =================================================================== */
   .h1 {
-    font-size: 1.75rem;
-    line-height: 1.2;
-    font-weight: 700;
-    color: #111827;
-    letter-spacing: -0.02em;
+    font-size: 1.85rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.03em;
   }
 
   @media (min-width: 640px) {
     .h1 {
-      font-size: 2.25rem;
+      font-size: 2.4rem;
     }
   }
 
   .h2 {
-    font-size: 1.5rem;
-    line-height: 1.2;
-    font-weight: 700;
-    color: #111827;
-    letter-spacing: -0.02em;
+    font-size: 1.55rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.03em;
   }
 
   @media (min-width: 640px) {
     .h2 {
-      font-size: 1.875rem;
+      font-size: 2rem;
     }
   }
 
   .h3 {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--ink);
     letter-spacing: -0.02em;
   }
 
   .h4 {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--ink);
     letter-spacing: -0.02em;
   }
 
   .h5 {
     font-size: 1rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--ink);
     letter-spacing: -0.02em;
   }
 
-  /* Body Text */
   .text-body-lg {
     font-size: 1rem;
     line-height: 1.75;
-    color: #374151;
+    color: var(--body);
   }
 
   .text-body {
     font-size: 0.95rem;
     line-height: 1.75;
-    color: #374151;
+    color: var(--body);
   }
 
   .text-body-sm {
     font-size: 0.85rem;
     line-height: 1.5;
-    color: #374151;
+    color: var(--body);
   }
 
   .text-body-xs {
     font-size: 0.75rem;
     line-height: 1.25;
-    color: #4b5563;
+    color: var(--muted);
   }
 
-  /* Labels and Small Text */
   .text-label {
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #0d7377;
+    letter-spacing: 0.12em;
+    color: var(--brand);
   }
 
   .text-muted {
     font-size: 0.875rem;
-    color: #4b5563;
+    color: var(--muted);
   }
 
-  /* Legacy classes for backward compatibility */
   .page-title {
-    font-size: 1.625rem;
-    line-height: 1.2;
-    font-weight: 700;
-    color: #111827;
-    letter-spacing: -0.02em;
+    font-size: 1.7rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.03em;
   }
 
   @media (min-width: 640px) {
     .page-title {
-      font-size: 2rem;
+      font-size: 2.1rem;
     }
   }
 
   .section-title {
-    font-size: 1.375rem;
-    line-height: 1.2;
-    font-weight: 700;
-    color: #111827;
-    letter-spacing: -0.02em;
+    font-size: 1.45rem;
+    line-height: 1.15;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.03em;
   }
 
   @media (min-width: 640px) {
     .section-title {
-      font-size: 1.75rem;
+      font-size: 1.85rem;
     }
   }
 
   .section-title-inverse {
-    font-size: 1.375rem;
-    line-height: 1.2;
-    font-weight: 700;
+    font-size: 1.45rem;
+    line-height: 1.15;
+    font-weight: 800;
     color: white;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 
   @media (min-width: 640px) {
     .section-title-inverse {
-      font-size: 1.75rem;
+      font-size: 1.85rem;
     }
   }
 
   .card-title {
     font-size: 1.125rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--ink);
     letter-spacing: -0.02em;
   }
 
   .subsection-title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #111827;
+    color: var(--ink);
     letter-spacing: -0.02em;
   }
 
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #0d7377;
-  }
-
+  .section-label,
   .section-label-uppercase {
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #0d7377;
+    letter-spacing: 0.12em;
+    color: var(--brand);
   }
 
-
-  /* Mantém o contêiner do checkbox alinhado com o texto e reserva espaço para o marcador customizado. */
+  /* ===================================================================
+     CHECKBOX CUSTOMIZADO
+     =================================================================== */
   .checkbox-container {
     display: inline-block;
     position: relative;
@@ -729,7 +739,6 @@ h6 {
     }
   }
 
-  /* Esconde o input nativo mas preserva acessibilidade e interação por teclado. */
   .custom-checkbox {
     position: absolute;
     opacity: 0;
@@ -738,21 +747,18 @@ h6 {
     width: 0;
   }
 
-  /* Cria a caixa visual moderna do checkbox */
   .checkbox-container .checkmark {
     position: absolute;
     top: 0;
     left: 0;
     height: 24px;
     width: 24px;
-    background-color: #f5f5f5;
-    border: 2px solid #d0d0d0;
-    border-radius: 6px;
+    background-color: var(--surface-muted);
+    border: 2px solid var(--line);
+    border-radius: 7px;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 
-  /* Desenha o ícone de confirmação e mantém oculto até o estado marcado. */
   .checkbox-container .checkmark::after {
     content: "";
     position: absolute;
@@ -766,35 +772,29 @@ h6 {
     transform: rotate(45deg);
   }
 
-  /* Estado checked com gradient e glow */
   .custom-checkbox:checked ~ .checkmark {
-    background: #e2e0e0;
-    border-color: #e2e0e0;
-    box-shadow: 0 0 0 3px rgba(34, 160, 148, 0.2);
+    background: var(--brand);
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
   }
 
-  /* Exibe o check com animação suave */
   .custom-checkbox:checked ~ .checkmark::after {
     display: block;
     animation: check-anim 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
-  /* Focus state acessível */
   .custom-checkbox:focus-visible ~ .checkmark {
-    box-shadow: 0 0 0 3px rgba(34, 160, 148, 0.3);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
   }
 
-  /* Animação suave do check com efeito de desenho */
   @keyframes check-anim {
     0% {
       height: 0;
       opacity: 0;
     }
-
     50% {
       opacity: 1;
     }
-
     100% {
       height: 10px;
       opacity: 1;
@@ -802,21 +802,24 @@ h6 {
   }
 }
 
-
+/* ===================================================================
+   FORMULÁRIOS
+   =================================================================== */
 .login-form {
   width: 100%;
   max-width: 460px;
   padding: 40px;
-  background: rgb(255 255 255 / 95%);
-  border-radius: 16px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  animation: fadeIn 1.5s ease-out;
-  backdrop-filter: blur(10px);
+  background: rgb(255 255 255 / 97%);
+  border-radius: 22px;
+  box-shadow: 0 30px 60px -24px rgba(33, 29, 84, 0.28), 0 2px 0 rgba(255, 255, 255, 0.6) inset;
+  border: 1px solid var(--line);
+  animation: fadeIn 0.9s ease-out;
+  backdrop-filter: blur(8px);
 }
 
 @media (max-width: 480px) {
   .login-form {
-    padding: 20px;
+    padding: 22px;
     margin: 0 auto;
     width: 95%;
   }
@@ -828,29 +831,28 @@ h6 {
 }
 
 .login-form * {
-  color: #333 !important;
+  color: var(--ink);
 }
 
 .form-heading {
   margin-bottom: 24px;
-  color: #1a1a1a !important;
+  color: var(--ink) !important;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
   text-align: center;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.02em;
 }
 
 @media (max-width: 480px) {
   .form-heading {
     font-size: 1.25rem;
     margin-bottom: 20px;
-    letter-spacing: 0.3px;
   }
 }
 
 .input-group {
   position: relative;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 480px) {
@@ -862,27 +864,27 @@ h6 {
 .input-group .label {
   position: absolute;
   top: -18px;
-  left: 0;
-  color: #000000 !important;
+  left: 2px;
+  color: var(--ink) !important;
   font-size: 12px;
   font-weight: 700;
   opacity: 1;
   transition: all 0.3s ease;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.01em;
 }
 
 .input-group input,
 .input-group textarea,
 .input-group select {
   width: 100%;
-  padding: 12px 14px;
-  color: #1a1a1a !important;
-  font-size: 0.85rem;
-  background-color: #f8f9fa !important;
-  border: 1px solid #e0e0e0 !important;
-  border-radius: 10px;
+  padding: 13px 15px;
+  color: var(--ink) !important;
+  font-size: 0.9rem;
+  background-color: var(--surface-muted) !important;
+  border: 1.5px solid var(--line) !important;
+  border-radius: 12px;
   outline: none;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   min-height: 44px;
 }
 
@@ -910,83 +912,84 @@ h6 {
 .input-group input:hover,
 .input-group textarea:hover,
 .input-group select:hover {
-  border-color: #d0d0d0 !important;
+  border-color: var(--brand-soft) !important;
   background-color: #ffffff !important;
 }
 
 .input-group input:focus,
 .input-group textarea:focus,
 .input-group select:focus {
-  border-color: #000000 !important;
-  box-shadow: 0 0 0 3px rgba(34, 160, 148, 0.15);
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
   background-color: #ffffff !important;
 }
 
 .submit {
   width: auto;
-  padding: 0.5rem 1rem;
+  padding: 0.65rem 1.6rem;
   color: white !important;
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   cursor: pointer;
-  background: #22a094;
+  background: var(--brand);
   border: none;
-  box-shadow: 0 0.5em 1.2em -0.5em rgba(34, 160, 148, 0.6);
-  border-radius: 10px;
+  box-shadow: 0 14px 26px -12px rgba(79, 70, 229, 0.6);
+  border-radius: 12px;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: "Google Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   line-height: 1;
 }
 
 @media (min-width: 640px) {
   .submit {
-    font-size: 0.75rem;
-    padding: 0.625rem 2rem;
+    font-size: 0.82rem;
+    padding: 0.75rem 2rem;
   }
 }
 
 .submit:hover {
-  box-shadow: 0 0.4em 1.2em -0.5em rgba(34, 160, 148, 0.6);
-  opacity: 0.95;
+  background: var(--brand-700);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 32px -12px rgba(79, 70, 229, 0.65);
 }
 
 .submit:active {
-  box-shadow: 0 0.2em 0.8em -0.5em rgba(34, 160, 148, 0.6);
-  opacity: 0.9;
+  transform: translateY(0);
 }
 
 .submit:disabled {
-  opacity: 0.65;
+  opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
 }
 
 .form-link {
-  color: #000000 !important;
+  color: var(--brand) !important;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.01em;
   position: relative;
 }
 
 .form-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
   width: 0;
   height: 2px;
-  background: #000000;
+  background: var(--accent);
   transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .form-link:hover {
-  color: #000000 !important;
+  color: var(--brand-700) !important;
 }
 
 .form-link:hover::after {
@@ -996,20 +999,19 @@ h6 {
 .form-feedback {
   padding: 12px 14px;
   font-size: 0.85rem;
-  border: 1px solid rgba(34, 160, 148, 0.3);
-  border-radius: 10px;
-  background: linear-gradient(135deg, #f0faf8 0%, #f5fdfb 100%);
-  color: #1b7661 !important;
-  font-weight: 500;
+  border: 1px solid rgba(79, 70, 229, 0.22);
+  border-radius: 12px;
+  background: var(--brand-soft);
+  color: var(--brand-700) !important;
+  font-weight: 600;
   line-height: 1.5;
 }
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateY(10px) scale(0.95);
+    transform: translateY(12px) scale(0.98);
   }
-
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -1024,40 +1026,38 @@ h6 {
   }
 }
 
-
-/* Estrutura principal do dashboard com menu lateral, conteúdo e cartão de apoio. */
+/* ===================================================================
+   DASHBOARD
+   =================================================================== */
 .dashboard-layout-shell {
   display: grid;
   gap: 1.25rem;
   align-items: start;
 }
 
-/* Cabeçalho superior do dashboard com design moderno */
 .dashboard-top-banner {
-  border-radius: 16px;
-  background: rgb(255 255 255 / 95%);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: 0 20px 44px -24px rgba(33, 29, 84, 0.2);
+  border: 1px solid var(--line);
   padding: 2rem;
   transition: all 0.3s ease;
 }
 
-/* Cartão lateral de navegação com design moderno */
 .dashboard-sidebar {
-  border-radius: 16px;
-  background: rgb(255 255 255 / 95%);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: 0 20px 44px -24px rgba(33, 29, 84, 0.16);
+  border: 1px solid var(--line);
   padding: 1.25rem;
-  backdrop-filter: blur(8px);
 }
 
-/* Título principal do menu lateral. */
 .dashboard-sidebar-title {
-  color: #111827 !important;
+  color: var(--ink) !important;
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: 800;
 }
 
-/* Lista vertical de opções do dashboard com espaçamento consistente. */
 .dashboard-menu {
   margin-top: 1rem;
   display: flex;
@@ -1065,15 +1065,15 @@ h6 {
   gap: 0.45rem;
 }
 
-/* Botão de menu com design moderno */
 .dashboard-menu-item {
   width: 100%;
-  border: 1px solid transparent;
-  border-radius: 10px;
+  border: 1.5px solid transparent;
+  border-radius: 14px;
   padding: 0.85rem 1rem;
   text-align: left;
   background: transparent;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: none;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
@@ -1081,58 +1081,79 @@ h6 {
 
 .dashboard-menu-item span {
   display: block;
-  color: #1a1a1a !important;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.2px;
+  color: var(--ink) !important;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .dashboard-menu-item small {
   display: block;
   margin-top: 0.3rem;
-  color: #9ca3af !important;
+  color: var(--muted) !important;
   font-size: 0.75rem;
-  letter-spacing: 0.1px;
+  font-weight: 500;
 }
 
-/* Destaque visual da secção ativa com gradiente sutil */
 .dashboard-menu-item.is-active {
-  background: linear-gradient(135deg, #f0faf8 0%, #f5fdfb 100%);
-  border-color: #22a094;
-  box-shadow: inset 0 1px 2px rgba(34, 160, 148, 0.1);
+  background: var(--brand-soft);
+  border-color: var(--brand);
+  box-shadow: none;
+}
+
+.dashboard-menu-item.is-active span {
+  color: var(--brand-700) !important;
 }
 
 .dashboard-menu-item:hover {
-  border-color: #e5e7eb;
-  background: #fafafa;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-color: var(--brand-soft);
+  background: var(--brand-tint);
+  transform: none;
 }
 
-/* Cartão lateral direito com design moderno */
 .dashboard-right-highlight {
-  border-radius: 16px;
-  background: linear-gradient(135deg, #fff9f3 0%, #fffbf8 100%);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  padding: 1.5rem;
+  border-radius: 22px;
+  background: linear-gradient(160deg, var(--brand-deep) 0%, var(--brand-700) 100%);
+  box-shadow: 0 24px 48px -22px rgba(49, 46, 129, 0.55);
+  padding: 1.6rem;
   display: none;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
-.dashboard-right-highlight .card-title,
+.dashboard-right-highlight::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.35;
+  top: -60px;
+  right: -50px;
+  pointer-events: none;
+}
+
+.dashboard-right-highlight .card-title {
+  color: #fff !important;
+  position: relative;
+}
+
 .dashboard-right-highlight p {
-  color: #111827 !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  position: relative;
 }
 
-/* Ícone decorativo simples para equilibrar a composição visual do painel. */
 .dashboard-right-highlight-icon {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   text-align: center;
-  color: #22a094 !important;
+  color: var(--amber) !important;
+  position: relative;
 }
 
 @media (min-width: 1024px) {
   .dashboard-layout-shell {
-    grid-template-columns: 220px minmax(0, 1fr) 240px;
+    grid-template-columns: 230px minmax(0, 1fr) 250px;
   }
 
   .dashboard-sidebar {
@@ -1147,19 +1168,19 @@ h6 {
   }
 }
 
-/* Estilos modernos adicionais */
+/* ===================================================================
+   DIVERSOS
+   =================================================================== */
 a {
   transition: color 0.3s ease;
 }
 
-/* Scroll suave para a página */
 html {
   scroll-behavior: smooth;
 }
 
-/* Customização de scrollbar para navegadores webkit */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1167,43 +1188,42 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(34, 160, 148, 0.5);
-  border-radius: 4px;
+  background: rgba(79, 70, 229, 0.35);
+  border-radius: 6px;
+  border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 160, 148, 0.8);
+  background: rgba(79, 70, 229, 0.6);
 }
 
-/* Placeholder melhorado */
 input::placeholder,
 textarea::placeholder {
-  color: #9ca3af !important;
+  color: var(--muted) !important;
   opacity: 1;
   font-weight: 400;
 }
 
-/* Select melhorado */
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
+  background-position: right 12px center;
   background-size: 20px;
-  padding-right: 36px !important;
+  padding-right: 38px !important;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-/* Melhor contraste em links dentro do conteúdo */
+/* Links dentro do conteúdo principal. */
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-pill-button-secondary) {
-  color: #000000;
+  color: var(--brand-700);
   text-decoration: none;
-  border-bottom: 1px solid rgba(34, 160, 148, 0.3);
+  border-bottom: 1px solid rgba(79, 70, 229, 0.3);
   transition: all 0.3s ease;
 }
 
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-pill-button-secondary):hover {
-  border-bottom-color: rgba(34, 160, 148, 0.8);
-  color: #000000;
+  border-bottom-color: var(--accent);
+  color: var(--accent-600);
 }

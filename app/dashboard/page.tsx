@@ -417,7 +417,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <section className="w-full space-y-8 bg-gray-50 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+    <section className="w-full space-y-8 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/40 p-4">
           <div className="login-form w-full max-w-2xl">
@@ -493,16 +493,16 @@ export default function DashboardPage() {
                     : d.startTraining}
                 </p>
               </div>
-              <span className="text-2xl font-bold" style={{ color: "#22a094" }}>
+              <span className="text-2xl font-extrabold" style={{ color: "var(--brand)" }}>
                 {courseProgress?.progressPercent ?? 0}%
               </span>
             </div>
-            <div className="h-3 w-full rounded-full bg-slate-200 overflow-hidden">
+            <div className="h-3 w-full rounded-full bg-[color:var(--surface-muted)] overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-700"
                 style={{
                   width: `${courseProgress?.progressPercent ?? 0}%`,
-                  background: "linear-gradient(90deg, #22a094, #22a094)",
+                  background: "linear-gradient(90deg, #4f46e5, #ff6b4a)",
                 }}
               />
             </div>
