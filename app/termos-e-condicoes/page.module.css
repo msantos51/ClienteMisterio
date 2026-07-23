@@ -10,10 +10,10 @@
    ============================================================ */
 .page {
   background: var(--background);
-  color: #111827;
+  color: var(--ink);
   font-size: 15px;
   line-height: 1.65;
-  font-family: "Google Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 .wrap {
   width: 100%;
@@ -34,7 +34,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #0d7377;
+  color: var(--brand-700);
   margin-bottom: 20px;
 }
 .eyebrow::before {
@@ -44,11 +44,11 @@
 }
 
 .displayLg {
-  font-family: "Google Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 0.98;
-  color: #111827;
+  color: var(--ink);
   font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
@@ -58,11 +58,11 @@
    ============================================================ */
 .hero {
   padding: 96px 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--line);
 }
 @media (max-width: 720px) { .hero { padding: 64px 0; } }
 .heroTitle { margin-bottom: 20px; }
-.heroDate { font-size: 14px; color: #9ca3af; margin-top: 16px; }
+.heroDate { font-size: 14px; color: var(--muted); margin-top: 16px; }
 
 /* ============================================================
    SECTIONS
@@ -70,12 +70,12 @@
 .sections { display: flex; flex-direction: column; gap: 16px; }
 .termSection {
   background: #fff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 32px 36px;
   transition: border-color .2s;
 }
-.termSection:hover { border-color: rgba(34,160,148,.3); }
+.termSection:hover { border-color: rgba(79,70,229,.3); }
 .termHeader {
   display: flex;
   align-items: flex-start;
@@ -86,7 +86,7 @@
   flex-shrink: 0;
   width: 44px; height: 44px;
   border-radius: 12px;
-  background: #111827;
+  background: var(--brand);
   color: #fff;
   font-family: "Basenji", Georgia, serif;
   font-style: italic;
@@ -100,13 +100,13 @@
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #111827;
+  color: var(--ink);
   margin: 0;
   padding-top: 10px;
 }
 .termContent {
   font-size: 16px;
-  color: #4b5563;
+  color: var(--muted);
   line-height: 1.7;
   margin: 0;
   padding-left: 64px;

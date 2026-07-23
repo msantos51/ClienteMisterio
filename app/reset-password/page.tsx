@@ -19,7 +19,7 @@ export default function ResetPasswordPage() {
 
 function ResetPasswordLoadingState() {
   return (
-    <section className="w-full space-y-8 bg-gray-50">
+    <section className="w-full space-y-8">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form">
           <p className="text-center text-sm">Loading recovery form...</p>
@@ -66,7 +66,7 @@ function ResetPasswordContent() {
   };
 
   return (
-    <section className="w-full space-y-8 bg-gray-50">
+    <section className="w-full space-y-8">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form">
           <h1 className="form-heading">{t.auth.resetPasswordTitle}</h1>

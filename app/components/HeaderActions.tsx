@@ -91,15 +91,15 @@ export default function HeaderActions() {
       ) : (
         <>
           {/* User Avatar & Name */}
-          <div className="flex items-center gap-2 rounded-full bg-[#f0f0f0] px-3 sm:px-4 py-2 sm:py-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#22a094] text-[10px] sm:text-xs font-semibold text-white">
+          <div className="flex items-center gap-2 rounded-full bg-[color:var(--brand-soft)] px-2.5 sm:px-3.5 py-1.5 sm:py-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-[#4f46e5] to-[#312e81] text-[10px] sm:text-xs font-bold text-white shadow-[0_6px_14px_-6px_rgba(79,70,229,0.8)]">
               {sessionUser.fullName.charAt(0).toUpperCase()}
             </div>
             <div className="hidden sm:flex flex-col">
-              <span className="text-[11px] font-semibold text-black leading-tight">
+              <span className="text-[11px] font-bold text-[color:var(--ink)] leading-tight">
                 {sessionUser.fullName.split(" ")[0]}
               </span>
-              <span className="text-[9px] text-black/50 leading-tight">
+              <span className="text-[9px] text-[color:var(--muted)] leading-tight">
                 {t.nav.account}
               </span>
             </div>

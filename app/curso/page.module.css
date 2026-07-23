@@ -46,7 +46,7 @@
   color: var(--foreground);
   font-size: 15px;
   line-height: 1.65;
-  font-family: "Google Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   min-height: 100vh;
 }
 .wrap {
@@ -65,7 +65,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #0d7377;
+  color: var(--brand);
   margin-bottom: 16px;
 }
 .eyebrow::before {
@@ -77,11 +77,11 @@
 .eyebrowAccent::before { background: var(--accent); }
 
 .display {
-  font-family: "Google Sans", sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.035em;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
   line-height: 0.98;
-  color: #111827;
+  color: var(--ink);
   margin: 0;
 }
 .displayXl { font-size: clamp(26px, 3.5vw, 48px); }
@@ -107,25 +107,25 @@
   cursor: pointer;
   font-family: inherit;
 }
-.btnPrimary { background: #111827; color: #fff; }
+.btnPrimary { background: var(--brand); color: #fff; }
 .btnPrimary:hover:not(:disabled) {
   background: var(--accent);
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px -10px rgba(34,160,148,.6);
+  box-shadow: 0 12px 28px -10px rgba(255,107,74,.5);
 }
 .btnGhost {
   background: transparent;
-  color: #111827;
-  border-color: #d0d0d0;
+  color: var(--ink);
+  border-color: var(--line);
 }
 .btnGhost:hover:not(:disabled) {
-  background: #111827;
+  background: var(--brand);
   color: #fff;
-  border-color: #111827;
+  border-color: var(--brand);
 }
 .btnAccent { background: var(--accent); color: #fff; }
 .btnAccent:hover:not(:disabled) {
-  background: #1d8478;
+  background: var(--accent-600);
   transform: translateY(-1px);
 }
 .btnSmall { height: 40px; padding: 0 16px; font-size: 13px; }
@@ -171,7 +171,7 @@
 .courseHeadSub {
   font-size: 15px;
   line-height: 1.55;
-  color: #4b5563;
+  color: var(--muted);
   margin: 0;
   max-width: 48ch;
   text-align: justify;
@@ -182,7 +182,7 @@
 
 .progressCard {
   background: #fff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 28px;
 }
@@ -194,12 +194,12 @@
   gap: 12px;
 }
 .progressCardCount {
-  font-family: "Google Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
-  color: #111827;
+  color: var(--ink);
 }
 .progressCardCount em {
   font-family: "Basenji", Georgia, serif;
@@ -211,7 +211,7 @@
 .progressCardCount span {
   font-size: 16px;
   font-weight: 500;
-  color: #4b5563;
+  color: var(--muted);
   margin-left: 6px;
 }
 .progressCardPct {
@@ -219,28 +219,28 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #0d7377;
+  color: var(--brand);
   text-align: right;
 }
 .progressBar {
   height: 8px;
-  background: #e5e5e5;
+  background: var(--line);
   border-radius: 999px;
   overflow: hidden;
   position: relative;
 }
 .progressBarFill {
   height: 100%;
-  background: var(--accent);
+  background: linear-gradient(90deg, #4f46e5 0%, #ff6b4a 100%);
   border-radius: 999px;
   transition: width .6s cubic-bezier(0.34,1.56,0.64,1);
 }
 .progressCardLabel {
   margin-top: 14px;
   font-size: 13px;
-  color: #4b5563;
+  color: var(--muted);
 }
-.progressCardLabel strong { color: #111827; font-weight: 600; }
+.progressCardLabel strong { color: var(--ink); font-weight: 600; }
 
 /* ============================================================
    MODULE LIST
@@ -254,7 +254,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 28px 0 12px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--line);
   margin-top: 24px;
   flex-wrap: wrap;
   gap: 16px;
@@ -264,14 +264,14 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #4b5563;
+  color: var(--muted);
   margin: 0;
 }
 .modListLegend {
   display: flex;
   gap: 18px;
   font-size: 12px;
-  color: #4b5563;
+  color: var(--muted);
 }
 .modListLegend span {
   display: inline-flex;
@@ -282,10 +282,10 @@
   content: "";
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: #d0d0d0;
+  background: var(--line);
 }
 .modListLegend .legDone::before { background: var(--accent); }
-.modListLegend .legNow::before { background: #111827; }
+.modListLegend .legNow::before { background: var(--brand); }
 
 .mod {
   display: grid;
@@ -293,14 +293,14 @@
   gap: 20px;
   padding: 20px 0;
   align-items: center;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--line);
   transition: background .2s, padding .2s;
   cursor: pointer;
   position: relative;
   width: 100%;
   text-align: left;
 }
-.mod:last-of-type { border-bottom: 1px solid #e5e5e5; }
+.mod:last-of-type { border-bottom: 1px solid var(--line); }
 .mod:not(:disabled):hover { background: rgba(255,255,255,.5); padding-left: 12px; }
 .mod:disabled,
 .modLocked {
@@ -317,7 +317,7 @@
   font-size: 28px;
   letter-spacing: -0.02em;
   line-height: 1;
-  color: #9ca3af;
+  color: var(--muted);
   font-variant-numeric: lining-nums;
 }
 .modDone .modNum,
@@ -327,12 +327,12 @@
   font-size: clamp(14px, 1.4vw, 17px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #111827;
+  color: var(--ink);
   margin: 0 0 4px;
 }
 .modDesc {
   font-size: 14.5px;
-  color: #4b5563;
+  color: var(--muted);
   line-height: 1.55;
   margin: 0;
   max-width: 68ch;
@@ -356,31 +356,31 @@
   text-transform: uppercase;
   padding: 6px 12px;
   border-radius: 999px;
-  background: #f0faf8;
-  color: #0d7377;
+  background: var(--brand-soft);
+  color: var(--brand-700);
   white-space: nowrap;
 }
-.modBadgeCurrent { background: #111827; color: #fff; }
+.modBadgeCurrent { background: var(--brand); color: #fff; }
 .modBadgeLocked {
   background: transparent;
-  color: #9ca3af;
-  border: 1px solid #d0d0d0;
+  color: var(--muted);
+  border: 1px solid var(--line);
 }
 .modBadgeDone { background: var(--accent); color: #fff; }
 .modArrow {
   width: 28px; height: 28px;
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--line);
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #111827;
+  color: var(--ink);
   transition: background .2s, color .2s, border-color .2s;
 }
 .mod:not(:disabled):hover .modArrow {
-  background: #111827;
+  background: var(--brand);
   color: #fff;
-  border-color: #111827;
+  border-color: var(--brand);
 }
 
 /* ============================================================
@@ -388,7 +388,7 @@
    ============================================================ */
 .certBlock {
   margin: 32px 0 0;
-  background: #111827;
+  background: linear-gradient(150deg, #211d54 0%, #312e81 55%, #4338ca 100%);
   color: #fff;
   border-radius: 24px;
   padding: 36px 40px;
@@ -458,8 +458,8 @@
   justify-content: space-between;
   gap: 24px;
   padding: 18px 32px;
-  border-bottom: 1px solid #e5e5e5;
-  background: rgba(235,236,230,.92);
+  border-bottom: 1px solid var(--line);
+  background: rgba(244,244,253,.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   flex-shrink: 0;
@@ -473,19 +473,19 @@
   gap: 8px;
   font-size: 14px;
   font-weight: 500;
-  color: #374151;
+  color: var(--body);
   transition: color .2s;
   background: transparent;
   border: 0;
   cursor: pointer;
 }
-.readerBack:hover { color: #111827; }
+.readerBack:hover { color: var(--ink); }
 .readerBack svg { transform: rotate(180deg); }
 
 .readerTitle {
   font-size: 14.5px;
   font-weight: 600;
-  color: #111827;
+  color: var(--ink);
   text-align: center;
   display: flex;
   align-items: center;
@@ -528,14 +528,14 @@
 .readerProgressDots span {
   width: 22px; height: 4px;
   border-radius: 999px;
-  background: #d0d0d0;
+  background: var(--line);
   transition: background .2s, width .2s;
 }
 .dotDone { background: var(--accent) !important; }
-.dotCurrent { background: #111827 !important; width: 36px !important; }
+.dotCurrent { background: var(--brand) !important; width: 36px !important; }
 .readerProgressLabel {
   font-size: 12px;
-  color: #4b5563;
+  color: var(--muted);
   white-space: nowrap;
 }
 
@@ -564,7 +564,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #0d7377;
+  color: var(--brand);
   margin: 0 0 12px;
   display: flex;
   align-items: center;
@@ -580,7 +580,7 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.05;
-  color: #111827;
+  color: var(--ink);
   margin: 0 0 28px;
   max-width: 22ch;
 }
@@ -589,7 +589,7 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 32px 0 20px;
-  color: #111827;
+  color: var(--ink);
 }
 .readerLede {
   font-family: "Basenji", Georgia, serif;
@@ -598,7 +598,7 @@
   font-size: 17px;
   line-height: 1.4;
   letter-spacing: -0.01em;
-  color: #111827;
+  color: var(--ink);
   margin: 0 0 32px;
   padding-left: 20px;
   border-left: 2px solid var(--accent);
@@ -608,7 +608,7 @@
 .readerProse {
   font-size: 15px;
   line-height: 1.7;
-  color: #374151;
+  color: var(--body);
   text-align: justify;
   text-wrap: pretty;
   hyphens: auto;
@@ -618,7 +618,7 @@
   margin: 0 0 18px;
   max-width: 64ch;
 }
-.readerProse strong { color: #111827; font-weight: 600; }
+.readerProse strong { color: var(--ink); font-weight: 600; }
 .readerProse ul {
   margin: 0 0 22px;
   padding-left: 0;
@@ -628,10 +628,10 @@
 }
 .readerProse li {
   padding: 10px 0 10px 32px;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--line);
   position: relative;
 }
-.readerProse li:last-child { border-bottom: 1px solid #e5e5e5; }
+.readerProse li:last-child { border-bottom: 1px solid var(--line); }
 .readerProse li::before {
   content: "—";
   position: absolute;
@@ -652,7 +652,7 @@
   content: "";
   flex: 1;
   height: 1px;
-  background: #e5e5e5;
+  background: var(--line);
 }
 .readerBreakIcon {
   font-family: "Basenji", Georgia, serif;
@@ -672,13 +672,13 @@
 .prem {
   border-radius: 16px;
   padding: 24px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--line);
   background: #fff;
 }
-.premGood { border-color: rgba(34,160,148,.25); background: #f0faf8; }
+.premGood { border-color: rgba(52,211,153,.35); background: #ecfdf5; }
 .premBad { border-color: rgba(220,38,38,.18); background: #fef5f3; }
-.premStrat { border-color: #e5e5e5; background: #fff; }
-.premCheck { border: 0; background: #111827; color: #fff; }
+.premStrat { border-color: var(--line); background: #fff; }
+.premCheck { border: 0; background: linear-gradient(150deg, #312e81 0%, #4338ca 100%); color: #fff; }
 .premCheck .premTitle { color: #fff; }
 .premCheck .premList li { color: rgba(255,255,255,.82); border-color: rgba(255,255,255,.12); }
 .premCheck .premList li::before { background: var(--accent); }
@@ -687,15 +687,15 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #111827;
+  color: var(--ink);
   margin: 0 0 14px;
 }
-.premGood .premTitle { color: #0d7377; }
+.premGood .premTitle { color: #0f9d6e; }
 .premBad .premTitle { color: #b91c1c; }
 .premList { margin: 0; padding: 0; list-style: none; }
 .premList li {
   font-size: 14.5px;
-  color: #374151;
+  color: var(--body);
   padding: 10px 0 10px 24px;
   border-top: 1px solid rgba(0,0,0,.06);
   position: relative;
@@ -714,23 +714,23 @@
   background: currentColor;
   opacity: .5;
 }
-.premGood .premList li::before { background: var(--accent); opacity: 1; }
+.premGood .premList li::before { background: var(--mint); opacity: 1; }
 .premBad .premList li::before { background: #dc2626; opacity: 1; }
 
 /* Evaluation example */
 .example {
   border-radius: 16px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--line);
   background: #fff;
   padding: 24px;
 }
-.example p { margin: 0 0 8px; font-size: 14.5px; color: #374151; line-height: 1.6; }
+.example p { margin: 0 0 8px; font-size: 14.5px; color: var(--body); line-height: 1.6; }
 .example p:last-child { margin-bottom: 0; }
 .exampleTitle {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: #111827;
+  color: var(--ink);
   margin: 0 0 12px;
 }
 .exampleLabel {
@@ -738,7 +738,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #0d7377;
+  color: var(--brand);
   margin-right: 4px;
 }
 
@@ -753,7 +753,7 @@
 }
 .asideCard {
   background: #fff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px;
 }
@@ -762,7 +762,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #4b5563;
+  color: var(--muted);
   margin: 0 0 12px;
   display: flex;
   align-items: center;
@@ -772,7 +772,7 @@
 .asideText {
   font-size: 14.5px;
   line-height: 1.6;
-  color: #374151;
+  color: var(--body);
   margin: 0;
   text-align: justify;
   text-wrap: pretty;
@@ -790,8 +790,8 @@
   padding: 5px 10px;
   background: var(--background);
   border-radius: 999px;
-  color: #374151;
-  border: 1px solid #e5e5e5;
+  color: var(--body);
+  border: 1px solid var(--line);
 }
 .asideCardWarn { background: #fef5f3; border-color: rgba(220,38,38,.18); }
 .asideCardWarn .asideLabel { color: #b91c1c; }
@@ -799,8 +799,8 @@
 
 /* Reader bottom */
 .readerBottom {
-  border-top: 1px solid #e5e5e5;
-  background: rgba(235,236,230,.92);
+  border-top: 1px solid var(--line);
+  background: rgba(244,244,253,.9);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   padding: 16px 32px;
@@ -819,9 +819,9 @@
 }
 .readerPageInfo {
   font-size: 13px;
-  color: #4b5563;
+  color: var(--muted);
 }
-.readerPageInfo strong { color: #111827; font-weight: 600; }
+.readerPageInfo strong { color: var(--ink); font-weight: 600; }
 @media (max-width: 600px) {
   .readerPageInfo { display: none; }
 }
@@ -839,11 +839,11 @@
   font-weight: 700;
   letter-spacing: -0.025em;
   margin: 0 0 12px;
-  color: #111827;
+  color: var(--ink);
 }
 .quizSub {
   font-size: 16px;
-  color: #4b5563;
+  color: var(--muted);
   margin: 0;
   max-width: 60ch;
   text-align: justify;
@@ -854,7 +854,7 @@
 
 .q {
   background: #fff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 28px;
   margin-bottom: 16px;
@@ -875,7 +875,7 @@
   font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.4;
-  color: #111827;
+  color: var(--ink);
   margin: 0 0 20px;
   max-width: 52ch;
   text-wrap: pretty;
@@ -887,47 +887,47 @@
   gap: 16px;
   padding: 16px 20px;
   background: var(--background);
-  border: 1.5px solid #e5e5e5;
+  border: 1.5px solid var(--line);
   border-radius: 12px;
   text-align: left;
   width: 100%;
   font-size: 15.5px;
-  color: #111827;
+  color: var(--ink);
   transition: border-color .15s, background .15s;
   cursor: pointer;
   font-family: inherit;
 }
-.qOpt:hover:not(:disabled) { border-color: #9ca3af; }
+.qOpt:hover:not(:disabled) { border-color: var(--muted); }
 .qOptSelected {
-  border-color: #111827 !important;
+  border-color: var(--brand) !important;
   background: #fff !important;
 }
 .qOptLetter {
   flex-shrink: 0;
   width: 28px; height: 28px;
   border-radius: 50%;
-  border: 1.5px solid #d0d0d0;
+  border: 1.5px solid var(--line);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
   font-weight: 700;
-  color: #4b5563;
+  color: var(--muted);
   background: #fff;
   transition: all .15s;
 }
 .qOptSelected .qOptLetter {
-  background: #111827;
-  border-color: #111827;
+  background: var(--brand);
+  border-color: var(--brand);
   color: #fff;
 }
 .qOptCorrect {
-  border-color: var(--accent) !important;
-  background: #f0faf8 !important;
+  border-color: var(--mint) !important;
+  background: #ecfdf5 !important;
 }
 .qOptCorrect .qOptLetter {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--mint);
+  border-color: var(--mint);
   color: #fff;
 }
 .qOptWrong {
@@ -952,7 +952,7 @@
 .quizHint {
   flex: 1;
   font-size: 13px;
-  color: #4b5563;
+  color: var(--muted);
   min-width: 200px;
 }
 
@@ -960,7 +960,7 @@
 .result {
   background: #fff;
   border-radius: 24px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--line);
   padding: 48px;
   text-align: center;
   margin-bottom: 24px;
@@ -988,7 +988,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #4b5563;
+  color: var(--muted);
   margin: 16px 0 12px;
 }
 .resultTitle {
@@ -996,11 +996,11 @@
   font-weight: 700;
   letter-spacing: -0.025em;
   margin: 0 0 8px;
-  color: #111827;
+  color: var(--ink);
 }
 .resultSub {
   font-size: 15.5px;
-  color: #4b5563;
+  color: var(--muted);
   line-height: 1.55;
   margin: 0 auto 28px;
   max-width: 50ch;

@@ -85,15 +85,15 @@ export default function TopNav() {
           return (
             <Link
               key={item.href}
-              className={`relative pb-2 text-[16px] lg:text-[18px] font-semibold transition min-h-[44px] flex items-center text-black/80 hover:text-black ${
-                isActive ? "text-black" : ""
+              className={`relative pb-2 text-[15px] lg:text-[16px] font-semibold transition min-h-[44px] flex items-center hover:text-[color:var(--brand)] ${
+                isActive ? "text-[color:var(--brand)]" : "text-[color:var(--body)]"
               }`}
               href={item.href}
             >
               {item.label}
 
               {isActive ? (
-                <span className="absolute inset-x-0 -bottom-[2px] h-[2px] bg-[#22a094]" />
+                <span className="absolute inset-x-0 -bottom-[2px] h-[3px] rounded-full bg-gradient-to-r from-[#4f46e5] to-[#ff6b4a]" />
               ) : null}
             </Link>
           );
@@ -116,10 +116,8 @@ export default function TopNav() {
                 <Link
                   key={item.href}
                   className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg font-semibold transition ${
-                    isActive
-                      ? "bg-[#1d8478]"
-                      : "hover:bg-[#1d8478]"
-                  } ${isLast ? "border-b-0" : "border-b border-[#22a094]/20"}`}
+                    isActive ? "bg-[color:var(--brand-soft)]" : ""
+                  } ${isLast ? "border-b-0" : "border-b border-[color:var(--line-light)]"}`}
                   href={item.href}
                   onClick={closeMenu}
                 >
