@@ -171,34 +171,74 @@ h6 {
 
   /* Estilo global aplicado a <button> sem classe utilitária. */
   button {
+    --button-bg: var(--brand);
+    --button-hover-bg: var(--brand-700);
+    --button-fg: white;
+    --button-hover-fg: white;
+    --button-shadow: 0 14px 26px -12px rgba(79, 70, 229, 0.6);
     outline: none;
     cursor: pointer;
     border: none;
-    padding: 0.65em 1.4em;
+    padding: 0.9rem 2rem;
     margin: 0;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    font-size: 14px;
+    font-family: inherit;
+    font-size: 17px;
     position: relative;
     display: inline-flex;
     align-items: center;
-    letter-spacing: 0.01em;
-    font-weight: 600;
-    border-radius: 14px;
+    justify-content: center;
+    gap: 0.65rem;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+    border-radius: 500px;
     overflow: hidden;
-    background: var(--brand);
-    color: white;
-    box-shadow: 0 12px 24px -12px rgba(79, 70, 229, 0.55);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    width: auto;
-    min-width: auto;
+    background: var(--button-hover-bg);
+    color: var(--button-fg);
+    box-shadow: var(--button-shadow);
+    transition: color 0.4s, transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    width: fit-content;
+    min-width: 0;
+    isolation: isolate;
+    white-space: nowrap;
+    line-height: 1.1;
   }
 
-  button:hover {
+  button::before,
+  button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  button::after {
+    background: var(--button-hover-bg);
+    z-index: -2;
+  }
+
+  button::before {
+    background: var(--button-bg);
+    width: 120%;
+    left: -10%;
+    transform: skew(30deg);
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+    z-index: -1;
+  }
+
+  button:hover:not(:disabled) {
+    color: var(--button-hover-fg);
     transform: translateY(-2px);
-    box-shadow: 0 18px 30px -12px rgba(79, 70, 229, 0.6);
+    box-shadow: 0 20px 32px -12px rgba(79, 70, 229, 0.65);
   }
 
-  button:active {
+  button:hover:not(:disabled)::before {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  button:active:not(:disabled) {
     transform: translateY(0);
     box-shadow: 0 8px 16px -10px rgba(79, 70, 229, 0.5);
   }
@@ -207,11 +247,13 @@ h6 {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
   }
 
   button span {
     position: relative;
     z-index: 10;
+    transition: color 0.4s;
   }
 
   /* === SISTEMA PADRONIZADO DE BOTÕES === */
@@ -1226,4 +1268,88 @@ main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-
 main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-pill-button-secondary):hover {
   border-bottom-color: var(--accent);
   color: var(--accent-600);
+}
+
+/* Formato Uiverse aplicado aos botões/CTAs do site, preservando a paleta atual por variante. */
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button) {
+  --button-bg: var(--brand);
+  --button-hover-bg: var(--brand-700);
+  --button-fg: #fff;
+  --button-hover-fg: #fff;
+  --button-shadow: 0 14px 26px -12px rgba(79, 70, 229, 0.6);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: none;
+  border-radius: 500px;
+  padding: 0.9rem 2rem;
+  width: fit-content;
+  min-width: 0;
+  height: auto;
+  color: var(--button-fg) !important;
+  background: var(--button-hover-bg) !important;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  line-height: 1.1;
+  white-space: nowrap;
+  box-shadow: var(--button-shadow);
+  transition: color 0.4s, transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button)::before,
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button)::after {
+  background: var(--button-hover-bg);
+  z-index: -2;
+}
+
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button)::before {
+  background: var(--button-bg);
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+  z-index: -1;
+}
+
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button):hover:not(:disabled) {
+  color: var(--button-hover-fg) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 20px 32px -12px rgba(79, 70, 229, 0.65);
+}
+
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button):hover:not(:disabled)::before {
+  transform: translate3d(100%, 0, 0);
+}
+
+:is(.btn-primary, .btn-secondary, .site-pill-button, .button-size-login, .site-pill-button-secondary, .submit, .cssbuttons-io-button):disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+:is(.btn-primary, .site-pill-button, .button-size-login, .submit, .cssbuttons-io-button) {
+  --button-bg: var(--brand);
+  --button-hover-bg: var(--brand-700);
+}
+
+:is(.btn-secondary, .site-pill-button.nav-login-btn, .site-pill-button-secondary) {
+  --button-bg: #fff;
+  --button-hover-bg: var(--brand-soft);
+  --button-fg: var(--brand-700);
+  --button-hover-fg: var(--brand-700);
+  --button-shadow: none;
+  border: 1.5px solid var(--brand-soft);
 }

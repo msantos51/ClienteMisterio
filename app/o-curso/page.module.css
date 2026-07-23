@@ -529,3 +529,28 @@
 }
 .finalCta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .btnBlock { width: 100%; max-width: 340px; }
+
+/* Formato Uiverse para CTAs da página do curso. */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 500px;
+  padding: 0.9rem 2rem;
+  width: fit-content;
+  min-width: 0;
+  height: auto;
+  font-size: 17px;
+  letter-spacing: 0.05rem;
+  line-height: 1.1;
+  background: var(--button-hover-bg, var(--brand-700));
+  color: #fff;
+}
+.btn::before,
+.btn::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.btn::after { background: var(--button-hover-bg, var(--brand-700)); z-index: -2; }
+.btn::before { background: var(--button-bg, var(--brand)); width: 120%; left: -10%; transform: skew(30deg); transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1); z-index: -1; }
+.btn:hover::before { transform: translate3d(100%, 0, 0); }
+.btnDark { --button-bg: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%); --button-hover-bg: #4338ca; }
+.btnAccent { --button-bg: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%); --button-hover-bg: #f5502e; }
+.btnBlock { width: fit-content; max-width: none; }
