@@ -1,5 +1,5 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Landing page principal — redesign editorial focado em conversão.
+ * DESCRIÇÃO DO FICHEIRO: Landing page principal — versão simplificada, focada em conversão.
  */
 
 "use client";
@@ -19,6 +19,24 @@ const ArrowIcon = ({ size = 16 }: { size?: number }) => (
 const CheckIcon = ({ size = 11 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
     <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+/* ---------- Floating-card icons (hero visual) ---------- */
+const BagIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+    <path d="M3 6h18" />
+    <path d="M16 10a4 4 0 0 1-8 0" />
+  </svg>
+);
+
+const ReportIcon = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <path d="M14 2v6h6" />
+    <path d="M8 13h8" />
+    <path d="M8 17h5" />
   </svg>
 );
 
@@ -145,14 +163,6 @@ const modules = [
   { n: "10", t: "Fiscal e relacionamento", d: "Recibos verdes, faturação, como manter-te ativo e a receber missões.", time: "17 min" },
 ];
 
-const earnings = [
-  { type: "Café / pastelaria", detail: "~20 min · consumo incluído", amount: "5 — 15" },
-  { type: "Restaurante", detail: "45–90 min · refeição paga + valor", amount: "20 — 60" },
-  { type: "Loja de retalho", detail: "30–60 min · interação com produto", amount: "10 — 40" },
-  { type: "Banco / telecom", detail: "Atendimento presencial ou telefónico", amount: "15 — 50" },
-  { type: "Hotel · estadia avaliada", detail: "1 noite · check-in a check-out", amount: "80 — 150" },
-];
-
 const steps = [
   { n: "01", t: "Compras o curso", d: "Pagamento único de 24,99€. Acesso imediato a todos os módulos, em qualquer dispositivo." },
   { n: "02", t: "Aprendes", d: "10 módulos práticos com casos reais, formulários-tipo e quiz de validação no fim de cada um." },
@@ -160,39 +170,7 @@ const steps = [
   { n: "04", t: "Aceitas missões e ganhas", d: "Escolhes onde, quando e quantas vezes. Cada missão é paga após o relatório ser aprovado." },
 ];
 
-const faqs = [
-  {
-    q: "Isto é legal em Portugal?",
-    a: "Sim. Mystery shopping é uma atividade legítima e regulada como qualquer outra prestação de serviços. As marcas pagam às plataformas para auditarem o seu próprio atendimento e tu prestas esse serviço como independente.",
-  },
-  {
-    q: "Preciso de experiência anterior?",
-    a: "Não. O curso foi desenhado para começar do zero. Se tens atenção ao detalhe e sabes escrever um parágrafo claro, tens o suficiente para começar.",
-  },
-  {
-    q: "Quanto tempo demora a fazer o curso?",
-    a: "Em média, cerca de 4 horas, distribuídas pelos 10 módulos. Podes fazê-lo num fim-de-semana ou ao longo de várias semanas — o acesso é vitalício.",
-  },
-  {
-    q: "Como recebo o pagamento das missões?",
-    a: "Diretamente da plataforma que te atribui a missão, normalmente por transferência bancária após aprovação do relatório. O módulo 10 explica como emitir recibos verdes.",
-  },
-  {
-    q: "É preciso ter carro?",
-    a: "Depende da tua zona. Em cidades como Lisboa ou Porto, transportes públicos chegam. Fora dos centros, carro alarga muito as missões disponíveis — mas não é obrigatório.",
-  },
-  {
-    q: "Há reembolso se não gostar?",
-    a: "Sim. Tens 14 dias para pedir reembolso integral, sem questões. Acreditamos no produto — só queremos que aprendas, não que pagues sem usar.",
-  },
-  {
-    q: "O certificado é reconhecido?",
-    a: "O certificado é emitido pelo Cliente Mistério e comprova as competências adquiridas. As plataformas em Portugal aceitam-no como prova de formação, mas o que conta sobretudo é o teu desempenho nas missões.",
-  },
-];
-
 export default function HomePage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [showBuyBar, setShowBuyBar] = useState(false);
   const finalRef = useRef<HTMLElement>(null);
 
@@ -253,61 +231,78 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Hero visual */}
+          {/* Hero visual — composição profissional com cartões flutuantes */}
           <div className={styles.heroVisual}>
-            <div className={styles.heroChip}>Missão paga · há 2h</div>
+            <span className={styles.heroRing} aria-hidden />
+            <div className={styles.heroStage}>
+              <svg
+                className={styles.heroArt}
+                viewBox="0 0 300 300"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="Avaliador profissional"
+              >
+                <defs>
+                  <linearGradient id="cmSkin" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stopColor="#f8cda8" />
+                    <stop offset="1" stopColor="#efb790" />
+                  </linearGradient>
+                </defs>
+                {/* shirt + blazer (shoulders, clipped by the circular stage) */}
+                <path d="M56 300 C56 232 96 196 150 196 C204 196 244 232 244 300 Z" fill="#ffffff" />
+                <path d="M150 236 L118 205 C86 220 64 255 62 300 L150 300 Z" fill="#4f46e5" />
+                <path d="M150 236 L182 205 C214 220 236 255 238 300 L150 300 Z" fill="#4338ca" />
+                <path d="M150 236 L120 206 L150 216 Z" fill="#eef0ff" />
+                <path d="M150 236 L180 206 L150 216 Z" fill="#e3e5ff" />
+                {/* neck */}
+                <path d="M134 176 h32 v16 c0 12 -32 12 -32 0 Z" fill="url(#cmSkin)" />
+                <path d="M134 188 c8 8 24 8 32 0 v4 c-6 8 -26 8 -32 0 Z" fill="#e29f76" opacity=".5" />
+                {/* hair (behind head) */}
+                <ellipse cx="150" cy="112" rx="54" ry="58" fill="#2f2a4d" />
+                {/* head */}
+                <ellipse cx="150" cy="130" rx="46" ry="52" fill="url(#cmSkin)" />
+                {/* brows */}
+                <path d="M126 118 q10 -5 20 -1" stroke="#2f2a4d" strokeWidth="3" strokeLinecap="round" fill="none" />
+                <path d="M154 117 q10 -4 20 1" stroke="#2f2a4d" strokeWidth="3" strokeLinecap="round" fill="none" />
+                {/* eyes */}
+                <circle cx="134" cy="133" r="4.2" fill="#2f2a4d" />
+                <circle cx="166" cy="133" r="4.2" fill="#2f2a4d" />
+                {/* cheeks */}
+                <circle cx="122" cy="150" r="7" fill="#ff8a6b" opacity=".32" />
+                <circle cx="178" cy="150" r="7" fill="#ff8a6b" opacity=".32" />
+                {/* smile */}
+                <path d="M136 153 q14 14 28 0" stroke="#2f2a4d" strokeWidth="3.4" strokeLinecap="round" fill="none" />
+              </svg>
+            </div>
 
-            <div className={`${styles.mock} ${styles.mockMission}`}>
-              <div className={styles.mockHead}>
-                <span className={styles.mockTag}>Missão #047</span>
-                <span className={styles.mockPay}>+ 35,00 €</span>
-              </div>
-              <h3 className={styles.mockTitle}>Café Lisboa — Chiado</h3>
-              <p className={styles.mockSub}>Avaliar atendimento e tempo de espera</p>
-
-              <div className={styles.mockCheck}>
-                <span className={`${styles.mockBox} ${styles.mockBoxOn}`}>
-                  <CheckIcon />
-                </span>
-                Cumprimento à entrada
-              </div>
-              <div className={styles.mockCheck}>
-                <span className={`${styles.mockBox} ${styles.mockBoxOn}`}>
-                  <CheckIcon />
-                </span>
-                Tempo de espera &lt; 4 min
-              </div>
-              <div className={`${styles.mockCheck} ${styles.mockCheckLast}`}>
-                <span className={styles.mockBox} />
-                Conhecimento do menu
-              </div>
-
-              <div className={styles.mockRate}>
-                <span className={styles.mockStars}>★★★★★</span>
-                <span className={styles.mockRateLabel}>Avaliação geral</span>
+            <div className={`${styles.floatCard} ${styles.floatMissions}`}>
+              <span className={styles.floatIcon}>
+                <BagIcon />
+              </span>
+              <div className={styles.floatText}>
+                <strong className={styles.floatNum}>3 Novas missões</strong>
+                <span className={styles.floatLabel}>disponíveis</span>
               </div>
             </div>
 
-            <div className={`${styles.mock} ${styles.mockModule}`}>
-              <div className={styles.mockRow}>
-                <span className={styles.mockNum}>03</span>
-                <div>
-                  <h3 className={styles.mockTitle} style={{ fontSize: 15 }}>
-                    Como avaliar serviço
-                  </h3>
-                  <p className={styles.mockSub} style={{ margin: 0 }}>
-                    Módulo · 12 min
-                  </p>
-                </div>
+            <div className={`${styles.floatCard} ${styles.floatPayment}`}>
+              <span className={`${styles.floatIcon} ${styles.floatIconMint}`}>
+                <CheckIcon size={15} />
+              </span>
+              <div className={styles.floatText}>
+                <strong className={styles.floatStrong}>Pagamento recebido</strong>
+                <span className={styles.floatAmount}>+ 35,00 €</span>
               </div>
-              <div className={styles.mockProgress}>
-                <span className={styles.mockProgressBar} />
-              </div>
-              <div className={styles.mockProgressLabel}>
-                <span>Progresso do curso</span>
-                <span>
-                  <strong>3 / 10</strong>
-                </span>
+            </div>
+
+            <div className={`${styles.floatCard} ${styles.floatReport}`}>
+              <span className={`${styles.floatIcon} ${styles.floatIconAmber}`}>
+                <ReportIcon />
+              </span>
+              <div className={styles.floatText}>
+                <strong className={styles.floatNum}>1 relatório</strong>
+                <span className={styles.floatLabel}>por preencher</span>
               </div>
             </div>
           </div>
@@ -430,54 +425,6 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================
-          EARNINGS
-          ============================================================ */}
-      <section className={styles.section} id="ganhos">
-        <div className={styles.wrap}>
-          <div className={styles.earn}>
-            <div className={styles.earnCopy}>
-              <div className={styles.eyebrow}>Quanto se ganha</div>
-              <h2 className={`${styles.display} ${styles.displayMd}`} style={{ marginBottom: 24 }}>
-                De <em className={styles.italic} style={{ color: "var(--accent)" }}>5</em> a{" "}
-                <em className={styles.italic} style={{ color: "var(--accent)" }}>150€</em> por missão.
-              </h2>
-              <p className={styles.lead} style={{ marginBottom: 28 }}>
-                O valor depende do tipo, da duração e do nível de detalhe. Há quem faça 2 missões por mês como complemento; outros constroem uma rotina semanal.
-              </p>
-              <p style={{ fontSize: 14, color: "#4b5563", margin: 0 }}>
-                <strong style={{ color: "var(--ink)" }}>Importante:</strong> não prometemos rendimento garantido. Os valores variam por região e disponibilidade.
-              </p>
-            </div>
-
-            <div>
-              <div className={styles.earnTable}>
-                <div className={`${styles.earnRow} ${styles.earnRowHead}`}>
-                  <span>Tipo de missão</span>
-                  <span>Pagamento típico</span>
-                </div>
-                {earnings.map((e) => (
-                  <div className={styles.earnRow} key={e.type}>
-                    <div>
-                      <div className={styles.earnType}>{e.type}</div>
-                      <div className={styles.earnDetail}>{e.detail}</div>
-                    </div>
-                    <div className={styles.earnAmount}>
-                      {e.amount} <em>€</em>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className={styles.earnNote}>
-                Em média, um aluno ativo recupera o valor do curso na{" "}
-                <strong>primeira ou segunda missão</strong>.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
           HOW IT WORKS
           ============================================================ */}
       <section className={styles.section}>
@@ -502,106 +449,6 @@ export default function HomePage() {
                 <p className={styles.stepDesc}>{s.d}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
-          TESTIMONIALS
-          ============================================================ */}
-      <section className={styles.section}>
-        <div className={styles.wrap}>
-          <div className={styles.head}>
-            <div>
-              <div className={styles.eyebrow}>Testemunhos</div>
-              <h2 className={`${styles.display} ${styles.displayLg}`}>
-                +500 pessoas já passaram por aqui.
-              </h2>
-            </div>
-            <p className={styles.headSub}>
-              Histórias reais de alunos que começaram do zero e fizeram da avaliação um complemento — ou uma rotina.
-            </p>
-          </div>
-
-          <div className={styles.featQuote}>
-            <p className={styles.featQuoteText}>
-              No primeiro mês já tinha completado quatro missões. Recuperei o investimento na primeira.
-            </p>
-            <div className={styles.featAuthor}>
-              <span className={styles.featAvatar}>AP</span>
-              <div>
-                <div className={styles.featName}>Ana Pereira</div>
-                <div className={styles.featRole}>Lisboa · aluna desde Março</div>
-              </div>
-              <span className={styles.featRating}>★★★★★</span>
-            </div>
-          </div>
-
-          <div className={styles.quotes}>
-            <div className={styles.quote}>
-              <p className={styles.quoteText}>
-                Curso bem estruturado, direto ao ponto. Já realizei mais de 10 missões e o suporte tem sido excelente em qualquer dúvida.
-              </p>
-              <div className={styles.quoteAuthor}>
-                <span className={styles.quoteAvatar}>MF</span>
-                <div>
-                  <div className={styles.quoteName}>Maria Ferreira</div>
-                  <div className={styles.quoteRole}>Braga</div>
-                </div>
-                <span className={styles.quoteRating}>★★★★★</span>
-              </div>
-            </div>
-            <div className={styles.quote}>
-              <p className={styles.quoteText}>
-                Procurava complemento ao salário e isto era exatamente o que faltava em Portugal. O módulo do relatório vale, sozinho, o preço.
-              </p>
-              <div className={styles.quoteAuthor}>
-                <span className={styles.quoteAvatar}>RC</span>
-                <div>
-                  <div className={styles.quoteName}>Rui Cardoso</div>
-                  <div className={styles.quoteRole}>Porto</div>
-                </div>
-                <span className={styles.quoteRating}>★★★★★</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
-          FAQ
-          ============================================================ */}
-      <section className={styles.section} id="faq">
-        <div className={styles.wrap} style={{ maxWidth: 880 }}>
-          <div className={`${styles.head} ${styles.headSingle}`}>
-            <div>
-              <div className={styles.eyebrow}>Perguntas frequentes</div>
-              <h2 className={`${styles.display} ${styles.displayLg}`}>
-                Tudo o que precisas de saber.
-              </h2>
-            </div>
-          </div>
-
-          <div className={styles.faq}>
-            {faqs.map((f, i) => {
-              const open = openFaq === i;
-              return (
-                <div className={`${styles.faqItem} ${open ? styles.faqItemOpen : ""}`} key={f.q}>
-                  <button
-                    type="button"
-                    className={styles.faqQ}
-                    onClick={() => setOpenFaq(open ? null : i)}
-                    aria-expanded={open}
-                  >
-                    <span>{f.q}</span>
-                    <span className={styles.faqIcon} aria-hidden />
-                  </button>
-                  <div className={styles.faqA}>
-                    <div className={styles.faqAInner}>{f.a}</div>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </div>
       </section>
