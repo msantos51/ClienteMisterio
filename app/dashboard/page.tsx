@@ -673,7 +673,7 @@ export default function DashboardPage() {
                   )}
 
                   <button
-                    className="submit mt-4 max-w-[240px] bg-red-600 hover:bg-red-700"
+                    className="submit is-danger mt-4 max-w-[240px]"
                     type="button"
                     onClick={handleDeleteAccount}
                   >

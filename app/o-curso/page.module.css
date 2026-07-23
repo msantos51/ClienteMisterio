@@ -91,44 +91,68 @@
 /* ============================================================
    BUTTONS
    ============================================================ */
-.btn {
+/* Formato "skew wipe": pílula que dimensiona ao texto. Em repouso mostra a
+   cor atual (via ::before); no hover o painel inclinado desliza e revela a
+   segunda cor da marca. Scoped em .page para vencer o reset .page button. */
+.page .btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  height: 56px;
-  padding: 0 28px;
-  border-radius: 16px;
+  padding: 0.9rem 2rem;
+  border-radius: 500px;
   font-weight: 700;
   font-size: 16px;
-  letter-spacing: -0.005em;
+  letter-spacing: 0.02em;
   border: 1px solid transparent;
-  transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: color .4s, transform .3s cubic-bezier(0.23, 1, 0.320, 1),
+    box-shadow .3s;
   white-space: nowrap;
   cursor: pointer;
   font-family: inherit;
 }
-.btnDark {
-  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
-  color: #fff;
-  box-shadow: 0 16px 30px -12px rgba(79, 70, 229, 0.55);
-  width: 100%;
+.page .btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  z-index: -1;
+  transform: skew(30deg);
+  transition: transform .4s cubic-bezier(0.3, 1, 0.8, 1);
 }
-.btnDark:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 22px 38px -12px rgba(79, 70, 229, 0.65);
-}
-.btnAccent {
+.page .btn:hover::before { transform: translate3d(100%, 0, 0); }
+
+.page .btnDark {
   background: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%);
   color: #fff;
-  box-shadow: 0 16px 30px -12px rgba(255, 107, 74, 0.55);
+  box-shadow: 0 16px 30px -12px rgba(79, 70, 229, 0.5);
 }
-.btnAccent:hover {
+.page .btnDark::before {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+}
+.page .btnDark:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 38px -12px rgba(255, 107, 74, 0.65);
+  box-shadow: 0 22px 38px -12px rgba(255, 107, 74, 0.55);
+}
+.page .btnAccent {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  color: #fff;
+  box-shadow: 0 16px 30px -12px rgba(255, 107, 74, 0.5);
+}
+.page .btnAccent::before {
+  background: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%);
+}
+.page .btnAccent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 38px -12px rgba(79, 70, 229, 0.55);
 }
 .arrow { transition: transform .2s; }
-.btn:hover .arrow { transform: translateX(3px); }
+.page .btn:hover .arrow { transform: translateX(3px); }
 
 /* ============================================================
    HERO
@@ -528,4 +552,4 @@
   font-weight: 500;
 }
 .finalCta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-.btnBlock { width: 100%; max-width: 340px; }
+.page .btnBlock { width: 100%; max-width: 340px; }
