@@ -25,8 +25,7 @@ export default function Footer() {
       links: [
         { label: t.footer.courseLink, href: "/o-curso" },
         { label: t.footer.certificateLink, href: "/dashboard" },
-        { label: t.nav.resources, href: "/recursos" },
-        { label: t.footer.faqLink, href: "/#faq" },
+        { label: t.footer.faqLink, href: "/faq" },
         { label: t.footer.platformsLink, href: "/catalogo" },
       ],
     },

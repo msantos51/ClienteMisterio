@@ -1,0 +1,196 @@
+/*
+ * Cliente Mistério — Página FAQ (design "Índigo & Coral").
+ */
+
+.page {
+  background:
+    radial-gradient(60% 40% at 85% -5%, rgba(255, 107, 74, 0.08) 0%, transparent 60%),
+    radial-gradient(55% 45% at 0% 0%, rgba(79, 70, 229, 0.09) 0%, transparent 55%),
+    var(--background);
+  color: var(--body);
+  font-size: 15px;
+  line-height: 1.65;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  padding-bottom: 92px;
+}
+.wrap {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+@media (min-width: 768px) {
+  .wrap { padding: 0 40px; }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 72px 0 40px;
+  text-align: center;
+}
+@media (max-width: 720px) {
+  .hero { padding: 48px 0 28px; }
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-600);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 7px 15px 7px 12px;
+  margin-bottom: 22px;
+}
+.eyebrow::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(255, 107, 74, 0.18);
+}
+.title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.04;
+  color: var(--ink);
+  font-size: clamp(29px, 3.9vw, 52px);
+  margin: 0 0 18px;
+}
+.sub {
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.65;
+  color: var(--body);
+  max-width: 52ch;
+  margin: 0 auto;
+  text-wrap: pretty;
+  font-weight: 500;
+}
+.subLink {
+  color: var(--brand);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1.5px solid var(--brand-soft);
+  transition: border-color .2s;
+}
+.subLink:hover { border-color: var(--brand); }
+
+/* ---------- Accordion ---------- */
+.faq {
+  border-top: 1.5px solid var(--line);
+  margin-top: 12px;
+}
+.faqItem { border-bottom: 1.5px solid var(--line); }
+.faqQ {
+  display: flex;
+  width: 100%;
+  text-align: left;
+  padding: 26px 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: color .2s;
+  font-family: inherit;
+}
+.faqQ:hover { color: var(--brand); }
+.faqIcon {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  position: relative;
+  transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+.faqIcon::before, .faqIcon::after {
+  content: "";
+  position: absolute;
+  background: var(--brand);
+  top: 50%; left: 50%;
+  transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+.faqIcon::before { width: 12px; height: 2px; transform: translate(-50%,-50%); }
+.faqIcon::after { width: 2px; height: 12px; transform: translate(-50%,-50%); }
+.faqItemOpen .faqIcon {
+  background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
+  border-color: transparent;
+}
+.faqItemOpen .faqIcon::before,
+.faqItemOpen .faqIcon::after { background: #fff; }
+.faqItemOpen .faqIcon::after { transform: translate(-50%,-50%) rotate(90deg); }
+
+.faqA {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease;
+}
+.faqAInner {
+  padding: 0 0 24px;
+  max-width: 68ch;
+  color: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+  text-wrap: pretty;
+  font-weight: 500;
+}
+.faqItemOpen .faqA { max-height: 400px; }
+
+/* ---------- CTA ---------- */
+.cta {
+  margin-top: 56px;
+  background: linear-gradient(150deg, #211d54 0%, #312e81 55%, #4338ca 100%);
+  border-radius: 24px;
+  padding: 36px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: #fff;
+}
+.ctaTitle {
+  font-size: clamp(20px, 2.4vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 6px;
+}
+.ctaSub {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.74);
+  margin: 0;
+  font-weight: 500;
+}
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 54px;
+  padding: 0 28px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  background: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%);
+  color: #fff;
+  box-shadow: 0 16px 34px -12px rgba(255, 107, 74, 0.6);
+  transition: transform .2s, box-shadow .2s;
+}
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 42px -12px rgba(255, 107, 74, 0.7);
+}
+.ctaBtn svg { transition: transform .2s; }
+.ctaBtn:hover svg { transform: translateX(3px); }

@@ -9,6 +9,7 @@ const siteUrl = process.env.APP_BASE_URL?.trim() || "https://clientemisterio.onr
 const publicPaths = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
   { path: "/o-curso", priority: 0.9, changeFrequency: "weekly" as const },
+  { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/about", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.6, changeFrequency: "monthly" as const },
   { path: "/login", priority: 0.4, changeFrequency: "yearly" as const },
