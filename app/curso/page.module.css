@@ -1031,3 +1031,52 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* Formato Uiverse para botões da página do curso, preservando as cores atuais. */
+.btn,
+.readerBack {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 500px;
+  padding: 0.9rem 2rem;
+  width: fit-content;
+  min-width: 0;
+  height: auto;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  line-height: 1.1;
+  background: var(--button-hover-bg, var(--brand-700));
+  color: var(--button-fg, #fff);
+  transition: color 0.4s, transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+.btn::before,
+.btn::after,
+.readerBack::before,
+.readerBack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.btn::after,
+.readerBack::after { background: var(--button-hover-bg, var(--brand-700)); z-index: -2; }
+.btn::before,
+.readerBack::before {
+  background: var(--button-bg, var(--brand));
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+  z-index: -1;
+}
+.btn:hover:not(:disabled)::before,
+.readerBack:hover:not(:disabled)::before { transform: translate3d(100%, 0, 0); }
+.btnPrimary { --button-bg: var(--brand); --button-hover-bg: var(--accent); --button-fg: #fff; }
+.btnAccent { --button-bg: var(--accent); --button-hover-bg: var(--accent-600); --button-fg: #fff; }
+.btnGhost,
+.readerBack { --button-bg: transparent; --button-hover-bg: var(--brand); --button-fg: var(--ink); }
+.btnGhost:hover:not(:disabled),
+.readerBack:hover:not(:disabled) { color: #fff; }
+.btnSmall { padding: 0.75rem 1.4rem; font-size: 14px; }

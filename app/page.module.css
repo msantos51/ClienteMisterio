@@ -799,3 +799,43 @@
   transition: opacity .8s ease, transform .8s cubic-bezier(.22,.61,.36,1);
 }
 .fadeUpIn { opacity: 1; transform: translateY(0); }
+
+/* Formato Uiverse para CTAs desta página, mantendo as cores das variantes atuais. */
+.btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 500px;
+  padding: 0.9rem 2rem;
+  width: fit-content;
+  min-width: 0;
+  height: auto;
+  font-size: 17px;
+  letter-spacing: 0.05rem;
+  line-height: 1.1;
+  background: var(--button-hover-bg, var(--brand-700));
+  color: var(--button-fg, #fff);
+  transition: color 0.4s, transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+.btn::before,
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.btn::after { background: var(--button-hover-bg, var(--brand-700)); z-index: -2; }
+.btn::before {
+  background: var(--button-bg, var(--brand));
+  width: 120%;
+  left: -10%;
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+  z-index: -1;
+}
+.btn:hover::before { transform: translate3d(100%, 0, 0); }
+.btnPrimary { --button-bg: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%); --button-hover-bg: #f5502e; --button-fg: #fff; }
+.btnGhost { --button-bg: #fff; --button-hover-bg: var(--brand-soft); --button-fg: var(--brand-700); }
+.finalBtn,
+.buyBarBtn { --button-bg: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%); --button-hover-bg: #f5502e; --button-fg: #fff; }
+.btnSmall { padding: 0.75rem 1.4rem; font-size: 14px; }
