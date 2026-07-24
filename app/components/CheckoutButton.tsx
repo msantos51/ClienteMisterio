@@ -23,7 +23,7 @@ export default function CheckoutButton({
 
   if (!paymentLink) {
     return (
-      <button disabled className="opacity-50 cursor-not-allowed" title="Payment link não configurado">
+      <button disabled className="submit opacity-50 cursor-not-allowed" title="Payment link não configurado">
         {label}
       </button>
     );

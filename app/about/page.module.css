@@ -70,30 +70,48 @@
 /* ============================================================
    BUTTONS
    ============================================================ */
-.btn {
+/* Formato "skew wipe": pílula que dimensiona ao texto. Em repouso mostra a
+   cor atual (via ::before); no hover o painel inclinado desliza e revela a
+   segunda cor da marca. Scoped em .page para vencer o reset .page button. */
+.page .btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  height: 56px;
-  padding: 0 26px;
-  border-radius: 999px;
-  font-weight: 600;
+  padding: 0.9rem 2rem;
+  border-radius: 500px;
+  font-weight: 700;
   font-size: 16px;
-  letter-spacing: -0.005em;
+  letter-spacing: 0.02em;
   border: 1px solid transparent;
-  transition: transform .2s cubic-bezier(0.34,1.56,0.64,1), background .2s, color .2s, box-shadow .2s;
+  transition: color .4s, transform .2s cubic-bezier(0.34,1.56,0.64,1),
+    box-shadow .2s;
   white-space: nowrap;
   cursor: pointer;
   font-family: inherit;
-  width: 100%;
 }
-.btnDark {
-  background: var(--brand);
+.page .btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  z-index: -1;
+  transform: skew(30deg);
+  transition: transform .4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+.page .btn:hover::before { transform: translate3d(100%, 0, 0); }
+
+.page .btnDark {
+  background: var(--accent);
   color: #fff;
 }
-.btnDark:hover {
-  background: var(--accent);
+.page .btnDark::before { background: var(--brand); }
+.page .btnDark:hover {
   transform: translateY(-1px);
   box-shadow: 0 12px 28px -10px rgba(255,107,74,.5);
 }

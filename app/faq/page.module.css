@@ -171,26 +171,44 @@
   margin: 0;
   font-weight: 500;
 }
+/* Formato "skew wipe": coral em repouso (via ::before), revela índigo no
+   hover. !important em color/border para vencer a regra global main a. */
 .ctaBtn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  height: 54px;
-  padding: 0 28px;
-  border-radius: 16px;
+  padding: 0.85rem 2rem;
+  border-radius: 500px;
   font-weight: 700;
   font-size: 16px;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   text-decoration: none;
-  background: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%);
-  color: #fff;
-  box-shadow: 0 16px 34px -12px rgba(255, 107, 74, 0.6);
-  transition: transform .2s, box-shadow .2s;
+  border-bottom: none !important;
+  background: var(--brand-500);
+  color: #fff !important;
+  box-shadow: 0 16px 34px -12px rgba(255, 107, 74, 0.55);
+  transition: color .4s, transform .3s, box-shadow .3s;
 }
+.ctaBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%);
+  transform: skew(30deg);
+  transition: transform .4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+.ctaBtn:hover::before { transform: translate3d(100%, 0, 0); }
 .ctaBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 42px -12px rgba(255, 107, 74, 0.7);
+  box-shadow: 0 22px 42px -12px rgba(79, 70, 229, 0.5);
 }
 .ctaBtn svg { transition: transform .2s; }
 .ctaBtn:hover svg { transform: translateX(3px); }

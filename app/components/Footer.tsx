@@ -121,7 +121,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="w-full rounded-xl bg-gradient-to-r from-[#ff6b4a] to-[#f5502e] px-3 py-2.5 text-xs font-bold text-white shadow-[0_12px_24px_-12px_rgba(255,107,74,0.8)] transition-transform hover:-translate-y-0.5"
+                className="btn-accent btn-block !text-xs !py-2.5"
               >
                 {newsletterSubmitted ? "✓ " + t.footer.newsletterButton : t.footer.newsletterButton}
               </button>
