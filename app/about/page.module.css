@@ -1,5 +1,5 @@
 /*
- * About page — editorial design matching the homepage.
+ * Página "Sobre" — design "Carvão & Carmim", alinhado com a homepage.
  */
 
 /* Reset global button/link styles inside this page */
@@ -11,7 +11,7 @@
    ============================================================ */
 .page {
   background: var(--background);
-  color: var(--ink);
+  color: #fff;
   font-size: 15px;
   line-height: 1.65;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -30,38 +30,38 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--brand-700);
+  color: var(--brand);
   margin-bottom: 20px;
 }
 .eyebrow::before {
   content: "";
-  width: 24px; height: 1px;
-  background: var(--accent);
+  width: 30px; height: 2px;
+  background: var(--brand);
+  flex-shrink: 0;
 }
 
 .displayLg {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
-  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: #fff;
   font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
 .italic {
-  font-family: "Basenji", Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  color: var(--accent);
+  font-style: normal;
+  font-weight: 800;
+  color: var(--brand);
 }
 .lead {
   font-size: clamp(14px, 1.1vw, 17px);
-  line-height: 1.55;
+  line-height: 1.75;
   color: var(--body);
   max-width: 56ch;
   margin: 0;
@@ -70,9 +70,7 @@
 /* ============================================================
    BUTTONS
    ============================================================ */
-/* Formato "skew wipe": pílula que dimensiona ao texto. Em repouso mostra a
-   cor atual (via ::before); no hover o painel inclinado desliza e revela a
-   segunda cor da marca. Scoped em .page para vencer o reset .page button. */
+/* CTA vazado com contorno carmim; preenche no hover. */
 .page .btn {
   position: relative;
   isolation: isolate;
@@ -81,14 +79,17 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 0.9rem 2rem;
-  border-radius: 500px;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.02em;
-  border: 1px solid transparent;
-  transition: color .4s, transform .2s cubic-bezier(0.34,1.56,0.64,1),
-    box-shadow .2s;
+  padding: 1.05rem 2.2rem;
+  border-radius: 3px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+  border: 1px solid var(--brand);
+  background: transparent;
+  color: #fff;
+  transition: color .35s, transform .3s cubic-bezier(0.23, 1, 0.32, 1);
   white-space: nowrap;
   cursor: pointer;
   font-family: inherit;
@@ -101,20 +102,14 @@
   width: 120%;
   height: 100%;
   z-index: -1;
-  transform: skew(30deg);
-  transition: transform .4s cubic-bezier(0.3, 1, 0.8, 1);
+  background: var(--brand);
+  transform: translate3d(-115%, 0, 0) skew(30deg);
+  transition: transform .45s cubic-bezier(0.3, 1, 0.8, 1);
 }
-.page .btn:hover::before { transform: translate3d(100%, 0, 0); }
-
-.page .btnDark {
-  background: var(--accent);
-  color: #fff;
-}
-.page .btnDark::before { background: var(--brand); }
-.page .btnDark:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px -10px rgba(255,107,74,.5);
-}
+.page .btn:hover::before { transform: skew(30deg); }
+.page .btn:hover { transform: translateY(-2px); }
+.page .btnDark { background: var(--brand); border-color: var(--brand); }
+.page .btnDark::before { background: #0b0b0e; }
 
 /* ============================================================
    HERO
@@ -147,7 +142,7 @@
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.1;
-  color: var(--ink);
+  color: #fff;
   margin: 0 0 16px;
 }
 .advDesc {
@@ -162,19 +157,19 @@
   align-items: flex-start;
   gap: 16px;
   padding: 20px 24px;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 3px;
   font-size: 15px;
   color: var(--body);
   line-height: 1.5;
   transition: border-color .2s;
 }
-.adv:hover { border-color: var(--accent); }
+.adv:hover { border-color: var(--brand); }
 .advNum {
   flex-shrink: 0;
   width: 28px; height: 28px;
-  border-radius: 50%;
+  border-radius: 2px;
   background: var(--brand);
   color: #fff;
   font-weight: 700;
@@ -192,9 +187,9 @@
 
 /* Pricing card */
 .card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 4px;
   padding: 40px;
   position: sticky;
   top: 100px;
@@ -204,7 +199,7 @@
   font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.04em;
-  color: var(--ink);
+  color: #fff;
   line-height: 1;
   margin: 0 0 4px;
 }
@@ -238,34 +233,11 @@
 }
 .check {
   flex-shrink: 0;
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--accent);
+  width: 20px; height: 20px;
+  border-radius: 2px;
+  background: var(--brand);
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
-
-/* Formato Uiverse para botões desta página. */
-.btn {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  border-radius: 500px;
-  padding: 0.9rem 2rem;
-  width: fit-content;
-  min-width: 0;
-  height: auto;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 0.05rem;
-  line-height: 1.1;
-  background: var(--accent);
-  color: #fff;
-}
-.btn::before,
-.btn::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
-.btn::after { background: var(--accent); z-index: -2; }
-.btn::before { background: var(--brand); width: 120%; left: -10%; transform: skew(30deg); transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1); z-index: -1; }
-.btn:hover::before { transform: translate3d(100%, 0, 0); }

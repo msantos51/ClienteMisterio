@@ -46,10 +46,10 @@ export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
   const buttonClass = (isActive: boolean) =>
-    `flex items-center justify-center gap-1 px-3 py-1.5 rounded-lg border-2 font-semibold text-sm transition-all ${
+    `lang-switch-btn flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-[3px] border font-bold text-[11px] uppercase tracking-[0.12em] transition-all ${
       isActive
-        ? "border-[color:var(--brand)] bg-[color:var(--brand-soft)] text-[color:var(--ink)]"
-        : "border-transparent text-[color:var(--muted)] hover:bg-[color:var(--surface-muted)]"
+        ? "border-[color:var(--brand)] bg-[color:var(--brand-soft)] text-white"
+        : "border-transparent text-[color:var(--muted)] hover:text-white"
     }`;
 
   return (

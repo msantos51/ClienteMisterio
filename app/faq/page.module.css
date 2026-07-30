@@ -1,11 +1,35 @@
 /*
- * Cliente Mistério — Página FAQ (design "Índigo & Coral").
+ * Cliente Mistério — Página FAQ (design "Carvão & Carmim").
  */
+
+/* Reset das regras globais de <button> dentro desta página. */
+.page button {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  border-radius: 0;
+  box-shadow: none;
+  width: auto;
+  min-width: 0;
+  overflow: visible;
+  text-align: inherit;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.page button::before,
+.page button::after { content: none; }
 
 .page {
   background:
-    radial-gradient(60% 40% at 85% -5%, rgba(255, 107, 74, 0.08) 0%, transparent 60%),
-    radial-gradient(55% 45% at 0% 0%, rgba(79, 70, 229, 0.09) 0%, transparent 55%),
+    radial-gradient(60% 40% at 85% -5%, rgba(236, 30, 79, 0.08) 0%, transparent 60%),
+    radial-gradient(55% 45% at 0% 0%, rgba(236, 30, 79, 0.09) 0%, transparent 55%),
     var(--background);
   color: var(--body);
   font-size: 15px;
@@ -34,30 +58,26 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 12px;
+  gap: 12px;
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent-600);
-  background: var(--accent-soft);
-  border-radius: 999px;
-  padding: 7px 15px 7px 12px;
+  color: var(--brand);
   margin-bottom: 22px;
 }
 .eyebrow::before {
   content: "";
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(255, 107, 74, 0.18);
+  width: 30px; height: 2px;
+  background: var(--brand);
+  flex-shrink: 0;
 }
 .title {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.04;
-  color: var(--ink);
+  color: #fff;
   font-size: clamp(29px, 3.9vw, 52px);
   margin: 0 0 18px;
 }
@@ -74,18 +94,18 @@
   color: var(--brand);
   font-weight: 700;
   text-decoration: none;
-  border-bottom: 1.5px solid var(--brand-soft);
+  border-bottom: 1px solid rgba(236, 30, 79, 0.4);
   transition: border-color .2s;
 }
 .subLink:hover { border-color: var(--brand); }
 
 /* ---------- Accordion ---------- */
 .faq {
-  border-top: 1.5px solid var(--line);
+  border-top: 1px solid var(--line);
   margin-top: 12px;
 }
-.faqItem { border-bottom: 1.5px solid var(--line); }
-.faqQ {
+.faqItem { border-bottom: 1px solid var(--line); }
+.page .faqQ {
   display: flex;
   width: 100%;
   text-align: left;
@@ -96,19 +116,19 @@
   font-size: clamp(15px, 1.4vw, 18px);
   font-weight: 700;
   letter-spacing: -0.015em;
-  color: var(--ink);
+  color: #fff;
   background: transparent;
   border: 0;
   cursor: pointer;
   transition: color .2s;
   font-family: inherit;
 }
-.faqQ:hover { color: var(--brand); }
+.page .faqQ:hover { color: var(--brand); }
 .faqIcon {
   flex-shrink: 0;
   width: 34px; height: 34px;
-  border: 2px solid var(--line);
-  border-radius: 50%;
+  border: 1px solid var(--line);
+  border-radius: 2px;
   position: relative;
   transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
 }
@@ -122,7 +142,7 @@
 .faqIcon::before { width: 12px; height: 2px; transform: translate(-50%,-50%); }
 .faqIcon::after { width: 2px; height: 12px; transform: translate(-50%,-50%); }
 .faqItemOpen .faqIcon {
-  background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
+  background: var(--brand);
   border-color: transparent;
 }
 .faqItemOpen .faqIcon::before,
@@ -148,8 +168,8 @@
 /* ---------- CTA ---------- */
 .cta {
   margin-top: 56px;
-  background: linear-gradient(150deg, #211d54 0%, #312e81 55%, #4338ca 100%);
-  border-radius: 24px;
+  background: var(--brand);
+  border-radius: 4px;
   padding: 36px 32px;
   display: flex;
   flex-wrap: wrap;
@@ -171,8 +191,7 @@
   margin: 0;
   font-weight: 500;
 }
-/* Formato "skew wipe": coral em repouso (via ::before), revela índigo no
-   hover. !important em color/border para vencer a regra global main a. */
+/* CTA vazado sobre o painel carmim: preenche a preto no hover. */
 .ctaBtn {
   position: relative;
   isolation: isolate;
@@ -180,18 +199,19 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 0.85rem 2rem;
-  border-radius: 500px;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.02em;
+  padding: 1.05rem 2.2rem;
+  border-radius: 3px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
   white-space: nowrap;
   text-decoration: none;
-  border-bottom: none !important;
-  background: var(--brand-500);
+  border: 1px solid #0b0b0e !important;
+  background: #0b0b0e;
   color: #fff !important;
-  box-shadow: 0 16px 34px -12px rgba(255, 107, 74, 0.55);
-  transition: color .4s, transform .3s, box-shadow .3s;
+  transition: color .35s, transform .3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .ctaBtn::before {
   content: "";
@@ -201,36 +221,14 @@
   width: 120%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%);
-  transform: skew(30deg);
-  transition: transform .4s cubic-bezier(0.3, 1, 0.8, 1);
+  background: #fff;
+  transform: translate3d(-115%, 0, 0) skew(30deg);
+  transition: transform .45s cubic-bezier(0.3, 1, 0.8, 1);
 }
-.ctaBtn:hover::before { transform: translate3d(100%, 0, 0); }
+.ctaBtn:hover::before { transform: skew(30deg); }
 .ctaBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 42px -12px rgba(79, 70, 229, 0.5);
+  color: #0b0b0e !important;
 }
-.ctaBtn svg { transition: transform .2s; }
+.ctaBtn svg { transition: transform .25s; }
 .ctaBtn:hover svg { transform: translateX(3px); }
-
-/* Formato Uiverse para o CTA da FAQ. */
-.ctaBtn {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  border-radius: 500px;
-  padding: 0.9rem 2rem;
-  width: fit-content;
-  min-width: 0;
-  height: auto;
-  font-size: 17px;
-  letter-spacing: 0.05rem;
-  line-height: 1.1;
-  background: #f5502e;
-  color: #fff;
-}
-.ctaBtn::before,
-.ctaBtn::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
-.ctaBtn::after { background: #f5502e; z-index: -2; }
-.ctaBtn::before { background: linear-gradient(135deg, #ff6b4a 0%, #f5502e 100%); width: 120%; left: -10%; transform: skew(30deg); transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1); z-index: -1; }
-.ctaBtn:hover::before { transform: translate3d(100%, 0, 0); }

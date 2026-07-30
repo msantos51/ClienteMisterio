@@ -859,7 +859,7 @@ export default function CursoPage() {
   };
 
   if (!isAuthenticated) {
-    return <p className="text-sm text-slate-500">{cp.verifyingSession}</p>;
+    return <p className="text-sm text-[color:var(--muted)]">{cp.verifyingSession}</p>;
   }
 
   if (accessDenied) {
