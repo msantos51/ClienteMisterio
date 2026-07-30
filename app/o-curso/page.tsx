@@ -38,32 +38,32 @@ function BuyButton({ children, className }: { children: React.ReactNode; classNa
 /* Benefit icons */
 const benefitIcons = [
   /* Beginners */ (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg key="beginners" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
     </svg>
   ),
   /* Practical */ (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg key="practical" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
     </svg>
   ),
   /* Earn */ (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg key="earn" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
     </svg>
   ),
   /* Career */ (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg key="career" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
     </svg>
   ),
   /* Tests */ (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg key="tests" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
     </svg>
   ),
   /* Community */ (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg key="community" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
     </svg>
   ),
@@ -173,7 +173,7 @@ export default function CoursePage() {
               <h2 className={styles.displayLg}>{t.coursePage.benefitsTitle}</h2>
             </div>
             <p className={styles.headSub}>
-              Do zero à primeira missão paga, com estrutura, casos reais e certificado incluído.
+Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a primeira missão marcada.
             </p>
           </div>
           <div className={styles.benefits}>
@@ -207,7 +207,7 @@ export default function CoursePage() {
                   </h2>
                 </div>
                 <p className={styles.currSub}>
-                  Vídeo + PDFs descarregáveis. Cada módulo termina com um quiz; no final recebes o certificado.
+Teoria paginada, casos reais comentados e checklists. Cada módulo termina com um quiz; no fim recebes o certificado.
                 </p>
               </div>
 
@@ -228,7 +228,7 @@ export default function CoursePage() {
                         {expanded && (
                           <details className={styles.moduleDetails}>
                             <summary className={styles.moduleSummary}>
-                              Ver mais detalhes & recursos
+                              Ver detalhes e recursos
                               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                                 <polyline points="6 9 12 15 18 9"></polyline>
                               </svg>
@@ -237,12 +237,12 @@ export default function CoursePage() {
                             <div className={styles.moduleExpanded}>
                               {/* Duration */}
                               <div className={styles.expandedItem}>
-                                <strong>⏱ Duração:</strong> {expanded.duration}
+                                <strong>Duração</strong> {expanded.duration}
                               </div>
 
                               {/* Learning Objectives */}
                               <div className={styles.expandedItem}>
-                                <strong>📚 Objetivos de aprendizagem:</strong>
+                                <strong>Objetivos de aprendizagem</strong>
                                 <ul className={styles.objectivesList}>
                                   {expanded.learningObjectives.map((obj) => (
                                     <li key={obj}>{obj}</li>
@@ -252,7 +252,7 @@ export default function CoursePage() {
 
                               {/* Practical Applications */}
                               <div className={styles.expandedItem}>
-                                <strong>💼 Aplicações práticas:</strong>
+                                <strong>Aplicações práticas</strong>
                                 <ul className={styles.objectivesList}>
                                   {expanded.practicalApplications.map((app) => (
                                     <li key={app}>{app}</li>
@@ -262,13 +262,13 @@ export default function CoursePage() {
 
                               {/* Real World Example */}
                               <div className={styles.expandedItem}>
-                                <strong>🎯 Caso real:</strong>
+                                <strong>Caso real</strong>
                                 <p className={styles.caseExample}>{expanded.realWorldExample}</p>
                               </div>
 
                               {/* Resources */}
                               <div className={styles.expandedItem}>
-                                <strong>📥 Recursos incluídos:</strong>
+                                <strong>Recursos incluídos</strong>
                                 <ul className={styles.resourcesList}>
                                   {expanded.resourcesIncluded.map((res) => (
                                     <li key={res}>{res}</li>

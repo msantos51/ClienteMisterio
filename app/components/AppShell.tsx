@@ -15,39 +15,41 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <LanguageProvider>
       <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
-        <header className="sticky top-0 z-50 border-b border-[color:var(--line)] bg-white/85 backdrop-blur-md">
-          <div className="flex w-full justify-center border-b border-[color:var(--line-light)] px-3 sm:px-6 md:px-10">
-            <LanguageSwitcher />
-          </div>
-
-          <div className="px-3 py-2.5 sm:px-6 sm:py-3 md:px-10 md:py-4">
-            <div className="relative flex w-full items-center justify-between gap-2 sm:gap-3">
+        {/* Cabeçalho escuro: marca à esquerda, navegação e ações à direita. */}
+        <header className="sticky top-0 z-50 border-b border-[color:var(--line)] bg-[color:var(--background)]/92 backdrop-blur-md">
+          <div className="px-3 py-3 sm:px-6 md:px-10 md:py-4">
+            <div className="relative flex w-full items-center justify-between gap-3">
               <Link
-                className="order-2 lg:order-first flex items-center gap-2.5"
+                className="flex shrink-0 items-center gap-2.5"
                 href="/"
                 aria-label="Cliente Mistério — início"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#4f46e5] to-[#312e81] text-[13px] font-extrabold tracking-tight text-white shadow-[0_8px_18px_-8px_rgba(79,70,229,0.7)] sm:h-10 sm:w-10">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[3px] bg-[color:var(--brand)] text-[13px] font-extrabold tracking-tight text-white sm:h-10 sm:w-10">
                   CM
                 </span>
-                <span className="hidden flex-col leading-none sm:flex">
-                  <span className="text-[13px] font-extrabold tracking-tight text-[color:var(--ink)]">
-                    Cliente Mistério
+                <span className="hidden flex-col whitespace-nowrap leading-none sm:flex">
+                  <span className="text-[15px] font-extrabold tracking-tight text-white">
+                    Cliente Mistério<span className="text-[color:var(--brand)]">.</span>
                   </span>
-                  <span className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-[color:var(--brand)]">
+                  <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
                     Formação Pro
                   </span>
                 </span>
               </Link>
 
-              <div className="order-first lg:order-none lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+              <div className="flex items-center gap-3 lg:gap-8 xl:gap-10">
                 <TopNav />
-              </div>
-
-              <div className="order-last max-w-[calc(100%-120px)] sm:max-w-none">
+                <div className="hidden md:block">
+                  <LanguageSwitcher />
+                </div>
                 <HeaderActions />
               </div>
             </div>
+          </div>
+
+          {/* Em ecrãs pequenos o seletor de idioma fica numa linha própria. */}
+          <div className="flex w-full justify-center border-t border-[color:var(--line-light)] px-3 py-1.5 md:hidden">
+            <LanguageSwitcher />
           </div>
         </header>
 

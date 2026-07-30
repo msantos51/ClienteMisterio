@@ -413,13 +413,13 @@ export default function DashboardPage() {
   };
 
   if (!profile) {
-    return <p className="text-sm text-slate-500">{d.loading}</p>;
+    return <p className="text-sm text-[color:var(--muted)]">{d.loading}</p>;
   }
 
   return (
     <section className="w-full space-y-8 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
       {mustCompleteProfile && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-slate-900/40 p-4">
+        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4">
           <div className="login-form w-full max-w-2xl">
             <h2 className="section-title">{d.completeProfile}</h2>
             <p className="mt-2 text-sm text-justify">
@@ -485,7 +485,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h2 className="text-lg font-bold !text-black">{d.courseTitle}</h2>
-                <p className="text-xs !text-slate-500 mt-0.5">
+                <p className="text-xs !text-[color:var(--muted)] mt-0.5">
                   {courseProgress
                     ? courseProgress.completedCount === courseProgress.totalModules
                       ? d.courseCompleted
@@ -506,14 +506,14 @@ export default function DashboardPage() {
                 }}
               />
             </div>
-            <p className="mt-2 text-xs !text-slate-400 text-right">{d.continueButton}</p>
+            <p className="mt-2 text-xs !text-[color:var(--muted)] text-right">{d.continueButton}</p>
           </div>
         ) : (
           <div className="dashboard-top-banner">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-lg font-bold !text-black">{d.courseTitle}</h2>
-                <p className="text-xs !text-slate-500 mt-0.5">
+                <p className="text-xs !text-[color:var(--muted)] mt-0.5">
                   {d.paymentMessage}
                 </p>
               </div>
@@ -652,7 +652,7 @@ export default function DashboardPage() {
                   {isSavingPassword ? d.updating : d.updatePassword}
                 </button>
 
-                <div className="mt-8 rounded-xl border border-red-200 bg-red-50 p-4">
+                <div className="mt-8 rounded-[4px] border border-[rgba(236,30,79,0.35)] bg-[rgba(236,30,79,0.08)] p-4">
                   <h3 className="text-base font-semibold text-red-700">{d.dangerZone}</h3>
                   <p className="mt-2 text-sm text-red-700">
                     {d.deleteWarning}
@@ -688,7 +688,7 @@ export default function DashboardPage() {
                 <h2 className="section-title">{d.preferencesTitle}</h2>
                 <p className="mt-2 text-sm">{d.chooseUpdates}</p>
 
-                <div className="mt-5 space-y-3 rounded-xl border border-slate-200 bg-white p-4">
+                <div className="mt-5 space-y-3 rounded-[4px] border border-[color:var(--line)] bg-[color:var(--surface-raised)] p-4">
                   <div className="flex items-center justify-between text-sm">
                     <label htmlFor="receive-newsletter">{d.newsletter}</label>
                     <label className="checkbox-container" htmlFor="receive-newsletter">

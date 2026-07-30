@@ -77,23 +77,23 @@ export default function TopNav() {
         </span>
       </button>
 
-      {/* Mantém os links centrados no desktop e destaca a página ativa com sublinhado. */}
-      <nav className="hidden items-center justify-center gap-6 lg:gap-8 xl:gap-10 lg:flex">
+      {/* Links compactos em maiúsculas, com régua carmim curta na página ativa. */}
+      <nav className="hidden items-center justify-center gap-5 lg:gap-5 xl:gap-8 lg:flex">
         {navigationItems.map((item) => {
           const isActive = pathname === item.href;
 
           return (
             <Link
               key={item.href}
-              className={`relative pb-2 text-[15px] lg:text-[16px] font-semibold transition min-h-[44px] flex items-center hover:text-[color:var(--brand)] ${
-                isActive ? "text-[color:var(--brand)]" : "text-[color:var(--body)]"
+              className={`relative flex min-h-[44px] items-center whitespace-nowrap pb-1 text-[12px] font-bold uppercase tracking-[0.08em] transition hover:text-white xl:text-[13px] ${
+                isActive ? "text-white" : "text-[color:var(--muted)]"
               }`}
               href={item.href}
             >
               {item.label}
 
               {isActive ? (
-                <span className="absolute inset-x-0 -bottom-[2px] h-[3px] rounded-full bg-gradient-to-r from-[#4f46e5] to-[#ff6b4a]" />
+                <span className="absolute bottom-1.5 left-0 h-[2px] w-5 bg-[color:var(--brand)]" />
               ) : null}
             </Link>
           );
@@ -102,10 +102,10 @@ export default function TopNav() {
 
       {/* Renderiza menu vertical no mobile com área clicável confortável e ordem visual consistente. */}
       {isMenuOpen ? (
-        <div className="fixed inset-0 z-40 bg-black/20 lg:hidden" role="presentation">
+        <div className="fixed inset-0 z-40 bg-black/60 lg:hidden" role="presentation">
           <nav
             aria-label="Menu principal mobile"
-            className="mobile-menu-container absolute left-3 right-3 top-[76px] flex flex-col overflow-hidden rounded-[12px] border border-[color:var(--line)] shadow-sm sm:left-4 sm:right-4 sm:top-[82px]"
+            className="mobile-menu-container absolute left-3 right-3 top-[76px] flex flex-col overflow-hidden rounded-[6px] border border-[color:var(--line)] sm:left-4 sm:right-4 sm:top-[82px]"
             ref={menuContainerRef}
           >
             {navigationItems.map((item, index) => {
@@ -115,7 +115,7 @@ export default function TopNav() {
               return (
                 <Link
                   key={item.href}
-                  className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-base sm:text-lg font-semibold transition ${
+                  className={`mobile-menu-item px-4 sm:px-5 py-3 sm:py-4 text-sm font-bold uppercase tracking-[0.08em] transition ${
                     isActive ? "bg-[color:var(--brand-soft)]" : ""
                   } ${isLast ? "border-b-0" : "border-b border-[color:var(--line-light)]"}`}
                   href={item.href}

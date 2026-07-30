@@ -10,7 +10,7 @@
    ============================================================ */
 .page {
   background: var(--background);
-  color: var(--ink);
+  color: #fff;
   font-size: 15px;
   line-height: 1.65;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -39,28 +39,28 @@
 }
 .eyebrow::before {
   content: "";
-  width: 24px; height: 1px;
-  background: var(--accent);
+  width: 30px; height: 2px;
+  background: var(--brand);
+  flex-shrink: 0;
 }
 
 .displayLg {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
-  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: #fff;
   font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
 .italic {
-  font-family: "Basenji", Georgia, serif;
-  font-style: italic;
-  font-weight: 600;
-  color: var(--accent);
+  font-style: normal;
+  font-weight: 800;
+  color: var(--brand);
 }
 .lead {
   font-size: clamp(14px, 1.1vw, 17px);
-  line-height: 1.55;
+  line-height: 1.75;
   color: var(--body);
   max-width: 56ch;
   margin: 0;
@@ -97,7 +97,7 @@
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: #fff;
   margin: 0 0 28px;
 }
 .infoItems { display: flex; flex-direction: column; gap: 20px; }
@@ -105,7 +105,7 @@
 .infoIcon {
   flex-shrink: 0;
   width: 40px; height: 40px;
-  border-radius: 12px;
+  border-radius: 3px;
   background: var(--brand);
   color: #fff;
   display: flex;
@@ -114,7 +114,7 @@
 }
 .infoLabel { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
 .infoValue { font-size: 16px; color: var(--body); line-height: 1.4; }
-.infoValue a { color: var(--accent) !important; }
+.infoValue a { color: var(--brand-500) !important; }
 .infoValue a:hover { opacity: .8; }
 
 .badge {
@@ -123,34 +123,34 @@
   gap: 10px;
   padding: 14px 18px;
   background: var(--brand-soft);
-  border: 1px solid rgba(79,70,229,.2);
-  border-radius: 14px;
+  border: 1px solid rgba(236,30,79,.3);
+  border-radius: 3px;
   font-size: 14px;
-  color: var(--brand-700);
+  color: #fff;
   font-weight: 600;
   margin-top: 32px;
 }
 .badgeDot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(79,70,229,.2);
+  background: var(--brand);
+  box-shadow: 0 0 0 4px rgba(236,30,79,.24);
 }
 
 /* ============================================================
    FORM CARD
    ============================================================ */
 .card {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 4px;
   padding: 40px;
 }
 .cardTitle {
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: #fff;
   margin: 0 0 28px;
 }
 
@@ -174,30 +174,30 @@
 .input {
   height: 48px;
   padding: 0 16px;
-  background: var(--background);
+  background: var(--surface-raised);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 3px;
   font-size: 16px;
   font-family: inherit;
-  color: var(--ink);
+  color: #fff;
   transition: border-color .2s, box-shadow .2s;
   outline: none;
   width: 100%;
   box-sizing: border-box;
 }
 .input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(79,70,229,.14);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(236,30,79,.18);
 }
 .textarea {
   min-height: 140px;
   padding: 14px 16px;
-  background: var(--background);
+  background: var(--surface-raised);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 3px;
   font-size: 16px;
   font-family: inherit;
-  color: var(--ink);
+  color: #fff;
   transition: border-color .2s, box-shadow .2s;
   outline: none;
   resize: vertical;
@@ -206,24 +206,23 @@
   line-height: 1.55;
 }
 .textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(79,70,229,.14);
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(236,30,79,.18);
 }
 
 /* Status message */
 .status {
   padding: 16px 20px;
   background: var(--brand-soft);
-  border: 1px solid rgba(79,70,229,.2);
-  border-radius: 12px;
+  border: 1px solid rgba(236,30,79,.3);
+  border-radius: 3px;
   font-size: 14px;
-  color: var(--brand-700);
+  color: #fff;
   line-height: 1.5;
 }
 .statusRef { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
-/* Submit — formato "skew wipe": índigo em repouso (via ::before), revela
-   coral no hover. Scoped em .page para vencer o reset .page button. */
+/* Submit — vazado carmim que preenche no hover. */
 .page .submit {
   position: relative;
   isolation: isolate;
@@ -232,18 +231,19 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 0.9rem 2rem;
-  border-radius: 500px;
-  font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.02em;
-  border: none;
-  background: var(--accent);
+  padding: 1.05rem 2.2rem;
+  border-radius: 3px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+  border: 1px solid var(--brand);
+  background: var(--brand);
   color: #fff;
   cursor: pointer;
   font-family: inherit;
-  transition: color .4s, transform .2s cubic-bezier(0.34,1.56,0.64,1),
-    box-shadow .2s;
+  transition: color .35s, transform .3s cubic-bezier(0.23, 1, 0.32, 1);
   width: fit-content;
   max-width: 100%;
   justify-self: start;
@@ -256,13 +256,10 @@
   width: 120%;
   height: 100%;
   z-index: -1;
-  background: var(--brand);
-  transform: skew(30deg);
-  transition: transform .4s cubic-bezier(0.3, 1, 0.8, 1);
+  background: #0b0b0e;
+  transform: translate3d(-115%, 0, 0) skew(30deg);
+  transition: transform .45s cubic-bezier(0.3, 1, 0.8, 1);
 }
-.page .submit:hover::before { transform: translate3d(100%, 0, 0); }
-.page .submit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px -10px rgba(255,107,74,.5);
-}
-.page .submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+.page .submit:hover::before { transform: skew(30deg); }
+.page .submit:hover { transform: translateY(-2px); }
+.page .submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
