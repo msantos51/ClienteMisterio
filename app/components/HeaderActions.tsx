@@ -91,8 +91,8 @@ export default function HeaderActions() {
       ) : (
         <>
           {/* User Avatar & Name */}
-          <div className="flex items-center gap-2 rounded-[3px] border border-[color:var(--line)] bg-[color:var(--surface)] px-2 sm:px-3 py-1.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-[3px] bg-[color:var(--brand)] text-[10px] sm:text-xs font-bold text-white">
+          <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[color:var(--line)] bg-[color:var(--surface)] px-2 sm:px-3 py-1.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--brand)] text-[10px] sm:text-xs font-bold text-white">
               {sessionUser.fullName.charAt(0).toUpperCase()}
             </div>
             <div className="hidden sm:flex flex-col">

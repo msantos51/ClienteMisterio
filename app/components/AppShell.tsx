@@ -24,7 +24,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
                 href="/"
                 aria-label="Cliente Mistério — início"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[3px] bg-[color:var(--brand)] text-[13px] font-extrabold tracking-tight text-white sm:h-10 sm:w-10">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--brand)] text-[13px] font-extrabold tracking-tight text-white sm:h-10 sm:w-10">
                   CM
                 </span>
                 <span className="hidden flex-col whitespace-nowrap leading-none sm:flex">

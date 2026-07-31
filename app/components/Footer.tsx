@@ -62,7 +62,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <div className="mb-5 flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-[3px] bg-[color:var(--brand)] text-[13px] font-extrabold text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--brand)] text-[13px] font-extrabold text-white">
                 CM
               </span>
               <span className="flex flex-col leading-none">
@@ -113,7 +113,7 @@ export default function Footer() {
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 required
-                className="w-full rounded-[3px] border border-white/12 bg-white/[0.04] px-3 py-2.5 text-xs text-white placeholder:text-white/35 focus:border-[color:var(--brand)] focus:outline-none"
+                className="w-full rounded-[var(--radius-md)] border border-white/12 bg-white/[0.04] px-3 py-2.5 text-xs text-white placeholder:text-white/35 focus:border-[color:var(--brand)] focus:outline-none"
                 aria-label={t.footer.newsletterLabel}
               />
               <button
@@ -146,7 +146,7 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-[3px] border border-white/10 bg-white/[0.04] text-white/60 transition-all hover:border-[color:var(--brand)] hover:text-white"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] border border-white/10 bg-white/[0.04] text-white/60 transition-all hover:border-[color:var(--brand)] hover:text-white"
                   aria-label={s.label}
                   title={s.label}
                 >
@@ -159,7 +159,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-[3px] border border-white/10 bg-white/[0.04] text-white/60 transition-all hover:border-[color:var(--brand)] hover:text-white"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] border border-white/10 bg-white/[0.04] text-white/60 transition-all hover:border-[color:var(--brand)] hover:text-white"
                 aria-label="Instagram"
                 title="Instagram"
               >

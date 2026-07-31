@@ -652,7 +652,7 @@ export default function DashboardPage() {
                   {isSavingPassword ? d.updating : d.updatePassword}
                 </button>
 
-                <div className="mt-8 rounded-[4px] border border-[rgba(236,30,79,0.35)] bg-[rgba(236,30,79,0.08)] p-4">
+                <div className="mt-8 rounded-[var(--radius-lg)] border border-[rgba(236,30,79,0.35)] bg-[rgba(236,30,79,0.08)] p-4">
                   <h3 className="text-base font-semibold text-red-700">{d.dangerZone}</h3>
                   <p className="mt-2 text-sm text-red-700">
                     {d.deleteWarning}
@@ -688,7 +688,7 @@ export default function DashboardPage() {
                 <h2 className="section-title">{d.preferencesTitle}</h2>
                 <p className="mt-2 text-sm">{d.chooseUpdates}</p>
 
-                <div className="mt-5 space-y-3 rounded-[4px] border border-[color:var(--line)] bg-[color:var(--surface-raised)] p-4">
+                <div className="mt-5 space-y-3 rounded-[var(--radius-lg)] border border-[color:var(--line)] bg-[color:var(--surface-raised)] p-4">
                   <div className="flex items-center justify-between text-sm">
                     <label htmlFor="receive-newsletter">{d.newsletter}</label>
                     <label className="checkbox-container" htmlFor="receive-newsletter">

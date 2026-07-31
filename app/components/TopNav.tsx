@@ -105,7 +105,7 @@ export default function TopNav() {
         <div className="fixed inset-0 z-40 bg-black/60 lg:hidden" role="presentation">
           <nav
             aria-label="Menu principal mobile"
-            className="mobile-menu-container absolute left-3 right-3 top-[76px] flex flex-col overflow-hidden rounded-[6px] border border-[color:var(--line)] sm:left-4 sm:right-4 sm:top-[82px]"
+            className="mobile-menu-container absolute left-3 right-3 top-[76px] flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--line)] sm:left-4 sm:right-4 sm:top-[82px]"
             ref={menuContainerRef}
           >
             {navigationItems.map((item, index) => {
