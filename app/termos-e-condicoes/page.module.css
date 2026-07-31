@@ -10,7 +10,7 @@
    ============================================================ */
 .page {
   background: var(--background);
-  color: #fff;
+  color: var(--moonlight-white);
   font-size: 15px;
   line-height: 1.65;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -48,7 +48,7 @@
   font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 0.98;
-  color: #fff;
+  color: var(--moonlight-white);
   font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
@@ -75,7 +75,7 @@
   padding: 32px 36px;
   transition: border-color .2s;
 }
-.termSection:hover { border-color: rgba(236,30,79,.4); }
+.termSection:hover { border-color: rgba(226, 14, 23,.4); }
 .termHeader {
   display: flex;
   align-items: flex-start;
@@ -87,7 +87,7 @@
   width: 44px; height: 44px;
   border-radius: var(--radius-sm);
   background: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
   font-weight: 800;
   font-size: 18px;
   display: flex;
@@ -98,7 +98,7 @@
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0;
   padding-top: 10px;
 }

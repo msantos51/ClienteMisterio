@@ -1,5 +1,5 @@
 /*
- * Página "Sobre" — design "Carvão & Carmim", alinhado com a homepage.
+ * Página "Sobre" — design "Turkish Red & Railroad Black", alinhado com a homepage.
  */
 
 /* Reset global button/link styles inside this page */
@@ -11,7 +11,7 @@
    ============================================================ */
 .page {
   background: var(--background);
-  color: #fff;
+  color: var(--moonlight-white);
   font-size: 15px;
   line-height: 1.65;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -51,7 +51,7 @@
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1;
-  color: #fff;
+  color: var(--moonlight-white);
   font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
@@ -71,7 +71,7 @@
 /* ============================================================
    BUTTONS
    ============================================================ */
-/* CTA vazado com contorno carmim; preenche no hover. */
+/* CTA vazado com contorno Turkish Red; preenche no hover. */
 .page .btn {
   position: relative;
   isolation: isolate;
@@ -89,7 +89,7 @@
   line-height: 1;
   border: 1px solid var(--brand);
   background: transparent;
-  color: #fff;
+  color: var(--moonlight-white);
   transition: color .35s, transform .3s cubic-bezier(0.23, 1, 0.32, 1);
   white-space: nowrap;
   cursor: pointer;
@@ -110,7 +110,7 @@
 .page .btn:hover::before { transform: skew(30deg); }
 .page .btn:hover { transform: translateY(-2px); }
 .page .btnDark { background: var(--brand); border-color: var(--brand); }
-.page .btnDark::before { background: #0b0b0e; }
+.page .btnDark::before { background: var(--railroad-black); }
 
 /* ============================================================
    HERO
@@ -143,7 +143,7 @@
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.1;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 16px;
 }
 .advDesc {
@@ -172,7 +172,7 @@
   width: 28px; height: 28px;
   border-radius: var(--radius-sm);
   background: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
   font-weight: 700;
   font-size: 13px;
   display: inline-flex;
@@ -200,7 +200,7 @@
   font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.04em;
-  color: #fff;
+  color: var(--moonlight-white);
   line-height: 1;
   margin: 0 0 4px;
 }
@@ -237,7 +237,7 @@
   width: 20px; height: 20px;
   border-radius: var(--radius-sm);
   background: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
   display: inline-flex;
   align-items: center;
   justify-content: center;

@@ -30,15 +30,15 @@ const resolveAppBaseUrl = () => {
 const createLayout = (title: string, description: string, buttonLabel: string, buttonUrl: string) => {
   // Gera HTML padronizado para e-mails de autenticação com CTA principal.
   return `
-    <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; color: #0f172a;">
-      <h1 style="font-size: 24px; margin-bottom: 12px;">${title}</h1>
+    <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; background: #ededed; color: #05141d;">
+      <h1 style="font-size: 24px; margin-bottom: 12px; color: #05141d;">${title}</h1>
       <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">${description}</p>
-      <a href="${buttonUrl}" style="display: inline-block; background: #3b82f6; color: #ffffff; text-decoration: none; padding: 12px 18px; border-radius: 8px; font-weight: 700;">
+      <a href="${buttonUrl}" style="display: inline-block; background: #e20e17; color: #ededed; text-decoration: none; padding: 12px 18px; border-radius: 8px; font-weight: 700;">
         ${buttonLabel}
       </a>
-      <p style="font-size: 13px; color: #475569; margin-top: 18px; line-height: 1.4;">
+      <p style="font-size: 13px; color: #4a575e; margin-top: 18px; line-height: 1.4;">
         Se o botão não funcionar, copie e cole este link no browser:<br />
-        <a href="${buttonUrl}" style="color: #2563eb;">${buttonUrl}</a>
+        <a href="${buttonUrl}" style="color: #e20e17;">${buttonUrl}</a>
       </p>
     </div>
   `;

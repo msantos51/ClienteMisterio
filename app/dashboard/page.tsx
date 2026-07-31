@@ -465,8 +465,8 @@ export default function DashboardPage() {
 
       <div className="mx-auto w-full max-w-6xl space-y-6">
         <header className="dashboard-top-banner">
-          <h1 className="page-title !text-black">{d.hello}, {profile.firstName}</h1>
-          <p className="mt-2 text-sm !text-black">{d.manageAccount}</p>
+          <h1 className="page-title !text-[color:var(--ink)]">{d.hello}, {profile.firstName}</h1>
+          <p className="mt-2 text-sm !text-[color:var(--ink)]">{d.manageAccount}</p>
         </header>
 
         {/* Secção do curso com barra de progresso apenas para contas com pagamento confirmado. */}
@@ -484,7 +484,7 @@ export default function DashboardPage() {
           >
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h2 className="text-lg font-bold !text-black">{d.courseTitle}</h2>
+                <h2 className="text-lg font-bold !text-[color:var(--ink)]">{d.courseTitle}</h2>
                 <p className="text-xs !text-[color:var(--muted)] mt-0.5">
                   {courseProgress
                     ? courseProgress.completedCount === courseProgress.totalModules
@@ -502,7 +502,7 @@ export default function DashboardPage() {
                 className="h-full rounded-full transition-all duration-700"
                 style={{
                   width: `${courseProgress?.progressPercent ?? 0}%`,
-                  background: "linear-gradient(90deg, #4f46e5, #ff6b4a)",
+                  background: "linear-gradient(90deg, var(--brand), var(--brand-500))",
                 }}
               />
             </div>
@@ -512,7 +512,7 @@ export default function DashboardPage() {
           <div className="dashboard-top-banner">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-bold !text-black">{d.courseTitle}</h2>
+                <h2 className="text-lg font-bold !text-[color:var(--ink)]">{d.courseTitle}</h2>
                 <p className="text-xs !text-[color:var(--muted)] mt-0.5">
                   {d.paymentMessage}
                 </p>
@@ -652,9 +652,9 @@ export default function DashboardPage() {
                   {isSavingPassword ? d.updating : d.updatePassword}
                 </button>
 
-                <div className="mt-8 rounded-[var(--radius-lg)] border border-[rgba(236,30,79,0.35)] bg-[rgba(236,30,79,0.08)] p-4">
-                  <h3 className="text-base font-semibold text-red-700">{d.dangerZone}</h3>
-                  <p className="mt-2 text-sm text-red-700">
+                <div className="mt-8 rounded-[var(--radius-lg)] border border-[rgba(226, 14, 23,0.35)] bg-[rgba(226, 14, 23,0.08)] p-4">
+                  <h3 className="text-base font-semibold text-[color:var(--brand-500)]">{d.dangerZone}</h3>
+                  <p className="mt-2 text-sm text-[color:var(--brand-500)]">
                     {d.deleteWarning}
                   </p>
 

@@ -1,5 +1,5 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Landing page principal — design "Carvão & Carmim",
+ * DESCRIÇÃO DO FICHEIRO: Landing page principal — design "Turkish Red & Railroad Black",
  * layout editorial de agência focado em conversão.
  */
 
