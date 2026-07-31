@@ -28,13 +28,13 @@
 
 .page {
   background:
-    radial-gradient(60% 40% at 85% -5%, rgba(226, 14, 23, 0.08) 0%, transparent 60%),
-    radial-gradient(55% 45% at 0% 0%, rgba(226, 14, 23, 0.09) 0%, transparent 55%),
+    radial-gradient(60% 40% at 85% -5%, rgba(239, 62, 77, 0.08) 0%, transparent 60%),
+    radial-gradient(55% 45% at 0% 0%, rgba(239, 62, 77, 0.09) 0%, transparent 55%),
     var(--background);
   color: var(--body);
   font-size: 15px;
   line-height: 1.65;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   padding-bottom: 92px;
 }
 .wrap {
@@ -74,11 +74,11 @@
   flex-shrink: 0;
 }
 .title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.04;
-  color: var(--moonlight-white);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  color: var(--color-text-primary);
   font-size: clamp(29px, 3.9vw, 52px);
   margin: 0 0 18px;
 }
@@ -95,7 +95,7 @@
   color: var(--brand);
   font-weight: 700;
   text-decoration: none;
-  border-bottom: 1px solid rgba(226, 14, 23, 0.4);
+  border-bottom: 1px solid rgba(239, 62, 77, 0.4);
   transition: border-color .2s;
 }
 .subLink:hover { border-color: var(--brand); }
@@ -116,8 +116,8 @@
   gap: 32px;
   font-size: clamp(15px, 1.4vw, 18px);
   font-weight: 700;
-  letter-spacing: -0.015em;
-  color: var(--moonlight-white);
+  letter-spacing: -0.2px;
+  color: var(--color-text-primary);
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -188,48 +188,34 @@
 }
 .ctaSub {
   font-size: 15px;
-  color: rgba(237, 237, 237, 0.74);
+  color: rgba(255, 255, 255, 0.74);
   margin: 0;
   font-weight: 500;
 }
-/* CTA vazado sobre o painel Turkish Red: preenche a preto no hover. */
+/* CTA branco sobre o painel vermelho — máximo contraste sobre a cor de marca. */
 .ctaBtn {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 1.05rem 2.2rem;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 32px;
   border-radius: var(--radius-md);
-  font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  line-height: 1;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
   white-space: nowrap;
   text-decoration: none;
-  border: 1px solid var(--railroad-black) !important;
-  background: var(--railroad-black);
-  color: var(--moonlight-white) !important;
-  transition: color .35s, transform .3s cubic-bezier(0.23, 1, 0.32, 1);
+  border: none !important;
+  background: var(--color-white);
+  color: var(--color-primary-red) !important;
+  box-shadow: 0 4px 12px rgba(15, 76, 92, 0.2);
+  transition: all 200ms ease;
 }
-.ctaBtn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -10%;
-  width: 120%;
-  height: 100%;
-  z-index: -1;
-  background: var(--moonlight-white);
-  transform: translate3d(-115%, 0, 0) skew(30deg);
-  transition: transform .45s cubic-bezier(0.3, 1, 0.8, 1);
-}
-.ctaBtn:hover::before { transform: skew(30deg); }
 .ctaBtn:hover {
   transform: translateY(-2px);
-  color: var(--railroad-black) !important;
+  background: var(--color-bg-light);
+  box-shadow: 0 6px 16px rgba(15, 76, 92, 0.28);
 }
-.ctaBtn svg { transition: transform .25s; }
+.ctaBtn:active { transform: translateY(0); }
+.ctaBtn svg { transition: transform 200ms ease; }
 .ctaBtn:hover svg { transform: translateX(3px); }

@@ -82,32 +82,31 @@ export default function HeaderActions() {
   return (
     <div className="flex flex-nowrap items-center justify-end gap-2">
       {!sessionUser ? (
-        <Link
-          className="site-pill-button nav-login-btn px-4 sm:px-6 py-2.5 text-[10px] sm:text-[11px] leading-none"
-          href="/login"
-        >
+        <Link className="site-pill-button nav-login-btn" href="/login">
           {t.nav.login}
         </Link>
       ) : (
         <>
           {/* User Avatar & Name */}
-          <div className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[color:var(--line)] bg-[color:var(--surface)] px-2 sm:px-3 py-1.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--brand)] text-[10px] sm:text-xs font-bold text-white">
-              {sessionUser.fullName.charAt(0).toUpperCase()}
-            </div>
-            <div className="hidden sm:flex flex-col">
-              <span className="text-[11px] font-bold leading-tight text-white">
-                {sessionUser.fullName.split(" ")[0]}
-              </span>
-              <span className="text-[9px] uppercase tracking-[0.14em] leading-tight text-[color:var(--muted)]">
-                {t.nav.account}
-              </span>
+          <div className="user-menu hidden sm:flex">
+            <div className="flex items-center gap-2">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--color-primary-red)] text-xs font-bold text-white">
+                {sessionUser.fullName.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex flex-col">
+                <span className="user-name leading-tight">
+                  {sessionUser.fullName.split(" ")[0]}
+                </span>
+                <span className="text-[10px] uppercase tracking-[0.5px] leading-tight text-white/60">
+                  {t.nav.account}
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Dashboard & Logout Links */}
           <Link
-            className="site-pill-button nav-dashboard-btn px-4 sm:px-6 py-2.5 text-[10px] sm:text-[11px] leading-none"
+            className="site-pill-button nav-dashboard-btn"
             href="/dashboard"
             title={`${t.nav.dashboard} - ${sessionUser.fullName}`}
           >
@@ -115,7 +114,7 @@ export default function HeaderActions() {
           </Link>
           <button
             onClick={handleLogout}
-            className="site-pill-button-secondary hidden px-4 sm:px-6 py-2.5 text-[10px] sm:text-[11px] leading-none md:inline-flex"
+            className="site-pill-button-secondary hidden md:inline-flex"
             title={t.nav.logout}
           >
             {t.nav.logout}

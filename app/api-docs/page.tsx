@@ -36,7 +36,7 @@ export default function ApiDocsPage() {
       <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
 
       {/* Container onde o Swagger UI será montado no cliente. */}
-      <section className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-[color:var(--line)] bg-[#ededed] p-2 shadow-sm">
+      <section className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-[color:var(--line)] bg-[#f5f8fa] p-2 shadow-sm">
         <div id="swagger-ui" />
       </section>
 

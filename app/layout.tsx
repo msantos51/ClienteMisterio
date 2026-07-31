@@ -55,7 +55,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#05141d",
+  themeColor: "#0f4c5c",
 };
 
 export default function RootLayout({
@@ -65,14 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-PT">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body
-        className="bg-[color:var(--background)] text-[color:var(--foreground)] antialiased"
-        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-      >
+      <body className="bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
         <AppShell>{children}</AppShell>
       </body>
     </html>

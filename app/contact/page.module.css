@@ -9,11 +9,11 @@
    LAYOUT PRIMITIVES
    ============================================================ */
 .page {
-  background: var(--background);
-  color: var(--moonlight-white);
+  background: var(--color-white);
+  color: var(--color-text-primary);
   font-size: 15px;
   line-height: 1.65;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
 }
 .wrap {
   width: 100%;
@@ -46,11 +46,11 @@
 }
 
 .displayLg {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1;
-  color: var(--moonlight-white);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  color: var(--color-text-primary);
   font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
@@ -97,8 +97,8 @@
 .infoTitle {
   font-size: 22px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--moonlight-white);
+  letter-spacing: -0.3px;
+  color: var(--color-text-primary);
   margin: 0 0 28px;
 }
 .infoItems { display: flex; flex-direction: column; gap: 20px; }
@@ -124,10 +124,10 @@
   gap: 10px;
   padding: 14px 18px;
   background: var(--brand-soft);
-  border: 1px solid rgba(226, 14, 23,.3);
+  border: 1px solid rgba(239, 62, 77,.3);
   border-radius: var(--radius-pill);
   font-size: 14px;
-  color: var(--moonlight-white);
+  color: var(--color-red-ink);
   font-weight: 600;
   margin-top: 32px;
 }
@@ -135,23 +135,24 @@
   width: 8px; height: 8px;
   border-radius: 50%;
   background: var(--brand);
-  box-shadow: 0 0 0 4px rgba(226, 14, 23,.24);
+  box-shadow: 0 0 0 4px rgba(239, 62, 77,.24);
 }
 
 /* ============================================================
    FORM CARD
    ============================================================ */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-xl);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-lg);
   padding: 40px;
+  box-shadow: 0 8px 24px rgba(15, 76, 92, 0.1);
 }
 .cardTitle {
   font-size: 22px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--moonlight-white);
+  letter-spacing: -0.3px;
+  color: var(--color-text-primary);
   margin: 0 0 28px;
 }
 
@@ -175,12 +176,12 @@
 .input {
   height: 48px;
   padding: 0 16px;
-  background: var(--surface-raised);
-  border: 1px solid var(--line);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
   border-radius: var(--radius-md);
   font-size: 16px;
   font-family: inherit;
-  color: var(--moonlight-white);
+  color: var(--color-text-primary);
   transition: border-color .2s, box-shadow .2s;
   outline: none;
   width: 100%;
@@ -188,17 +189,17 @@
 }
 .input:focus {
   border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(226, 14, 23,.18);
+  box-shadow: 0 0 0 3px rgba(239, 62, 77,.18);
 }
 .textarea {
   min-height: 140px;
   padding: 14px 16px;
-  background: var(--surface-raised);
-  border: 1px solid var(--line);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
   border-radius: var(--radius-md);
   font-size: 16px;
   font-family: inherit;
-  color: var(--moonlight-white);
+  color: var(--color-text-primary);
   transition: border-color .2s, box-shadow .2s;
   outline: none;
   resize: vertical;
@@ -208,59 +209,50 @@
 }
 .textarea:focus {
   border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(226, 14, 23,.18);
+  box-shadow: 0 0 0 3px rgba(239, 62, 77,.18);
 }
 
 /* Status message */
 .status {
   padding: 16px 20px;
   background: var(--brand-soft);
-  border: 1px solid rgba(226, 14, 23,.3);
+  border: 1px solid rgba(239, 62, 77,.3);
   border-radius: var(--radius-md);
   font-size: 14px;
-  color: var(--moonlight-white);
+  color: var(--color-red-ink);
   line-height: 1.5;
 }
 .statusRef { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
 /* Submit — vazado Turkish Red que preenche no hover. */
 .page .submit {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 1.05rem 2.2rem;
+  gap: 8px;
+  padding: 16px 32px;
   border-radius: var(--radius-md);
-  font-weight: 800;
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  line-height: 1;
-  border: 1px solid var(--brand);
-  background: var(--brand);
-  color: var(--moonlight-white);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.2;
+  border: none;
+  background: var(--color-primary-red);
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(239, 62, 77, 0.25);
   cursor: pointer;
-  font-family: inherit;
-  transition: color .35s, transform .3s cubic-bezier(0.23, 1, 0.32, 1);
+  font-family: var(--font-body);
+  transition: all 200ms ease;
   width: fit-content;
   max-width: 100%;
   justify-self: start;
 }
-.page .submit::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -10%;
-  width: 120%;
-  height: 100%;
-  z-index: -1;
-  background: var(--railroad-black);
-  transform: translate3d(-115%, 0, 0) skew(30deg);
-  transition: transform .45s cubic-bezier(0.3, 1, 0.8, 1);
+.page .submit:hover:not(:disabled) {
+  background: var(--color-red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(239, 62, 77, 0.35);
 }
-.page .submit:hover::before { transform: skew(30deg); }
-.page .submit:hover { transform: translateY(-2px); }
-.page .submit:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.page .submit:active:not(:disabled) {
+  background: var(--color-red-active);
+  transform: translateY(0);
+}
+.page .submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }

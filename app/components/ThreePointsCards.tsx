@@ -9,17 +9,20 @@ export default function ThreePointsCards() {
     {
       title: t.threePoints.learn,
       description: t.threePoints.learnDesc,
-      background: "linear-gradient(155deg, var(--brand-500) 0%, var(--brand) 100%)",
+      background:
+        "linear-gradient(155deg, var(--color-primary-red) 0%, var(--color-red-hover) 100%)",
     },
     {
       title: t.threePoints.certificate,
       description: t.threePoints.certificateDesc,
-      background: "linear-gradient(155deg, var(--brand) 0%, var(--brand-deep) 100%)",
+      background:
+        "linear-gradient(155deg, var(--color-red-hover) 0%, var(--color-red-active) 100%)",
     },
     {
       title: t.threePoints.opportunities,
       description: t.threePoints.opportunitiesDesc,
-      background: "linear-gradient(155deg, var(--surface-raised) 0%, var(--railroad-black) 100%)",
+      background:
+        "linear-gradient(155deg, var(--color-primary-blue) 0%, var(--color-blue-deep) 100%)",
     },
   ];
 
