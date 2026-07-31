@@ -49,52 +49,50 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--background-deep)] px-3 py-16 text-white sm:px-6 md:px-10">
-      {/* Halo Turkish Red discreto no canto superior direito. */}
+    <footer className="relative overflow-hidden">
+      {/* Halo vermelho discreto no canto superior direito. */}
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-25"
-        style={{ background: "radial-gradient(circle, #e20e17 0%, transparent 70%)" }}
+        style={{
+          background:
+            "radial-gradient(circle, var(--color-primary-red) 0%, transparent 70%)",
+        }}
         aria-hidden
       />
-      <div className="relative mx-auto w-full max-w-6xl">
+      <div className="relative mx-auto w-full max-w-[1200px]">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+        <div className="mb-[var(--sp-3xl)] grid grid-cols-1 gap-[var(--sp-2xl)] sm:grid-cols-2 lg:grid-cols-5 lg:gap-[var(--sp-lg)]">
           {/* Brand Column */}
-          <div className="lg:col-span-1">
+          <div className="footer-column lg:col-span-1">
             <div className="mb-5 flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--brand)] text-[13px] font-extrabold text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--color-primary-red)] text-[13px] font-bold text-white">
                 CM
               </span>
               <span className="flex flex-col leading-none">
-                <span className="text-[15px] font-extrabold tracking-tight text-white">
-                  Cliente Mistério<span className="text-[color:var(--brand)]">.</span>
+                <span className="text-[16px] font-bold tracking-tight text-white">
+                  Cliente Mistério<span className="text-[color:var(--color-primary-red)]">.</span>
                 </span>
-                <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.24em] text-white/45">
+                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.5px] text-white/60">
                   Formação Pro
                 </span>
               </span>
             </div>
-            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.14em] text-[color:var(--brand)]">{t.footer.madeWith}</p>
-            <p className="text-xs leading-6 text-white/50">
+            <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.5px] text-[color:var(--color-red-on-dark)]">
+              {t.footer.madeWith}
+            </p>
+            <p className="text-[15px] leading-relaxed text-white/70">
               {t.footer.tagline}
             </p>
           </div>
 
           {/* Footer Sections */}
           {footerSections.map((section) => (
-            <div key={section.title}>
-              <h3 className="mb-4 inline-block border-b-2 border-[color:var(--brand)] pb-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
-                {section.title}
-              </h3>
-              <ul className="space-y-2.5">
+            <div className="footer-column" key={section.title}>
+              <h4>{section.title}</h4>
+              <ul>
                 {section.links.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-xs text-white/55 transition-colors hover:text-[color:var(--brand-500)]"
-                    >
-                      {link.label}
-                    </Link>
+                    <Link href={link.href}>{link.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -102,29 +100,23 @@ export default function Footer() {
           ))}
 
           {/* Newsletter */}
-          <div className="lg:col-span-1">
-            <h3 className="mb-4 inline-block border-b-2 border-[color:var(--brand)] pb-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-white">
-              {t.footer.newsletterLabel}
-            </h3>
-            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+          <div className="footer-column lg:col-span-1">
+            <h4>{t.footer.newsletterLabel}</h4>
+            <form onSubmit={handleNewsletterSubmit} className="newsletter-form flex-col">
               <input
                 type="email"
                 placeholder={t.footer.newsletterPlaceholder}
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 required
-                className="w-full rounded-[var(--radius-md)] border border-white/12 bg-white/[0.04] px-3 py-2.5 text-xs text-white placeholder:text-white/35 focus:border-[color:var(--brand)] focus:outline-none"
                 aria-label={t.footer.newsletterLabel}
               />
-              <button
-                type="submit"
-                className="btn-primary btn-block !py-2.5 !text-[11px]"
-              >
+              <button type="submit" className="w-full">
                 {newsletterSubmitted ? "✓ " + t.footer.newsletterButton : t.footer.newsletterButton}
               </button>
             </form>
             {/* Social Links */}
-            <div className="mt-6 flex gap-2.5">
+            <div className="footer-socials mt-6">
               {[
                 {
                   href: "https://linkedin.com",
@@ -146,7 +138,6 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] border border-white/10 bg-white/[0.04] text-white/60 transition-all hover:border-[color:var(--brand)] hover:text-white"
                   aria-label={s.label}
                   title={s.label}
                 >
@@ -159,7 +150,6 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] border border-white/10 bg-white/[0.04] text-white/60 transition-all hover:border-[color:var(--brand)] hover:text-white"
                 aria-label="Instagram"
                 title="Instagram"
               >
@@ -173,19 +163,22 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="my-10 border-t border-white/8" />
-
         {/* Bottom Footer */}
-        <div className="flex flex-col items-start justify-between gap-4 text-[11px] uppercase tracking-[0.1em] text-white/40 sm:flex-row sm:items-center">
-          <p>
+        <div className="footer-bottom">
+          <p className="footer-bottom-text mb-0">
             &copy; {currentYear} Cliente Mistério. {t.footer.allRightsReserved}
           </p>
           <div className="flex gap-6">
-            <Link href="/termos-e-condicoes" className="transition-colors hover:text-white">
+            <Link
+              href="/termos-e-condicoes"
+              className="footer-bottom-text transition-colors hover:text-white"
+            >
               {t.footer.termsLink}
             </Link>
-            <Link href="#" className="transition-colors hover:text-white">
+            <Link
+              href="#"
+              className="footer-bottom-text transition-colors hover:text-white"
+            >
               {t.footer.privacyLink}
             </Link>
           </div>

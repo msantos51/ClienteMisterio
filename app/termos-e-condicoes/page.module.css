@@ -9,11 +9,11 @@
    LAYOUT PRIMITIVES
    ============================================================ */
 .page {
-  background: var(--background);
-  color: var(--moonlight-white);
+  background: var(--color-white);
+  color: var(--color-text-primary);
   font-size: 15px;
   line-height: 1.65;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
 }
 .wrap {
   width: 100%;
@@ -44,11 +44,11 @@
 }
 
 .displayLg {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 0.98;
-  color: var(--moonlight-white);
+  line-height: 1.1;
+  color: var(--color-text-primary);
   font-size: clamp(26px, 3.5vw, 48px);
   margin: 0;
 }
@@ -69,13 +69,13 @@
    ============================================================ */
 .sections { display: flex; flex-direction: column; gap: 16px; }
 .termSection {
-  background: var(--surface);
-  border: 1px solid var(--line);
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-gray-light);
   border-radius: var(--radius-lg);
   padding: 32px 36px;
   transition: border-color .2s;
 }
-.termSection:hover { border-color: rgba(226, 14, 23,.4); }
+.termSection:hover { border-color: rgba(239, 62, 77,.4); }
 .termHeader {
   display: flex;
   align-items: flex-start;
@@ -97,8 +97,8 @@
 .termTitle {
   font-size: 20px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--moonlight-white);
+  letter-spacing: -0.2px;
+  color: var(--color-text-primary);
   margin: 0;
   padding-top: 10px;
 }

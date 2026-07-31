@@ -77,24 +77,21 @@ export default function TopNav() {
         </span>
       </button>
 
-      {/* Links compactos em maiúsculas, com régua Turkish Red curta na página ativa. */}
-      <nav className="hidden items-center justify-center gap-5 lg:gap-5 xl:gap-8 lg:flex">
+      {/* Links do cabeçalho, com régua vermelha na página ativa (ver globals.css). */}
+      <nav className="hidden items-center justify-center gap-6 lg:flex xl:gap-8">
         {navigationItems.map((item) => {
           const isActive = pathname === item.href;
 
           return (
             <Link
               key={item.href}
-              className={`relative flex min-h-[44px] items-center whitespace-nowrap pb-1 text-[12px] font-bold uppercase tracking-[0.08em] transition hover:text-white xl:text-[13px] ${
-                isActive ? "text-white" : "text-[color:var(--muted)]"
+              className={`flex min-h-[44px] items-center whitespace-nowrap ${
+                isActive ? "nav-link-active" : ""
               }`}
               href={item.href}
+              aria-current={isActive ? "page" : undefined}
             >
               {item.label}
-
-              {isActive ? (
-                <span className="absolute bottom-1.5 left-0 h-[2px] w-5 bg-[color:var(--brand)]" />
-              ) : null}
             </Link>
           );
         })}

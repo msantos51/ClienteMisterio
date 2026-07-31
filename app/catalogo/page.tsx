@@ -42,7 +42,7 @@ export default function CatalogPage() {
       <style>{`
         @media print {
           header, footer, .no-print { display: none !important; }
-          body { background: #ededed !important; }
+          body { background: #f5f8fa !important; }
           .print-page { box-shadow: none !important; }
         }
       `}</style>
@@ -66,7 +66,7 @@ export default function CatalogPage() {
         <div className="print-page mx-auto max-w-[820px] bg-white shadow-lg print:shadow-none">
 
           {/* Header */}
-          <div className="bg-gradient-to-br from-[#e20e17] to-[#7c060b] px-10 py-10 text-white">
+          <div className="bg-gradient-to-br from-[#ef3e4d] to-[#c62a35] px-10 py-10 text-white">
             <div className="flex items-start justify-between gap-6">
               <div>
                 <p className="mb-2 text-sm font-semibold tracking-wide text-white/70">
@@ -112,23 +112,23 @@ export default function CatalogPage() {
 
             {/* For whom */}
             <section>
-              <h2 className="mb-4 text-lg font-bold !text-[#05141d] border-b border-[#c7c7c6] pb-2">
+              <h2 className="mb-4 text-lg font-bold !text-[#1a1a1a] border-b border-[#e8eef1] pb-2">
                 {c.forWhomTitle}
               </h2>
-              <p className="text-sm leading-7 text-[#05141d]/80 text-justify">
+              <p className="text-sm leading-7 text-[#1a1a1a]/80 text-justify">
                 {c.forWhomDesc}
               </p>
             </section>
 
             {/* What's included */}
             <section>
-              <h2 className="mb-4 text-lg font-bold !text-[#05141d] border-b border-[#c7c7c6] pb-2">
+              <h2 className="mb-4 text-lg font-bold !text-[#1a1a1a] border-b border-[#e8eef1] pb-2">
                 {c.whatsIncludedTitle}
               </h2>
               <div className="grid grid-cols-2 gap-3">
                 {includedItems.map((item) => (
-                  <div key={item} className="flex items-start gap-2 text-sm text-[#05141d]/80">
-                    <span className="mt-0.5 shrink-0 text-[#e20e17]">✓</span>
+                  <div key={item} className="flex items-start gap-2 text-sm text-[#1a1a1a]/80">
+                    <span className="mt-0.5 shrink-0 text-[#ef3e4d]">✓</span>
                     <span className="leading-6">{item}</span>
                   </div>
                 ))}
@@ -137,32 +137,32 @@ export default function CatalogPage() {
 
             {/* Programme */}
             <section>
-              <h2 className="mb-4 text-lg font-bold !text-[#05141d] border-b border-[#c7c7c6] pb-2">
+              <h2 className="mb-4 text-lg font-bold !text-[#1a1a1a] border-b border-[#e8eef1] pb-2">
                 {c.programTitle}
               </h2>
               <div className="space-y-2">
                 {modules.map((mod) => (
                   <div
                     key={mod.id}
-                    className="flex items-start gap-4 rounded-lg border border-[#c7c7c6] bg-[#c7c7c6]/25 px-4 py-3"
+                    className="flex items-start gap-4 rounded-lg border border-[#e8eef1] bg-[#e8eef1]/25 px-4 py-3"
                   >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e20e17]/15 text-xs font-bold text-[#e20e17]">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#ef3e4d]/15 text-xs font-bold text-[#ef3e4d]">
                       {mod.id}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#05141d]">{mod.title}</p>
-                      <p className="text-xs text-[#05141d]/65 mt-0.5">{mod.description}</p>
+                      <p className="text-sm font-semibold text-[#1a1a1a]">{mod.title}</p>
+                      <p className="text-xs text-[#1a1a1a]/65 mt-0.5">{mod.description}</p>
                     </div>
                   </div>
                 ))}
                 {/* Certificate */}
-                <div className="flex items-start gap-4 rounded-lg border border-[#e20e17]/30 bg-[#e20e17]/10 px-4 py-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e20e17] text-xs font-bold text-white">
+                <div className="flex items-start gap-4 rounded-lg border border-[#ef3e4d]/30 bg-[#ef3e4d]/10 px-4 py-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#ef3e4d] text-xs font-bold text-white">
                     ★
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#05141d]">{c.certificateModuleTitle}</p>
-                    <p className="text-xs text-[#05141d]/65 mt-0.5">
+                    <p className="text-sm font-semibold text-[#1a1a1a]">{c.certificateModuleTitle}</p>
+                    <p className="text-xs text-[#1a1a1a]/65 mt-0.5">
                       {c.certificateModuleDesc}
                     </p>
                   </div>
@@ -172,17 +172,17 @@ export default function CatalogPage() {
 
             {/* How it works */}
             <section>
-              <h2 className="mb-4 text-lg font-bold !text-[#05141d] border-b border-[#c7c7c6] pb-2">
+              <h2 className="mb-4 text-lg font-bold !text-[#1a1a1a] border-b border-[#e8eef1] pb-2">
                 {c.howWorksTitle}
               </h2>
               <div className="grid grid-cols-4 gap-4 text-center">
                 {howWorksSteps.map((item) => (
                   <div key={item.step} className="space-y-2">
-                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#e20e17] text-sm font-bold text-white">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#ef3e4d] text-sm font-bold text-white">
                       {item.step}
                     </div>
-                    <p className="text-sm font-semibold text-[#05141d]">{item.label}</p>
-                    <p className="text-xs text-[#05141d]/65 leading-5">{item.desc}</p>
+                    <p className="text-sm font-semibold text-[#1a1a1a]">{item.label}</p>
+                    <p className="text-xs text-[#1a1a1a]/65 leading-5">{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -190,15 +190,15 @@ export default function CatalogPage() {
           </div>
 
           {/* Document footer */}
-          <div className="border-t border-[#c7c7c6] bg-[#c7c7c6]/30 px-10 py-6">
+          <div className="border-t border-[#e8eef1] bg-[#e8eef1]/30 px-10 py-6">
             <div className="flex items-center justify-between gap-6">
               <div>
-                <p className="text-sm font-bold text-[#05141d]">{c.footerBrand}</p>
-                <p className="text-xs text-[#05141d]/65 mt-0.5">{c.footerUrl}</p>
+                <p className="text-sm font-bold text-[#1a1a1a]">{c.footerBrand}</p>
+                <p className="text-xs text-[#1a1a1a]/65 mt-0.5">{c.footerUrl}</p>
               </div>
               <div className="text-right">
-                <p className="text-lg font-bold text-[#e20e17]">24,99€</p>
-                <p className="text-xs text-[#05141d]/65">{c.footerAccessNote}</p>
+                <p className="text-lg font-bold text-[#ef3e4d]">24,99€</p>
+                <p className="text-xs text-[#1a1a1a]/65">{c.footerAccessNote}</p>
               </div>
             </div>
           </div>

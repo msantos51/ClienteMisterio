@@ -652,9 +652,9 @@ export default function DashboardPage() {
                   {isSavingPassword ? d.updating : d.updatePassword}
                 </button>
 
-                <div className="mt-8 rounded-[var(--radius-lg)] border border-[rgba(226, 14, 23,0.35)] bg-[rgba(226, 14, 23,0.08)] p-4">
-                  <h3 className="text-base font-semibold text-[color:var(--brand-500)]">{d.dangerZone}</h3>
-                  <p className="mt-2 text-sm text-[color:var(--brand-500)]">
+                <div className="mt-8 rounded-[var(--radius-lg)] border border-[color:var(--color-primary-red)]/35 bg-[color:var(--color-primary-red)]/8 p-4">
+                  <h3 className="text-base font-semibold text-[color:var(--color-red-ink)]">{d.dangerZone}</h3>
+                  <p className="mt-2 text-sm text-[color:var(--color-red-ink)]">
                     {d.deleteWarning}
                   </p>
 
