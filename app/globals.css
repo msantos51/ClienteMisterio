@@ -62,7 +62,18 @@
   --primary-soft: #c81340;
   --accent-success: #3ddc97;
 
-  --radius-sharp: 3px;
+  /* Raios de canto — escala única partilhada por todo o site.
+     Do detalhe pequeno (chips, ícones) ao painel grande (formulários),
+     tudo assenta nestes tokens para o arredondamento ficar coerente. */
+  --radius-xs: 6px;      /* micro-detalhes: barras, marcadores */
+  --radius-sm: 8px;      /* chips, ícones, quadrados pequenos */
+  --radius-md: 12px;     /* botões, campos de formulário, itens de lista */
+  --radius-lg: 16px;     /* cartões e blocos de conteúdo */
+  --radius-xl: 22px;     /* painéis grandes: formulários, destaques */
+  --radius-pill: 999px;  /* pílulas, réguas finas e barras de progresso */
+
+  /* Nome legado mantido para compatibilidade — hoje é o raio dos botões. */
+  --radius-sharp: var(--radius-md);
   --header-control-height: 38px;
   color-scheme: dark;
 }
@@ -137,6 +148,7 @@ h6 {
   width: 34px;
   height: 2px;
   margin-top: 14px;
+  border-radius: var(--radius-pill);
   background: var(--brand);
 }
 
@@ -144,7 +156,8 @@ h6 {
   /* ===================================================================
      BOTÕES
      ===================================================================
-     Formato base: retângulo de canto vivo (3px), texto curto em maiúsculas
+     Formato base: retângulo de cantos arredondados (--radius-md), texto curto
+     em maiúsculas
      com tracking largo. Em repouso mostra-se a cor de origem (via ::before);
      ao passar o rato, um painel inclinado desliza e revela a cor de destino.
      =================================================================== */
@@ -168,7 +181,7 @@ h6 {
     box-shadow: none;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     transition: color 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
       box-shadow 0.3s;
     width: auto;
@@ -233,7 +246,7 @@ h6 {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 700;
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     overflow: hidden;
     background: var(--button-hover-bg);
     color: var(--button-fg);
@@ -317,7 +330,7 @@ h6 {
     color: #fff !important;
     background: var(--brand);
     border: none;
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: color 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
@@ -383,7 +396,7 @@ h6 {
     color: #fff !important;
     background: var(--brand-700);
     border: none;
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: color 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
@@ -442,7 +455,7 @@ h6 {
     color: #fff;
     background: var(--brand);
     border: 1px solid var(--brand);
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: color 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
@@ -521,7 +534,7 @@ h6 {
     color: #fff !important;
     background: var(--brand);
     border: none;
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     transition: color 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
@@ -620,7 +633,7 @@ h6 {
     box-shadow: none;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     transition: color 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
       border-color 0.3s;
     white-space: nowrap;
@@ -689,7 +702,7 @@ h6 {
     min-width: 44px;
     min-height: 44px;
     border: 1px solid var(--line);
-    border-radius: var(--radius-sharp);
+    border-radius: var(--radius-md);
     background-color: var(--surface-raised);
     box-shadow: none;
     cursor: pointer;
@@ -730,7 +743,7 @@ h6 {
     display: block;
     width: 100%;
     height: 2px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background-color: var(--brand);
     transition: all 0.35s ease;
   }
@@ -766,7 +779,7 @@ h6 {
 
   /* Cartão do menu mobile. */
   .mobile-menu-container {
-    border-radius: 6px;
+    border-radius: var(--radius-lg);
     will-change: contents;
     box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.8) !important;
     border: 1px solid var(--line) !important;
@@ -1021,7 +1034,7 @@ h6 {
     width: 24px;
     background-color: var(--surface-raised);
     border: 1.5px solid var(--line);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
@@ -1076,21 +1089,23 @@ h6 {
   max-width: 460px;
   padding: 40px;
   background: var(--surface);
-  border-radius: 6px;
+  border-radius: var(--radius-xl);
   box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.8);
   border: 1px solid var(--line);
   animation: fadeIn 0.9s ease-out;
   position: relative;
 }
 
-/* Régua carmim no topo do cartão de formulário. */
+/* Régua carmim no topo do cartão de formulário. Recuada até depois da curva
+   do canto para assentar no troço reto da borda. */
 .login-form::before {
   content: "";
   position: absolute;
   top: -1px;
-  left: -1px;
+  left: var(--radius-xl);
   width: 62px;
   height: 3px;
+  border-radius: var(--radius-pill);
   background: var(--brand);
 }
 
@@ -1160,7 +1175,7 @@ h6 {
   font-size: 0.9rem;
   background-color: var(--surface-raised) !important;
   border: 1px solid var(--line) !important;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   outline: none;
   transition: all 0.25s ease;
   min-height: 44px;
@@ -1216,7 +1231,7 @@ h6 {
   background: var(--brand);
   border: none;
   box-shadow: none;
-  border-radius: var(--radius-sharp);
+  border-radius: var(--radius-md);
   transition: color 0.4s, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
     box-shadow 0.3s;
   display: inline-flex;
@@ -1307,7 +1322,7 @@ h6 {
   padding: 12px 14px;
   font-size: 0.85rem;
   border: 1px solid rgba(236, 30, 79, 0.3);
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   background: var(--brand-soft);
   color: #ff97b1 !important;
   font-weight: 600;
@@ -1343,7 +1358,7 @@ h6 {
 }
 
 .dashboard-top-banner {
-  border-radius: 6px;
+  border-radius: var(--radius-xl);
   background: var(--surface);
   box-shadow: none;
   border: 1px solid var(--line);
@@ -1352,7 +1367,7 @@ h6 {
 }
 
 .dashboard-sidebar {
-  border-radius: 6px;
+  border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: none;
   border: 1px solid var(--line);
@@ -1376,7 +1391,7 @@ h6 {
 .dashboard-menu-item {
   width: 100%;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: var(--radius-md);
   padding: 0.85rem 1rem;
   text-align: left;
   background: transparent;
@@ -1427,7 +1442,7 @@ h6 {
 }
 
 .dashboard-right-highlight {
-  border-radius: 6px;
+  border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: none;
   padding: 1.6rem;
@@ -1441,9 +1456,10 @@ h6 {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  left: var(--radius-lg);
   width: 62px;
   height: 3px;
+  border-radius: var(--radius-pill);
   background: var(--brand);
   pointer-events: none;
 }
@@ -1504,7 +1520,7 @@ html {
 
 ::-webkit-scrollbar-thumb {
   background: #33333d;
-  border-radius: 0;
+  border-radius: var(--radius-pill);
   border: 3px solid var(--background);
 }
 
@@ -1559,7 +1575,7 @@ main a:not(.site-pill-button):not(.button-size-login):not(.form-link):not(.site-
   overflow: hidden;
   isolation: isolate;
   border: none;
-  border-radius: var(--radius-sharp);
+  border-radius: var(--radius-md);
   padding: 0.85rem 1.9rem;
   width: fit-content;
   min-width: 0;

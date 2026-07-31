@@ -46,7 +46,7 @@ export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
   const buttonClass = (isActive: boolean) =>
-    `lang-switch-btn flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-[3px] border font-bold text-[11px] uppercase tracking-[0.12em] transition-all ${
+    `lang-switch-btn flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-[var(--radius-md)] border font-bold text-[11px] uppercase tracking-[0.12em] transition-all ${
       isActive
         ? "border-[color:var(--brand)] bg-[color:var(--brand-soft)] text-white"
         : "border-transparent text-[color:var(--muted)] hover:text-white"

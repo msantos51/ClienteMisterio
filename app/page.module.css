@@ -1,7 +1,7 @@
 /*
  * Cliente Mistério — Homepage (design "Carvão & Carmim").
  * Layout editorial de agência: fundo carvão, tipografia branca compacta,
- * carmim como única cor de energia e cantos vivos.
+ * carmim como única cor de energia e cantos arredondados (tokens --radius-*).
  * CSS Module ao lado de app/page.tsx.
  */
 
@@ -80,6 +80,7 @@
   content: "";
   width: 30px;
   height: 2px;
+  border-radius: var(--radius-pill);
   background: var(--brand);
   flex-shrink: 0;
 }
@@ -117,7 +118,7 @@
   justify-content: center;
   gap: 12px;
   padding: 1.05rem 2.2rem;
-  border-radius: 3px;
+  border-radius: var(--radius-md);
   font-weight: 800;
   font-size: 12px;
   letter-spacing: 0.16em;
@@ -220,7 +221,7 @@
 .heroAvatars { display: inline-flex; }
 .heroAvatars span {
   width: 30px; height: 30px;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   border: 1px solid #000;
   background: var(--surface-raised);
   margin-left: -8px;
@@ -246,12 +247,14 @@
   position: absolute;
   inset: 26px -22px -22px 26px;
   border: 1px solid var(--brand);
+  border-radius: var(--radius-xl);
   pointer-events: none;
 }
 .heroPanel {
   position: relative;
   background: linear-gradient(160deg, #141419 0%, #0e0e12 100%);
   border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
   padding: 26px;
 }
 .heroPanelTop {
@@ -277,6 +280,7 @@
   text-transform: uppercase;
   color: var(--brand);
   border: 1px solid rgba(236, 30, 79, 0.4);
+  border-radius: var(--radius-sm);
   padding: 5px 9px;
 }
 .heroRows { display: flex; flex-direction: column; gap: 2px; }
@@ -302,6 +306,7 @@
 .heroRowBad { color: var(--brand-500); }
 .heroPayout {
   margin-top: 20px;
+  border-radius: var(--radius-md);
   background: var(--brand);
   color: #fff;
   padding: 16px 20px;
@@ -340,7 +345,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2px;
+  gap: 12px;
 }
 @media (min-width: 860px) {
   .pillarsGrid { grid-template-columns: repeat(3, 1fr); }
@@ -353,6 +358,7 @@
   height: 62%;
   border-right: 3px solid var(--brand);
   border-bottom: 3px solid var(--brand);
+  border-bottom-right-radius: var(--radius-xl);
   pointer-events: none;
   display: none;
 }
@@ -363,6 +369,7 @@
   position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
   padding: 34px 30px 38px;
   transition: transform .35s cubic-bezier(0.23, 1, 0.32, 1), border-color .35s;
 }
@@ -390,6 +397,7 @@
 .pillarRule {
   width: 34px;
   height: 2px;
+  border-radius: var(--radius-pill);
   background: var(--brand);
   margin-bottom: 16px;
 }
@@ -439,7 +447,7 @@
 .cats {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2px;
+  gap: 12px;
 }
 @media (min-width: 640px) {
   .cats { grid-template-columns: repeat(2, 1fr); }
@@ -451,6 +459,7 @@
   position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
   padding: 30px 28px;
   display: flex;
   align-items: center;
@@ -588,6 +597,7 @@
   text-transform: uppercase;
   white-space: nowrap;
   border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
   padding: 6px 10px;
 }
 @media (max-width: 620px) {
@@ -601,7 +611,7 @@
 .steps {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2px;
+  gap: 12px;
 }
 @media (min-width: 760px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
@@ -613,6 +623,7 @@
   position: relative;
   background: var(--surface);
   border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
   padding: 34px 28px 36px;
   transition: background .3s;
 }
@@ -646,6 +657,7 @@
   position: relative;
   background: var(--brand);
   color: #fff;
+  border-radius: var(--radius-xl);
   padding: 64px 32px;
   overflow: hidden;
 }

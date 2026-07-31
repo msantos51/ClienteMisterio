@@ -8,7 +8,7 @@
 .animationBox {
   background: linear-gradient(135deg, #fff9e6 0%, #ffe6f0 100%);
   border: 2px solid #e8b4d4;
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   padding: 32px;
   position: relative;
   min-height: 400px;
@@ -311,7 +311,7 @@
   transform: translateX(-50%);
   background: #fff3cd;
   border: 2px solid #ffc107;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   padding: 16px;
   width: 80%;
   max-width: 400px;
@@ -384,7 +384,7 @@
   border: 2px solid #4a90e2;
   background: white;
   color: #4a90e2;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
