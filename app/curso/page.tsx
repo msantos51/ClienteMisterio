@@ -96,7 +96,7 @@ const renderTheoryBlock = (paragraph: string, index: number) => {
     return (
       <div key={index} className="space-y-3">
         {paragraphChunks.map((chunk) => (
-          <p key={`${index}-${chunk}`} className="text-base leading-8 text-[#2a2a2a] text-justify">
+          <p key={`${index}-${chunk}`} className="text-base leading-8 text-[color:var(--body)] text-justify">
             {chunk}
           </p>
         ))}
@@ -116,8 +116,8 @@ const renderTheoryBlock = (paragraph: string, index: number) => {
 
   return (
     <div key={index} className="space-y-3">
-      {introText && <p className="text-base leading-8 text-[#2a2a2a] text-justify">{introText}</p>}
-      <ul className="list-disc pl-6 space-y-2 text-base leading-8 text-[#2a2a2a] text-justify">
+      {introText && <p className="text-base leading-8 text-[color:var(--body)] text-justify">{introText}</p>}
+      <ul className="list-disc pl-6 space-y-2 text-base leading-8 text-[color:var(--body)] text-justify">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}

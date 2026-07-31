@@ -77,7 +77,7 @@ export default function TopNav() {
         </span>
       </button>
 
-      {/* Links compactos em maiúsculas, com régua carmim curta na página ativa. */}
+      {/* Links compactos em maiúsculas, com régua Turkish Red curta na página ativa. */}
       <nav className="hidden items-center justify-center gap-5 lg:gap-5 xl:gap-8 lg:flex">
         {navigationItems.map((item) => {
           const isActive = pathname === item.href;

@@ -49,11 +49,11 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative overflow-hidden border-t border-[color:var(--line)] bg-black px-3 py-16 text-white sm:px-6 md:px-10">
-      {/* Halo carmim discreto no canto superior direito. */}
+    <footer className="relative overflow-hidden border-t border-[color:var(--line)] bg-[color:var(--background-deep)] px-3 py-16 text-white sm:px-6 md:px-10">
+      {/* Halo Turkish Red discreto no canto superior direito. */}
       <div
         className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-25"
-        style={{ background: "radial-gradient(circle, #ec1e4f 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(circle, #e20e17 0%, transparent 70%)" }}
         aria-hidden
       />
       <div className="relative mx-auto w-full max-w-6xl">

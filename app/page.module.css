@@ -1,7 +1,7 @@
 /*
- * Cliente Mistério — Homepage (design "Carvão & Carmim").
- * Layout editorial de agência: fundo carvão, tipografia branca compacta,
- * carmim como única cor de energia e cantos arredondados (tokens --radius-*).
+ * Cliente Mistério — Homepage (design "Turkish Red & Railroad Black").
+ * Layout editorial de agência: fundo Railroad Black, tipografia branca compacta,
+ * Turkish Red como única cor de energia e cantos arredondados (tokens --radius-*).
  * CSS Module ao lado de app/page.tsx.
  */
 
@@ -58,13 +58,13 @@
 }
 .section { padding: 104px 0; }
 .sectionTight { padding: 72px 0; }
-.sectionAlt { background: #08080a; }
+.sectionAlt { background: var(--background-deep); }
 @media (max-width: 720px) {
   .section { padding: 64px 0; }
   .sectionTight { padding: 44px 0; }
 }
 
-/* Kicker: traço carmim + texto em maiúsculas. */
+/* Kicker: traço Turkish Red + texto em maiúsculas. */
 .eyebrow {
   display: flex;
   align-items: center;
@@ -90,7 +90,7 @@
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0;
 }
 .displayXl { font-size: clamp(42px, 6.2vw, 82px); }
@@ -147,22 +147,22 @@
 .page .btn:hover::before { transform: skew(30deg); }
 .page .btn:hover { transform: translateY(-2px); }
 
-/* Preenchido carmim → escurece no hover. */
+/* Preenchido Turkish Red → escurece no hover. */
 .page .btnPrimary {
   background: var(--brand);
   border-color: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
 }
-.page .btnPrimary::before { background: #0b0b0e; }
-.page .btnPrimary:hover { color: #fff; }
+.page .btnPrimary::before { background: var(--railroad-black); }
+.page .btnPrimary:hover { color: var(--moonlight-white); }
 
-/* Vazado com contorno carmim → preenche no hover. */
+/* Vazado com contorno Turkish Red → preenche no hover. */
 .page .btnGhost {
   background: transparent;
   border-color: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
 }
-.page .btnGhost:hover { color: #fff; }
+.page .btnGhost:hover { color: var(--moonlight-white); }
 
 .page .btnSmall { padding: 0.8rem 1.5rem; font-size: 11px; }
 
@@ -182,8 +182,8 @@
   position: relative;
   padding: 84px 0 150px;
   background:
-    radial-gradient(80% 60% at 78% 20%, rgba(236, 30, 79, 0.14) 0%, transparent 62%),
-    #000;
+    radial-gradient(80% 60% at 78% 20%, rgba(226, 14, 23, 0.14) 0%, transparent 62%),
+    var(--railroad-black);
   overflow: hidden;
 }
 @media (max-width: 720px) {
@@ -217,12 +217,12 @@
   font-size: 13px;
   color: var(--muted);
 }
-.heroTrust strong { color: #fff; font-weight: 700; }
+.heroTrust strong { color: var(--moonlight-white); font-weight: 700; }
 .heroAvatars { display: inline-flex; }
 .heroAvatars span {
   width: 30px; height: 30px;
   border-radius: var(--radius-sm);
-  border: 1px solid #000;
+  border: 1px solid var(--railroad-black);
   background: var(--surface-raised);
   margin-left: -8px;
   display: inline-flex;
@@ -230,7 +230,7 @@
   justify-content: center;
   font-size: 10px;
   font-weight: 800;
-  color: #fff;
+  color: var(--moonlight-white);
   letter-spacing: 0.04em;
 }
 .heroAvatars span:first-child { margin-left: 0; background: var(--brand); }
@@ -252,7 +252,7 @@
 }
 .heroPanel {
   position: relative;
-  background: linear-gradient(160deg, #141419 0%, #0e0e12 100%);
+  background: linear-gradient(160deg, var(--surface) 0%, var(--background-deep) 100%);
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   padding: 26px;
@@ -279,7 +279,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--brand);
-  border: 1px solid rgba(236, 30, 79, 0.4);
+  border: 1px solid rgba(226, 14, 23, 0.4);
   border-radius: var(--radius-sm);
   padding: 5px 9px;
 }
@@ -297,7 +297,7 @@
 .heroRow:last-child { border-bottom: none; }
 .heroRowVal {
   font-weight: 800;
-  color: #fff;
+  color: var(--moonlight-white);
   font-size: 12px;
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -308,7 +308,7 @@
   margin-top: 20px;
   border-radius: var(--radius-md);
   background: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
   padding: 16px 20px;
   display: flex;
   align-items: center;
@@ -373,7 +373,7 @@
   padding: 34px 30px 38px;
   transition: transform .35s cubic-bezier(0.23, 1, 0.32, 1), border-color .35s;
 }
-.pillar:hover { transform: translateY(-6px); border-color: #3a3a46; }
+.pillar:hover { transform: translateY(-6px); border-color: var(--line-strong); }
 .pillarAccent {
   background: var(--brand);
   border-color: var(--brand);
@@ -386,12 +386,12 @@
   margin-bottom: 26px;
   display: block;
 }
-.pillarAccent .pillarIcon { color: #fff; }
+.pillarAccent .pillarIcon { color: var(--moonlight-white); }
 .pillarTitle {
   font-size: 19px;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 14px;
 }
 .pillarRule {
@@ -401,7 +401,7 @@
   background: var(--brand);
   margin-bottom: 16px;
 }
-.pillarAccent .pillarRule { background: #fff; }
+.pillarAccent .pillarRule { background: var(--moonlight-white); }
 .pillarDesc {
   font-size: 13.5px;
   line-height: 1.75;
@@ -409,7 +409,7 @@
   margin: 0;
   text-wrap: pretty;
 }
-.pillarAccent .pillarDesc { color: rgba(255, 255, 255, .85); }
+.pillarAccent .pillarDesc { color: rgba(237, 237, 237, .85); }
 
 /* ============================================================
    CABEÇALHO DE SECÇÃO
@@ -477,7 +477,7 @@
   transform-origin: top;
   transition: transform .35s cubic-bezier(0.23, 1, 0.32, 1);
 }
-.cat:hover { background: var(--surface-raised); border-color: #33333e; }
+.cat:hover { background: var(--surface-raised); border-color: var(--line-strong); }
 .cat:hover::after { transform: scaleY(1); }
 .catIcon {
   width: 26px;
@@ -490,7 +490,7 @@
   font-size: 15.5px;
   font-weight: 800;
   letter-spacing: -0.01em;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 4px;
 }
 .catPay {
@@ -536,7 +536,7 @@
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
-  color: #fff;
+  color: var(--moonlight-white);
   margin-bottom: 12px;
 }
 .stripNum em {
@@ -578,7 +578,7 @@
   font-size: clamp(15px, 1.5vw, 17px);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 5px;
 }
 .moduleDesc {
@@ -639,7 +639,7 @@
   font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 12px;
 }
 .stepDesc {
@@ -656,7 +656,7 @@
 .final {
   position: relative;
   background: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
   border-radius: var(--radius-xl);
   padding: 64px 32px;
   overflow: hidden;
@@ -668,24 +668,24 @@
   width: 460px; height: 460px;
   top: -220px; right: -160px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.28) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(5, 20, 29, 0.28) 0%, transparent 70%);
   pointer-events: none;
 }
 .finalInner { position: relative; max-width: 760px; }
-.finalEyebrow { color: #fff; }
-.finalEyebrow::before { background: #fff; }
+.finalEyebrow { color: var(--moonlight-white); }
+.finalEyebrow::before { background: var(--moonlight-white); }
 .finalTitle {
   font-size: clamp(30px, 3.8vw, 50px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.02;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 20px;
 }
 .finalSub {
   font-size: 15px;
   line-height: 1.75;
-  color: rgba(255, 255, 255, .82);
+  color: rgba(237, 237, 237, .82);
   margin: 0 0 34px;
   max-width: 54ch;
   text-wrap: pretty;
@@ -701,7 +701,7 @@
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--moonlight-white);
 }
 .finalList li { display: inline-flex; align-items: center; gap: 10px; }
 .finalCta {
@@ -711,26 +711,26 @@
   gap: 24px;
 }
 .page .finalBtn {
-  background: #0b0b0e;
-  border-color: #0b0b0e;
-  color: #fff;
+  background: var(--railroad-black);
+  border-color: var(--railroad-black);
+  color: var(--moonlight-white);
 }
-.page .finalBtn::before { background: #fff; }
-.page .finalBtn:hover { color: #0b0b0e; }
+.page .finalBtn::before { background: var(--moonlight-white); }
+.page .finalBtn:hover { color: var(--railroad-black); }
 .finalPriceTag {
   display: flex;
   align-items: baseline;
   gap: 10px;
-  color: rgba(255, 255, 255, .85);
+  color: rgba(237, 237, 237, .85);
   font-size: 13px;
 }
 .finalPriceTag strong {
   font-size: 24px;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: #fff;
+  color: var(--moonlight-white);
 }
-.finalPriceTag s { color: rgba(255, 255, 255, .55); }
+.finalPriceTag s { color: rgba(237, 237, 237, .55); }
 
 /* ============================================================
    BARRA DE COMPRA FIXA
@@ -741,9 +741,9 @@
   left: 0;
   right: 0;
   transform: translateY(130%);
-  background: rgba(8, 8, 10, 0.94);
+  background: rgba(3, 13, 20, 0.94);
   backdrop-filter: blur(12px);
-  color: #fff;
+  color: var(--moonlight-white);
   border-top: 1px solid var(--line);
   padding: 12px 20px;
   display: flex;
@@ -761,16 +761,16 @@
   white-space: nowrap;
   letter-spacing: 0.04em;
 }
-.buyBarPrice strong { font-size: 19px; color: #fff; font-weight: 800; margin-left: 8px; }
+.buyBarPrice strong { font-size: 19px; color: var(--moonlight-white); font-weight: 800; margin-left: 8px; }
 .buyBarPrice s { color: var(--muted); }
 .page .buyBarBtn {
   background: var(--brand);
   border-color: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
   padding: 0.8rem 1.6rem;
   font-size: 11px;
 }
-.page .buyBarBtn::before { background: #fff; }
+.page .buyBarBtn::before { background: var(--moonlight-white); }
 .page .buyBarBtn:hover { color: var(--brand); }
 @media (max-width: 520px) {
   .buyBar { padding: 10px 14px; gap: 12px; }

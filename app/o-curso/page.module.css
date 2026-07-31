@@ -1,5 +1,5 @@
 /*
- * O-curso — página de venda do curso (design "Carvão & Carmim").
+ * O-curso — página de venda do curso (design "Turkish Red & Railroad Black").
  */
 
 .page button { all: unset; cursor: pointer; font: inherit; }
@@ -10,7 +10,7 @@
    ============================================================ */
 .page {
   background:
-    radial-gradient(70% 45% at 85% 0%, rgba(236, 30, 79, 0.12) 0%, transparent 62%),
+    radial-gradient(70% 45% at 85% 0%, rgba(226, 14, 23, 0.12) 0%, transparent 62%),
     var(--background);
   color: var(--body);
   font-size: 15px;
@@ -57,7 +57,7 @@
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1.02;
-  color: #fff;
+  color: var(--moonlight-white);
   font-size: clamp(30px, 4vw, 54px);
   margin: 0;
 }
@@ -66,7 +66,7 @@
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1.02;
-  color: #fff;
+  color: var(--moonlight-white);
   font-size: clamp(22px, 3vw, 38px);
   margin: 0;
 }
@@ -124,14 +124,14 @@
 .page .btnDark {
   background: var(--brand);
   border-color: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
 }
-.page .btnDark::before { background: #0b0b0e; }
+.page .btnDark::before { background: var(--railroad-black); }
 
 .page .btnAccent {
   background: transparent;
   border-color: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
 }
 .arrow { transition: transform .25s; }
 .page .btn:hover .arrow { transform: translateX(4px); }
@@ -174,7 +174,7 @@
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1;
-  color: #fff;
+  color: var(--moonlight-white);
 }
 .statNum em {
   font-style: normal;
@@ -216,19 +216,19 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--brand);
-  border: 1px solid rgba(236, 30, 79, 0.4);
+  border: 1px solid rgba(226, 14, 23, 0.4);
   border-radius: var(--radius-pill);
   padding: 6px 12px;
   margin-bottom: 22px;
 }
-.cardTitle { font-size: 14px; font-weight: 700; color: #fff; margin: 0 0 10px; }
+.cardTitle { font-size: 14px; font-weight: 700; color: var(--moonlight-white); margin: 0 0 10px; }
 .cardPriceRow { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
 .cardOrig { font-size: 17px; color: var(--muted); text-decoration: line-through; }
 .cardPrice {
   font-size: 38px;
   font-weight: 800;
   letter-spacing: -0.045em;
-  color: #fff;
+  color: var(--moonlight-white);
   line-height: 1;
 }
 .cardPayment { font-size: 12px; color: var(--muted); margin: 0 0 24px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
@@ -313,12 +313,12 @@
   justify-content: center;
   margin-bottom: 24px;
 }
-.benefit:first-child .benefitIcon { color: #fff; }
+.benefit:first-child .benefitIcon { color: var(--moonlight-white); }
 .benefitTitle {
   font-size: 18px;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 14px;
   padding-bottom: 14px;
   position: relative;
@@ -333,18 +333,18 @@
   border-radius: var(--radius-pill);
   background: var(--brand);
 }
-.benefit:first-child .benefitTitle::after { background: #fff; }
+.benefit:first-child .benefitTitle::after { background: var(--moonlight-white); }
 .benefitDesc { font-size: 13.5px; color: var(--muted); line-height: 1.75; margin: 0; }
-.benefit:first-child .benefitDesc { color: rgba(255, 255, 255, .85); }
+.benefit:first-child .benefitDesc { color: rgba(237, 237, 237, .85); }
 
 /* ============================================================
    CURRÍCULO
    ============================================================ */
 .curr {
   position: relative;
-  background: #08080a;
+  background: var(--background-deep);
   border: 1px solid var(--line);
-  color: #fff;
+  color: var(--moonlight-white);
   border-radius: var(--radius-xl);
   padding: 56px 8px;
   overflow: hidden;
@@ -354,14 +354,14 @@
   position: absolute;
   width: 380px; height: 380px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(236, 30, 79, 0.16) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(226, 14, 23, 0.16) 0%, transparent 70%);
   top: -160px; right: -110px;
   pointer-events: none;
 }
 @media (min-width: 880px) { .curr { padding: 76px 16px; } }
 .currInner { position: relative; max-width: 980px; margin: 0 auto; padding: 0 24px; }
 .currEyebrow { color: var(--brand); }
-.currDisplay { color: #fff; }
+.currDisplay { color: var(--moonlight-white); }
 .currSub { color: var(--muted); font-size: 14.5px; line-height: 1.8; max-width: 44ch; margin: 0; }
 .currHead {
   display: grid;
@@ -385,7 +385,7 @@
   transition: background .25s;
 }
 .module:last-child { border-bottom: 1px solid var(--line); }
-.module:hover { background: rgba(255, 255, 255, .03); }
+.module:hover { background: rgba(237, 237, 237, .03); }
 .moduleNum {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
@@ -399,7 +399,7 @@
   font-size: clamp(15px, 1.5vw, 18px);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 6px;
 }
 .moduleSubtitle {
@@ -451,7 +451,7 @@
   padding: 4px 0;
 }
 .moduleSummary:hover {
-  color: #fff;
+  color: var(--moonlight-white);
 }
 .moduleSummary svg {
   transition: transform .2s;
@@ -473,7 +473,7 @@
   line-height: 1.7;
 }
 .expandedItem > strong {
-  color: #fff;
+  color: var(--moonlight-white);
   display: block;
   margin-bottom: 8px;
   font-size: 12px;
@@ -503,7 +503,7 @@
   background: var(--brand);
 }
 .caseExample {
-  background: rgba(255, 255, 255, .04);
+  background: rgba(237, 237, 237, .04);
   padding: 16px;
   border-radius: var(--radius-md);
   border-left: 2px solid var(--brand);
@@ -518,7 +518,7 @@
    ============================================================ */
 .final {
   background: var(--brand);
-  color: #fff;
+  color: var(--moonlight-white);
   border-radius: var(--radius-xl);
   padding: 64px 28px;
   position: relative;
@@ -532,34 +532,34 @@
   border-radius: 50%;
   pointer-events: none;
   width: 420px; height: 420px; top: -200px; right: -140px;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.28) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(5, 20, 29, 0.28) 0%, transparent 70%);
 }
 .finalInner { position: relative; max-width: 600px; margin: 0 auto; }
-.finalEyebrow { color: #fff; justify-content: center; }
-.finalEyebrow::before { background: #fff; }
+.finalEyebrow { color: var(--moonlight-white); justify-content: center; }
+.finalEyebrow::before { background: var(--moonlight-white); }
 .finalTitle {
   font-size: clamp(26px, 3.4vw, 44px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.04;
-  color: #fff;
+  color: var(--moonlight-white);
   margin: 0 0 20px;
 }
 .finalTitle em {
   font-style: normal;
-  color: #0b0b0e;
+  color: var(--railroad-black);
 }
 .finalSub {
   font-size: 15px;
   line-height: 1.75;
-  color: rgba(255, 255, 255, .84);
+  color: rgba(237, 237, 237, .84);
   margin: 0 0 34px;
 }
 .finalCta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
 .page .btnBlock { width: 100%; max-width: 340px; }
 .page .final .btnAccent {
-  background: #0b0b0e;
-  border-color: #0b0b0e;
+  background: var(--railroad-black);
+  border-color: var(--railroad-black);
 }
-.page .final .btnAccent::before { background: #fff; }
-.page .final .btnAccent:hover { color: #0b0b0e; }
+.page .final .btnAccent::before { background: var(--moonlight-white); }
+.page .final .btnAccent:hover { color: var(--railroad-black); }
