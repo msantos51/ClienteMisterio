@@ -48,11 +48,11 @@
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 72px 0 40px;
+  padding: 96px 0 48px;
   text-align: center;
 }
 @media (max-width: 720px) {
-  .hero { padding: 48px 0 28px; }
+  .hero { padding: 64px 0 32px; }
 }
 .eyebrow {
   display: inline-flex;
