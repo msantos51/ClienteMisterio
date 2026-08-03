@@ -65,14 +65,20 @@ export default function HomePage() {
               aria-hidden
             >
               <defs>
+                {/* Branco a ganhar densidade ao subir: a curva acompanha o
+                    progresso sem sair da paleta vermelho/branco. */}
                 <linearGradient id="cmTrack" x1="0" y1="1" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#ef3e4d" stopOpacity="0.25" />
-                  <stop offset="45%" stopColor="#ef3e4d" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0.55" />
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
+                  <stop offset="45%" stopColor="#ffffff" stopOpacity="0.55" />
+                  <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
                 </linearGradient>
               </defs>
+              {/* Os nós ficam encostados à esquerda de cada coluna da grelha,
+                  não ao centro: as âncoras horizontais (~2,5% / 36,5% / 70,5%)
+                  seguem os centros reais dos marcadores. Na vertical, 84,4 /
+                  46,8 / 15,6 são os `--node-y` convertidos para o viewBox. */}
               <path
-                d="M 0,95 C 8,86 11,84.4 16.7,84.4 C 31,84.4 36,46.8 50,46.8 C 64,46.8 69,15.6 83.3,15.6 C 90,15.6 95,11 100,6"
+                d="M 0,91 C 0.8,88 1.5,84.4 2.5,84.4 C 17,84.4 22,46.8 36.5,46.8 C 51,46.8 56,15.6 70.5,15.6 C 82,15.6 92,9 100,3"
                 fill="none"
                 stroke="url(#cmTrack)"
                 strokeWidth="2"

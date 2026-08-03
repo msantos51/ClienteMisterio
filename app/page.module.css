@@ -1,7 +1,8 @@
 /*
  * Cliente Mistério — Homepage de ecrã único.
- * Fundo azul profundo (mesma superfície escura do resto do site), vermelho
- * #EF3E4D como cor de energia e números fantasma como decoração.
+ * Superfície vermelha da marca de bordo a bordo, tipografia branca de grande
+ * escala e números fantasma como única decoração. Sem gradientes: a força vem
+ * do contraste vermelho/branco e do tamanho do texto.
  * CSS Module ao lado de app/page.tsx.
  */
 
@@ -14,11 +15,7 @@
 .page {
   display: flex;
   flex: 1;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary-blue) 0%,
-    var(--color-blue-deep) 100%
-  );
+  background: var(--surface-brand);
   color: var(--color-white);
   font-family: var(--font-body);
   overflow-x: hidden;
@@ -32,23 +29,10 @@
   position: relative;
 }
 
-/* Halo vermelho discreto, alinhado com o resto do site. */
-.stage::before {
-  content: "";
-  position: absolute;
-  top: -180px;
-  right: -140px;
-  width: 480px;
-  height: 480px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(239, 62, 77, 0.25) 0%, transparent 70%);
-  pointer-events: none;
-}
-
 .wrap {
   position: relative;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 0 var(--sp-md);
 }
@@ -59,38 +43,42 @@
 /* ============================================================
    PROPOSTA DE VALOR
    ============================================================ */
-.intro { max-width: 720px; }
+.intro { max-width: 900px; }
 
 .eyebrow {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 0 0 var(--sp-sm);
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 var(--sp-md);
 }
 .eyebrow::before {
   content: "";
-  width: 30px;
+  width: 34px;
   height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--color-primary-red);
+  background: var(--color-white);
   flex-shrink: 0;
 }
 
+/* Título de cartaz: grande, apertado e a branco cheio — a assinatura
+   tipográfica do site. */
 .title {
-  font-size: clamp(36px, 5.4vw, 64px);
+  font-family: var(--font-display);
+  font-size: clamp(42px, 7.6vw, 108px);
   font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 1.12;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+  text-transform: uppercase;
   color: var(--color-white);
   margin: 0;
   text-wrap: balance;
 }
-.dot { color: var(--color-primary-red); }
+/* O ponto final fica a meio-tom: pontua sem competir com o título. */
+.dot { color: rgba(255, 255, 255, 0.5); }
 
 /* ============================================================
    PROCESSO
@@ -134,15 +122,15 @@
   top: calc(var(--node-y, 0px) + 26px);
   left: 40px;
   font-size: clamp(90px, 9vw, 140px);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 0.8;
-  letter-spacing: -4px;
-  color: rgba(255, 255, 255, 0.07);
+  letter-spacing: -0.06em;
+  color: rgba(255, 255, 255, 0.1);
   pointer-events: none;
   user-select: none;
 }
 
-/* Nó: ícone dentro de um marcador redondo com halo. */
+/* Nó: ícone vermelho dentro de um marcador branco. */
 .node {
   position: relative;
   z-index: 1;
@@ -152,11 +140,9 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--color-primary-red);
-  color: var(--color-white);
-  box-shadow:
-    0 0 0 8px rgba(239, 62, 77, 0.14),
-    0 8px 20px rgba(0, 0, 0, 0.25);
+  background: var(--color-white);
+  color: var(--color-red);
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.14);
 }
 .node svg { width: 22px; height: 22px; }
 
@@ -165,21 +151,21 @@
   z-index: 1;
   display: block;
   margin-top: var(--sp-md);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-red-on-dark);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .stepTitle {
   position: relative;
   z-index: 1;
-  margin: 8px 0 0;
-  font-size: clamp(17px, 1.6vw, 22px);
+  margin: 10px 0 0;
+  font-size: clamp(17px, 1.6vw, 23px);
   font-weight: 700;
-  letter-spacing: -0.2px;
-  line-height: 1.35;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
   color: var(--color-white);
   max-width: 22ch;
   text-wrap: pretty;
@@ -206,7 +192,7 @@
     left: 0;
     width: 44px;
     height: 44px;
-    box-shadow: 0 0 0 6px rgba(239, 62, 77, 0.14);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.14);
   }
   /* Fio vertical a ligar os nós. */
   .step:not(:last-child)::before {
@@ -216,10 +202,9 @@
     left: 21px;
     bottom: -24px;
     width: 2px;
-    border-radius: var(--radius-pill);
     background: linear-gradient(
       180deg,
-      rgba(239, 62, 77, 0.7) 0%,
+      rgba(255, 255, 255, 0.7) 0%,
       rgba(255, 255, 255, 0.15) 100%
     );
   }

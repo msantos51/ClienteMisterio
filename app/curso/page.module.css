@@ -1,6 +1,11 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Estilos scoped da página /curso (design "Turkish Red & Railroad Black").
+ * DESCRIÇÃO DO FICHEIRO: Estilos scoped da página /curso, sistema vermelho/branco.
  * Convenção: classes camelCase para acesso direto via styles.xxx
+ *
+ * A capa do curso (cabeçalho + lista de módulos) vive sobre o vermelho da
+ * marca. O leitor é um overlay com chrome vermelho e corpo branco: são
+ * milhares de palavras por módulo, e o branco é a superfície onde o texto
+ * longo se lê sem cansar. O quiz e o resultado vivem dentro desse corpo.
  */
 
 /* Reset das regras globais que entram nesta página.
@@ -43,8 +48,8 @@
    PRIMITIVAS DE LAYOUT
    ============================================================ */
 .page {
-  background: var(--background);
-  color: var(--body);
+  background: var(--surface-brand);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 15px;
   line-height: 1.7;
   font-family: var(--font-body);
@@ -61,37 +66,36 @@
 .eyebrow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: rgba(255, 255, 255, 0.78);
   margin-bottom: 18px;
 }
 .eyebrow::before {
   content: "";
-  width: 30px; height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
+  width: 34px; height: 2px;
+  background: currentColor;
   flex-shrink: 0;
 }
-.eyebrowAccent { color: var(--brand); }
+.eyebrowAccent { color: var(--color-white); }
 
 .display {
-  font-family: var(--font-body);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
-  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: var(--color-white);
   margin: 0;
 }
-.displayXl { font-size: clamp(28px, 3.6vw, 50px); }
-.displayLg { font-size: clamp(21px, 2.8vw, 36px); }
+.displayXl { font-size: clamp(30px, 4.2vw, 58px); }
+.displayLg { font-size: clamp(22px, 3vw, 40px); }
 .lead {
-  font-size: 15px;
-  line-height: 1.75;
-  color: var(--body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
   max-width: 56ch;
   margin: 0;
 }
@@ -106,7 +110,7 @@
   gap: 8px;
   padding: 16px 32px;
   border-radius: var(--radius-md);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 16px;
   border: none;
   transition: all 200ms ease;
@@ -118,38 +122,40 @@
 .page .btn:hover:not(:disabled) { transform: translateY(-2px); }
 .page .btn:active:not(:disabled) { transform: translateY(0); }
 
+/* Principal sobre vermelho: branco cheio. */
 .page .btnPrimary {
-  background: var(--color-primary-red);
-  color: var(--color-white);
-  box-shadow: 0 4px 12px rgba(239, 62, 77, 0.25);
+  background: var(--color-white);
+  color: var(--color-red);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
 }
 .page .btnPrimary:hover:not(:disabled) {
-  background: var(--color-red-hover);
-  box-shadow: 0 6px 16px rgba(239, 62, 77, 0.35);
+  background: var(--color-white);
+  color: var(--color-red-3);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
 }
 .page .btnGhost {
   background: transparent;
-  color: var(--color-primary-blue);
-  border: 2px solid var(--color-gray-light);
-  padding: 14px 30px;
+  color: var(--color-white);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  padding: 14.5px 30.5px;
 }
 .page .btnGhost:hover:not(:disabled) {
-  border-color: var(--color-primary-blue);
-  background: rgba(15, 76, 92, 0.05);
+  border-color: var(--color-white);
+  background: rgba(255, 255, 255, 0.12);
 }
 .page .btnAccent {
   background: transparent;
-  border: 2px solid var(--color-primary-blue);
-  color: var(--color-primary-blue);
-  padding: 14px 30px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  color: var(--color-white);
+  padding: 14.5px 30.5px;
 }
 .page .btnAccent:hover:not(:disabled) {
-  background: rgba(15, 76, 92, 0.05);
-  box-shadow: 0 4px 12px rgba(15, 76, 92, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-white);
 }
 .page .btnSmall { padding: 12px 24px; font-size: 14px; }
 .page .btn:disabled {
-  opacity: .6;
+  opacity: .5;
   cursor: not-allowed;
   transform: none !important;
   box-shadow: none;
@@ -180,34 +186,43 @@
 .courseHeadTitle {
   margin: 0 0 20px;
 }
+/* Realce do título: inversão do sistema — caixa branca, texto vermelho. */
 .courseHeadTitle em {
   font-style: normal;
-  color: var(--brand);
+  color: var(--color-red);
+  background: var(--color-white);
+  padding: 0 0.14em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .courseHeadSub {
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 1.75;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.7);
   margin: 0;
   max-width: 48ch;
   text-wrap: pretty;
 }
 
+/* Cartão de progresso — painel branco invertido. */
 .progressCard {
+  --muted: var(--on-invert-3);
+
   background: var(--color-white);
-  border: 1px solid var(--color-gray-light);
-  border-radius: var(--radius-lg);
+  color: var(--on-invert);
+  border: none;
+  border-radius: var(--radius-xl);
   padding: 28px;
-  box-shadow: 0 8px 24px rgba(15, 76, 92, 0.1);
+  box-shadow: var(--shadow-lg);
   position: relative;
+  overflow: hidden;
 }
 .progressCard::before {
   content: "";
   position: absolute;
-  top: -1px; left: var(--radius-xl);
-  width: 56px; height: 3px;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
+  top: 0; left: var(--radius-xl);
+  width: 56px; height: 4px;
+  background: var(--color-red);
 }
 .progressCardRow {
   display: flex;
@@ -217,49 +232,49 @@
   gap: 12px;
 }
 .progressCardCount {
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   line-height: 1;
-  color: var(--color-text-primary);
+  color: var(--on-invert);
 }
 .progressCardCount em {
   font-style: normal;
-  color: var(--brand);
+  color: var(--color-red);
 }
 .progressCardCount span {
   font-size: 16px;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--on-invert-3);
   margin-left: 6px;
 }
 .progressCardPct {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: var(--color-red);
   text-align: right;
 }
 .progressBar {
   height: 5px;
-  background: var(--line);
+  background: #ededf1;
   border-radius: var(--radius-pill);
   overflow: hidden;
   position: relative;
 }
 .progressBarFill {
   height: 100%;
-  background: var(--brand);
+  background: var(--color-red);
   transition: width .6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .progressCardLabel {
   margin-top: 16px;
   font-size: 12.5px;
-  color: var(--muted);
+  color: var(--on-invert-3);
   line-height: 1.6;
 }
-.progressCardLabel strong { color: var(--color-text-primary); font-weight: 700; }
+.progressCardLabel strong { color: var(--on-invert); font-weight: 700; }
 
 /* ============================================================
    LISTA DE MÓDULOS
@@ -273,26 +288,26 @@
   align-items: center;
   justify-content: space-between;
   padding: 28px 0 14px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--hairline);
   margin-top: 28px;
   flex-wrap: wrap;
   gap: 16px;
 }
 .modListTitle {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.6);
   margin: 0;
 }
 .modListLegend {
   display: flex;
   gap: 18px;
-  font-size: 11px;
-  color: var(--muted);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   font-weight: 700;
 }
 .modListLegend span {
@@ -303,10 +318,10 @@
 .modListLegend span::before {
   content: "";
   width: 7px; height: 7px;
-  background: var(--line);
+  background: rgba(255, 255, 255, 0.35);
 }
-.modListLegend .legDone::before { background: var(--mint); }
-.modListLegend .legNow::before { background: var(--brand); }
+.modListLegend .legDone::before { background: var(--color-white); }
+.modListLegend .legNow::before { background: var(--color-black); }
 
 .mod {
   display: grid;
@@ -314,43 +329,44 @@
   gap: 24px;
   padding: 26px 0;
   align-items: start;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--hairline);
   transition: background .25s, padding .25s;
   cursor: pointer;
   position: relative;
   width: 100%;
   text-align: left;
 }
-.mod:last-of-type { border-bottom: 1px solid var(--line); }
-.mod:not(:disabled):hover { background: var(--color-bg-light); padding-left: 16px; }
+.mod:last-of-type { border-bottom: 1px solid var(--hairline); }
+.mod:not(:disabled):hover { background: rgba(255, 255, 255, 0.08); padding-left: 16px; }
 .mod:disabled,
 .modLocked {
-  opacity: .38;
+  opacity: .4;
   cursor: not-allowed;
 }
 .mod:disabled:hover,
 .modLocked:hover { background: transparent; padding-left: 0; }
 
 .modNum {
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -0.04em;
   line-height: 1.15;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.5);
 }
-.modDone .modNum { color: var(--mint); }
-.modCurrent .modNum { color: var(--brand); }
+.modDone .modNum { color: var(--color-white); }
+.modCurrent .modNum { color: var(--color-white); }
 .modBody { min-width: 0; }
 .modTitle {
-  font-size: clamp(14px, 1.4vw, 17px);
-  font-weight: 800;
-  letter-spacing: -0.2px;
-  color: var(--color-text-primary);
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--color-white);
   margin: 0 0 5px;
 }
 .modDesc {
   font-size: 13.5px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.7;
   margin: 0;
   max-width: 68ch;
@@ -367,44 +383,53 @@
   align-items: center;
   gap: 6px;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   padding: 6px 11px;
   border-radius: var(--radius-pill);
-  background: var(--surface-raised);
-  color: var(--body);
-  border: 1px solid var(--line);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--hairline-strong);
   white-space: nowrap;
 }
-.modBadgeCurrent { background: var(--color-primary-red); color: var(--color-white); border-color: var(--color-primary-red); }
+.modBadgeCurrent {
+  background: var(--color-white);
+  color: var(--color-red);
+  border-color: var(--color-white);
+}
 .modBadgeLocked {
   background: transparent;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.55);
+  border-color: var(--hairline);
 }
-.modBadgeDone { background: rgba(42, 191, 132, 0.15); color: #1b6f4a; border-color: rgba(42, 191, 132, 0.35); }
+.modBadgeDone {
+  background: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
 .modArrow {
   width: 28px; height: 28px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--hairline-strong);
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary-blue);
+  color: var(--color-white);
   transition: background .2s, color .2s, border-color .2s;
 }
 .mod:not(:disabled):hover .modArrow {
-  background: var(--color-primary-red);
-  color: var(--color-white);
-  border-color: var(--color-primary-red);
+  background: var(--color-white);
+  color: var(--color-red);
+  border-color: var(--color-white);
 }
 
 /* ============================================================
-   BLOCO DO CERTIFICADO
+   BLOCO DO CERTIFICADO — preto, para marcar a chegada
    ============================================================ */
 .certBlock {
   margin: 36px 0 0;
-  background: var(--color-primary-red);
+  background: var(--color-black);
   color: var(--color-white);
   border-radius: var(--radius-xl);
   padding: 40px 44px;
@@ -418,43 +443,43 @@
 .certBlock::before {
   content: "";
   position: absolute;
-  width: 360px; height: 360px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(15, 76, 92, 0.3) 0%, transparent 70%);
-  top: -170px; right: -140px;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--color-red);
   pointer-events: none;
 }
 .certBlockCopy { position: relative; max-width: 56ch; }
 .certBlockTitle {
-  font-size: clamp(18px, 1.9vw, 26px);
-  font-weight: 800;
-  letter-spacing: -0.3px;
+  font-size: clamp(20px, 2.1vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
   margin: 0 0 10px;
   color: var(--color-white);
 }
 .certBlockTitle em {
   font-style: normal;
-  color: var(--color-blue-deep);
+  color: var(--color-red-bright);
 }
 .certBlockSub {
   font-size: 14px;
-  color: rgba(255, 255, 255, .82);
+  color: rgba(255, 255, 255, .62);
   margin: 0;
   max-width: 56ch;
   line-height: 1.7;
   text-wrap: pretty;
 }
 .certBlockCta { position: relative; display: flex; gap: 12px; flex-wrap: wrap; }
-/* Sobre o painel vermelho, o CTA passa a branco para máximo contraste. */
+/* Sobre o painel preto, o CTA passa a vermelho sólido. */
 .certBlock .btnAccent {
-  background: var(--color-white);
-  border-color: var(--color-white);
-  color: var(--color-primary-red);
-  box-shadow: 0 4px 12px rgba(15, 76, 92, 0.2);
+  background: var(--color-red);
+  border-color: var(--color-red);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.3);
 }
 .certBlock .btnAccent:hover:not(:disabled) {
-  background: var(--color-bg-light);
-  box-shadow: 0 6px 16px rgba(15, 76, 92, 0.28);
+  background: var(--color-red-bright);
+  border-color: var(--color-red-bright);
+  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.36);
 }
 @media (max-width: 720px) {
   .certBlock { grid-template-columns: 1fr; padding: 30px 26px; }
@@ -462,11 +487,12 @@
 
 /* ============================================================
    LEITOR (overlay)
+   Chrome vermelho, corpo branco: modo de leitura.
    ============================================================ */
 .reader {
   position: fixed;
   inset: 0;
-  background: var(--background);
+  background: var(--color-white);
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -480,10 +506,8 @@
   justify-content: space-between;
   gap: 24px;
   padding: 18px 32px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(15, 76, 92, .96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--color-red);
   flex-shrink: 0;
 }
 @media (max-width: 720px) {
@@ -493,11 +517,11 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   transition: color .2s;
   background: transparent;
   border: 0;
@@ -509,7 +533,7 @@
 
 .readerTitle {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-white);
   text-align: center;
   display: flex;
@@ -521,8 +545,8 @@
 }
 .readerTitle em {
   font-style: normal;
-  font-weight: 800;
-  color: var(--color-red-on-dark);
+  font-weight: 700;
+  color: var(--color-white);
   font-size: 16px;
 }
 .readerTitleName {
@@ -552,24 +576,27 @@
 .readerProgressDots span {
   width: 20px; height: 3px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
   transition: background .2s, width .2s;
 }
-.dotDone { background: var(--mint) !important; }
-.dotCurrent { background: var(--brand) !important; width: 34px !important; }
+.dotDone { background: rgba(255, 255, 255, 0.75) !important; }
+.dotCurrent { background: var(--color-white) !important; width: 34px !important; }
 .readerProgressLabel {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
   white-space: nowrap;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   font-weight: 700;
 }
 
-/* Corpo do leitor */
+/* Corpo do leitor — superfície branca de leitura. */
 .readerBody {
   flex: 1;
   overflow-y: auto;
   padding: 52px 32px 72px;
+  background: var(--color-white);
+  color: var(--on-invert-2);
 }
 @media (max-width: 720px) {
   .readerBody { padding: 32px 20px 48px; }
@@ -587,61 +614,61 @@
 
 .readerChap {
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: var(--color-red);
   margin: 0 0 16px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 .readerChap::before {
   content: "";
-  width: 30px; height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
+  width: 34px; height: 2px;
+  background: currentColor;
   flex-shrink: 0;
 }
 .readerHeading {
-  font-size: clamp(24px, 3vw, 36px);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
-  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+  color: var(--on-invert);
   margin: 0 0 26px;
   max-width: 22ch;
 }
 .readerH2 {
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   margin: 40px 0 20px;
-  color: var(--color-text-primary);
+  color: var(--on-invert);
 }
 .readerLede {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   line-height: 1.6;
-  letter-spacing: -0.1px;
-  color: var(--color-text-primary);
+  letter-spacing: -0.015em;
+  color: var(--on-invert);
   margin: 0 0 34px;
   padding-left: 20px;
-  border-left: 2px solid var(--brand);
+  border-left: 3px solid var(--color-red);
   max-width: 54ch;
   text-wrap: pretty;
 }
 .readerProse {
-  font-size: 15px;
-  line-height: 1.85;
-  color: var(--body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--on-invert-2);
   text-wrap: pretty;
 }
 .readerProse p {
   margin: 0 0 20px;
   max-width: 66ch;
 }
-.readerProse strong { color: var(--color-text-primary); font-weight: 700; }
+.readerProse strong { color: var(--on-invert); font-weight: 700; }
 .readerProse ul {
   margin: 0 0 22px;
   padding-left: 0;
@@ -650,19 +677,18 @@
 }
 .readerProse li {
   padding: 11px 0 11px 32px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--hairline-invert);
   position: relative;
 }
-.readerProse li:last-child { border-bottom: 1px solid var(--line); }
+.readerProse li:last-child { border-bottom: 1px solid var(--hairline-invert); }
 .readerProse li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 21px;
+  top: 22px;
   width: 14px;
   height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
+  background: var(--color-red);
 }
 
 .readerBreak {
@@ -670,17 +696,17 @@
   align-items: center;
   gap: 14px;
   margin: 52px 0 34px;
-  color: var(--brand);
+  color: var(--color-red);
 }
 .readerBreak::before, .readerBreak::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--line);
+  background: var(--hairline-invert);
 }
 .readerBreakIcon {
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* Conteúdo premium */
@@ -694,32 +720,33 @@
 .prem {
   border-radius: var(--radius-lg);
   padding: 26px;
-  border: 1px solid var(--color-gray-light);
-  background: var(--color-bg-light);
+  border: 1px solid var(--hairline-invert);
+  background: #f7f7f9;
 }
-.premGood { border-color: rgba(42, 191, 132, .35); }
-.premBad { border-color: rgba(239, 62, 77, .3); }
-.premStrat { border-color: var(--line); }
-.premCheck { background: var(--color-primary-red); border-color: var(--color-primary-red); color: var(--color-white); }
+.premGood { border-color: rgba(18, 160, 109, .3); }
+.premBad { border-color: rgba(227, 6, 19, .28); }
+.premStrat { border-color: var(--hairline-invert); }
+/* O checklist inverte-se dentro do corpo branco: vermelho da marca. */
+.premCheck { background: var(--color-red); border-color: var(--color-red); color: var(--color-white); }
 .premCheck .premTitle { color: var(--color-white); }
-.premCheck .premList li { color: rgba(255, 255, 255, .88); border-color: rgba(255, 255, 255, .16); }
+.premCheck .premList li { color: rgba(255, 255, 255, .9); border-color: rgba(255, 255, 255, .2); }
 .premCheck .premList li::before { background: var(--color-white); opacity: 1; }
 .premTitle {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-text-primary);
+  color: var(--on-invert);
   margin: 0 0 16px;
 }
-.premGood .premTitle { color: #1b6f4a; }
-.premBad .premTitle { color: var(--brand-500); }
+.premGood .premTitle { color: var(--color-success); }
+.premBad .premTitle { color: var(--color-danger); }
 .premList { margin: 0; padding: 0; list-style: none; }
 .premList li {
   font-size: 14px;
-  color: var(--color-dark-blue);
+  color: var(--on-invert-2);
   padding: 11px 0 11px 26px;
-  border-top: 1px solid var(--color-gray-light);
+  border-top: 1px solid var(--hairline-invert);
   position: relative;
   line-height: 1.65;
 }
@@ -732,35 +759,34 @@
   top: 20px;
   width: 14px;
   height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--muted);
+  background: var(--on-invert-3);
 }
-.premGood .premList li::before { background: var(--mint); }
-.premBad .premList li::before { background: var(--brand-500); }
+.premGood .premList li::before { background: var(--color-success); }
+.premBad .premList li::before { background: var(--color-danger); }
 
 /* Exemplo de avaliação */
 .example {
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-gray-light);
-  border-left: 3px solid var(--color-primary-red);
-  background: var(--color-bg-light);
+  border: 1px solid var(--hairline-invert);
+  border-left: 3px solid var(--color-red);
+  background: #f7f7f9;
   padding: 26px;
 }
-.example p { margin: 0 0 10px; font-size: 14px; color: var(--body); line-height: 1.7; }
+.example p { margin: 0 0 10px; font-size: 14px; color: var(--on-invert-2); line-height: 1.7; }
 .example p:last-child { margin-bottom: 0; }
 .exampleTitle {
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.2px;
-  color: var(--color-text-primary);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--on-invert);
   margin: 0 0 14px;
 }
 .exampleLabel {
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: var(--color-red);
   margin-right: 6px;
 }
 
@@ -774,27 +800,27 @@
   gap: 16px;
 }
 .asideCard {
-  background: var(--color-bg-light);
-  border: 1px solid var(--color-gray-light);
+  background: #f7f7f9;
+  border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-lg);
   padding: 22px;
 }
 .asideLabel {
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--on-invert-3);
   margin: 0 0 14px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.asideLabel svg { color: var(--brand); }
+.asideLabel svg { color: var(--color-red); }
 .asideText {
   font-size: 14px;
   line-height: 1.75;
-  color: var(--body);
+  color: var(--on-invert-2);
   margin: 0;
   text-wrap: pretty;
 }
@@ -808,20 +834,18 @@
   font-weight: 600;
   padding: 6px 10px;
   background: var(--color-white);
-  color: var(--body);
-  border: 1px solid var(--line);
+  color: var(--on-invert-2);
+  border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-pill);
 }
-.asideCardWarn { border-color: rgba(239, 62, 77, .35); background: rgba(239, 62, 77, .06); }
-.asideCardWarn .asideLabel { color: var(--brand-500); }
-.asideCardWarn .asideLabel svg { color: var(--brand-500); }
+.asideCardWarn { border-color: rgba(227, 6, 19, .3); background: rgba(227, 6, 19, .05); }
+.asideCardWarn .asideLabel { color: var(--color-red); }
+.asideCardWarn .asideLabel svg { color: var(--color-red); }
 
 /* Rodapé do leitor */
 .readerBottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(15, 76, 92, .96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--color-red);
   padding: 16px 32px;
   flex-shrink: 0;
 }
@@ -837,19 +861,32 @@
   gap: 16px;
 }
 .readerPageInfo {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.75);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
   font-weight: 700;
 }
 .readerPageInfo strong { color: var(--color-white); font-weight: 700; }
 @media (max-width: 600px) {
   .readerPageInfo { display: none; }
 }
+/* No chrome vermelho do leitor, os botões voltam a ser brancos/vazados. */
+.readerBottom .btnPrimary,
+.readerTop .btnPrimary {
+  background: var(--color-white);
+  color: var(--color-red);
+}
+.readerBottom .btnGhost,
+.readerBottom .btnAccent,
+.readerTop .btnGhost,
+.readerTop .btnAccent {
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.5);
+}
 
 /* ============================================================
-   QUIZ
+   QUIZ — dentro do corpo branco do leitor
    ============================================================ */
 .quiz {
   max-width: 760px;
@@ -857,15 +894,17 @@
 }
 .quizHead { margin-bottom: 34px; }
 .quizTitle {
-  font-size: clamp(20px, 2.4vw, 30px);
-  font-weight: 800;
-  letter-spacing: -0.3px;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
   margin: 0 0 12px;
-  color: var(--color-text-primary);
+  color: var(--on-invert);
 }
 .quizSub {
   font-size: 15px;
-  color: var(--muted);
+  color: var(--on-invert-3);
   margin: 0;
   max-width: 60ch;
   line-height: 1.75;
@@ -874,29 +913,29 @@
 
 .q {
   background: var(--color-white);
-  border: 1px solid var(--color-gray-light);
+  border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-lg);
   padding: 28px;
   margin-bottom: 12px;
-  box-shadow: 0 2px 8px rgba(15, 76, 92, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 @media (max-width: 600px) {
   .q { padding: 22px; }
 }
 .qNum {
-  font-weight: 800;
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: var(--color-red);
   margin: 0 0 12px;
 }
 .qText {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.45;
-  color: var(--color-text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  color: var(--on-invert);
   margin: 0 0 22px;
   max-width: 52ch;
   text-wrap: pretty;
@@ -908,60 +947,60 @@
   justify-content: flex-start;
   gap: 16px;
   padding: 15px 18px;
-  background: var(--color-bg-light);
-  border: 1px solid var(--color-gray-light);
+  background: #f7f7f9;
+  border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-md);
   text-align: left;
   width: 100%;
   font-size: 14.5px;
-  color: var(--body);
+  color: var(--on-invert-2);
   transition: border-color .15s, background .15s, color .15s;
   cursor: pointer;
   font-family: inherit;
 }
-.qOpt:hover:not(:disabled) { border-color: var(--color-primary-blue); color: var(--color-text-primary); }
+.qOpt:hover:not(:disabled) { border-color: var(--on-invert-3); color: var(--on-invert); }
 .qOptSelected {
-  border-color: var(--color-primary-red) !important;
-  background: rgba(239, 62, 77, 0.1) !important;
-  color: var(--color-red-ink) !important;
+  border-color: var(--color-red) !important;
+  background: rgba(227, 6, 19, 0.07) !important;
+  color: var(--color-danger) !important;
 }
 .qOptLetter {
   flex-shrink: 0;
   width: 26px; height: 26px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--line);
+  border: 1px solid var(--hairline-invert);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  font-weight: 800;
-  color: var(--muted);
-  background: transparent;
+  font-weight: 700;
+  color: var(--on-invert-3);
+  background: var(--color-white);
   transition: all .15s;
 }
 .qOptSelected .qOptLetter {
-  background: var(--color-primary-red);
-  border-color: var(--color-primary-red);
+  background: var(--color-red);
+  border-color: var(--color-red);
   color: var(--color-white);
 }
 .qOptCorrect {
-  border-color: rgba(42, 191, 132, .5) !important;
-  background: rgba(42, 191, 132, .12) !important;
-  color: #1b6f4a !important;
+  border-color: rgba(18, 160, 109, .5) !important;
+  background: rgba(18, 160, 109, .09) !important;
+  color: var(--color-success) !important;
 }
 .qOptCorrect .qOptLetter {
-  background: var(--color-success-green);
-  border-color: var(--color-success-green);
+  background: var(--color-success);
+  border-color: var(--color-success);
   color: var(--color-white);
 }
 .qOptWrong {
-  border-color: rgba(239, 62, 77, .5) !important;
-  background: rgba(239, 62, 77, .1) !important;
-  color: var(--color-red-ink) !important;
+  border-color: rgba(227, 6, 19, .5) !important;
+  background: rgba(227, 6, 19, .08) !important;
+  color: var(--color-danger) !important;
 }
 .qOptWrong .qOptLetter {
-  background: var(--color-primary-red);
-  border-color: var(--color-primary-red);
+  background: var(--color-red);
+  border-color: var(--color-red);
   color: var(--color-white);
 }
 .qOptDim { opacity: .45; }
@@ -977,16 +1016,37 @@
 .quizHint {
   flex: 1;
   font-size: 12.5px;
-  color: var(--muted);
+  color: var(--on-invert-3);
   min-width: 200px;
+}
+/* Dentro do corpo branco, os botões do quiz invertem-se. */
+.quiz .btnPrimary {
+  background: var(--color-red);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
+}
+.quiz .btnPrimary:hover:not(:disabled) {
+  background: var(--color-red-2);
+  color: var(--color-white);
+  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.34);
+}
+.quiz .btnGhost,
+.quiz .btnAccent {
+  color: var(--on-invert);
+  border-color: var(--hairline-invert);
+}
+.quiz .btnGhost:hover:not(:disabled),
+.quiz .btnAccent:hover:not(:disabled) {
+  background: #f2f2f5;
+  border-color: var(--on-invert-3);
 }
 
 /* Resultado */
 .result {
   background: var(--color-white);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--color-gray-light);
-  box-shadow: 0 8px 24px rgba(15, 76, 92, 0.1);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--hairline-invert);
+  box-shadow: var(--shadow-md);
   padding: 52px;
   text-align: center;
   margin-bottom: 24px;
@@ -998,44 +1058,44 @@
   position: absolute;
   top: 0; left: 50%;
   transform: translateX(-50%);
-  width: 72px; height: 3px;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
+  width: 72px; height: 4px;
+  background: var(--color-red);
 }
 @media (max-width: 600px) {
   .result { padding: 34px 24px; }
 }
 .resultScore {
-  font-weight: 800;
-  font-size: 76px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 86px;
   line-height: 1;
-  letter-spacing: -0.5px;
-  color: var(--color-success-green);
+  letter-spacing: -0.05em;
+  color: var(--color-success);
   margin: 0;
 }
-.resultScoreFail { color: var(--color-primary-red) !important; }
+.resultScoreFail { color: var(--color-danger) !important; }
 .resultScore span {
   font-size: 34px;
   margin-left: 2px;
 }
 .resultLabel {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--on-invert-3);
   margin: 18px 0 12px;
 }
 .resultTitle {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
   margin: 0 0 10px;
-  color: var(--color-text-primary);
+  color: var(--on-invert);
 }
 .resultSub {
   font-size: 15px;
-  color: var(--muted);
+  color: var(--on-invert-3);
   line-height: 1.7;
   margin: 0 auto 30px;
   max-width: 50ch;

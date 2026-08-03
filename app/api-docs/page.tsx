@@ -26,8 +26,8 @@ export default function ApiDocsPage() {
     <main className="min-h-screen bg-[color:var(--background)] px-4 py-6 sm:px-6 md:px-8">
       {/* Título e contexto rápido para orientar quem vai testar endpoints no browser. */}
       <header className="mx-auto mb-4 max-w-6xl">
-        <h1 className="text-2xl font-bold text-[color:var(--ink)]">Swagger API Explorer</h1>
-        <p className="mt-2 text-sm text-[color:var(--body)]">
+        <h1 className="text-2xl font-bold tracking-[-0.03em] text-white">Swagger API Explorer</h1>
+        <p className="mt-2 text-sm text-white/80">
           Use esta página para testar todos os endpoints disponíveis da aplicação.
         </p>
       </header>
@@ -36,7 +36,9 @@ export default function ApiDocsPage() {
       <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
 
       {/* Container onde o Swagger UI será montado no cliente. */}
-      <section className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-[color:var(--line)] bg-[#f5f8fa] p-2 shadow-sm">
+      {/* O Swagger UI traz o seu próprio tema claro: fica num painel branco,
+          como os restantes blocos de foco do sistema. */}
+      <section className="on-light mx-auto max-w-6xl overflow-hidden rounded-xl bg-white p-2 shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
         <div id="swagger-ui" />
       </section>
 

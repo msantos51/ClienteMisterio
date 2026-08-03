@@ -21,7 +21,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <LanguageProvider>
       <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
-        {/* Cabeçalho azul: marca à esquerda, navegação e ações à direita. */}
+        {/* Cabeçalho vermelho: marca à esquerda, navegação e ações à direita. */}
         <header className="site-header sticky top-0 z-50">
           <div className="site-header-inner mx-auto w-full max-w-[1400px]">
             <Link
@@ -29,14 +29,15 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               href="/"
               aria-label="Cliente Mistério — início"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--color-primary-red)] text-[13px] font-bold tracking-tight text-white">
+              {/* Marca invertida: quadrado branco sobre o vermelho do cabeçalho. */}
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-white text-[13px] font-bold tracking-[-0.02em] text-[color:var(--color-red)]">
                 CM
               </span>
               <span className="hidden flex-col whitespace-nowrap leading-none sm:flex">
-                <span className="text-[16px] font-bold tracking-tight text-white">
-                  Cliente Mistério<span className="text-[color:var(--color-primary-red)]">.</span>
+                <span className="text-[16px] font-bold tracking-[-0.03em] text-white">
+                  Cliente Mistério<span className="text-white/55">.</span>
                 </span>
-                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.5px] text-white/60">
+                <span className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.22em] text-white/55">
                   Formação Pro
                 </span>
               </span>
@@ -52,7 +53,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </div>
 
           {/* Em ecrãs pequenos o seletor de idioma fica numa linha própria. */}
-          <div className="flex w-full justify-center border-t border-white/15 px-3 py-1.5 md:hidden">
+          <div className="flex w-full justify-center border-t border-white/20 px-3 py-1.5 md:hidden">
             <LanguageSwitcher />
           </div>
         </header>

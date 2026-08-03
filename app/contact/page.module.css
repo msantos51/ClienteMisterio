@@ -1,5 +1,7 @@
 /*
- * Contact page — editorial design matching the homepage.
+ * Página de contacto — sistema vermelho/branco.
+ * Informação de contacto em texto branco sobre o vermelho; o formulário vive
+ * num painel branco invertido, porque é onde o utilizador tem de escrever.
  */
 
 .page button { all: unset; cursor: pointer; font: inherit; }
@@ -9,8 +11,8 @@
    LAYOUT PRIMITIVES
    ============================================================ */
 .page {
-  background: var(--color-white);
-  color: var(--color-text-primary);
+  background: var(--surface-brand);
+  color: var(--color-white);
   font-size: 15px;
   line-height: 1.65;
   font-family: var(--font-body);
@@ -29,40 +31,44 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--brand-700);
+  color: rgba(255, 255, 255, 0.78);
   margin-bottom: 20px;
 }
 .eyebrow::before {
   content: "";
-  width: 30px; height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
+  width: 34px; height: 2px;
+  background: currentColor;
   flex-shrink: 0;
 }
 
 .displayLg {
-  font-family: var(--font-body);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
-  color: var(--color-text-primary);
-  font-size: clamp(26px, 3.5vw, 48px);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: var(--color-white);
+  font-size: clamp(30px, 4.6vw, 62px);
   margin: 0;
 }
+/* Realce do título: inversão do sistema — caixa branca, texto vermelho. */
 .italic {
   font-style: normal;
-  font-weight: 800;
-  color: var(--brand);
+  font-weight: 700;
+  color: var(--color-red);
+  background: var(--color-white);
+  padding: 0 0.14em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .lead {
-  font-size: clamp(14px, 1.1vw, 17px);
-  line-height: 1.75;
-  color: var(--body);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
   max-width: 56ch;
   margin: 0;
 }
@@ -72,7 +78,7 @@
    ============================================================ */
 .hero {
   padding: 96px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--hairline);
 }
 @media (max-width: 720px) { .hero { padding: 64px 0; } }
 .heroTitle { margin-bottom: 24px; }
@@ -95,10 +101,10 @@
    CONTACT INFO
    ============================================================ */
 .infoTitle {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  color: var(--color-white);
   margin: 0 0 28px;
 }
 .infoItems { display: flex; flex-direction: column; gap: 20px; }
@@ -107,52 +113,73 @@
   flex-shrink: 0;
   width: 40px; height: 40px;
   border-radius: var(--radius-md);
-  background: var(--brand);
-  color: var(--moonlight-white);
+  background: var(--color-white);
+  color: var(--color-red);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.infoLabel { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
-.infoValue { font-size: 16px; color: var(--body); line-height: 1.4; }
-.infoValue a { color: var(--brand-500) !important; }
+.infoLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+.infoValue { font-size: 16px; color: var(--color-white); line-height: 1.4; }
+.infoValue a { color: var(--color-white) !important; border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
 .infoValue a:hover { opacity: .8; }
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 18px;
-  background: var(--brand-soft);
-  border: 1px solid rgba(239, 62, 77,.3);
+  padding: 13px 18px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: var(--radius-pill);
-  font-size: 14px;
-  color: var(--color-red-ink);
-  font-weight: 600;
+  font-size: 13px;
+  color: var(--color-white);
+  font-weight: 700;
+  letter-spacing: 0.02em;
   margin-top: 32px;
 }
 .badgeDot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: var(--brand);
-  box-shadow: 0 0 0 4px rgba(239, 62, 77,.24);
+  background: var(--color-white);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.22);
 }
 
 /* ============================================================
-   FORM CARD
+   FORM CARD — painel branco invertido
    ============================================================ */
 .card {
+  --muted: var(--on-invert-3);
+  --body: var(--on-invert-2);
+
   background: var(--color-white);
-  border: 1px solid var(--color-gray-light);
-  border-radius: var(--radius-lg);
+  color: var(--on-invert);
+  border: none;
+  border-radius: var(--radius-xl);
   padding: 40px;
-  box-shadow: 0 8px 24px rgba(15, 76, 92, 0.1);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: var(--radius-xl);
+  width: 72px; height: 4px;
+  background: var(--color-red);
 }
 .cardTitle {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  color: var(--on-invert);
   margin: 0 0 28px;
 }
 
@@ -167,40 +194,41 @@
 
 .field { display: flex; flex-direction: column; gap: 6px; }
 .label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--on-invert-3);
 }
 .input {
   height: 48px;
   padding: 0 16px;
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-light);
+  background: #f7f7f9;
+  border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-md);
   font-size: 16px;
   font-family: inherit;
-  color: var(--color-text-primary);
-  transition: border-color .2s, box-shadow .2s;
+  color: var(--on-invert);
+  transition: border-color .2s, box-shadow .2s, background .2s;
   outline: none;
   width: 100%;
   box-sizing: border-box;
 }
 .input:focus {
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(239, 62, 77,.18);
+  background: var(--color-white);
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.14);
 }
 .textarea {
   min-height: 140px;
   padding: 14px 16px;
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-light);
+  background: #f7f7f9;
+  border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-md);
   font-size: 16px;
   font-family: inherit;
-  color: var(--color-text-primary);
-  transition: border-color .2s, box-shadow .2s;
+  color: var(--on-invert);
+  transition: border-color .2s, box-shadow .2s, background .2s;
   outline: none;
   resize: vertical;
   width: 100%;
@@ -208,23 +236,25 @@
   line-height: 1.55;
 }
 .textarea:focus {
-  border-color: var(--brand);
-  box-shadow: 0 0 0 3px rgba(239, 62, 77,.18);
+  background: var(--color-white);
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.14);
 }
 
 /* Status message */
 .status {
   padding: 16px 20px;
-  background: var(--brand-soft);
-  border: 1px solid rgba(239, 62, 77,.3);
-  border-radius: var(--radius-md);
+  background: rgba(227, 6, 19, 0.07);
+  border: none;
+  border-left: 3px solid var(--color-red);
+  border-radius: var(--radius-sm);
   font-size: 14px;
-  color: var(--color-red-ink);
+  color: var(--color-danger);
   line-height: 1.5;
 }
-.statusRef { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.statusRef { font-size: 12px; color: var(--on-invert-3); margin-top: 6px; }
 
-/* Submit — vazado Turkish Red que preenche no hover. */
+/* Submit — sólido vermelho sobre o painel branco. */
 .page .submit {
   display: inline-flex;
   align-items: center;
@@ -232,13 +262,13 @@
   gap: 8px;
   padding: 16px 32px;
   border-radius: var(--radius-md);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 16px;
   line-height: 1.2;
   border: none;
-  background: var(--color-primary-red);
+  background: var(--color-red);
   color: var(--color-white);
-  box-shadow: 0 4px 12px rgba(239, 62, 77, 0.25);
+  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
   cursor: pointer;
   font-family: var(--font-body);
   transition: all 200ms ease;
@@ -247,12 +277,12 @@
   justify-self: start;
 }
 .page .submit:hover:not(:disabled) {
-  background: var(--color-red-hover);
+  background: var(--color-red-2);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(239, 62, 77, 0.35);
+  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.34);
 }
 .page .submit:active:not(:disabled) {
-  background: var(--color-red-active);
+  background: var(--color-red-3);
   transform: translateY(0);
 }
-.page .submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+.page .submit:disabled { opacity: .55; cursor: not-allowed; transform: none; }

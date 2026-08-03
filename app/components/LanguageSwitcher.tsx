@@ -46,10 +46,10 @@ export default function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
 
   const buttonClass = (isActive: boolean) =>
-    `lang-selector flex items-center justify-center gap-1.5 font-semibold ${
+    `lang-selector flex items-center justify-center gap-1.5 ${
       isActive
-        ? "border-[color:var(--color-primary-red)] bg-[color:var(--color-red-soft)] text-white"
-        : "border-white/30 text-white/70 hover:text-white"
+        ? "!border-white !bg-white !text-[color:var(--color-red)]"
+        : "border-white/35 text-white/70 hover:text-white"
     }`;
 
   return (
