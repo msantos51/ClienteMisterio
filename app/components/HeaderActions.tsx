@@ -90,14 +90,14 @@ export default function HeaderActions() {
           {/* User Avatar & Name */}
           <div className="user-menu hidden sm:flex">
             <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[color:var(--color-primary-red)] text-xs font-bold text-white">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-xs font-bold text-[color:var(--color-red)]">
                 {sessionUser.fullName.charAt(0).toUpperCase()}
               </div>
               <div className="flex flex-col">
                 <span className="user-name leading-tight">
                   {sessionUser.fullName.split(" ")[0]}
                 </span>
-                <span className="text-[10px] uppercase tracking-[0.5px] leading-tight text-white/60">
+                <span className="text-[9px] font-bold uppercase tracking-[0.18em] leading-tight text-white/55">
                   {t.nav.account}
                 </span>
               </div>

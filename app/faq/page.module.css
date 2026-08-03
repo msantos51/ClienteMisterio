@@ -1,5 +1,7 @@
 /*
- * Cliente Mistério — Página FAQ (design "Turkish Red & Railroad Black").
+ * Cliente Mistério — Página FAQ, sistema vermelho/branco.
+ * Acordeão tipográfico sobre o vermelho da marca: as respostas são separadas
+ * por filetes brancos finos, sem cartões, para manter a leitura calma.
  */
 
 /* Reset das regras globais de <button> dentro desta página. */
@@ -27,11 +29,8 @@
 .page button::after { content: none; }
 
 .page {
-  background:
-    radial-gradient(60% 40% at 85% -5%, rgba(239, 62, 77, 0.08) 0%, transparent 60%),
-    radial-gradient(55% 45% at 0% 0%, rgba(239, 62, 77, 0.09) 0%, transparent 55%),
-    var(--background);
-  color: var(--body);
+  background: var(--surface-brand);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 15px;
   line-height: 1.65;
   font-family: var(--font-body);
@@ -58,54 +57,53 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--brand);
+  color: rgba(255, 255, 255, 0.78);
   margin-bottom: 22px;
 }
 .eyebrow::before {
   content: "";
-  width: 30px; height: 2px;
-  border-radius: var(--radius-pill);
-  background: var(--brand);
+  width: 34px; height: 2px;
+  background: currentColor;
   flex-shrink: 0;
 }
 .title {
-  font-family: var(--font-body);
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
-  color: var(--color-text-primary);
-  font-size: clamp(29px, 3.9vw, 52px);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: var(--color-white);
+  font-size: clamp(32px, 4.6vw, 60px);
   margin: 0 0 18px;
 }
 .sub {
   font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.65;
-  color: var(--body);
+  color: rgba(255, 255, 255, 0.78);
   max-width: 52ch;
   margin: 0 auto;
   text-wrap: pretty;
-  font-weight: 500;
+  font-weight: 400;
 }
 .subLink {
-  color: var(--brand);
+  color: var(--color-white);
   font-weight: 700;
   text-decoration: none;
-  border-bottom: 1px solid rgba(239, 62, 77, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   transition: border-color .2s;
 }
-.subLink:hover { border-color: var(--brand); }
+.subLink:hover { border-color: var(--color-white); }
 
 /* ---------- Accordion ---------- */
 .faq {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--hairline);
   margin-top: 12px;
 }
-.faqItem { border-bottom: 1px solid var(--line); }
+.faqItem { border-bottom: 1px solid var(--hairline); }
 .page .faqQ {
   display: flex;
   width: 100%;
@@ -114,40 +112,40 @@
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  font-size: clamp(15px, 1.4vw, 18px);
+  font-size: clamp(16px, 1.4vw, 19px);
   font-weight: 700;
-  letter-spacing: -0.2px;
-  color: var(--color-text-primary);
+  letter-spacing: -0.025em;
+  color: var(--color-white);
   background: transparent;
   border: 0;
   cursor: pointer;
-  transition: color .2s;
+  transition: opacity .2s;
   font-family: inherit;
 }
-.page .faqQ:hover { color: var(--brand); }
+.page .faqQ:hover { opacity: 0.8; }
 .faqIcon {
   flex-shrink: 0;
   width: 34px; height: 34px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--hairline-strong);
+  border-radius: 50%;
   position: relative;
   transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
 }
 .faqIcon::before, .faqIcon::after {
   content: "";
   position: absolute;
-  background: var(--brand);
+  background: var(--color-white);
   top: 50%; left: 50%;
   transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
 }
 .faqIcon::before { width: 12px; height: 2px; transform: translate(-50%,-50%); }
 .faqIcon::after { width: 2px; height: 12px; transform: translate(-50%,-50%); }
 .faqItemOpen .faqIcon {
-  background: var(--brand);
-  border-color: transparent;
+  background: var(--color-white);
+  border-color: var(--color-white);
 }
 .faqItemOpen .faqIcon::before,
-.faqItemOpen .faqIcon::after { background: var(--moonlight-white); }
+.faqItemOpen .faqIcon::after { background: var(--color-red); }
 .faqItemOpen .faqIcon::after { transform: translate(-50%,-50%) rotate(90deg); }
 
 .faqA {
@@ -158,18 +156,18 @@
 .faqAInner {
   padding: 0 0 24px;
   max-width: 68ch;
-  color: var(--body);
+  color: rgba(255, 255, 255, 0.78);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   text-wrap: pretty;
-  font-weight: 500;
+  font-weight: 400;
 }
 .faqItemOpen .faqA { max-height: 400px; }
 
-/* ---------- CTA ---------- */
+/* ---------- CTA — painel branco a fechar a página ---------- */
 .cta {
   margin-top: 56px;
-  background: var(--brand);
+  background: var(--color-white);
   border-radius: var(--radius-xl);
   padding: 36px 32px;
   display: flex;
@@ -177,22 +175,32 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  color: var(--moonlight-white);
+  color: var(--on-invert);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--color-red);
 }
 .ctaTitle {
-  font-size: clamp(20px, 2.4vw, 28px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--moonlight-white);
+  font-size: clamp(21px, 2.4vw, 30px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--on-invert);
   margin: 0 0 6px;
 }
 .ctaSub {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.74);
+  color: var(--on-invert-3);
   margin: 0;
-  font-weight: 500;
+  font-weight: 400;
 }
-/* CTA branco sobre o painel vermelho — máximo contraste sobre a cor de marca. */
+/* CTA sólido vermelho sobre o painel branco. */
 .ctaBtn {
   display: inline-flex;
   align-items: center;
@@ -200,21 +208,21 @@
   gap: 8px;
   padding: 16px 32px;
   border-radius: var(--radius-md);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 16px;
   line-height: 1.2;
   white-space: nowrap;
   text-decoration: none;
   border: none !important;
-  background: var(--color-white);
-  color: var(--color-primary-red) !important;
-  box-shadow: 0 4px 12px rgba(15, 76, 92, 0.2);
+  background: var(--color-red);
+  color: var(--color-white) !important;
+  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
   transition: all 200ms ease;
 }
 .ctaBtn:hover {
   transform: translateY(-2px);
-  background: var(--color-bg-light);
-  box-shadow: 0 6px 16px rgba(15, 76, 92, 0.28);
+  background: var(--color-red-2);
+  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.34);
 }
 .ctaBtn:active { transform: translateY(0); }
 .ctaBtn svg { transition: transform 200ms ease; }

@@ -4,12 +4,15 @@
  * secções e utilitários usados em toda a aplicação.
  *
  * PALETA OFICIAL (única fonte de verdade de cor do site):
- *   Vermelho  #EF3E4D — primária, CTAs e destaques
- *   Azul      #0F4C5C — primária, cabeçalho, rodapé e superfícies escuras
- *   Azul esc. #2A3F4B — subtítulos e texto secundário
- *   Cinzentos #6B8087 / #E8EEF1 / #F5F8FA — labels, linhas e fundos alternados
- *   Verde     #2ABF84 — sucesso e aprovações
- *   Laranja   #F39C12 — avisos
+ *   Vermelho  #E30613 — superfície principal: fundo do site e do cabeçalho
+ *   Vermelho  #C40510 — superfície alternada, para dar ritmo entre secções
+ *   Branco    #FFFFFF — texto principal sobre vermelho e painéis invertidos
+ *   Preto     #101012 — rodapé, painéis de contraste e detalhes
+ *
+ * O site é um sistema de dois tons: VERMELHO com texto BRANCO, e o inverso
+ * — painéis BRANCOS com texto quase-preto — usado nos blocos que pedem foco
+ * (formulários, cartões de preço, quiz, documento imprimível). O preto entra
+ * apenas como âncora (rodapé, chrome do leitor) e como sombra.
  *
  * Os nomes dos tokens legados (--brand, --surface, --ink, ...) mantêm-se e são
  * remapeados para esta paleta, para que os CSS Modules de cada página herdem o
@@ -22,37 +25,45 @@
    PARTE 1 — TOKENS: COR, ESPAÇAMENTO E RAIOS
    =================================================================== */
 :root {
-  /* Cores Primárias */
-  --color-primary-red: #ef3e4d;        /* Vermelho vibrante — CTAs, destaques */
-  --color-primary-blue: #0f4c5c;       /* Azul profundo — backgrounds, text */
-
-  /* Cores Secundárias */
-  --color-dark-blue: #2a3f4b;          /* Azul escuro — subtítulos, text secondary */
-  --color-gray-medium: #6b8087;        /* Cinzento médio — labels, hints */
-  --color-gray-light: #e8eef1;         /* Cinzento claro — borders, backgrounds alt */
-  --color-bg-light: #f5f8fa;           /* Fundo muito claro — cards, sections */
-  --color-success-green: #2abf84;      /* Verde — sucesso, checkmarks, aprovado */
-  --color-warning-orange: #f39c12;     /* Laranja — warning, atenção */
-
-  /* Neutros */
+  /* --- Paleta base ------------------------------------------------ */
+  --color-red: #e30613;                /* Vermelho da marca — superfície */
+  --color-red-2: #c40510;              /* Vermelho alternado — ritmo */
+  --color-red-3: #a00309;              /* Vermelho profundo — pressed */
+  --color-red-bright: #ff5147;         /* Vermelho vivo — acento sobre branco/preto */
   --color-white: #ffffff;
-  --color-text-primary: #1a1a1a;       /* Texto muito escuro para máx contraste */
-  --color-text-secondary: #6b8087;
+  --color-black: #101012;              /* Preto da marca — rodapé, chrome */
+  --color-black-2: #1b1b1f;            /* Preto elevado — painéis sobre preto */
 
-  /* Escalas derivadas do vermelho, para estados e fundos translúcidos. */
-  --color-red-hover: #d63442;
-  --color-red-active: #c62a35;
-  --color-red-ink: #9d1f29;
-  --color-red-soft: rgba(239, 62, 77, 0.12);
-  --color-red-tint: rgba(239, 62, 77, 0.06);
+  /* --- Superfícies -------------------------------------------------
+     `surface` = vermelho (o site). `invert` = branco (blocos de foco). */
+  --surface-brand: var(--color-red);
+  --surface-brand-alt: var(--color-red-2);
+  --surface-invert: var(--color-white);
+  --surface-ink: var(--color-black);
 
-  /* Vermelho clarificado para texto sobre as superfícies azuis escuras:
-     o #EF3E4D puro só atinge ~2.8:1 sobre #0F4C5C. */
-  --color-red-on-dark: #ff9ba3;
+  /* Painéis translúcidos sobre vermelho — evitam introduzir novas cores. */
+  --panel: rgba(255, 255, 255, 0.08);
+  --panel-strong: rgba(255, 255, 255, 0.14);
+  --panel-ink: rgba(0, 0, 0, 0.16);
 
-  /* Escalas derivadas do azul. */
-  --color-blue-deep: #06333d;
-  --color-blue-tint: rgba(15, 76, 92, 0.08);
+  /* --- Texto -------------------------------------------------------- */
+  --on-brand: var(--color-white);              /* texto sobre vermelho */
+  --on-brand-2: rgba(255, 255, 255, 0.82);     /* corpo secundário */
+  --on-brand-3: rgba(255, 255, 255, 0.64);     /* labels, hints */
+  --on-invert: #141416;                        /* texto sobre branco */
+  --on-invert-2: #4d4d55;                      /* corpo sobre branco */
+  --on-invert-3: #74747e;                      /* labels sobre branco */
+
+  /* --- Linhas ------------------------------------------------------- */
+  --hairline: rgba(255, 255, 255, 0.24);
+  --hairline-soft: rgba(255, 255, 255, 0.14);
+  --hairline-strong: rgba(255, 255, 255, 0.46);
+  --hairline-invert: #e7e7ea;
+
+  /* --- Estados semânticos (usados sobre painéis brancos) ------------ */
+  --color-success: #12a06d;
+  --color-warning: #b8730a;
+  --color-danger: #cf0a17;
 
   /* SPACING SCALE (8px base) */
   --sp-xs: 8px;
@@ -65,72 +76,156 @@
   --sp-4xl: 64px;
   --sp-5xl: 80px;
 
-  /* Tipografia base — pilha de sistema, sem pedidos externos de fonte. */
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", sans-serif;
+  /* Tipografia — Creato Display (ficheiros locais, ver app/fonts.ts).
+     `--font-creato` é injetado pelo next/font; a pilha de sistema fica como
+     alternativa para o primeiro paint e para ambientes sem a fonte. */
+  --font-body: var(--font-creato), "Helvetica Neue", Helvetica, Arial,
+    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: var(--font-body);
 
-  /* Raios de canto — escala única partilhada por todo o site. */
-  --radius-xs: 4px;      /* micro-detalhes: barras, marcadores */
-  --radius-sm: 6px;      /* chips, distintivos, ícones pequenos */
-  --radius-md: 8px;      /* botões, campos de formulário, itens de lista */
-  --radius-lg: 12px;     /* cartões e blocos de conteúdo */
-  --radius-xl: 16px;     /* painéis grandes: formulários, destaques */
+  /* Raios de canto — escala curta e discreta: o desenho é tipográfico,
+     não arredondado. */
+  --radius-xs: 2px;      /* micro-detalhes: barras, marcadores */
+  --radius-sm: 4px;      /* chips, distintivos, ícones pequenos */
+  --radius-md: 6px;      /* botões, campos de formulário, itens de lista */
+  --radius-lg: 10px;     /* cartões e blocos de conteúdo */
+  --radius-xl: 14px;     /* painéis grandes: formulários, destaques */
   --radius-pill: 999px;  /* pílulas, réguas finas e barras de progresso */
   --radius-sharp: var(--radius-md);
   --header-control-height: 38px;
 
-  /* Sombras — escala única de elevação. */
-  --shadow-sm: 0 2px 8px rgba(15, 76, 92, 0.08);
-  --shadow-md: 0 8px 24px rgba(15, 76, 92, 0.12);
-  --shadow-lg: 0 12px 32px rgba(15, 76, 92, 0.14);
+  /* Sombras — sobre vermelho só funcionam sombras pretas e discretas. */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.24);
 
   /* ---------------------------------------------------------------
      CAMADA DE COMPATIBILIDADE
      Tokens legados usados pelos CSS Modules de cada página, agora
      apontados para a paleta acima. Alterar aqui muda o site inteiro.
      --------------------------------------------------------------- */
-  --turkish-red: var(--color-primary-red);
+  --turkish-red: var(--color-red);
   --moonlight-white: var(--color-white);
-  --light-carbon: var(--color-gray-medium);
-  --railroad-black: var(--color-primary-blue);
+  --light-carbon: var(--on-brand-3);
+  --railroad-black: var(--color-black);
 
   /* Superfícies e texto */
-  --background: var(--color-white);
-  --background-deep: var(--color-bg-light);
-  --foreground: var(--color-text-primary);
-  --surface: var(--color-white);
-  --surface-raised: var(--color-bg-light);
-  --surface-muted: var(--color-gray-light);
-  --ink: var(--color-text-primary);
-  --body: var(--color-dark-blue);
-  --muted: var(--color-gray-medium);
-  --line: var(--color-gray-light);
-  --line-light: #eef3f6;
-  --line-strong: #d3dee4;
-  --scrim: rgba(6, 51, 61, 0.6);
+  --background: var(--surface-brand);
+  --background-deep: var(--surface-brand-alt);
+  --foreground: var(--on-brand);
+  --surface: var(--surface-brand);
+  --surface-raised: var(--panel);
+  --surface-muted: var(--panel-strong);
+  --ink: var(--on-brand);
+  --body: var(--on-brand-2);
+  --muted: var(--on-brand-3);
+  --line: var(--hairline);
+  --line-light: var(--hairline-soft);
+  --line-strong: var(--hairline-strong);
+  --scrim: rgba(0, 0, 0, 0.62);
 
-  /* Marca — Vermelho */
-  --brand: var(--color-primary-red);
-  --brand-500: #f2606c;
-  --brand-600: var(--color-primary-red);
-  --brand-700: var(--color-red-hover);
-  --brand-deep: var(--color-red-active);
-  --brand-ink: var(--color-red-ink);
-  --brand-soft: var(--color-red-soft);
-  --brand-tint: var(--color-red-tint);
+  /* Nomes antigos da paleta anterior — mantidos para não partir módulos. */
+  --color-primary-red: var(--color-red);
+  /* O antigo azul era, ao mesmo tempo, superfície escura e texto forte.
+     O preto cobre bem os dois papéis dentro do novo sistema. */
+  --color-primary-blue: var(--color-black);
+  --color-blue-deep: #0a0a0b;
+  --color-blue-tint: rgba(0, 0, 0, 0.14);
+  --color-dark-blue: var(--on-brand-2);
+  --color-gray-medium: var(--on-brand-3);
+  --color-gray-light: var(--hairline);
+  --color-bg-light: var(--surface-brand-alt);
+  --color-text-primary: var(--on-brand);
+  --color-text-secondary: var(--on-brand-3);
+  --color-success-green: var(--color-success);
+  --color-warning-orange: var(--color-warning);
+
+  --color-red-hover: #f5232f;
+  --color-red-active: var(--color-red-3);
+  --color-red-ink: var(--color-danger);
+  --color-red-soft: rgba(255, 255, 255, 0.14);
+  --color-red-tint: rgba(255, 255, 255, 0.07);
+  --color-red-on-dark: var(--color-white);
+
+  /* Marca */
+  --brand: var(--color-white);          /* o acento sobre vermelho é branco */
+  --brand-on-invert: var(--color-red);  /* e sobre branco é vermelho */
+  --brand-500: var(--color-white);
+  --brand-600: var(--color-white);
+  --brand-700: var(--color-white);
+  --brand-deep: var(--color-red-3);
+  --brand-ink: var(--color-red-3);
+  --brand-soft: var(--panel);
+  --brand-tint: rgba(255, 255, 255, 0.07);
 
   /* Estados semânticos */
-  --accent: var(--color-primary-red);
-  --accent-600: var(--color-red-hover);
-  --accent-soft: var(--color-red-soft);
-  --amber: var(--color-warning-orange);
-  --amber-soft: rgba(243, 156, 18, 0.15);
-  --mint: var(--color-success-green);
-  --primary: var(--color-primary-red);
-  --primary-soft: var(--color-red-hover);
-  --accent-success: var(--color-success-green);
+  --accent: var(--color-white);
+  --accent-600: rgba(255, 255, 255, 0.86);
+  --accent-soft: var(--panel);
+  --amber: var(--color-warning);
+  --amber-soft: rgba(255, 255, 255, 0.14);
+  --mint: var(--color-success);
+  --primary: var(--color-white);
+  --primary-soft: rgba(255, 255, 255, 0.86);
+  --accent-success: var(--color-success);
+
+  /* Botão principal — sempre o oposto da superfície onde assenta.
+     Sobre vermelho é branco; qualquer painel `.on-light` inverte estes três
+     valores e todos os botões lá dentro seguem, sem seletores extra. */
+  --btn-bg: var(--color-white);
+  --btn-fg: var(--color-red);
+  --btn-bg-hover: var(--color-white);
+  --btn-fg-hover: var(--color-red-3);
+  --btn-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  --btn-shadow-hover: 0 8px 22px rgba(0, 0, 0, 0.22);
+  --focus-ring: var(--color-white);
 
   color-scheme: light;
+}
+
+/* -------------------------------------------------------------------
+   PAINÉIS INVERTIDOS
+   Aplicar `.on-light` a qualquer bloco branco: os tokens de texto e linha
+   viram para a escala escura, e tudo o que está dentro herda sem
+   declarações extra.
+   ------------------------------------------------------------------- */
+.on-light,
+.login-form,
+.mobile-menu-container,
+.dashboard-top-banner,
+.dashboard-sidebar {
+  --ink: var(--on-invert);
+  --body: var(--on-invert-2);
+  --muted: var(--on-invert-3);
+  --line: var(--hairline-invert);
+  --line-light: #f0f0f2;
+  --line-strong: #cfcfd5;
+  --brand: var(--color-red);
+  --brand-500: var(--color-red);
+  --brand-600: var(--color-red);
+  --brand-700: var(--color-red-2);
+  --brand-soft: rgba(227, 6, 19, 0.1);
+  --accent: var(--color-red);
+  --primary: var(--color-red);
+  --surface: var(--color-white);
+  --surface-raised: #f6f6f8;
+  --surface-muted: #ededf1;
+  --panel: #f6f6f8;
+  --panel-strong: #ededf1;
+  --color-text-primary: var(--on-invert);
+  --color-text-secondary: var(--on-invert-3);
+  --color-gray-light: var(--hairline-invert);
+  --color-gray-medium: var(--on-invert-3);
+  --color-bg-light: #f6f6f8;
+  --color-red-soft: rgba(227, 6, 19, 0.1);
+
+  --btn-bg: var(--color-red);
+  --btn-fg: var(--color-white);
+  --btn-bg-hover: var(--color-red-2);
+  --btn-fg-hover: var(--color-white);
+  --btn-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
+  --btn-shadow-hover: 0 8px 22px rgba(227, 6, 19, 0.34);
+  --focus-ring: var(--color-red);
 }
 
 @theme inline {
@@ -150,10 +245,6 @@
   --color-body: var(--body);
   --color-muted: var(--muted);
 
-  /* `bg-black/60` e afins passam a usar o azul profundo da paleta, para que
-     nenhum ecrã caia fora das cores da marca. */
-  --color-black: #06333d;
-
   --font-sans: var(--font-body);
 }
 
@@ -164,15 +255,15 @@
   html {
     font-size: 16px;
     scroll-behavior: smooth;
-    background: var(--color-white);
+    background: var(--surface-brand);
   }
 
   body {
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
-    color: var(--color-text-primary);
-    background: var(--color-white);
+    color: var(--on-brand);
+    background: var(--surface-brand);
     letter-spacing: 0;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -180,41 +271,47 @@
     overflow-x: hidden;
   }
 
-  /* HEADINGS — sem `color` fixo: herdam do <body>, para que qualquer
-     contentor de fundo escuro (painéis vermelhos/azuis) possa passar a sua
-     própria cor de texto aos títulos que contém. */
+  /* HEADINGS — sem `color` fixo: herdam do contentor, para que os painéis
+     brancos possam impor o seu próprio tom sem exceções. Tracking negativo
+     e peso alto dão o registo tipográfico moderno do sistema. */
   h1 {
-    font-size: 56px;
+    font-family: var(--font-display);
+    font-size: 60px;
     font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
     margin-bottom: 24px;
   }
 
   h2 {
-    font-size: 40px;
+    font-family: var(--font-display);
+    font-size: 42px;
     font-weight: 700;
-    line-height: 1.3;
-    letter-spacing: -0.3px;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
     margin-bottom: 20px;
   }
 
   h3 {
+    font-family: var(--font-display);
     font-size: 28px;
-    font-weight: 600;
-    line-height: 1.3;
+    font-weight: 700;
+    line-height: 1.16;
+    letter-spacing: -0.02em;
     margin-bottom: 16px;
   }
 
   h4 {
     font-size: 22px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.015em;
     margin-bottom: 12px;
   }
 
   h5 {
     font-size: 18px;
     font-weight: 600;
+    letter-spacing: -0.01em;
     margin-bottom: 8px;
   }
 
@@ -227,8 +324,8 @@
   /* Os tamanhos fixos acima são desenhados para desktop; em ecrãs pequenos
      descem para não rebentar a linha. */
   @media (max-width: 768px) {
-    h1 { font-size: 38px; }
-    h2 { font-size: 30px; }
+    h1 { font-size: 40px; }
+    h2 { font-size: 31px; }
     h3 { font-size: 23px; }
     h4 { font-size: 20px; }
   }
@@ -244,22 +341,22 @@
 
 @layer components {
   .text-secondary {
-    color: var(--color-text-secondary);
+    color: var(--body);
     font-size: 16px;
   }
 
   .text-small {
     font-size: 14px;
-    color: var(--color-gray-medium);
+    color: var(--muted);
     line-height: 1.6;
   }
 
   .text-label {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--color-gray-medium);
+    letter-spacing: 0.14em;
+    color: var(--muted);
   }
 
   /* Mantém texto branco legível em cartões de fundo colorido. */
@@ -274,7 +371,7 @@
   /* Realces específicos da home, com prioridade sobre regras globais. */
   .home-title-highlight-text {
     color: var(--ink) !important;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.03em;
   }
 
   .home-benefits-highlight-text {
@@ -285,7 +382,7 @@
     color: var(--accent) !important;
   }
 
-  /* Régua vermelha curta — assinatura do sistema, usada abaixo de títulos. */
+  /* Régua curta — assinatura do sistema, usada abaixo de títulos. */
   .rule-accent::after {
     content: "";
     display: block;
@@ -293,7 +390,7 @@
     height: 3px;
     margin-top: 14px;
     border-radius: var(--radius-pill);
-    background: var(--color-primary-red);
+    background: var(--brand);
   }
 
 }
@@ -301,11 +398,11 @@
 @layer components {
   /* =================================================================
      PARTE 2 — BOTÕES
+     -----------------------------------------------------------------
+     Regra do sistema: o botão principal é sempre o oposto da superfície.
+     Sobre vermelho → botão branco com texto vermelho. Dentro de um painel
+     branco (`.on-light`, `.login-form`) → botão vermelho com texto branco.
      ================================================================= */
-
-  /* BUTTON BASE. Os nomes de classe legados (.btn-primary, .site-pill-button,
-     .submit, ...) partilham esta base para que nenhuma página precise de ser
-     reescrita. */
   button,
   .button,
   .btn-primary,
@@ -320,14 +417,14 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 16px 32px;
+    padding: 15px 30px;
     border-radius: var(--radius-md);
     border: none;
     font-family: var(--font-body);
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 700;
     line-height: 1.2;
-    letter-spacing: 0;
+    letter-spacing: -0.005em;
     text-transform: none;
     cursor: pointer;
     transition: all 200ms ease;
@@ -336,7 +433,8 @@
     white-space: nowrap;
   }
 
-  /* BUTTON PRIMARY — Vermelho (CTA) */
+  /* BUTTON PRIMARY — lê os tokens `--btn-*`, por isso inverte-se sozinho
+     dentro de qualquer painel branco. */
   button.primary,
   .button.primary,
   button[type="submit"],
@@ -347,9 +445,9 @@
   .button-size-login,
   .submit,
   .cssbuttons-io-button {
-    background-color: var(--color-primary-red);
-    color: var(--color-white);
-    box-shadow: 0 4px 12px rgba(239, 62, 77, 0.25);
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+    box-shadow: var(--btn-shadow);
   }
 
   button.primary:hover,
@@ -361,10 +459,10 @@
   .button-size-login:hover,
   .submit:hover,
   .cssbuttons-io-button:hover {
-    background-color: var(--color-red-hover);
-    color: var(--color-white);
+    background-color: var(--btn-bg-hover);
+    color: var(--btn-fg-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(239, 62, 77, 0.35);
+    box-shadow: var(--btn-shadow-hover);
   }
 
   button.primary:active,
@@ -376,9 +474,8 @@
   .button-size-login:active,
   .submit:active,
   .cssbuttons-io-button:active {
-    background-color: var(--color-red-active);
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(239, 62, 77, 0.25);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
   }
 
   button.primary:disabled,
@@ -387,40 +484,39 @@
   .btn-primary:disabled,
   .submit:disabled,
   .cssbuttons-io-button:disabled {
-    opacity: 0.6;
+    opacity: 0.55;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
   }
 
-  /* BUTTON SECONDARY — Azul/Border */
+  /* BUTTON SECONDARY — vazado, herda a cor do texto do contentor */
   button.secondary,
   .button.secondary,
   .btn-secondary,
   .site-pill-button-secondary {
     background-color: transparent;
-    color: var(--color-primary-blue);
-    border: 2px solid var(--color-primary-blue);
+    color: var(--ink);
+    border: 1.5px solid var(--line-strong);
     box-shadow: none;
-    /* Compensa os 2px de contorno para manter a mesma altura do primário. */
-    padding: 14px 30px;
+    padding: 13.5px 28.5px;
   }
 
   button.secondary:hover,
   .button.secondary:hover,
   .btn-secondary:hover,
   .site-pill-button-secondary:hover {
-    background-color: rgba(15, 76, 92, 0.05);
-    color: var(--color-primary-blue);
+    background-color: var(--panel-strong);
+    color: var(--ink);
+    border-color: var(--ink);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(15, 76, 92, 0.15);
+    box-shadow: none;
   }
 
   button.secondary:active,
   .button.secondary:active,
   .btn-secondary:active,
   .site-pill-button-secondary:active {
-    background-color: rgba(15, 76, 92, 0.1);
     transform: translateY(0);
   }
 
@@ -428,17 +524,16 @@
   button.lg,
   .button.lg,
   .btn-lg {
-    padding: 20px 48px;
-    font-size: 18px;
-    font-weight: 700;
+    padding: 19px 44px;
+    font-size: 17px;
   }
 
   /* BUTTON SMALL */
   button.sm,
   .button.sm,
   .btn-sm {
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 11px 22px;
+    font-size: 13.5px;
   }
 
   /* BUTTON FULLWIDTH */
@@ -448,28 +543,27 @@
     width: 100%;
   }
 
-  /* Botões do cabeçalho — compactos e legíveis sobre o azul profundo. */
+  /* Botões do cabeçalho — compactos e legíveis sobre o vermelho. */
   .site-pill-button,
   .button-size-login,
   .site-pill-button-secondary {
     padding: 10px 20px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.01em;
   }
 
-  /* Vazado sobre o cabeçalho azul: contorno branco em vez de azul. */
-  .site-header .site-pill-button-secondary,
-  .site-header .site-pill-button.nav-login-btn {
+  /* Vazado sobre o cabeçalho vermelho: contorno branco. */
+  .site-header .site-pill-button-secondary {
     background-color: transparent;
     color: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.45);
     padding: 11px 21px;
     box-shadow: none;
   }
 
-  .site-header .site-pill-button-secondary:hover,
-  .site-header .site-pill-button.nav-login-btn:hover {
-    background-color: rgba(255, 255, 255, 0.12);
+  .site-header .site-pill-button-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.14);
     border-color: var(--color-white);
     color: var(--color-white);
     box-shadow: none;
@@ -485,9 +579,9 @@
     height: var(--header-control-height);
     min-width: 44px;
     min-height: 44px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: var(--radius-md);
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: transparent;
     box-shadow: none;
     cursor: pointer;
     transition: all 200ms ease;
@@ -551,12 +645,12 @@
     }
   }
 
-  /* Cartão do menu mobile. */
+  /* Cartão do menu mobile — painel branco invertido. */
   .mobile-menu-container {
     border-radius: var(--radius-lg);
     will-change: contents;
     box-shadow: var(--shadow-lg) !important;
-    border: 1px solid var(--color-gray-light) !important;
+    border: 1px solid var(--hairline-invert) !important;
     background: var(--color-white) !important;
   }
 
@@ -567,15 +661,15 @@
   }
 
   .mobile-menu-item {
-    color: var(--color-primary-blue) !important;
+    color: var(--on-invert) !important;
     min-height: 48px;
     display: flex;
     align-items: center;
   }
 
   .mobile-menu-item:hover {
-    color: var(--color-primary-red) !important;
-    background: var(--color-bg-light) !important;
+    color: var(--color-red) !important;
+    background: #f6f6f8 !important;
   }
 
   @media (max-width: 480px) {
@@ -587,7 +681,7 @@
 
   .button-text-standard {
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
   }
 
   /* Reset para botões estruturais (toggles, seletores) que não são CTAs. */
@@ -614,28 +708,28 @@
      PARTE 3 — CARDS & CONTAINERS
      ================================================================= */
   .card {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-gray-light);
+    background-color: var(--panel);
+    border: 1px solid var(--hairline);
     border-radius: var(--radius-lg);
     padding: 24px;
     transition: all 300ms ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: none;
   }
 
   .card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--hairline-strong);
     transform: translateY(-4px);
   }
 
   /* CARD DARK (fundo alternado) */
   .card.dark {
-    background-color: var(--color-bg-light);
+    background-color: var(--surface-brand-alt);
     border-color: transparent;
   }
 
   /* CARD WITH ACCENT BORDER LEFT */
   .card.accent-left {
-    border-left: 3px solid var(--color-primary-red);
+    border-left: 3px solid var(--color-white);
     padding-left: 28px;
   }
 
@@ -661,46 +755,62 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     white-space: nowrap;
   }
 
   .badge.success {
-    background-color: rgba(42, 191, 132, 0.15);
-    color: #1b6f4a;
-    border: 1px solid rgba(42, 191, 132, 0.3);
+    background-color: rgba(255, 255, 255, 0.16);
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
 
   .badge.error {
-    background-color: rgba(239, 62, 77, 0.15);
-    color: var(--color-red-ink);
-    border: 1px solid rgba(239, 62, 77, 0.3);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 1px solid var(--color-black);
   }
 
   .badge.warning {
-    background-color: rgba(243, 156, 18, 0.15);
-    color: #b85f0d;
-    border: 1px solid rgba(243, 156, 18, 0.3);
+    background-color: rgba(255, 255, 255, 0.16);
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.4);
   }
 
   .badge.info {
-    background-color: rgba(15, 76, 92, 0.15);
-    color: var(--color-dark-blue);
-    border: 1px solid rgba(15, 76, 92, 0.3);
+    background-color: transparent;
+    color: var(--color-white);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .on-light .badge.success {
+    background-color: rgba(18, 160, 109, 0.12);
+    color: var(--color-success);
+    border-color: rgba(18, 160, 109, 0.32);
+  }
+
+  .on-light .badge.error {
+    background-color: rgba(207, 10, 23, 0.1);
+    color: var(--color-danger);
+    border-color: rgba(207, 10, 23, 0.3);
   }
 
   .status-approved {
-    color: var(--color-success-green);
-    font-weight: 600;
+    color: var(--color-white);
+    font-weight: 700;
   }
 
   .status-rejected {
-    color: var(--color-primary-red);
-    font-weight: 600;
+    color: var(--color-black);
+    font-weight: 700;
   }
+
+  .on-light .status-approved { color: var(--color-success); }
+  .on-light .status-rejected { color: var(--color-danger); }
 
   /* =================================================================
      PARTE 5 — NAVEGAÇÃO & HEADER
@@ -710,15 +820,16 @@
      desenho do cabeçalho não contamina outros usos do elemento.
      ================================================================= */
   .site-header {
-    background-color: var(--color-primary-blue);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--surface-brand);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: none;
     z-index: 100;
   }
 
   /* A linha principal do cabeçalho: marca à esquerda, navegação e ações à
-     direita, com a altura de 70px definida no sistema. */
+     direita, com a altura de 72px definida no sistema. */
   .site-header-inner {
-    height: 70px;
+    height: 72px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -735,7 +846,7 @@
   .site-header .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     text-decoration: none;
     font-size: 16px;
     font-weight: 700;
@@ -750,9 +861,11 @@
   /* Nota: o `display` da <nav> fica a cargo das utilitárias responsivas
      (hidden / lg:flex); defini-lo aqui quebraria o menu em ecrãs pequenos. */
   .site-header nav a {
-    font-size: 15px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
     text-decoration: none;
     transition: color 200ms ease;
     position: relative;
@@ -765,11 +878,11 @@
   .site-header nav a::after {
     content: "";
     position: absolute;
-    bottom: -4px;
+    bottom: -6px;
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--color-primary-red);
+    background-color: var(--color-white);
     transition: width 200ms ease;
   }
 
@@ -777,19 +890,20 @@
     width: 100%;
   }
 
-  /* Página ativa: texto a branco cheio e régua vermelha permanente. */
+  /* Página ativa: texto a branco cheio e régua branca permanente. */
   .site-header nav a.nav-link-active {
     color: var(--color-white);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .site-header nav a.nav-link-active::after {
     width: 100%;
   }
 
-  /* O menu mobile é um cartão claro sobreposto — herda o seu próprio tema. */
+  /* O menu mobile é um cartão branco sobreposto — herda o seu próprio tema. */
   .site-header .mobile-menu-container a {
-    color: var(--color-primary-blue);
+    color: var(--on-invert);
+    text-transform: uppercase;
   }
 
   .site-header .mobile-menu-container a::after {
@@ -806,18 +920,23 @@
   /* LANGUAGE SELECTOR */
   .lang-selector {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     color: var(--color-white);
-    padding: 8px 12px;
+    padding: 7px 11px;
     border-radius: var(--radius-sm);
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     cursor: pointer;
+    box-shadow: none;
     transition: all 200ms ease;
   }
 
   .lang-selector:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.14);
     border-color: var(--color-white);
+    transform: none;
+    box-shadow: none;
   }
 
   /* USER MENU */
@@ -826,13 +945,13 @@
     align-items: center;
     gap: 16px;
     padding-left: 16px;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.28);
   }
 
   .user-name {
     color: var(--color-white);
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   /* =================================================================
@@ -844,17 +963,14 @@
     gap: var(--sp-lg);
     align-items: center;
     padding: var(--sp-5xl) var(--sp-md);
-    background: linear-gradient(
-      135deg,
-      var(--color-primary-blue) 0%,
-      rgba(15, 76, 92, 0.95) 100%
-    );
+    background: var(--surface-brand);
     color: var(--color-white);
   }
 
   .hero-content h1 {
-    font-size: 64px;
-    line-height: 1.15;
+    font-size: 68px;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
     margin-bottom: 24px;
     color: var(--color-white);
   }
@@ -863,7 +979,7 @@
     font-size: 16px;
     line-height: 1.7;
     margin-bottom: 32px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.82);
     max-width: 500px;
   }
 
@@ -880,7 +996,7 @@
     gap: var(--sp-md);
     align-items: center;
     padding-top: var(--sp-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
     margin-top: var(--sp-lg);
   }
 
@@ -894,8 +1010,8 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: var(--color-primary-red);
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-red);
     padding: 4px 8px;
     border-radius: var(--radius-xs);
     font-size: 12px;
@@ -909,19 +1025,19 @@
 
   /* HERO MISSION CARD */
   .mission-card {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(239, 62, 77, 0.4);
+    background: rgba(0, 0, 0, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: var(--radius-lg);
     padding: 28px;
     backdrop-filter: blur(10px);
   }
 
   .mission-card h4 {
-    font-size: 13px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.16em;
     margin-bottom: 16px;
-    color: var(--color-primary-red);
+    color: var(--color-white);
     font-weight: 700;
   }
 
@@ -930,7 +1046,7 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 12px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
     font-size: 15px;
   }
 
@@ -939,25 +1055,25 @@
   }
 
   .mission-label {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.78);
   }
 
   .mission-value {
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-white);
   }
 
   .mission-value.approved {
-    color: var(--color-success-green);
+    color: var(--color-white);
   }
 
   .mission-value.rejected {
-    color: var(--color-primary-red);
+    color: var(--color-black);
   }
 
   .mission-price {
-    background: var(--color-primary-red);
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-red);
     padding: 16px;
     border-radius: var(--radius-md);
     margin-top: 16px;
@@ -965,17 +1081,18 @@
   }
 
   .mission-price-label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.14em;
     margin-bottom: 8px;
-    opacity: 0.9;
+    opacity: 0.75;
   }
 
   .mission-price-amount {
     font-size: 36px;
     font-weight: 700;
+    letter-spacing: -0.03em;
   }
 
   @media (max-width: 768px) {
@@ -985,7 +1102,7 @@
     }
 
     .hero-content h1 {
-      font-size: 42px;
+      font-size: 44px;
     }
 
     .hero-buttons {
@@ -1014,16 +1131,15 @@
   .feature-card {
     text-align: center;
     padding: var(--sp-lg);
-    background: var(--color-white);
+    background: var(--panel);
     border-radius: var(--radius-lg);
-    border: 1px solid var(--color-gray-light);
+    border: 1px solid var(--hairline);
     transition: all 300ms ease;
   }
 
   .feature-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-    border-color: rgba(239, 62, 77, 0.2);
+    border-color: var(--color-white);
   }
 
   .feature-icon {
@@ -1035,32 +1151,27 @@
     justify-content: center;
     font-size: 32px;
     border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--color-white);
   }
 
-  .feature-icon.red {
-    background: rgba(239, 62, 77, 0.1);
-    color: var(--color-primary-red);
-  }
-
-  .feature-icon.green {
-    background: rgba(42, 191, 132, 0.1);
-    color: var(--color-success-green);
-  }
-
+  .feature-icon.red,
+  .feature-icon.green,
   .feature-icon.orange {
-    background: rgba(243, 156, 18, 0.1);
-    color: var(--color-warning-orange);
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--color-white);
   }
 
   .feature-card h3 {
     font-size: 24px;
     margin-bottom: 12px;
+    color: var(--color-white);
   }
 
   .feature-card p {
     font-size: 15px;
     line-height: 1.6;
-    color: var(--color-gray-medium);
+    color: rgba(255, 255, 255, 0.78);
   }
 
   @media (max-width: 768px) {
@@ -1081,43 +1192,46 @@
   }
 
   .sector-card {
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-light);
+    background: var(--panel);
+    border: 1px solid var(--hairline);
     border-radius: var(--radius-lg);
     padding: var(--sp-lg);
-    border-top: 3px solid var(--color-primary-red);
+    border-top: 3px solid var(--color-white);
     transition: all 300ms ease;
   }
 
   .sector-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
     transform: translateY(-4px);
+    border-color: var(--hairline-strong);
+    border-top-color: var(--color-white);
   }
 
   .sector-title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--color-primary-blue);
+    letter-spacing: -0.02em;
+    color: var(--color-white);
     margin-bottom: 12px;
   }
 
   .sector-subtitle {
     font-size: 14px;
-    color: var(--color-gray-medium);
+    color: rgba(255, 255, 255, 0.7);
     margin-bottom: 16px;
   }
 
   .sector-price {
     font-size: 28px;
     font-weight: 700;
-    color: var(--color-success-green);
+    letter-spacing: -0.03em;
+    color: var(--color-white);
   }
 
   .sector-price-label {
-    font-size: 12px;
-    color: var(--color-gray-medium);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.64);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.14em;
   }
 
   @media (max-width: 1024px) {
@@ -1149,18 +1263,18 @@
     display: flex;
     gap: var(--sp-md);
     padding: var(--sp-lg);
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-light);
+    background: transparent;
+    border: 1px solid var(--hairline);
     border-radius: var(--radius-lg);
     transition: all 300ms ease;
   }
 
   .module-card:nth-child(even) {
-    background: var(--color-bg-light);
+    background: var(--panel);
   }
 
   .module-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-white);
     transform: translateY(-2px);
   }
 
@@ -1171,8 +1285,8 @@
     min-width: 56px;
     width: 56px;
     height: 56px;
-    background: var(--color-primary-red);
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-red);
     border-radius: 50%;
     font-size: 24px;
     font-weight: 700;
@@ -1186,21 +1300,24 @@
   .module-title {
     font-size: 18px;
     font-weight: 700;
+    letter-spacing: -0.015em;
     margin-bottom: 8px;
-    color: var(--color-text-primary);
+    color: var(--color-white);
   }
 
   .module-desc {
     font-size: 15px;
-    color: var(--color-gray-medium);
+    color: rgba(255, 255, 255, 0.76);
     line-height: 1.6;
     margin-bottom: 0;
   }
 
   .module-duration {
-    font-size: 13px;
-    color: var(--color-gray-medium);
-    font-weight: 600;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.64);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     text-align: right;
     padding-top: var(--sp-md);
   }
@@ -1226,7 +1343,7 @@
      ================================================================= */
   .steps-section {
     padding: var(--sp-5xl) var(--sp-md);
-    background: var(--color-bg-light);
+    background: var(--surface-brand-alt);
   }
 
   .steps-grid {
@@ -1245,7 +1362,7 @@
     left: 60px;
     right: 60px;
     height: 1px;
-    background: var(--color-gray-light);
+    background: var(--hairline);
     z-index: 0;
   }
 
@@ -1266,29 +1383,29 @@
     border-radius: 50%;
     font-size: 24px;
     font-weight: 700;
-    color: var(--color-white);
+    color: var(--color-red);
     position: relative;
     z-index: 2;
-    background: var(--color-primary-blue);
+    background: var(--color-white);
   }
 
-  .step-card:nth-child(2) .step-number {
-    background: var(--color-primary-red);
-  }
-
+  .step-card:nth-child(2) .step-number,
   .step-card:nth-child(4) .step-number {
-    background: var(--color-success-green);
+    background: var(--color-white);
+    color: var(--color-red);
   }
 
   .step-title {
     font-size: 20px;
     font-weight: 700;
+    letter-spacing: -0.02em;
     margin-bottom: 12px;
+    color: var(--color-white);
   }
 
   .step-desc {
     font-size: 15px;
-    color: var(--color-gray-medium);
+    color: rgba(255, 255, 255, 0.76);
     line-height: 1.6;
   }
 
@@ -1318,11 +1435,7 @@
      ================================================================= */
   .pricing-section {
     padding: var(--sp-5xl) var(--sp-md);
-    background: linear-gradient(
-      135deg,
-      var(--color-primary-blue) 0%,
-      var(--color-blue-deep) 100%
-    );
+    background: var(--color-black);
     color: var(--color-white);
     text-align: center;
   }
@@ -1339,7 +1452,7 @@
 
   .pricing-subtext {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.72);
     margin-bottom: var(--sp-2xl);
     line-height: 1.7;
   }
@@ -1356,13 +1469,14 @@
   .price-original {
     font-size: 28px;
     text-decoration: line-through;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.45);
     font-weight: 600;
   }
 
   .price-current {
-    font-size: 56px;
+    font-size: 60px;
     font-weight: 700;
+    letter-spacing: -0.04em;
     color: var(--color-white);
   }
 
@@ -1373,28 +1487,28 @@
   }
 
   .discount-badge {
-    background: var(--color-primary-red);
+    background: var(--color-red);
     color: var(--color-white);
     padding: 8px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
+    border-radius: var(--radius-pill);
+    font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.14em;
     margin-bottom: var(--sp-lg);
     display: inline-block;
   }
 
   .pricing-section .button {
-    padding: 20px 48px;
-    font-size: 18px;
+    padding: 19px 44px;
+    font-size: 17px;
     margin-bottom: var(--sp-lg);
   }
 
   .pricing-features {
     list-style: none;
     padding: var(--sp-2xl) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
     text-align: left;
     margin-top: var(--sp-lg);
   }
@@ -1405,20 +1519,20 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.86);
   }
 
   .pricing-features li::before {
-    content: "✓";
-    color: var(--color-success-green);
+    content: "→";
+    color: var(--color-red-bright);
     font-weight: 700;
-    font-size: 20px;
+    font-size: 18px;
     flex-shrink: 0;
   }
 
   .pricing-subtext-footer {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.6);
     margin-top: var(--sp-md);
   }
 
@@ -1429,7 +1543,7 @@
     }
 
     .price-current {
-      font-size: 44px;
+      font-size: 46px;
     }
   }
 
@@ -1447,10 +1561,12 @@
   }
 
   .footer-column h4 {
-    font-size: 16px;
+    font-size: 11px;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
     margin-bottom: var(--sp-md);
-    color: var(--color-white);
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .footer-column ul {
@@ -1459,19 +1575,19 @@
   }
 
   .footer-column li {
-    margin-bottom: var(--sp-sm);
+    margin-bottom: var(--sp-xs);
   }
 
   .footer-column a {
     font-size: 15px;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     transition: color 200ms ease;
-    line-height: 1.8;
+    line-height: 1.9;
   }
 
   .footer-column a:hover {
-    color: var(--color-primary-red);
+    color: var(--color-white);
   }
 
   /* NEWSLETTER FORM */
@@ -1481,47 +1597,54 @@
     margin-top: var(--sp-sm);
   }
 
+  /* `flex: 1 1 auto` (e não `1`) porque o rodapé empilha o formulário em
+     coluna: com base 0% o campo colapsaria em altura. */
   .newsletter-form input {
-    flex: 1;
-    height: 48px;
-    padding: 0 16px;
-    border: none;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 46px;
+    min-height: 46px;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: var(--radius-md);
     font-size: 14px;
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-white);
     outline: none;
   }
 
   .newsletter-form input::placeholder {
-    color: var(--color-gray-medium);
+    color: rgba(255, 255, 255, 0.45) !important;
   }
 
   .newsletter-form input:focus {
-    background: var(--color-white);
-    box-shadow: 0 0 0 2px var(--color-primary-red);
+    border-color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .newsletter-form button {
-    height: 48px;
-    padding: 0 32px;
-    background: var(--color-primary-red);
+    height: 46px;
+    padding: 0 28px;
+    background: var(--color-red);
     color: var(--color-white);
     border: none;
     border-radius: var(--radius-md);
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    box-shadow: none;
     transition: all 200ms ease;
   }
 
   .newsletter-form button:hover {
-    background: var(--color-red-hover);
+    background: var(--color-red-bright);
+    color: var(--color-white);
     transform: translateY(-2px);
+    box-shadow: none;
   }
 
   /* FOOTER BOTTOM */
   .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
     padding-top: var(--sp-lg);
     display: flex;
     justify-content: space-between;
@@ -1534,13 +1657,14 @@
   }
 
   .footer-bottom-text {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .footer-socials {
     display: flex;
-    gap: var(--sp-md);
+    gap: var(--sp-sm);
   }
 
   .footer-socials a {
@@ -1550,7 +1674,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
     color: var(--color-white);
     text-decoration: none;
     font-size: 16px;
@@ -1558,7 +1683,8 @@
   }
 
   .footer-socials a:hover {
-    background: var(--color-primary-red);
+    background: var(--color-red);
+    border-color: var(--color-red);
     transform: translateY(-2px);
   }
 
@@ -1589,124 +1715,128 @@
      TIPOGRAFIA UTILITÁRIA (nomes legados usados pelas páginas)
      ================================================================= */
   .h1 {
-    font-size: 56px;
-    line-height: 1.2;
+    font-size: 60px;
+    line-height: 1.04;
     font-weight: 700;
-    color: var(--color-text-primary);
-    letter-spacing: -0.5px;
+    color: var(--ink);
+    letter-spacing: -0.035em;
   }
 
   .h2 {
-    font-size: 40px;
-    line-height: 1.3;
+    font-size: 42px;
+    line-height: 1.08;
     font-weight: 700;
-    color: var(--color-text-primary);
-    letter-spacing: -0.3px;
+    color: var(--ink);
+    letter-spacing: -0.03em;
   }
 
   .h3 {
     font-size: 28px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--color-text-primary);
+    font-weight: 700;
+    line-height: 1.16;
+    color: var(--ink);
+    letter-spacing: -0.02em;
   }
 
   .h4 {
     font-size: 22px;
-    font-weight: 600;
-    color: var(--color-text-primary);
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
   }
 
   .h5 {
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-text-primary);
+    color: var(--ink);
   }
 
   @media (max-width: 768px) {
-    .h1 { font-size: 38px; }
-    .h2 { font-size: 30px; }
+    .h1 { font-size: 40px; }
+    .h2 { font-size: 31px; }
     .h3 { font-size: 23px; }
   }
 
   .text-body-lg {
     font-size: 18px;
     line-height: 1.7;
-    color: var(--color-text-primary);
+    color: var(--body);
   }
 
   .text-body {
     font-size: 16px;
     line-height: 1.7;
-    color: var(--color-text-primary);
+    color: var(--body);
   }
 
   .text-body-sm {
     font-size: 14px;
     line-height: 1.6;
-    color: var(--color-text-secondary);
+    color: var(--muted);
   }
 
   .text-body-xs {
     font-size: 13px;
     line-height: 1.5;
-    color: var(--color-gray-medium);
+    color: var(--muted);
   }
 
   .text-muted {
     font-size: 14px;
-    color: var(--color-gray-medium);
+    color: var(--muted);
   }
 
   .page-title {
-    font-size: 56px;
-    line-height: 1.2;
+    font-size: 60px;
+    line-height: 1.04;
     font-weight: 700;
-    color: var(--color-text-primary);
-    letter-spacing: -0.5px;
+    color: var(--ink);
+    letter-spacing: -0.035em;
   }
 
   .section-title {
-    font-size: 40px;
-    line-height: 1.3;
+    font-size: 42px;
+    line-height: 1.08;
     font-weight: 700;
-    color: var(--color-text-primary);
-    letter-spacing: -0.3px;
+    color: var(--ink);
+    letter-spacing: -0.03em;
   }
 
   .section-title-inverse {
-    font-size: 40px;
-    line-height: 1.3;
+    font-size: 42px;
+    line-height: 1.08;
     font-weight: 700;
     color: var(--color-white);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.03em;
   }
 
   @media (max-width: 768px) {
-    .page-title { font-size: 38px; }
+    .page-title { font-size: 40px; }
     .section-title,
-    .section-title-inverse { font-size: 30px; }
+    .section-title-inverse { font-size: 31px; }
   }
 
   .card-title {
     font-size: 22px;
-    font-weight: 600;
-    color: var(--color-text-primary);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--ink);
   }
 
   .subsection-title {
     font-size: 24px;
-    font-weight: 600;
-    color: var(--color-text-primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
   }
 
   .section-label,
   .section-label-uppercase {
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--color-primary-red);
+    letter-spacing: 0.2em;
+    color: var(--brand);
   }
 
   /* =================================================================
@@ -1745,7 +1875,7 @@
     height: 24px;
     width: 24px;
     background-color: var(--color-white);
-    border: 1.5px solid var(--color-gray-light);
+    border: 1.5px solid var(--line);
     border-radius: var(--radius-sm);
     transition: all 200ms ease;
   }
@@ -1764,9 +1894,9 @@
   }
 
   .custom-checkbox:checked ~ .checkmark {
-    background: var(--color-primary-red);
-    border-color: var(--color-primary-red);
-    box-shadow: 0 0 0 3px rgba(239, 62, 77, 0.2);
+    background: var(--color-red);
+    border-color: var(--color-red);
+    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.2);
   }
 
   .custom-checkbox:checked ~ .checkmark::after {
@@ -1775,7 +1905,7 @@
   }
 
   .custom-checkbox:focus-visible ~ .checkmark {
-    box-shadow: 0 0 0 3px rgba(239, 62, 77, 0.35);
+    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.35);
   }
 
   @keyframes check-anim {
@@ -1796,9 +1926,10 @@
 @layer base {
   /* ===================================================================
      PARTE 12 — FOOTER (elemento)
+     Preto: fecha a página e separa-a claramente do corpo vermelho.
      =================================================================== */
   footer {
-    background: var(--color-primary-blue);
+    background: var(--color-black);
     color: var(--color-white);
     padding: var(--sp-3xl) var(--sp-md) var(--sp-lg);
   }
@@ -1807,11 +1938,11 @@
      SECÇÕES
      =================================================================== */
   section.light-bg {
-    background-color: var(--color-bg-light);
+    background-color: var(--surface-brand-alt);
   }
 
   section.dark-bg {
-    background-color: var(--color-primary-blue);
+    background-color: var(--color-black);
     color: var(--color-white);
   }
 
@@ -1822,7 +1953,7 @@
   }
 
   section.dark-bg .text-secondary {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.78);
   }
 
 }
@@ -1830,6 +1961,8 @@
 @layer components {
   /* ===================================================================
      FORMULÁRIOS
+     `.login-form` é um painel branco (ver `.on-light` no topo do ficheiro):
+     tudo o que está dentro herda a escala escura de texto e linhas.
      =================================================================== */
   .login-form {
     width: 100%;
@@ -1838,21 +1971,22 @@
     background: var(--color-white);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
-    border: 1px solid var(--color-gray-light);
+    border: none;
     animation: fadeIn 0.6s ease-out;
     position: relative;
+    color: var(--on-invert);
   }
 
   /* Régua vermelha no topo do cartão de formulário. */
   .login-form::before {
     content: "";
     position: absolute;
-    top: -1px;
+    top: 0;
     left: var(--radius-xl);
     width: 62px;
-    height: 3px;
-    border-radius: var(--radius-pill);
-    background: var(--color-primary-red);
+    height: 4px;
+    border-radius: 0 0 var(--radius-pill) var(--radius-pill);
+    background: var(--color-red);
   }
 
   @media (max-width: 480px) {
@@ -1869,21 +2003,27 @@
   }
 
   .login-form * {
-    color: var(--color-text-primary);
+    color: var(--on-invert);
+  }
+
+  .login-form .text-muted,
+  .login-form .text-body-sm,
+  .login-form .text-body-xs {
+    color: var(--on-invert-3);
   }
 
   .form-heading {
     margin-bottom: 24px;
-    color: var(--color-text-primary) !important;
-    font-size: 28px;
+    color: var(--on-invert) !important;
+    font-size: 30px;
     font-weight: 700;
     text-align: center;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.03em;
   }
 
   @media (max-width: 480px) {
     .form-heading {
-      font-size: 23px;
+      font-size: 24px;
       margin-bottom: 20px;
     }
   }
@@ -1903,11 +2043,11 @@
     position: absolute;
     top: -18px;
     left: 2px;
-    color: var(--color-gray-medium) !important;
-    font-size: 13px;
-    font-weight: 600;
+    color: var(--on-invert-3) !important;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.14em;
     opacity: 1;
     transition: all 200ms ease;
   }
@@ -1917,11 +2057,11 @@
   .input-group select {
     width: 100%;
     padding: 13px 15px;
-    color: var(--color-text-primary) !important;
+    color: var(--on-invert) !important;
     font-family: var(--font-body);
     font-size: 15px;
-    background-color: var(--color-white) !important;
-    border: 1px solid var(--color-gray-light) !important;
+    background-color: #f7f7f9 !important;
+    border: 1px solid #e7e7ea !important;
     border-radius: var(--radius-md);
     outline: none;
     transition: all 200ms ease;
@@ -1952,29 +2092,32 @@
   .input-group input:hover,
   .input-group textarea:hover,
   .input-group select:hover {
-    border-color: var(--line-strong) !important;
+    border-color: #cfcfd5 !important;
   }
 
   .input-group input:focus,
   .input-group textarea:focus,
   .input-group select:focus {
-    border-color: var(--color-primary-red) !important;
-    box-shadow: 0 0 0 3px rgba(239, 62, 77, 0.15);
+    background-color: var(--color-white) !important;
+    border-color: var(--color-red) !important;
+    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.14);
   }
 
   /* Ação destrutiva (ex.: terminar sessão). */
   .submit.is-danger {
-    background-color: var(--color-red-active);
+    background-color: var(--color-black) !important;
+    color: var(--color-white) !important;
   }
 
   .submit.is-danger:hover {
-    background-color: var(--color-red-ink);
+    background-color: var(--color-black-2) !important;
+    color: var(--color-white) !important;
   }
 
   .form-link {
-    color: var(--color-primary-red) !important;
+    color: var(--color-red) !important;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     transition: all 200ms ease;
     position: relative;
@@ -1987,12 +2130,12 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--color-primary-red);
+    background: var(--color-red);
     transition: width 200ms ease;
   }
 
   .form-link:hover {
-    color: var(--color-red-hover) !important;
+    color: var(--color-red-2) !important;
   }
 
   .form-link:hover::after {
@@ -2002,10 +2145,11 @@
   .form-feedback {
     padding: 12px 14px;
     font-size: 14px;
-    border: 1px solid rgba(239, 62, 77, 0.3);
-    border-radius: var(--radius-md);
-    background: rgba(239, 62, 77, 0.1);
-    color: var(--color-red-ink) !important;
+    border: none;
+    border-left: 3px solid var(--color-red);
+    border-radius: var(--radius-sm);
+    background: rgba(227, 6, 19, 0.08);
+    color: var(--color-danger) !important;
     font-weight: 600;
     line-height: 1.5;
   }
@@ -2023,6 +2167,7 @@
 
   /* ===================================================================
      DASHBOARD
+     Cartões brancos sobre o vermelho — o contraste faz de estrutura.
      =================================================================== */
   .dashboard-layout-shell {
     display: grid;
@@ -2033,24 +2178,27 @@
   .dashboard-top-banner {
     border-radius: var(--radius-xl);
     background: var(--color-white);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-gray-light);
+    box-shadow: var(--shadow-md);
+    border: none;
     padding: var(--sp-lg);
     transition: all 300ms ease;
+    color: var(--on-invert);
   }
 
   .dashboard-sidebar {
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-xl);
     background: var(--color-white);
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--color-gray-light);
+    box-shadow: var(--shadow-md);
+    border: none;
     padding: var(--sp-md);
+    color: var(--on-invert);
   }
 
   .dashboard-sidebar-title {
-    color: var(--color-text-primary) !important;
+    color: var(--on-invert) !important;
     font-size: 18px;
     font-weight: 700;
+    letter-spacing: -0.015em;
   }
 
   .dashboard-menu {
@@ -2080,7 +2228,7 @@
 
   .dashboard-menu-item span {
     display: block;
-    color: var(--color-text-primary) !important;
+    color: var(--on-invert) !important;
     font-size: 15px;
     font-weight: 600;
   }
@@ -2088,35 +2236,35 @@
   .dashboard-menu-item small {
     display: block;
     margin-top: 0.3rem;
-    color: var(--color-gray-medium) !important;
+    color: var(--on-invert-3) !important;
     font-size: 13px;
     font-weight: 500;
   }
 
   .dashboard-menu-item.is-active {
-    background: rgba(239, 62, 77, 0.1);
-    border-color: var(--color-primary-red);
+    background: rgba(227, 6, 19, 0.08);
+    border-color: var(--color-red);
     box-shadow: none;
   }
 
   .dashboard-menu-item.is-active span {
-    color: var(--color-red-ink) !important;
+    color: var(--color-red) !important;
   }
 
   .dashboard-menu-item:hover {
-    border-color: var(--color-gray-light);
-    background: var(--color-bg-light);
+    border-color: #e7e7ea;
+    background: #f7f7f9;
     transform: none;
     box-shadow: none;
   }
 
   .dashboard-right-highlight {
-    border-radius: var(--radius-lg);
-    background: var(--color-bg-light);
+    border-radius: var(--radius-xl);
+    background: var(--color-black);
     box-shadow: none;
     padding: var(--sp-md);
     display: none;
-    border: 1px solid var(--color-gray-light);
+    border: none;
     position: relative;
     overflow: hidden;
   }
@@ -2127,26 +2275,26 @@
     top: 0;
     left: var(--radius-lg);
     width: 62px;
-    height: 3px;
-    border-radius: var(--radius-pill);
-    background: var(--color-primary-red);
+    height: 4px;
+    border-radius: 0 0 var(--radius-pill) var(--radius-pill);
+    background: var(--color-red);
     pointer-events: none;
   }
 
   .dashboard-right-highlight .card-title {
-    color: var(--color-text-primary) !important;
+    color: var(--color-white) !important;
     position: relative;
   }
 
   .dashboard-right-highlight p {
-    color: var(--color-text-secondary) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
     position: relative;
   }
 
   .dashboard-right-highlight-icon {
     font-size: 1.5rem;
     text-align: center;
-    color: var(--color-primary-red) !important;
+    color: var(--color-red-bright) !important;
     position: relative;
   }
 
@@ -2212,26 +2360,26 @@
 @layer base {
   /* SCROLLBAR */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-bg-light);
+    background: var(--color-red-2);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-gray-medium);
-    border-radius: var(--radius-xs);
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: var(--radius-pill);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-dark-blue);
+    background: var(--color-white);
   }
 
   ::selection {
-    background: var(--color-primary-red);
-    color: var(--color-white);
+    background: var(--color-white);
+    color: var(--color-red);
   }
 
   /* FOCUS STATES */
@@ -2244,7 +2392,7 @@
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible {
-    outline: 2px solid var(--color-primary-red);
+    outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
 
@@ -2277,13 +2425,13 @@
      =================================================================== */
   input::placeholder,
   textarea::placeholder {
-    color: var(--color-gray-medium) !important;
+    color: var(--on-invert-3) !important;
     opacity: 1;
     font-weight: 400;
   }
 
   select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ef3e4d' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e30613' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 20px;
@@ -2306,9 +2454,9 @@
     .btn-primary,
     .btn-secondary
   )) {
-    color: var(--color-primary-blue);
+    color: var(--ink);
     text-decoration: none;
-    border-bottom: 1px solid rgba(239, 62, 77, 0.45);
+    border-bottom: 1px solid var(--line-strong);
     transition: all 200ms ease;
   }
 
@@ -2321,8 +2469,8 @@
     .btn-primary,
     .btn-secondary
   )):hover {
-    border-bottom-color: var(--color-primary-red);
-    color: var(--color-primary-red);
+    border-bottom-color: var(--ink);
+    opacity: 0.75;
   }
 
 }

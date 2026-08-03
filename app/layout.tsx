@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import AppShell from "./components/AppShell";
+import { creatoDisplay } from "./fonts";
 import "./globals.css";
 
 const siteUrl = process.env.APP_BASE_URL?.trim() || "https://clientemisterio.onrender.com";
@@ -55,7 +56,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#0f4c5c",
+  themeColor: "#e30613",
 };
 
 export default function RootLayout({
@@ -64,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-PT">
+    <html lang="pt-PT" className={creatoDisplay.variable}>
       <body className="bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
         <AppShell>{children}</AppShell>
       </body>

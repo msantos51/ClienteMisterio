@@ -5,24 +5,29 @@ import { useLanguage } from "@/app/context/LanguageContext";
 export default function ThreePointsCards() {
   const { t } = useLanguage();
 
+  // Alterna vermelho profundo / branco / preto: o trio percorre a paleta
+  // inteira sem introduzir cores fora do sistema.
   const benefits = [
     {
       title: t.threePoints.learn,
       description: t.threePoints.learnDesc,
-      background:
-        "linear-gradient(155deg, var(--color-primary-red) 0%, var(--color-red-hover) 100%)",
+      surface: "bg-[color:var(--color-red-2)] text-white",
+      titleClass: "text-white",
+      bodyClass: "text-white/80",
     },
     {
       title: t.threePoints.certificate,
       description: t.threePoints.certificateDesc,
-      background:
-        "linear-gradient(155deg, var(--color-red-hover) 0%, var(--color-red-active) 100%)",
+      surface: "bg-white",
+      titleClass: "text-[color:var(--on-invert)]",
+      bodyClass: "text-[color:var(--on-invert-2)]",
     },
     {
       title: t.threePoints.opportunities,
       description: t.threePoints.opportunitiesDesc,
-      background:
-        "linear-gradient(155deg, var(--color-primary-blue) 0%, var(--color-blue-deep) 100%)",
+      surface: "bg-[color:var(--color-black)] text-white",
+      titleClass: "text-white",
+      bodyClass: "text-white/70",
     },
   ];
 
@@ -31,11 +36,14 @@ export default function ThreePointsCards() {
       {benefits.map((benefit) => (
         <div
           key={benefit.title}
-          className="on-brand flex min-h-[180px] flex-col items-center justify-center gap-3 rounded-[var(--radius-xl)] p-6 text-center shadow-[0_20px_44px_-24px_rgba(5,20,29,0.6)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_28px_50px_-22px_rgba(5,20,29,0.65)] sm:min-h-[240px] sm:gap-4 sm:p-10 md:min-h-[260px]"
-          style={{ background: benefit.background }}
+          className={`flex min-h-[180px] flex-col items-center justify-center gap-3 rounded-[var(--radius-xl)] p-6 text-center shadow-[0_20px_44px_-24px_rgba(0,0,0,0.5)] transition duration-300 hover:-translate-y-2 sm:min-h-[240px] sm:gap-4 sm:p-10 md:min-h-[260px] ${benefit.surface}`}
         >
-          <h3 className="text-base font-bold text-white sm:text-lg leading-tight">{benefit.title}</h3>
-          <p className="text-sm leading-6 text-white sm:text-base sm:leading-7">{benefit.description}</p>
+          <h3 className={`text-base font-bold leading-tight tracking-[-0.02em] sm:text-lg ${benefit.titleClass}`}>
+            {benefit.title}
+          </h3>
+          <p className={`text-sm leading-6 sm:text-base sm:leading-7 ${benefit.bodyClass}`}>
+            {benefit.description}
+          </p>
         </div>
       ))}
     </div>

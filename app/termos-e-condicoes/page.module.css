@@ -1,5 +1,7 @@
 /*
- * Termos e Condições page — editorial design matching the homepage.
+ * Termos e Condições — sistema vermelho/branco.
+ * Documento longo: cada cláusula fica num bloco translúcido sobre o vermelho,
+ * com o número em caixa branca a servir de âncora de leitura.
  */
 
 .page button { all: unset; cursor: pointer; font: inherit; }
@@ -9,8 +11,8 @@
    LAYOUT PRIMITIVES
    ============================================================ */
 .page {
-  background: var(--color-white);
-  color: var(--color-text-primary);
+  background: var(--surface-brand);
+  color: var(--color-white);
   font-size: 15px;
   line-height: 1.65;
   font-family: var(--font-body);
@@ -29,27 +31,27 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--brand-700);
+  color: rgba(255, 255, 255, 0.78);
   margin-bottom: 20px;
 }
 .eyebrow::before {
   content: "";
-  width: 24px; height: 1px;
-  background: var(--accent);
+  width: 34px; height: 2px;
+  background: currentColor;
 }
 
 .displayLg {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
-  color: var(--color-text-primary);
-  font-size: clamp(26px, 3.5vw, 48px);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  color: var(--color-white);
+  font-size: clamp(30px, 4.6vw, 62px);
   margin: 0;
 }
 
@@ -58,24 +60,34 @@
    ============================================================ */
 .hero {
   padding: 96px 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--hairline);
 }
 @media (max-width: 720px) { .hero { padding: 64px 0; } }
 .heroTitle { margin-bottom: 20px; }
-.heroDate { font-size: 14px; color: var(--muted); margin-top: 16px; }
+.heroDate {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 16px;
+}
 
 /* ============================================================
    SECTIONS
    ============================================================ */
-.sections { display: flex; flex-direction: column; gap: 16px; }
+.sections { display: flex; flex-direction: column; gap: 12px; }
 .termSection {
-  background: var(--color-bg-light);
-  border: 1px solid var(--color-gray-light);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius-lg);
   padding: 32px 36px;
-  transition: border-color .2s;
+  transition: border-color .2s, background .2s;
 }
-.termSection:hover { border-color: rgba(239, 62, 77,.4); }
+.termSection:hover {
+  border-color: var(--color-white);
+  background: rgba(255, 255, 255, 0.11);
+}
 .termHeader {
   display: flex;
   align-items: flex-start;
@@ -86,26 +98,26 @@
   flex-shrink: 0;
   width: 44px; height: 44px;
   border-radius: var(--radius-sm);
-  background: var(--brand);
-  color: var(--moonlight-white);
-  font-weight: 800;
+  background: var(--color-white);
+  color: var(--color-red);
+  font-weight: 700;
   font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .termTitle {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
-  letter-spacing: -0.2px;
-  color: var(--color-text-primary);
+  letter-spacing: -0.03em;
+  color: var(--color-white);
   margin: 0;
-  padding-top: 10px;
+  padding-top: 9px;
 }
 .termContent {
   font-size: 16px;
-  color: var(--muted);
-  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.75;
   margin: 0;
   padding-left: 64px;
 }

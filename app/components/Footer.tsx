@@ -50,13 +50,10 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden">
-      {/* Halo vermelho discreto no canto superior direito. */}
+      {/* Régua vermelha a todo o comprimento: liga o rodapé preto ao corpo
+          vermelho da página em vez de o cortar a seco. */}
       <div
-        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-25"
-        style={{
-          background:
-            "radial-gradient(circle, var(--color-primary-red) 0%, transparent 70%)",
-        }}
+        className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-[color:var(--color-red)]"
         aria-hidden
       />
       <div className="relative mx-auto w-full max-w-[1200px]">
@@ -65,22 +62,22 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="footer-column lg:col-span-1">
             <div className="mb-5 flex items-center gap-2.5">
-              <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[color:var(--color-primary-red)] text-[13px] font-bold text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] bg-[color:var(--color-red)] text-[13px] font-bold text-white">
                 CM
               </span>
               <span className="flex flex-col leading-none">
-                <span className="text-[16px] font-bold tracking-tight text-white">
-                  Cliente Mistério<span className="text-[color:var(--color-primary-red)]">.</span>
+                <span className="text-[16px] font-bold tracking-[-0.03em] text-white">
+                  Cliente Mistério<span className="text-[color:var(--color-red)]">.</span>
                 </span>
-                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.5px] text-white/60">
+                <span className="mt-1.5 text-[9px] font-bold uppercase tracking-[0.22em] text-white/50">
                   Formação Pro
                 </span>
               </span>
             </div>
-            <p className="mb-4 text-[13px] font-semibold uppercase tracking-[0.5px] text-[color:var(--color-red-on-dark)]">
+            <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[color:var(--color-red-bright)]">
               {t.footer.madeWith}
             </p>
-            <p className="text-[15px] leading-relaxed text-white/70">
+            <p className="text-[15px] leading-relaxed text-white/65">
               {t.footer.tagline}
             </p>
           </div>
