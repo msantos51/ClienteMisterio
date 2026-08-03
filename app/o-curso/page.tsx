@@ -35,6 +35,14 @@ function BuyButton({ children, className }: { children: React.ReactNode; classNa
   );
 }
 
+/* Passos "Como funciona" — vindos da antiga página inicial. */
+const howItWorks = [
+  { n: "Passo 01", t: "Compras uma vez", d: "Pagamento único de 24,99 €. Acesso imediato e vitalício, em qualquer dispositivo, com atualizações incluídas." },
+  { n: "Passo 02", t: "Aprendes o método", d: "Dez módulos com casos reais, formulários-tipo e um quiz no fim de cada um para fixares o essencial." },
+  { n: "Passo 03", t: "Registas-te nas plataformas", d: "Damos-te a lista das empresas que operam em Portugal e o guião para criares um perfil que é escolhido." },
+  { n: "Passo 04", t: "Aceitas missões e recebes", d: "Escolhes onde, quando e quantas vezes. Cada missão é paga depois de o relatório ser aprovado." },
+];
+
 /* Benefit icons */
 const benefitIcons = [
   /* Beginners */ (
@@ -184,6 +192,39 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
                 </div>
                 <h3 className={styles.benefitTitle}>{b.title}</h3>
                 <p className={styles.benefitDesc}>{b.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          COMO FUNCIONA
+          ============================================================ */}
+      <section className={styles.sectionSteps}>
+        <div className={styles.wrap}>
+          <div className={styles.head}>
+            <div>
+              <div className={styles.eyebrow}>Como funciona</div>
+              <h2 className={styles.displayLg}>
+                Do carrinho à primeira missão paga.
+              </h2>
+              <p className={styles.headKicker}>
+                Sem agências, sem comissões, sem mensalidades
+              </p>
+            </div>
+            <p className={styles.headSub}>
+              Compras uma vez, aprendes ao teu ritmo e candidatas-te diretamente às plataformas. O
+              dinheiro da missão é todo teu.
+            </p>
+          </div>
+
+          <div className={styles.steps}>
+            {howItWorks.map((s) => (
+              <div className={styles.step} key={s.n}>
+                <div className={styles.stepNum}>{s.n}</div>
+                <h3 className={styles.stepTitle}>{s.t}</h3>
+                <p className={styles.stepDesc}>{s.d}</p>
               </div>
             ))}
           </div>

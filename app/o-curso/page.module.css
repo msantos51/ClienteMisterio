@@ -568,3 +568,66 @@
   background: var(--color-bg-light);
   box-shadow: 0 6px 16px rgba(15, 76, 92, 0.28);
 }
+
+/* ============================================================
+   COMO FUNCIONA — secção vinda da antiga página inicial
+   ============================================================ */
+.sectionSteps {
+  padding: 96px 0;
+  background: var(--color-bg-light);
+  border-top: 1px solid var(--color-gray-light);
+  border-bottom: 1px solid var(--color-gray-light);
+}
+@media (max-width: 720px) { .sectionSteps { padding: 64px 0; } }
+
+.headKicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-primary-red);
+  margin: 16px 0 0;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 760px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1060px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+
+.step {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  transition: all 300ms ease;
+}
+.step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: rgba(239, 62, 77, 0.2);
+}
+.stepNum {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-primary-red);
+  margin-bottom: 16px;
+}
+.stepTitle {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--color-text-primary);
+  margin: 0 0 12px;
+}
+.stepDesc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  text-wrap: pretty;
+}
