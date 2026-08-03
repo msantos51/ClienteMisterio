@@ -120,7 +120,7 @@
   justify-content: center;
 }
 .infoLabel {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -194,7 +194,7 @@
 
 .field { display: flex; flex-direction: column; gap: 6px; }
 .label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
