@@ -1549,166 +1549,31 @@
 
   /* =================================================================
      PARTE 12 — FOOTER
+     -----------------------------------------------------------------
+     Rodapé mínimo: apenas termos e condições e nota de direitos
+     reservados, sem colunas de navegação nem newsletter.
      ================================================================= */
-  .footer-content {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--sp-2xl);
-    margin-bottom: var(--sp-3xl);
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+  .footer-mini {
+    padding: var(--sp-md) 0;
   }
 
-  .footer-column h4 {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    margin-bottom: var(--sp-md);
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .footer-column ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .footer-column li {
-    margin-bottom: var(--sp-xs);
-  }
-
-  .footer-column a {
-    font-size: 15px;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 200ms ease;
-    line-height: 1.9;
-  }
-
-  .footer-column a:hover {
-    color: var(--color-white);
-  }
-
-  /* NEWSLETTER FORM */
-  .newsletter-form {
-    display: flex;
-    gap: 8px;
-    margin-top: var(--sp-sm);
-  }
-
-  /* `flex: 1 1 auto` (e não `1`) porque o rodapé empilha o formulário em
-     coluna: com base 0% o campo colapsaria em altura. */
-  .newsletter-form input {
-    flex: 1 1 auto;
-    width: 100%;
-    height: 46px;
-    min-height: 46px;
-    padding: 0 14px;
-    border: 1px solid rgba(255, 255, 255, 0.24);
-    border-radius: var(--radius-md);
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--color-white);
-    outline: none;
-  }
-
-  .newsletter-form input::placeholder {
-    color: rgba(255, 255, 255, 0.45) !important;
-  }
-
-  .newsletter-form input:focus {
-    border-color: var(--color-white);
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .newsletter-form button {
-    height: 46px;
-    padding: 0 28px;
-    background: var(--color-red);
-    color: var(--color-white);
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: none;
-    transition: all 200ms ease;
-  }
-
-  .newsletter-form button:hover {
-    background: var(--color-red-bright);
-    color: var(--color-white);
-    transform: translateY(-2px);
-    box-shadow: none;
-  }
-
-  /* FOOTER BOTTOM */
-  .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-    padding-top: var(--sp-lg);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--sp-md);
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .footer-bottom-text {
+  .footer-mini-text {
     font-size: 12px;
     letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.5);
   }
 
-  .footer-socials {
-    display: flex;
-    gap: var(--sp-sm);
+  .footer-mini-link {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 200ms ease;
   }
 
-  .footer-socials a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: transparent;
+  .footer-mini-link:hover {
     color: var(--color-white);
-    text-decoration: none;
-    font-size: 16px;
-    transition: all 200ms ease;
-  }
-
-  .footer-socials a:hover {
-    background: var(--color-red);
-    border-color: var(--color-red);
-    transform: translateY(-2px);
-  }
-
-  @media (max-width: 1024px) {
-    .footer-content {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-lg);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .footer-content {
-      grid-template-columns: 1fr;
-      gap: var(--sp-2xl);
-    }
-
-    .footer-bottom {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .footer-socials {
-      justify-content: center;
-    }
   }
 
   /* =================================================================
