@@ -226,6 +226,26 @@ export const courseModules: CourseModule[] = [
     ],
    },
   ],
+  evaluationExamples: [
+   {
+    title: "Exemplo 1 — A missão que parecia boa",
+    scenario:
+     "Uma plataforma anuncia \"missão de restauração — 50 €\". Inclui refeição reembolsada até 30 €, 35 minutos de carro (ida e volta) e um formulário que demora cerca de 45 minutos a preencher.",
+    correctApproach:
+     "\"Honorário real: 20 €. Tempo total: ~1h50 (deslocação + visita de 40 min + relatório). Valor líquido ≈ 11 €/hora — abaixo do meu mínimo. Só aceito se conseguir agrupar com outra missão na mesma zona.\"",
+    incorrectApproach:
+     "\"A missão paga 50 €, aceito já.\" — confunde honorário com valor total anunciado e ignora o tempo real gasto.",
+   },
+   {
+    title: "Exemplo 2 — Escolher a plataforma certa",
+    scenario:
+     "Uma \"plataforma\" nova pede 15 € de \"taxa de certificação\" antes de liberar o acesso às missões disponíveis na tua zona.",
+    correctApproach:
+     "\"Nenhuma plataforma séria cobra para dar acesso a missões. Não me registo e reporto o anúncio, se possível.\"",
+    incorrectApproach:
+     "\"Pago os 15 €, deve valer a pena para começar mais depressa.\" — é precisamente o sinal de alerta descrito nesta página.",
+   },
+  ],
   quiz: [
    {
     id: "m2q1",
@@ -598,6 +618,26 @@ export const courseModules: CourseModule[] = [
      "**Sei o meu cenário e as minhas perguntas.** Duas ou três, no máximo. E sei como saio.",
      "**Confirmei a morada exata e o horário de funcionamento.** Cadeias grandes têm lojas a 300 metros uma da outra: avaliar a errada acontece mais vezes do que imaginas.",
     ],
+   },
+  ],
+  evaluationExamples: [
+   {
+    title: "Exemplo 1 — Briefing lido na diagonal",
+    scenario:
+     "O briefing pede explicitamente o número da caixa registadora e a hora de abertura da loja. Só percebes isso ao preencher o formulário, já em casa, três horas depois da visita.",
+    correctApproach:
+     "\"Leio o briefing e o formulário completo antes de sair de casa, com lápis na mão, e só depois preparo o cenário — assim nenhum campo me apanha de surpresa.\"",
+    incorrectApproach:
+     "\"Li o briefing por alto, achei que percebia o essencial.\" — resultado: relatório incompleto e missão em risco de ser devolvida.",
+   },
+   {
+    title: "Exemplo 2 — Cenário pouco credível",
+    scenario:
+     "A missão pede que avalies uma loja de material de escritório. Inventas um cenário elaborado de \"gerente de uma empresa de eventos que vai abrir filial em três países\".",
+    correctApproach:
+     "\"Uso um cenário próximo da minha realidade: preciso de material para um pequeno escritório em casa. Fácil de sustentar em qualquer pergunta de seguimento.\"",
+    incorrectApproach:
+     "Manter a personagem elaborada — cai ao primeiro \"e para que é que precisa disso?\" e chama a atenção do colaborador.",
    },
   ],
   quiz: [
@@ -1072,6 +1112,26 @@ export const courseModules: CourseModule[] = [
     ],
    },
   ],
+  evaluationExamples: [
+   {
+    title: "Exemplo 1 — Separar honorário de reembolso",
+    scenario:
+     "No fim do mês, somas todos os valores recebidos das plataformas e concluis que \"ganhaste 480 €\" com cinco missões.",
+    correctApproach:
+     "\"Separo a folha em duas colunas: honorário (o que é rendimento real) e reembolso (despesa devolvida). Só declaro e conto como ganho a coluna do honorário — nesse mês, 210 €.\"",
+    incorrectApproach:
+     "\"Ganhei 480 €\" — confunde o total recebido com rendimento e distorce por completo a perceção de rentabilidade.",
+   },
+   {
+    title: "Exemplo 2 — Excesso sobre o limite de reembolso",
+    scenario:
+     "O briefing indica um limite de reembolso de 20 € para a compra obrigatória. Na loja, o artigo mais barato que cumpre o pedido custa 27 €.",
+    correctApproach:
+     "\"Contacto a agência antes de comprar, a confirmar se há tolerância ou se assumo os 7 € de diferença. Guardo sempre o talão como prova do valor total gasto.\"",
+    incorrectApproach:
+     "\"Compro e assumo que a plataforma paga o valor todo.\" — o excesso sobre o limite fica quase sempre a cargo do avaliador, e a surpresa chega tarde de mais.",
+   },
+  ],
   quiz: [
    {
     id: "m9q1",
@@ -1174,6 +1234,26 @@ export const courseModules: CourseModule[] = [
      "**Constrói relação com as agências.** Responde rápido, cumpre prazos, avisa quando algo corre mal e sê educado com quem revê os teus relatórios. Passados alguns meses começam a chegar convites diretos — as missões que nunca chegam a ser publicadas.",
      "**Meta realista para os primeiros três meses:** 4 a 8 missões por mês, entre 80 € e 250 € de honorário mensal, e uma classificação acima da média. A partir daí, é escolher: manter como complemento ou empurrar para valores que já pagam contas.",
     ],
+   },
+  ],
+  evaluationExamples: [
+   {
+    title: "Exemplo 1 — Arranque comedido vs. arranque atabalhoado",
+    scenario:
+     "Na primeira semana já registada em várias plataformas, aparecem cinco convites de missão para a mesma semana.",
+    correctApproach:
+     "\"Aceito uma ou duas, próximas de casa e simples, para fechar bem o ciclo completo — candidatura, execução, relatório, aprovação — antes de escalar o volume.\"",
+    incorrectApproach:
+     "\"Aceito as cinco, mais vale aproveitar.\" — o risco de falhar um prazo é alto e uma classificação inicial baixa demora meses a recuperar.",
+   },
+   {
+    title: "Exemplo 2 — Ler o feedback da agência",
+    scenario:
+     "O primeiro relatório volta com uma nota de qualidade média e três comentários do revisor sobre falta de horas na narrativa.",
+    correctApproach:
+     "\"Leio os comentários com atenção, ajusto o próximo relatório para incluir sempre horas concretas, e trato o feedback como formação gratuita.\"",
+    incorrectApproach:
+     "\"Ignoro os comentários, o importante é que já fui pago.\" — repete o mesmo erro e mantém a classificação estagnada.",
    },
   ],
   quiz: [
