@@ -93,7 +93,7 @@
   --radius-pill: 999px;  /* pílulas, réguas finas e barras de progresso */
   --radius-sharp: var(--radius-md);
   --header-control-height: 38px;
-  --header-h: 72px;         /* altura fixa de .site-header-inner */
+  --header-h: 73px;         /* 72px de .site-header-inner + 1px de border-bottom do .site-header */
 
   /* Sombras — sobre vermelho só funcionam sombras pretas e discretas. */
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.12);
