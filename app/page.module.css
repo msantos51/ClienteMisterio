@@ -9,10 +9,7 @@
 .page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex: 1;
-  min-height: 0;
-  padding: clamp(16px, 6vh, 96px) 0;
+  padding: clamp(48px, 10vh, 120px) 0;
   background: var(--surface-brand);
   color: var(--color-white);
   font-family: var(--font-body);
@@ -24,7 +21,7 @@
 .hero {
   position: relative;
   flex: 0 1 auto;
-  padding: clamp(12px, 4vh, var(--sp-3xl)) 0 clamp(8px, 2.5vh, var(--sp-lg));
+  padding: clamp(24px, 6vh, var(--sp-3xl)) 0 clamp(32px, 6vh, var(--sp-2xl));
 }
 
 .heroInner {
@@ -210,7 +207,7 @@
    ============================================================ */
 .process {
   flex: 0 1 auto;
-  padding: clamp(8px, 2.4vh, var(--sp-2xl)) 0 clamp(8px, 3vh, var(--sp-4xl));
+  padding: clamp(16px, 4vh, var(--sp-2xl)) 0 clamp(16px, 4vh, var(--sp-4xl));
 }
 
 .processInner {

@@ -12,11 +12,6 @@ import TopNav from "./TopNav";
 import Footer from "./Footer";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  // A página inicial ocupa exatamente um ecrã: sem rodapé não há nada para
-  // percorrer abaixo do processo. As restantes páginas mantêm o rodapé.
-  const isHome = pathname === "/";
-
   return (
     <LanguageProvider>
       <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
@@ -41,17 +36,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </header>
 
         {/*
-          Há sempre uma única barra de scroll no site. Na home, uma só
-          secção, `screen-main-single` fixa a altura ao ecrã e elimina o
-          scroll. Nas restantes páginas, `screen-main` cresce com o
-          conteúdo e é o `body` que percorre a página inteira — as
+          Há sempre uma única barra de scroll no site: `screen-main` cresce
+          com o conteúdo e é o `body` que percorre a página inteira — as
           secções nunca têm scroll próprio, evitando sobreposições.
         */}
-        <main
-          className={`screen-main px-0 pb-0 ${isHome ? "screen-main-single flex flex-col" : ""}`}
-        >
+        <main className="screen-main px-0 pb-0">
           {children}
-          {!isHome ? <Footer /> : null}
+          <Footer />
         </main>
       </div>
     </LanguageProvider>
