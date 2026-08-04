@@ -227,6 +227,26 @@ export const courseModules: CourseModule[] = [
     ],
    },
   ],
+  evaluationExamples: [
+   {
+    title: "Example 1 — The mission that looked good",
+    scenario:
+     "A platform advertises \"restaurant mission — €50\". It includes a meal reimbursed up to €30, 35 minutes of driving round trip, and a form that takes about 45 minutes to fill in.",
+    correctApproach:
+     "\"Real fee: €20. Total time: ~1h50 (travel + a 40-minute visit + report). Net value ≈ €11/hour — below my minimum. I only accept if I can group it with another mission in the same area.\"",
+    incorrectApproach:
+     "\"The mission pays €50, I'll take it.\" — confuses the fee with the advertised total and ignores the actual time spent.",
+   },
+   {
+    title: "Example 2 — Picking the right platform",
+    scenario:
+     "A new \"platform\" asks for a €15 \"certification fee\" before unlocking access to the missions available in your area.",
+    correctApproach:
+     "\"No serious platform charges for access to missions. I don't register, and I report the listing if possible.\"",
+    incorrectApproach:
+     "\"I'll pay the €15, it's probably worth it to get started faster.\" — that's exactly the warning sign described on this page.",
+   },
+  ],
   quiz: [
    {
     id: "m2q1",
@@ -599,6 +619,26 @@ export const courseModules: CourseModule[] = [
      "**I know my scenario and my questions.** Two or three, maximum. And I know how I'll leave.",
      "**I've confirmed the exact address and opening hours.** Big chains have stores 300 metres apart: evaluating the wrong one happens more often than you'd think.",
     ],
+   },
+  ],
+  evaluationExamples: [
+   {
+    title: "Example 1 — Brief skimmed too fast",
+    scenario:
+     "The brief explicitly asks for the till number and the store's opening time. You only notice that while filling in the form, three hours after the visit, at home.",
+    correctApproach:
+     "\"I read the brief and the full form before leaving home, pencil in hand, and only then prepare the scenario — so no field catches me off guard.\"",
+    incorrectApproach:
+     "\"I skimmed the brief, figured I got the gist.\" — result: an incomplete report and a mission at risk of being rejected.",
+   },
+   {
+    title: "Example 2 — An unconvincing scenario",
+    scenario:
+     "The mission asks you to evaluate an office-supplies store. You invent an elaborate scenario: \"manager of an events company opening branches in three countries\".",
+    correctApproach:
+     "\"I use a scenario close to my real life: I need supplies for a small home office. Easy to sustain under any follow-up question.\"",
+    incorrectApproach:
+     "Keeping the elaborate character — it collapses at the first \"and what do you need that for?\" and draws the employee's attention.",
    },
   ],
   quiz: [
@@ -1073,6 +1113,26 @@ export const courseModules: CourseModule[] = [
     ],
    },
   ],
+  evaluationExamples: [
+   {
+    title: "Example 1 — Separating fee from reimbursement",
+    scenario:
+     "At the end of the month, you add up everything received from the platforms and conclude you \"earned €480\" across five missions.",
+    correctApproach:
+     "\"I split the sheet into two columns: fee (real income) and reimbursement (returned expense). I only declare and count the fee column as earnings — that month, €210.\"",
+    incorrectApproach:
+     "\"I earned €480\" — confuses total received with income and completely distorts your sense of profitability.",
+   },
+   {
+    title: "Example 2 — Going over the reimbursement cap",
+    scenario:
+     "The brief sets a €20 reimbursement cap for the mandatory purchase. In the store, the cheapest item that fits the request costs €27.",
+    correctApproach:
+     "\"I contact the agency before buying, to confirm whether there's tolerance or whether I absorb the €7 difference. I always keep the receipt as proof of the total spent.\"",
+    incorrectApproach:
+     "\"I buy it and assume the platform pays the full amount.\" — the excess over the cap almost always falls on the evaluator, and the surprise arrives too late.",
+   },
+  ],
   quiz: [
    {
     id: "m9q1",
@@ -1175,6 +1235,26 @@ export const courseModules: CourseModule[] = [
      "**Build a relationship with agencies.** Reply quickly, meet deadlines, flag problems early and be courteous with whoever reviews your reports. After a few months, direct invitations start arriving — the missions that never get published.",
      "**A realistic target for the first three months:** 4 to 8 missions a month, €80 to €250 in monthly fees, and an above-average rating. From there it's your choice: keep it as side income or push it towards figures that pay bills.",
     ],
+   },
+  ],
+  evaluationExamples: [
+   {
+    title: "Example 1 — A measured start vs. an overloaded one",
+    scenario:
+     "In your first week registered on several platforms, five mission invitations arrive for the same week.",
+    correctApproach:
+     "\"I accept one or two, close to home and simple, to properly close the full cycle — apply, execute, report, get approved — before scaling up volume.\"",
+    incorrectApproach:
+     "\"I accept all five, might as well.\" — the risk of missing a deadline is high, and a poor early rating takes months to recover from.",
+   },
+   {
+    title: "Example 2 — Reading the agency's feedback",
+    scenario:
+     "Your first report comes back with an average quality score and three reviewer comments about missing timestamps in the narrative.",
+    correctApproach:
+     "\"I read the comments carefully, adjust the next report to always include concrete times, and treat the feedback as free training.\"",
+    incorrectApproach:
+     "\"I ignore the comments, what matters is I already got paid.\" — repeats the same mistake and keeps the rating stuck.",
    },
   ],
   quiz: [
