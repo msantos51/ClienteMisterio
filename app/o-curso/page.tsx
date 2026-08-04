@@ -19,6 +19,18 @@ const ArrowIcon = ({ size = 16 }: { size?: number }) => (
   </svg>
 );
 
+const LockIcon = ({ size = 13 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
+const StarIcon = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden>
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+  </svg>
+);
+
 function BuyButton({ children, className }: { children: React.ReactNode; className?: string }) {
   const router = useRouter();
   const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
@@ -148,8 +160,16 @@ export default function CoursePage() {
               <div className={styles.cardPriceRow}>
                 <span className={styles.cardOrig}>{t.coursePage.pricingOriginal}</span>
                 <span className={styles.cardPrice}>{t.coursePage.pricingPrice}</span>
+                <span className={styles.discountBadge}>{t.coursePage.pricingDiscount}</span>
               </div>
-              <div className={styles.cardPayment}>{t.coursePage.pricingPayment}</div>
+              <div className={styles.cardPayment}>
+                {t.coursePage.pricingPayment}
+                <span className={styles.lifetimeChip}>
+                  <LockIcon size={12} />
+                  {t.coursePage.pricingLifetime}
+                </span>
+              </div>
+              <p className={styles.urgencyNote}>{t.coursePage.pricingUrgency}</p>
 
               <div className={styles.featureList}>
                 {pricingFeatures.map((item) => (
@@ -192,6 +212,59 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
                 </div>
                 <h3 className={styles.benefitTitle}>{b.title}</h3>
                 <p className={styles.benefitDesc}>{b.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          CONFIANÇA — números + certificação
+          ============================================================ */}
+      <section className={styles.sectionTight}>
+        <div className={styles.wrap}>
+          <div className={styles.trustBar}>
+            <div className={styles.trustBadgeChip}>
+              <LockIcon size={13} />
+              {t.coursePage.trustBadge}
+            </div>
+            <div className={styles.trustStat}>
+              <div className={styles.trustStatNum}>{t.coursePage.trustStudents}</div>
+              <div className={styles.trustStatLabel}>{t.coursePage.trustStudentsLabel}</div>
+            </div>
+            <div className={styles.trustStat}>
+              <div className={styles.trustStatNum}>{t.coursePage.trustReviews}</div>
+              <div className={styles.trustStatLabel}>{t.coursePage.trustReviewsLabel}</div>
+            </div>
+            <div className={styles.trustStat}>
+              <div className={styles.trustStatNum}>{t.coursePage.trustCertified}</div>
+              <div className={styles.trustStatLabel}>{t.coursePage.trustCertifiedLabel}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+          TESTEMUNHOS
+          ============================================================ */}
+      <section className={styles.sectionTight}>
+        <div className={styles.wrap}>
+          <h2 className={`${styles.displayLg} ${styles.testimonialsTitle}`}>
+            {t.coursePage.testimonialsTitle}
+          </h2>
+          <div className={styles.testimonials} role="region" aria-label={t.coursePage.testimonialsTitle}>
+            {[
+              { quote: t.coursePage.testimonial1Quote, name: t.coursePage.testimonial1Name, role: t.coursePage.testimonial1Role },
+              { quote: t.coursePage.testimonial2Quote, name: t.coursePage.testimonial2Name, role: t.coursePage.testimonial2Role },
+              { quote: t.coursePage.testimonial3Quote, name: t.coursePage.testimonial3Name, role: t.coursePage.testimonial3Role },
+            ].map((item) => (
+              <div className={styles.testimonial} key={item.name}>
+                <div className={styles.testimonialStars} aria-hidden>
+                  <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
+                </div>
+                <p className={styles.testimonialQuote}>&ldquo;{item.quote}&rdquo;</p>
+                <div className={styles.testimonialName}>{item.name}</div>
+                <div className={styles.testimonialRole}>{item.role}</div>
               </div>
             ))}
           </div>
