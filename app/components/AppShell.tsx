@@ -40,10 +40,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           com o conteúdo e é o `body` que percorre a página inteira — as
           secções nunca têm scroll próprio, evitando sobreposições.
         */}
-        <main className="screen-main px-0 pb-0">
+        <main className="screen-main px-0">
           {children}
-          <Footer />
         </main>
+        <Footer />
       </div>
     </LanguageProvider>
   );

@@ -9,10 +9,19 @@
 .page {
   display: flex;
   flex-direction: column;
-  padding: clamp(48px, 10vh, 120px) 0;
+  justify-content: center;
+  min-height: calc(100dvh - var(--header-h) - var(--footer-h));
+  padding: clamp(12px, 4vh, 48px) 0;
   background: var(--surface-brand);
   color: var(--color-white);
   font-family: var(--font-body);
+}
+
+@media (min-width: 861px) {
+  .page {
+    height: calc(100dvh - var(--header-h) - var(--footer-h));
+    overflow: hidden;
+  }
 }
 
 /* ============================================================
