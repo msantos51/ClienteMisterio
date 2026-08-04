@@ -60,25 +60,12 @@ export default function HomePage() {
               </span>
             </h1>
             <p className={styles.subtitle}>{t.home.subtitle}</p>
-            <p className={styles.valueProp}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <line x1="12" y1="1" x2="12" y2="23" />
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-              </svg>
-              {t.home.valueProp}
-            </p>
 
             <div className={styles.ctaRow}>
               <Link href="/login" className={styles.ctaPrimary}>
                 {t.home.ctaPrimary}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </Link>
-              <Link href="/about" className={styles.ctaSecondary}>
-                {t.home.ctaSecondary}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M6 9l6 6 6-6" />
                 </svg>
               </Link>
             </div>

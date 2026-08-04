@@ -965,7 +965,7 @@
 .qOptSelected {
   border-color: var(--color-red) !important;
   background: rgba(124, 92, 255, 0.07) !important;
-  color: var(--color-danger) !important;
+  color: var(--color-red) !important;
 }
 .qOptLetter {
   flex-shrink: 0;

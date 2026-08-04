@@ -895,7 +895,7 @@ export default function CursoPage() {
   const premiumTheoryPage = activeSupportContent
     ? {
         title: cp.premiumPageTitle,
-        blocks: [activeSupportContent.realScenario],
+        blocks: [] as string[],
       }
     : null;
   const allTheoryPages = premiumTheoryPage ? [...baseTheoryPages, premiumTheoryPage] : baseTheoryPages;
