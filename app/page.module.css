@@ -1,8 +1,9 @@
 /*
  * Cliente Mistério — Homepage.
- * Superfície branca, título de grande escala com o segundo verso em roxo,
- * ícone de destaque em halo roxo e três passos ligados por uma curva
- * ascendente. CSS Module ao lado de app/page.tsx.
+ * Superfície roxa da marca (igual às restantes páginas), título de grande
+ * escala com o segundo verso em destaque branco-sobre-roxo, ícone de
+ * destaque em halo branco e três passos ligados por uma curva ascendente.
+ * CSS Module ao lado de app/page.tsx.
  */
 
 .page {
@@ -11,8 +12,8 @@
   justify-content: center;
   flex: 1;
   min-height: 0;
-  background: var(--color-white);
-  color: var(--on-invert);
+  background: var(--surface-brand);
+  color: var(--color-white);
   font-family: var(--font-body);
 }
 
@@ -50,14 +51,14 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--on-invert-3);
+  color: rgba(255, 255, 255, 0.78);
   margin: 0 0 clamp(8px, 1.6vh, var(--sp-md));
 }
 .eyebrow::before {
   content: "";
   width: 34px;
   height: 2px;
-  background: var(--color-red);
+  background: currentColor;
   flex-shrink: 0;
 }
 
@@ -68,19 +69,26 @@
   letter-spacing: -0.04em;
   line-height: 1.02;
   text-transform: uppercase;
-  color: var(--on-invert);
+  color: var(--color-white);
   margin: 0;
   text-wrap: balance;
 }
 
-.titleAccent { color: var(--color-red); }
+/* Realce do segundo verso: inversão do sistema — caixa branca, texto roxo. */
+.titleAccent {
+  color: var(--color-red);
+  background: var(--color-white);
+  padding: 0 0.1em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
 .dot { color: var(--color-red); }
 
 .subtitle {
   margin: clamp(8px, 1.6vh, var(--sp-md)) 0 0;
   font-size: 17px;
   line-height: 1.5;
-  color: var(--on-invert-2);
+  color: rgba(255, 255, 255, 0.82);
   max-width: 46ch;
 }
 
@@ -91,8 +99,8 @@
   margin: clamp(6px, 1.2vh, var(--sp-sm)) 0 0;
   padding: 8px 14px;
   border-radius: var(--radius-pill);
-  background: rgba(124, 92, 255, 0.1);
-  color: var(--color-red);
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-white);
   font-size: 13px;
   font-weight: 700;
 }
@@ -113,22 +121,22 @@
   min-height: 48px;
   padding: 15px 26px;
   border-radius: var(--radius-md);
-  background: var(--color-red);
-  color: var(--color-white);
+  background: var(--color-white);
+  color: var(--color-red);
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 10px 24px rgba(124, 92, 255, 0.28);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
   transition: all 200ms ease;
 }
 .ctaPrimary:hover {
-  background: var(--color-red-2);
+  color: var(--color-red-3);
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(124, 92, 255, 0.34);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
 }
 .ctaPrimary:active {
   transform: translateY(0) scale(0.97);
-  box-shadow: 0 6px 16px rgba(124, 92, 255, 0.3);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
 }
 .ctaPrimary svg { width: 18px; height: 18px; }
 
@@ -137,7 +145,7 @@
   align-items: center;
   gap: 8px;
   min-height: 48px;
-  color: var(--on-invert);
+  color: var(--color-white);
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
@@ -165,9 +173,9 @@
   border-radius: 50%;
   background: radial-gradient(
     circle at 50% 45%,
-    rgba(124, 92, 255, 0.28) 0%,
-    rgba(124, 92, 255, 0.14) 45%,
-    rgba(124, 92, 255, 0) 72%
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0) 72%
   );
 }
 
@@ -179,8 +187,8 @@
   width: 128px;
   height: 128px;
   border-radius: 50%;
-  background: rgba(124, 92, 255, 0.12);
-  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.22);
+  background: var(--color-white);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
   color: var(--color-red);
 }
 .heroArtRing svg { width: 54px; height: 54px; }
@@ -255,14 +263,14 @@
   border-radius: 50%;
   background: var(--color-white);
   color: var(--color-red);
-  box-shadow: 0 0 0 1px var(--hairline-invert), var(--shadow-sm);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 .node svg { width: 24px; height: 24px; }
 
 .nodeFilled {
-  background: var(--color-red);
+  background: var(--color-black);
   color: var(--color-white);
-  box-shadow: 0 10px 24px rgba(124, 92, 255, 0.32);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
 }
 
 .stepIndex {
@@ -274,7 +282,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-red);
+  color: var(--color-white);
 }
 
 .stepTitle {
@@ -285,7 +293,7 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
-  color: var(--on-invert);
+  color: var(--color-white);
   max-width: 26ch;
   text-wrap: pretty;
 }
@@ -296,7 +304,7 @@
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
-  color: var(--on-invert-3);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 30ch;
 }
 
@@ -332,8 +340,8 @@
     width: 2px;
     background: linear-gradient(
       180deg,
-      rgba(124, 92, 255, 0.4) 0%,
-      rgba(124, 92, 255, 0.08) 100%
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.08) 100%
     );
   }
   .stepIndex { margin-top: 0; }

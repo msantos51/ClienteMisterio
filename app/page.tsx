@@ -110,9 +110,9 @@ export default function HomePage() {
           >
             <defs>
               <linearGradient id="cmTrack" x1="0" y1="1" x2="1" y2="0">
-                <stop offset="0%" stopColor="var(--color-red)" stopOpacity="0.18" />
-                <stop offset="45%" stopColor="var(--color-red)" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="var(--color-red)" stopOpacity="1" />
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
+                <stop offset="45%" stopColor="#ffffff" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
               </linearGradient>
             </defs>
             <path
