@@ -19,9 +19,15 @@ export const translations = {
       badge: "O único curso do género em Portugal",
       titleLine1: "Avalia lojas.",
       titleLine2: "Recebe por isso",
+      subtitle: "Transforma o teu tempo livre numa oportunidade real. Torna-te cliente mistério e começa hoje.",
+      ctaPrimary: "Quero começar",
+      ctaSecondary: "Saber mais",
       step1: "Inscreve-te no curso",
+      step1Desc: "Cria a tua conta e começa agora.",
       step2: "Realiza todos os módulos",
+      step2Desc: "Aprende ao teu ritmo com conteúdos práticos.",
       step3: "Acesso a todas as missões das várias empresas em Portugal",
+      step3Desc: "Recebe, avalia e ganha.",
     },
 
     // About Page
@@ -493,9 +499,15 @@ export const translations = {
       badge: "The only course of its kind in Portugal",
       titleLine1: "Evaluate stores.",
       titleLine2: "Get paid for it",
+      subtitle: "Turn your free time into a real opportunity. Become a mystery shopper and start today.",
+      ctaPrimary: "Get started",
+      ctaSecondary: "Learn more",
       step1: "Sign up for the course",
+      step1Desc: "Create your account and start now.",
       step2: "Complete every module",
+      step2Desc: "Learn at your own pace with practical content.",
       step3: "Access every mission from companies across Portugal",
+      step3Desc: "Get missions, evaluate and earn.",
     },
 
     // About Page

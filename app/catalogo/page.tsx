@@ -131,7 +131,7 @@ export default function CatalogPage() {
               <div className="grid grid-cols-2 gap-3">
                 {includedItems.map((item) => (
                   <div key={item} className="flex items-start gap-2 text-sm text-[#141416]/80">
-                    <span className="mt-0.5 shrink-0 text-[#e30613]">✓</span>
+                    <span className="mt-0.5 shrink-0 text-[#7c5cff]">✓</span>
                     <span className="leading-6">{item}</span>
                   </div>
                 ))}
@@ -149,7 +149,7 @@ export default function CatalogPage() {
                     key={mod.id}
                     className="flex items-start gap-4 rounded-lg border border-[#e7e7ea] bg-[#e7e7ea]/25 px-4 py-3"
                   >
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e30613]/15 text-xs font-bold text-[#e30613]">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#7c5cff]/15 text-xs font-bold text-[#7c5cff]">
                       {mod.id}
                     </div>
                     <div>
@@ -159,8 +159,8 @@ export default function CatalogPage() {
                   </div>
                 ))}
                 {/* Certificate */}
-                <div className="flex items-start gap-4 rounded-lg border border-[#e30613]/30 bg-[#e30613]/10 px-4 py-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#e30613] text-xs font-bold text-white">
+                <div className="flex items-start gap-4 rounded-lg border border-[#7c5cff]/30 bg-[#7c5cff]/10 px-4 py-3">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#7c5cff] text-xs font-bold text-white">
                     ★
                   </div>
                   <div>
@@ -181,7 +181,7 @@ export default function CatalogPage() {
               <div className="grid grid-cols-4 gap-4 text-center">
                 {howWorksSteps.map((item) => (
                   <div key={item.step} className="space-y-2">
-                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#e30613] text-sm font-bold text-white">
+                    <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#7c5cff] text-sm font-bold text-white">
                       {item.step}
                     </div>
                     <p className="text-sm font-semibold text-[#141416]">{item.label}</p>
@@ -200,7 +200,7 @@ export default function CatalogPage() {
                 <p className="text-xs text-[#141416]/65 mt-0.5">{c.footerUrl}</p>
               </div>
               <div className="text-right">
-                <p className="text-lg font-bold text-[#e30613]">24,99€</p>
+                <p className="text-lg font-bold text-[#7c5cff]">24,99€</p>
                 <p className="text-xs text-[#141416]/65">{c.footerAccessNote}</p>
               </div>
             </div>

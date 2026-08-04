@@ -4,12 +4,12 @@
  * secções e utilitários usados em toda a aplicação.
  *
  * PALETA OFICIAL (única fonte de verdade de cor do site):
- *   Vermelho  #E30613 — superfície principal: fundo do site e do cabeçalho
- *   Vermelho  #C40510 — superfície alternada, para dar ritmo entre secções
- *   Branco    #FFFFFF — texto principal sobre vermelho e painéis invertidos
+ *   Roxo      #7c5cff — superfície principal: fundo do site e do cabeçalho
+ *   Roxo      #6d4ce6 — superfície alternada, para dar ritmo entre secções
+ *   Branco    #FFFFFF — texto principal sobre roxo e painéis invertidos
  *   Preto     #101012 — rodapé, painéis de contraste e detalhes
  *
- * O site é um sistema de dois tons: VERMELHO com texto BRANCO, e o inverso
+ * O site é um sistema de dois tons: ROXO com texto BRANCO, e o inverso
  * — painéis BRANCOS com texto quase-preto — usado nos blocos que pedem foco
  * (formulários, cartões de preço, quiz, documento imprimível). O preto entra
  * apenas como âncora (rodapé, chrome do leitor) e como sombra.
@@ -26,28 +26,28 @@
    =================================================================== */
 :root {
   /* --- Paleta base ------------------------------------------------ */
-  --color-red: #e30613;                /* Vermelho da marca — superfície */
-  --color-red-2: #c40510;              /* Vermelho alternado — ritmo */
-  --color-red-3: #a00309;              /* Vermelho profundo — pressed */
-  --color-red-bright: #ff5147;         /* Vermelho vivo — acento sobre branco/preto */
+  --color-red: #7c5cff;                /* Roxo da marca — superfície */
+  --color-red-2: #6d4ce6;              /* Roxo alternado — ritmo */
+  --color-red-3: #5a3dc7;              /* Roxo profundo — pressed */
+  --color-red-bright: #a78bfa;         /* Roxo vivo — acento sobre branco/preto */
   --color-white: #ffffff;
   --color-black: #101012;              /* Preto da marca — rodapé, chrome */
   --color-black-2: #1b1b1f;            /* Preto elevado — painéis sobre preto */
 
   /* --- Superfícies -------------------------------------------------
-     `surface` = vermelho (o site). `invert` = branco (blocos de foco). */
+     `surface` = roxo (o site). `invert` = branco (blocos de foco). */
   --surface-brand: var(--color-red);
   --surface-brand-alt: var(--color-red-2);
   --surface-invert: var(--color-white);
   --surface-ink: var(--color-black);
 
-  /* Painéis translúcidos sobre vermelho — evitam introduzir novas cores. */
+  /* Painéis translúcidos sobre roxo — evitam introduzir novas cores. */
   --panel: rgba(255, 255, 255, 0.08);
   --panel-strong: rgba(255, 255, 255, 0.14);
   --panel-ink: rgba(0, 0, 0, 0.16);
 
   /* --- Texto -------------------------------------------------------- */
-  --on-brand: var(--color-white);              /* texto sobre vermelho */
+  --on-brand: var(--color-white);              /* texto sobre roxo */
   --on-brand-2: rgba(255, 255, 255, 0.82);     /* corpo secundário */
   --on-brand-3: rgba(255, 255, 255, 0.64);     /* labels, hints */
   --on-invert: #141416;                        /* texto sobre branco */
@@ -140,7 +140,7 @@
   --color-success-green: var(--color-success);
   --color-warning-orange: var(--color-warning);
 
-  --color-red-hover: #f5232f;
+  --color-red-hover: #8f74ff;
   --color-red-active: var(--color-red-3);
   --color-red-ink: var(--color-danger);
   --color-red-soft: rgba(255, 255, 255, 0.14);
@@ -204,7 +204,7 @@
   --brand-500: var(--color-red);
   --brand-600: var(--color-red);
   --brand-700: var(--color-red-2);
-  --brand-soft: rgba(227, 6, 19, 0.1);
+  --brand-soft: rgba(124, 92, 255, 0.1);
   --accent: var(--color-red);
   --primary: var(--color-red);
   --surface: var(--color-white);
@@ -217,14 +217,14 @@
   --color-gray-light: var(--hairline-invert);
   --color-gray-medium: var(--on-invert-3);
   --color-bg-light: #f6f6f8;
-  --color-red-soft: rgba(227, 6, 19, 0.1);
+  --color-red-soft: rgba(124, 92, 255, 0.1);
 
   --btn-bg: var(--color-red);
   --btn-fg: var(--color-white);
   --btn-bg-hover: var(--color-red-2);
   --btn-fg-hover: var(--color-white);
-  --btn-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
-  --btn-shadow-hover: 0 8px 22px rgba(227, 6, 19, 0.34);
+  --btn-shadow: 0 4px 14px rgba(124, 92, 255, 0.28);
+  --btn-shadow-hover: 0 8px 22px rgba(124, 92, 255, 0.34);
   --focus-ring: var(--color-red);
 }
 
@@ -543,7 +543,7 @@
     width: 100%;
   }
 
-  /* Botões do cabeçalho — compactos e legíveis sobre o vermelho. */
+  /* Botões do cabeçalho — compactos e legíveis sobre o branco. */
   .site-pill-button,
   .button-size-login,
   .site-pill-button-secondary {
@@ -553,19 +553,19 @@
     letter-spacing: 0.01em;
   }
 
-  /* Vazado sobre o cabeçalho vermelho: contorno branco. */
+  /* Vazado sobre o cabeçalho branco: contorno cinzento. */
   .site-header .site-pill-button-secondary {
     background-color: transparent;
-    color: var(--color-white);
-    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
     padding: 11px 21px;
     box-shadow: none;
   }
 
   .site-header .site-pill-button-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.14);
-    border-color: var(--color-white);
-    color: var(--color-white);
+    background-color: var(--panel-strong);
+    border-color: var(--ink);
+    color: var(--ink);
     box-shadow: none;
   }
 
@@ -579,7 +579,7 @@
     height: var(--header-control-height);
     min-width: 44px;
     min-height: 44px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--line-strong);
     border-radius: var(--radius-md);
     background-color: transparent;
     box-shadow: none;
@@ -596,8 +596,8 @@
   }
 
   .menu-toggle-button:hover {
-    background-color: rgba(255, 255, 255, 0.16);
-    border-color: var(--color-white);
+    background-color: var(--panel-strong);
+    border-color: var(--ink);
     transform: none;
     box-shadow: none;
   }
@@ -616,7 +616,7 @@
     width: 100%;
     height: 2px;
     border-radius: var(--radius-pill);
-    background-color: var(--color-white);
+    background-color: var(--ink);
     transition: all 300ms ease;
   }
 
@@ -820,8 +820,8 @@
      desenho do cabeçalho não contamina outros usos do elemento.
      ================================================================= */
   .site-header {
-    background-color: var(--surface-brand);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--line);
     box-shadow: none;
     z-index: 100;
   }
@@ -850,7 +850,7 @@
     text-decoration: none;
     font-size: 16px;
     font-weight: 700;
-    color: var(--color-white);
+    color: var(--ink);
   }
 
   .site-header .logo img {
@@ -865,14 +865,14 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.78);
+    color: var(--muted);
     text-decoration: none;
     transition: color 200ms ease;
     position: relative;
   }
 
   .site-header nav a:hover {
-    color: var(--color-white);
+    color: var(--ink);
   }
 
   .site-header nav a::after {
@@ -882,7 +882,7 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--color-white);
+    background-color: var(--brand);
     transition: width 200ms ease;
   }
 
@@ -890,9 +890,9 @@
     width: 100%;
   }
 
-  /* Página ativa: texto a branco cheio e régua branca permanente. */
+  /* Página ativa: texto no tom principal e régua roxa permanente. */
   .site-header nav a.nav-link-active {
-    color: var(--color-white);
+    color: var(--ink);
     font-weight: 700;
   }
 
@@ -920,8 +920,8 @@
   /* LANGUAGE SELECTOR */
   .lang-selector {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    color: var(--color-white);
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
     padding: 7px 11px;
     border-radius: var(--radius-sm);
     font-size: 12px;
@@ -933,8 +933,8 @@
   }
 
   .lang-selector:hover {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: var(--color-white);
+    background: var(--panel-strong);
+    border-color: var(--ink);
     transform: none;
     box-shadow: none;
   }
@@ -945,11 +945,11 @@
     align-items: center;
     gap: 16px;
     padding-left: 16px;
-    border-left: 1px solid rgba(255, 255, 255, 0.28);
+    border-left: 1px solid var(--line);
   }
 
   .user-name {
-    color: var(--color-white);
+    color: var(--ink);
     font-size: 14px;
     font-weight: 600;
   }
@@ -1761,7 +1761,7 @@
   .custom-checkbox:checked ~ .checkmark {
     background: var(--color-red);
     border-color: var(--color-red);
-    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.2);
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.2);
   }
 
   .custom-checkbox:checked ~ .checkmark::after {
@@ -1770,7 +1770,7 @@
   }
 
   .custom-checkbox:focus-visible ~ .checkmark {
-    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.35);
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.35);
   }
 
   @keyframes check-anim {
@@ -1965,7 +1965,7 @@
   .input-group select:focus {
     background-color: var(--color-white) !important;
     border-color: var(--color-red) !important;
-    box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.14);
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.14);
   }
 
   /* Ação destrutiva (ex.: terminar sessão). */
@@ -2013,7 +2013,7 @@
     border: none;
     border-left: 3px solid var(--color-red);
     border-radius: var(--radius-sm);
-    background: rgba(227, 6, 19, 0.08);
+    background: rgba(124, 92, 255, 0.08);
     color: var(--color-danger) !important;
     font-weight: 600;
     line-height: 1.5;
@@ -2107,7 +2107,7 @@
   }
 
   .dashboard-menu-item.is-active {
-    background: rgba(227, 6, 19, 0.08);
+    background: rgba(124, 92, 255, 0.08);
     border-color: var(--color-red);
     box-shadow: none;
   }
@@ -2296,7 +2296,7 @@
   }
 
   select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e30613' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237c5cff' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 20px;
