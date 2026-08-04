@@ -166,7 +166,7 @@ export default function AboutPage() {
       {/* ============================================================
           HERO
           ============================================================ */}
-      <header className={styles.hero}>
+      <header className={`${styles.hero} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.heroInner}>
             <div className={styles.eyebrow}>{t.about.badge}</div>
@@ -184,7 +184,7 @@ export default function AboutPage() {
       {/* ============================================================
           CONTENT
           ============================================================ */}
-      <section className={styles.section}>
+      <section className={`${styles.section} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.grid}>
             {/* Left column — advantages */}
@@ -233,7 +233,7 @@ export default function AboutPage() {
       {/* ============================================================
           PILARES
           ============================================================ */}
-      <section className={styles.sectionAlt}>
+      <section className={`${styles.sectionAlt} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.head}>
             <div>
@@ -267,7 +267,7 @@ export default function AboutPage() {
       {/* ============================================================
           SETORES
           ============================================================ */}
-      <section className={styles.section}>
+      <section className={`${styles.section} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.head}>
             <div>
@@ -304,7 +304,7 @@ export default function AboutPage() {
       {/* ============================================================
           NÚMEROS
           ============================================================ */}
-      <section className={styles.strip}>
+      <section className={`${styles.strip} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.stripGrid}>
             <div className={styles.stripItem}>

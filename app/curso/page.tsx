@@ -921,7 +921,7 @@ export default function CursoPage() {
           ============================================================ */}
       {!activeModule && (
         <>
-          <section className={styles.courseHead}>
+          <section className={`${styles.courseHead} full-section full-section-scroll`}>
             <div className={styles.wrap}>
               <div className={styles.courseHeadGrid}>
                 <div>
@@ -962,7 +962,7 @@ export default function CursoPage() {
             </div>
           </section>
 
-          <section className={styles.modList}>
+          <section className={`${styles.modList} full-section full-section-scroll`}>
             <div className={styles.wrap}>
               <div className={styles.modListHead}>
                 <h2 className={styles.modListTitle}>{cp.courseModulesTitle}</h2>

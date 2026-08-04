@@ -22,7 +22,7 @@ export default function TermosECondicoes() {
       {/* ============================================================
           HERO
           ============================================================ */}
-      <header className={styles.hero}>
+      <header className={`${styles.hero} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.eyebrow}>{headerLabel}</div>
           <h1 className={`${styles.displayLg} ${styles.heroTitle}`}>
@@ -37,7 +37,7 @@ export default function TermosECondicoes() {
       {/* ============================================================
           SECTIONS
           ============================================================ */}
-      <section className={styles.section}>
+      <section className={`${styles.section} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.sections}>
             {sections.map((section) => (

@@ -26,11 +26,26 @@
 }
 @media (min-width: 768px) { .wrap { padding: 0 40px; } }
 
-.section { padding: 96px 0; }
-.sectionTight { padding: 64px 0; }
+.section {
+  padding: clamp(28px, 8vh, 96px) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sectionTight {
+  padding: clamp(20px, 6vh, 64px) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sectionSteps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 @media (max-width: 720px) {
-  .section { padding: 64px 0; }
-  .sectionTight { padding: 40px 0; }
+  .section { padding: clamp(20px, 6vh, 64px) 0; }
+  .sectionTight { padding: clamp(14px, 4vh, 40px) 0; }
 }
 
 .eyebrow {
@@ -138,11 +153,14 @@
    HERO
    ============================================================ */
 .hero {
-  padding: 96px 0;
+  padding: clamp(28px, 8vh, 96px) 0;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-@media (max-width: 720px) { .hero { padding: 64px 0; } }
+@media (max-width: 720px) { .hero { padding: clamp(20px, 6vh, 64px) 0; } }
 
 .heroGrid {
   position: relative;
@@ -703,12 +721,12 @@
    COMO FUNCIONA — secção vinda da antiga página inicial
    ============================================================ */
 .sectionSteps {
-  padding: 96px 0;
+  padding: clamp(28px, 8vh, 96px) 0;
   background: var(--surface-brand-alt);
   border-top: 1px solid var(--hairline-soft);
   border-bottom: 1px solid var(--hairline-soft);
 }
-@media (max-width: 720px) { .sectionSteps { padding: 64px 0; } }
+@media (max-width: 720px) { .sectionSteps { padding: clamp(20px, 6vh, 64px) 0; } }
 
 .headKicker {
   font-size: 11px;

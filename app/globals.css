@@ -93,6 +93,7 @@
   --radius-pill: 999px;  /* pílulas, réguas finas e barras de progresso */
   --radius-sharp: var(--radius-md);
   --header-control-height: 38px;
+  --header-h: 72px;         /* altura fixa de .site-header-inner */
 
   /* Sombras — sobre vermelho só funcionam sombras pretas e discretas. */
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.12);
@@ -2234,6 +2235,46 @@
       top: 110px;
       display: block;
     }
+  }
+
+  /* ===================================================================
+     PARTE 14 — SECÇÕES DE ECRÃ INTEIRO
+     -------------------------------------------------------------------
+     Cada página ocupa exatamente a altura visível abaixo do cabeçalho
+     fixo (100dvh - --header-h). Numa página de secção única (ex: home)
+     isto elimina o scroll. Em páginas com várias secções, `.screen-main`
+     torna-se o contentor de scroll com "encaixe": cada `.full-section`
+     preenche o ecrã por inteiro e só a secção seguinte aparece quando se
+     desliza — nunca uma secção cortada a meio. Se o conteúdo de uma
+     secção for demasiado extenso para o ecrã (ex: um formulário longo em
+     ecrãs baixos), essa secção ganha `.full-section-scroll` para deslizar
+     internamente em vez de cortar texto.
+     =================================================================== */
+  .screen-main {
+    height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y proximity;
+  }
+
+  .full-section {
+    min-height: calc(100dvh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .full-section-scroll {
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    /* Um flex column centrado (.full-section) com conteúdo maior do que a
+       caixa distribui o overflow para os dois lados: a posição de scroll 0
+       já começa a meio do conteúdo e o início fica inacessível. Quando a
+       secção pode precisar de scroll interno, o alinhamento tem de ser ao
+       topo para nunca esconder o começo do conteúdo. */
+    justify-content: flex-start;
   }
 
 }

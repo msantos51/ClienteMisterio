@@ -417,7 +417,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <section className="w-full space-y-8 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+    <section className="full-section full-section-scroll w-full space-y-8 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4">
           <div className="login-form w-full max-w-2xl">

@@ -47,7 +47,7 @@ export default function CatalogPage() {
         }
       `}</style>
 
-      <div className="min-h-screen bg-[color:var(--background)] py-10 px-4 print:bg-white print:py-0 print:px-0">
+      <div className="full-section full-section-scroll bg-[color:var(--background)] py-10 px-4 print:bg-white print:py-0 print:px-0">
         {/* Print button */}
         <div className="no-print mx-auto mb-6 max-w-[820px] flex justify-end">
           <button

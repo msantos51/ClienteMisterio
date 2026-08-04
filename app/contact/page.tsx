@@ -73,7 +73,7 @@ export default function ContactPage() {
       {/* ============================================================
           HERO
           ============================================================ */}
-      <header className={styles.hero}>
+      <header className={`${styles.hero} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.eyebrow}>{t.contact.badge}</div>
           <h1 className={`${styles.displayLg} ${styles.heroTitle}`}>
@@ -88,7 +88,7 @@ export default function ContactPage() {
       {/* ============================================================
           CONTENT
           ============================================================ */}
-      <section className={styles.section}>
+      <section className={`${styles.section} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.grid}>
             {/* Left — contact info */}
