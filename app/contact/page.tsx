@@ -71,28 +71,21 @@ export default function ContactPage() {
   return (
     <div className={styles.page}>
       {/* ============================================================
-          HERO
-          ============================================================ */}
-      <header className={`${styles.hero} full-section full-section-scroll`}>
-        <div className={styles.wrap}>
-          <div className={styles.eyebrow}>{t.contact.badge}</div>
-          <h1 className={`${styles.displayLg} ${styles.heroTitle}`}>
-            Fala <em className={styles.italic}>connosco</em>.
-          </h1>
-          <p className={`${styles.lead} ${styles.heroSub}`}>
-            {t.contact.description}
-          </p>
-        </div>
-      </header>
-
-      {/* ============================================================
-          CONTENT
+          CONTENT — título e informação de contacto à esquerda,
+          formulário à direita, tudo num único ecrã sem scroll.
           ============================================================ */}
       <section className={`${styles.section} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.grid}>
-            {/* Left — contact info */}
+            {/* Left — heading + contact info */}
             <div>
+              <div className={styles.eyebrow}>{t.contact.badge}</div>
+              <h1 className={`${styles.displayLg} ${styles.heroTitle}`}>
+                Fala <em className={styles.italic}>connosco</em>.
+              </h1>
+              <p className={`${styles.lead} ${styles.heroSub}`}>
+                {t.contact.description}
+              </p>
               <h2 className={styles.infoTitle}>{t.contact.contactHeader}</h2>
               <div className={styles.infoItems}>
                 {/* Email */}

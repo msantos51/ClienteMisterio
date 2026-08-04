@@ -12,6 +12,7 @@
   justify-content: center;
   flex: 1;
   min-height: 0;
+  padding: clamp(16px, 6vh, 96px) 0;
   background: var(--surface-brand);
   color: var(--color-white);
   font-family: var(--font-body);

@@ -75,12 +75,12 @@ export default function HomePage() {
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </Link>
-              <a href="#processo" className={styles.ctaSecondary}>
+              <Link href="/about" className={styles.ctaSecondary}>
                 {t.home.ctaSecondary}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M6 9l6 6 6-6" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
 
