@@ -9,6 +9,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { courseModules as courseModulesPt, type QuizQuestion } from "./courseData";
 import { courseModules as courseModulesEn } from "./courseDataEn";
+import { getModuleIcon } from "./moduleIcons";
 import { useLanguage } from "@/app/context/LanguageContext";
 import styles from "./page.module.css";
 
@@ -1101,6 +1102,7 @@ export default function CursoPage() {
             <div className={styles.readerContainer}>
               {/* MAIN COLUMN */}
               <article>
+                <div className={styles.readerIcon} aria-hidden="true">{getModuleIcon(activeModule.id)}</div>
                 <p className={styles.readerChap}>{currentTheoryPage.title}</p>
                 <h1 className={styles.readerHeading}>{activeModule.title}</h1>
                 {activeModule.description && (

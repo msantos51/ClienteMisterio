@@ -612,6 +612,18 @@
   .readerContainer { grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; }
 }
 
+.readerIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  background: var(--color-red);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 22px;
+}
+
 .readerChap {
   font-size: 11px;
   font-weight: 700;
@@ -662,11 +674,13 @@
   font-size: 16px;
   line-height: 1.8;
   color: var(--on-invert-2);
-  text-wrap: pretty;
 }
 .readerProse p {
   margin: 0 0 20px;
   max-width: 66ch;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 .readerProse strong { color: var(--on-invert); font-weight: 700; }
 .readerProse ul {
@@ -772,7 +786,7 @@
   background: #f7f7f9;
   padding: 26px;
 }
-.example p { margin: 0 0 10px; font-size: 14px; color: var(--on-invert-2); line-height: 1.7; }
+.example p { margin: 0 0 10px; font-size: 14px; color: var(--on-invert-2); line-height: 1.7; text-align: justify; }
 .example p:last-child { margin-bottom: 0; }
 .exampleTitle {
   font-size: 17px;
@@ -798,6 +812,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+@media (max-width: 980px) {
+  .aside { position: static; }
 }
 .asideCard {
   background: #f7f7f9;

@@ -216,6 +216,9 @@
   top: 100px;
   overflow: hidden;
 }
+@media (max-width: 880px) {
+  .card { position: static; }
+}
 /* Régua vermelha no topo, assinatura dos painéis brancos. */
 .card::before {
   content: "";
