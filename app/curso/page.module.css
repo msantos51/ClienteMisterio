@@ -169,10 +169,13 @@
    CABEÇALHO DO CURSO
    ============================================================ */
 .courseHead {
-  padding: 56px 0 32px;
+  padding: clamp(20px, 6vh, 56px) 0 clamp(14px, 3.5vh, 32px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 @media (max-width: 720px) {
-  .courseHead { padding: 34px 0 24px; }
+  .courseHead { padding: clamp(16px, 4vh, 34px) 0 clamp(10px, 2.5vh, 24px); }
 }
 .courseHeadGrid {
   display: grid;
@@ -279,9 +282,14 @@
 /* ============================================================
    LISTA DE MÓDULOS
    ============================================================ */
-.modList { padding-bottom: 88px; }
+.modList {
+  padding-bottom: clamp(28px, 8vh, 88px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 @media (max-width: 720px) {
-  .modList { padding-bottom: 56px; }
+  .modList { padding-bottom: clamp(20px, 6vh, 56px); }
 }
 .modListHead {
   display: flex;

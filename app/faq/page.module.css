@@ -48,11 +48,21 @@
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 96px 0 48px;
+  padding: clamp(28px, 8vh, 96px) 0 clamp(16px, 4vh, 48px);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 @media (max-width: 720px) {
-  .hero { padding: 64px 0 32px; }
+  .hero { padding: clamp(20px, 6vh, 64px) 0 clamp(12px, 3vh, 32px); }
+}
+
+.contentSection {
+  padding-bottom: clamp(28px, 8vh, 92px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .eyebrow {
   display: inline-flex;

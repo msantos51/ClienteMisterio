@@ -43,7 +43,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} full-section`}>
       {/* ----------------------------------------------------------
           HERO — proposta de valor à esquerda, destaque à direita
           ---------------------------------------------------------- */}
@@ -130,7 +130,11 @@ export default function HomePage() {
               <li
                 className={styles.step}
                 key={step.title}
-                style={{ "--node-y": `${[106, 48, 0][i]}px` } as React.CSSProperties}
+                style={
+                  {
+                    "--node-y": `clamp(0px, ${[13, 6, 0][i]}vh, ${[106, 48, 0][i]}px)`,
+                  } as React.CSSProperties
+                }
               >
                 <span className={`${styles.node} ${i === 2 ? styles.nodeFilled : ""}`} aria-hidden>
                   {StepIcons[i]}

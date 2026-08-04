@@ -40,12 +40,18 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </header>
 
-        {/* Na página inicial o conteúdo estica-se para ocupar o ecrã inteiro. */}
-        <main className={`flex-1 px-0 pb-0 ${isHome ? "flex flex-col" : ""}`}>
+        {/*
+          `screen-main` faz o conteúdo ocupar exatamente a altura do ecrã
+          abaixo do cabeçalho. Com uma só secção (home) isso elimina o
+          scroll; com várias secções, o scroll dentro de `main` fica com
+          "encaixe" — cada secção aparece por inteiro antes de a seguinte
+          entrar. O rodapé fica fora do encaixe, alcançável a seguir à
+          última secção.
+        */}
+        <main className={`screen-main px-0 pb-0 ${isHome ? "flex flex-col" : ""}`}>
           {children}
+          {!isHome ? <Footer /> : null}
         </main>
-
-        {!isHome ? <Footer /> : null}
       </div>
     </LanguageProvider>
   );

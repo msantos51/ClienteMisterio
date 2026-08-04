@@ -126,7 +126,7 @@ export default function CoursePage() {
       {/* ============================================================
           HERO
           ============================================================ */}
-      <header className={styles.hero}>
+      <header className={`${styles.hero} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.heroGrid}>
             {/* Left — copy */}
@@ -193,7 +193,7 @@ export default function CoursePage() {
       {/* ============================================================
           BENEFITS
           ============================================================ */}
-      <section className={styles.section}>
+      <section className={`${styles.section} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.head}>
             <div>
@@ -221,7 +221,7 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
       {/* ============================================================
           CONFIANÇA — números + certificação
           ============================================================ */}
-      <section className={styles.sectionTight}>
+      <section className={`${styles.sectionTight} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.trustBar}>
             <div className={styles.trustBadgeChip}>
@@ -247,7 +247,7 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
       {/* ============================================================
           TESTEMUNHOS
           ============================================================ */}
-      <section className={styles.sectionTight}>
+      <section className={`${styles.sectionTight} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <h2 className={`${styles.displayLg} ${styles.testimonialsTitle}`}>
             {t.coursePage.testimonialsTitle}
@@ -274,7 +274,7 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
       {/* ============================================================
           COMO FUNCIONA
           ============================================================ */}
-      <section className={styles.sectionSteps}>
+      <section className={`${styles.sectionSteps} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.head}>
             <div>
@@ -307,7 +307,7 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
       {/* ============================================================
           CURRICULUM
           ============================================================ */}
-      <section className={styles.sectionTight}>
+      <section className={`${styles.sectionTight} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.curr}>
             <div className={styles.currInner}>
@@ -406,7 +406,7 @@ Teoria paginada, casos reais comentados e checklists. Cada módulo termina com u
           FINAL CTA (only shown when not logged in)
           ============================================================ */}
       {!isLoggedIn && (
-        <section className={styles.section}>
+        <section className={`${styles.section} full-section full-section-scroll`}>
           <div className={styles.wrap}>
             <div className={styles.final}>
               <div className={styles.finalInner}>

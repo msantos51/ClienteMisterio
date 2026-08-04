@@ -51,7 +51,7 @@ export default function FaqPage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.hero}>
+      <header className={`${styles.hero} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.eyebrow}>Perguntas frequentes</div>
           <h1 className={styles.title}>Tudo o que precisas de saber.</h1>
@@ -62,7 +62,7 @@ export default function FaqPage() {
         </div>
       </header>
 
-      <main className={styles.wrap}>
+      <main className={`${styles.wrap} ${styles.contentSection} full-section full-section-scroll`}>
         <div className={styles.faq}>
           {faqs.map((f, i) => {
             const open = openFaq === i;
