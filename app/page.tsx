@@ -43,7 +43,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className={`${styles.page} full-section`}>
+    <div className={styles.page}>
       {/* ----------------------------------------------------------
           HERO — proposta de valor à esquerda, destaque à direita
           ---------------------------------------------------------- */}

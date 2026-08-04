@@ -94,6 +94,7 @@
   --radius-sharp: var(--radius-md);
   --header-control-height: 38px;
   --header-h: 73px;         /* 72px de .site-header-inner + 1px de border-bottom do .site-header */
+  --footer-h: 40px;         /* altura do rodapé mínimo, fixo em todas as páginas */
 
   /* Sombras — sobre vermelho só funcionam sombras pretas e discretas. */
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.12);
@@ -1555,73 +1556,22 @@
      reservados, sem colunas de navegação nem newsletter.
      ================================================================= */
   .footer-mini {
-    padding: var(--sp-md) 0;
-  }
-
-  .footer-expanded {
-    padding-top: var(--sp-2xl);
-  }
-
-  .footer-heading {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .footer-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    min-height: 40px;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.82);
-    text-decoration: none;
-    transition: color 200ms ease;
   }
 
-  .footer-link:hover {
-    color: var(--color-white);
-  }
-
-  .footer-social-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.24);
-    color: rgba(255, 255, 255, 0.82);
-    transition: all 200ms ease;
-  }
-
-  @media (max-width: 480px) {
-    .footer-social-icon {
-      width: 48px;
-      height: 48px;
-      min-width: 48px;
-      min-height: 48px;
-    }
-  }
-
-  .footer-social-icon:hover {
-    color: var(--color-white);
-    border-color: var(--color-white);
-    transform: translateY(-2px);
+  .footer-mini-inner {
+    height: 100%;
   }
 
   .footer-mini-text {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.5);
   }
 
   .footer-mini-link {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.7);
     text-decoration: underline;
@@ -1851,9 +1801,14 @@
      Preto: fecha a página e separa-a claramente do corpo vermelho.
      =================================================================== */
   footer {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    height: var(--footer-h);
     background: var(--color-black);
     color: var(--color-white);
-    padding: var(--sp-3xl) var(--sp-md) var(--sp-lg);
+    padding: 0 var(--sp-md);
   }
 
   /* ===================================================================
@@ -2255,15 +2210,16 @@
      =================================================================== */
   .screen-main {
     overflow-x: hidden;
+    padding-bottom: var(--footer-h);
   }
 
   .screen-main-single {
-    height: calc(100dvh - var(--header-h));
+    height: calc(100dvh - var(--header-h) - var(--footer-h));
     overflow: hidden;
   }
 
   .full-section {
-    min-height: calc(100dvh - var(--header-h));
+    min-height: calc(100dvh - var(--header-h) - var(--footer-h));
     display: flex;
     flex-direction: column;
     justify-content: center;
