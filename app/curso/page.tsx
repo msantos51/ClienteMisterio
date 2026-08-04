@@ -966,11 +966,6 @@ export default function CursoPage() {
             <div className={styles.wrap}>
               <div className={styles.modListHead}>
                 <h2 className={styles.modListTitle}>{cp.courseModulesTitle}</h2>
-                <div className={styles.modListLegend}>
-                  <span className={styles.legDone}>{cp.completed}</span>
-                  <span className={styles.legNow}>A decorrer</span>
-                  <span>{cp.locked}</span>
-                </div>
               </div>
 
               {courseModules.filter((m) => m.id !== 11).map((mod) => {

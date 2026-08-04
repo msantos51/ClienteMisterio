@@ -216,7 +216,7 @@
   color: var(--on-invert);
   border: none;
   border-radius: var(--radius-xl);
-  padding: 34px;
+  padding: 24px 30px;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
 }
@@ -241,13 +241,13 @@
   border: 1px solid rgba(124, 92, 255, 0.35);
   border-radius: var(--radius-pill);
   padding: 6px 12px;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
 }
-.cardTitle { font-size: 14px; font-weight: 600; color: var(--on-invert); margin: 0 0 10px; }
+.cardTitle { font-size: 14px; font-weight: 600; color: var(--on-invert); margin: 0 0 8px; }
 .cardPriceRow { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
 .cardOrig { font-size: 17px; color: var(--on-invert-3); text-decoration: line-through; }
 .cardPrice {
-  font-size: 46px;
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.04em;
   color: var(--on-invert);
@@ -292,23 +292,23 @@
   font-size: 12.5px;
   font-weight: 700;
   color: var(--color-red);
-  margin: 0 0 24px;
-  line-height: 1.5;
+  margin: 0 0 14px;
+  line-height: 1.4;
 }
 .featureList {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 24px 0;
+  gap: 8px;
+  padding: 14px 0;
   border-top: 1px solid var(--hairline-invert);
   border-bottom: 1px solid var(--hairline-invert);
-  margin-bottom: 26px;
+  margin-bottom: 16px;
 }
 .featureItem {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--on-invert-2);
 }
 .check {
@@ -325,7 +325,7 @@
   text-align: center;
   font-size: 11px;
   color: var(--on-invert-3);
-  margin-top: 16px;
+  margin-top: 10px;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-weight: 700;
