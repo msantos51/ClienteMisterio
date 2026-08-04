@@ -2238,23 +2238,28 @@
   }
 
   /* ===================================================================
-     PARTE 14 — SECÇÕES DE ECRÃ INTEIRO
+     PARTE 14 — SECÇÕES DE ECRÃ
      -------------------------------------------------------------------
-     Cada página ocupa exatamente a altura visível abaixo do cabeçalho
-     fixo (100dvh - --header-h). Numa página de secção única (ex: home)
-     isto elimina o scroll. Em páginas com várias secções, `.screen-main`
-     torna-se o contentor de scroll com "encaixe": cada `.full-section`
-     preenche o ecrã por inteiro e só a secção seguinte aparece quando se
-     desliza — nunca uma secção cortada a meio. Se o conteúdo de uma
-     secção for demasiado extenso para o ecrã (ex: um formulário longo em
-     ecrãs baixos), essa secção ganha `.full-section-scroll` para deslizar
-     internamente em vez de cortar texto.
+     Existe uma única barra de scroll no site: a da página (via `body`/
+     `main`), nunca uma por secção. Isso evita que conteúdos fiquem
+     sobrepostos ou cortados dentro de uma secção.
+
+     Numa página de secção única (ex: home) `.screen-main-single` fixa a
+     altura ao ecrã visível abaixo do cabeçalho (100dvh - --header-h), pelo
+     que não há nada para percorrer. Nas restantes páginas, `.screen-main`
+     não tem altura fixa nem overflow próprio — cresce com o conteúdo e é o
+     `body` que faz o scroll da página inteira. Cada `.full-section` tenta
+     preencher o ecrã (min-height), mas nunca corta nem faz scroll
+     internamente: se o conteúdo for maior do que o ecrã, a secção cresce e
+     empurra as seguintes para baixo, mantendo o scroll único da página.
      =================================================================== */
   .screen-main {
-    height: calc(100dvh - var(--header-h));
-    overflow-y: auto;
     overflow-x: hidden;
-    scroll-snap-type: y proximity;
+  }
+
+  .screen-main-single {
+    height: calc(100dvh - var(--header-h));
+    overflow: hidden;
   }
 
   .full-section {
@@ -2262,18 +2267,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 
   .full-section-scroll {
-    max-height: calc(100dvh - var(--header-h));
-    overflow-y: auto;
     /* Um flex column centrado (.full-section) com conteúdo maior do que a
        caixa distribui o overflow para os dois lados: a posição de scroll 0
-       já começa a meio do conteúdo e o início fica inacessível. Quando a
-       secção pode precisar de scroll interno, o alinhamento tem de ser ao
-       topo para nunca esconder o começo do conteúdo. */
+       já começa a meio do conteúdo e o início fica inacessível. Secções que
+       podem exceder o ecrã alinham-se ao topo para nunca esconder o começo
+       do conteúdo — o excesso simplesmente cresce a página. */
     justify-content: flex-start;
   }
 

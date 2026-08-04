@@ -41,14 +41,15 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         </header>
 
         {/*
-          `screen-main` faz o conteúdo ocupar exatamente a altura do ecrã
-          abaixo do cabeçalho. Com uma só secção (home) isso elimina o
-          scroll; com várias secções, o scroll dentro de `main` fica com
-          "encaixe" — cada secção aparece por inteiro antes de a seguinte
-          entrar. O rodapé fica fora do encaixe, alcançável a seguir à
-          última secção.
+          Há sempre uma única barra de scroll no site. Na home, uma só
+          secção, `screen-main-single` fixa a altura ao ecrã e elimina o
+          scroll. Nas restantes páginas, `screen-main` cresce com o
+          conteúdo e é o `body` que percorre a página inteira — as
+          secções nunca têm scroll próprio, evitando sobreposições.
         */}
-        <main className={`screen-main px-0 pb-0 ${isHome ? "flex flex-col" : ""}`}>
+        <main
+          className={`screen-main px-0 pb-0 ${isHome ? "screen-main-single flex flex-col" : ""}`}
+        >
           {children}
           {!isHome ? <Footer /> : null}
         </main>
