@@ -9,7 +9,10 @@
 .page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* `flex-start`, não `center`: se o conteúdo não couber no ecrã, o
+     excesso tem de ficar todo em baixo — nunca a espalhar-se também para
+     cima, onde ficaria escondido atrás do cabeçalho fixo. */
+  justify-content: flex-start;
   min-height: calc(100dvh - var(--header-h) - var(--footer-h));
   padding: clamp(12px, 4vh, 48px) 0;
   background: var(--surface-brand);
@@ -30,7 +33,7 @@
 .hero {
   position: relative;
   flex: 0 1 auto;
-  padding: clamp(24px, 6vh, var(--sp-3xl)) 0 clamp(32px, 6vh, var(--sp-2xl));
+  padding: clamp(16px, 3.5vh, var(--sp-2xl)) 0 clamp(20px, 4vh, var(--sp-xl));
 }
 
 .heroInner {
@@ -71,7 +74,7 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(30px, min(5.6vw, 7vh), 64px);
+  font-size: clamp(28px, min(5vw, 5.6vh), 56px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.02;
@@ -92,9 +95,9 @@
 .dot { color: var(--color-red); }
 
 .subtitle {
-  margin: clamp(8px, 1.6vh, var(--sp-md)) 0 0;
-  font-size: 17px;
-  line-height: 1.5;
+  margin: clamp(6px, 1.2vh, var(--sp-sm)) 0 0;
+  font-size: 16px;
+  line-height: 1.45;
   color: rgba(255, 255, 255, 0.82);
   max-width: 46ch;
 }
@@ -216,7 +219,7 @@
    ============================================================ */
 .process {
   flex: 0 1 auto;
-  padding: clamp(16px, 4vh, var(--sp-2xl)) 0 clamp(16px, 4vh, var(--sp-4xl));
+  padding: clamp(8px, 2.5vh, var(--sp-xl)) 0 clamp(8px, 2.5vh, var(--sp-2xl));
 }
 
 .processInner {
@@ -238,7 +241,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: clamp(90px, 16vh, 154px);
+  height: clamp(70px, 12vh, 130px);
   overflow: visible;
   pointer-events: none;
 }
@@ -265,14 +268,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background: var(--color-white);
   color: var(--color-red);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
-.node svg { width: 24px; height: 24px; }
+.node svg { width: 21px; height: 21px; }
 
 .nodeFilled {
   background: var(--color-black);
@@ -284,7 +287,7 @@
   position: relative;
   z-index: 1;
   display: block;
-  margin-top: clamp(8px, 1.6vh, var(--sp-md));
+  margin-top: clamp(6px, 1.2vh, var(--sp-sm));
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.24em;
@@ -295,8 +298,8 @@
 .stepTitle {
   position: relative;
   z-index: 1;
-  margin: 10px 0 4px;
-  font-size: clamp(17px, 1.6vw, 21px);
+  margin: 8px 0 4px;
+  font-size: clamp(16px, 1.5vw, 19px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
@@ -309,8 +312,8 @@
   position: relative;
   z-index: 1;
   margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.55;
   color: rgba(255, 255, 255, 0.7);
   max-width: 30ch;
 }

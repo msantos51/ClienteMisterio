@@ -119,7 +119,7 @@ export default function HomePage() {
                 key={step.title}
                 style={
                   {
-                    "--node-y": `clamp(0px, ${[13, 6, 0][i]}vh, ${[106, 48, 0][i]}px)`,
+                    "--node-y": `clamp(0px, ${[10, 4.5, 0][i]}vh, ${[86, 38, 0][i]}px)`,
                   } as React.CSSProperties
                 }
               >
