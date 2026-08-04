@@ -110,13 +110,13 @@
   background: var(--color-red);
   border-color: var(--color-red);
   color: var(--color-white);
-  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
+  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.28);
 }
 .page .btnDark:hover {
   background: var(--color-red-2);
   border-color: var(--color-red-2);
   color: var(--color-white);
-  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.34);
+  box-shadow: 0 8px 22px rgba(124, 92, 255, 0.34);
 }
 
 /* ============================================================

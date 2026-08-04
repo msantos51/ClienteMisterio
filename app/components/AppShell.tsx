@@ -20,16 +20,16 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <LanguageProvider>
       <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
-        {/* Cabeçalho vermelho: marca à esquerda, navegação e ações à direita. */}
-        <header className="site-header sticky top-0 z-50">
+        {/* Cabeçalho branco: marca à esquerda, navegação e ações à direita. */}
+        <header className="site-header on-light sticky top-0 z-50">
           <div className="site-header-inner mx-auto w-full max-w-[1400px]">
             <Link
               className="logo shrink-0"
               href="/"
               aria-label="Cliente Mistério — início"
             >
-              <span className="whitespace-nowrap text-[18px] font-bold tracking-[-0.03em] text-white">
-                Cliente Mistério
+              <span className="whitespace-nowrap text-[18px] font-bold tracking-[-0.03em] text-[color:var(--ink)]">
+                Cliente Mistério<span className="text-[color:var(--color-red)]">.</span>
               </span>
             </Link>
 

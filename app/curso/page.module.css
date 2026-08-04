@@ -474,12 +474,12 @@
   background: var(--color-red);
   border-color: var(--color-red);
   color: var(--color-white);
-  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.3);
+  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.3);
 }
 .certBlock .btnAccent:hover:not(:disabled) {
   background: var(--color-red-bright);
   border-color: var(--color-red-bright);
-  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.36);
+  box-shadow: 0 8px 22px rgba(124, 92, 255, 0.36);
 }
 @media (max-width: 720px) {
   .certBlock { grid-template-columns: 1fr; padding: 30px 26px; }
@@ -738,7 +738,7 @@
   background: #f7f7f9;
 }
 .premGood { border-color: rgba(18, 160, 109, .3); }
-.premBad { border-color: rgba(227, 6, 19, .28); }
+.premBad { border-color: rgba(124, 92, 255, .28); }
 .premStrat { border-color: var(--hairline-invert); }
 /* O checklist inverte-se dentro do corpo branco: vermelho da marca. */
 .premCheck { background: var(--color-red); border-color: var(--color-red); color: var(--color-white); }
@@ -855,7 +855,7 @@
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-pill);
 }
-.asideCardWarn { border-color: rgba(227, 6, 19, .3); background: rgba(227, 6, 19, .05); }
+.asideCardWarn { border-color: rgba(124, 92, 255, .3); background: rgba(124, 92, 255, .05); }
 .asideCardWarn .asideLabel { color: var(--color-red); }
 .asideCardWarn .asideLabel svg { color: var(--color-red); }
 
@@ -978,7 +978,7 @@
 .qOpt:hover:not(:disabled) { border-color: var(--on-invert-3); color: var(--on-invert); }
 .qOptSelected {
   border-color: var(--color-red) !important;
-  background: rgba(227, 6, 19, 0.07) !important;
+  background: rgba(124, 92, 255, 0.07) !important;
   color: var(--color-danger) !important;
 }
 .qOptLetter {
@@ -1011,8 +1011,8 @@
   color: var(--color-white);
 }
 .qOptWrong {
-  border-color: rgba(227, 6, 19, .5) !important;
-  background: rgba(227, 6, 19, .08) !important;
+  border-color: rgba(124, 92, 255, .5) !important;
+  background: rgba(124, 92, 255, .08) !important;
   color: var(--color-danger) !important;
 }
 .qOptWrong .qOptLetter {
@@ -1040,12 +1040,12 @@
 .quiz .btnPrimary {
   background: var(--color-red);
   color: var(--color-white);
-  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
+  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.28);
 }
 .quiz .btnPrimary:hover:not(:disabled) {
   background: var(--color-red-2);
   color: var(--color-white);
-  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.34);
+  box-shadow: 0 8px 22px rgba(124, 92, 255, 0.34);
 }
 .quiz .btnGhost,
 .quiz .btnAccent {

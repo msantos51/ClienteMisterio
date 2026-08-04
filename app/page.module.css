@@ -1,49 +1,44 @@
 /*
- * Cliente Mistério — Homepage de ecrã único.
- * Superfície vermelha da marca de bordo a bordo, tipografia branca de grande
- * escala e números fantasma como única decoração. Sem gradientes: a força vem
- * do contraste vermelho/branco e do tamanho do texto.
- * CSS Module ao lado de app/page.tsx.
+ * Cliente Mistério — Homepage.
+ * Superfície branca, título de grande escala com o segundo verso em roxo,
+ * ícone de destaque em halo roxo e três passos ligados por uma curva
+ * ascendente. CSS Module ao lado de app/page.tsx.
  */
 
-/* ============================================================
-   PALCO — ocupa exatamente um ecrã, sem scroll
-   ============================================================ */
-/* Na página inicial o `main` é uma coluna flex (ver AppShell): `flex: 1`
-   preenche exatamente o ecrã menos o cabeçalho, sem depender da altura da
-   barra em cada breakpoint e sem gerar scroll. */
 .page {
   display: flex;
+  flex-direction: column;
   flex: 1;
-  background: var(--surface-brand);
-  color: var(--color-white);
+  background: var(--color-white);
+  color: var(--on-invert);
   font-family: var(--font-body);
   overflow-x: hidden;
 }
 
-.stage {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  padding: var(--sp-xl) 0;
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
   position: relative;
+  padding: clamp(var(--sp-2xl), 8vh, var(--sp-5xl)) 0 var(--sp-2xl);
 }
 
-.wrap {
+.heroInner {
   position: relative;
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 var(--sp-md);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: var(--sp-xl);
 }
 @media (min-width: 768px) {
-  .wrap { padding: 0 var(--sp-xl); }
+  .heroInner { padding: 0 var(--sp-xl); }
 }
 
-/* ============================================================
-   PROPOSTA DE VALOR
-   ============================================================ */
-.intro { max-width: 900px; }
+.intro { max-width: 640px; }
 
 .eyebrow {
   display: flex;
@@ -53,39 +48,148 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-invert-3);
   margin: 0 0 var(--sp-md);
 }
 .eyebrow::before {
   content: "";
   width: 34px;
   height: 2px;
-  background: var(--color-white);
+  background: var(--color-red);
   flex-shrink: 0;
 }
 
-/* Título de cartaz: grande, apertado e a branco cheio — a assinatura
-   tipográfica do site. */
 .title {
   font-family: var(--font-display);
-  font-size: clamp(42px, 7.6vw, 108px);
-  font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 0.94;
+  font-size: clamp(38px, 5.6vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.02;
   text-transform: uppercase;
-  color: var(--color-white);
+  color: var(--on-invert);
   margin: 0;
   text-wrap: balance;
 }
-/* O ponto final fica a meio-tom: pontua sem competir com o título. */
-.dot { color: rgba(255, 255, 255, 0.5); }
+
+.titleAccent { color: var(--color-red); }
+.dot { color: var(--color-red); }
+
+.subtitle {
+  margin: var(--sp-md) 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--on-invert-2);
+  max-width: 46ch;
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-lg);
+  flex-wrap: wrap;
+  margin-top: var(--sp-lg);
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 26px;
+  border-radius: var(--radius-md);
+  background: var(--color-red);
+  color: var(--color-white);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(124, 92, 255, 0.28);
+  transition: all 200ms ease;
+}
+.ctaPrimary:hover {
+  background: var(--color-red-2);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(124, 92, 255, 0.34);
+}
+.ctaPrimary svg { width: 18px; height: 18px; }
+
+.ctaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--on-invert);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 200ms ease;
+}
+.ctaSecondary:hover { opacity: 0.7; }
+.ctaSecondary svg { width: 16px; height: 16px; }
+
+/* ---------- Destaque visual do hero ---------- */
+.heroArt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.heroArtGlow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(124, 92, 255, 0.28) 0%,
+    rgba(124, 92, 255, 0.14) 45%,
+    rgba(124, 92, 255, 0) 72%
+  );
+}
+
+.heroArtRing {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: rgba(124, 92, 255, 0.12);
+  box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.22);
+  color: var(--color-red);
+}
+.heroArtRing svg { width: 54px; height: 54px; }
+
+@media (max-width: 860px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: var(--sp-xl);
+  }
+  .heroArt { order: -1; min-height: 200px; }
+  .heroArtGlow { width: 260px; }
+  .heroArtRing { width: 100px; height: 100px; }
+  .heroArtRing svg { width: 42px; height: 42px; }
+  .title { font-size: clamp(32px, 10vw, 46px); }
+}
 
 /* ============================================================
    PROCESSO
    ============================================================ */
 .process {
+  padding: var(--sp-2xl) 0 var(--sp-5xl);
+}
+
+.processInner {
   position: relative;
-  margin-top: clamp(var(--sp-2xl), 7vh, var(--sp-5xl));
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--sp-md);
+}
+@media (min-width: 768px) {
+  .processInner { padding: 0 var(--sp-xl); }
 }
 
 /* Curva ascendente que liga os três nós. Estica-se com o contentor
@@ -116,35 +220,27 @@
   padding-top: var(--node-y, 0px);
 }
 
-/* Número fantasma, atrás do conteúdo. */
-.ghost {
-  position: absolute;
-  top: calc(var(--node-y, 0px) + 26px);
-  left: 40px;
-  font-size: clamp(90px, 9vw, 140px);
-  font-weight: 700;
-  line-height: 0.8;
-  letter-spacing: -0.06em;
-  color: rgba(255, 255, 255, 0.1);
-  pointer-events: none;
-  user-select: none;
-}
-
-/* Nó: ícone vermelho dentro de um marcador branco. */
+/* Nó: círculo claro com contorno roxo; o terceiro nó vem preenchido. */
 .node {
   position: relative;
   z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: var(--color-white);
   color: var(--color-red);
-  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 1px var(--hairline-invert), var(--shadow-sm);
 }
-.node svg { width: 22px; height: 22px; }
+.node svg { width: 24px; height: 24px; }
+
+.nodeFilled {
+  background: var(--color-red);
+  color: var(--color-white);
+  box-shadow: 0 10px 24px rgba(124, 92, 255, 0.32);
+}
 
 .stepIndex {
   position: relative;
@@ -155,20 +251,30 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-red);
 }
 
 .stepTitle {
   position: relative;
   z-index: 1;
-  margin: 10px 0 0;
-  font-size: clamp(17px, 1.6vw, 23px);
+  margin: 10px 0 4px;
+  font-size: clamp(17px, 1.6vw, 21px);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   line-height: 1.25;
-  color: var(--color-white);
-  max-width: 22ch;
+  color: var(--on-invert);
+  max-width: 26ch;
   text-wrap: pretty;
+}
+
+.stepDesc {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--on-invert-3);
+  max-width: 30ch;
 }
 
 /* ============================================================
@@ -178,42 +284,32 @@
   .track { display: none; }
   .steps {
     grid-template-columns: 1fr;
-    gap: var(--sp-md);
+    gap: var(--sp-xl);
   }
   .step {
-    /* Anula o escalonamento em diagonal. */
     padding-top: 0;
-    padding-left: 64px;
-    min-height: 48px;
+    padding-left: 72px;
+    min-height: 56px;
   }
   .node {
     position: absolute;
     top: 0;
     left: 0;
-    width: 44px;
-    height: 44px;
-    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.14);
   }
   /* Fio vertical a ligar os nós. */
   .step:not(:last-child)::before {
     content: "";
     position: absolute;
-    top: 48px;
-    left: 21px;
-    bottom: -24px;
+    top: 56px;
+    left: 27px;
+    bottom: -32px;
     width: 2px;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.7) 0%,
-      rgba(255, 255, 255, 0.15) 100%
+      rgba(124, 92, 255, 0.4) 0%,
+      rgba(124, 92, 255, 0.08) 100%
     );
   }
-  .ghost {
-    top: -12px;
-    left: auto;
-    right: 0;
-    font-size: 84px;
-  }
   .stepIndex { margin-top: 0; }
-  .stepTitle { max-width: none; }
+  .stepTitle, .stepDesc { max-width: none; }
 }

@@ -216,13 +216,13 @@
   border: none !important;
   background: var(--color-red);
   color: var(--color-white) !important;
-  box-shadow: 0 4px 14px rgba(227, 6, 19, 0.28);
+  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.28);
   transition: all 200ms ease;
 }
 .ctaBtn:hover {
   transform: translateY(-2px);
   background: var(--color-red-2);
-  box-shadow: 0 8px 22px rgba(227, 6, 19, 0.34);
+  box-shadow: 0 8px 22px rgba(124, 92, 255, 0.34);
 }
 .ctaBtn:active { transform: translateY(0); }
 .ctaBtn svg { transition: transform 200ms ease; }
