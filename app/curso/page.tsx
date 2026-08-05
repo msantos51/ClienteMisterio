@@ -40,8 +40,6 @@ type TheoryPage = {
   blocks: string[];
 };
 
-const sessionStorageKey = "vp_session";
-
 /*
  * DESCRIÇÃO DA CONSTANTE: Lista de siglas válidas que devem manter maiúsculas.
  */
@@ -682,7 +680,15 @@ export default function CursoPage() {
     setAccessDenied(false);
 
     try {
+      // A autenticação vive só no cookie httpOnly (credentials: "include")
+      // — sem estado de sessão em localStorage.
       const response = await fetch("/api/course/progress", { credentials: "include" });
+
+      if (response.status === 401) {
+        router.push("/login");
+        return;
+      }
+
       if (response.status === 403) {
         setAccessDenied(true);
         return;
@@ -691,21 +697,16 @@ export default function CursoPage() {
       if (response.ok) {
         const data = (await response.json()) as ProgressData;
         setProgress(data);
+        setIsAuthenticated(true);
       }
     } catch {
       // Silently fail: progress will show as empty.
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
-    const session = localStorage.getItem(sessionStorageKey);
-    if (!session) {
-      router.push("/login");
-      return;
-    }
-    setIsAuthenticated(true);
     loadProgress();
-  }, [router, loadProgress]);
+  }, [loadProgress]);
 
   /*
    * DESCRIÇÃO DO EFEITO: Bloqueia o scroll da página principal sempre que um módulo
@@ -995,7 +996,7 @@ export default function CursoPage() {
                     <div className={styles.modMeta}>
                       {completed ? (
                         <span className={`${styles.modBadge} ${styles.modBadgeDone}`}>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                           {modProgress?.quizScore ?? 100}%
                         </span>
                       ) : isCurrent ? (
@@ -1004,13 +1005,13 @@ export default function CursoPage() {
                         <span className={styles.modBadge}>{cp.available}</span>
                       ) : (
                         <span className={`${styles.modBadge} ${styles.modBadgeLocked}`}>
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                           {cp.locked}
                         </span>
                       )}
                       {unlocked && (
                         <span className={styles.modArrow}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </span>
                       )}
                     </div>
@@ -1045,11 +1046,11 @@ export default function CursoPage() {
                           className={`${styles.btn} ${styles.btnAccent}`}
                         >
                           {certCompleted ? cp.downloadCertificate : "Ver e descarregar"}
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                         </button>
                       ) : (
                         <button type="button" disabled className={`${styles.btn} ${styles.btnAccent}`}>
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                           {cp.locked}
                         </button>
                       )}
@@ -1069,7 +1070,7 @@ export default function CursoPage() {
         <div className={`${styles.reader} ${styles.readerOpen}`}>
           <div className={styles.readerTop}>
             <button type="button" className={styles.readerBack} onClick={() => setActiveModuleId(null)}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               {cp.backToModules}
             </button>
             <div className={styles.readerTitle}>
@@ -1183,7 +1184,7 @@ export default function CursoPage() {
                 {activeModule.keywords && activeModule.keywords.length > 0 && (
                   <div className={styles.asideCard}>
                     <p className={styles.asideLabel}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                       {cp.keyConceptsTitle}
                     </p>
                     <div className={styles.asideChips}>
@@ -1197,7 +1198,7 @@ export default function CursoPage() {
                 {activeModule.practicalTip && (
                   <div className={styles.asideCard}>
                     <p className={styles.asideLabel}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v4"/><path d="m16.24 7.76 2.83-2.83"/><path d="M18 12h4"/><path d="m16.24 16.24 2.83 2.83"/><path d="M12 18v4"/><path d="m7.76 16.24-2.83 2.83"/><path d="M6 12H2"/><path d="m7.76 7.76-4.83-2.83"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 2v4"/><path d="m16.24 7.76 2.83-2.83"/><path d="M18 12h4"/><path d="m16.24 16.24 2.83 2.83"/><path d="M12 18v4"/><path d="m7.76 16.24-2.83 2.83"/><path d="M6 12H2"/><path d="m7.76 7.76-4.83-2.83"/></svg>
                       {cp.practicalTipTitle}
                     </p>
                     <p className={styles.asideText}>{activeModule.practicalTip}</p>
@@ -1207,7 +1208,7 @@ export default function CursoPage() {
                 {activeModule.benefit && (
                   <div className={styles.asideCard}>
                     <p className={styles.asideLabel}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                       {cp.whyItMatters}
                     </p>
                     <p className={styles.asideText}>{activeModule.benefit}</p>
@@ -1217,7 +1218,7 @@ export default function CursoPage() {
                 {activeModule.warning && (
                   <div className={`${styles.asideCard} ${styles.asideCardWarn}`}>
                     <p className={styles.asideLabel}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
                       {cp.importantWarning}
                     </p>
                     <p className={styles.asideText}>{activeModule.warning}</p>
@@ -1235,7 +1236,7 @@ export default function CursoPage() {
                 onClick={() => setTheoryPage((prev) => Math.max(prev - 1, 0))}
                 disabled={theoryPage === 0}
               >
-                <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 {cp.previous}
               </button>
               <div className={styles.readerPageInfo}>
@@ -1249,7 +1250,7 @@ export default function CursoPage() {
                   className={`${styles.btn} ${styles.btnAccent} ${styles.btnSmall}`}
                 >
                   {isDownloadingCertificate ? cp.preparingCertificate : cp.downloadCertificate}
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 </button>
               ) : isLastTheoryPage ? (
                 <button
@@ -1258,7 +1259,7 @@ export default function CursoPage() {
                   className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
                 >
                   {cp.startQuiz}
-                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </button>
               ) : (
                 <button
@@ -1267,7 +1268,7 @@ export default function CursoPage() {
                   className={`${styles.btn} ${styles.btnPrimary} ${styles.btnSmall}`}
                 >
                   {cp.nextPage}
-                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </button>
               )}
             </div>
@@ -1282,7 +1283,7 @@ export default function CursoPage() {
         <div className={`${styles.reader} ${styles.readerOpen}`}>
           <div className={styles.readerTop}>
             <button type="button" className={styles.readerBack} onClick={() => setQuizMode(false)}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               {cp.backToContent}
             </button>
             <div className={styles.readerTitle}>
@@ -1340,7 +1341,7 @@ export default function CursoPage() {
                       className={`${styles.btn} ${styles.btnPrimary}`}
                     >
                       {cp.submitAnswers}
-                      <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                      <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                   </div>
                 )}
@@ -1370,7 +1371,7 @@ export default function CursoPage() {
                         onClick={() => { setActiveModuleId(null); setQuizMode(false); }}
                       >
                         {cp.backToModulesList}
-                        <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        <svg className={styles.arrow} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                       </button>
                     ) : (
                       <>

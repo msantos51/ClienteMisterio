@@ -29,11 +29,18 @@ export default function CheckoutButton({
     );
   }
 
-  const handleCheckout = () => {
-    const session = localStorage.getItem("vp_session");
-    if (session) {
-      window.location.href = paymentLink;
-    } else {
+  const handleCheckout = async () => {
+    // A sessão real vive no cookie httpOnly — confirma no servidor antes de
+    // decidir entre ir para o Stripe ou pedir login.
+    try {
+      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const data = response.ok ? ((await response.json()) as { authenticated: boolean }) : { authenticated: false };
+      if (data.authenticated) {
+        window.location.href = paymentLink;
+      } else {
+        router.push("/login?checkout=1");
+      }
+    } catch {
       router.push("/login?checkout=1");
     }
   };

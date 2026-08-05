@@ -663,9 +663,8 @@
 }
 .readerProse p {
   margin: 0 0 20px;
-  max-width: 66ch;
-  text-align: justify;
-  text-justify: inter-word;
+  max-width: 68ch;
+  text-align: left;
   hyphens: auto;
 }
 .readerProse strong { color: var(--on-invert); font-weight: 700; }
@@ -673,7 +672,7 @@
   margin: 0 0 22px;
   padding-left: 0;
   list-style: none;
-  max-width: 66ch;
+  max-width: 68ch;
 }
 .readerProse li {
   padding: 11px 0 11px 32px;

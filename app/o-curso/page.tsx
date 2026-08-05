@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import { courseModules as courseData } from "../curso/courseData";
 import { expandedModuleData } from "../curso/courseDataExpanded";
+import { useCourseAccess } from "@/app/lib/useCourseAccess";
 import styles from "./page.module.css";
 
 const CheckIcon = ({ size = 11 }: { size?: number }) => (
@@ -34,12 +36,32 @@ const StarIcon = ({ size = 16 }: { size?: number }) => (
 function BuyButton({ children, className }: { children: React.ReactNode; className?: string }) {
   const router = useRouter();
   const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
-  const handleCheckout = () => {
+  const { loading, hasAccess, nextModuleId } = useCourseAccess();
+
+  const handleCheckout = async () => {
     if (!paymentLink) return;
-    const session = typeof window !== "undefined" ? localStorage.getItem("vp_session") : null;
-    if (session) { window.location.href = paymentLink; }
-    else { router.push("/login?checkout=1"); }
+    // A sessão real vive no cookie httpOnly — confirma no servidor antes de
+    // decidir entre ir para o Stripe ou pedir login.
+    try {
+      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const data = response.ok ? ((await response.json()) as { authenticated: boolean }) : { authenticated: false };
+      if (data.authenticated) { window.location.href = paymentLink; }
+      else { router.push("/login?checkout=1"); }
+    } catch {
+      router.push("/login?checkout=1");
+    }
   };
+
+  // Quem já tem acesso ao curso não precisa de voltar a comprar — leva
+  // diretamente ao leitor de módulos.
+  if (!loading && hasAccess) {
+    return (
+      <Link href="/curso" className={className}>
+        {nextModuleId ? `Continuar no módulo ${nextModuleId}` : "Continuar o curso"}
+      </Link>
+    );
+  }
+
   return (
     <button type="button" onClick={handleCheckout} disabled={!paymentLink} className={className}>
       {children}
