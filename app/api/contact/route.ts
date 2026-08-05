@@ -11,6 +11,32 @@ type ContactPayload = {
   email?: string;
   subject?: string;
   message?: string;
+  /** Honeypot: campo invisível no formulário — só bots o preenchem. */
+  website?: string;
+};
+
+/*
+ * DESCRIÇÃO: Limitador de taxa em memória por IP (Fase 5, ponto 46). Simples
+ * de propósito — este processo Node corre como instância única (não
+ * serverless), por isso um Map local já evita o abuso mais comum sem
+ * depender de infraestrutura extra (Redis, etc.).
+ */
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const rateLimitHits = new Map<string, number[]>();
+
+const isRateLimited = (ip: string) => {
+  const now = Date.now();
+  const hits = (rateLimitHits.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+  hits.push(now);
+  rateLimitHits.set(ip, hits);
+  return hits.length > RATE_LIMIT_MAX_REQUESTS;
+};
+
+const getClientIp = (request: Request) => {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) return forwardedFor.split(",")[0].trim();
+  return request.headers.get("x-real-ip") || "unknown";
 };
 
 type ContactMessageRow = {
@@ -51,6 +77,15 @@ const getSafeErrorMessage = (error: unknown) => {
 };
 
 export async function POST(request: Request) {
+  const clientIp = getClientIp(request);
+
+  if (isRateLimited(clientIp)) {
+    return NextResponse.json(
+      { message: "Demasiados pedidos. Tente novamente dentro de alguns minutos." },
+      { status: 429 },
+    );
+  }
+
   let payload: ContactPayload;
 
   try {
@@ -60,6 +95,12 @@ export async function POST(request: Request) {
       { message: "Corpo do pedido inválido." },
       { status: 400 },
     );
+  }
+
+  // Honeypot preenchido = bot. Responde com sucesso genérico sem processar
+  // nada, para não revelar ao bot que foi detetado.
+  if (sanitizeText(payload.website || "")) {
+    return NextResponse.json({ message: "Mensagem enviada com sucesso para a equipa." });
   }
 
   const name = sanitizeText(payload.name || "");

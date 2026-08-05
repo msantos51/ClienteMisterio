@@ -111,6 +111,11 @@ export const openApiDocument = {
           email: { type: "string", format: "email", example: "maria@example.com" },
           subject: { type: "string", example: "Dúvida sobre o curso" },
           message: { type: "string", example: "Gostava de saber mais detalhes sobre o módulo 3." },
+          website: {
+            type: "string",
+            description: "Honeypot anti-spam — deve ficar vazio. Preenchido, o pedido é silenciosamente ignorado.",
+            example: "",
+          },
         },
         required: ["name", "email", "subject", "message"],
       },

@@ -137,6 +137,14 @@ export const translations = {
       formSuccessMessage: "Mensagem enviada com sucesso!",
       formErrorMessage: "Não foi possível enviar a sua mensagem.",
       formConnectionError: "Erro de ligação. Tente novamente dentro de alguns instantes.",
+      formNameError: "Indica o teu nome.",
+      formEmailError: "Indica um e-mail válido.",
+      formSubjectError: "Indica o assunto da tua mensagem.",
+      formMessageError: "Escreve a tua mensagem (mínimo 10 carateres).",
+      formConsentLabel: "Li e aceito a",
+      formConsentLinkText: "política de privacidade",
+      formConsentError: "Tens de aceitar a política de privacidade para enviar a mensagem.",
+      formErrorSummary: "Corrige os campos assinalados antes de continuar.",
     },
 
     // Footer
@@ -653,6 +661,14 @@ export const translations = {
       formSuccessMessage: "Message sent successfully!",
       formErrorMessage: "We were unable to send your message.",
       formConnectionError: "Connection error. Please try again in a few moments.",
+      formNameError: "Enter your name.",
+      formEmailError: "Enter a valid email address.",
+      formSubjectError: "Enter the subject of your message.",
+      formMessageError: "Write your message (minimum 10 characters).",
+      formConsentLabel: "I have read and accept the",
+      formConsentLinkText: "privacy policy",
+      formConsentError: "You must accept the privacy policy to send the message.",
+      formErrorSummary: "Fix the highlighted fields before continuing.",
     },
 
     // Footer
