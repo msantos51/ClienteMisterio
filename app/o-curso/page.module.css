@@ -13,7 +13,7 @@
    ============================================================ */
 .page {
   background: var(--surface-brand);
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--on-brand-2);
   font-size: 15px;
   line-height: 1.7;
   font-family: var(--font-body);
@@ -56,7 +56,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   margin-bottom: 20px;
 }
 .eyebrow::before {
@@ -97,7 +97,7 @@
 .lead {
   font-size: clamp(15px, 1.1vw, 18px);
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--on-brand-2);
   max-width: 56ch;
   margin: 0;
 }
@@ -198,7 +198,7 @@
 }
 .statLabel {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--on-brand-2);
   margin-top: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -367,7 +367,7 @@
 }
 .trustStatLabel {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.64);
+  color: var(--on-brand-2);
   margin-top: 6px;
   font-weight: 600;
   line-height: 1.4;
@@ -402,11 +402,11 @@
 .testimonialQuote {
   font-size: 15px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.86);
+  color: var(--on-brand-2);
   margin: 0 0 20px;
 }
 .testimonialName { font-size: 14px; font-weight: 700; color: var(--color-white); }
-.testimonialRole { font-size: 12px; color: rgba(255, 255, 255, 0.6); margin-top: 2px; }
+.testimonialRole { font-size: 12px; color: var(--on-brand-2); margin-top: 2px; }
 
 /* ============================================================
    VANTAGENS
@@ -421,7 +421,7 @@
 @media (min-width: 880px) {
   .head { grid-template-columns: 1.3fr 1fr; gap: 64px; }
 }
-.headSub { font-size: 15px; line-height: 1.8; color: rgba(255, 255, 255, 0.7); max-width: 44ch; margin: 0; }
+.headSub { font-size: 15px; line-height: 1.8; color: var(--on-brand-2); max-width: 44ch; margin: 0; }
 
 .benefits {
   display: grid;
@@ -481,7 +481,7 @@
 }
 .benefit:first-child .benefitTitle { color: var(--on-invert); }
 .benefit:first-child .benefitTitle::after { background: var(--color-red); }
-.benefitDesc { font-size: 14px; color: rgba(255, 255, 255, 0.72); line-height: 1.75; margin: 0; }
+.benefitDesc { font-size: 14px; color: var(--on-brand-2); line-height: 1.75; margin: 0; }
 .benefit:first-child .benefitDesc { color: var(--on-invert-2); }
 
 /* ============================================================
@@ -509,7 +509,7 @@
 .currInner { position: relative; max-width: 980px; margin: 0 auto; padding: 0 24px; }
 .currEyebrow { color: var(--color-red-bright); }
 .currDisplay { color: var(--color-white); }
-.currSub { color: rgba(255, 255, 255, 0.62); font-size: 15px; line-height: 1.8; max-width: 44ch; margin: 0; }
+.currSub { color: var(--on-brand-2); font-size: 15px; line-height: 1.8; max-width: 44ch; margin: 0; }
 .currHead {
   display: grid;
   grid-template-columns: 1fr;
@@ -559,7 +559,7 @@
 }
 .moduleDesc {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--on-brand-2);
   line-height: 1.7;
   margin: 0 0 12px;
   max-width: 56ch;
@@ -567,7 +567,7 @@
 .moduleTime {
   font-size: 11px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--on-brand-2);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -616,7 +616,7 @@
 }
 .expandedItem {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--on-brand-2);
   line-height: 1.7;
 }
 .expandedItem > strong {
@@ -656,7 +656,7 @@
   margin: 6px 0 0;
   font-size: 14px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
 }
 
 /* ============================================================
@@ -733,7 +733,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--on-brand-2);
   margin: 16px 0 0;
 }
 
@@ -762,7 +762,7 @@
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--on-brand-2);
   margin-bottom: 16px;
 }
 .stepTitle {
@@ -774,7 +774,7 @@
 }
 .stepDesc {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--on-brand-2);
   line-height: 1.65;
   margin: 0;
   text-wrap: pretty;

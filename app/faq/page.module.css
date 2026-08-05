@@ -30,7 +30,7 @@
 
 .page {
   background: var(--surface-brand);
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--on-brand-2);
   font-size: 15px;
   line-height: 1.65;
   font-family: var(--font-body);
@@ -72,7 +72,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   margin-bottom: 22px;
 }
 .eyebrow::before {
@@ -93,7 +93,7 @@
 .sub {
   font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   max-width: 52ch;
   margin: 0 auto;
   text-wrap: pretty;
@@ -166,7 +166,7 @@
 .faqAInner {
   padding: 0 0 24px;
   max-width: 68ch;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   font-size: 16px;
   line-height: 1.75;
   text-wrap: pretty;

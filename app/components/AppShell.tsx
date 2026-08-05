@@ -14,7 +14,7 @@ import Footer from "./Footer";
 export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <LanguageProvider>
-      <div className="mx-auto flex min-h-screen w-full flex-col bg-transparent">
+      <div className="mx-auto flex min-h-dvh w-full flex-col bg-transparent">
         {/* Cabeçalho branco: marca à esquerda, navegação e ações à direita. */}
         <header className="site-header on-light sticky top-0 z-50">
           <div className="site-header-inner mx-auto w-full max-w-[1400px]">
@@ -40,7 +40,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           com o conteúdo e é o `body` que percorre a página inteira — as
           secções nunca têm scroll próprio, evitando sobreposições.
         */}
-        <main className="screen-main px-0">
+        <main id="conteudo" className="screen-main flex-1 px-0">
           {children}
         </main>
         <Footer />

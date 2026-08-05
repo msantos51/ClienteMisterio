@@ -1,17 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import AppShell from "./components/AppShell";
 import { creatoDisplay } from "./fonts";
+import { siteUrl, siteName } from "./lib/site";
 import "./globals.css";
 
-const siteUrl = process.env.APP_BASE_URL?.trim() || "https://clientemisterio.onrender.com";
-const siteName = "Cliente Mistério";
 const siteDescription =
   "O único curso de Cliente Mistério em Portugal. Aprende, de forma metódica e discreta, a avaliar serviços e a ser remunerado.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName}. Curso online em Portugal`,
+    default: "Curso de Cliente Mistério em Portugal | Ganha dinheiro a avaliar lojas",
     template: `%s | ${siteName}`,
   },
   description: siteDescription,

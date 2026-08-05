@@ -41,7 +41,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   margin-bottom: 20px;
 }
 .eyebrow::before {
@@ -73,7 +73,7 @@
 .lead {
   font-size: clamp(15px, 1.1vw, 18px);
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--on-brand-2);
   max-width: 56ch;
   margin: 0;
 }
@@ -124,7 +124,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--on-brand-2);
   margin-bottom: 4px;
 }
 .infoValue { font-size: 16px; color: var(--color-white); line-height: 1.4; }

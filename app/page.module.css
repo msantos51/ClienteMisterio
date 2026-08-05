@@ -20,13 +20,6 @@
   font-family: var(--font-body);
 }
 
-@media (min-width: 861px) {
-  .page {
-    height: calc(100dvh - var(--header-h) - var(--footer-h));
-    overflow: hidden;
-  }
-}
-
 /* ============================================================
    HERO
    ============================================================ */
@@ -61,7 +54,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   margin: 0 0 clamp(8px, 1.6vh, var(--sp-md));
 }
 .eyebrow::before {
@@ -98,7 +91,7 @@
   margin: clamp(6px, 1.2vh, var(--sp-sm)) 0 0;
   font-size: 16px;
   line-height: 1.45;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--on-brand-2);
   max-width: 46ch;
 }
 
@@ -314,7 +307,7 @@
   margin: 0;
   font-size: 14px;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--on-brand-2);
   max-width: 30ch;
 }
 

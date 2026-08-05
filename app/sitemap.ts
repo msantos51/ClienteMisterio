@@ -3,8 +3,7 @@
  */
 
 import type { MetadataRoute } from "next";
-
-const siteUrl = process.env.APP_BASE_URL?.trim() || "https://clientemisterio.onrender.com";
+import { siteUrl } from "./lib/site";
 
 const publicPaths = [
   { path: "/", priority: 1.0, changeFrequency: "weekly" as const },
