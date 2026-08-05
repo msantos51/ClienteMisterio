@@ -40,85 +40,189 @@ const encodePdfLatin1Text = (value: string): string => {
 };
 
 /*
- * DESCRIÇÃO DA FUNÇÃO: Constrói um PDF simples (1 página) com identidade visual da plataforma.
+ * DESCRIÇÃO DA FUNÇÃO: Traça um círculo (via 4 curvas de Bézier) para uso em selos/badges do certificado.
+ */
+const circlePath = (cx: number, cy: number, r: number): string => {
+  const k = r * 0.5523;
+
+  return [
+    `${cx + r} ${cy} m`,
+    `${cx + r} ${cy + k} ${cx + k} ${cy + r} ${cx} ${cy + r} c`,
+    `${cx - k} ${cy + r} ${cx - r} ${cy + k} ${cx - r} ${cy} c`,
+    `${cx - r} ${cy - k} ${cx - k} ${cy - r} ${cx} ${cy - r} c`,
+    `${cx + k} ${cy - r} ${cx + r} ${cy - k} ${cx + r} ${cy} c`,
+    "h",
+  ].join("\n");
+};
+
+/*
+ * DESCRIÇÃO DA FUNÇÃO: Constrói um PDF simples (1 página) com a identidade visual do site
+ * (roxo --surface-brand, acento --color-red e preto --color-black de app/globals.css).
  */
 const buildCertificatePdf = (studentName: string, issueDate: string): Uint8Array => {
   const pageWidth = 842;
+  const pageHeight = 595;
   const centerX = pageWidth / 2;
+  const margin = 28;
   const safeName = encodePdfLatin1Text(studentName.trim() || "Participante");
   const safeDate = encodePdfLatin1Text(issueDate);
   const measureCenteredX = (text: string, fontSize: number, widthFactor = 0.5): number => {
     return centerX - (text.length * fontSize * widthFactor) / 2;
   };
 
+  // Paleta oficial (app/globals.css): --surface-brand, --surface-brand-alt, --color-red (acento),
+  // --color-black, --on-brand-2/3 (texto claro sobre roxo) e --on-invert-2/3 (texto sobre branco).
+  const brand = "0.353 0.239 0.780"; // #5a3dc7
+  const accent = "0.416 0.290 0.871"; // #6a4ade
+  const ink = "0.063 0.063 0.071"; // #101012
+  const inkSecondary = "0.302 0.302 0.333"; // #4d4d55
+  const inkMuted = "0.455 0.455 0.494"; // #74747e
+  const onBrandSoft = "0.871 0.851 0.969"; // #ded9f7
+  const onBrandFaint = "0.937 0.922 0.992"; // #efebfd
+  const lineStrong = "0.812 0.812 0.835"; // #cfcfd5
+  const white = "1 1 1";
+
   const titleText = "CERTIFICADO DE CONCLUSÃO";
+  const subtitleText = "CLIENTE MISTERIO - FORMACAO PROFISSIONAL";
   const introText = "Certificamos que";
   const completionText = "concluiu com sucesso o Curso de Cliente Mistério.";
   const noteLineOne = "Este certificado serve exclusivamente como comprovativo de que o formando adquiriu";
   const noteLineTwo = "os conhecimentos necessários para iniciar a atividade enquanto Cliente Mistério.";
   const issueDateText = `Data de emissão: ${safeDate}`;
   const websiteText = "www.clientemisterio.com";
+  const sealText = "CM";
+
+  const topBarY = pageHeight - margin - 70; // 497
+  const accentLineY = topBarY - 4; // 493
+  const footerBarHeight = 26;
+  const sealCx = pageWidth - margin - 92;
+  const sealCy = 170;
 
   const contentStream = [
+    // Fundo branco (painel ".on-light" do site).
     "q",
-    "0.9294 0.9294 0.9294 rg",
-    "0 0 842 595 re f",
+    `${white} rg`,
+    `0 0 ${pageWidth} ${pageHeight} re f`,
+    "Q",
+
+    // Barra de topo — --surface-brand.
+    "q",
+    `${brand} rg`,
+    `${margin} ${topBarY} ${pageWidth - margin * 2} 70 re f`,
+    "Q",
+
+    // Linha de acento — --color-red (#6a4ade) sob a barra de topo.
+    "q",
+    `${accent} rg`,
+    `${margin} ${accentLineY} ${pageWidth - margin * 2} 4 re f`,
+    "Q",
+
+    // Barra de rodapé — --color-black, igual ao rodapé do site.
+    "q",
+    `${ink} rg`,
+    `${margin} ${margin} ${pageWidth - margin * 2} ${footerBarHeight} re f`,
+    "Q",
+
+    // Selo circular — anel em --surface-brand, miolo em --color-red.
+    "q",
+    `${brand} RG`,
+    "2 w",
+    circlePath(sealCx, sealCy, 40),
+    "S",
     "Q",
     "q",
-    "0.8863 0.0549 0.0902 rg",
-    "36 540 770 24 re f",
+    `${accent} rg`,
+    circlePath(sealCx, sealCy, 34),
+    "f",
     "Q",
+
+    // Moldura fina em torno de todo o certificado.
     "q",
-    "0.7804 0.7804 0.7765 rg",
-    "36 28 770 16 re f",
+    `${lineStrong} RG`,
+    "1.2 w",
+    `${margin} ${margin} ${pageWidth - margin * 2} ${pageHeight - margin * 2} re`,
+    "S",
     "Q",
+
+    // Título, na barra de topo.
     "BT",
-    "/F2 20 Tf",
-    "0.8863 0.0549 0.0902 rg",
-    `${measureCenteredX(titleText, 20, 0.56)} 500 Td`,
+    "/F2 21 Tf",
+    `${white} rg`,
+    `${measureCenteredX(titleText, 21, 0.56)} ${topBarY + 40} Td`,
     `(${encodePdfLatin1Text(titleText)}) Tj`,
     "ET",
     "BT",
-    "/F1 15 Tf",
-    "0.0196 0.0784 0.1137 rg",
-    `${measureCenteredX(introText, 15, 0.5)} 455 Td`,
+    "/F1 9 Tf",
+    `${onBrandFaint} rg`,
+    `${measureCenteredX(subtitleText, 9, 0.52)} ${topBarY + 20} Td`,
+    `(${encodePdfLatin1Text(subtitleText)}) Tj`,
+    "ET",
+
+    // Corpo — introdução, nome e texto de conclusão.
+    "BT",
+    "/F1 14 Tf",
+    `${inkSecondary} rg`,
+    `${measureCenteredX(introText, 14, 0.5)} 440 Td`,
     `(${encodePdfLatin1Text(introText)}) Tj`,
     "ET",
     "BT",
     "/F2 34 Tf",
-    "0.0196 0.0784 0.1137 rg",
-    `${measureCenteredX(safeName, 34, 0.56)} 402 Td`,
+    `${ink} rg`,
+    `${measureCenteredX(safeName, 34, 0.56)} 385 Td`,
     `(${safeName}) Tj`,
     "ET",
+
+    // Sublinhado de acento sob o nome.
+    "q",
+    `${accent} rg`,
+    `${centerX - 130} 372 260 3 re f`,
+    "Q",
+
     "BT",
-    "/F1 15 Tf",
-    "0.0196 0.0784 0.1137 rg",
-    `${measureCenteredX(completionText, 15, 0.5)} 352 Td`,
+    "/F1 14 Tf",
+    `${inkSecondary} rg`,
+    `${measureCenteredX(completionText, 14, 0.5)} 335 Td`,
     `(${encodePdfLatin1Text(completionText)}) Tj`,
     "ET",
     "BT",
-    "/F1 11 Tf",
-    "0.2902 0.3412 0.3686 rg",
-    "120 312 Td",
+    "/F1 10.5 Tf",
+    `${inkMuted} rg`,
+    `${measureCenteredX(noteLineOne, 10.5, 0.5)} 290 Td`,
     `(${encodePdfLatin1Text(noteLineOne)}) Tj`,
     "ET",
     "BT",
-    "/F1 11 Tf",
-    "0.2902 0.3412 0.3686 rg",
-    "120 294 Td",
+    "/F1 10.5 Tf",
+    `${inkMuted} rg`,
+    `${measureCenteredX(noteLineTwo, 10.5, 0.5)} 274 Td`,
     `(${encodePdfLatin1Text(noteLineTwo)}) Tj`,
     "ET",
+
+    // Selo — texto pequeno "OK" ao centro do círculo.
     "BT",
-    "/F1 12 Tf",
-    "0.2902 0.3412 0.3686 rg",
-    `${measureCenteredX(issueDateText, 12, 0.5)} 236 Td`,
+    "/F2 13 Tf",
+    `${white} rg`,
+    `${sealCx - 11} ${sealCy - 5} Td`,
+    `(${sealText}) Tj`,
+    "ET",
+    "BT",
+    "/F1 8 Tf",
+    `${inkMuted} rg`,
+    `${sealCx - 20} ${sealCy - 54} Td`,
+    "(Verificado) Tj",
+    "ET",
+
+    // Rodapé — data de emissão e site, sobre a barra preta.
+    "BT",
+    "/F1 10 Tf",
+    `${onBrandSoft} rg`,
+    `${margin + 16} ${margin + 9} Td`,
     `(${issueDateText}) Tj`,
     "ET",
     "BT",
-    "/F1 12 Tf",
-    "0.2902 0.3412 0.3686 rg",
-    `${measureCenteredX(websiteText, 12, 0.5)} 96 Td`,
-    `(${websiteText}) Tj`,
+    "/F1 10 Tf",
+    `${white} rg`,
+    `${pageWidth - margin - 16 - websiteText.length * 10 * 0.5} ${margin + 9} Td`,
+    `(${encodePdfLatin1Text(websiteText)}) Tj`,
     "ET",
   ].join("\n");
 
