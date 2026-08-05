@@ -41,7 +41,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   margin-bottom: 20px;
 }
 .eyebrow::before {
@@ -77,7 +77,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--on-brand-2);
   margin-top: 16px;
 }
 
@@ -124,7 +124,7 @@
 }
 .termContent {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--on-brand-2);
   line-height: 1.75;
   margin: 0;
   padding-left: 64px;
