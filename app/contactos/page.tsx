@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import Field from "@/app/components/ui/Field";
 import styles from "./page.module.css";
 
 type FormData = {
@@ -149,63 +150,64 @@ export default function ContactPage() {
                 aria-labelledby="contact-form-heading"
               >
                 <div className={styles.row}>
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="contact-name">{t.contact.formNameLabel}</label>
-                    <input
-                      id="contact-name"
-                      className={styles.input}
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      placeholder={t.contact.formNamePlaceholder}
-                      required
-                      value={formData.name}
-                      onChange={(e) => handleFieldChange("name", e.target.value)}
-                    />
-                  </div>
-                  <div className={styles.field}>
-                    <label className={styles.label} htmlFor="contact-email">{t.contact.formEmailLabel}</label>
-                    <input
-                      id="contact-email"
-                      className={styles.input}
-                      name="email"
-                      type="email"
-                      inputMode="email"
-                      autoComplete="email"
-                      placeholder={t.contact.formEmailPlaceholder}
-                      required
-                      value={formData.email}
-                      onChange={(e) => handleFieldChange("email", e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.field}>
-                  <label className={styles.label} htmlFor="contact-subject">{t.contact.formSubjectLabel}</label>
-                  <input
-                    id="contact-subject"
-                    className={styles.input}
-                    name="subject"
+                  <Field
+                    id="contact-name"
+                    name="name"
                     type="text"
-                    placeholder={t.contact.formSubjectPlaceholder}
+                    autoComplete="name"
+                    label={t.contact.formNameLabel}
+                    placeholder={t.contact.formNamePlaceholder}
                     required
-                    value={formData.subject}
-                    onChange={(e) => handleFieldChange("subject", e.target.value)}
+                    value={formData.name}
+                    onChange={(value) => handleFieldChange("name", value)}
+                    wrapperClassName={styles.field}
+                    labelClassName={styles.label}
+                    controlClassName={styles.input}
+                  />
+                  <Field
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    label={t.contact.formEmailLabel}
+                    placeholder={t.contact.formEmailPlaceholder}
+                    required
+                    value={formData.email}
+                    onChange={(value) => handleFieldChange("email", value)}
+                    wrapperClassName={styles.field}
+                    labelClassName={styles.label}
+                    controlClassName={styles.input}
                   />
                 </div>
 
-                <div className={styles.field}>
-                  <label className={styles.label} htmlFor="contact-message">{t.contact.formMessageLabel}</label>
-                  <textarea
-                    id="contact-message"
-                    className={styles.textarea}
-                    name="message"
-                    placeholder={t.contact.formMessagePlaceholder}
-                    required
-                    value={formData.message}
-                    onChange={(e) => handleFieldChange("message", e.target.value)}
-                  />
-                </div>
+                <Field
+                  id="contact-subject"
+                  name="subject"
+                  type="text"
+                  label={t.contact.formSubjectLabel}
+                  placeholder={t.contact.formSubjectPlaceholder}
+                  required
+                  value={formData.subject}
+                  onChange={(value) => handleFieldChange("subject", value)}
+                  wrapperClassName={styles.field}
+                  labelClassName={styles.label}
+                  controlClassName={styles.input}
+                />
+
+                <Field
+                  as="textarea"
+                  id="contact-message"
+                  name="message"
+                  label={t.contact.formMessageLabel}
+                  placeholder={t.contact.formMessagePlaceholder}
+                  required
+                  value={formData.message}
+                  onChange={(value) => handleFieldChange("message", value)}
+                  wrapperClassName={styles.field}
+                  labelClassName={styles.label}
+                  controlClassName={styles.textarea}
+                />
 
                 <div role="status" aria-live="polite">
                   {statusMessage && (

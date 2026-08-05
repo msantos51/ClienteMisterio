@@ -6,6 +6,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Accordion from "@/app/components/ui/Accordion";
 import styles from "./page.module.css";
 import { faqs } from "./faqData";
 
@@ -33,38 +34,20 @@ export default function FaqPage() {
       </section>
 
       <section className={`${styles.wrap} ${styles.contentSection} full-section full-section-scroll`}>
-        <div className={styles.faq}>
-          {faqs.map((f, i) => {
-            const open = openFaq === i;
-            const questionId = `faq-question-${i}`;
-            const panelId = `faq-panel-${i}`;
-            return (
-              <div className={`${styles.faqItem} ${open ? styles.faqItemOpen : ""}`} key={f.q}>
-                <h2 className={styles.faqQHeading}>
-                  <button
-                    type="button"
-                    id={questionId}
-                    className={styles.faqQ}
-                    onClick={() => setOpenFaq(open ? null : i)}
-                    aria-expanded={open}
-                    aria-controls={panelId}
-                  >
-                    <span>{f.q}</span>
-                    <span className={styles.faqIcon} aria-hidden />
-                  </button>
-                </h2>
-                <div
-                  className={styles.faqA}
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={questionId}
-                >
-                  <div className={styles.faqAInner}>{f.a}</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <Accordion
+          idPrefix="faq"
+          className={styles.faq}
+          items={faqs.map((f) => ({ question: f.q, answer: f.a }))}
+          openIndex={openFaq}
+          onToggle={(index) => setOpenFaq(openFaq === index ? null : index)}
+          itemClassName={styles.faqItem}
+          openItemClassName={styles.faqItemOpen}
+          questionHeadingClassName={styles.faqQHeading}
+          questionButtonClassName={styles.faqQ}
+          icon={<span className={styles.faqIcon} aria-hidden />}
+          panelClassName={styles.faqA}
+          panelInnerClassName={styles.faqAInner}
+        />
 
         <div className={styles.cta}>
           <div>

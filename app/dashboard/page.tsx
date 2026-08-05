@@ -7,6 +7,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import ProgressBar from "@/app/components/ui/ProgressBar";
 
 type UserProfile = {
   firstName: string;
@@ -455,15 +456,13 @@ export default function DashboardPage() {
                 {courseProgress?.progressPercent ?? 0}%
               </span>
             </div>
-            <div className="h-3 w-full rounded-full bg-[color:var(--surface-muted)] overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-700"
-                style={{
-                  width: `${courseProgress?.progressPercent ?? 0}%`,
-                  background: "linear-gradient(90deg, var(--brand), var(--brand-500))",
-                }}
-              />
-            </div>
+            <ProgressBar
+              value={courseProgress?.progressPercent ?? 0}
+              label={`Progresso do curso: ${courseProgress?.progressPercent ?? 0}%`}
+              trackClassName="h-3 w-full rounded-full bg-[color:var(--surface-muted)] overflow-hidden"
+              fillClassName="h-full rounded-full transition-all duration-700"
+              fillStyle={{ background: "linear-gradient(90deg, var(--brand), var(--brand-500))" }}
+            />
             <p className="mt-2 text-xs !text-[color:var(--muted)] text-right">{d.continueButton}</p>
           </div>
         ) : (
