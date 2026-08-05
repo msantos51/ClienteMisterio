@@ -19,6 +19,14 @@ export default function Footer() {
         <Link href="/privacidade" className="footer-mini-link">
           Privacidade
         </Link>
+        <a
+          href="https://www.livroreclamacoes.pt/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-mini-link"
+        >
+          Livro de Reclamações
+        </a>
       </div>
     </footer>
   );
