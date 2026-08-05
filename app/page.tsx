@@ -8,6 +8,7 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/app/context/LanguageContext";
+import { useCourseAccess } from "@/app/lib/useCourseAccess";
 import styles from "./page.module.css";
 
 /* ---------- Ícones dos nós do processo ---------- */
@@ -35,6 +36,11 @@ const StepIcons = [
 
 export default function HomePage() {
   const { t } = useLanguage();
+  const { loading, hasAccess, nextModuleId } = useCourseAccess();
+
+  const primaryCta = !loading && hasAccess
+    ? { href: "/curso", label: nextModuleId ? `Continuar no módulo ${nextModuleId}` : "Continuar o curso" }
+    : { href: "/o-curso", label: t.home.ctaPrimary };
 
   const steps = [
     { title: t.home.step1, desc: t.home.step1Desc },
@@ -62,8 +68,8 @@ export default function HomePage() {
             <p className={styles.subtitle}>{t.home.subtitle}</p>
 
             <div className={styles.ctaRow}>
-              <Link href="/login" className={styles.ctaPrimary}>
-                {t.home.ctaPrimary}
+              <Link href={primaryCta.href} className={styles.ctaPrimary}>
+                {primaryCta.label}
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
