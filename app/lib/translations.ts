@@ -14,13 +14,14 @@ export const translations = {
       logout: "Terminar Sessão",
       dashboard: "Dashboard",
     },
-    // Home Page — ecrã único: proposta de valor + os três passos do processo.
+    // Home Page
     home: {
       badge: "Curso de Cliente Mistério em Portugal",
       titleLine1: "Avalia lojas.",
       titleLine2: "Recebe dinheiro",
       subtitle: "Transforma o teu tempo livre numa oportunidade real. Torna-te cliente mistério e começa hoje.",
       valueProp: "Ganha entre 5€ e 150€ por missão",
+      heroGuarantee: "24,99€ · pagamento único · 14 dias de reembolso",
       ctaPrimary: "Quero começar",
       ctaSecondary: "Saber mais",
       step1: "Inscreve-te no curso",
@@ -29,6 +30,27 @@ export const translations = {
       step2Desc: "Aprende o método ao teu ritmo, com casos reais, checklists e um quiz no fim de cada módulo.",
       step3: "Acesso a todas as missões das várias empresas em Portugal",
       step3Desc: "Candidata-te às missões disponíveis e recebe o pagamento assim que o relatório é aprovado.",
+
+      modulesEyebrow: "O que vais aprender",
+      modulesTitle: "10 módulos, do zero à primeira missão paga.",
+      modulesSub: "Teoria paginada, casos reais comentados e um quiz no fim de cada módulo.",
+      modulesCta: "Ver o programa completo",
+
+      socialProofEyebrow: "Quem já está a fazer isto",
+      socialProofTitle: "[TODO: prova social real — número de alunos, avaliações e testemunhos verificáveis]",
+      socialProofDesc: "[TODO: substituir por testemunhos reais, identificados e com indicação de como foram recolhidos]",
+
+      pricingEyebrow: "Preço",
+      pricingTitle: "Um pagamento. Acesso para sempre.",
+      pricingCta: "Quero começar",
+
+      faqEyebrow: "Perguntas frequentes",
+      faqTitle: "Ainda tens dúvidas?",
+      faqCta: "Ver todas as perguntas",
+
+      finalCtaTitle: "A tua primeira missão paga começa aqui.",
+      finalCtaDesc: "Compras uma vez, aprendes ao teu ritmo e candidatas-te às missões assim que estiveres pronto.",
+      finalCtaButton: "Quero começar",
     },
 
     // About Page
@@ -547,6 +569,7 @@ export const translations = {
       titleLine2: "Get paid",
       subtitle: "Turn your free time into a real opportunity. Become a mystery shopper and start today.",
       valueProp: "Earn between €5 and €150 per mission",
+      heroGuarantee: "€24.99 · one-time payment · 14-day refund",
       ctaPrimary: "Get started",
       ctaSecondary: "Learn more",
       step1: "Sign up for the course",
@@ -555,6 +578,27 @@ export const translations = {
       step2Desc: "Learn the method at your own pace, with real cases, checklists and a quiz after each module.",
       step3: "Access every mission from companies across Portugal",
       step3Desc: "Apply to available missions and get paid as soon as your report is approved.",
+
+      modulesEyebrow: "What you'll learn",
+      modulesTitle: "10 modules, from zero to your first paid mission.",
+      modulesSub: "Paginated theory, real cases and a quiz at the end of each module.",
+      modulesCta: "See the full program",
+
+      socialProofEyebrow: "Who's already doing this",
+      socialProofTitle: "[TODO: real social proof — student count, ratings and verifiable testimonials]",
+      socialProofDesc: "[TODO: replace with real testimonials, identified, with a note on how they were collected]",
+
+      pricingEyebrow: "Pricing",
+      pricingTitle: "One payment. Access forever.",
+      pricingCta: "Get started",
+
+      faqEyebrow: "Frequently asked questions",
+      faqTitle: "Still have questions?",
+      faqCta: "See all questions",
+
+      finalCtaTitle: "Your first paid mission starts here.",
+      finalCtaDesc: "Pay once, learn at your own pace, and apply to missions as soon as you're ready.",
+      finalCtaButton: "Get started",
     },
 
     // About Page
