@@ -177,7 +177,7 @@
   border: 1px solid var(--hairline);
   border-radius: var(--radius-lg);
   font-size: 15px;
-  color: var(--on-brand-2);
+  color: var(--on-brand-3);
   line-height: 1.5;
   transition: border-color .2s, background .2s;
 }

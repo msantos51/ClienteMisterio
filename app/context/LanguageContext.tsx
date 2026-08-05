@@ -15,26 +15,25 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const LANGUAGE_STORAGE_KEY = "clientemisterio_language";
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
+  // Começa sempre em "pt" — igual no servidor e no primeiro render do
+  // cliente, para não haver mismatch de hidratação. Se a preferência
+  // guardada for diferente, o efeito abaixo atualiza o estado depois do
+  // mount (um re-render normal, não uma trocas de tipo de elemento — o
+  // Provider é sempre o mesmo, para o React nunca desmontar/remontar
+  // cabeçalho, main e rodapé a cada carregamento de página).
   const [language, setLanguageState] = useState<Language>("pt");
-  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY) as Language | null;
     if (stored && (stored === "pt" || stored === "en")) {
       setLanguageState(stored);
     }
-    setIsHydrated(true);
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
   };
-
-  // Avoid hydration issues by rendering nothing until client is hydrated
-  if (!isHydrated) {
-    return <>{children}</>;
-  }
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t: getTranslation(language) }}>
