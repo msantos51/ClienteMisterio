@@ -4,8 +4,8 @@
 
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
 import ProgressBar from "@/app/components/ui/ProgressBar";
 
@@ -67,8 +67,24 @@ const normalizeBirthDateForInput = (birthDate: string | null) => {
   return birthDate ? birthDate.slice(0, 10) : "";
 };
 
+const dashboardSectionIds: DashboardSection[] = ["account", "security", "preferences"];
+
+const isDashboardSection = (value: string | null): value is DashboardSection =>
+  dashboardSectionIds.includes(value as DashboardSection);
+
 export default function DashboardPage() {
+  // useSearchParams exige um limite de Suspense — sem isto, o build estático
+  // falha com "should be wrapped in a suspense boundary".
+  return (
+    <Suspense fallback={null}>
+      <DashboardPageContent />
+    </Suspense>
+  );
+}
+
+function DashboardPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { t } = useLanguage();
   const d = t.dashboard;
 
@@ -78,7 +94,22 @@ export default function DashboardPage() {
     { id: "preferences", label: d.preferences, description: d.preferencesDescription },
   ];
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [activeSection, setActiveSection] = useState<DashboardSection>("account");
+  const tabFromUrl = searchParams.get("tab");
+  const [activeSection, setActiveSection] = useState<DashboardSection>(
+    isDashboardSection(tabFromUrl) ? tabFromUrl : "account"
+  );
+
+  const changeSection = (section: DashboardSection) => {
+    setActiveSection(section);
+    const params = new URLSearchParams(searchParams.toString());
+    if (section === "account") {
+      params.delete("tab");
+    } else {
+      params.set("tab", section);
+    }
+    const query = params.toString();
+    router.replace(query ? `/dashboard?${query}` : "/dashboard", { scroll: false });
+  };
   const [preferences, setPreferences] = useState<UserPreferences>({
     receiveNewsletter: true,
     allowNotifications: true,
@@ -484,15 +515,20 @@ export default function DashboardPage() {
         <div className="dashboard-layout-shell">
           <aside className="dashboard-sidebar">
             <h2 className="dashboard-sidebar-title">{d.settings}</h2>
-            <nav className="dashboard-menu" aria-label={d.navigation}>
+            <nav className="dashboard-menu" role="tablist" aria-label={d.navigation}>
               {dashboardSections.map((menuSection) => (
                 <button
                   key={menuSection.id}
                   type="button"
+                  role="tab"
+                  id={`dashboard-tab-${menuSection.id}`}
+                  aria-selected={activeSection === menuSection.id}
+                  aria-controls={`dashboard-panel-${menuSection.id}`}
+                  tabIndex={activeSection === menuSection.id ? 0 : -1}
                   className={`dashboard-menu-item ${
                     activeSection === menuSection.id ? "is-active" : ""
                   }`}
-                  onClick={() => setActiveSection(menuSection.id)}
+                  onClick={() => changeSection(menuSection.id)}
                 >
                   <span>{menuSection.label}</span>
                   <small>{menuSection.description}</small>
@@ -503,7 +539,7 @@ export default function DashboardPage() {
 
           <article className="login-form dashboard-form max-w-none">
             {activeSection === "account" && (
-              <>
+              <div role="tabpanel" id="dashboard-panel-account" aria-labelledby="dashboard-tab-account">
                 <h2 className="section-title">{d.accountInfo}</h2>
                 <p className="mt-2 text-sm">{d.updatePersonal}</p>
 
@@ -561,11 +597,11 @@ export default function DashboardPage() {
                     {isSavingProfile ? d.saving : d.saveProfile}
                   </button>
                 </div>
-              </>
+              </div>
             )}
 
             {activeSection === "security" && (
-              <>
+              <div role="tabpanel" id="dashboard-panel-security" aria-labelledby="dashboard-tab-security">
                 <h2 className="section-title">{d.securityTitle}</h2>
                 <p className="mt-2 text-sm">{d.securePassword}</p>
 
@@ -637,11 +673,11 @@ export default function DashboardPage() {
                     {isDeletingAccount ? d.deleting : d.deleteAccount}
                   </button>
                 </div>
-              </>
+              </div>
             )}
 
             {activeSection === "preferences" && (
-              <>
+              <div role="tabpanel" id="dashboard-panel-preferences" aria-labelledby="dashboard-tab-preferences">
                 <h2 className="section-title">{d.preferencesTitle}</h2>
                 <p className="mt-2 text-sm">{d.chooseUpdates}</p>
 
@@ -677,7 +713,7 @@ export default function DashboardPage() {
                 <button className="submit mt-8" type="button" onClick={handleLogout}>
                   {d.logout}
                 </button>
-              </>
+              </div>
             )}
           </article>
 
