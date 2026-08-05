@@ -394,6 +394,8 @@ export const translations = {
     // Course Player (curso page)
     coursePlayer: {
       verifyingSession: "A verificar sessão...",
+      progressLoadError: "Não foi possível carregar o teu progresso. Tenta novamente.",
+      tryAgain: "Tentar novamente",
       courseTitle: "Curso de Cliente Mistério",
       accessDeniedDesc: "O acesso ao curso só fica disponível após confirmação do pagamento.",
       goToPayment: "Ir para pagamento",
@@ -918,6 +920,8 @@ export const translations = {
     // Course Player (curso page)
     coursePlayer: {
       verifyingSession: "Verifying session...",
+      progressLoadError: "We couldn't load your progress. Please try again.",
+      tryAgain: "Try again",
       courseTitle: "Mystery Shopper Course",
       accessDeniedDesc: "Course access is only available after payment confirmation.",
       goToPayment: "Go to payment",

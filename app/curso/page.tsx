@@ -679,6 +679,7 @@ function CursoPageContent() {
   const [isSaving, setIsSaving] = useState(false);
   const [isDownloadingCertificate, setIsDownloadingCertificate] = useState(false);
   const [accessDenied, setAccessDenied] = useState(false);
+  const [progressLoadError, setProgressLoadError] = useState<string | null>(null);
 
   const moduleContentRef = useRef<HTMLDivElement>(null);
 
@@ -688,6 +689,7 @@ function CursoPageContent() {
 
   const loadProgress = useCallback(async () => {
     setAccessDenied(false);
+    setProgressLoadError(null);
 
     try {
       // A autenticação vive só no cookie httpOnly (credentials: "include")
@@ -708,11 +710,14 @@ function CursoPageContent() {
         const data = (await response.json()) as ProgressData;
         setProgress(data);
         setIsAuthenticated(true);
+        return;
       }
+
+      setProgressLoadError(cp.progressLoadError);
     } catch {
-      // Silently fail: progress will show as empty.
+      setProgressLoadError(cp.progressLoadError);
     }
-  }, [router]);
+  }, [router, cp.progressLoadError]);
 
   useEffect(() => {
     loadProgress();
@@ -927,8 +932,30 @@ function CursoPageContent() {
     return classes.join(" ");
   };
 
-  if (!isAuthenticated) {
-    return <p className="text-sm text-[color:var(--muted)]">{cp.verifyingSession}</p>;
+  if (progressLoadError) {
+    return (
+      <div className={styles.page}>
+        <div className={styles.wrap} style={{ padding: "80px 28px", textAlign: "center" }}>
+          <p role="alert" className={styles.lead} style={{ marginBottom: 24 }}>{progressLoadError}</p>
+          <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => loadProgress()}>
+            {cp.tryAgain}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated && !accessDenied) {
+    return (
+      <div className={styles.page} aria-busy="true" aria-label={cp.verifyingSession}>
+        <div className={styles.wrap} style={{ padding: "80px 28px" }}>
+          <div
+            className={`${styles.progressCard} animate-pulse`}
+            style={{ maxWidth: 420, minHeight: 160, margin: "0 auto" }}
+          />
+        </div>
+      </div>
+    );
   }
 
   if (accessDenied) {
