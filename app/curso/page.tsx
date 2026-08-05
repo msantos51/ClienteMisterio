@@ -4,8 +4,8 @@
 
 "use client";
 
-import { useRouter } from "next/navigation";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense, useCallback, useEffect, useRef, useState } from "react";
 
 import ProgressBar from "@/app/components/ui/ProgressBar";
 import { courseModules as courseModulesPt, type QuizQuestion } from "./courseData";
@@ -654,7 +654,16 @@ function renderBold(text: string): React.ReactNode {
 }
 
 export default function CursoPage() {
+  return (
+    <Suspense fallback={null}>
+      <CursoPageContent />
+    </Suspense>
+  );
+}
+
+function CursoPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { language, t } = useLanguage();
   const cp = t.coursePlayer;
   const courseModules = language === "en" ? courseModulesEn : courseModulesPt;
@@ -752,6 +761,63 @@ export default function CursoPage() {
     setQuizSubmitted(false);
     setQuizScore(null);
   };
+
+  /*
+   * DESCRIÇÃO DO EFEITO: Restaura módulo/página/quiz a partir do URL assim que o
+   * progresso chega (só é seguro validar módulos desbloqueados depois disso).
+   * Corre uma única vez — depois disso o URL passa a refletir o estado, não o contrário.
+   */
+  const restoredFromUrlRef = useRef(false);
+  useEffect(() => {
+    if (restoredFromUrlRef.current || !progress) return;
+    restoredFromUrlRef.current = true;
+
+    const moduleParam = Number(searchParams.get("modulo"));
+    if (!moduleParam || !courseModules.some((m) => m.id === moduleParam) || !isModuleUnlocked(moduleParam)) {
+      return;
+    }
+
+    setActiveModuleId(moduleParam);
+
+    if (searchParams.get("quiz") === "1") {
+      setQuizMode(true);
+      return;
+    }
+
+    const pageParam = Number(searchParams.get("pagina"));
+    if (pageParam >= 1) {
+      setTheoryPage(pageParam - 1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [progress]);
+
+  /*
+   * DESCRIÇÃO DO EFEITO: Mantém o URL sincronizado com o módulo/página/quiz atuais,
+   * para que o refresh restaure o lugar e o URL seja partilhável.
+   */
+  useEffect(() => {
+    if (!restoredFromUrlRef.current) return;
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (activeModuleId) {
+      params.set("modulo", String(activeModuleId));
+      if (quizMode) {
+        params.set("quiz", "1");
+        params.delete("pagina");
+      } else {
+        params.delete("quiz");
+        params.set("pagina", String(theoryPage + 1));
+      }
+    } else {
+      params.delete("modulo");
+      params.delete("pagina");
+      params.delete("quiz");
+    }
+
+    const query = params.toString();
+    router.replace(query ? `/curso?${query}` : "/curso", { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeModuleId, quizMode, theoryPage]);
 
   const selectAnswer = (questionId: string, optionIndex: number) => {
     if (quizSubmitted) return;
@@ -1072,6 +1138,15 @@ export default function CursoPage() {
           ============================================================ */}
       {activeModule && !quizMode && currentTheoryPage && (
         <div className={`${styles.reader} ${styles.readerOpen}`}>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+            <ol>
+              <li>{cp.courseTitle}</li>
+              <li>{language === "en" ? "Module" : "Módulo"} {String(activeModule.id).padStart(2, "0")}</li>
+              <li aria-current="page">
+                {cp.page} {theoryPage + 1} {cp.of} {allTheoryPages.length}
+              </li>
+            </ol>
+          </nav>
           <div className={styles.readerTop}>
             <button type="button" className={styles.readerBack} onClick={() => setActiveModuleId(null)}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -1285,6 +1360,13 @@ export default function CursoPage() {
           ============================================================ */}
       {activeModule && quizMode && activeModule.quiz.length > 0 && (
         <div className={`${styles.reader} ${styles.readerOpen}`}>
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+            <ol>
+              <li>{cp.courseTitle}</li>
+              <li>{language === "en" ? "Module" : "Módulo"} {String(activeModule.id).padStart(2, "0")}</li>
+              <li aria-current="page">Quiz</li>
+            </ol>
+          </nav>
           <div className={styles.readerTop}>
             <button type="button" className={styles.readerBack} onClick={() => setQuizMode(false)}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
