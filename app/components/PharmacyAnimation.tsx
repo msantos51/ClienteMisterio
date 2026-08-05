@@ -75,7 +75,7 @@ export const PharmacyAnimation: React.FC = () => {
           {/* Speech Bubbles */}
           {step === "greeting" && (
             <div className={styles.speechBubble + " " + styles.pharmacistSpeech}>
-              <p>Olá! Qual é o seu problema?</p>
+              <p>Olá! Qual é o teu problema?</p>
             </div>
           )}
 
