@@ -19,7 +19,7 @@ export const expandedModuleData = {
       "Aplicar a regra \"se não consegues provar, não escreves\" desde a primeira visita",
     ],
     realWorldExample:
-      "Uma cadeia de 80 lojas descobriu que apenas 40% dos clientes eram cumprimentados, quando a norma exigia 100%. Após formação das equipas, subiu para 95% em três meses — e as vendas acompanharam.",
+      "Uma cadeia de 80 lojas jurava, de mão no coração, que 100% dos clientes eram cumprimentados à entrada. Os relatórios dos avaliadores diziam outra coisa: 40%. A direção não gostou nada da notícia — ninguém gosta de ouvir que o espelho mente — mas formou as equipas na mesma. Três meses depois, os cumprimentos subiram para 95% e as vendas foram atrás, porque um \"bom dia\" a tempo vale mais do que qualquer promoção na montra. A moral da história: ninguém pediu a um avaliador para ser simpático. Pediram-lhe para contar a verdade, por mais chata que fosse — e foi essa verdade, escrita num café qualquer, que mudou o hábito de 80 equipas.",
     duration: "14 minutos",
     resourcesIncluded: [
       "Mapa dos formatos de missão e do que cada um exige",
@@ -41,7 +41,7 @@ export const expandedModuleData = {
       "Agrupar missões por zona para duplicar o rendimento horário",
     ],
     realWorldExample:
-      "Missão de 25 €: 40 min de deslocação, 30 min de visita, 40 min de relatório e 6 € de combustível. Resultado real: cerca de 10 €/hora. Agrupadas três missões na mesma zona, sobe para perto de 19 €/hora.",
+      "Um avaliador viu \"missão de 25 €\" e já se imaginava a pagar o café do mês. Fez a conta a sério: 40 minutos de carro, 30 de visita, 40 a escrever o relatório e 6 € em combustível. Resultado — uns modestos 10 €/hora, o mesmo que ganharia a passear o cão de alguém. No dia seguinte fez diferente: aceitou mais duas missões na mesma zona, no mesmo trajeto, e o valor por hora quase duplicou sem mudar uma única missão de sítio. A lição não é \"aceita tudo\" nem \"recusa tudo\" — é fazer a conta antes de dizer que sim. As plataformas não avisam disto; a folha de cálculo, sim.",
     duration: "16 minutos",
     resourcesIncluded: [
       "Tabela de setores com intervalos de honorário praticados em Portugal",
@@ -63,7 +63,7 @@ export const expandedModuleData = {
       "Separar simpatia de cumprimento na hora de responder ao formulário",
     ],
     realWorldExample:
-      "Um avaliador entrou num café com um bloco de notas à vista. O colaborador ficou nervoso e mudou de comportamento; o relatório foi anulado. Lição: observa, memoriza e escreve lá fora.",
+      "Um avaliador entrou num café decidido a não esquecer nada — e para isso levou um bloco de notas, pousado bem à vista em cima da mesa, como um inspetor de restaurante de série de televisão. O empregado reparou, ficou tenso, o atendimento mudou por completo e o relatório saiu inutilizável: media a reação a um bloco de notas, não a um cliente normal. A missão foi anulada e teve de ser refeita por outro avaliador, com o telemóvel discretamente no bolso e a memória a trabalhar até à porta. Fica a lição, meio a rir meio a sério: o teu instrumento de trabalho mais eficaz não tem capa nem caneta — é a tua cara de cliente banal, a pedir um galão como qualquer pessoa.",
     duration: "18 minutos",
     resourcesIncluded: [
       "Guião de respostas discretas para situações delicadas",
@@ -85,7 +85,7 @@ export const expandedModuleData = {
       "Usar corretamente o \"não aplicável\" sem distorcer os dados da marca",
     ],
     realWorldExample:
-      "Dois avaliadores visitam o mesmo hotel. Um escreve \"serviço excelente\"; o outro, \"9 min de espera no check-in com dois rececionistas em atendimento\". Só o segundo relatório é aprovado.",
+      "Dois avaliadores fizeram check-in no mesmo hotel, no mesmo dia, quase à mesma hora. Um escreveu \"serviço excelente, adorei\" e ficou muito satisfeito consigo mesmo. O outro escreveu \"9 minutos de espera no balcão, com dois rececionistas visíveis mas apenas um a atender\" — e nem sequer achou que tinha sido um mau serviço, só descreveu o que viu. O primeiro relatório voltou para trás com um simples \"não avaliável\"; o segundo foi aprovado sem uma única pergunta e gerou uma ação de reforço de equipa na receção. A diferença entre os dois nunca foi o hotel: foi que um escreveu como fã e o outro como testemunha. É esse segundo avaliador que as agências voltam a chamar.",
     duration: "22 minutos",
     resourcesIncluded: [
       "Banco de 30 frases: opinião vs. facto, lado a lado",
@@ -107,7 +107,7 @@ export const expandedModuleData = {
       "Registar notas nos 10 minutos seguintes à saída",
     ],
     realWorldExample:
-      "Um avaliador chegou a uma loja de eletrodomésticos sem ter lido o formulário até ao fim. Só em casa percebeu que era obrigatório registar o número de colaboradores em sala. Relatório incompleto, missão perdida.",
+      "Um avaliador leu o briefing na diagonal — \"já percebi a ideia geral\" — e foi direito à loja de eletrodomésticos. A visita correu bem, o cenário funcionou, até fez uma pergunta simpática sobre garantias. Só que ao abrir o formulário em casa, já sem a loja à frente, descobriu um campo obrigatório: número exato de colaboradores em sala durante a visita. Ele tinha reparado vagamente que \"havia lá pessoal\", o que, tecnicamente, não é uma resposta que passe em nenhum formulário do mundo. Teve de admitir que não sabia e o relatório ficou incompleto — missão perdida por um detalhe que estava escrito a preto e branco duas páginas antes da que ele leu. Desde então, lê tudo antes de sair de casa, mesmo o que parece só \"burocracia\".",
     duration: "20 minutos",
     resourcesIncluded: [
       "Modelo de cartão mental de 5 pontos por missão",
@@ -129,7 +129,7 @@ export const expandedModuleData = {
       "Comunicar imprevistos à agência no próprio dia",
     ],
     realWorldExample:
-      "Avaliação de restauração em hora de ponta: entrada às 13h04, pedido às 13h09, tabuleiro às 13h16. Sem estas três horas, o relatório seria apenas \"demorou um bocado\".",
+      "Hora de almoço, restaurante de centro comercial a abarrotar, fila até à porta. Um avaliador com fome real e paciência a esgotar podia perfeitamente ter escrito \"demorou uma eternidade, quase fui embora\". Em vez disso, foi marcando as horas discretamente pelo relógio do telemóvel: entrada às 13h04, pedido feito às 13h09, tabuleiro na mesa às 13h16. Sete minutos de espera pelo pedido, numa hora de ponta com três caixas abertas — um número que qualquer gestor de operações entende ao segundo, sem precisar de adivinhar o que \"uma eternidade\" quer dizer. O hambúrguer, já agora, estava quente; as batatas, mornas — e isso também foi escrito, com a mesma frieza cirúrgica. Fome satisfeita, relatório aprovado, dois problemas resolvidos num só almoço.",
     duration: "24 minutos",
     resourcesIncluded: [
       "Rotina de visita em 3 momentos, aplicável a qualquer setor",
@@ -151,7 +151,7 @@ export const expandedModuleData = {
       "Nomear ficheiros de forma a encontrá-los dois meses depois",
     ],
     realWorldExample:
-      "Cinco semanas após a visita, a agência pediu a fotografia da entrada da loja. O avaliador que tinha a pasta organizada respondeu em dois minutos; o outro perdeu o pagamento.",
+      "Cinco semanas depois de duas visitas quase idênticas, a mesma agência mandou o mesmo pedido a dois avaliadores: \"precisamos da fotografia da entrada da loja, para uma auditoria interna\". O primeiro tinha uma pasta chamada `2026-03-14_MarcaX_Braga_M4172`, com o `talao.jpg` e a `montra.jpg` arrumadinhos lá dentro — respondeu em dois minutos, do sofá, sem sequer se levantar. O segundo tinha tudo espalhado por uma galeria de fotos com quatrocentas imagens de férias, aniversários e ecrãs de telemóvel partido pelo meio — nunca encontrou a foto certa e acabou por perder o pagamento da missão. A pasta bem nomeada não parece grande coisa no dia da visita; cinco semanas depois, é a diferença entre \"aqui está\" e \"deixa-me só verificar uma coisa\" — dita pela quinta vez.",
     duration: "19 minutos",
     resourcesIncluded: [
       "Tabela de evidências exigidas por tipo de missão",
@@ -173,7 +173,7 @@ export const expandedModuleData = {
       "Submeter dentro do prazo, sempre no mesmo dia",
     ],
     realWorldExample:
-      "\"Não falou da promoção\" foi devolvido. \"Às 11h27, o colaborador registou a compra e não mencionou a promoção afixada na montra\" foi aprovado e gerou ação na loja.",
+      "Primeira tentativa de relatório: \"não falou da promoção\". Três palavras, escritas em trinta segundos entre duas séries na Netflix. Voltou da agência no dia seguinte com um pedido de esclarecimento — a marca queria saber quando, com quem e que promoção. Segunda tentativa, já com mais calma: \"Às 11h27, o colaborador (crachá: Rui) registou a compra e não mencionou a promoção '2ª unidade a 50%' afixada na montra e no expositor de entrada.\" Mesma visita, mesmo facto, seis vezes mais palavras e zero opiniões — e desta vez o relatório foi aprovado sem perguntas e ainda gerou uma ação de formação na loja. A frase curta poupou trinta segundos de escrita e custou um dia inteiro de espera. Vale a pena fazer a conta.",
     duration: "22 minutos",
     resourcesIncluded: [
       "Modelo de relatório por setor, pré-estruturado",
@@ -195,7 +195,7 @@ export const expandedModuleData = {
       "Organizar recibos e comprovativos para efeitos fiscais",
     ],
     realWorldExample:
-      "Missão anunciada a 45 € com 30 € de reembolso de refeição: o honorário real é 15 €. Quem não faz esta distinção pensa que ganha o triplo do que ganha.",
+      "Uma avaliadora contou a uma amiga, toda contente, que tinha \"ganho 45 € num almoço\". A amiga, mais desconfiada de contas, perguntou: \"ganhaste ou gastaste e depois devolveram-te?\". Foi ver o extrato com calma: dos 45 €, 30 € eram reembolso da refeição — dinheiro que já era seu, só voltou por outra porta — e 15 € eram honorário a sério, o que ganhou pelo trabalho de observar e escrever o relatório. Não é pouco, mas é a terça parte do número que andava a contar aos amigos ao jantar. Desde essa conversa, mantém uma folha simples com duas colunas bem separadas, e já não confunde \"recebi\" com \"ganhei\" — uma confusão que engana até quem faz isto há anos.",
     duration: "18 minutos",
     resourcesIncluded: [
       "Folha de cálculo de rentabilidade mensal",
@@ -217,7 +217,7 @@ export const expandedModuleData = {
       "Analisar os resultados do primeiro mês e escolher o caminho",
     ],
     realWorldExample:
-      "Avaliador registado em 8 plataformas: primeira semana sem convites. Completou o perfil, respondeu rápido e concluiu 3 missões dentro do prazo. Na segunda semana recebeu 12 convites.",
+      "Um avaliador registou-se em oito plataformas numa tarde só, cheio de energia — e depois passou a primeira semana a olhar para o telemóvel sem receber praticamente nenhum convite. Quase desistiu, convencido de que \"isto não funciona\". Em vez de desistir, foi completar o que tinha deixado a meio: zona geográfica, disponibilidade, idiomas, uma apresentação curta em vez do campo em branco. Aceitou três missões simples, cumpriu os prazos religiosamente e submeteu tudo no próprio dia. Na segunda semana, sem fazer mais nada de especial, os convites passaram de zero para doze. Não foi sorte nem favoritismo — foi o sistema a notar, finalmente, que ali havia um perfil completo e fiável, coisa mais rara do que parece.",
     duration: "20 minutos",
     resourcesIncluded: [
       "Plano de 30 dias, semana a semana",
@@ -237,7 +237,7 @@ export const expandedModuleData = {
       "Definir a primeira missão a realizar esta semana",
     ],
     realWorldExample:
-      "Perfis com formação comprovada e perfil completo recebem, em média, mais convites nas primeiras semanas do que perfis genéricos sem qualquer credencial.",
+      "Duas candidaturas chegaram à mesma agência no mesmo dia, para a mesma zona. Uma dizia apenas \"tenho disponibilidade e gosto de atendimento ao cliente\". A outra tinha o mesmo texto, mais um PDF anexado: certificado nominal, com data, a dizer sem rodeios que aquela pessoa sabe o que é um briefing, um item de guião e um prazo. Quem revê candidaturas todos os dias não tem tempo para adivinhar quem é sério — e escolhe pelo sinal mais óbvio que tem à frente. Perfis com formação comprovada recebem, em média, mais convites nas primeiras semanas do que perfis genéricos sem qualquer credencial. Um PDF não faz o trabalho por ti no terreno, mas é ele que te abre a porta para o poderes fazer.",
     duration: "5 minutos",
     resourcesIncluded: [
       "Certificado nominal em PDF, com data de conclusão",
