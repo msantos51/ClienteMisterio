@@ -49,16 +49,22 @@ export default function ForgotPasswordPage() {
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <input
+                id="forgot-email"
                 name="email"
                 placeholder={t.auth.emailPlaceholder}
                 type="email"
+                inputMode="email"
+                autoComplete="email"
+                required
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
-              <span className="label">{t.auth.emailLabel}</span>
+              <label className="label" htmlFor="forgot-email">{t.auth.emailLabel}</label>
             </div>
 
-            {feedback && <p className="form-feedback">{feedback}</p>}
+            <div role="status" aria-live="polite">
+              {feedback && <p className="form-feedback">{feedback}</p>}
+            </div>
 
             <div className="mt-5 space-y-3">
               <button className="submit" type="submit">

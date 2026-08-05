@@ -52,7 +52,7 @@ export default function AccountPage() {
     if (formData.password !== formData.confirmPassword) {
       setFeedback({
         type: "error",
-        message: "Password confirmation does not match the password entered.",
+        message: t.auth.registerPasswordMismatch,
       });
       return;
     }
@@ -74,7 +74,7 @@ export default function AccountPage() {
         return;
       }
 
-      setFeedback({ type: "success", message: "Registration successful." });
+      setFeedback({ type: "success", message: t.auth.registerSuccess });
       router.push(isCheckout ? "/entrar?registered=1&checkout=1" : "/entrar?registered=1");
     } catch {
       setFeedback({
@@ -92,7 +92,7 @@ export default function AccountPage() {
         <article className="login-form max-w-[620px]">
           <h1 className="form-heading">{t.auth.registerTitle}</h1>
           {isCheckout && (
-            <p className="form-feedback mb-4">To proceed with the purchase, you need to create an account or <a className="form-link" href="/entrar?checkout=1">sign in</a>.</p>
+            <p className="form-feedback mb-4">{t.auth.checkoutRequired}</p>
           )}
 
           <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
@@ -100,7 +100,7 @@ export default function AccountPage() {
               <input
                 id="register-first-name"
                 name="firstName"
-                placeholder="Enter your first name"
+                placeholder={t.auth.firstNamePlaceholder}
                 type="text"
                 autoComplete="given-name"
                 required
@@ -114,7 +114,7 @@ export default function AccountPage() {
               <input
                 id="register-last-name"
                 name="lastName"
-                placeholder="Enter your last name"
+                placeholder={t.auth.lastNamePlaceholder}
                 type="text"
                 autoComplete="family-name"
                 required
@@ -128,7 +128,7 @@ export default function AccountPage() {
               <input
                 id="register-email"
                 name="email"
-                placeholder="name@example.com"
+                placeholder={t.auth.emailPlaceholder}
                 type="email"
                 inputMode="email"
                 autoComplete="email"
@@ -143,7 +143,7 @@ export default function AccountPage() {
               <input
                 id="register-password"
                 name="password"
-                placeholder="Create a secure password"
+                placeholder={t.auth.registerPasswordPlaceholder}
                 type="password"
                 autoComplete="new-password"
                 required
@@ -157,7 +157,7 @@ export default function AccountPage() {
               <input
                 id="register-password-confirm"
                 name="confirmPassword"
-                placeholder="Repeat the password"
+                placeholder={t.auth.registerPasswordConfirmPlaceholder}
                 type="password"
                 autoComplete="new-password"
                 required
