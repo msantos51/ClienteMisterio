@@ -38,8 +38,6 @@ type PasswordForm = {
   confirmNewPassword: string;
 };
 
-type StoredUserProfile = Pick<UserProfile, "email" | "birthDate">;
-
 type DashboardSection = "account" | "security" | "preferences";
 
 type ProfileResponse = {
@@ -61,35 +59,11 @@ type UpdateResponse = {
   message: string;
 };
 
-const userStorageKey = "vp_user";
-const sessionStorageKey = "vp_session";
 const preferencesStorageKey = "vp_preferences";
 
-
-
-const normalizeBirthDateForInput = (birthDate: string | null, email: string) => {
-  // Garante formato YYYY-MM-DD no input date e usa fallback local quando necessário.
-  if (birthDate) {
-    return birthDate.slice(0, 10);
-  }
-
-  const storedUserRaw = localStorage.getItem(userStorageKey);
-
-  if (!storedUserRaw) {
-    return "";
-  }
-
-  try {
-    const storedUser = JSON.parse(storedUserRaw) as StoredUserProfile;
-
-    if (storedUser.email === email) {
-      return (storedUser.birthDate ?? "").slice(0, 10);
-    }
-  } catch {
-    return "";
-  }
-
-  return "";
+const normalizeBirthDateForInput = (birthDate: string | null) => {
+  // Garante formato YYYY-MM-DD no input date.
+  return birthDate ? birthDate.slice(0, 10) : "";
 };
 
 export default function DashboardPage() {
@@ -103,7 +77,6 @@ export default function DashboardPage() {
     { id: "preferences", label: d.preferences, description: d.preferencesDescription },
   ];
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [sessionEmail, setSessionEmail] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<DashboardSection>("account");
   const [preferences, setPreferences] = useState<UserPreferences>({
     receiveNewsletter: true,
@@ -134,16 +107,9 @@ export default function DashboardPage() {
   }, [profile]);
 
   useEffect(() => {
-    // Garante que apenas utilizadores autenticados acedem ao dashboard.
-    const storedSession = localStorage.getItem(sessionStorageKey);
-
-    if (!storedSession) {
-      router.push("/login");
-      return;
-    }
-
-    setSessionEmail(storedSession);
-
+    // A autenticação vive só no cookie httpOnly (ver lib/session.ts) — o
+    // servidor é a única fonte de verdade, sem estado de sessão em
+    // localStorage (evita divergência e exposição a XSS).
     const loadProfile = async () => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
@@ -163,7 +129,7 @@ export default function DashboardPage() {
           lastName: data.user.lastName,
           fullName: data.user.fullName,
           email: data.user.email,
-          birthDate: normalizeBirthDateForInput(data.user.birthDate, data.user.email),
+          birthDate: normalizeBirthDateForInput(data.user.birthDate),
           gender: data.user.gender ?? "",
           profileCompleted: data.user.profileCompleted,
           isAdmin: data.user.isAdmin,
@@ -171,7 +137,6 @@ export default function DashboardPage() {
         };
 
         setProfile(normalizedProfile);
-        localStorage.setItem(userStorageKey, JSON.stringify(normalizedProfile));
       } catch {
         clearTimeout(timeoutId);
         router.push("/login");
@@ -223,7 +188,7 @@ export default function DashboardPage() {
 
 
   const saveProfile = async (isFirstAccessCompletion: boolean) => {
-    if (!profile || !sessionEmail) {
+    if (!profile) {
       return;
     }
 
@@ -265,12 +230,9 @@ export default function DashboardPage() {
         isAdmin: profile.isAdmin,
       };
 
-      // Mantém sessão, preferências e perfil sincronizados após guardar alterações.
+      // Mantém as preferências sincronizadas após guardar alterações.
       localStorage.setItem(preferencesStorageKey, JSON.stringify(preferences));
-      localStorage.setItem(sessionStorageKey, profile.email);
-      localStorage.setItem(userStorageKey, JSON.stringify(refreshedProfile));
 
-      setSessionEmail(profile.email);
       setProfile(refreshedProfile);
       setFeedbackState(data.message);
     } catch {
@@ -311,7 +273,7 @@ export default function DashboardPage() {
   };
 
   const handleChangePassword = async () => {
-    if (!sessionEmail || isSavingPassword) {
+    if (!profile || isSavingPassword) {
       return;
     }
 
@@ -358,15 +320,13 @@ export default function DashboardPage() {
   };
 
   const handleLogout = async () => {
-    // Termina a sessão no servidor e remove os dados locais antes do redirecionamento.
+    // Termina a sessão no servidor (limpa o cookie httpOnly).
     await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
-    localStorage.removeItem(sessionStorageKey);
-    localStorage.removeItem(userStorageKey);
     router.push("/login");
   };
 
   const handleDeleteAccount = async () => {
-    if (!sessionEmail || isDeletingAccount) {
+    if (!profile || isDeletingAccount) {
       return;
     }
 
@@ -401,8 +361,6 @@ export default function DashboardPage() {
       }
 
       await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
-      localStorage.removeItem(sessionStorageKey);
-      localStorage.removeItem(userStorageKey);
       localStorage.removeItem(preferencesStorageKey);
       router.push("/login?deleted=1");
     } catch {

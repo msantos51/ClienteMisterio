@@ -38,11 +38,18 @@ function BuyButton({ children, className }: { children: React.ReactNode; classNa
   const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
   const { loading, hasAccess, nextModuleId } = useCourseAccess();
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!paymentLink) return;
-    const session = typeof window !== "undefined" ? localStorage.getItem("vp_session") : null;
-    if (session) { window.location.href = paymentLink; }
-    else { router.push("/login?checkout=1"); }
+    // A sessão real vive no cookie httpOnly — confirma no servidor antes de
+    // decidir entre ir para o Stripe ou pedir login.
+    try {
+      const response = await fetch("/api/auth/session", { cache: "no-store" });
+      const data = response.ok ? ((await response.json()) as { authenticated: boolean }) : { authenticated: false };
+      if (data.authenticated) { window.location.href = paymentLink; }
+      else { router.push("/login?checkout=1"); }
+    } catch {
+      router.push("/login?checkout=1");
+    }
   };
 
   // Quem já tem acesso ao curso não precisa de voltar a comprar — leva

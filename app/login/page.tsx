@@ -19,20 +19,6 @@ type LoginResponse = {
   };
 };
 
-type SessionUser = {
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  email: string;
-  birthDate: string;
-  gender: string;
-  profileCompleted: boolean;
-  isAdmin: boolean;
-};
-
-const userStorageKey = "vp_user";
-const sessionStorageKey = "vp_session";
-
 export default function LoginPage() {
   const router = useRouter();
   const { t } = useLanguage();
@@ -57,12 +43,21 @@ export default function LoginPage() {
       setFeedback(t.auth.checkoutRequired);
     }
 
-    const storedSession = localStorage.getItem(sessionStorageKey);
-    const storedUser = localStorage.getItem(userStorageKey);
+    // A sessão vive só no cookie httpOnly — pergunta ao servidor em vez de
+    // ler um estado duplicado em localStorage.
+    let cancelled = false;
+    fetch("/api/auth/session", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : { authenticated: false }))
+      .then((data: { authenticated: boolean }) => {
+        if (!cancelled && data.authenticated) {
+          router.push(checkout ? "/checkout" : "/dashboard");
+        }
+      })
+      .catch(() => {});
 
-    if (storedSession && storedUser) {
-      router.push(checkout ? "/checkout" : "/dashboard");
-    }
+    return () => {
+      cancelled = true;
+    };
   }, [router, t]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -90,22 +85,8 @@ export default function LoginPage() {
         return;
       }
 
-      if (data.user?.email) {
-        const normalizedSessionUser: SessionUser = {
-          firstName: data.user.firstName,
-          lastName: data.user.lastName,
-          fullName: data.user.fullName,
-          email: data.user.email,
-          birthDate: data.user.birthDate ?? "",
-          gender: data.user.gender ?? "",
-          profileCompleted: data.user.profileCompleted,
-          isAdmin: data.user.isAdmin,
-        };
-
-        localStorage.setItem(sessionStorageKey, normalizedSessionUser.email);
-        localStorage.setItem(userStorageKey, JSON.stringify(normalizedSessionUser));
-      }
-
+      // O login já deixou o cookie httpOnly definido no servidor — nada a
+      // guardar no cliente.
       router.push(isCheckout ? "/checkout" : "/dashboard");
     } catch {
       setFeedback(t.auth.loginError);

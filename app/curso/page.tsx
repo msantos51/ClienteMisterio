@@ -40,8 +40,6 @@ type TheoryPage = {
   blocks: string[];
 };
 
-const sessionStorageKey = "vp_session";
-
 /*
  * DESCRIÇÃO DA CONSTANTE: Lista de siglas válidas que devem manter maiúsculas.
  */
@@ -682,7 +680,15 @@ export default function CursoPage() {
     setAccessDenied(false);
 
     try {
+      // A autenticação vive só no cookie httpOnly (credentials: "include")
+      // — sem estado de sessão em localStorage.
       const response = await fetch("/api/course/progress", { credentials: "include" });
+
+      if (response.status === 401) {
+        router.push("/login");
+        return;
+      }
+
       if (response.status === 403) {
         setAccessDenied(true);
         return;
@@ -691,21 +697,16 @@ export default function CursoPage() {
       if (response.ok) {
         const data = (await response.json()) as ProgressData;
         setProgress(data);
+        setIsAuthenticated(true);
       }
     } catch {
       // Silently fail: progress will show as empty.
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
-    const session = localStorage.getItem(sessionStorageKey);
-    if (!session) {
-      router.push("/login");
-      return;
-    }
-    setIsAuthenticated(true);
     loadProgress();
-  }, [router, loadProgress]);
+  }, [loadProgress]);
 
   /*
    * DESCRIÇÃO DO EFEITO: Bloqueia o scroll da página principal sempre que um módulo
