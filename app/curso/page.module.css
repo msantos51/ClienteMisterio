@@ -211,7 +211,7 @@
 .progressCard {
   --muted: var(--on-invert-3);
 
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   color: var(--on-invert);
   border: none;
   border-radius: var(--radius-xl);
@@ -243,7 +243,7 @@
 }
 .progressCardCount em {
   font-style: normal;
-  color: var(--color-red);
+  color: var(--link-accent);
 }
 .progressCardCount span {
   font-size: 16px;
@@ -256,12 +256,12 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-red);
+  color: var(--link-accent);
   text-align: right;
 }
 .progressBar {
   height: 5px;
-  background: #ededf1;
+  background: var(--track-invert);
   border-radius: var(--radius-pill);
   overflow: hidden;
   position: relative;
@@ -478,7 +478,7 @@
 .reader {
   position: fixed;
   inset: 0;
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -617,7 +617,7 @@
   flex: 1;
   overflow-y: auto;
   padding: 32px 20px 48px;
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   color: var(--on-invert-2);
 }
 @media (min-width: 768px) {
@@ -651,7 +651,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-red);
+  color: var(--link-accent);
   margin: 0 0 16px;
   display: flex;
   align-items: center;
@@ -731,7 +731,7 @@
   align-items: center;
   gap: 14px;
   margin: 52px 0 34px;
-  color: var(--color-red);
+  color: var(--link-accent);
 }
 .readerBreak::before, .readerBreak::after {
   content: "";
@@ -756,7 +756,7 @@
   border-radius: var(--radius-lg);
   padding: 26px;
   border: 1px solid var(--hairline-invert);
-  background: #f7f7f9;
+  background: var(--input-bg);
 }
 .premGood { border-color: rgba(18, 160, 109, .3); }
 .premBad { border-color: rgba(124, 92, 255, .28); }
@@ -804,7 +804,7 @@
   border-radius: var(--radius-lg);
   border: 1px solid var(--hairline-invert);
   border-left: 3px solid var(--color-red);
-  background: #f7f7f9;
+  background: var(--input-bg);
   padding: 26px;
 }
 .example p { margin: 0 0 10px; font-size: 14px; color: var(--on-invert-2); line-height: 1.7; text-align: justify; }
@@ -821,7 +821,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--color-red);
+  color: var(--link-accent);
   margin-right: 6px;
 }
 
@@ -837,7 +837,7 @@
   .aside { position: sticky; top: 24px; }
 }
 .asideCard {
-  background: #f7f7f9;
+  background: var(--input-bg);
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-lg);
   padding: 22px;
@@ -853,7 +853,7 @@
   align-items: center;
   gap: 8px;
 }
-.asideLabel svg { color: var(--color-red); }
+.asideLabel svg { color: var(--link-accent); }
 .asideText {
   font-size: 14px;
   line-height: 1.75;
@@ -870,14 +870,14 @@
   font-size: 11px;
   font-weight: 600;
   padding: 6px 10px;
-  background: var(--color-white);
+  background: var(--input-bg);
   color: var(--on-invert-2);
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-pill);
 }
 .asideCardWarn { border-color: rgba(124, 92, 255, .3); background: rgba(124, 92, 255, .05); }
-.asideCardWarn .asideLabel { color: var(--color-red); }
-.asideCardWarn .asideLabel svg { color: var(--color-red); }
+.asideCardWarn .asideLabel { color: var(--link-accent); }
+.asideCardWarn .asideLabel svg { color: var(--link-accent); }
 
 /* Rodapé do leitor */
 .readerBottom {
@@ -950,7 +950,7 @@
 }
 
 .q {
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-lg);
   padding: 22px;
@@ -965,7 +965,7 @@
   font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--color-red);
+  color: var(--link-accent);
   margin: 0 0 12px;
 }
 .qText {
@@ -985,7 +985,7 @@
   justify-content: flex-start;
   gap: 16px;
   padding: 15px 18px;
-  background: #f7f7f9;
+  background: var(--input-bg);
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-md);
   text-align: left;
@@ -998,9 +998,9 @@
 }
 .qOpt:hover:not(:disabled) { border-color: var(--on-invert-3); color: var(--on-invert); }
 .qOptSelected {
-  border-color: var(--color-red) !important;
+  border-color: var(--link-accent) !important;
   background: rgba(124, 92, 255, 0.07) !important;
-  color: var(--color-red) !important;
+  color: var(--link-accent) !important;
 }
 .qOptLetter {
   flex-shrink: 0;
@@ -1013,7 +1013,7 @@
   font-size: 12px;
   font-weight: 700;
   color: var(--on-invert-3);
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   transition: all .15s;
 }
 .qOptSelected .qOptLetter {
@@ -1075,13 +1075,13 @@
 }
 .quiz .btnGhost:hover:not(:disabled),
 .quiz .btnAccent:hover:not(:disabled) {
-  background: #f2f2f5;
+  background: var(--input-bg);
   border-color: var(--on-invert-3);
 }
 
 /* Resultado */
 .result {
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   border-radius: var(--radius-xl);
   border: 1px solid var(--hairline-invert);
   box-shadow: var(--shadow-md);

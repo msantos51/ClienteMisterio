@@ -184,7 +184,7 @@
 /* ---------- CTA — painel branco a fechar a página ---------- */
 .cta {
   margin-top: 56px;
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   border-radius: var(--radius-xl);
   padding: 36px 32px;
   display: flex;
