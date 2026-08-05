@@ -120,7 +120,7 @@ export default function DashboardPage() {
         const data = (await response.json()) as ProfileResponse;
 
         if (!response.ok || !data.user) {
-          router.push("/login");
+          router.push("/entrar");
           return;
         }
 
@@ -139,7 +139,7 @@ export default function DashboardPage() {
         setProfile(normalizedProfile);
       } catch {
         clearTimeout(timeoutId);
-        router.push("/login");
+        router.push("/entrar");
       }
     };
 
@@ -322,7 +322,7 @@ export default function DashboardPage() {
   const handleLogout = async () => {
     // Termina a sessão no servidor (limpa o cookie httpOnly).
     await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
-    router.push("/login");
+    router.push("/entrar");
   };
 
   const handleDeleteAccount = async () => {
@@ -362,7 +362,7 @@ export default function DashboardPage() {
 
       await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
       localStorage.removeItem(preferencesStorageKey);
-      router.push("/login?deleted=1");
+      router.push("/entrar?deleted=1");
     } catch {
       setDeleteAccountFeedback(t.common.error);
     } finally {

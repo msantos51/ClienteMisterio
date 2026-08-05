@@ -40,9 +40,9 @@ function BuyButton({ children, className }: { children: React.ReactNode; classNa
       const response = await fetch("/api/auth/session", { cache: "no-store" });
       const data = response.ok ? ((await response.json()) as { authenticated: boolean }) : { authenticated: false };
       if (data.authenticated) { window.location.href = paymentLink; }
-      else { router.push("/login?checkout=1"); }
+      else { router.push("/entrar?checkout=1"); }
     } catch {
-      router.push("/login?checkout=1");
+      router.push("/entrar?checkout=1");
     }
   };
 

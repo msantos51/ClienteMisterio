@@ -82,7 +82,7 @@ export default function HeaderActions() {
   return (
     <div className="flex flex-nowrap items-center justify-end gap-2">
       {!sessionUser ? (
-        <Link className="site-pill-button nav-login-btn" href="/login">
+        <Link className="site-pill-button nav-login-btn" href="/entrar">
           {t.nav.login}
         </Link>
       ) : (

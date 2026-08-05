@@ -65,7 +65,7 @@ export default function ForgotPasswordPage() {
                 {isSubmitting ? t.auth.resetSubmitting : t.auth.resetButton}
               </button>
               <div className="text-center">
-                <Link className="form-link" href="/login">
+                <Link className="form-link" href="/entrar">
                   {t.auth.goToLogin}
                 </Link>
               </div>

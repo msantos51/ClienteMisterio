@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
   compress: true,
+  async redirects() {
+    // Rotas normalizadas para pt-PT (ver ponto 27 do plano de SEO): os
+    // caminhos antigos passam a 301 permanente para o novo endereço.
+    return [
+      { source: "/about", destination: "/sobre", permanent: true },
+      { source: "/contact", destination: "/contactos", permanent: true },
+      { source: "/login", destination: "/entrar", permanent: true },
+      { source: "/account", destination: "/criar-conta", permanent: true },
+      { source: "/registo", destination: "/criar-conta", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

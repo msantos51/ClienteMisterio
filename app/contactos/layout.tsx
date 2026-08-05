@@ -4,12 +4,12 @@ export const metadata: Metadata = {
   title: "Contacto",
   description:
     "Fala com a equipa do Cliente Mistério para dúvidas sobre o curso, o certificado ou o processo de pagamento.",
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: "/contactos" },
   openGraph: {
     title: "Contacto | Cliente Mistério",
     description:
       "Fala com a equipa do Cliente Mistério para dúvidas sobre o curso, o certificado ou o processo de pagamento.",
-    url: "/contact",
+    url: "/contactos",
   },
 };
 
