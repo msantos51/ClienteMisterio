@@ -9,7 +9,24 @@
 import Link from "next/link";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { useCourseAccess } from "@/app/lib/useCourseAccess";
+import { courseModules } from "./curso/courseData";
+import { faqs } from "./faq/faqData";
 import styles from "./page.module.css";
+
+const CheckIcon = ({ size = 11 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+const ArrowIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
+
+/* As 4 perguntas mais representativas da FAQ, uma por tema. */
+const homeFaqSlugs = ["duracao", "pagamento", "legalidade", "certificado"];
 
 /* ---------- Ícones dos nós do processo ---------- */
 const StepIcons = [
@@ -66,6 +83,7 @@ export default function HomePage() {
               </span>
             </h1>
             <p className={styles.subtitle}>{t.home.subtitle}</p>
+            <p className={styles.valueProp}>{t.home.heroGuarantee}</p>
 
             <div className={styles.ctaRow}>
               <Link href={primaryCta.href} className={styles.ctaPrimary}>
@@ -138,6 +156,128 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------------
+          O QUE APRENDES — grelha resumida dos 10 módulos
+          ---------------------------------------------------------- */}
+      <section className={`${styles.section} full-section full-section-scroll`}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHead}>
+            <p className={styles.eyebrow}>{t.home.modulesEyebrow}</p>
+            <h2 className={styles.sectionTitle}>{t.home.modulesTitle}</h2>
+            <p className={styles.sectionSub}>{t.home.modulesSub}</p>
+          </div>
+          <div className={styles.modulesGrid}>
+            {courseModules
+              .filter((m) => m.id <= 10)
+              .map((module) => (
+                <div key={module.id} className={styles.moduleCard}>
+                  <span className={styles.moduleCardNum}>{String(module.id).padStart(2, "0")}</span>
+                  <span className={styles.moduleCardTitle}>{module.title}</span>
+                </div>
+              ))}
+          </div>
+          <Link href="/o-curso" className={styles.sectionLink}>
+            {t.home.modulesCta}
+            <ArrowIcon />
+          </Link>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------------
+          PROVA SOCIAL — por preencher com dados reais e verificáveis
+          (ponto 48/58 do plano: nunca inventar números de alunos ou
+          avaliações).
+          ---------------------------------------------------------- */}
+      <section className={`${styles.section} full-section full-section-scroll`}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHead}>
+            <p className={styles.eyebrow}>{t.home.socialProofEyebrow}</p>
+            <p className={styles.socialProofPlaceholder}>{t.home.socialProofTitle}</p>
+            <p className={styles.socialProofPlaceholder}>{t.home.socialProofDesc}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------------
+          PREÇO — reaproveita os valores já usados em /o-curso
+          ---------------------------------------------------------- */}
+      <section className={`${styles.section} full-section full-section-scroll`}>
+        <div className={styles.sectionInner}>
+          <div className={styles.priceCard}>
+            <p className={styles.priceEyebrow}>{t.home.pricingEyebrow}</p>
+            <h2 className={styles.priceTitle}>{t.home.pricingTitle}</h2>
+            <div className={styles.priceRow}>
+              <span className={styles.priceAmount}>{t.coursePage.pricingPrice}</span>
+              <span className={styles.priceMeta}>
+                {t.coursePage.pricingPayment} · {t.coursePage.pricingLifetime}
+              </span>
+            </div>
+            <p className={styles.priceUrgency}>{t.coursePage.pricingUrgency}</p>
+            <ul className={styles.priceFeatures}>
+              {[
+                t.coursePage.pricingFeature1,
+                t.coursePage.pricingFeature2,
+                t.coursePage.pricingFeature3,
+              ].map((feature) => (
+                <li key={feature}>
+                  <CheckIcon />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <Link href={primaryCta.href} className={styles.priceCta}>
+              {t.home.pricingCta}
+              <ArrowIcon />
+            </Link>
+            <p className={styles.priceSecure}>{t.coursePage.paymentSecure}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------------
+          FAQ CURTO — 4 perguntas + link para a FAQ completa
+          ---------------------------------------------------------- */}
+      <section className={`${styles.section} full-section full-section-scroll`}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHead}>
+            <p className={styles.eyebrow}>{t.home.faqEyebrow}</p>
+            <h2 className={styles.sectionTitle}>{t.home.faqTitle}</h2>
+          </div>
+          <dl className={styles.faqList}>
+            {homeFaqSlugs.map((slug) => {
+              const item = faqs.find((f) => f.slug === slug);
+              if (!item) return null;
+              return (
+                <div key={slug} className={styles.faqItem}>
+                  <dt className={styles.faqQ}>{item.q}</dt>
+                  <dd className={styles.faqA}>{item.a}</dd>
+                </div>
+              );
+            })}
+          </dl>
+          <Link href="/faq" className={styles.sectionLink}>
+            {t.home.faqCta}
+            <ArrowIcon />
+          </Link>
+        </div>
+      </section>
+
+      {/* ----------------------------------------------------------
+          CTA FINAL
+          ---------------------------------------------------------- */}
+      <section className={`${styles.section} full-section full-section-scroll`}>
+        <div className={styles.sectionInner}>
+          <div className={styles.finalCta}>
+            <h2 className={styles.finalCtaTitle}>{t.home.finalCtaTitle}</h2>
+            <p className={styles.finalCtaDesc}>{t.home.finalCtaDesc}</p>
+            <Link href={primaryCta.href} className={styles.ctaPrimary}>
+              {t.home.finalCtaButton}
+              <ArrowIcon />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
