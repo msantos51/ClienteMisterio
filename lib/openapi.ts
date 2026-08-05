@@ -83,9 +83,9 @@ export const openApiDocument = {
           firstName: { type: "string", example: "João" },
           lastName: { type: "string", example: "Silva" },
           birthDate: { type: "string", format: "date", example: "1994-04-10" },
-          gender: { type: "string", enum: ["male", "female"], example: "male" },
+          gender: { type: "string", enum: ["male", "female", "unspecified", ""], example: "unspecified" },
         },
-        required: ["email", "firstName", "lastName", "birthDate", "gender"],
+        required: ["email", "firstName", "lastName", "birthDate"],
       },
       UserPasswordUpdateRequest: {
         type: "object",

@@ -38,7 +38,7 @@ type PasswordRow = {
   password_hash: string;
 };
 
-const allowedGender = ["male", "female"];
+const allowedGender = ["male", "female", "unspecified"];
 
 export const GET = async () => {
   // Devolve o perfil do utilizador autenticado com base na sessão server-side.
@@ -106,7 +106,7 @@ export const PUT = async (request: Request) => {
 
     if (typeof payload.birthDate !== "string" || !payload.birthDate || typeof payload.gender !== "string") {
       return NextResponse.json(
-        { message: "Data de nascimento e género são obrigatórios." },
+        { message: "Data de nascimento é obrigatória." },
         { status: 400 }
       );
     }
@@ -121,7 +121,7 @@ export const PUT = async (request: Request) => {
       return NextResponse.json({ message: "Data de nascimento inválida." }, { status: 400 });
     }
 
-    if (!allowedGender.includes(payload.gender)) {
+    if (payload.gender && !allowedGender.includes(payload.gender)) {
       return NextResponse.json({ message: "Género inválido." }, { status: 400 });
     }
 

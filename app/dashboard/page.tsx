@@ -281,7 +281,7 @@ function DashboardPageContent() {
 
     setFirstAccessFeedback(null);
 
-    if (!profile.birthDate || !profile.gender) {
+    if (!profile.birthDate) {
       setFirstAccessFeedback(d.birthDateRequired);
       return;
     }
@@ -296,7 +296,7 @@ function DashboardPageContent() {
 
     setProfileFeedback(null);
 
-    if (!profile.birthDate || !profile.gender) {
+    if (!profile.birthDate) {
       setProfileFeedback(d.birthDateRequired);
       return;
     }
@@ -437,6 +437,7 @@ function DashboardPageContent() {
                   <option value="">{d.select}</option>
                   <option value="male">{d.male}</option>
                   <option value="female">{d.female}</option>
+                  <option value="unspecified">{d.genderUnspecified}</option>
                 </select>
                 <span className="label">{d.gender}</span>
               </div>
