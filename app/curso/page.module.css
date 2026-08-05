@@ -169,13 +169,13 @@
    CABEÇALHO DO CURSO
    ============================================================ */
 .courseHead {
-  padding: clamp(20px, 6vh, 56px) 0 clamp(14px, 3.5vh, 32px);
+  padding: clamp(16px, 4vh, 34px) 0 clamp(10px, 2.5vh, 24px);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 720px) {
-  .courseHead { padding: clamp(16px, 4vh, 34px) 0 clamp(10px, 2.5vh, 24px); }
+@media (min-width: 768px) {
+  .courseHead { padding: clamp(20px, 6vh, 56px) 0 clamp(14px, 3.5vh, 32px); }
 }
 .courseHeadGrid {
   display: grid;
@@ -183,7 +183,7 @@
   gap: 32px;
   align-items: end;
 }
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .courseHeadGrid { grid-template-columns: 1.4fr 1fr; gap: 64px; }
 }
 .courseHeadTitle {
@@ -283,13 +283,13 @@
    LISTA DE MÓDULOS
    ============================================================ */
 .modList {
-  padding-bottom: clamp(28px, 8vh, 88px);
+  padding-bottom: clamp(20px, 6vh, 56px);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 720px) {
-  .modList { padding-bottom: clamp(20px, 6vh, 56px); }
+@media (min-width: 768px) {
+  .modList { padding-bottom: clamp(28px, 8vh, 88px); }
 }
 .modListHead {
   display: flex;
@@ -418,13 +418,16 @@
   background: var(--color-black);
   color: var(--color-white);
   border-radius: var(--radius-xl);
-  padding: 40px 44px;
+  padding: 30px 26px;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   gap: 32px;
   align-items: center;
   position: relative;
   overflow: hidden;
+}
+@media (min-width: 768px) {
+  .certBlock { grid-template-columns: 1fr auto; padding: 40px 44px; }
 }
 .certBlock::before {
   content: "";
@@ -467,9 +470,6 @@
   border-color: var(--color-red-bright);
   box-shadow: 0 8px 22px rgba(124, 92, 255, 0.36);
 }
-@media (max-width: 720px) {
-  .certBlock { grid-template-columns: 1fr; padding: 30px 26px; }
-}
 
 /* ============================================================
    LEITOR (overlay)
@@ -490,14 +490,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 18px 32px;
+  gap: 12px;
+  padding: 14px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
   background: var(--color-red);
   flex-shrink: 0;
 }
-@media (max-width: 720px) {
-  .readerTop { padding: 14px 20px; gap: 12px; }
+@media (min-width: 768px) {
+  .readerTop { padding: 18px 32px; gap: 24px; }
 }
 .readerBack {
   display: inline-flex;
@@ -518,16 +518,19 @@
 .readerBack svg { transform: rotate(180deg); }
 
 .readerTitle {
+  display: none;
   font-size: 13px;
   font-weight: 600;
   color: var(--color-white);
   text-align: center;
-  display: flex;
   align-items: center;
   gap: 12px;
   min-width: 0;
   flex: 1;
   justify-content: center;
+}
+@media (min-width: 768px) {
+  .readerTitle { display: flex; }
 }
 .readerTitle em {
   font-style: normal;
@@ -541,19 +544,15 @@
   text-overflow: ellipsis;
   max-width: 50ch;
 }
-@media (max-width: 720px) {
-  .readerTitle { display: none; }
-}
-
 .readerProgress {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: 180px;
+  min-width: auto;
   justify-content: flex-end;
 }
-@media (max-width: 720px) {
-  .readerProgress { min-width: auto; }
+@media (min-width: 768px) {
+  .readerProgress { min-width: 180px; }
 }
 .readerProgressDots {
   display: flex;
@@ -580,12 +579,12 @@
 .readerBody {
   flex: 1;
   overflow-y: auto;
-  padding: 52px 32px 72px;
+  padding: 32px 20px 48px;
   background: var(--color-white);
   color: var(--on-invert-2);
 }
-@media (max-width: 720px) {
-  .readerBody { padding: 32px 20px 48px; }
+@media (min-width: 768px) {
+  .readerBody { padding: 52px 32px 72px; }
 }
 .readerContainer {
   max-width: 1180px;
@@ -594,7 +593,7 @@
   grid-template-columns: 1fr;
   gap: 40px;
 }
-@media (min-width: 980px) {
+@media (min-width: 1024px) {
   .readerContainer { grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; }
 }
 
@@ -715,7 +714,7 @@
   gap: 12px;
   margin-top: 8px;
 }
-@media (min-width: 720px) { .premGrid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 768px) { .premGrid { grid-template-columns: 1fr 1fr; } }
 .prem {
   border-radius: var(--radius-lg);
   padding: 26px;
@@ -791,15 +790,14 @@
 
 /* Barra lateral */
 .aside {
-  position: sticky;
-  top: 24px;
+  position: static;
   align-self: start;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-@media (max-width: 980px) {
-  .aside { position: static; }
+@media (min-width: 1024px) {
+  .aside { position: sticky; top: 24px; }
 }
 .asideCard {
   background: #f7f7f9;
@@ -848,11 +846,11 @@
 .readerBottom {
   border-top: 1px solid rgba(255, 255, 255, 0.22);
   background: var(--color-red);
-  padding: 16px 32px;
+  padding: 12px 20px;
   flex-shrink: 0;
 }
-@media (max-width: 720px) {
-  .readerBottom { padding: 12px 20px; }
+@media (min-width: 768px) {
+  .readerBottom { padding: 16px 32px; }
 }
 .readerBottomInner {
   max-width: 1180px;
@@ -863,6 +861,7 @@
   gap: 16px;
 }
 .readerPageInfo {
+  display: none;
   font-size: 11px;
   color: var(--on-brand-2);
   text-transform: uppercase;
@@ -870,8 +869,8 @@
   font-weight: 700;
 }
 .readerPageInfo strong { color: var(--color-white); font-weight: 700; }
-@media (max-width: 600px) {
-  .readerPageInfo { display: none; }
+@media (min-width: 640px) {
+  .readerPageInfo { display: block; }
 }
 /* No chrome vermelho do leitor, os botões voltam a ser brancos/vazados. */
 .readerBottom .btnPrimary,
@@ -917,12 +916,12 @@
   background: var(--color-white);
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-lg);
-  padding: 28px;
+  padding: 22px;
   margin-bottom: 12px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
-@media (max-width: 600px) {
-  .q { padding: 22px; }
+@media (min-width: 640px) {
+  .q { padding: 28px; }
 }
 .qNum {
   font-weight: 700;
@@ -1049,11 +1048,14 @@
   border-radius: var(--radius-xl);
   border: 1px solid var(--hairline-invert);
   box-shadow: var(--shadow-md);
-  padding: 52px;
+  padding: 34px 24px;
   text-align: center;
   margin-bottom: 24px;
   position: relative;
   overflow: hidden;
+}
+@media (min-width: 640px) {
+  .result { padding: 52px; }
 }
 .result::before {
   content: "";
@@ -1062,9 +1064,6 @@
   transform: translateX(-50%);
   width: 72px; height: 4px;
   background: var(--color-red);
-}
-@media (max-width: 600px) {
-  .result { padding: 34px 24px; }
 }
 .resultScore {
   font-family: var(--font-display);

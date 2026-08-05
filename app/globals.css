@@ -289,7 +289,7 @@ html {
      e peso alto dão o registo tipográfico moderno do sistema. */
   h1 {
     font-family: var(--font-display);
-    font-size: 60px;
+    font-size: 40px;
     font-weight: 700;
     line-height: 1.04;
     letter-spacing: -0.035em;
@@ -298,7 +298,7 @@ html {
 
   h2 {
     font-family: var(--font-display);
-    font-size: 42px;
+    font-size: 31px;
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -0.03em;
@@ -307,7 +307,7 @@ html {
 
   h3 {
     font-family: var(--font-display);
-    font-size: 28px;
+    font-size: 23px;
     font-weight: 700;
     line-height: 1.16;
     letter-spacing: -0.02em;
@@ -315,7 +315,7 @@ html {
   }
 
   h4 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: -0.015em;
     margin-bottom: 12px;
@@ -334,13 +334,13 @@ html {
     margin-bottom: 8px;
   }
 
-  /* Os tamanhos fixos acima são desenhados para desktop; em ecrãs pequenos
-     descem para não rebentar a linha. */
-  @media (max-width: 768px) {
-    h1 { font-size: 40px; }
-    h2 { font-size: 31px; }
-    h3 { font-size: 23px; }
-    h4 { font-size: 20px; }
+  /* Os tamanhos base acima são mobile-first; a partir de 768px sobem para
+     a escala desktop (o registo tipográfico grande do sistema). */
+  @media (min-width: 768px) {
+    h1 { font-size: 60px; }
+    h2 { font-size: 42px; }
+    h3 { font-size: 28px; }
+    h4 { font-size: 22px; }
   }
 
   /* PARAGRAPHS & TEXT */
@@ -636,8 +636,8 @@ html {
     padding: 0;
     width: var(--header-control-height);
     height: var(--header-control-height);
-    min-width: 44px;
-    min-height: 44px;
+    min-width: 48px;
+    min-height: 48px;
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-md);
     background-color: transparent;
@@ -645,13 +645,6 @@ html {
     cursor: pointer;
     transition: all 200ms ease;
     -webkit-tap-highlight-color: transparent;
-  }
-
-  @media (max-width: 480px) {
-    .menu-toggle-button {
-      min-width: 48px;
-      min-height: 48px;
-    }
   }
 
   .menu-toggle-button:hover {
@@ -713,12 +706,6 @@ html {
     background: var(--color-white) !important;
   }
 
-  @media (max-width: 480px) {
-    .mobile-menu-container {
-      top: 74px !important;
-    }
-  }
-
   .mobile-menu-item {
     color: var(--on-invert) !important;
     min-height: 48px;
@@ -729,13 +716,6 @@ html {
   .mobile-menu-item:hover {
     color: var(--color-red) !important;
     background: #f6f6f8 !important;
-  }
-
-  @media (max-width: 480px) {
-    .mobile-menu-item {
-      min-height: 48px;
-      padding: 0.65rem 1.1rem !important;
-    }
   }
 
   .button-text-standard {
@@ -893,12 +873,12 @@ html {
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-sm);
-    padding: 0 var(--sp-md);
+    padding: 0 12px;
   }
 
-  @media (max-width: 480px) {
+  @media (min-width: 640px) {
     .site-header-inner {
-      padding: 0 12px;
+      padding: 0 var(--sp-md);
     }
   }
 
@@ -1018,20 +998,26 @@ html {
      ================================================================= */
   .hero {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: var(--sp-lg);
     align-items: center;
     padding: var(--sp-5xl) var(--sp-md);
     background: var(--surface-brand);
     color: var(--color-white);
   }
+  @media (min-width: 768px) {
+    .hero { grid-template-columns: 1fr 1fr; }
+  }
 
   .hero-content h1 {
-    font-size: 68px;
+    font-size: 44px;
     line-height: 1.02;
     letter-spacing: -0.04em;
     margin-bottom: 24px;
     color: var(--color-white);
+  }
+  @media (min-width: 768px) {
+    .hero-content h1 { font-size: 68px; }
   }
 
   .hero-subtitle {
@@ -1044,9 +1030,15 @@ html {
 
   .hero-buttons {
     display: flex;
+    flex-direction: column;
     gap: var(--sp-md);
     flex-wrap: wrap;
     margin-bottom: 32px;
+  }
+  .hero-buttons button { width: 100%; }
+  @media (min-width: 768px) {
+    .hero-buttons { flex-direction: row; }
+    .hero-buttons button { width: auto; }
   }
 
   /* HERO BADGE/STATS */
@@ -1084,11 +1076,15 @@ html {
 
   /* HERO MISSION CARD */
   .mission-card {
+    order: -1;
     background: rgba(0, 0, 0, 0.16);
     border: 1px solid rgba(255, 255, 255, 0.28);
     border-radius: var(--radius-lg);
     padding: 28px;
     backdrop-filter: blur(10px);
+  }
+  @media (min-width: 768px) {
+    .mission-card { order: 0; }
   }
 
   .mission-card h4 {
@@ -1154,37 +1150,18 @@ html {
     letter-spacing: -0.03em;
   }
 
-  @media (max-width: 768px) {
-    .hero {
-      grid-template-columns: 1fr;
-      gap: var(--sp-lg);
-    }
-
-    .hero-content h1 {
-      font-size: 44px;
-    }
-
-    .hero-buttons {
-      flex-direction: column;
-    }
-
-    .hero-buttons button {
-      width: 100%;
-    }
-
-    .mission-card {
-      order: -1;
-    }
-  }
 
   /* =================================================================
      PARTE 7 — FEATURE SECTIONS
      ================================================================= */
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-lg);
+    grid-template-columns: 1fr;
+    gap: var(--sp-md);
     padding: var(--sp-5xl) var(--sp-md);
+  }
+  @media (min-width: 768px) {
+    .features-grid { grid-template-columns: repeat(3, 1fr); gap: var(--sp-lg); }
   }
 
   .feature-card {
@@ -1233,21 +1210,20 @@ html {
     color: var(--on-brand-2);
   }
 
-  @media (max-width: 768px) {
-    .features-grid {
-      grid-template-columns: 1fr;
-      gap: var(--sp-md);
-    }
-  }
-
   /* =================================================================
      PARTE 8 — SETORES / AVALIAÇÃO
      ================================================================= */
   .sectors-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: var(--sp-md);
     padding: var(--sp-5xl) var(--sp-md);
+  }
+  @media (min-width: 768px) {
+    .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .sectors-grid { grid-template-columns: repeat(3, 1fr); }
   }
 
   .sector-card {
@@ -1293,18 +1269,6 @@ html {
     letter-spacing: 0.14em;
   }
 
-  @media (max-width: 1024px) {
-    .sectors-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .sectors-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
   /* =================================================================
      PARTE 9 — PROGRAMA / MÓDULOS
      ================================================================= */
@@ -1314,18 +1278,25 @@ html {
 
   .modules-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: var(--sp-lg);
+  }
+  @media (min-width: 768px) {
+    .modules-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   .module-card {
     display: flex;
+    flex-direction: column;
     gap: var(--sp-md);
     padding: var(--sp-lg);
     background: transparent;
     border: 1px solid var(--hairline);
     border-radius: var(--radius-lg);
     transition: all 300ms ease;
+  }
+  @media (min-width: 768px) {
+    .module-card { flex-direction: row; }
   }
 
   .module-card:nth-child(even) {
@@ -1377,24 +1348,11 @@ html {
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    text-align: right;
-    padding-top: var(--sp-md);
+    text-align: left;
+    padding-top: var(--sp-sm);
   }
-
-  @media (max-width: 768px) {
-    .modules-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .module-card {
-      flex-direction: column;
-      gap: var(--sp-md);
-    }
-
-    .module-duration {
-      text-align: left;
-      padding-top: var(--sp-sm);
-    }
+  @media (min-width: 768px) {
+    .module-duration { text-align: right; padding-top: var(--sp-md); }
   }
 
   /* =================================================================
@@ -1407,15 +1365,21 @@ html {
 
   .steps-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--sp-lg);
+    grid-template-columns: 1fr;
+    gap: var(--sp-2xl);
     position: relative;
     margin-top: var(--sp-2xl);
   }
+  @media (min-width: 768px) {
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(4, 1fr); gap: var(--sp-lg); }
+  }
 
-  /* Linha que liga os passos. */
+  /* Linha que liga os passos — só faz sentido com os 4 nós na mesma linha. */
   .steps-grid::before {
-    content: "";
+    content: none;
     position: absolute;
     top: 28px;
     left: 60px;
@@ -1424,12 +1388,18 @@ html {
     background: var(--hairline);
     z-index: 0;
   }
+  @media (min-width: 1024px) {
+    .steps-grid::before { content: ""; }
+  }
 
   .step-card {
     position: relative;
     z-index: 1;
-    padding: var(--sp-lg);
+    padding: var(--sp-md);
     text-align: center;
+  }
+  @media (min-width: 1024px) {
+    .step-card { padding: var(--sp-lg); }
   }
 
   .step-number {
@@ -1468,27 +1438,6 @@ html {
     line-height: 1.6;
   }
 
-  @media (max-width: 1024px) {
-    .steps-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-2xl);
-    }
-
-    .steps-grid::before {
-      content: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .steps-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .step-card {
-      padding: var(--sp-md);
-    }
-  }
-
   /* =================================================================
      PARTE 11 — PRICING
      ================================================================= */
@@ -1518,11 +1467,15 @@ html {
 
   .price-display {
     display: flex;
+    flex-direction: column;
     align-items: baseline;
     justify-content: center;
-    gap: 16px;
+    gap: 8px;
     margin-bottom: var(--sp-2xl);
     flex-wrap: wrap;
+  }
+  @media (min-width: 768px) {
+    .price-display { flex-direction: row; gap: 16px; }
   }
 
   .price-original {
@@ -1533,10 +1486,13 @@ html {
   }
 
   .price-current {
-    font-size: 60px;
+    font-size: 46px;
     font-weight: 700;
     letter-spacing: -0.04em;
     color: var(--color-white);
+  }
+  @media (min-width: 768px) {
+    .price-current { font-size: 60px; }
   }
 
   .price-currency {
@@ -1593,17 +1549,6 @@ html {
     font-size: 14px;
     color: var(--on-brand-2);
     margin-top: var(--sp-md);
-  }
-
-  @media (max-width: 768px) {
-    .price-display {
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .price-current {
-      font-size: 46px;
-    }
   }
 
   /* =================================================================
@@ -1713,27 +1658,36 @@ html {
      TIPOGRAFIA UTILITÁRIA (nomes legados usados pelas páginas)
      ================================================================= */
   .h1 {
-    font-size: 60px;
+    font-size: 40px;
     line-height: 1.04;
     font-weight: 700;
     color: var(--ink);
     letter-spacing: -0.035em;
   }
+  @media (min-width: 768px) {
+    .h1 { font-size: 60px; }
+  }
 
   .h2 {
-    font-size: 42px;
+    font-size: 31px;
     line-height: 1.08;
     font-weight: 700;
     color: var(--ink);
     letter-spacing: -0.03em;
   }
+  @media (min-width: 768px) {
+    .h2 { font-size: 42px; }
+  }
 
   .h3 {
-    font-size: 28px;
+    font-size: 23px;
     font-weight: 700;
     line-height: 1.16;
     color: var(--ink);
     letter-spacing: -0.02em;
+  }
+  @media (min-width: 768px) {
+    .h3 { font-size: 28px; }
   }
 
   .h4 {
@@ -1747,12 +1701,6 @@ html {
     font-size: 18px;
     font-weight: 600;
     color: var(--ink);
-  }
-
-  @media (max-width: 768px) {
-    .h1 { font-size: 40px; }
-    .h2 { font-size: 31px; }
-    .h3 { font-size: 23px; }
   }
 
   .text-body-lg {
@@ -1785,15 +1733,18 @@ html {
   }
 
   .page-title {
-    font-size: 60px;
+    font-size: 40px;
     line-height: 1.04;
     font-weight: 700;
     color: var(--ink);
     letter-spacing: -0.035em;
   }
+  @media (min-width: 768px) {
+    .page-title { font-size: 60px; }
+  }
 
   .section-title {
-    font-size: 42px;
+    font-size: 31px;
     line-height: 1.08;
     font-weight: 700;
     color: var(--ink);
@@ -1801,17 +1752,15 @@ html {
   }
 
   .section-title-inverse {
-    font-size: 42px;
+    font-size: 31px;
     line-height: 1.08;
     font-weight: 700;
     color: var(--color-white);
     letter-spacing: -0.03em;
   }
-
-  @media (max-width: 768px) {
-    .page-title { font-size: 40px; }
+  @media (min-width: 768px) {
     .section-title,
-    .section-title-inverse { font-size: 31px; }
+    .section-title-inverse { font-size: 42px; }
   }
 
   .card-title {
@@ -1845,17 +1794,10 @@ html {
     position: relative;
     width: 25px;
     height: 25px;
-    min-width: 44px;
-    min-height: 44px;
+    min-width: 48px;
+    min-height: 48px;
     cursor: pointer;
     user-select: none;
-  }
-
-  @media (max-width: 480px) {
-    .checkbox-container {
-      min-width: 48px;
-      min-height: 48px;
-    }
   }
 
   .custom-checkbox {
@@ -1963,9 +1905,10 @@ html {
      tudo o que está dentro herda a escala escura de texto e linhas.
      =================================================================== */
   .login-form {
-    width: 100%;
+    width: 95%;
     max-width: 460px;
-    padding: 40px;
+    margin: 0 auto;
+    padding: 22px;
     background: var(--color-white);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
@@ -1973,6 +1916,9 @@ html {
     animation: fadeIn 0.6s ease-out;
     position: relative;
     color: var(--on-invert);
+  }
+  @media (min-width: 640px) {
+    .login-form { width: 100%; margin: 0; padding: 40px; }
   }
 
   /* Régua vermelha no topo do cartão de formulário. */
@@ -1985,14 +1931,6 @@ html {
     height: 4px;
     border-radius: 0 0 var(--radius-pill) var(--radius-pill);
     background: var(--color-red);
-  }
-
-  @media (max-width: 480px) {
-    .login-form {
-      padding: 22px;
-      margin: 0 auto;
-      width: 95%;
-    }
   }
 
   .dashboard-form {
@@ -2011,30 +1949,23 @@ html {
   }
 
   .form-heading {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     color: var(--on-invert) !important;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 700;
     text-align: center;
     letter-spacing: -0.03em;
   }
-
-  @media (max-width: 480px) {
-    .form-heading {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
+  @media (min-width: 640px) {
+    .form-heading { font-size: 30px; margin-bottom: 24px; }
   }
 
   .input-group {
     position: relative;
-    margin-bottom: 26px;
+    margin-bottom: 22px;
   }
-
-  @media (max-width: 480px) {
-    .input-group {
-      margin-bottom: 22px;
-    }
+  @media (min-width: 640px) {
+    .input-group { margin-bottom: 26px; }
   }
 
   .input-group .label {
@@ -2054,10 +1985,10 @@ html {
   .input-group textarea,
   .input-group select {
     width: 100%;
-    padding: 13px 15px;
+    padding: 13px 14px;
     color: var(--on-invert) !important;
     font-family: var(--font-body);
-    font-size: 15px;
+    font-size: 16px;
     background-color: #f7f7f9 !important;
     border: 1px solid #e7e7ea !important;
     border-radius: var(--radius-md);
@@ -2065,26 +1996,22 @@ html {
     transition: all 200ms ease;
     min-height: 44px;
   }
-
-  @media (max-width: 480px) {
+  @media (min-width: 640px) {
     .input-group input,
     .input-group textarea,
     .input-group select {
-      font-size: 16px;
-      padding: 13px 14px;
+      font-size: 15px;
+      padding: 13px 15px;
     }
   }
 
   .input-group textarea {
-    min-height: 110px;
+    min-height: 100px;
     resize: vertical;
     font-family: inherit;
   }
-
-  @media (max-width: 480px) {
-    .input-group textarea {
-      min-height: 100px;
-    }
+  @media (min-width: 640px) {
+    .input-group textarea { min-height: 110px; }
   }
 
   .input-group input:hover,
@@ -2381,13 +2308,16 @@ html {
   .gap-lg { gap: var(--sp-lg); }
 
   /* VISIBILITY */
-  @media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+  @media (min-width: 768px) {
     .hide-mobile {
-      display: none !important;
+      display: unset !important;
     }
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 768px) {
     .hide-desktop {
       display: none !important;
     }
