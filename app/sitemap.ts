@@ -14,6 +14,7 @@ const publicPaths = [
   { path: "/login", priority: 0.4, changeFrequency: "yearly" as const },
   { path: "/termos-e-condicoes", priority: 0.3, changeFrequency: "yearly" as const },
   { path: "/privacidade", priority: 0.3, changeFrequency: "yearly" as const },
+  { path: "/cookies", priority: 0.3, changeFrequency: "yearly" as const },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
