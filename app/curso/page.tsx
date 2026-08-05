@@ -685,7 +685,7 @@ export default function CursoPage() {
       const response = await fetch("/api/course/progress", { credentials: "include" });
 
       if (response.status === 401) {
-        router.push("/login");
+        router.push("/entrar");
         return;
       }
 

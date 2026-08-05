@@ -96,7 +96,10 @@
   --radius-sharp: var(--radius-md);
   --header-control-height: 38px;
   --header-h: 73px;         /* 72px de .site-header-inner + 1px de border-bottom do .site-header */
-  --footer-h: 40px;         /* altura do rodapé mínimo, fixo em todas as páginas */
+  --footer-h: 320px;        /* estimativa da altura do rodapé completo (desktop); só
+                                usada para o min-height aproximado das secções de ecrã
+                                inteiro — o rodapé em si nunca é cortado nem tem
+                                altura fixa. */
 
   /* Sombras — sobre vermelho só funcionam sombras pretas e discretas. */
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.12);
@@ -1582,16 +1585,85 @@ html {
   /* =================================================================
      PARTE 12 — FOOTER
      -----------------------------------------------------------------
-     Rodapé mínimo: apenas termos e condições e nota de direitos
-     reservados, sem colunas de navegação nem newsletter.
+     Rodapé completo: mapa do site, contactos e links legais numa
+     grelha de colunas, com uma barra final de direitos reservados.
+     Estático (sem position:fixed) — cresce com o conteúdo.
      ================================================================= */
-  .footer-mini {
+  .site-footer {
+    padding: var(--sp-3xl) var(--sp-md) var(--sp-lg);
+  }
+
+  .site-footer-grid {
+    display: grid;
+    gap: var(--sp-xl);
+    grid-template-columns: 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 640px) {
+    .site-footer-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .site-footer-grid { grid-template-columns: 1.4fr repeat(3, 1fr); }
+  }
+
+  .site-footer-brand {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+    margin-bottom: 10px;
+  }
+
+  .site-footer-tagline {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--on-brand-2);
+    max-width: 32ch;
+  }
+
+  .site-footer-heading {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--on-brand-3);
+    margin-bottom: 14px;
+  }
+
+  .site-footer-links {
     display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .site-footer-link {
+    font-size: 13px;
+    color: var(--on-brand-2);
+    text-decoration: none;
+    transition: color 200ms ease;
+    min-height: 24px;
+    display: inline-flex;
     align-items: center;
   }
 
-  .footer-mini-inner {
-    height: 100%;
+  .site-footer-link:hover {
+    color: var(--color-white);
+  }
+
+  .site-footer-bottom {
+    max-width: 1200px;
+    margin: var(--sp-2xl) auto 0;
+    padding-top: var(--sp-md);
+    border-top: 1px solid var(--hairline-soft);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 24px;
+    text-align: center;
   }
 
   .footer-mini-text {
@@ -1832,10 +1904,8 @@ html {
      =================================================================== */
   footer {
     flex-shrink: 0;
-    height: var(--footer-h);
     background: var(--color-black);
     color: var(--color-white);
-    padding: 0 var(--sp-md);
   }
 
   /* ===================================================================

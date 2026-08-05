@@ -98,7 +98,7 @@ function ResetPasswordContent() {
                 {isSubmitting ? t.auth.resetPasswordSubmitting : t.auth.resetPasswordButton}
               </button>
               <div className="text-center">
-                <Link className="form-link" href="/login">
+                <Link className="form-link" href="/entrar">
                   {t.auth.goToLogin}
                 </Link>
               </div>

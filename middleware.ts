@@ -72,7 +72,7 @@ export function middleware(request: NextRequest) {
 
   if (requiresAuthentication(pathname) && !hasSessionCookie) {
     // Redireciona visitantes sem sessão para login antes de abrir páginas privadas.
-    const redirectUrl = new URL(`/login?next=${encodeURIComponent(`${pathname}${search}`)}`, request.url);
+    const redirectUrl = new URL(`/entrar?next=${encodeURIComponent(`${pathname}${search}`)}`, request.url);
 
     return appendSecurityHeaders(NextResponse.redirect(redirectUrl));
   }

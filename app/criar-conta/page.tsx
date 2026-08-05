@@ -75,7 +75,7 @@ export default function AccountPage() {
       }
 
       setFeedback({ type: "success", message: "Registration successful." });
-      router.push(isCheckout ? "/login?registered=1&checkout=1" : "/login?registered=1");
+      router.push(isCheckout ? "/entrar?registered=1&checkout=1" : "/entrar?registered=1");
     } catch {
       setFeedback({
         type: "error",
@@ -92,7 +92,7 @@ export default function AccountPage() {
         <article className="login-form max-w-[620px]">
           <h1 className="form-heading">{t.auth.registerTitle}</h1>
           {isCheckout && (
-            <p className="form-feedback mb-4">To proceed with the purchase, you need to create an account or <a className="form-link" href="/login?checkout=1">sign in</a>.</p>
+            <p className="form-feedback mb-4">To proceed with the purchase, you need to create an account or <a className="form-link" href="/entrar?checkout=1">sign in</a>.</p>
           )}
 
           <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
@@ -178,7 +178,7 @@ export default function AccountPage() {
                 {isSubmitting ? t.auth.registerSubmitting : t.auth.registerButton}
               </button>
               <div className="text-center">
-                <Link className="form-link" href={isCheckout ? "/login?checkout=1" : "/login"}>
+                <Link className="form-link" href={isCheckout ? "/entrar?checkout=1" : "/entrar"}>
                   {t.auth.alreadyHaveAccount}
                 </Link>
               </div>

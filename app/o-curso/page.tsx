@@ -27,12 +27,6 @@ const LockIcon = ({ size = 13 }: { size?: number }) => (
   </svg>
 );
 
-const StarIcon = ({ size = 16 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden>
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-  </svg>
-);
-
 function BuyButton({ children, className }: { children: React.ReactNode; className?: string }) {
   const router = useRouter();
   const paymentLink = process.env.NEXT_PUBLIC_STRIPE_PAYMENT_LINK;
@@ -46,9 +40,9 @@ function BuyButton({ children, className }: { children: React.ReactNode; classNa
       const response = await fetch("/api/auth/session", { cache: "no-store" });
       const data = response.ok ? ((await response.json()) as { authenticated: boolean }) : { authenticated: false };
       if (data.authenticated) { window.location.href = paymentLink; }
-      else { router.push("/login?checkout=1"); }
+      else { router.push("/entrar?checkout=1"); }
     } catch {
-      router.push("/login?checkout=1");
+      router.push("/entrar?checkout=1");
     }
   };
 
@@ -180,9 +174,7 @@ export default function CoursePage() {
               <div className={styles.cardBadge}>{t.coursePage.pricingBadge}</div>
               <div className={styles.cardTitle}>{t.coursePage.pricingTitle}</div>
               <div className={styles.cardPriceRow}>
-                <span className={styles.cardOrig}>{t.coursePage.pricingOriginal}</span>
                 <span className={styles.cardPrice}>{t.coursePage.pricingPrice}</span>
-                <span className={styles.discountBadge}>{t.coursePage.pricingDiscount}</span>
               </div>
               <div className={styles.cardPayment}>
                 {t.coursePage.pricingPayment}
@@ -241,7 +233,11 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
       </section>
 
       {/* ============================================================
-          CONFIANÇA — números + certificação
+          CONFIANÇA — certificação
+          Os números de alunos/avaliações (500+, 4,8/5, 100%) foram
+          removidos por não serem dados reais e verificáveis — repor
+          quando existirem valores reais (ver regras Omnibus sobre
+          reviews, ponto 58 do plano de acessibilidade/SEO).
           ============================================================ */}
       <section className={`${styles.sectionTight} full-section full-section-scroll`}>
         <div className={styles.wrap}>
@@ -250,48 +246,17 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
               <LockIcon size={13} />
               {t.coursePage.trustBadge}
             </div>
-            <div className={styles.trustStat}>
-              <div className={styles.trustStatNum}>{t.coursePage.trustStudents}</div>
-              <div className={styles.trustStatLabel}>{t.coursePage.trustStudentsLabel}</div>
-            </div>
-            <div className={styles.trustStat}>
-              <div className={styles.trustStatNum}>{t.coursePage.trustReviews}</div>
-              <div className={styles.trustStatLabel}>{t.coursePage.trustReviewsLabel}</div>
-            </div>
-            <div className={styles.trustStat}>
-              <div className={styles.trustStatNum}>{t.coursePage.trustCertified}</div>
-              <div className={styles.trustStatLabel}>{t.coursePage.trustCertifiedLabel}</div>
-            </div>
           </div>
         </div>
       </section>
 
       {/* ============================================================
-          TESTEMUNHOS
+          TESTEMUNHOS — removidos: eram exemplos fictícios apresentados
+          como avaliações reais de alunos, o que a política do projeto
+          proíbe e as regras Omnibus da UE exigem que sejam verificáveis.
+          Repor com testemunhos reais, identificados e com a indicação de
+          como foram recolhidos (ver ponto 48/58 do plano).
           ============================================================ */}
-      <section className={`${styles.sectionTight} full-section full-section-scroll`}>
-        <div className={styles.wrap}>
-          <h2 className={`${styles.displayLg} ${styles.testimonialsTitle}`}>
-            {t.coursePage.testimonialsTitle}
-          </h2>
-          <div className={styles.testimonials} role="region" aria-label={t.coursePage.testimonialsTitle}>
-            {[
-              { quote: t.coursePage.testimonial1Quote, name: t.coursePage.testimonial1Name, role: t.coursePage.testimonial1Role },
-              { quote: t.coursePage.testimonial2Quote, name: t.coursePage.testimonial2Name, role: t.coursePage.testimonial2Role },
-              { quote: t.coursePage.testimonial3Quote, name: t.coursePage.testimonial3Name, role: t.coursePage.testimonial3Role },
-            ].map((item) => (
-              <div className={styles.testimonial} key={item.name}>
-                <div className={styles.testimonialStars} aria-hidden>
-                  <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
-                </div>
-                <p className={styles.testimonialQuote}>&ldquo;{item.quote}&rdquo;</p>
-                <div className={styles.testimonialName}>{item.name}</div>
-                <div className={styles.testimonialRole}>{item.role}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ============================================================
           COMO FUNCIONA

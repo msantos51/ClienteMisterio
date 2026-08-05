@@ -21,11 +21,11 @@ export default function TopNav() {
 
   const navigationItems = [
     { href: "/", label: t.nav.home },
-    { href: "/about", label: t.nav.about },
+    { href: "/sobre", label: t.nav.about },
     { href: "/o-curso", label: t.nav.course },
     { href: "/faq", label: t.nav.faq },
-    { href: "/contact", label: t.nav.contact },
-    { href: "/account", label: t.nav.account },
+    { href: "/contactos", label: t.nav.contact },
+    { href: "/criar-conta", label: t.nav.account },
   ];
 
   // Deriva o fecho do menu a partir da alteração da rota sem disparar efeitos em cascata.

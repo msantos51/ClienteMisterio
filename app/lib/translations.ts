@@ -16,7 +16,7 @@ export const translations = {
     },
     // Home Page — ecrã único: proposta de valor + os três passos do processo.
     home: {
-      badge: "O único curso do género em Portugal",
+      badge: "Curso de Cliente Mistério em Portugal",
       titleLine1: "Avalia lojas.",
       titleLine2: "Recebe dinheiro",
       subtitle: "Transforma o teu tempo livre numa oportunidade real. Torna-te cliente mistério e começa hoje.",
@@ -66,12 +66,10 @@ export const translations = {
       statsAccess: "Acesso",
       pricingBadge: "+ Acesso completo",
       pricingTitle: "Curso Cliente Mistério",
-      pricingOriginal: "64,99€",
       pricingPrice: "24,99€",
-      pricingDiscount: "Poupa 62%",
       pricingPayment: "Pagamento único",
       pricingLifetime: "Acesso vitalício",
-      pricingUrgency: "Preço de lançamento — vagas limitadas este mês",
+      pricingUrgency: "14 dias de reembolso sem questões",
       pricingFeature1: "10 módulos completos + certificado",
       pricingFeature2: "Testes por módulo",
       pricingFeature3: "Checklists, modelos e casos reais",
@@ -143,7 +141,7 @@ export const translations = {
 
     // Footer
     footer: {
-      tagline: "O único curso de Cliente Mistério em Portugal.",
+      tagline: "O curso de Cliente Mistério em Portugal.",
       termsLink: "Termos e Condições",
       contactLink: "Contacto",
       copyright: "Cliente Mistério. Todos os direitos reservados.",
@@ -335,7 +333,7 @@ export const translations = {
       {
         number: "4",
         title: "Compra e Pagamento",
-        content: "A aquisição do curso é feita mediante pagamento único, processado de forma segura através da plataforma de pagamentos Stripe. Após confirmação do pagamento, o acesso ao curso é ativado de forma imediata. Não são oferecidos reembolsos após o acesso ao curso ter sido disponibilizado, salvo nos casos previstos na legislação do consumidor em vigor.",
+        content: "A aquisição do curso é feita mediante pagamento único, processado de forma segura através da plataforma de pagamentos Stripe. Após confirmação do pagamento, o acesso ao curso é ativado de forma imediata. Ao iniciar a compra, o utilizador consente expressamente no início imediato da execução do conteúdo digital e reconhece que, nos termos do Decreto-Lei n.º 24/2014, perde o direito legal de livre resolução de 14 dias a partir desse momento. Como garantia comercial voluntária — e não como direito legal de resolução —, a Cliente Mistério oferece, ainda assim, reembolso integral a quem o solicitar dentro de 14 dias após a compra, sem necessidade de justificação.",
       },
       {
         number: "5",
@@ -371,6 +369,16 @@ export const translations = {
         number: "11",
         title: "Contacto",
         content: "Se tiver dúvidas sobre estes termos e condições ou sobre o curso, por favor contacte-nos através da página de contacto do portal.",
+      },
+      {
+        number: "12",
+        title: "Identificação Legal",
+        content: "Cliente Mistério é operado por [TODO: denominação social], NIF [TODO: número de identificação fiscal], com sede em [TODO: morada legal da empresa], registada na Conservatória do Registo Comercial de [TODO: localidade e número de matrícula].",
+      },
+      {
+        number: "13",
+        title: "Livro de Reclamações e Resolução Alternativa de Litígios",
+        content: "Nos termos da legislação portuguesa, o consumidor tem acesso ao Livro de Reclamações Eletrónico em www.livroreclamacoes.pt. Em caso de litígio de consumo, o consumidor pode recorrer a uma Entidade de Resolução Alternativa de Litígios: [TODO: nome, morada e site do centro de arbitragem de consumo territorialmente competente]. Mais informação em www.consumidor.gov.pt.",
       },
     ],
 
@@ -523,7 +531,7 @@ export const translations = {
     },
     // Home Page — single screen: value proposition + the three process steps.
     home: {
-      badge: "The only course of its kind in Portugal",
+      badge: "Mystery Shopper course in Portugal",
       titleLine1: "Evaluate stores.",
       titleLine2: "Get paid",
       subtitle: "Turn your free time into a real opportunity. Become a mystery shopper and start today.",
@@ -573,12 +581,10 @@ export const translations = {
       statsAccess: "Access",
       pricingBadge: "+ Full access",
       pricingTitle: "Mystery Shopper Course",
-      pricingOriginal: "€64.99",
       pricingPrice: "€24.99",
-      pricingDiscount: "Save 62%",
       pricingPayment: "One-time payment",
       pricingLifetime: "Lifetime access",
-      pricingUrgency: "Launch price — limited spots this month",
+      pricingUrgency: "14-day no-questions-asked refund",
       pricingFeature1: "10 complete modules + certificate",
       pricingFeature2: "Module quizzes",
       pricingFeature3: "Checklists, templates and real cases",
@@ -650,7 +656,7 @@ export const translations = {
 
     // Footer
     footer: {
-      tagline: "The only mystery shopping course in Portugal.",
+      tagline: "The Mystery Shopper course in Portugal.",
       termsLink: "Terms and Conditions",
       contactLink: "Contact",
       copyright: "Mystery Shopping. All rights reserved.",
@@ -842,7 +848,7 @@ export const translations = {
       {
         number: "4",
         title: "Purchase and Payment",
-        content: "The course is purchased through a one-time payment, securely processed through the Stripe payment platform. After payment confirmation, access to the course is activated immediately. No refunds are offered after the course access has been provided, except in cases provided for in current consumer protection legislation.",
+        content: "The course is purchased through a one-time payment, securely processed through the Stripe payment platform. After payment confirmation, access to the course is activated immediately. By starting the purchase, the user expressly consents to the immediate start of performance of the digital content and acknowledges that, under Portuguese law (Decree-Law 24/2014), they lose the statutory 14-day right of withdrawal from that moment. As a voluntary commercial guarantee — not a statutory withdrawal right — Cliente Mistério still offers a full refund to anyone who requests it within 14 days of purchase, no questions asked.",
       },
       {
         number: "5",
@@ -878,6 +884,16 @@ export const translations = {
         number: "11",
         title: "Contact",
         content: "If you have questions about these terms and conditions or the course, please contact us through the contact page on the portal.",
+      },
+      {
+        number: "12",
+        title: "Legal Identification",
+        content: "Cliente Mistério is operated by [TODO: legal company name], VAT number [TODO: tax ID], registered office at [TODO: legal company address], registered with the Commercial Registry of [TODO: locality and registration number].",
+      },
+      {
+        number: "13",
+        title: "Complaints Book and Alternative Dispute Resolution",
+        content: "Under Portuguese law, consumers can access the Electronic Complaints Book at www.livroreclamacoes.pt. In case of a consumer dispute, consumers may resort to an Alternative Dispute Resolution entity: [TODO: name, address and website of the territorially competent consumer arbitration centre]. More information at www.consumidor.gov.pt.",
       },
     ],
 

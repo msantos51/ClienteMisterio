@@ -17,7 +17,7 @@ export const GET = async (request: Request) => {
   const token = url.searchParams.get("token")?.trim();
 
   if (!token) {
-    return NextResponse.redirect(new URL("/login?confirmed=0", request.url));
+    return NextResponse.redirect(new URL("/entrar?confirmed=0", request.url));
   }
 
   const tokenHash = hashToken(token);
@@ -33,8 +33,8 @@ export const GET = async (request: Request) => {
   );
 
   if (!updateResult.rowCount) {
-    return NextResponse.redirect(new URL("/login?confirmed=0", request.url));
+    return NextResponse.redirect(new URL("/entrar?confirmed=0", request.url));
   }
 
-  return NextResponse.redirect(new URL("/login?confirmed=1", request.url));
+  return NextResponse.redirect(new URL("/entrar?confirmed=1", request.url));
 };

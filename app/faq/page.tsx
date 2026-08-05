@@ -27,7 +27,7 @@ export default function FaqPage() {
           <h1 className={styles.title}>Tudo o que precisas de saber.</h1>
           <p className={styles.sub}>
             Reunimos as dúvidas mais comuns sobre o curso, os pagamentos e as missões. Não encontras a
-            tua resposta? <Link href="/contact" className={styles.subLink}>Fala connosco</Link>.
+            tua resposta? <Link href="/contactos" className={styles.subLink}>Fala connosco</Link>.
           </p>
         </div>
       </section>

@@ -5,7 +5,7 @@ import { siteUrl, siteName } from "./lib/site";
 import "./globals.css";
 
 const siteDescription =
-  "O único curso de Cliente Mistério em Portugal. Aprende, de forma metódica e discreta, a avaliar serviços e a ser remunerado.";
+  "O curso de Cliente Mistério em Portugal. Aprende, de forma metódica e discreta, a avaliar serviços e a ser remunerado.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

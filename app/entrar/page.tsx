@@ -139,7 +139,7 @@ export default function LoginPage() {
                 {isSubmitting ? t.auth.loginSubmitting : t.auth.loginButton}
               </button>
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <Link className="form-link" href={isCheckout ? "/account?checkout=1" : "/account"}>
+                <Link className="form-link" href={isCheckout ? "/criar-conta?checkout=1" : "/criar-conta"}>
                   {t.auth.createAccount}
                 </Link>
                 <Link className="form-link" href="/forgot-password">

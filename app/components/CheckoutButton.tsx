@@ -38,10 +38,10 @@ export default function CheckoutButton({
       if (data.authenticated) {
         window.location.href = paymentLink;
       } else {
-        router.push("/login?checkout=1");
+        router.push("/entrar?checkout=1");
       }
     } catch {
-      router.push("/login?checkout=1");
+      router.push("/entrar?checkout=1");
     }
   };
 
