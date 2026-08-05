@@ -372,6 +372,28 @@ html {
     color: var(--muted);
   }
 
+  /* Eyebrow — régua + rótulo acima de um título. Consolida o padrão que
+     estava repetido em vários page.module.css (ver componente
+     app/components/ui/Eyebrow.tsx). */
+  .ui-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--on-brand-2);
+    margin-bottom: 20px;
+  }
+  .ui-eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 2px;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
   /* Mantém texto branco legível em cartões de fundo colorido. */
   .on-brand p,
   .on-brand span,

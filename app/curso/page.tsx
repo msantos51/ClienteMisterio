@@ -7,6 +7,7 @@
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
+import ProgressBar from "@/app/components/ui/ProgressBar";
 import { courseModules as courseModulesPt, type QuizQuestion } from "./courseData";
 import { courseModules as courseModulesEn } from "./courseDataEn";
 import { getModuleIcon } from "./moduleIcons";
@@ -946,9 +947,12 @@ export default function CursoPage() {
                     </div>
                     <div className={styles.progressCardPct}>{progressPercent}% {cp.completed}</div>
                   </div>
-                  <div className={styles.progressBar}>
-                    <div className={styles.progressBarFill} style={{ width: `${progressPercent}%` }} />
-                  </div>
+                  <ProgressBar
+                    value={progressPercent}
+                    label={`Progresso do curso: ${progressPercent}%`}
+                    trackClassName={styles.progressBar}
+                    fillClassName={styles.progressBarFill}
+                  />
                   <p className={styles.progressCardLabel}>
                     {currentMod ? (
                       <>Continua no módulo <strong>{String(currentMod.id).padStart(2, "0")} · {currentMod.title}</strong></>

@@ -11,10 +11,7 @@
         "http://localhost:3000/sobre",
         "http://localhost:3000/contactos"
       ],
-      "numberOfRuns": 2,
-      "settings": {
-        "preset": "mobile"
-      }
+      "numberOfRuns": 2
     },
     "assert": {
       "assertions": {

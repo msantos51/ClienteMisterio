@@ -25,9 +25,13 @@ export default defineConfig({
       name: "chromium",
       use: {
         ...devices["Desktop Chrome"],
-        launchOptions: {
-          executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH || "/opt/pw-browsers/chromium",
-        },
+        // Só força um executável específico quando explicitamente indicado
+        // (ex.: o Chromium pré-instalado de um sandbox de desenvolvimento).
+        // Sem a variável, o Playwright usa o browser instalado por
+        // `playwright install` — o caminho certo em CI/GitHub Actions.
+        ...(process.env.PLAYWRIGHT_CHROMIUM_PATH
+          ? { launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH } }
+          : {}),
       },
     },
   ],
