@@ -69,7 +69,7 @@ test.describe("Acordeão da FAQ", () => {
   test("aria-expanded e aria-controls ligam pergunta e painel", async ({ page }) => {
     await page.goto("/faq");
 
-    const firstButton = page.locator('[id^="faq-question-"]').first();
+    const firstButton = page.locator('[id*="-question-"]').first();
     const panelId = await firstButton.getAttribute("aria-controls");
     expect(panelId).toBeTruthy();
 
