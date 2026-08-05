@@ -79,6 +79,9 @@ function FaqPageContent() {
     const indexInCategory = categoryItems.findIndex((faq) => faq.slug === hash);
     if (indexInCategory === -1) return;
 
+    // Sincroniza com window.location.hash (indisponível no servidor) depois
+    // do mount, para abrir a pergunta de um link direto (ex.: /faq#reembolso).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOpenByCategory((prev) => ({ ...prev, [target.category]: indexInCategory }));
 
     requestAnimationFrame(() => {

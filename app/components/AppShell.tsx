@@ -5,7 +5,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { LanguageProvider } from "@/app/context/LanguageContext";
 import HeaderActions from "./HeaderActions";
 import TopNav from "./TopNav";

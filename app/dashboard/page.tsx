@@ -212,7 +212,7 @@ function DashboardPageContent() {
     if (storedPreferences) {
       setPreferences(JSON.parse(storedPreferences) as UserPreferences);
     }
-  }, [router, profileLoadAttempt]);
+  }, [router, profileLoadAttempt, t]);
 
   const handleProfileChange = (field: keyof UserProfile, value: string | boolean) => {
     if (!profile) {

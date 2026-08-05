@@ -26,6 +26,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY) as Language | null;
     if (stored && (stored === "pt" || stored === "en")) {
+      // Sincroniza com localStorage (indisponível no servidor) depois do
+      // mount, de propósito: é o padrão de hidratação descrito acima.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguageState(stored);
     }
   }, []);

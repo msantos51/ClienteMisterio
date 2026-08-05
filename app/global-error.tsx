@@ -20,6 +20,9 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
             <button type="button" className="button primary" onClick={() => reset()}>
               Tentar novamente
             </button>
+            {/* <a> propositado: um erro à raiz da app pede um reload completo,
+                não navegação client-side que poderia repetir o mesmo estado partido. */}
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/" className="button secondary">
               Página inicial
             </a>
