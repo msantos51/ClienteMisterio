@@ -9,12 +9,15 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
 
+const MOBILE_MENU_ID = "mobile-menu-panel";
+
 export default function TopNav() {
   const pathname = usePathname();
   const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
+  const menuToggleRef = useRef<HTMLButtonElement | null>(null);
 
   const navigationItems = [
     { href: "/", label: t.nav.home },
@@ -37,6 +40,65 @@ export default function TopNav() {
     // Fecha o menu após navegação para melhorar a experiência em ecrãs pequenos.
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    // Torna o resto da página inerte enquanto o menu mobile está aberto,
+    // devolve o foco ao botão de abrir/fechar quando o menu fecha.
+    const mainContent = document.getElementById("conteudo");
+    const logo = document.querySelector<HTMLElement>(".site-header .logo");
+
+    if (isMenuOpen) {
+      mainContent?.setAttribute("inert", "");
+      logo?.setAttribute("inert", "");
+    } else {
+      mainContent?.removeAttribute("inert");
+      logo?.removeAttribute("inert");
+    }
+
+    return () => {
+      mainContent?.removeAttribute("inert");
+      logo?.removeAttribute("inert");
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    // Foca o primeiro link do painel ao abrir.
+    const panel = menuContainerRef.current;
+    const focusable = panel?.querySelectorAll<HTMLElement>("a, button");
+    focusable?.[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsMenuOpen(false);
+        menuToggleRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab" || !focusable || focusable.length === 0) {
+        return;
+      }
+
+      // Focus trap: mantém o Tab dentro do painel enquanto está aberto.
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
 
   useEffect(() => {
     // Fecha o menu ao clicar fora do contêiner para evitar sobreposição visual persistente.
@@ -64,8 +126,10 @@ export default function TopNav() {
     <>
       {/* Exibe botão hamburguer apenas no mobile para manter o desktop limpo e alinhado ao centro. */}
       <button
+        ref={menuToggleRef}
         aria-expanded={isMenuOpen}
-        aria-label="Abrir menu principal"
+        aria-controls={MOBILE_MENU_ID}
+        aria-label={isMenuOpen ? "Fechar menu principal" : "Abrir menu principal"}
         className={`menu-toggle-button lg:hidden ${isMenuOpen ? "is-open" : ""}`}
         onClick={() => setIsMenuOpen((current) => !current)}
         type="button"
@@ -78,7 +142,7 @@ export default function TopNav() {
       </button>
 
       {/* Links do cabeçalho, com régua vermelha na página ativa (ver globals.css). */}
-      <nav className="hidden items-center justify-center gap-6 lg:flex xl:gap-8">
+      <nav className="hidden items-center justify-center gap-6 lg:flex xl:gap-8" aria-label="Navegação principal">
         {navigationItems.map((item) => {
           const isActive = pathname === item.href;
 
@@ -101,6 +165,7 @@ export default function TopNav() {
       {isMenuOpen ? (
         <div className="fixed inset-0 z-40 bg-black/60 lg:hidden" role="presentation">
           <nav
+            id={MOBILE_MENU_ID}
             aria-label="Menu principal mobile"
             className="mobile-menu-container absolute left-3 right-3 top-[76px] flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[color:var(--line)] sm:left-4 sm:right-4 sm:top-[82px]"
             ref={menuContainerRef}
@@ -116,6 +181,7 @@ export default function TopNav() {
                     isActive ? "bg-[color:var(--brand-soft)]" : ""
                   } ${isLast ? "border-b-0" : "border-b border-[color:var(--line-light)]"}`}
                   href={item.href}
+                  aria-current={isActive ? "page" : undefined}
                   onClick={closeMenu}
                 >
                   {item.label}

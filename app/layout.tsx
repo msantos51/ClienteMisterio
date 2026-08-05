@@ -15,14 +15,6 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   applicationName: siteName,
-  keywords: [
-    "cliente mistério",
-    "mystery shopper",
-    "curso",
-    "Portugal",
-    "avaliação de serviços",
-    "rendimento extra",
-  ],
   authors: [{ name: siteName }],
   alternates: {
     canonical: "/",
@@ -58,6 +50,22 @@ export const viewport: Viewport = {
   themeColor: "#7c5cff",
 };
 
+// TODO: acrescentar `logo` (URL de imagem real) e `sameAs` (redes sociais
+// reais) quando existirem — não inventar dados de marca não confirmados.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteName,
+  url: siteUrl,
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: siteUrl,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,6 +74,14 @@ export default function RootLayout({
   return (
     <html lang="pt-PT" className={creatoDisplay.variable}>
       <body className="bg-[color:var(--background)] text-[color:var(--foreground)] antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <AppShell>{children}</AppShell>
       </body>
     </html>

@@ -15,6 +15,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <LanguageProvider>
       <div className="mx-auto flex min-h-dvh w-full flex-col bg-transparent">
+        <a href="#conteudo" className="skip-link">
+          Saltar para o conteúdo
+        </a>
+
         {/* Cabeçalho branco: marca à esquerda, navegação e ações à direita. */}
         <header className="site-header on-light sticky top-0 z-50">
           <div className="site-header-inner mx-auto w-full max-w-[1400px]">

@@ -142,15 +142,21 @@ export default function ContactPage() {
 
             {/* Right — form card */}
             <div className={styles.card}>
-              <h2 className={styles.cardTitle}>Enviar mensagem</h2>
-              <form className={styles.form} onSubmit={handleSubmit}>
+              <h2 id="contact-form-heading" className={styles.cardTitle}>Enviar mensagem</h2>
+              <form
+                className={styles.form}
+                onSubmit={handleSubmit}
+                aria-labelledby="contact-form-heading"
+              >
                 <div className={styles.row}>
                   <div className={styles.field}>
-                    <label className={styles.label}>{t.contact.formNameLabel}</label>
+                    <label className={styles.label} htmlFor="contact-name">{t.contact.formNameLabel}</label>
                     <input
+                      id="contact-name"
                       className={styles.input}
                       name="name"
                       type="text"
+                      autoComplete="name"
                       placeholder={t.contact.formNamePlaceholder}
                       required
                       value={formData.name}
@@ -158,11 +164,14 @@ export default function ContactPage() {
                     />
                   </div>
                   <div className={styles.field}>
-                    <label className={styles.label}>{t.contact.formEmailLabel}</label>
+                    <label className={styles.label} htmlFor="contact-email">{t.contact.formEmailLabel}</label>
                     <input
+                      id="contact-email"
                       className={styles.input}
                       name="email"
                       type="email"
+                      inputMode="email"
+                      autoComplete="email"
                       placeholder={t.contact.formEmailPlaceholder}
                       required
                       value={formData.email}
@@ -172,8 +181,9 @@ export default function ContactPage() {
                 </div>
 
                 <div className={styles.field}>
-                  <label className={styles.label}>{t.contact.formSubjectLabel}</label>
+                  <label className={styles.label} htmlFor="contact-subject">{t.contact.formSubjectLabel}</label>
                   <input
+                    id="contact-subject"
                     className={styles.input}
                     name="subject"
                     type="text"
@@ -185,8 +195,9 @@ export default function ContactPage() {
                 </div>
 
                 <div className={styles.field}>
-                  <label className={styles.label}>{t.contact.formMessageLabel}</label>
+                  <label className={styles.label} htmlFor="contact-message">{t.contact.formMessageLabel}</label>
                   <textarea
+                    id="contact-message"
                     className={styles.textarea}
                     name="message"
                     placeholder={t.contact.formMessagePlaceholder}
@@ -196,21 +207,24 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {statusMessage && (
-                  <div className={styles.status}>
-                    <div>{statusMessage}</div>
-                    {statusReference && (
-                      <div className={styles.statusRef}>
-                        Referência: <strong>{statusReference}</strong>
-                      </div>
-                    )}
-                  </div>
-                )}
+                <div role="status" aria-live="polite">
+                  {statusMessage && (
+                    <div className={styles.status}>
+                      <div>{statusMessage}</div>
+                      {statusReference && (
+                        <div className={styles.statusRef}>
+                          Referência: <strong>{statusReference}</strong>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
 
                 <button
                   type="submit"
                   className={styles.submit}
                   disabled={isSubmitting}
+                  aria-busy={isSubmitting}
                 >
                   {isSubmitting ? t.contact.formSubmittingButton : t.contact.formSubmitButton}
                   {!isSubmitting && <ArrowIcon />}
