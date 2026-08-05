@@ -47,6 +47,19 @@ Quatro valores, mobile-first: **640 / 768 / 1024 / 1280**. Não introduzas
 ponto de quebra, primeiro tenta resolver com `clamp()`/grid responsivo;
 só uses `@media` nestes quatro valores.
 
+## 2.1 Componentes reutilizáveis
+
+`app/components/ui/` — `Button`, `Card`, `Section`, `Eyebrow`, `Heading`,
+`Field`, `Accordion`, `ProgressBar`. Todos são envelopes finos das
+classes já existentes em `globals.css` (ou, no caso de `Field` e
+`Accordion`, recebem as classes do CSS Module da página via props) —
+não têm estilo próprio embutido, só fixam estrutura/acessibilidade
+(labels ligados, `aria-expanded`/`aria-controls`, `role="progressbar"`).
+Usa-os em vez de recriar `<button className="button primary">` ou um
+acordeão à mão numa página nova; se precisares de um padrão que não
+exista ainda (ex.: `<Field>` para um select), estende o componente em
+vez de duplicar a lógica na página.
+
 ## 3. Quando usar Tailwind vs. CSS Modules
 
 - **Tailwind**: utilitários de layout genéricos (`flex`, `grid`, `gap-*`,
