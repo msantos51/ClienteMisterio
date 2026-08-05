@@ -13,19 +13,21 @@ import localFont from "next/font/local";
 export const creatoDisplay = localFont({
   src: [
     {
-      path: "../public/fonts/CreatoDisplay-Regular.otf",
+      // WOFF2, subset latin + diacríticos pt (ver public/fonts/README.md
+      // para regenerar a partir dos .otf originais).
+      path: "../public/fonts/CreatoDisplay-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/CreatoDisplay-Medium.otf",
+      path: "../public/fonts/CreatoDisplay-Medium.woff2",
       weight: "500",
       style: "normal",
     },
     {
       // O Bold cobre também os pesos 600/700/800 pedidos pelos módulos CSS,
       // evitando que o browser sintetize um falso negrito.
-      path: "../public/fonts/CreatoDisplay-Bold.otf",
+      path: "../public/fonts/CreatoDisplay-Bold.woff2",
       weight: "600 900",
       style: "normal",
     },
