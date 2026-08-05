@@ -125,6 +125,8 @@ function DashboardPageContent() {
   const [deleteAccountPassword, setDeleteAccountPassword] = useState("");
   const [deleteAccountFeedback, setDeleteAccountFeedback] = useState<string | null>(null);
   const [courseProgress, setCourseProgress] = useState<CourseProgressData | null>(null);
+  const [profileLoadError, setProfileLoadError] = useState<string | null>(null);
+  const [profileLoadAttempt, setProfileLoadAttempt] = useState(0);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
   const [isCompletingFirstAccess, setIsCompletingFirstAccess] = useState(false);
   const [isSavingPassword, setIsSavingPassword] = useState(false);
@@ -149,10 +151,19 @@ function DashboardPageContent() {
       try {
         const response = await fetch("/api/user", { credentials: "include", signal: controller.signal });
         clearTimeout(timeoutId);
+
+        // 401 é a única resposta que significa "sem sessão" — qualquer outra
+        // falha (500, timeout, rede) é um erro recuperável, não motivo para
+        // expulsar quem já tinha sessão válida de volta para o login.
+        if (response.status === 401) {
+          router.push("/entrar");
+          return;
+        }
+
         const data = (await response.json()) as ProfileResponse;
 
         if (!response.ok || !data.user) {
-          router.push("/entrar");
+          setProfileLoadError(data.message || t.common.error);
           return;
         }
 
@@ -168,10 +179,11 @@ function DashboardPageContent() {
           hasCourseAccess: data.user.hasCourseAccess,
         };
 
+        setProfileLoadError(null);
         setProfile(normalizedProfile);
       } catch {
         clearTimeout(timeoutId);
-        router.push("/entrar");
+        setProfileLoadError(t.common.error);
       }
     };
 
@@ -200,7 +212,7 @@ function DashboardPageContent() {
     if (storedPreferences) {
       setPreferences(JSON.parse(storedPreferences) as UserPreferences);
     }
-  }, [router]);
+  }, [router, profileLoadAttempt]);
 
   const handleProfileChange = (field: keyof UserProfile, value: string | boolean) => {
     if (!profile) {
@@ -281,7 +293,7 @@ function DashboardPageContent() {
 
     setFirstAccessFeedback(null);
 
-    if (!profile.birthDate || !profile.gender) {
+    if (!profile.birthDate) {
       setFirstAccessFeedback(d.birthDateRequired);
       return;
     }
@@ -296,7 +308,7 @@ function DashboardPageContent() {
 
     setProfileFeedback(null);
 
-    if (!profile.birthDate || !profile.gender) {
+    if (!profile.birthDate) {
       setProfileFeedback(d.birthDateRequired);
       return;
     }
@@ -402,8 +414,42 @@ function DashboardPageContent() {
     }
   };
 
+  if (!profile && profileLoadError) {
+    return (
+      <section className="full-section full-section-scroll w-full px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+        <div className="mx-auto flex w-full max-w-md flex-col items-center gap-4 text-center">
+          <p role="alert" className="text-sm text-[color:var(--muted)]">{profileLoadError}</p>
+          <button
+            type="button"
+            className="submit"
+            onClick={() => {
+              setProfileLoadError(null);
+              setProfileLoadAttempt((n) => n + 1);
+            }}
+          >
+            {t.common.tryAgain}
+          </button>
+        </div>
+      </section>
+    );
+  }
+
   if (!profile) {
-    return <p className="text-sm text-[color:var(--muted)]">{d.loading}</p>;
+    return (
+      <section
+        className="full-section full-section-scroll w-full space-y-6 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10"
+        aria-busy="true"
+        aria-label={d.loading}
+      >
+        <div className="mx-auto w-full max-w-6xl space-y-6">
+          <div className="dashboard-top-banner h-24 animate-pulse" />
+          <div className="grid gap-6 md:grid-cols-[1fr_320px]">
+            <div className="dashboard-top-banner h-40 animate-pulse" />
+            <div className="dashboard-sidebar h-56 animate-pulse" />
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (
@@ -437,12 +483,15 @@ function DashboardPageContent() {
                   <option value="">{d.select}</option>
                   <option value="male">{d.male}</option>
                   <option value="female">{d.female}</option>
+                  <option value="unspecified">{d.genderUnspecified}</option>
                 </select>
                 <span className="label">{d.gender}</span>
               </div>
             </div>
 
-            {firstAccessFeedback && <p className="form-feedback mt-2">{firstAccessFeedback}</p>}
+            <div role="status" aria-live="polite">
+              {firstAccessFeedback && <p className="form-feedback mt-2">{firstAccessFeedback}</p>}
+            </div>
 
             <div className="mt-4">
               <button className="submit" type="button" onClick={handleCompleteFirstAccess}>
@@ -585,12 +634,15 @@ function DashboardPageContent() {
                       <option value="">{d.select}</option>
                       <option value="male">{d.male}</option>
                       <option value="female">{d.female}</option>
+                      <option value="unspecified">{d.genderUnspecified}</option>
                     </select>
                     <span className="label">{d.gender}</span>
                   </div>
                 </div>
 
-                {profileFeedback && <p className="form-feedback mt-2">{profileFeedback}</p>}
+                <div role="status" aria-live="polite">
+                  {profileFeedback && <p className="form-feedback mt-2">{profileFeedback}</p>}
+                </div>
 
                 <div className="mt-4">
                   <button className="submit" type="button" onClick={handleSaveProfile}>
@@ -639,7 +691,9 @@ function DashboardPageContent() {
                   </div>
                 </div>
 
-                {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
+                <div role="status" aria-live="polite">
+                  {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
+                </div>
 
                 <button className="submit mt-4" type="button" onClick={handleChangePassword}>
                   {isSavingPassword ? d.updating : d.updatePassword}
@@ -661,9 +715,11 @@ function DashboardPageContent() {
                     <span className="label">{d.deleteAccountPassword}</span>
                   </div>
 
-                  {deleteAccountFeedback && (
-                    <p className="form-feedback mt-2">{deleteAccountFeedback}</p>
-                  )}
+                  <div role="status" aria-live="polite">
+                    {deleteAccountFeedback && (
+                      <p className="form-feedback mt-2">{deleteAccountFeedback}</p>
+                    )}
+                  </div>
 
                   <button
                     className="submit is-danger mt-4 max-w-[240px]"

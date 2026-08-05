@@ -14,9 +14,14 @@ type BaseProps = {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
+  /** Mensagem de erro (validação em tempo real, no blur). Quando presente,
+   * liga `aria-invalid`/`aria-describedby` ao campo — Fase 5, ponto 46. */
+  error?: string;
   wrapperClassName?: string;
   labelClassName?: string;
   controlClassName?: string;
+  errorClassName?: string;
 };
 
 type InputProps = BaseProps &
@@ -30,7 +35,8 @@ type TextareaProps = BaseProps &
   };
 
 export default function Field(props: InputProps | TextareaProps) {
-  const { id, name, label, value, onChange, wrapperClassName, labelClassName, controlClassName } = props;
+  const { id, name, label, value, onChange, onBlur, error, wrapperClassName, labelClassName, controlClassName, errorClassName } = props;
+  const errorId = `${id}-error`;
 
   return (
     <div className={wrapperClassName}>
@@ -46,6 +52,9 @@ export default function Field(props: InputProps | TextareaProps) {
           required={props.required}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
         />
       ) : (
         <input
@@ -59,7 +68,15 @@ export default function Field(props: InputProps | TextareaProps) {
           required={props.required}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
         />
+      )}
+      {error && (
+        <p id={errorId} className={errorClassName} role="alert">
+          {error}
+        </p>
       )}
     </div>
   );

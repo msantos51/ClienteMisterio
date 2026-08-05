@@ -27,6 +27,8 @@ type AccordionProps = {
   icon?: ReactNode;
   panelClassName?: string;
   panelInnerClassName?: string;
+  /** IDs opcionais por item, para âncoras diretas (ex.: /faq#reembolso). */
+  itemIds?: (string | undefined)[];
 };
 
 export default function Accordion({
@@ -42,6 +44,7 @@ export default function Accordion({
   icon,
   panelClassName,
   panelInnerClassName,
+  itemIds,
 }: AccordionProps) {
   return (
     <div className={className}>
@@ -53,6 +56,7 @@ export default function Accordion({
         return (
           <div
             key={questionId}
+            id={itemIds?.[index]}
             className={[itemClassName, isOpen && openItemClassName].filter(Boolean).join(" ")}
           >
             <h2 className={questionHeadingClassName}>

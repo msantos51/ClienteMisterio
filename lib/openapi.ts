@@ -83,9 +83,9 @@ export const openApiDocument = {
           firstName: { type: "string", example: "João" },
           lastName: { type: "string", example: "Silva" },
           birthDate: { type: "string", format: "date", example: "1994-04-10" },
-          gender: { type: "string", enum: ["male", "female"], example: "male" },
+          gender: { type: "string", enum: ["male", "female", "unspecified", ""], example: "unspecified" },
         },
-        required: ["email", "firstName", "lastName", "birthDate", "gender"],
+        required: ["email", "firstName", "lastName", "birthDate"],
       },
       UserPasswordUpdateRequest: {
         type: "object",
@@ -111,6 +111,11 @@ export const openApiDocument = {
           email: { type: "string", format: "email", example: "maria@example.com" },
           subject: { type: "string", example: "Dúvida sobre o curso" },
           message: { type: "string", example: "Gostava de saber mais detalhes sobre o módulo 3." },
+          website: {
+            type: "string",
+            description: "Honeypot anti-spam — deve ficar vazio. Preenchido, o pedido é silenciosamente ignorado.",
+            example: "",
+          },
         },
         required: ["name", "email", "subject", "message"],
       },

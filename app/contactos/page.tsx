@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import Link from "next/link";
 import { useLanguage } from "@/app/context/LanguageContext";
 import Field from "@/app/components/ui/Field";
 import styles from "./page.module.css";
@@ -11,6 +12,8 @@ type FormData = {
   subject: string;
   message: string;
 };
+
+type FormErrors = Partial<Record<keyof FormData, string>>;
 
 type ContactApiResponse = {
   message?: string;
@@ -24,6 +27,8 @@ const initialFormData: FormData = {
   message: "",
 };
 
+const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
 const ArrowIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
     <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
@@ -33,18 +38,61 @@ const ArrowIcon = () => (
 export default function ContactPage() {
   const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [statusReference, setStatusReference] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const errorSummaryRef = useRef<HTMLDivElement>(null);
+
+  const validators: Record<keyof FormData, (value: string) => string | null> = {
+    name: (value) => (value.trim() ? null : t.contact.formNameError),
+    email: (value) => (isValidEmail(value) ? null : t.contact.formEmailError),
+    subject: (value) => (value.trim() ? null : t.contact.formSubjectError),
+    message: (value) => (value.trim().length >= 10 ? null : t.contact.formMessageError),
+  };
+
+  const validateField = (field: keyof FormData, value: string) => validators[field](value);
 
   const handleFieldChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+    // Validação em tempo real: só depois do primeiro blur, para não mostrar
+    // erro enquanto o utilizador ainda está a escrever o valor inicial.
+    if (touched[field]) {
+      setErrors((prev) => ({ ...prev, [field]: validateField(field, value) ?? undefined }));
+    }
+  };
+
+  const handleFieldBlur = (field: keyof FormData) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    setErrors((prev) => ({ ...prev, [field]: validateField(field, formData[field]) ?? undefined }));
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatusMessage("");
     setStatusReference("");
+
+    const nextErrors: FormErrors = {};
+    (Object.keys(formData) as (keyof FormData)[]).forEach((field) => {
+      const error = validateField(field, formData[field]);
+      if (error) nextErrors[field] = error;
+    });
+    const nextConsentError = consent ? null : t.contact.formConsentError;
+
+    if (Object.keys(nextErrors).length > 0 || nextConsentError) {
+      setErrors(nextErrors);
+      setConsentError(nextConsentError);
+      setTouched({ name: true, email: true, subject: true, message: true });
+      // Foca o resumo de erros no topo do formulário, para leitores de ecrã
+      // e utilizadores de teclado saberem imediatamente o que falta corrigir.
+      errorSummaryRef.current?.focus();
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -52,7 +100,7 @@ export default function ContactPage() {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, website: honeypot }),
       });
 
       const data = (await response.json()) as ContactApiResponse;
@@ -61,6 +109,10 @@ export default function ContactPage() {
 
       if (response.ok) {
         setFormData(initialFormData);
+        setTouched({});
+        setErrors({});
+        setConsent(false);
+        setConsentError(null);
       }
     } catch {
       setStatusMessage(t.contact.formConnectionError);
@@ -68,6 +120,8 @@ export default function ContactPage() {
       setIsSubmitting(false);
     }
   };
+
+  const hasErrors = Object.values(errors).some(Boolean) || Boolean(consentError);
 
   return (
     <div className={styles.page}>
@@ -148,7 +202,33 @@ export default function ContactPage() {
                 className={styles.form}
                 onSubmit={handleSubmit}
                 aria-labelledby="contact-form-heading"
+                noValidate
               >
+                {/* Honeypot — invisível para humanos; bots costumam preenchê-lo. */}
+                <div className={styles.hp} aria-hidden="true">
+                  <label htmlFor="contact-website">Não preencher este campo</label>
+                  <input
+                    id="contact-website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                  />
+                </div>
+
+                {hasErrors && (
+                  <div
+                    ref={errorSummaryRef}
+                    className={styles.errorSummary}
+                    role="alert"
+                    tabIndex={-1}
+                  >
+                    {t.contact.formErrorSummary}
+                  </div>
+                )}
+
                 <div className={styles.row}>
                   <Field
                     id="contact-name"
@@ -160,9 +240,12 @@ export default function ContactPage() {
                     required
                     value={formData.name}
                     onChange={(value) => handleFieldChange("name", value)}
+                    onBlur={() => handleFieldBlur("name")}
+                    error={errors.name}
                     wrapperClassName={styles.field}
                     labelClassName={styles.label}
                     controlClassName={styles.input}
+                    errorClassName={styles.fieldError}
                   />
                   <Field
                     id="contact-email"
@@ -175,9 +258,12 @@ export default function ContactPage() {
                     required
                     value={formData.email}
                     onChange={(value) => handleFieldChange("email", value)}
+                    onBlur={() => handleFieldBlur("email")}
+                    error={errors.email}
                     wrapperClassName={styles.field}
                     labelClassName={styles.label}
                     controlClassName={styles.input}
+                    errorClassName={styles.fieldError}
                   />
                 </div>
 
@@ -190,9 +276,12 @@ export default function ContactPage() {
                   required
                   value={formData.subject}
                   onChange={(value) => handleFieldChange("subject", value)}
+                  onBlur={() => handleFieldBlur("subject")}
+                  error={errors.subject}
                   wrapperClassName={styles.field}
                   labelClassName={styles.label}
                   controlClassName={styles.input}
+                  errorClassName={styles.fieldError}
                 />
 
                 <Field
@@ -204,10 +293,43 @@ export default function ContactPage() {
                   required
                   value={formData.message}
                   onChange={(value) => handleFieldChange("message", value)}
+                  onBlur={() => handleFieldBlur("message")}
+                  error={errors.message}
                   wrapperClassName={styles.field}
                   labelClassName={styles.label}
                   controlClassName={styles.textarea}
+                  errorClassName={styles.fieldError}
                 />
+
+                <div className={styles.consentRow}>
+                  <label className="checkbox-container" htmlFor="contact-consent">
+                    <input
+                      id="contact-consent"
+                      className="custom-checkbox"
+                      type="checkbox"
+                      checked={consent}
+                      onChange={(e) => {
+                        setConsent(e.target.checked);
+                        if (e.target.checked) setConsentError(null);
+                      }}
+                      aria-invalid={consentError ? true : undefined}
+                      aria-describedby={consentError ? "contact-consent-error" : undefined}
+                    />
+                    <span className="checkmark" aria-hidden="true" />
+                  </label>
+                  <label htmlFor="contact-consent">
+                    {t.contact.formConsentLabel}{" "}
+                    <Link href="/privacidade" target="_blank" rel="noopener noreferrer">
+                      {t.contact.formConsentLinkText}
+                    </Link>
+                    .
+                  </label>
+                </div>
+                {consentError && (
+                  <p id="contact-consent-error" className={styles.fieldError} role="alert">
+                    {consentError}
+                  </p>
+                )}
 
                 <div role="status" aria-live="polite">
                   {statusMessage && (

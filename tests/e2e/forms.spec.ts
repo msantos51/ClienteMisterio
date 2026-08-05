@@ -33,6 +33,7 @@ test.describe("Formulário de contacto", () => {
     await page.locator("#contact-email").fill("ana@example.com");
     await page.locator("#contact-subject").fill("Dúvida sobre o curso");
     await page.locator("#contact-message").fill("Mensagem de teste automatizado.");
+    await page.locator(".checkbox-container[for=\"contact-consent\"]").click();
 
     const statusRegion = page.locator('[role="status"][aria-live="polite"]');
     await page.getByRole("button", { name: /enviar mensagem/i }).click();
@@ -54,6 +55,7 @@ test.describe("Formulário de contacto", () => {
     await page.locator("#contact-email").fill("ana@example.com");
     await page.locator("#contact-subject").fill("Dúvida sobre o curso");
     await page.locator("#contact-message").fill("Mensagem que não se pode perder.");
+    await page.locator(".checkbox-container[for=\"contact-consent\"]").click();
 
     await page.getByRole("button", { name: /enviar mensagem/i }).click();
 
@@ -63,13 +65,35 @@ test.describe("Formulário de contacto", () => {
     // O texto escrito continua no formulário — não há reset em caso de erro.
     await expect(page.locator("#contact-message")).toHaveValue("Mensagem que não se pode perder.");
   });
+
+  test("valida em tempo real no blur e exige consentimento RGPD", async ({ page }) => {
+    await page.goto("/contactos");
+
+    // Blur com e-mail inválido mostra erro inline ligado por aria-describedby.
+    const emailInput = page.locator("#contact-email");
+    await emailInput.fill("nao-e-um-email");
+    await emailInput.blur();
+    await expect(page.locator("#contact-email-error")).toBeVisible();
+    await expect(emailInput).toHaveAttribute("aria-invalid", "true");
+
+    // Preenche tudo corretamente mas sem aceitar a política de privacidade.
+    await page.locator("#contact-name").fill("Ana Teste");
+    await emailInput.fill("ana@example.com");
+    await page.locator("#contact-subject").fill("Dúvida sobre o curso");
+    await page.locator("#contact-message").fill("Mensagem com mais de dez carateres.");
+
+    await page.getByRole("button", { name: /enviar mensagem/i }).click();
+
+    await expect(page.locator('[role="alert"]').first()).toBeVisible();
+    await expect(page.locator("#contact-consent-error")).toBeVisible();
+  });
 });
 
 test.describe("Acordeão da FAQ", () => {
   test("aria-expanded e aria-controls ligam pergunta e painel", async ({ page }) => {
     await page.goto("/faq");
 
-    const firstButton = page.locator('[id^="faq-question-"]').first();
+    const firstButton = page.locator('[id*="-question-"]').first();
     const panelId = await firstButton.getAttribute("aria-controls");
     expect(panelId).toBeTruthy();
 
