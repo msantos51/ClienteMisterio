@@ -159,7 +159,7 @@
   --muted: var(--on-invert-3);
   --body: var(--on-invert-2);
 
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   color: var(--on-invert);
   border: none;
   border-radius: var(--radius-xl);
@@ -203,7 +203,7 @@
 .input {
   height: 42px;
   padding: 0 16px;
-  background: #f7f7f9;
+  background: var(--input-bg);
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-md);
   font-size: 16px;
@@ -215,14 +215,14 @@
   box-sizing: border-box;
 }
 .input:focus {
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   border-color: var(--color-red);
   box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.14);
 }
 .textarea {
   min-height: 90px;
   padding: 10px 16px;
-  background: #f7f7f9;
+  background: var(--input-bg);
   border: 1px solid var(--hairline-invert);
   border-radius: var(--radius-md);
   font-size: 16px;
@@ -236,7 +236,7 @@
   line-height: 1.55;
 }
 .textarea:focus {
-  background: var(--color-white);
+  background: var(--panel-invert-bg);
   border-color: var(--color-red);
   box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.14);
 }

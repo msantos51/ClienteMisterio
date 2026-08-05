@@ -18,7 +18,7 @@ export default function ThreePointsCards() {
     {
       title: t.threePoints.certificate,
       description: t.threePoints.certificateDesc,
-      surface: "bg-white",
+      surface: "bg-[color:var(--panel-invert-bg)]",
       titleClass: "text-[color:var(--on-invert)]",
       bodyClass: "text-[color:var(--on-invert-2)]",
     },

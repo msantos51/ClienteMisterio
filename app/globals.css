@@ -55,6 +55,7 @@
   --input-border-hover: #cfcfd5;
   --link-accent: var(--color-red);
   --link-accent-hover: var(--color-red-2);
+  --track-invert: #ededf1;
 
   /* Painéis translúcidos sobre roxo — evitam introduzir novas cores. */
   --panel: rgba(255, 255, 255, 0.08);
@@ -254,18 +255,18 @@ html {
 
 /* -------------------------------------------------------------------
    MODO ESCURO (prefers-color-scheme)
-   O site é maioritariamente roxo em qualquer tema — só os painéis
-   invertidos (formulários, menu mobile, dashboard) são brancos e
-   precisam de uma variante escura. Reescreve só os tokens locais do
-   grupo `.on-light`, nunca `--color-white` global (que continua a ser
-   o texto sobre roxo em todo o resto do site).
+   O site é maioritariamente roxo em qualquer tema — a superfície
+   principal (--surface-brand) não muda. O que muda são os painéis
+   invertidos: todos os cartões/formulários brancos, em qualquer
+   página, usam os tokens abaixo (--panel-invert-bg, --on-invert*,
+   --hairline-invert, --input-*, --link-accent*) em vez de
+   `--color-white`/`--color-red` literais, por isso escurecer estes
+   tokens ao nível do :root escurece o site inteiro de uma vez —
+   nunca tocando em `--color-white` (que continua a ser o texto sobre
+   roxo em todo o resto do site).
    ------------------------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
-  .on-light,
-  .login-form,
-  .mobile-menu-container,
-  .dashboard-top-banner,
-  .dashboard-sidebar {
+  :root {
     --panel-invert-bg: #1c1a2e;
     --input-bg: #221f38;
     --input-border: #383359;
@@ -276,6 +277,23 @@ html {
     --on-invert-3: #9a94b8;
     --hairline-invert: #383359;
 
+    --link-accent: var(--color-red-bright);
+    --link-accent-hover: #c4b1ff;
+    --focus-ring: var(--color-red-bright);
+
+    /* Os três estados semânticos só têm contraste suficiente sobre
+       branco — em painéis escuros precisam de versões mais claras. */
+    --color-success: #34d399;
+    --color-warning: #fbbf24;
+    --color-danger: #ff6b6b;
+    --track-invert: #2a273f;
+  }
+
+  .on-light,
+  .login-form,
+  .mobile-menu-container,
+  .dashboard-top-banner,
+  .dashboard-sidebar {
     --line-light: #2a273f;
     --line-strong: #4a4470;
     --surface: var(--panel-invert-bg);
@@ -285,10 +303,6 @@ html {
     --panel-strong: #2a273f;
     --color-gray-light: #383359;
     --color-bg-light: #221f38;
-
-    --link-accent: var(--color-red-bright);
-    --link-accent-hover: #c4b1ff;
-    --focus-ring: var(--color-red-bright);
   }
 }
 
