@@ -28,12 +28,12 @@
 @media (min-width: 768px) { .wrap { padding: 0 40px; } }
 
 .section {
-  padding: clamp(28px, 8vh, 96px) 0;
+  padding: clamp(20px, 6vh, 64px) 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 720px) { .section { padding: clamp(20px, 6vh, 64px) 0; } }
+@media (min-width: 768px) { .section { padding: clamp(28px, 8vh, 96px) 0; } }
 
 .eyebrow {
   display: inline-flex;
@@ -128,13 +128,13 @@
    HERO
    ============================================================ */
 .hero {
-  padding: clamp(28px, 8vh, 96px) 0;
+  padding: clamp(20px, 6vh, 64px) 0;
   border-bottom: 1px solid var(--hairline);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 720px) { .hero { padding: clamp(20px, 6vh, 64px) 0; } }
+@media (min-width: 768px) { .hero { padding: clamp(28px, 8vh, 96px) 0; } }
 .heroInner { max-width: 860px; }
 .heroTitle { margin-bottom: clamp(12px, 3vh, 28px); }
 .heroSub { margin-top: clamp(10px, 2.4vh, 24px); }
@@ -148,7 +148,7 @@
   gap: 64px;
   align-items: start;
 }
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .grid { grid-template-columns: 1.2fr 1fr; }
 }
 
@@ -220,12 +220,11 @@
   border-radius: var(--radius-xl);
   padding: 40px;
   box-shadow: var(--shadow-lg);
-  position: sticky;
-  top: 100px;
+  position: static;
   overflow: hidden;
 }
-@media (max-width: 880px) {
-  .card { position: static; }
+@media (min-width: 1024px) {
+  .card { position: sticky; top: 100px; }
 }
 /* Régua vermelha no topo, assinatura dos painéis brancos. */
 .card::before {
@@ -290,14 +289,14 @@
    SECÇÕES VINDAS DA ANTIGA PÁGINA INICIAL
    ============================================================ */
 .sectionAlt {
-  padding: clamp(28px, 8vh, 96px) 0;
+  padding: clamp(20px, 6vh, 64px) 0;
   background: var(--surface-brand-alt);
   border-top: 1px solid var(--hairline-soft);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 720px) { .sectionAlt { padding: clamp(20px, 6vh, 64px) 0; } }
+@media (min-width: 768px) { .sectionAlt { padding: clamp(28px, 8vh, 96px) 0; } }
 
 .dot { color: var(--on-brand-2); }
 
@@ -308,7 +307,7 @@
   margin-bottom: var(--sp-2xl);
   align-items: end;
 }
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .head { grid-template-columns: 1.25fr 1fr; gap: var(--sp-4xl); }
 }
 .headSub {
@@ -334,7 +333,7 @@
   grid-template-columns: 1fr;
   gap: var(--sp-md);
 }
-@media (min-width: 860px) {
+@media (min-width: 1024px) {
   .pillars { grid-template-columns: repeat(3, 1fr); }
 }
 .pillar {
@@ -401,7 +400,7 @@
 @media (min-width: 640px) {
   .cats { grid-template-columns: repeat(2, 1fr); }
 }
-@media (min-width: 1000px) {
+@media (min-width: 1024px) {
   .cats { grid-template-columns: repeat(3, 1fr); }
 }
 .cat {
@@ -459,7 +458,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-@media (min-width: 860px) {
+@media (min-width: 1024px) {
   .stripGrid { grid-template-columns: repeat(4, 1fr); }
 }
 .stripItem {
@@ -468,7 +467,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 .stripItem:nth-child(2n) { border-right: none; }
-@media (min-width: 860px) {
+@media (min-width: 1024px) {
   .stripItem { border-bottom: none; }
   .stripItem:nth-child(2n) { border-right: 1px solid rgba(255, 255, 255, 0.14); }
   .stripItem:last-child { border-right: none; }
