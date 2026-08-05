@@ -9,18 +9,21 @@
   background: linear-gradient(135deg, var(--color-white) 0%, var(--color-bg-light) 100%);
   border: 2px solid var(--brand);
   border-radius: var(--radius-xl);
-  padding: 32px;
+  padding: 20px;
   position: relative;
-  min-height: 400px;
+  min-height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+@media (min-width: 768px) {
+  .animationBox { padding: 32px; min-height: 400px; }
+}
 
 .pharmacy {
   width: 100%;
-  height: 300px;
+  height: 250px;
   position: relative;
   background: linear-gradient(to bottom, var(--color-white) 0%, var(--color-gray-light) 100%);
   border-radius: 8px;
@@ -29,6 +32,9 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+@media (min-width: 768px) {
+  .pharmacy { height: 300px; }
 }
 
 /* Counter */
@@ -217,13 +223,16 @@
   background: var(--moonlight-white);
   border: 2px solid var(--railroad-black);
   border-radius: 8px;
-  padding: 12px;
-  font-size: 13px;
+  padding: 8px;
+  font-size: 12px;
   font-weight: 500;
-  max-width: 140px;
+  max-width: 100px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   animation: popIn 0.3s ease-out;
+}
+@media (min-width: 768px) {
+  .speechBubble { padding: 12px; font-size: 13px; max-width: 140px; }
 }
 
 .speechBubble p {
@@ -314,8 +323,11 @@
   border-radius: var(--radius-lg);
   padding: 16px;
   width: 80%;
-  max-width: 400px;
+  max-width: 90%;
   animation: slideUp 0.4s ease-out;
+}
+@media (min-width: 768px) {
+  .conclusionBox { max-width: 400px; }
 }
 
 .conclusionTitle {
@@ -400,25 +412,4 @@
 .button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-@media (max-width: 768px) {
-  .animationBox {
-    padding: 20px;
-    min-height: 350px;
-  }
-
-  .pharmacy {
-    height: 250px;
-  }
-
-  .speechBubble {
-    font-size: 12px;
-    padding: 8px;
-    max-width: 100px;
-  }
-
-  .conclusionBox {
-    max-width: 90%;
-  }
 }

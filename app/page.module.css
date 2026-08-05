@@ -36,12 +36,15 @@
   margin: 0 auto;
   padding: 0 var(--sp-md);
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr;
   align-items: center;
-  gap: var(--sp-xl);
+  gap: clamp(8px, 2vh, var(--sp-xl));
 }
 @media (min-width: 768px) {
   .heroInner { padding: 0 var(--sp-xl); }
+}
+@media (min-width: 1024px) {
+  .heroInner { grid-template-columns: 1.15fr 0.85fr; gap: var(--sp-xl); }
 }
 
 .intro { max-width: 640px; }
@@ -67,7 +70,7 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: clamp(28px, min(5vw, 5.6vh), 56px);
+  font-size: clamp(26px, min(10vw, 8vh), 46px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.02;
@@ -158,13 +161,20 @@
 .ctaSecondary:active { transform: scale(0.97); }
 .ctaSecondary svg { width: 16px; height: 16px; }
 
-/* ---------- Destaque visual do hero ---------- */
+/* ---------- Destaque visual do hero ----------
+   Escondido por omissão: em ecrãs baixos/estreitos o destaque decorativo
+   é o primeiro a ceder espaço ao conteúdo, para o texto nunca ficar
+   cortado. Só aparece a partir do breakpoint onde a coluna extra cabe. */
 .heroArt {
+  display: none;
   position: relative;
-  display: flex;
   align-items: center;
   justify-content: center;
   min-height: clamp(120px, 22vh, 280px);
+}
+@media (min-width: 1024px) {
+  .heroArt { display: flex; }
+  .title { font-size: clamp(28px, min(5vw, 5.6vh), 56px); }
 }
 
 .heroArtGlow {
@@ -196,17 +206,6 @@
 }
 .heroArtRing svg { width: 54px; height: 54px; }
 
-@media (max-width: 860px) {
-  .heroInner {
-    grid-template-columns: 1fr;
-    gap: clamp(8px, 2vh, var(--sp-xl));
-  }
-  /* Em ecrãs baixos o destaque decorativo é o primeiro a ceder espaço
-     ao conteúdo, para o texto nunca ficar cortado. */
-  .heroArt { display: none; }
-  .title { font-size: clamp(26px, min(10vw, 8vh), 46px); }
-}
-
 /* ============================================================
    PROCESSO
    ============================================================ */
@@ -229,7 +228,11 @@
 /* Curva ascendente que liga os três nós. Estica-se com o contentor
    (preserveAspectRatio="none"), por isso os centros dos nós estão nas
    mesmas percentagens usadas no path: 16,7% / 50% / 83,3%. */
+/* Mobile-first: por omissão é uma lista vertical sem a curva (ver bloco
+   "MOBILE" mais abaixo, que era a base antes da normalização de
+   breakpoints); a partir de 1024px passa a curva horizontal com os 3 nós. */
 .track {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -238,37 +241,80 @@
   overflow: visible;
   pointer-events: none;
 }
+@media (min-width: 1024px) {
+  .track { display: block; }
+}
 
 .steps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(var(--sp-sm), 2.5vh, var(--sp-lg));
+  grid-template-columns: 1fr;
+  gap: clamp(8px, 2.4vh, var(--sp-xl));
   list-style: none;
   margin: 0;
   padding: 0;
 }
+@media (min-width: 1024px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(var(--sp-sm), 2.5vh, var(--sp-lg));
+  }
+}
 
 .step {
   position: relative;
-  /* Cada passo sobe em relação ao anterior; o valor vem do page.tsx. */
-  padding-top: var(--node-y, 0px);
+  padding-top: 0;
+  padding-left: 60px;
+  min-height: 44px;
+}
+@media (min-width: 1024px) {
+  .step {
+    /* Cada passo sobe em relação ao anterior; o valor vem do page.tsx. */
+    padding-top: var(--node-y, 0px);
+    padding-left: 0;
+    min-height: 0;
+  }
+}
+/* Fio vertical a ligar os nós — só na lista mobile. */
+.step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 44px;
+  left: 21px;
+  bottom: clamp(-28px, -3vh, -12px);
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+}
+@media (min-width: 1024px) {
+  .step:not(:last-child)::before { content: none; }
 }
 
 /* Nó: círculo claro com contorno roxo; o terceiro nó vem preenchido. */
 .node {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--color-white);
   color: var(--color-red);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
-.node svg { width: 21px; height: 21px; }
+@media (min-width: 1024px) {
+  .node { position: relative; top: auto; left: auto; width: 48px; height: 48px; }
+}
+.node svg { width: 20px; height: 20px; }
+@media (min-width: 1024px) {
+  .node svg { width: 21px; height: 21px; }
+}
 
 .nodeFilled {
   background: var(--color-black);
@@ -280,25 +326,31 @@
   position: relative;
   z-index: 1;
   display: block;
-  margin-top: clamp(6px, 1.2vh, var(--sp-sm));
+  margin-top: 0;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-white);
 }
+@media (min-width: 1024px) {
+  .stepIndex { margin-top: clamp(6px, 1.2vh, var(--sp-sm)); }
+}
 
 .stepTitle {
   position: relative;
   z-index: 1;
-  margin: 8px 0 4px;
-  font-size: clamp(16px, 1.5vw, 19px);
+  margin: 6px 0 2px;
+  font-size: clamp(15px, 4vw, 21px);
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
   color: var(--color-white);
-  max-width: 26ch;
+  max-width: none;
   text-wrap: pretty;
+}
+@media (min-width: 1024px) {
+  .stepTitle { margin: 8px 0 4px; font-size: clamp(16px, 1.5vw, 19px); max-width: 26ch; }
 }
 
 .stepDesc {
@@ -306,61 +358,19 @@
   z-index: 1;
   margin: 0;
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--on-brand-2);
-  max-width: 30ch;
+  max-width: none;
 }
-
-/* ============================================================
-   MOBILE — lista vertical, sem a curva
-   ============================================================ */
-@media (max-width: 860px) {
-  .track { display: none; }
-  .steps {
-    grid-template-columns: 1fr;
-    gap: clamp(8px, 2.4vh, var(--sp-xl));
-  }
-  .step {
-    padding-top: 0;
-    padding-left: 60px;
-    min-height: 44px;
-  }
-  .node {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 44px;
-    height: 44px;
-  }
-  .node svg { width: 20px; height: 20px; }
-  /* Fio vertical a ligar os nós. */
-  .step:not(:last-child)::before {
-    content: "";
-    position: absolute;
-    top: 44px;
-    left: 21px;
-    bottom: clamp(-28px, -3vh, -12px);
-    width: 2px;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.4) 0%,
-      rgba(255, 255, 255, 0.08) 100%
-    );
-  }
-  .stepIndex { margin-top: 0; }
-  .stepTitle {
-    margin: 6px 0 2px;
-    font-size: clamp(15px, 4vw, 21px);
-  }
-  .stepDesc { font-size: 14px; line-height: 1.5; }
-  .stepTitle, .stepDesc { max-width: none; }
+@media (min-width: 1024px) {
+  .stepDesc { line-height: 1.55; max-width: 30ch; }
 }
 
 /* ============================================================
    ECRÃS BAIXOS — telemóveis pequenos, em que o total ainda não
    coubesse com as regras acima; comprime mais um nível.
    ============================================================ */
-@media (max-width: 860px) and (max-height: 760px) {
+@media (max-width: 1023px) and (max-height: 760px) {
   .eyebrow { display: none; }
   .title { font-size: clamp(22px, 8vw, 34px); line-height: 1.05; }
   .subtitle { font-size: 14px; line-height: 1.4; }

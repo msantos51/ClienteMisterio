@@ -27,13 +27,13 @@
 @media (min-width: 768px) { .wrap { padding: 0 40px; } }
 
 .section {
-  padding: clamp(28px, 8vh, 96px) 0;
+  padding: clamp(20px, 6vh, 64px) 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 .sectionTight {
-  padding: clamp(20px, 6vh, 64px) 0;
+  padding: clamp(14px, 4vh, 40px) 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,9 +43,9 @@
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 720px) {
-  .section { padding: clamp(20px, 6vh, 64px) 0; }
-  .sectionTight { padding: clamp(14px, 4vh, 40px) 0; }
+@media (min-width: 768px) {
+  .section { padding: clamp(28px, 8vh, 96px) 0; }
+  .sectionTight { padding: clamp(20px, 6vh, 64px) 0; }
 }
 
 .eyebrow {
@@ -153,14 +153,14 @@
    HERO
    ============================================================ */
 .hero {
-  padding: clamp(28px, 8vh, 96px) 0;
+  padding: clamp(20px, 6vh, 64px) 0;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-@media (max-width: 720px) { .hero { padding: clamp(20px, 6vh, 64px) 0; } }
+@media (min-width: 768px) { .hero { padding: clamp(28px, 8vh, 96px) 0; } }
 
 .heroGrid {
   position: relative;
@@ -170,7 +170,7 @@
   gap: 48px;
   align-items: start;
 }
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .heroGrid { grid-template-columns: 1.2fr 1fr; gap: 64px; }
 }
 
@@ -338,11 +338,14 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 32px;
-  padding: 28px 32px;
+  gap: 20px;
+  padding: 24px;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.04);
+}
+@media (min-width: 768px) {
+  .trustBar { gap: 32px; padding: 28px 32px; }
 }
 .trustBadgeChip {
   display: inline-flex;
@@ -372,10 +375,6 @@
   font-weight: 600;
   line-height: 1.4;
 }
-@media (max-width: 640px) {
-  .trustBar { gap: 20px; padding: 24px; }
-}
-
 /* ============================================================
    TESTEMUNHOS — carrossel horizontal com scroll-snap (sem JS)
    ============================================================ */
@@ -418,7 +417,7 @@
   margin-bottom: 54px;
   align-items: end;
 }
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .head { grid-template-columns: 1.3fr 1fr; gap: 64px; }
 }
 .headSub { font-size: 15px; line-height: 1.8; color: var(--on-brand-2); max-width: 44ch; margin: 0; }
@@ -429,7 +428,7 @@
   gap: 12px;
 }
 @media (min-width: 640px) { .benefits { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 980px) { .benefits { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .benefits { grid-template-columns: repeat(3, 1fr); } }
 
 .benefit {
   position: relative;
@@ -505,7 +504,7 @@
   background: var(--color-red);
   pointer-events: none;
 }
-@media (min-width: 880px) { .curr { padding: 76px 16px; } }
+@media (min-width: 1024px) { .curr { padding: 76px 16px; } }
 .currInner { position: relative; max-width: 980px; margin: 0 auto; padding: 0 24px; }
 .currEyebrow { color: var(--color-red-bright); }
 .currDisplay { color: var(--color-white); }
@@ -517,7 +516,7 @@
   margin-bottom: 52px;
   align-items: end;
 }
-@media (min-width: 880px) {
+@media (min-width: 1024px) {
   .currHead { grid-template-columns: 1.3fr 1fr; gap: 64px; }
 }
 
@@ -672,7 +671,7 @@
   text-align: center;
   box-shadow: var(--shadow-lg);
 }
-@media (min-width: 880px) { .final { padding: 80px 64px; } }
+@media (min-width: 1024px) { .final { padding: 80px 64px; } }
 .final::before {
   content: "";
   position: absolute;
@@ -721,12 +720,12 @@
    COMO FUNCIONA — secção vinda da antiga página inicial
    ============================================================ */
 .sectionSteps {
-  padding: clamp(28px, 8vh, 96px) 0;
+  padding: clamp(20px, 6vh, 64px) 0;
   background: var(--surface-brand-alt);
   border-top: 1px solid var(--hairline-soft);
   border-bottom: 1px solid var(--hairline-soft);
 }
-@media (max-width: 720px) { .sectionSteps { padding: clamp(20px, 6vh, 64px) 0; } }
+@media (min-width: 768px) { .sectionSteps { padding: clamp(28px, 8vh, 96px) 0; } }
 
 .headKicker {
   font-size: 11px;
@@ -742,8 +741,8 @@
   grid-template-columns: 1fr;
   gap: 20px;
 }
-@media (min-width: 760px) { .steps { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1060px) { .steps { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 768px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .steps { grid-template-columns: repeat(4, 1fr); } }
 
 .step {
   background: transparent;
