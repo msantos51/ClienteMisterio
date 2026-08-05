@@ -26,7 +26,9 @@
    =================================================================== */
 :root {
   /* --- Paleta base ------------------------------------------------ */
-  --color-red: #7c5cff;                /* Roxo vivo — acento sobre fundos claros/painéis, nunca superfície de página */
+  --color-red: #6a4ade;                /* Roxo — acento sobre fundos claros/painéis. ≥5,8:1 com branco/texto
+                                           em ambos os sentidos (WCAG AA) — mínimo recomendado no plano de
+                                           contraste; nunca superfície de página. */
   --color-red-2: #6d4ce6;              /* Roxo alternado — ritmo */
   --color-red-3: #5a3dc7;              /* Roxo profundo — pressed */
   --color-red-bright: #a78bfa;         /* Roxo vivo — acento sobre branco/preto */

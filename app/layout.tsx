@@ -47,7 +47,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   userScalable: true,
-  themeColor: "#7c5cff",
+  themeColor: "#6a4ade",
 };
 
 // TODO: acrescentar `logo` (URL de imagem real) e `sameAs` (redes sociais
