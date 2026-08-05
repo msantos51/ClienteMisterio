@@ -122,30 +122,39 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <input
+                id="login-email"
                 name="email"
                 placeholder={t.auth.emailPlaceholder}
                 type="email"
+                inputMode="email"
+                autoComplete="email"
+                required
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
               />
-              <span className="label">{t.auth.emailLabel}</span>
+              <label className="label" htmlFor="login-email">{t.auth.emailLabel}</label>
             </div>
 
             <div className="input-group">
               <input
+                id="login-password"
                 name="password"
                 placeholder={t.auth.passwordPlaceholder}
                 type="password"
+                autoComplete="current-password"
+                required
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
-              <span className="label">{t.auth.passwordLabel}</span>
+              <label className="label" htmlFor="login-password">{t.auth.passwordLabel}</label>
             </div>
 
-            {feedback && <p className="form-feedback">{feedback}</p>}
+            <div role="status" aria-live="polite">
+              {feedback && <p className="form-feedback">{feedback}</p>}
+            </div>
 
             <div className="mt-5 space-y-3">
-              <button className="submit" type="submit">
+              <button className="submit" type="submit" aria-busy={isSubmitting}>
                 {isSubmitting ? t.auth.loginSubmitting : t.auth.loginButton}
               </button>
               <div className="flex flex-wrap items-center justify-between gap-3">

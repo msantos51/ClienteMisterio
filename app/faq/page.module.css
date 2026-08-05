@@ -114,6 +114,13 @@
   margin-top: 12px;
 }
 .faqItem { border-bottom: 1px solid var(--hairline); }
+.faqQHeading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
 .page .faqQ {
   display: flex;
   width: 100%;

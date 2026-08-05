@@ -187,6 +187,10 @@
   color-scheme: light;
 }
 
+html {
+  scroll-padding-top: var(--header-h);
+}
+
 /* -------------------------------------------------------------------
    PAINÉIS INVERTIDOS
    Aplicar `.on-light` a qualquer bloco branco: os tokens de texto e linha
@@ -571,6 +575,30 @@
     border-color: var(--ink);
     color: var(--ink);
     box-shadow: none;
+  }
+
+  /* Skip link — primeiro elemento focável da página, invisível até
+     receber foco por teclado. */
+  .skip-link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    transform: translateY(-150%);
+    padding: 12px 20px;
+    background: var(--color-white);
+    color: var(--color-red);
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 0 0 var(--radius-md) 0;
+    box-shadow: var(--shadow-md);
+    transition: transform 150ms ease;
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+    outline: 3px solid var(--color-red);
+    outline-offset: -3px;
   }
 
   /* Botão hamburguer — controlo estrutural, não é um CTA. */
@@ -2298,18 +2326,19 @@
     color: var(--color-red);
   }
 
-  /* FOCUS STATES */
+  /* FOCUS STATES
+     Sistema global: qualquer elemento focável recebe o mesmo anel de foco,
+     nunca `outline: none` sem substituto. `--focus-ring` já inverte por
+     painel (roxo sobre branco, branco sobre roxo — ver `.on-light`),
+     garantindo ≥3:1 contra o fundo em qualquer contexto. */
   *:focus {
     outline: none;
   }
 
-  a:focus-visible,
-  button:focus-visible,
-  input:focus-visible,
-  select:focus-visible,
-  textarea:focus-visible {
-    outline: 2px solid var(--focus-ring);
+  :focus-visible {
+    outline: 3px solid var(--focus-ring);
     outline-offset: 2px;
+    border-radius: inherit;
   }
 
   /* SMOOTH TRANSITIONS */

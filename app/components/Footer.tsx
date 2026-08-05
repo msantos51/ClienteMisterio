@@ -16,6 +16,9 @@ export default function Footer() {
         <Link href="/termos-e-condicoes" className="footer-mini-link">
           {t.footer.termsLink}
         </Link>
+        <Link href="/privacidade" className="footer-mini-link">
+          Privacidade
+        </Link>
       </div>
     </footer>
   );

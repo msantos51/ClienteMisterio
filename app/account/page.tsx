@@ -98,65 +98,83 @@ export default function AccountPage() {
           <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
             <div className="input-group">
               <input
+                id="register-first-name"
                 name="firstName"
                 placeholder="Enter your first name"
                 type="text"
+                autoComplete="given-name"
+                required
                 value={formData.firstName}
                 onChange={(event) => handleChange("firstName", event.target.value)}
               />
-              <span className="label">{t.auth.firstNameLabel}</span>
+              <label className="label" htmlFor="register-first-name">{t.auth.firstNameLabel}</label>
             </div>
 
             <div className="input-group">
               <input
+                id="register-last-name"
                 name="lastName"
                 placeholder="Enter your last name"
                 type="text"
+                autoComplete="family-name"
+                required
                 value={formData.lastName}
                 onChange={(event) => handleChange("lastName", event.target.value)}
               />
-              <span className="label">{t.auth.lastNameLabel}</span>
+              <label className="label" htmlFor="register-last-name">{t.auth.lastNameLabel}</label>
             </div>
 
             <div className="input-group md:col-span-2">
               <input
+                id="register-email"
                 name="email"
                 placeholder="name@example.com"
                 type="email"
+                inputMode="email"
+                autoComplete="email"
+                required
                 value={formData.email}
                 onChange={(event) => handleChange("email", event.target.value)}
               />
-              <span className="label">{t.auth.emailLabel}</span>
+              <label className="label" htmlFor="register-email">{t.auth.emailLabel}</label>
             </div>
 
             <div className="input-group">
               <input
+                id="register-password"
                 name="password"
                 placeholder="Create a secure password"
                 type="password"
+                autoComplete="new-password"
+                required
                 value={formData.password}
                 onChange={(event) => handleChange("password", event.target.value)}
               />
-              <span className="label">{t.auth.passwordLabel}</span>
+              <label className="label" htmlFor="register-password">{t.auth.passwordLabel}</label>
             </div>
 
             <div className="input-group">
               <input
+                id="register-password-confirm"
                 name="confirmPassword"
                 placeholder="Repeat the password"
                 type="password"
+                autoComplete="new-password"
+                required
                 value={formData.confirmPassword}
                 onChange={(event) => handleChange("confirmPassword", event.target.value)}
               />
-              <span className="label">{t.auth.passwordConfirmLabel}</span>
+              <label className="label" htmlFor="register-password-confirm">{t.auth.passwordConfirmLabel}</label>
             </div>
 
-            {feedback && (
-              <p className="form-feedback md:col-span-2">{feedback.message}</p>
-            )}
+            <div className="md:col-span-2" role="status" aria-live="polite">
+              {feedback && (
+                <p className="form-feedback">{feedback.message}</p>
+              )}
+            </div>
 
             <div className="md:col-span-2 mt-2 space-y-3">
-              <button className="submit" type="submit">
+              <button className="submit" type="submit" aria-busy={isSubmitting}>
                 {isSubmitting ? t.auth.registerSubmitting : t.auth.registerButton}
               </button>
               <div className="text-center">

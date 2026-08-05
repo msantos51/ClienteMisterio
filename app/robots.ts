@@ -9,8 +9,8 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: ["/", "/about", "/o-curso", "/contact", "/termos-e-condicoes", "/login", "/account"],
-      disallow: ["/api", "/api-docs", "/dashboard", "/curso", "/checkout", "/reset-password", "/forgot-password"],
+      allow: ["/", "/about", "/o-curso", "/contact", "/termos-e-condicoes", "/privacidade", "/login"],
+      disallow: ["/api", "/api-docs", "/dashboard", "/curso", "/account", "/checkout", "/reset-password", "/forgot-password"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };
