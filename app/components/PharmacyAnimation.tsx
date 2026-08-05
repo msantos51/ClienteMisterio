@@ -5,10 +5,18 @@ import styles from "./PharmacyAnimation.module.css";
 
 type Step = "idle" | "enter" | "greeting" | "recommendation" | "noFlyer" | "conclusion";
 
+const stepForProgress = (progress: number): Step => {
+  if (progress >= 0 && progress < 20) return "enter";
+  if (progress >= 20 && progress < 50) return "greeting";
+  if (progress >= 50 && progress < 80) return "noFlyer";
+  if (progress >= 80 && progress < 100) return "conclusion";
+  return "idle";
+};
+
 export const PharmacyAnimation: React.FC = () => {
-  const [step, setStep] = useState<Step>("idle");
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
+  const step = stepForProgress(progress);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -27,14 +35,6 @@ export const PharmacyAnimation: React.FC = () => {
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  useEffect(() => {
-    if (progress >= 0 && progress < 20) setStep("enter");
-    else if (progress >= 20 && progress < 50) setStep("greeting");
-    else if (progress >= 50 && progress < 80) setStep("noFlyer");
-    else if (progress >= 80 && progress < 100) setStep("conclusion");
-    else setStep("idle");
-  }, [progress]);
-
   const handlePlay = () => {
     setProgress(0);
     setIsPlaying(true);
@@ -43,7 +43,6 @@ export const PharmacyAnimation: React.FC = () => {
   const handleReset = () => {
     setProgress(0);
     setIsPlaying(false);
-    setStep("idle");
   };
 
   return (

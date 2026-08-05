@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import AppShell from "./components/AppShell";
+import WebVitals from "./components/WebVitals";
 import { creatoDisplay } from "./fonts";
 import { siteUrl, siteName } from "./lib/site";
 import "./globals.css";
@@ -84,6 +85,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
+        <WebVitals />
         <AppShell>{children}</AppShell>
       </body>
     </html>

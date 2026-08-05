@@ -224,8 +224,12 @@ export const translations = {
       registerTitle: "Criar Conta",
       registerDescription: "Junta-te a mais de 500 alunos",
       firstNameLabel: "Primeiro Nome",
+      firstNamePlaceholder: "Escreve o teu primeiro nome",
       lastNameLabel: "Último Nome",
+      lastNamePlaceholder: "Escreve o teu último nome",
       passwordConfirmLabel: "Confirmar Senha",
+      registerPasswordPlaceholder: "Cria uma senha segura",
+      registerPasswordConfirmPlaceholder: "Repete a senha",
       termsCheckbox: "Concordo com os",
       termsLink: "Termos e Condições",
       registerButton: "Criar Conta",
@@ -233,6 +237,8 @@ export const translations = {
       alreadyHaveAccount: "Já tens conta?",
       goToLogin: "Ir para Login",
       registrationError: "Não foi possível criar a conta. Tenta novamente.",
+      registerPasswordMismatch: "A confirmação da senha não corresponde à senha introduzida.",
+      registerSuccess: "Conta criada com sucesso.",
 
       // Forgot Password
       forgotPasswordTitle: "Recuperar Senha",
@@ -245,11 +251,14 @@ export const translations = {
       // Reset Password
       resetPasswordTitle: "Definir Nova Senha",
       newPasswordLabel: "Nova Senha",
+      newPasswordPlaceholder: "Escreve a tua nova senha",
       confirmPasswordLabel: "Confirmar Senha",
+      confirmPasswordPlaceholder: "Confirma a tua nova senha",
       resetPasswordButton: "Definir Senha",
       resetPasswordSubmitting: "A definir senha...",
       resetPasswordSuccess: "Senha definida com sucesso. Podes agora iniciar sessão.",
       resetPasswordError: "Não foi possível definir a senha.",
+      loadingRecoveryForm: "A carregar formulário de recuperação...",
     },
 
     // Checkout
@@ -772,8 +781,12 @@ export const translations = {
       registerTitle: "Create Account",
       registerDescription: "Join over 500 students",
       firstNameLabel: "First Name",
+      firstNamePlaceholder: "Enter your first name",
       lastNameLabel: "Last Name",
+      lastNamePlaceholder: "Enter your last name",
       passwordConfirmLabel: "Confirm Password",
+      registerPasswordPlaceholder: "Create a secure password",
+      registerPasswordConfirmPlaceholder: "Repeat the password",
       termsCheckbox: "I agree with the",
       termsLink: "Terms and Conditions",
       registerButton: "Create Account",
@@ -781,6 +794,8 @@ export const translations = {
       alreadyHaveAccount: "Already have an account?",
       goToLogin: "Go to Login",
       registrationError: "Unable to create account. Please try again.",
+      registerPasswordMismatch: "Password confirmation does not match the password entered.",
+      registerSuccess: "Registration successful.",
 
       // Forgot Password
       forgotPasswordTitle: "Recover Password",
@@ -793,11 +808,14 @@ export const translations = {
       // Reset Password
       resetPasswordTitle: "Set New Password",
       newPasswordLabel: "New Password",
+      newPasswordPlaceholder: "Enter your new password",
       confirmPasswordLabel: "Confirm Password",
+      confirmPasswordPlaceholder: "Confirm your new password",
       resetPasswordButton: "Set Password",
       resetPasswordSubmitting: "Setting password...",
       resetPasswordSuccess: "Password set successfully. You can now sign in.",
       resetPasswordError: "Unable to set password.",
+      loadingRecoveryForm: "Loading recovery form...",
     },
 
     // Checkout

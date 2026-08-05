@@ -76,9 +76,15 @@
   --hairline-strong: rgba(255, 255, 255, 0.46);
   --hairline-invert: #e7e7ea;
 
-  /* --- Estados semânticos (usados sobre painéis brancos) ------------ */
-  --color-success: #12a06d;
-  --color-warning: #b8730a;
+  /* --- Estados semânticos (usados sobre painéis brancos) ------------
+     Escurecidos para ≥4,5:1 sobre branco (WCAG AA) — o valor anterior
+     de --color-success (#12a06d, 3,35:1) e --color-warning (#b8730a,
+     3,82:1) só cumpria em texto grande; como o token é reutilizado
+     também em texto pequeno (badges, títulos de 11px), tem de cumprir
+     o rácio mais exigente em qualquer contexto. Ver ponto 62 do plano
+     (testes de contraste automatizados sobre os tokens de cor). */
+  --color-success: #0d7a52;
+  --color-warning: #a06308;
   --color-danger: #cf0a17;
 
   /* SPACING SCALE (8px base) */

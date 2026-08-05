@@ -18,11 +18,12 @@ export default function ResetPasswordPage() {
 }
 
 function ResetPasswordLoadingState() {
+  const { t } = useLanguage();
   return (
     <section className="full-section full-section-scroll w-full space-y-8">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form">
-          <p className="text-center text-sm">Loading recovery form...</p>
+          <p className="text-center text-sm">{t.auth.loadingRecoveryForm}</p>
         </article>
       </div>
     </section>
@@ -73,25 +74,35 @@ function ResetPasswordContent() {
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <input
-                placeholder="Enter your new password"
+                id="reset-new-password"
+                name="newPassword"
+                placeholder={t.auth.newPasswordPlaceholder}
                 type="password"
+                autoComplete="new-password"
+                required
                 value={newPassword}
                 onChange={(event) => setNewPassword(event.target.value)}
               />
-              <span className="label">{t.auth.newPasswordLabel}</span>
+              <label className="label" htmlFor="reset-new-password">{t.auth.newPasswordLabel}</label>
             </div>
 
             <div className="input-group">
               <input
-                placeholder="Confirm your new password"
+                id="reset-confirm-password"
+                name="confirmPassword"
+                placeholder={t.auth.confirmPasswordPlaceholder}
                 type="password"
+                autoComplete="new-password"
+                required
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
-              <span className="label">{t.auth.confirmPasswordLabel}</span>
+              <label className="label" htmlFor="reset-confirm-password">{t.auth.confirmPasswordLabel}</label>
             </div>
 
-            {feedback && <p className="form-feedback">{feedback}</p>}
+            <div role="status" aria-live="polite">
+              {feedback && <p className="form-feedback">{feedback}</p>}
+            </div>
 
             <div className="mt-5 space-y-3">
               <button className="submit" type="submit">
