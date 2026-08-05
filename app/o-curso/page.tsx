@@ -390,6 +390,59 @@ Teoria paginada, casos reais comentados e checklists. Cada módulo termina com u
       </section>
 
       {/* ============================================================
+          OBJEÇÕES COMUNS — responde às dúvidas mais frequentes de quem
+          ainda não decidiu comprar (ponto 50 do plano). Reaproveita só
+          factos já estabelecidos noutras secções desta página e na FAQ
+          — nada de números novos inventados.
+          ============================================================ */}
+      <section className={`${styles.section} full-section full-section-scroll`}>
+        <div className={styles.wrap}>
+          <div className={styles.head}>
+            <div>
+              <div className={styles.eyebrow}>Antes de decidires</div>
+              <h2 className={styles.displayLg}>As dúvidas mais comuns.</h2>
+            </div>
+            <p className={styles.headSub}>
+              Quatro perguntas que quase toda a gente faz antes de começar.{" "}
+              <Link href="/faq" style={{ color: "var(--color-white)", fontWeight: 700, textDecoration: "underline" }}>
+                Vê a FAQ completa
+              </Link>.
+            </p>
+          </div>
+          <div className={styles.benefits}>
+            <div className={styles.benefit}>
+              <h3 className={styles.benefitTitle}>Quanto tempo demora o curso?</h3>
+              <p className={styles.benefitDesc}>
+                Em média cerca de 4 horas, distribuídas pelos 10 módulos. Podes fazê-lo num
+                fim de semana ou ao longo de várias semanas — o acesso é vitalício.
+              </p>
+            </div>
+            <div className={styles.benefit}>
+              <h3 className={styles.benefitTitle}>Quanto se ganha por missão?</h3>
+              <p className={styles.benefitDesc}>
+                Entre 5€ e 150€, consoante o tipo de missão e a plataforma. O curso ensina-te
+                a escolher as que compensam o teu tempo.
+              </p>
+            </div>
+            <div className={styles.benefit}>
+              <h3 className={styles.benefitTitle}>Preciso de experiência ou carro?</h3>
+              <p className={styles.benefitDesc}>
+                Não. O curso começa do zero. Um carro alarga as missões disponíveis fora dos
+                grandes centros, mas não é obrigatório.
+              </p>
+            </div>
+            <div className={styles.benefit}>
+              <h3 className={styles.benefitTitle}>E se não for para mim?</h3>
+              <p className={styles.benefitDesc}>
+                Tens 14 dias para pedir reembolso integral, sem questões — sem risco em
+                experimentar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
           FINAL CTA (only shown when not logged in)
           ============================================================ */}
       {!isLoggedIn && (
