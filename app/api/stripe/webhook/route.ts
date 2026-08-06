@@ -31,27 +31,51 @@ const getPaymentIntentId = (paymentIntent: string | Stripe.PaymentIntent | null)
 
 type GrantResult = "granted" | "user_not_found";
 
-const grantCourseAccessByEmail = async (payload: {
+const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+const findUserIdForPayment = async (
+  clientReferenceId: string | null,
+  customerEmail: string
+): Promise<string | null> => {
+  // client_reference_id é o identificador fiável (o próprio ID da conta, anexado ao link
+  // de pagamento no momento da compra) — o e-mail escrito no checkout do Stripe pode não
+  // coincidir com o da conta, por isso só serve como reserva para pagamentos antigos/manuais.
+  if (clientReferenceId && uuidPattern.test(clientReferenceId)) {
+    const byId = await query<{ id: string }>("select id from users where id = $1 limit 1", [
+      clientReferenceId,
+    ]);
+
+    if (byId.rows[0]?.id) {
+      return byId.rows[0].id;
+    }
+  }
+
+  const byEmail = await query<{ id: string }>(
+    "select id from users where lower(email) = $1 limit 1",
+    [customerEmail.toLowerCase()]
+  );
+
+  return byEmail.rows[0]?.id ?? null;
+};
+
+const grantCourseAccess = async (payload: {
   eventId: string;
   checkoutSessionId: string;
   paymentIntentId: string | null;
+  clientReferenceId: string | null;
   customerEmail: string;
   amountTotal: number;
   currency: string;
 }): Promise<GrantResult> => {
   // Atualiza o utilizador e regista a compra de forma idempotente para evitar duplicações.
-  const userResult = await query<{ id: string }>(
-    "select id from users where lower(email) = $1 limit 1",
-    [payload.customerEmail.toLowerCase()]
-  );
-
-  const userId = userResult.rows[0]?.id;
+  const userId = await findUserIdForPayment(payload.clientReferenceId, payload.customerEmail);
 
   if (!userId) {
     // Sem conta associada no momento do pagamento; regista alerta e confirma recepção ao Stripe.
     console.warn("STRIPE_WEBHOOK_USER_NOT_FOUND", {
       eventId: payload.eventId,
       checkoutSessionId: payload.checkoutSessionId,
+      clientReferenceId: payload.clientReferenceId,
       customerEmail: payload.customerEmail,
     });
     return "user_not_found";
@@ -132,10 +156,11 @@ export const POST = async (request: Request) => {
       }
 
       try {
-        const outcome = await grantCourseAccessByEmail({
+        const outcome = await grantCourseAccess({
           eventId: event.id,
           checkoutSessionId: session.id,
           paymentIntentId: getPaymentIntentId(session.payment_intent),
+          clientReferenceId: session.client_reference_id ?? null,
           customerEmail,
           amountTotal,
           currency,

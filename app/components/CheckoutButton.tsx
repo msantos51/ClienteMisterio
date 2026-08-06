@@ -7,11 +7,18 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
+import { buildCheckoutUrl } from "@/app/lib/checkoutLink";
+
 interface CheckoutButtonProps {
   label?: React.ReactNode;
   className?: string;
   variant?: "primary" | "secondary";
 }
+
+type SessionResponse = {
+  authenticated: boolean;
+  user?: { id: string; email: string };
+};
 
 export default function CheckoutButton({
   label = "Comprar Curso",
@@ -34,9 +41,9 @@ export default function CheckoutButton({
     // decidir entre ir para o Stripe ou pedir login.
     try {
       const response = await fetch("/api/auth/session", { cache: "no-store" });
-      const data = response.ok ? ((await response.json()) as { authenticated: boolean }) : { authenticated: false };
-      if (data.authenticated) {
-        window.location.href = paymentLink;
+      const data = response.ok ? ((await response.json()) as SessionResponse) : { authenticated: false };
+      if (data.authenticated && data.user) {
+        window.location.href = buildCheckoutUrl(paymentLink, data.user);
       } else {
         router.push("/entrar?checkout=1");
       }
