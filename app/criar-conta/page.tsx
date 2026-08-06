@@ -92,7 +92,7 @@ export default function AccountPage() {
         <article className="login-form max-w-[620px]">
           <h1 className="form-heading">{t.auth.registerTitle}</h1>
           {isCheckout && (
-            <p className="form-feedback mb-4">{t.auth.checkoutRequired}</p>
+            <p className="form-feedback form-feedback-success mb-4">{t.auth.checkoutRequired}</p>
           )}
 
           <form className="grid gap-4 md:grid-cols-2" onSubmit={handleSubmit}>
@@ -169,7 +169,9 @@ export default function AccountPage() {
 
             <div className="md:col-span-2" role="status" aria-live="polite">
               {feedback && (
-                <p className="form-feedback">{feedback.message}</p>
+                <p className={`form-feedback ${feedback.type === "success" ? "form-feedback-success" : ""}`}>
+                  {feedback.message}
+                </p>
               )}
             </div>
 

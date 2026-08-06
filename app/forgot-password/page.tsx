@@ -8,10 +8,12 @@ type ForgotResponse = {
   message: string;
 };
 
+type Feedback = { message: string; type: "success" | "error" };
+
 export default function ForgotPasswordPage() {
   const { t } = useLanguage();
   const [email, setEmail] = useState("");
-  const [feedback, setFeedback] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,9 +35,9 @@ export default function ForgotPasswordPage() {
       });
 
       const data = (await response.json()) as ForgotResponse;
-      setFeedback(data.message);
+      setFeedback({ message: data.message, type: response.ok ? "success" : "error" });
     } catch {
-      setFeedback(t.auth.resetError);
+      setFeedback({ message: t.auth.resetError, type: "error" });
     } finally {
       setIsSubmitting(false);
     }
@@ -63,7 +65,11 @@ export default function ForgotPasswordPage() {
             </div>
 
             <div role="status" aria-live="polite">
-              {feedback && <p className="form-feedback">{feedback}</p>}
+              {feedback && (
+                <p className={`form-feedback ${feedback.type === "success" ? "form-feedback-success" : ""}`}>
+                  {feedback.message}
+                </p>
+              )}
             </div>
 
             <div className="mt-5 space-y-3">

@@ -49,6 +49,19 @@ export default function CheckoutPage() {
 
   const fallbackHref = checkoutUrl ?? paymentLink;
 
+  if (!paymentLink) {
+    return (
+      <div className="full-section flex items-center justify-center">
+        <div className="text-center space-y-4 max-w-md px-4">
+          <h1 className="text-xl font-semibold home-title-highlight-text">Pagamento indisponível de momento</h1>
+          <p role="alert" className="text-sm sm:text-base leading-6 sm:leading-7">
+            Não foi possível iniciar o pagamento. Tenta novamente mais tarde ou contacta-nos.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="full-section flex items-center justify-center">
       <div className="text-center space-y-4">

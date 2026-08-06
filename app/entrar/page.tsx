@@ -19,12 +19,14 @@ type LoginResponse = {
   };
 };
 
+type Feedback = { message: string; type: "success" | "error" };
+
 export default function LoginPage() {
   const router = useRouter();
   const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [feedback, setFeedback] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
 
@@ -35,12 +37,12 @@ export default function LoginPage() {
 
     if (urlParameters.get("registered") === "1") {
       if (checkout) {
-        setFeedback(t.auth.loginSuccessCheckout);
+        setFeedback({ message: t.auth.loginSuccessCheckout, type: "success" });
       } else {
-        setFeedback(t.auth.loginSuccess);
+        setFeedback({ message: t.auth.loginSuccess, type: "success" });
       }
     } else if (checkout) {
-      setFeedback(t.auth.checkoutRequired);
+      setFeedback({ message: t.auth.checkoutRequired, type: "success" });
     }
 
     // A sessão vive só no cookie httpOnly — pergunta ao servidor em vez de
@@ -81,7 +83,7 @@ export default function LoginPage() {
       const data = (await response.json()) as LoginResponse;
 
       if (!response.ok) {
-        setFeedback(data.message);
+        setFeedback({ message: data.message, type: "error" });
         return;
       }
 
@@ -89,7 +91,7 @@ export default function LoginPage() {
       // guardar no cliente.
       router.push(isCheckout ? "/checkout" : "/dashboard");
     } catch {
-      setFeedback(t.auth.loginError);
+      setFeedback({ message: t.auth.loginError, type: "error" });
     } finally {
       setIsSubmitting(false);
     }
@@ -131,7 +133,11 @@ export default function LoginPage() {
             </div>
 
             <div role="status" aria-live="polite">
-              {feedback && <p className="form-feedback">{feedback}</p>}
+              {feedback && (
+                <p className={`form-feedback ${feedback.type === "success" ? "form-feedback-success" : ""}`}>
+                  {feedback.message}
+                </p>
+              )}
             </div>
 
             <div className="mt-5 space-y-3">

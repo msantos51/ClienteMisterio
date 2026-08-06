@@ -6,7 +6,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 const sessionCookieName = "vp_session_token";
-const protectedPaths = ["/dashboard", "/curso", "/checkout"];
+const protectedPaths = ["/dashboard", "/curso", "/checkout", "/pagamento-confirmado"];
 const productionOnlyHiddenPaths = ["/api-docs", "/api/openapi"];
 
 const requiresAuthentication = (pathname: string) => {

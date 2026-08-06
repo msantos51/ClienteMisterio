@@ -258,6 +258,7 @@ export const translations = {
       resetPasswordSubmitting: "A definir senha...",
       resetPasswordSuccess: "Senha definida com sucesso. Podes agora iniciar sessão.",
       resetPasswordError: "Não foi possível definir a senha.",
+      resetPasswordMismatch: "A confirmação deve ser igual à nova senha.",
       loadingRecoveryForm: "A carregar formulário de recuperação...",
     },
 
@@ -426,6 +427,7 @@ export const translations = {
     coursePlayer: {
       verifyingSession: "A verificar sessão...",
       progressLoadError: "Não foi possível carregar o teu progresso. Tenta novamente.",
+      quizSubmitError: "Não foi possível guardar as tuas respostas. Tenta novamente.",
       tryAgain: "Tentar novamente",
       courseTitle: "Curso de Cliente Mistério",
       accessDeniedDesc: "O acesso ao curso só fica disponível após confirmação do pagamento.",
@@ -815,6 +817,7 @@ export const translations = {
       resetPasswordSubmitting: "Setting password...",
       resetPasswordSuccess: "Password set successfully. You can now sign in.",
       resetPasswordError: "Unable to set password.",
+      resetPasswordMismatch: "Confirmation must match the new password.",
       loadingRecoveryForm: "Loading recovery form...",
     },
 
@@ -983,6 +986,7 @@ export const translations = {
     coursePlayer: {
       verifyingSession: "Verifying session...",
       progressLoadError: "We couldn't load your progress. Please try again.",
+      quizSubmitError: "We couldn't save your answers. Please try again.",
       tryAgain: "Try again",
       courseTitle: "Mystery Shopper Course",
       accessDeniedDesc: "Course access is only available after payment confirmation.",

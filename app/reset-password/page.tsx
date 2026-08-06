@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
 
@@ -30,13 +30,16 @@ function ResetPasswordLoadingState() {
   );
 }
 
+type Feedback = { message: string; type: "success" | "error" };
+
 function ResetPasswordContent() {
   const { t } = useLanguage();
+  const router = useRouter();
   const searchParameters = useSearchParams();
   const token = searchParameters.get("token") || "";
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [feedback, setFeedback] = useState<string | null>(null);
+  const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,8 +49,14 @@ function ResetPasswordContent() {
       return;
     }
 
-    setIsSubmitting(true);
     setFeedback(null);
+
+    if (newPassword !== confirmPassword) {
+      setFeedback({ message: t.auth.resetPasswordMismatch, type: "error" });
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("/api/auth/reset-password", {
@@ -58,9 +67,15 @@ function ResetPasswordContent() {
       });
 
       const data = (await response.json()) as ResetResponse;
-      setFeedback(data.message);
+      setFeedback({ message: data.message, type: response.ok ? "success" : "error" });
+
+      if (response.ok) {
+        setNewPassword("");
+        setConfirmPassword("");
+        setTimeout(() => router.push("/entrar"), 1800);
+      }
     } catch {
-      setFeedback(t.auth.resetPasswordError);
+      setFeedback({ message: t.auth.resetPasswordError, type: "error" });
     } finally {
       setIsSubmitting(false);
     }
@@ -101,7 +116,11 @@ function ResetPasswordContent() {
             </div>
 
             <div role="status" aria-live="polite">
-              {feedback && <p className="form-feedback">{feedback}</p>}
+              {feedback && (
+                <p className={`form-feedback ${feedback.type === "success" ? "form-feedback-success" : ""}`}>
+                  {feedback.message}
+                </p>
+              )}
             </div>
 
             <div className="mt-5 space-y-3">
