@@ -309,76 +309,18 @@ Teoria paginada, casos reais comentados e checklists. Cada módulo termina com u
               </div>
 
               <div className={styles.modules}>
-                {curriculumModules.map((module) => {
-                  const expanded = module;
-                  return (
-                    <div className={styles.module} key={module.id}>
-                      <div className={styles.moduleNum}>
-                        {String(module.id).padStart(2, "0")}
-                      </div>
-                      <div className={styles.moduleContent}>
-                        <h3 className={styles.moduleTitle}>{module.title}</h3>
-                        <p className={styles.moduleSubtitle}>{expanded?.subtitle}</p>
-                        <p className={styles.moduleDesc}>{module.description}</p>
-
-                        {/* Expanded Details */}
-                        {expanded && (
-                          <details className={styles.moduleDetails}>
-                            <summary className={styles.moduleSummary}>
-                              Ver detalhes e recursos
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                              </svg>
-                            </summary>
-
-                            <div className={styles.moduleExpanded}>
-                              {/* Duration */}
-                              <div className={styles.expandedItem}>
-                                <strong>Duração</strong> {expanded.duration}
-                              </div>
-
-                              {/* Learning Objectives */}
-                              <div className={styles.expandedItem}>
-                                <strong>Objetivos de aprendizagem</strong>
-                                <ul className={styles.objectivesList}>
-                                  {expanded.learningObjectives.map((obj) => (
-                                    <li key={obj}>{obj}</li>
-                                  ))}
-                                </ul>
-                              </div>
-
-                              {/* Practical Applications */}
-                              <div className={styles.expandedItem}>
-                                <strong>Aplicações práticas</strong>
-                                <ul className={styles.objectivesList}>
-                                  {expanded.practicalApplications.map((app) => (
-                                    <li key={app}>{app}</li>
-                                  ))}
-                                </ul>
-                              </div>
-
-                              {/* Real World Example */}
-                              <div className={styles.expandedItem}>
-                                <strong>Caso real</strong>
-                                <p className={styles.caseExample}>{expanded.realWorldExample}</p>
-                              </div>
-
-                              {/* Resources */}
-                              <div className={styles.expandedItem}>
-                                <strong>Recursos incluídos</strong>
-                                <ul className={styles.resourcesList}>
-                                  {expanded.resourcesIncluded.map((res) => (
-                                    <li key={res}>{res}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                            </div>
-                          </details>
-                        )}
-                      </div>
+                {curriculumModules.map((module) => (
+                  <div className={styles.module} key={module.id}>
+                    <div className={styles.moduleNum}>
+                      {String(module.id).padStart(2, "0")}
                     </div>
-                  );
-                })}
+                    <div className={styles.moduleContent}>
+                      <h3 className={styles.moduleTitle}>{module.title}</h3>
+                      <p className={styles.moduleSubtitle}>{module.subtitle}</p>
+                      <p className={styles.moduleDesc}>{module.description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
