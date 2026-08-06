@@ -437,15 +437,15 @@ function DashboardPageContent() {
   if (!profile) {
     return (
       <section
-        className="full-section full-section-scroll w-full space-y-6 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10"
+        className="full-section full-section-scroll w-full space-y-4 px-3 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6"
         aria-busy="true"
         aria-label={d.loading}
       >
-        <div className="mx-auto w-full max-w-6xl space-y-6">
-          <div className="dashboard-top-banner h-24 animate-pulse" />
-          <div className="grid gap-6 md:grid-cols-[1fr_320px]">
-            <div className="dashboard-top-banner h-40 animate-pulse" />
-            <div className="dashboard-sidebar h-56 animate-pulse" />
+        <div className="mx-auto w-full max-w-6xl space-y-4">
+          <div className="dashboard-top-banner h-20 animate-pulse" />
+          <div className="grid gap-4 md:grid-cols-[1fr_320px]">
+            <div className="dashboard-top-banner h-32 animate-pulse" />
+            <div className="dashboard-sidebar h-48 animate-pulse" />
           </div>
         </div>
       </section>
@@ -453,7 +453,7 @@ function DashboardPageContent() {
   }
 
   return (
-    <section className="full-section full-section-scroll w-full space-y-8 px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+    <section className="full-section full-section-scroll w-full space-y-4 px-3 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6">
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4">
           <div className="login-form w-full max-w-2xl">
@@ -502,10 +502,10 @@ function DashboardPageContent() {
         </div>
       )}
 
-      <div className="mx-auto w-full max-w-6xl space-y-6">
-        <header className="dashboard-top-banner">
+      <div className="mx-auto w-full max-w-6xl space-y-4">
+        <header className="dashboard-top-banner dashboard-top-banner-compact">
           <h1 className="page-title !text-[color:var(--ink)]">{d.hello}, {profile.firstName}</h1>
-          <p className="mt-2 text-sm !text-[color:var(--ink)]">{d.manageAccount}</p>
+          <p className="mt-1 text-sm !text-[color:var(--ink)]">{d.manageAccount}</p>
         </header>
 
         {/* Secção do curso com barra de progresso apenas para contas com pagamento confirmado. */}
@@ -521,7 +521,7 @@ function DashboardPageContent() {
               }
             }}
           >
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-2">
               <div>
                 <h2 className="text-lg font-bold !text-[color:var(--ink)]">{d.courseTitle}</h2>
                 <p className="text-xs !text-[color:var(--muted)] mt-0.5">
@@ -592,7 +592,7 @@ function DashboardPageContent() {
                 <h2 className="section-title">{d.accountInfo}</h2>
                 <p className="mt-2 text-sm">{d.updatePersonal}</p>
 
-                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
                   <div className="input-group">
                     <input
                       value={profile.firstName}
@@ -657,7 +657,7 @@ function DashboardPageContent() {
                 <h2 className="section-title">{d.securityTitle}</h2>
                 <p className="mt-2 text-sm">{d.securePassword}</p>
 
-                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
                   <div className="input-group md:col-span-2">
                     <input
                       placeholder={d.currentPassword}
@@ -699,7 +699,7 @@ function DashboardPageContent() {
                   {isSavingPassword ? d.updating : d.updatePassword}
                 </button>
 
-                <div className="mt-8 rounded-[var(--radius-lg)] border border-[color:var(--color-primary-red)]/35 bg-[color:var(--color-primary-red)]/8 p-4">
+                <div className="mt-6 rounded-[var(--radius-lg)] border border-[color:var(--color-primary-red)]/35 bg-[color:var(--color-primary-red)]/8 p-4">
                   <h3 className="text-base font-semibold text-[color:var(--color-red-ink)]">{d.dangerZone}</h3>
                   <p className="mt-2 text-sm text-[color:var(--color-red-ink)]">
                     {d.deleteWarning}
@@ -766,7 +766,7 @@ function DashboardPageContent() {
                   </div>
                 </div>
 
-                <button className="submit mt-8" type="button" onClick={handleLogout}>
+                <button className="submit mt-6" type="button" onClick={handleLogout}>
                   {d.logout}
                 </button>
               </div>
