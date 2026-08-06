@@ -4,9 +4,12 @@
 
 import { NextResponse } from "next/server";
 
+import { createEmailConfirmationTemplate } from "@/lib/authEmail";
 import { query } from "@/lib/database";
+import { sendEmail } from "@/lib/email";
 import { verifyPassword } from "@/lib/password";
 import { getSession } from "@/lib/session";
+import { createToken, hashToken } from "@/lib/token";
 import { isValidEmail, isReasonableText } from "@/lib/validation";
 
 type UserRow = {
@@ -139,9 +142,57 @@ export const PUT = async (request: Request) => {
       );
     }
 
+    const currentUserResult = await query<{ email: string }>(
+      "select email from users where id = $1",
+      [session.userId]
+    );
+    const isChangingEmail = currentUserResult.rows[0]?.email.toLowerCase() !== normalizedEmail;
+
     const firstName = payload.firstName.trim();
     const lastName = payload.lastName.trim();
     const fullName = `${firstName} ${lastName}`.trim();
+
+    if (isChangingEmail) {
+      // Mudar de e-mail exige nova confirmação — a conta não fica marcada como
+      // confirmada para um endereço que ainda não foi validado por quem a controla.
+      const confirmationToken = createToken();
+
+      await query(
+        `update users
+         set first_name = $1,
+             last_name = $2,
+             full_name = $3,
+             email = $4,
+             birth_date = $5,
+             gender = $6,
+             profile_completed = true,
+             email_confirmed = false,
+             email_confirmation_token_hash = $7
+         where id = $8`,
+        [
+          firstName,
+          lastName,
+          fullName,
+          normalizedEmail,
+          payload.birthDate,
+          payload.gender,
+          hashToken(confirmationToken),
+          session.userId,
+        ]
+      );
+
+      const template = createEmailConfirmationTemplate(confirmationToken);
+      try {
+        await sendEmail({ to: normalizedEmail, subject: template.subject, html: template.html });
+      } catch (error) {
+        // A atualização do perfil já foi guardada; a pessoa pode pedir reenvio do e-mail de confirmação.
+        console.error("Falha ao enviar e-mail de confirmação após mudança de e-mail:", error);
+      }
+
+      return NextResponse.json({
+        message: "Perfil atualizado. Confirma o novo e-mail para continuar a entrar com ele.",
+      });
+    }
 
     await query(
       `update users

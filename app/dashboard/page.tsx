@@ -41,6 +41,8 @@ type PasswordForm = {
 
 type DashboardSection = "account" | "security" | "preferences";
 
+type Feedback = { message: string; type: "success" | "error" };
+
 type ProfileResponse = {
   user?: {
     firstName: string;
@@ -119,11 +121,11 @@ function DashboardPageContent() {
     newPassword: "",
     confirmNewPassword: "",
   });
-  const [profileFeedback, setProfileFeedback] = useState<string | null>(null);
-  const [firstAccessFeedback, setFirstAccessFeedback] = useState<string | null>(null);
-  const [passwordFeedback, setPasswordFeedback] = useState<string | null>(null);
+  const [profileFeedback, setProfileFeedback] = useState<Feedback | null>(null);
+  const [firstAccessFeedback, setFirstAccessFeedback] = useState<Feedback | null>(null);
+  const [passwordFeedback, setPasswordFeedback] = useState<Feedback | null>(null);
   const [deleteAccountPassword, setDeleteAccountPassword] = useState("");
-  const [deleteAccountFeedback, setDeleteAccountFeedback] = useState<string | null>(null);
+  const [deleteAccountFeedback, setDeleteAccountFeedback] = useState<Feedback | null>(null);
   const [courseProgress, setCourseProgress] = useState<CourseProgressData | null>(null);
   const [profileLoadError, setProfileLoadError] = useState<string | null>(null);
   const [profileLoadAttempt, setProfileLoadAttempt] = useState(0);
@@ -263,7 +265,7 @@ function DashboardPageContent() {
       const data = (await response.json()) as UpdateResponse;
 
       if (!response.ok) {
-        setFeedbackState(data.message);
+        setFeedbackState({ message: data.message, type: "error" });
         return;
       }
 
@@ -278,9 +280,9 @@ function DashboardPageContent() {
       localStorage.setItem(preferencesStorageKey, JSON.stringify(preferences));
 
       setProfile(refreshedProfile);
-      setFeedbackState(data.message);
+      setFeedbackState({ message: data.message, type: "success" });
     } catch {
-      setFeedbackState(t.common.error);
+      setFeedbackState({ message: t.common.error, type: "error" });
     } finally {
       setSavingState(false);
     }
@@ -294,7 +296,7 @@ function DashboardPageContent() {
     setFirstAccessFeedback(null);
 
     if (!profile.birthDate) {
-      setFirstAccessFeedback(d.birthDateRequired);
+      setFirstAccessFeedback({ message: d.birthDateRequired, type: "error" });
       return;
     }
 
@@ -309,7 +311,7 @@ function DashboardPageContent() {
     setProfileFeedback(null);
 
     if (!profile.birthDate) {
-      setProfileFeedback(d.birthDateRequired);
+      setProfileFeedback({ message: d.birthDateRequired, type: "error" });
       return;
     }
 
@@ -324,12 +326,12 @@ function DashboardPageContent() {
     setPasswordFeedback(null);
 
     if (!passwordForm.currentPassword || !passwordForm.newPassword || !passwordForm.confirmNewPassword) {
-      setPasswordFeedback(d.passwordFieldsRequired);
+      setPasswordFeedback({ message: d.passwordFieldsRequired, type: "error" });
       return;
     }
 
     if (passwordForm.newPassword !== passwordForm.confirmNewPassword) {
-      setPasswordFeedback(d.passwordMismatch);
+      setPasswordFeedback({ message: d.passwordMismatch, type: "error" });
       return;
     }
 
@@ -350,14 +352,14 @@ function DashboardPageContent() {
       const data = (await response.json()) as UpdateResponse;
 
       if (!response.ok) {
-        setPasswordFeedback(data.message);
+        setPasswordFeedback({ message: data.message, type: "error" });
         return;
       }
 
-      setPasswordFeedback(data.message);
+      setPasswordFeedback({ message: data.message, type: "success" });
       setPasswordForm({ currentPassword: "", newPassword: "", confirmNewPassword: "" });
     } catch {
-      setPasswordFeedback(t.common.error);
+      setPasswordFeedback({ message: t.common.error, type: "error" });
     } finally {
       setIsSavingPassword(false);
     }
@@ -377,7 +379,7 @@ function DashboardPageContent() {
     setDeleteAccountFeedback(null);
 
     if (!deleteAccountPassword) {
-      setDeleteAccountFeedback(d.deletePasswordRequired);
+      setDeleteAccountFeedback({ message: d.deletePasswordRequired, type: "error" });
       return;
     }
 
@@ -400,7 +402,7 @@ function DashboardPageContent() {
       const data = (await response.json()) as UpdateResponse;
 
       if (!response.ok) {
-        setDeleteAccountFeedback(data.message);
+        setDeleteAccountFeedback({ message: data.message, type: "error" });
         return;
       }
 
@@ -408,7 +410,7 @@ function DashboardPageContent() {
       localStorage.removeItem(preferencesStorageKey);
       router.push("/entrar?deleted=1");
     } catch {
-      setDeleteAccountFeedback(t.common.error);
+      setDeleteAccountFeedback({ message: t.common.error, type: "error" });
     } finally {
       setIsDeletingAccount(false);
     }
@@ -490,7 +492,11 @@ function DashboardPageContent() {
             </div>
 
             <div role="status" aria-live="polite">
-              {firstAccessFeedback && <p className="form-feedback mt-2">{firstAccessFeedback}</p>}
+              {firstAccessFeedback && (
+                <p className={`form-feedback mt-2 ${firstAccessFeedback.type === "success" ? "form-feedback-success" : ""}`}>
+                  {firstAccessFeedback.message}
+                </p>
+              )}
             </div>
 
             <div className="mt-4">
@@ -641,7 +647,11 @@ function DashboardPageContent() {
                 </div>
 
                 <div role="status" aria-live="polite">
-                  {profileFeedback && <p className="form-feedback mt-1">{profileFeedback}</p>}
+                  {profileFeedback && (
+                    <p className={`form-feedback mt-1 ${profileFeedback.type === "success" ? "form-feedback-success" : ""}`}>
+                      {profileFeedback.message}
+                    </p>
+                  )}
                 </div>
 
                 <div className="mt-2">
@@ -692,7 +702,11 @@ function DashboardPageContent() {
                 </div>
 
                 <div role="status" aria-live="polite">
-                  {passwordFeedback && <p className="form-feedback mt-1">{passwordFeedback}</p>}
+                  {passwordFeedback && (
+                    <p className={`form-feedback mt-1 ${passwordFeedback.type === "success" ? "form-feedback-success" : ""}`}>
+                      {passwordFeedback.message}
+                    </p>
+                  )}
                 </div>
 
                 <button className="submit mt-2" type="button" onClick={handleChangePassword}>
@@ -717,7 +731,9 @@ function DashboardPageContent() {
 
                   <div role="status" aria-live="polite">
                     {deleteAccountFeedback && (
-                      <p className="form-feedback mt-1">{deleteAccountFeedback}</p>
+                      <p className={`form-feedback mt-1 ${deleteAccountFeedback.type === "success" ? "form-feedback-success" : ""}`}>
+                        {deleteAccountFeedback.message}
+                      </p>
                     )}
                   </div>
 

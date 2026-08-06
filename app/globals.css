@@ -2168,6 +2168,13 @@ html {
     line-height: 1.5;
   }
 
+  /* Variante de sucesso — mesmo formato do .form-feedback, sem a conotação de erro. */
+  .form-feedback-success {
+    border-left-color: var(--color-success);
+    background: rgba(13, 122, 82, 0.08);
+    color: var(--color-success) !important;
+  }
+
   @keyframes fadeIn {
     0% {
       opacity: 0;
