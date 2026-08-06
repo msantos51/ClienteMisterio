@@ -1,7 +1,5 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Política de privacidade (RGPD). Dados de
- * identificação legal da empresa ainda não confirmados aparecem marcados
- * com TODO — substituir assim que existirem valores reais.
+ * DESCRIÇÃO DO FICHEIRO: Política de privacidade (RGPD).
  */
 
 import styles from "./page.module.css";
@@ -11,7 +9,7 @@ const sections = [
     number: "01",
     title: "Responsável pelo tratamento",
     content:
-      "[TODO: denominação social], com sede em [TODO: morada legal da empresa] e contacto [TODO: email de contacto real], é responsável pelo tratamento dos dados pessoais recolhidos através deste site.",
+      "A Cliente Mistério, contactável através do email clientemisterio.suporte@gmail.com, é responsável pelo tratamento dos dados pessoais recolhidos através deste site.",
   },
   {
     number: "02",
@@ -47,7 +45,7 @@ const sections = [
     number: "07",
     title: "Os seus direitos",
     content:
-      "Tem direito a aceder, retificar, apagar e portar os seus dados, a opor-se e a limitar o tratamento, e a retirar o consentimento a qualquer momento sem afetar a licitude do tratamento anterior. Para exercer estes direitos, contacte-nos através de [TODO: email de contacto real]. Tem também direito a apresentar reclamação junto da Comissão Nacional de Proteção de Dados (CNPD) — www.cnpd.pt.",
+      "Tem direito a aceder, retificar, apagar e portar os seus dados, a opor-se e a limitar o tratamento, e a retirar o consentimento a qualquer momento sem afetar a licitude do tratamento anterior. Para exercer estes direitos, contacte-nos através de clientemisterio.suporte@gmail.com. Tem também direito a apresentar reclamação junto da Comissão Nacional de Proteção de Dados (CNPD) — www.cnpd.pt.",
   },
   {
     number: "08",
