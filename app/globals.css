@@ -2007,6 +2007,17 @@ html {
   .dashboard-form {
     max-width: min(100%, 900px) !important;
     margin-inline: auto;
+    padding: var(--sp-md) !important;
+  }
+
+  .dashboard-form .input-group {
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .dashboard-form {
+      padding: var(--sp-lg) !important;
+    }
   }
 
   .login-form * {
@@ -2167,7 +2178,7 @@ html {
      =================================================================== */
   .dashboard-layout-shell {
     display: grid;
-    gap: var(--sp-md);
+    gap: var(--sp-sm);
     align-items: start;
   }
 
@@ -2176,9 +2187,13 @@ html {
     background: var(--panel-invert-bg);
     box-shadow: var(--shadow-md);
     border: none;
-    padding: var(--sp-lg);
+    padding: var(--sp-md);
     transition: all 300ms ease;
     color: var(--on-invert);
+  }
+
+  .dashboard-top-banner-compact {
+    padding: var(--sp-sm) var(--sp-md);
   }
 
   .dashboard-sidebar {
@@ -2186,7 +2201,7 @@ html {
     background: var(--panel-invert-bg);
     box-shadow: var(--shadow-md);
     border: none;
-    padding: var(--sp-md);
+    padding: var(--sp-sm);
     color: var(--on-invert);
   }
 
@@ -2208,7 +2223,7 @@ html {
     width: 100%;
     border: 1px solid transparent;
     border-radius: var(--radius-md);
-    padding: 14px 16px;
+    padding: 10px 14px;
     text-align: left;
     background: transparent;
     box-shadow: none;
@@ -2258,7 +2273,7 @@ html {
     border-radius: var(--radius-xl);
     background: var(--color-black);
     box-shadow: none;
-    padding: var(--sp-md);
+    padding: var(--sp-sm);
     display: none;
     border: none;
     position: relative;
