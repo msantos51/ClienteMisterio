@@ -26,6 +26,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               href="/"
               aria-label="Cliente Mistério — início"
             >
+              <img src="/logo-mark.svg" alt="" width={40} height={40} />
               <span className="whitespace-nowrap text-[18px] font-bold tracking-[-0.03em] text-[color:var(--ink)]">
                 Cliente Mistério<span className="text-[color:var(--color-red)]">.</span>
               </span>
