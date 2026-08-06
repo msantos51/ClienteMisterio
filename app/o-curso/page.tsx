@@ -4,8 +4,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { useRouter } from "next/navigation";
-import { courseModules as courseData } from "../curso/courseData";
 import { expandedModuleData } from "../curso/courseDataExpanded";
+
+// Currículo da página pública: só título, descrição curta e os campos de
+// expandedModuleData — nunca o conteúdo teórico nem as respostas dos quizzes
+// (esses só são servidos autenticados, com curso pago, por /api/course/modules).
+// O módulo 11 é o passo do certificado, não um módulo de conteúdo; fica fora do currículo.
+const curriculumModules = Object.entries(expandedModuleData)
+  .map(([id, data]) => ({ id: Number(id), ...data }))
+  .filter((module) => module.id !== 11)
+  .sort((a, b) => a.id - b.id);
 import { useCourseAccess } from "@/app/lib/useCourseAccess";
 import { buildCheckoutUrl } from "@/app/lib/checkoutLink";
 import styles from "./page.module.css";
@@ -301,8 +309,8 @@ Teoria paginada, casos reais comentados e checklists. Cada módulo termina com u
               </div>
 
               <div className={styles.modules}>
-                {courseData.map((module) => {
-                  const expanded = expandedModuleData[module.id as keyof typeof expandedModuleData];
+                {curriculumModules.map((module) => {
+                  const expanded = module;
                   return (
                     <div className={styles.module} key={module.id}>
                       <div className={styles.moduleNum}>

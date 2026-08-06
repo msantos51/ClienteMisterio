@@ -37,6 +37,12 @@ export type CourseModule = {
  evaluationExamples?: EvaluationExample[];
 };
 
+// Forma pública do módulo, sem a resposta certa de cada pergunta — é o que
+// GET /api/course/modules devolve ao cliente. A pontuação do quiz é sempre
+// calculada no servidor a partir de PublicQuizQuestion + as respostas do aluno.
+export type PublicQuizQuestion = Omit<QuizQuestion, "correctIndex">;
+export type PublicCourseModule = Omit<CourseModule, "quiz"> & { quiz: PublicQuizQuestion[] };
+
 export const courseModules: CourseModule[] = [
  /* ==========================================================
     MÓDULO 1

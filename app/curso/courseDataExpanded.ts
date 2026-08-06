@@ -1,11 +1,16 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Detalhe expandido de cada módulo — subtítulo, objetivos
- * de aprendizagem, aplicações práticas, caso real, duração e recursos.
- * Usado na página pública /o-curso. As chaves seguem os ids de courseData.ts.
+ * DESCRIÇÃO DO FICHEIRO: Detalhe expandido de cada módulo — título, descrição curta,
+ * subtítulo, objetivos de aprendizagem, aplicações práticas, caso real, duração e
+ * recursos. É a única fonte de dados de curso importada pela página pública /o-curso:
+ * ao contrário de courseData.ts, nunca inclui o conteúdo teórico completo nem as
+ * respostas dos quizzes, para nada disso ficar no bundle de uma página sem autenticação.
+ * As chaves seguem os ids de courseData.ts.
  */
 
 export const expandedModuleData = {
   1: {
+    title: "O lado invisível do serviço",
+    description: "O que é ser cliente mistério, quem paga a fatura e porque é que a tua opinião, bem escrita, vale dinheiro.",
     subtitle: "O que é, quem paga e porque é que isto existe",
     learningObjectives: [
       "Explicar o que é cliente mistério e em que se distingue de um inquérito de satisfação",
@@ -28,6 +33,8 @@ export const expandedModuleData = {
     ],
   },
   2: {
+    title: "O mercado e onde estão as missões",
+    description: "Quem opera em Portugal, que setores pagam melhor e como escolher missões que compensam mesmo.",
     subtitle: "Plataformas, setores e a conta que decide se compensa",
     learningObjectives: [
       "Distinguir plataformas internacionais de agências locais e o que esperar de cada uma",
@@ -50,6 +57,8 @@ export const expandedModuleData = {
     ],
   },
   3: {
+    title: "Perfil, conduta e ética",
+    description: "Discrição, imparcialidade e confidencialidade: as três regras que te mantêm no jogo (e as linhas que nunca se passam).",
     subtitle: "Discrição, imparcialidade, confidencialidade e linhas vermelhas",
     learningObjectives: [
       "Comportar-se como cliente comum sem levantar suspeitas em qualquer setor",
@@ -72,6 +81,8 @@ export const expandedModuleData = {
     ],
   },
   4: {
+    title: "Avaliar sem opinar",
+    description: "Transformar o que viste em dados objetivos: factos, tempos e critérios em vez de \"gostei\" e \"foi simpático\".",
     subtitle: "Facto contra opinião, cronometragem, escalas e enviesamentos",
     learningObjectives: [
       "Aplicar o teste da câmara a qualquer frase do relatório",
@@ -94,6 +105,8 @@ export const expandedModuleData = {
     ],
   },
   5: {
+    title: "Preparar a missão",
+    description: "Ler o briefing como um profissional, montar o teu cenário e memorizar o essencial sem apontamentos à vista.",
     subtitle: "Briefing, cenário credível e memorização sem apontamentos",
     learningObjectives: [
       "Extrair os seis pontos críticos de qualquer briefing",
@@ -116,6 +129,8 @@ export const expandedModuleData = {
     ],
   },
   6: {
+    title: "Execução no terreno",
+    description: "Entrar, observar, cronometrar e sair sem ser apanhado — com o que muda em cada setor e o que fazer quando corre mal.",
     subtitle: "Rotina de visita, observação em movimento e gestão de imprevistos",
     learningObjectives: [
       "Aproveitar os primeiros 30 segundos, onde se decide grande parte do formulário",
@@ -138,6 +153,8 @@ export const expandedModuleData = {
     ],
   },
   7: {
+    title: "Provas à prova de dúvida",
+    description: "Talões, fotografias, gravações e nomes: o que recolher, como guardar e até onde a lei te deixa ir.",
     subtitle: "Talões, fotografias, gravações e limites legais",
     learningObjectives: [
       "Identificar o que conta como evidência válida em cada tipo de missão",
@@ -160,6 +177,8 @@ export const expandedModuleData = {
     ],
   },
   8: {
+    title: "O relatório aprovado à primeira",
+    description: "Estrutura, tom e nível de detalhe — e os erros que fazem chumbar relatórios que davam missões perfeitas.",
     subtitle: "Estrutura, justificações, tom neutro e revisão final",
     learningObjectives: [
       "Construir as três camadas do relatório: respostas, justificações e narrativa",
@@ -182,6 +201,8 @@ export const expandedModuleData = {
     ],
   },
   9: {
+    title: "Quanto ganhas e quanto sobra",
+    description: "Honorários, reembolsos, custos e impostos: as contas reais para saberes o que rende cada missão.",
     subtitle: "Honorários, reembolsos, custos reais e obrigações fiscais",
     learningObjectives: [
       "Separar honorário de reembolso em qualquer oferta",
@@ -204,6 +225,8 @@ export const expandedModuleData = {
     ],
   },
   10: {
+    title: "Plano de ação de 30 dias",
+    description: "Do registo nas plataformas às primeiras missões pagas — e como subir para as que pagam melhor.",
     subtitle: "Plano semana a semana, das inscrições às missões premium",
     learningObjectives: [
       "Executar um registo completo em 5 a 8 plataformas",
@@ -226,6 +249,8 @@ export const expandedModuleData = {
     ],
   },
   11: {
+    title: "Certificado de conclusão",
+    description: "Concluíste o curso. Emite o teu certificado nominal e leva-o contigo para as candidaturas.",
     subtitle: "Certificado nominal em PDF e próximos passos",
     learningObjectives: [
       "Consolidar o método completo aprendido ao longo do curso",
