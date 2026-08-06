@@ -38,6 +38,9 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
+  verification: {
+    google: "946WmJk7qBDHfJStYqlqEyuY-Yj5zYnLHpuv0cKmxf4",
+  },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
