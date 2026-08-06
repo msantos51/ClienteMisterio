@@ -179,7 +179,7 @@ export default function HomePage() {
                 </div>
               ))}
           </div>
-          <Link href="/o-curso" className={styles.sectionLink}>
+          <Link href="/o-curso#programa" className={styles.sectionLink}>
             {t.home.modulesCta}
             <ArrowIcon />
           </Link>

@@ -148,12 +148,15 @@ function FaqPageContent() {
               panelClassName={styles.faqA}
               panelInnerClassName={styles.faqAInner}
             />
-            <p className={styles.groupCta}>
-              Ainda tens dúvidas sobre {category.label.toLowerCase()}?{" "}
-              <Link href="/contactos" className={styles.subLink}>Fala connosco</Link>
-            </p>
           </div>
         ))}
+
+        {hasResults && (
+          <p className={styles.groupCta}>
+            Ainda tens dúvidas sobre o curso?{" "}
+            <Link href="/contactos" className={styles.subLink}>Fala connosco</Link>
+          </p>
+        )}
 
         <div className={styles.cta}>
           <div>
@@ -162,7 +165,7 @@ function FaqPageContent() {
               Acesso imediato, certificado incluído e 14 dias de reembolso.
             </p>
           </div>
-          <Link href="/o-curso" className={styles.ctaBtn}>
+          <Link href="/o-curso#programa" className={styles.ctaBtn}>
             Ver o programa
             <ArrowIcon />
           </Link>

@@ -2007,16 +2007,23 @@ html {
   .dashboard-form {
     max-width: min(100%, 900px) !important;
     margin-inline: auto;
-    padding: var(--sp-md) !important;
+    padding: var(--sp-sm) !important;
   }
 
   .dashboard-form .input-group {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+  }
+
+  .dashboard-form .input-group input,
+  .dashboard-form .input-group select {
+    padding: 9px 12px;
+    min-height: 36px;
+    font-size: 14px;
   }
 
   @media (min-width: 640px) {
     .dashboard-form {
-      padding: var(--sp-lg) !important;
+      padding: var(--sp-md) !important;
     }
   }
 
@@ -2178,59 +2185,59 @@ html {
      =================================================================== */
   .dashboard-layout-shell {
     display: grid;
-    gap: var(--sp-sm);
+    gap: var(--sp-xs);
     align-items: start;
   }
 
   .dashboard-top-banner {
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     background: var(--panel-invert-bg);
     box-shadow: var(--shadow-md);
     border: none;
-    padding: var(--sp-md);
+    padding: var(--sp-sm);
     transition: all 300ms ease;
     color: var(--on-invert);
   }
 
   .dashboard-top-banner-compact {
-    padding: var(--sp-sm) var(--sp-md);
+    padding: 10px var(--sp-sm);
   }
 
   .dashboard-sidebar {
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     background: var(--panel-invert-bg);
     box-shadow: var(--shadow-md);
     border: none;
-    padding: var(--sp-sm);
+    padding: var(--sp-xs);
     color: var(--on-invert);
   }
 
   .dashboard-sidebar-title {
     color: var(--on-invert) !important;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     letter-spacing: -0.015em;
   }
 
   .dashboard-menu {
-    margin-top: var(--sp-sm);
+    margin-top: var(--sp-xs);
     display: flex;
     flex-direction: column;
-    gap: var(--sp-xs);
+    gap: 4px;
   }
 
   .dashboard-menu-item {
     width: 100%;
     border: 1px solid transparent;
     border-radius: var(--radius-md);
-    padding: 10px 14px;
+    padding: 6px 10px;
     text-align: left;
     background: transparent;
     box-shadow: none;
     transition: all 200ms ease;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.1rem;
     text-transform: none;
     letter-spacing: normal;
     justify-content: flex-start;
@@ -2240,15 +2247,15 @@ html {
   .dashboard-menu-item span {
     display: block;
     color: var(--on-invert) !important;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
   }
 
   .dashboard-menu-item small {
     display: block;
-    margin-top: 0.3rem;
+    margin-top: 0.15rem;
     color: var(--on-invert-3) !important;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
   }
 
@@ -2270,10 +2277,10 @@ html {
   }
 
   .dashboard-right-highlight {
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     background: var(--color-black);
     box-shadow: none;
-    padding: var(--sp-sm);
+    padding: var(--sp-xs);
     display: none;
     border: none;
     position: relative;

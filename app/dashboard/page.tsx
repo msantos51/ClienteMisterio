@@ -453,7 +453,7 @@ function DashboardPageContent() {
   }
 
   return (
-    <section className="full-section full-section-scroll w-full space-y-4 px-3 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6">
+    <section className="full-section full-section-scroll w-full space-y-2 px-3 py-3 sm:px-5 sm:py-4 md:px-6 md:py-4">
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4">
           <div className="login-form w-full max-w-2xl">
@@ -502,10 +502,10 @@ function DashboardPageContent() {
         </div>
       )}
 
-      <div className="mx-auto w-full max-w-6xl space-y-4">
+      <div className="mx-auto w-full max-w-6xl space-y-2">
         <header className="dashboard-top-banner dashboard-top-banner-compact">
-          <h1 className="page-title !text-[color:var(--ink)]">{d.hello}, {profile.firstName}</h1>
-          <p className="mt-1 text-sm !text-[color:var(--ink)]">{d.manageAccount}</p>
+          <h1 className="page-title !text-[color:var(--ink)] !text-lg">{d.hello}, {profile.firstName}</h1>
+          <p className="mt-0.5 text-xs !text-[color:var(--ink)]">{d.manageAccount}</p>
         </header>
 
         {/* Secção do curso com barra de progresso apenas para contas com pagamento confirmado. */}
@@ -521,9 +521,9 @@ function DashboardPageContent() {
               }
             }}
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-1">
               <div>
-                <h2 className="text-lg font-bold !text-[color:var(--ink)]">{d.courseTitle}</h2>
+                <h2 className="text-sm font-bold !text-[color:var(--ink)]">{d.courseTitle}</h2>
                 <p className="text-xs !text-[color:var(--muted)] mt-0.5">
                   {courseProgress
                     ? courseProgress.completedCount === courseProgress.totalModules
@@ -532,24 +532,24 @@ function DashboardPageContent() {
                     : d.startTraining}
                 </p>
               </div>
-              <span className="text-2xl font-extrabold" style={{ color: "var(--brand)" }}>
+              <span className="text-lg font-extrabold" style={{ color: "var(--brand)" }}>
                 {courseProgress?.progressPercent ?? 0}%
               </span>
             </div>
             <ProgressBar
               value={courseProgress?.progressPercent ?? 0}
               label={`Progresso do curso: ${courseProgress?.progressPercent ?? 0}%`}
-              trackClassName="h-3 w-full rounded-full bg-[color:var(--surface-muted)] overflow-hidden"
+              trackClassName="h-2 w-full rounded-full bg-[color:var(--surface-muted)] overflow-hidden"
               fillClassName="h-full rounded-full transition-all duration-700"
               fillStyle={{ background: "linear-gradient(90deg, var(--brand), var(--brand-500))" }}
             />
-            <p className="mt-2 text-xs !text-[color:var(--muted)] text-right">{d.continueButton}</p>
+            <p className="mt-1 text-xs !text-[color:var(--muted)] text-right">{d.continueButton}</p>
           </div>
         ) : (
-          <div className="dashboard-top-banner">
+          <div className="dashboard-top-banner dashboard-top-banner-compact">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-bold !text-[color:var(--ink)]">{d.courseTitle}</h2>
+                <h2 className="text-sm font-bold !text-[color:var(--ink)]">{d.courseTitle}</h2>
                 <p className="text-xs !text-[color:var(--muted)] mt-0.5">
                   {d.paymentMessage}
                 </p>
@@ -589,10 +589,10 @@ function DashboardPageContent() {
           <article className="login-form dashboard-form max-w-none">
             {activeSection === "account" && (
               <div role="tabpanel" id="dashboard-panel-account" aria-labelledby="dashboard-tab-account">
-                <h2 className="section-title">{d.accountInfo}</h2>
-                <p className="mt-2 text-sm">{d.updatePersonal}</p>
+                <h2 className="section-title !text-lg">{d.accountInfo}</h2>
+                <p className="mt-1 text-xs">{d.updatePersonal}</p>
 
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                <div className="mt-2 grid gap-2 md:grid-cols-2">
                   <div className="input-group">
                     <input
                       value={profile.firstName}
@@ -641,10 +641,10 @@ function DashboardPageContent() {
                 </div>
 
                 <div role="status" aria-live="polite">
-                  {profileFeedback && <p className="form-feedback mt-2">{profileFeedback}</p>}
+                  {profileFeedback && <p className="form-feedback mt-1">{profileFeedback}</p>}
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-2">
                   <button className="submit" type="button" onClick={handleSaveProfile}>
                     {isSavingProfile ? d.saving : d.saveProfile}
                   </button>
@@ -654,10 +654,10 @@ function DashboardPageContent() {
 
             {activeSection === "security" && (
               <div role="tabpanel" id="dashboard-panel-security" aria-labelledby="dashboard-tab-security">
-                <h2 className="section-title">{d.securityTitle}</h2>
-                <p className="mt-2 text-sm">{d.securePassword}</p>
+                <h2 className="section-title !text-lg">{d.securityTitle}</h2>
+                <p className="mt-1 text-xs">{d.securePassword}</p>
 
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                <div className="mt-2 grid gap-2 md:grid-cols-2">
                   <div className="input-group md:col-span-2">
                     <input
                       placeholder={d.currentPassword}
@@ -692,20 +692,20 @@ function DashboardPageContent() {
                 </div>
 
                 <div role="status" aria-live="polite">
-                  {passwordFeedback && <p className="form-feedback mt-2">{passwordFeedback}</p>}
+                  {passwordFeedback && <p className="form-feedback mt-1">{passwordFeedback}</p>}
                 </div>
 
-                <button className="submit mt-4" type="button" onClick={handleChangePassword}>
+                <button className="submit mt-2" type="button" onClick={handleChangePassword}>
                   {isSavingPassword ? d.updating : d.updatePassword}
                 </button>
 
-                <div className="mt-6 rounded-[var(--radius-lg)] border border-[color:var(--color-primary-red)]/35 bg-[color:var(--color-primary-red)]/8 p-4">
-                  <h3 className="text-base font-semibold text-[color:var(--color-red-ink)]">{d.dangerZone}</h3>
-                  <p className="mt-2 text-sm text-[color:var(--color-red-ink)]">
+                <div className="mt-3 rounded-[var(--radius-lg)] border border-[color:var(--color-primary-red)]/35 bg-[color:var(--color-primary-red)]/8 p-3">
+                  <h3 className="text-sm font-semibold text-[color:var(--color-red-ink)]">{d.dangerZone}</h3>
+                  <p className="mt-1 text-xs text-[color:var(--color-red-ink)]">
                     {d.deleteWarning}
                   </p>
 
-                  <div className="input-group mt-4">
+                  <div className="input-group mt-2">
                     <input
                       placeholder={d.currentPassword}
                       type="password"
@@ -717,12 +717,12 @@ function DashboardPageContent() {
 
                   <div role="status" aria-live="polite">
                     {deleteAccountFeedback && (
-                      <p className="form-feedback mt-2">{deleteAccountFeedback}</p>
+                      <p className="form-feedback mt-1">{deleteAccountFeedback}</p>
                     )}
                   </div>
 
                   <button
-                    className="submit is-danger mt-4 max-w-[240px]"
+                    className="submit is-danger mt-2 max-w-[240px]"
                     type="button"
                     onClick={handleDeleteAccount}
                   >
@@ -734,10 +734,10 @@ function DashboardPageContent() {
 
             {activeSection === "preferences" && (
               <div role="tabpanel" id="dashboard-panel-preferences" aria-labelledby="dashboard-tab-preferences">
-                <h2 className="section-title">{d.preferencesTitle}</h2>
-                <p className="mt-2 text-sm">{d.chooseUpdates}</p>
+                <h2 className="section-title !text-lg">{d.preferencesTitle}</h2>
+                <p className="mt-1 text-xs">{d.chooseUpdates}</p>
 
-                <div className="mt-5 space-y-3 rounded-[var(--radius-lg)] border border-[color:var(--line)] bg-[color:var(--surface-raised)] p-4">
+                <div className="mt-3 space-y-2 rounded-[var(--radius-lg)] border border-[color:var(--line)] bg-[color:var(--surface-raised)] p-3">
                   <div className="flex items-center justify-between text-sm">
                     <label htmlFor="receive-newsletter">{d.newsletter}</label>
                     <label className="checkbox-container" htmlFor="receive-newsletter">
@@ -766,7 +766,7 @@ function DashboardPageContent() {
                   </div>
                 </div>
 
-                <button className="submit mt-6" type="button" onClick={handleLogout}>
+                <button className="submit mt-3" type="button" onClick={handleLogout}>
                   {d.logout}
                 </button>
               </div>
@@ -777,8 +777,8 @@ function DashboardPageContent() {
             <p className="dashboard-right-highlight-icon" aria-hidden="true">
               ✧
             </p>
-            <h3 className="card-title">{d.secureAccount}</h3>
-            <p className="mt-3 text-sm text-center">
+            <h3 className="card-title !text-base">{d.secureAccount}</h3>
+            <p className="mt-1 text-xs text-center">
               {d.accountTip}
             </p>
           </aside>
