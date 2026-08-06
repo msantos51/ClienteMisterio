@@ -36,10 +36,6 @@ export const translations = {
       modulesSub: "Teoria paginada, casos reais comentados e um quiz no fim de cada módulo.",
       modulesCta: "Ver o programa completo",
 
-      socialProofEyebrow: "Quem já está a fazer isto",
-      socialProofTitle: "[TODO: prova social real — número de alunos, avaliações e testemunhos verificáveis]",
-      socialProofDesc: "[TODO: substituir por testemunhos reais, identificados e com indicação de como foram recolhidos]",
-
       pricingEyebrow: "Preço",
       pricingTitle: "Um pagamento. Acesso para sempre.",
       pricingCta: "Quero começar",
@@ -585,10 +581,6 @@ export const translations = {
       modulesTitle: "10 modules, from zero to your first paid mission.",
       modulesSub: "Paginated theory, real cases and a quiz at the end of each module.",
       modulesCta: "See the full program",
-
-      socialProofEyebrow: "Who's already doing this",
-      socialProofTitle: "[TODO: real social proof — student count, ratings and verifiable testimonials]",
-      socialProofDesc: "[TODO: replace with real testimonials, identified, with a note on how they were collected]",
 
       pricingEyebrow: "Pricing",
       pricingTitle: "One payment. Access forever.",

@@ -187,21 +187,6 @@ export default function HomePage() {
       </section>
 
       {/* ----------------------------------------------------------
-          PROVA SOCIAL — por preencher com dados reais e verificáveis
-          (ponto 48/58 do plano: nunca inventar números de alunos ou
-          avaliações).
-          ---------------------------------------------------------- */}
-      <section className={`${styles.section} full-section full-section-scroll`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHead}>
-            <p className={styles.eyebrow}>{t.home.socialProofEyebrow}</p>
-            <p className={styles.socialProofPlaceholder}>{t.home.socialProofTitle}</p>
-            <p className={styles.socialProofPlaceholder}>{t.home.socialProofDesc}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ----------------------------------------------------------
           PREÇO — reaproveita os valores já usados em /o-curso
           ---------------------------------------------------------- */}
       <section className={`${styles.section} full-section full-section-scroll`}>
