@@ -75,10 +75,16 @@ export const POST = async (request: Request) => {
           subject: template.subject,
           html: template.html,
         });
+        // Confirma no log do servidor que o Resend aceitou o envio (resposta ao cliente mantém-se neutra).
+        console.info("E-mail de recuperação de password enviado:", user.email);
       } catch (error) {
         // Evita falha do endpoint quando o provedor estiver indisponível, mantendo resposta neutra por segurança.
-        console.error("Falha ao enviar e-mail de recuperação de password:", error);
+        console.error("Falha ao enviar e-mail de recuperação de password:", user.email, error);
       }
+    } else {
+      // Log apenas no servidor (a resposta ao cliente mantém-se neutra) para diagnosticar em produção
+      // se o pedido falha por não existir conta com este e-mail nesta base de dados.
+      console.info("Pedido de reset de password para e-mail sem conta associada:", normalizedEmail);
     }
 
     return neutralResponse();
