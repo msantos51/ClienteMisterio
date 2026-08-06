@@ -368,7 +368,7 @@
 
 /* ============================================================
    SECÇÕES ADICIONAIS DA HOMEPAGE (ponto 41)
-   O que aprendes · Prova social · Preço · FAQ curto · CTA final.
+   O que aprendes · Preço · FAQ curto · CTA final.
    Reaproveitam os tokens e o ritmo `full-section` já usados no
    resto do site (o-curso, faq, contactos).
    ============================================================ */
@@ -413,13 +413,6 @@
   margin: 0;
 }
 .sectionHead .eyebrow { justify-content: center; }
-.socialProofPlaceholder {
-  font-size: 13px;
-  font-style: italic;
-  line-height: 1.6;
-  color: var(--on-brand-3);
-  margin: 0 0 6px;
-}
 
 .sectionLink {
   display: inline-flex;
