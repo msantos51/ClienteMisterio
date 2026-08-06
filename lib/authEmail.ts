@@ -21,6 +21,7 @@ const resolveAppBaseUrl = () => {
     process.env.NEXT_PUBLIC_APP_URL?.trim() ||
     process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() ||
     process.env.VERCEL_URL?.trim() ||
+    process.env.RAILWAY_PUBLIC_DOMAIN?.trim() ||
     process.env.RENDER_EXTERNAL_URL?.trim() ||
     "http://localhost:3000";
 
