@@ -233,24 +233,6 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
       </section>
 
       {/* ============================================================
-          CONFIANÇA — certificação
-          Os números de alunos/avaliações (500+, 4,8/5, 100%) foram
-          removidos por não serem dados reais e verificáveis — repor
-          quando existirem valores reais (ver regras Omnibus sobre
-          reviews, ponto 58 do plano de acessibilidade/SEO).
-          ============================================================ */}
-      <section className={`${styles.sectionTight} full-section full-section-scroll`}>
-        <div className={styles.wrap}>
-          <div className={styles.trustBar}>
-            <div className={styles.trustBadgeChip}>
-              <LockIcon size={13} />
-              {t.coursePage.trustBadge}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
           TESTEMUNHOS — removidos: eram exemplos fictícios apresentados
           como avaliações reais de alunos, o que a política do projeto
           proíbe e as regras Omnibus da UE exigem que sejam verificáveis.
@@ -294,7 +276,7 @@ Dez módulos curtos, casos reais e um plano de 30 dias para saíres daqui com a 
       {/* ============================================================
           CURRICULUM
           ============================================================ */}
-      <section className={`${styles.sectionTight} full-section full-section-scroll`}>
+      <section id="programa" className={`${styles.sectionTight} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.curr}>
             <div className={styles.currInner}>
