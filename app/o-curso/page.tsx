@@ -7,7 +7,13 @@ import { useRouter } from "next/navigation";
 import { courseModules as courseData } from "../curso/courseData";
 import { expandedModuleData } from "../curso/courseDataExpanded";
 import { useCourseAccess } from "@/app/lib/useCourseAccess";
+import { buildCheckoutUrl } from "@/app/lib/checkoutLink";
 import styles from "./page.module.css";
+
+type SessionResponse = {
+  authenticated: boolean;
+  user?: { id: string; email: string };
+};
 
 const CheckIcon = ({ size = 11 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -38,8 +44,8 @@ function BuyButton({ children, className }: { children: React.ReactNode; classNa
     // decidir entre ir para o Stripe ou pedir login.
     try {
       const response = await fetch("/api/auth/session", { cache: "no-store" });
-      const data = response.ok ? ((await response.json()) as { authenticated: boolean }) : { authenticated: false };
-      if (data.authenticated) { window.location.href = paymentLink; }
+      const data = response.ok ? ((await response.json()) as SessionResponse) : { authenticated: false };
+      if (data.authenticated && data.user) { window.location.href = buildCheckoutUrl(paymentLink, data.user); }
       else { router.push("/entrar?checkout=1"); }
     } catch {
       router.push("/entrar?checkout=1");
