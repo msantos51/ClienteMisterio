@@ -311,9 +311,13 @@
 }
 .mod {
   display: grid;
-  grid-template-columns: 56px 1fr auto;
-  gap: 24px;
-  padding: 26px 0;
+  grid-template-columns: 40px 1fr;
+  grid-template-areas:
+    "num  body"
+    "meta meta";
+  column-gap: 14px;
+  row-gap: 10px;
+  padding: 18px 0;
   align-items: start;
   border-top: 1px solid var(--hairline);
   transition: background .25s, padding .25s;
@@ -321,6 +325,15 @@
   position: relative;
   width: 100%;
   text-align: left;
+}
+@media (min-width: 640px) {
+  .mod {
+    grid-template-columns: 56px 1fr auto;
+    grid-template-areas: "num body meta";
+    column-gap: 24px;
+    row-gap: 0;
+    padding: 26px 0;
+  }
 }
 .mod:last-of-type { border-bottom: 1px solid var(--hairline); }
 .mod:not(:disabled):hover { background: rgba(255, 255, 255, 0.08); padding-left: 16px; }
@@ -333,6 +346,7 @@
 .modLocked:hover { background: transparent; padding-left: 0; }
 
 .modNum {
+  grid-area: num;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 24px;
@@ -342,13 +356,14 @@
 }
 .modDone .modNum { color: var(--color-white); }
 .modCurrent .modNum { color: var(--color-white); }
-.modBody { min-width: 0; }
+.modBody { grid-area: body; min-width: 0; }
 .modTitle {
   font-size: clamp(15px, 1.4vw, 18px);
   font-weight: 700;
   letter-spacing: -0.025em;
   color: var(--color-white);
   margin: 0 0 5px;
+  overflow-wrap: break-word;
 }
 .modDesc {
   font-size: 14px;
@@ -357,12 +372,19 @@
   margin: 0;
   max-width: 68ch;
   text-wrap: pretty;
+  overflow-wrap: break-word;
 }
 .modMeta {
+  grid-area: meta;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 14px;
   padding-top: 2px;
+  padding-left: 54px;
+}
+@media (min-width: 640px) {
+  .modMeta { padding-left: 0; }
 }
 .modBadge {
   display: inline-flex;

@@ -310,6 +310,19 @@ html {
     --color-gray-light: #383359;
     --color-bg-light: #221f38;
   }
+
+  /* O cabeçalho é o chrome fixo da marca, não um cartão de conteúdo — ao
+     contrário dos formulários/painéis acima, mantém-se sempre uma barra
+     branca nítida, para não ficar com um tom escurecido e dessaturado
+     desencontrado do roxo vivo do resto do site em modo escuro. */
+  .site-header.on-light {
+    --ink: #141416;
+    --muted: #74747e;
+    --line: #e7e7ea;
+    --line-strong: #cfcfd5;
+    --surface: var(--color-white);
+    --panel-strong: #ededf1;
+  }
 }
 
 @theme inline {
