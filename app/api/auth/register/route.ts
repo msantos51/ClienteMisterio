@@ -122,8 +122,10 @@ export const POST = async (request: Request) => {
     const user = result.rows[0];
 
     if (user) {
-      const template = createEmailConfirmationTemplate(confirmationToken);
       try {
+        // Construção do template (inclui validação de APP_URL) entra no mesmo try do envio:
+        // falha de configuração de e-mail não deve impedir a criação da conta já persistida.
+        const template = createEmailConfirmationTemplate(confirmationToken);
         await sendEmail({
           to: user.email,
           subject: template.subject,
