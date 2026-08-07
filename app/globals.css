@@ -270,8 +270,18 @@ html {
    tokens ao nível do :root escurece o site inteiro de uma vez —
    nunca tocando em `--color-white` (que continua a ser o texto sobre
    roxo em todo o resto do site).
+
+   Só entra a partir do breakpoint `md` (768px, ver PARTE 1 acima) — em
+   mobile o site mantém-se sempre no tema claro, incluindo os controlos
+   nativos do browser (`color-scheme` forçado a `light` abaixo).
    ------------------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
+@media (max-width: 767px) {
+  :root {
+    color-scheme: light;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (min-width: 768px) {
   :root {
     --panel-invert-bg: #1c1a2e;
     --input-bg: #221f38;
