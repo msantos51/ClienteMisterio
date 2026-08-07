@@ -227,8 +227,8 @@ Se quiser **manter a documentação privada em produção**, você tem 2 opçõe
 # A documentação voltará a estar inacessível em produção
 ```
 
-### Opção B: Proteger com Password (Middleware)
-Você pode adicionar autenticação HTTP básica ao endpoint `/api-docs` criando um middleware personalizado.
+### Opção B: Proteger com Password (Proxy)
+Você pode adicionar autenticação HTTP básica ao endpoint `/api-docs` criando lógica personalizada em `proxy.ts`.
 
 ---
 

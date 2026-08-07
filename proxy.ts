@@ -1,5 +1,6 @@
 /*
- * DESCRIÇÃO DO FICHEIRO: Middleware global para reforçar segurança HTTP e proteger rotas privadas antes da renderização.
+ * DESCRIÇÃO DO FICHEIRO: Proxy global (ex-middleware — ver nota de depreciação nos docs do Next.js 16)
+ * para reforçar segurança HTTP e proteger rotas privadas antes da renderização.
  */
 
 import type { NextRequest } from "next/server";
@@ -62,7 +63,7 @@ const appendSecurityHeaders = (response: NextResponse) => {
   return response;
 };
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const hasSessionCookie = Boolean(request.cookies.get(sessionCookieName)?.value);
 
