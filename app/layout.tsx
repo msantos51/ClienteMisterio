@@ -41,10 +41,11 @@ export const metadata: Metadata = {
   verification: {
     google: "946WmJk7qBDHfJStYqlqEyuY-Yj5zYnLHpuv0cKmxf4",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+  // Sem `icons` manual aqui de propósito: app/favicon.ico, app/icon.svg e
+  // app/apple-icon.png (file conventions) já geram as tags corretas
+  // sozinhos — e, ao contrário de um path fixo em metadata.icons, o
+  // ícone gerado por convenção leva um hash de versão automático, o que
+  // evita favicon desatualizado em cache no browser.
   manifest: "/manifest.webmanifest",
 };
 
