@@ -124,7 +124,7 @@ export default function ContactPage() {
   const hasErrors = Object.values(errors).some(Boolean) || Boolean(consentError);
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       {/* ============================================================
           CONTENT — título e informação de contacto à esquerda,
           formulário à direita, tudo num único ecrã sem scroll.

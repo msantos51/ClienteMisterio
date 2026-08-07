@@ -18,7 +18,7 @@ export default function TermosECondicoes() {
   const lastUpdatedText = language === "pt" ? "Última atualização:" : "Last updated:";
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       {/* ============================================================
           HERO
           ============================================================ */}

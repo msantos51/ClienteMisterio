@@ -9,7 +9,7 @@
 export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
     <html lang="pt-PT">
-      <body className="bg-[color:var(--background,#5a3dc7)] text-white antialiased">
+      <body className="on-light bg-[color:var(--surface,#ffffff)] text-[color:var(--ink,#141416)] antialiased">
         <div className="flex min-h-dvh flex-col items-center justify-center gap-6 px-6 text-center">
           <p className="text-label">Erro 500</p>
           <h1 className="page-title">Algo correu mal.</h1>

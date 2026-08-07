@@ -1,7 +1,9 @@
 /*
- * Cliente Mistério — Página FAQ, sistema vermelho/branco.
- * Acordeão tipográfico sobre o vermelho da marca: as respostas são separadas
- * por filetes brancos finos, sem cartões, para manter a leitura calma.
+ * Cliente Mistério — Página FAQ, mesma linguagem clara da homepage.
+ * Acordeão tipográfico sobre `--surface` (branco): as respostas são
+ * separadas por filetes finos, sem cartões, para manter a leitura calma. O
+ * CTA final inverte para o roxo cheio da marca, como o cartão de preço da
+ * homepage. Raiz com `on-light` em page.tsx.
  */
 
 /* Reset das regras globais de <button> dentro desta página. */
@@ -29,8 +31,8 @@
 .page button::after { content: none; }
 
 .page {
-  background: var(--surface-brand);
-  color: var(--on-brand-2);
+  background: var(--surface);
+  color: var(--body);
   font-size: 15px;
   line-height: 1.65;
   font-family: var(--font-body);
@@ -72,7 +74,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--on-brand-2);
+  color: var(--brand);
   margin-bottom: 22px;
 }
 .eyebrow::before {
@@ -86,27 +88,27 @@
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.02;
-  color: var(--color-white);
+  color: var(--ink);
   font-size: clamp(32px, 4.6vw, 60px);
   margin: 0 0 18px;
 }
 .sub {
   font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.65;
-  color: var(--on-brand-2);
+  color: var(--body);
   max-width: 52ch;
   margin: 0 auto;
   text-wrap: pretty;
   font-weight: 400;
 }
 .subLink {
-  color: var(--color-white);
+  color: var(--color-red);
   font-weight: 700;
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(106, 74, 222, 0.4);
   transition: border-color .2s;
 }
-.subLink:hover { border-color: var(--color-white); }
+.subLink:hover { border-color: var(--color-red); }
 
 /* ---------- Pesquisa ---------- */
 .searchWrap {
@@ -115,7 +117,7 @@
   margin: clamp(20px, 4vh, 36px) auto 0;
   display: flex;
   align-items: center;
-  color: var(--on-brand-2);
+  color: var(--body);
 }
 .searchWrap svg {
   position: absolute;
@@ -127,26 +129,29 @@
   width: 100%;
   height: 52px;
   padding: 0 18px 0 50px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--hairline);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  color: var(--color-white);
+  color: var(--ink);
   font-size: 16px;
   font-family: inherit;
   outline: none;
   transition: border-color .2s, background .2s;
 }
-.searchInput::placeholder { color: var(--on-brand-3); }
+/* `--muted` só está verificado para 4,5:1 sobre branco puro; este campo
+   assenta em `--surface-raised` (#f6f6f8), que o baixa para 4,28:1 —
+   `--body` mantém a folga (mesmo caso do .termContent nas páginas legais). */
+.searchInput::placeholder { color: var(--body); }
 .searchInput:focus {
-  border-color: var(--color-white);
-  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-red);
+  background: var(--panel-strong);
 }
 .searchInput::-webkit-search-cancel-button { cursor: pointer; }
 
 .noResults {
   font-size: 16px;
   line-height: 1.7;
-  color: var(--on-brand-2);
+  color: var(--body);
   text-align: center;
   padding: 32px 0;
 }
@@ -159,24 +164,24 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--on-brand-3);
+  color: var(--muted);
   margin: 40px 0 4px;
   scroll-margin-top: var(--header-h);
 }
 .group:first-child .groupTitle { margin-top: 0; }
 .groupCta {
   font-size: 13.5px;
-  color: var(--on-brand-3);
+  color: var(--muted);
   margin: 16px 0 0;
   padding-bottom: 8px;
 }
 
 /* ---------- Accordion ---------- */
 .faq {
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--line);
   margin-top: 12px;
 }
-.faqItem { border-bottom: 1px solid var(--hairline); scroll-margin-top: var(--header-h); }
+.faqItem { border-bottom: 1px solid var(--line); scroll-margin-top: var(--header-h); }
 .faqQHeading {
   margin: 0;
   font-size: inherit;
@@ -195,7 +200,7 @@
   font-size: clamp(16px, 1.4vw, 19px);
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--color-white);
+  color: var(--ink);
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -206,7 +211,7 @@
 .faqIcon {
   flex-shrink: 0;
   width: 34px; height: 34px;
-  border: 1px solid var(--hairline-strong);
+  border: 1px solid var(--line-strong);
   border-radius: 50%;
   position: relative;
   transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
@@ -214,18 +219,18 @@
 .faqIcon::before, .faqIcon::after {
   content: "";
   position: absolute;
-  background: var(--color-white);
+  background: var(--ink);
   top: 50%; left: 50%;
   transition: all .3s cubic-bezier(0.23, 1, 0.320, 1);
 }
 .faqIcon::before { width: 12px; height: 2px; transform: translate(-50%,-50%); }
 .faqIcon::after { width: 2px; height: 12px; transform: translate(-50%,-50%); }
 .faqItemOpen .faqIcon {
-  background: var(--color-white);
-  border-color: var(--color-white);
+  background: var(--color-red);
+  border-color: var(--color-red);
 }
 .faqItemOpen .faqIcon::before,
-.faqItemOpen .faqIcon::after { background: var(--color-red); }
+.faqItemOpen .faqIcon::after { background: var(--color-white); }
 .faqItemOpen .faqIcon::after { transform: translate(-50%,-50%) rotate(90deg); }
 
 .faqA {
@@ -236,7 +241,7 @@
 .faqAInner {
   padding: 0 0 24px;
   max-width: 68ch;
-  color: var(--on-brand-2);
+  color: var(--body);
   font-size: 16px;
   line-height: 1.75;
   text-wrap: pretty;
@@ -244,10 +249,11 @@
 }
 .faqItemOpen .faqA { max-height: 400px; }
 
-/* ---------- CTA — painel branco a fechar a página ---------- */
+/* ---------- CTA — painel roxo cheio a fechar a página, o momento de
+   conversão (mesmo papel que .priceCard na homepage). ---------- */
 .cta {
   margin-top: 56px;
-  background: var(--panel-invert-bg);
+  background: var(--surface-brand);
   border-radius: var(--radius-xl);
   padding: 36px 32px;
   display: flex;
@@ -255,7 +261,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  color: var(--on-invert);
+  color: var(--color-white);
   box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
@@ -265,22 +271,22 @@
   position: absolute;
   inset: 0 0 auto 0;
   height: 4px;
-  background: var(--color-red);
+  background: var(--color-white);
 }
 .ctaTitle {
   font-size: clamp(21px, 2.4vw, 30px);
   font-weight: 700;
   letter-spacing: -0.035em;
-  color: var(--on-invert);
+  color: var(--color-white);
   margin: 0 0 6px;
 }
 .ctaSub {
   font-size: 15px;
-  color: var(--on-invert-3);
+  color: var(--on-brand-3);
   margin: 0;
   font-weight: 400;
 }
-/* CTA sólido vermelho sobre o painel branco. */
+/* CTA sólido branco sobre o painel roxo (como .priceCta na homepage). */
 .ctaBtn {
   display: inline-flex;
   align-items: center;
@@ -294,15 +300,15 @@
   white-space: nowrap;
   text-decoration: none;
   border: none !important;
-  background: var(--color-red);
-  color: var(--color-white) !important;
-  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.28);
+  background: var(--color-white);
+  color: var(--surface-brand) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
   transition: all 200ms ease;
 }
 .ctaBtn:hover {
   transform: translateY(-2px);
-  background: var(--color-red-2);
-  box-shadow: 0 8px 22px rgba(124, 92, 255, 0.34);
+  background: var(--color-white);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
 }
 .ctaBtn:active { transform: translateY(0); }
 .ctaBtn svg { transition: transform 200ms ease; }

@@ -12,29 +12,31 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <div className="full-section container-sm mx-auto flex flex-col items-center gap-6 px-6 py-24 text-center">
-      <p className="text-label">Erro 404</p>
-      <h1 className="page-title">Esta página não existe.</h1>
-      <p className="text-body-lg max-w-[52ch]">
-        O endereço que procuras pode ter mudado ou nunca ter existido. Aqui tens alguns
-        caminhos úteis para continuares.
-      </p>
+    <div className="full-section on-light bg-[color:var(--surface)] flex flex-col items-center justify-center">
+      <div className="container-sm mx-auto flex flex-col items-center gap-6 px-6 py-24 text-center">
+        <p className="text-label">Erro 404</p>
+        <h1 className="page-title">Esta página não existe.</h1>
+        <p className="text-body-lg max-w-[52ch]">
+          O endereço que procuras pode ter mudado ou nunca ter existido. Aqui tens alguns
+          caminhos úteis para continuares.
+        </p>
 
-      <div className="hero-buttons">
-        <Link href="/o-curso" className="button primary">
-          Ver o curso
-        </Link>
-        <Link href="/faq" className="button secondary">
-          FAQ
-        </Link>
-        <Link href="/contactos" className="button secondary">
-          Contactos
+        <div className="hero-buttons">
+          <Link href="/o-curso" className="button primary">
+            Ver o curso
+          </Link>
+          <Link href="/faq" className="button secondary">
+            FAQ
+          </Link>
+          <Link href="/contactos" className="button secondary">
+            Contactos
+          </Link>
+        </div>
+
+        <Link href="/" className="form-link mt-4">
+          Voltar à página inicial
         </Link>
       </div>
-
-      <Link href="/" className="form-link mt-4">
-        Voltar à página inicial
-      </Link>
     </div>
   );
 }

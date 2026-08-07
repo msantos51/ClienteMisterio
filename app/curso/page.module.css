@@ -2,10 +2,15 @@
  * DESCRIÇÃO DO FICHEIRO: Estilos scoped da página /curso, sistema vermelho/branco.
  * Convenção: classes camelCase para acesso direto via styles.xxx
  *
- * A capa do curso (cabeçalho + lista de módulos) vive sobre o vermelho da
- * marca. O leitor é um overlay com chrome vermelho e corpo branco: são
- * milhares de palavras por módulo, e o branco é a superfície onde o texto
- * longo se lê sem cansar. O quiz e o resultado vivem dentro desse corpo.
+ * A capa do curso (cabeçalho + lista de módulos) vive sobre `--surface`
+ * (branco, como o resto do site — raiz com `on-light` em page.tsx). O
+ * leitor é um overlay com chrome vermelho e corpo branco: são milhares de
+ * palavras por módulo, e o branco é a superfície onde o texto longo se lê
+ * sem cansar — já usava os tokens `--on-invert*`/`--panel-invert-bg`, por
+ * isso não muda com esta conversão. O quiz e o resultado vivem dentro
+ * desse corpo. O cartão de progresso e os distintivos "atual"/"concluído"
+ * continuam a inverter para o roxo cheio da marca, como o cartão de preço
+ * da homepage.
  */
 
 /* Reset das regras globais que entram nesta página.
@@ -48,8 +53,8 @@
    PRIMITIVAS DE LAYOUT
    ============================================================ */
 .page {
-  background: var(--surface-brand);
-  color: var(--on-brand-2);
+  background: var(--surface);
+  color: var(--body);
   font-size: 15px;
   line-height: 1.7;
   font-family: var(--font-body);
@@ -71,7 +76,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--on-brand-2);
+  color: var(--brand);
   margin-bottom: 18px;
 }
 .eyebrow::before {
@@ -80,14 +85,14 @@
   background: currentColor;
   flex-shrink: 0;
 }
-.eyebrowAccent { color: var(--color-white); }
+.eyebrowAccent { color: var(--color-red); }
 
 .display {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.02;
-  color: var(--color-white);
+  color: var(--ink);
   margin: 0;
 }
 .displayXl { font-size: clamp(30px, 4.2vw, 58px); }
@@ -95,7 +100,7 @@
 .lead {
   font-size: 16px;
   line-height: 1.7;
-  color: var(--on-brand-2);
+  color: var(--body);
   max-width: 56ch;
   margin: 0;
 }
@@ -122,26 +127,28 @@
 .page .btn:hover:not(:disabled) { transform: translateY(-2px); }
 .page .btn:active:not(:disabled) { transform: translateY(0); }
 
-/* Principal sobre vermelho: branco cheio. */
+/* Principal sobre branco: roxo cheio (como .ctaPrimary da homepage). Dentro
+   do leitor/quiz, os overrides mais abaixo (.quiz, .readerTop/.readerBottom)
+   tomam prioridade e continuam vermelho-sobre-branco / branco-sobre-vermelho. */
 .page .btnPrimary {
-  background: var(--color-white);
-  color: var(--color-red);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  background: var(--color-red);
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(124, 92, 255, 0.28);
 }
 .page .btnPrimary:hover:not(:disabled) {
-  background: var(--color-white);
-  color: var(--color-red-3);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  background: var(--color-red-2);
+  color: var(--color-white);
+  box-shadow: 0 8px 22px rgba(124, 92, 255, 0.34);
 }
 .page .btnGhost {
   background: transparent;
-  color: var(--color-white);
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: var(--ink);
+  border: 1.5px solid var(--line-strong);
   padding: 14.5px 30.5px;
 }
 .page .btnGhost:hover:not(:disabled) {
-  border-color: var(--color-white);
-  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--ink);
+  background: var(--panel-strong);
 }
 .page .btnAccent {
   background: transparent;
@@ -189,11 +196,11 @@
 .courseHeadTitle {
   margin: 0 0 20px;
 }
-/* Realce do título: inversão do sistema — caixa branca, texto vermelho. */
+/* Realce do título: inversão do sistema — caixa roxa, texto branco. */
 .courseHeadTitle em {
   font-style: normal;
-  color: var(--color-red);
-  background: var(--color-white);
+  color: var(--color-white);
+  background: var(--color-red);
   padding: 0 0.14em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
@@ -201,18 +208,20 @@
 .courseHeadSub {
   font-size: 15px;
   line-height: 1.75;
-  color: var(--on-brand-2);
+  color: var(--body);
   margin: 0;
   max-width: 48ch;
   text-wrap: pretty;
 }
 
-/* Cartão de progresso — painel branco invertido. */
+/* Cartão de progresso — painel roxo cheio, o único acento forte da capa
+   (mesmo papel que .priceCard na homepage). */
 .progressCard {
-  --muted: var(--on-invert-3);
+  --muted: var(--on-brand-3);
+  --body: var(--on-brand-2);
 
-  background: var(--panel-invert-bg);
-  color: var(--on-invert);
+  background: var(--surface-brand);
+  color: var(--color-white);
   border: none;
   border-radius: var(--radius-xl);
   padding: 28px;
@@ -225,7 +234,7 @@
   position: absolute;
   top: 0; left: var(--radius-xl);
   width: 56px; height: 4px;
-  background: var(--color-red);
+  background: var(--color-white);
 }
 .progressCardRow {
   display: flex;
@@ -239,16 +248,16 @@
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
-  color: var(--on-invert);
+  color: var(--color-white);
 }
 .progressCardCount em {
   font-style: normal;
-  color: var(--link-accent);
+  color: var(--color-white);
 }
 .progressCardCount span {
   font-size: 16px;
   font-weight: 600;
-  color: var(--on-invert-3);
+  color: var(--on-brand-3);
   margin-left: 6px;
 }
 .progressCardPct {
@@ -256,28 +265,28 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--link-accent);
+  color: var(--on-brand-3);
   text-align: right;
 }
 .progressBar {
   height: 5px;
-  background: var(--track-invert);
+  background: rgba(255, 255, 255, 0.22);
   border-radius: var(--radius-pill);
   overflow: hidden;
   position: relative;
 }
 .progressBarFill {
   height: 100%;
-  background: var(--color-red);
+  background: var(--color-white);
   transition: width .6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .progressCardLabel {
   margin-top: 16px;
   font-size: 13.5px;
-  color: var(--on-invert-3);
+  color: var(--on-brand-2);
   line-height: 1.6;
 }
-.progressCardLabel strong { color: var(--on-invert); font-weight: 700; }
+.progressCardLabel strong { color: var(--color-white); font-weight: 700; }
 
 /* ============================================================
    LISTA DE MÓDULOS
@@ -296,7 +305,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 28px 0 14px;
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--line);
   margin-top: 28px;
   flex-wrap: wrap;
   gap: 16px;
@@ -306,7 +315,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--on-brand-2);
+  color: var(--body);
   margin: 0;
 }
 .mod {
@@ -319,7 +328,7 @@
   row-gap: 10px;
   padding: 18px 0;
   align-items: start;
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--line);
   transition: background .25s, padding .25s;
   cursor: pointer;
   position: relative;
@@ -335,8 +344,8 @@
     padding: 26px 0;
   }
 }
-.mod:last-of-type { border-bottom: 1px solid var(--hairline); }
-.mod:not(:disabled):hover { background: rgba(255, 255, 255, 0.08); padding-left: 16px; }
+.mod:last-of-type { border-bottom: 1px solid var(--line); }
+.mod:not(:disabled):hover { background: var(--surface-raised); padding-left: 16px; }
 .mod:disabled,
 .modLocked {
   opacity: .4;
@@ -352,22 +361,22 @@
   font-size: 24px;
   letter-spacing: -0.04em;
   line-height: 1.15;
-  color: var(--on-brand-2);
+  color: var(--body);
 }
-.modDone .modNum { color: var(--color-white); }
-.modCurrent .modNum { color: var(--color-white); }
+.modDone .modNum { color: var(--color-red); }
+.modCurrent .modNum { color: var(--color-red); }
 .modBody { grid-area: body; min-width: 0; }
 .modTitle {
   font-size: clamp(15px, 1.4vw, 18px);
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--color-white);
+  color: var(--ink);
   margin: 0 0 5px;
   overflow-wrap: break-word;
 }
 .modDesc {
   font-size: 14px;
-  color: var(--on-brand-2);
+  color: var(--body);
   line-height: 1.7;
   margin: 0;
   max-width: 68ch;
@@ -397,19 +406,19 @@
   padding: 6px 11px;
   border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--on-brand-2);
-  border: 1px solid var(--hairline-strong);
+  color: var(--body);
+  border: 1px solid var(--line-strong);
   white-space: nowrap;
 }
 .modBadgeCurrent {
-  background: var(--color-white);
-  color: var(--color-red);
-  border-color: var(--color-white);
+  background: var(--color-red);
+  color: var(--color-white);
+  border-color: var(--color-red);
 }
 .modBadgeLocked {
   background: transparent;
-  color: var(--on-brand-2);
-  border-color: var(--hairline);
+  color: var(--muted);
+  border-color: var(--line);
 }
 .modBadgeDone {
   background: var(--color-success);
@@ -418,18 +427,18 @@
 }
 .modArrow {
   width: 28px; height: 28px;
-  border: 1px solid var(--hairline-strong);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-white);
+  color: var(--ink);
   transition: background .2s, color .2s, border-color .2s;
 }
 .mod:not(:disabled):hover .modArrow {
-  background: var(--color-white);
-  color: var(--color-red);
-  border-color: var(--color-white);
+  background: var(--color-red);
+  color: var(--color-white);
+  border-color: var(--color-red);
 }
 
 /* ============================================================

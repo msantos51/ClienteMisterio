@@ -169,7 +169,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       {/* ============================================================
           HERO
           ============================================================ */}

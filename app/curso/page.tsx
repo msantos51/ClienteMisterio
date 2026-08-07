@@ -393,7 +393,7 @@ function CursoPageContent() {
 
   if (progressLoadError) {
     return (
-      <div className={styles.page}>
+      <div className={`${styles.page} on-light`}>
         <div className={styles.wrap} style={{ padding: "80px 28px", textAlign: "center" }}>
           <p role="alert" className={styles.lead} style={{ marginBottom: 24 }}>{progressLoadError}</p>
           <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => loadProgress()}>
@@ -406,7 +406,7 @@ function CursoPageContent() {
 
   if (!isAuthenticated && !accessDenied) {
     return (
-      <div className={styles.page} aria-busy="true" aria-label={cp.verifyingSession}>
+      <div className={`${styles.page} on-light`} aria-busy="true" aria-label={cp.verifyingSession}>
         <div className={styles.wrap} style={{ padding: "80px 28px" }}>
           <div
             className={`${styles.progressCard} animate-pulse`}
@@ -419,7 +419,7 @@ function CursoPageContent() {
 
   if (accessDenied) {
     return (
-      <div className={styles.page}>
+      <div className={`${styles.page} on-light`}>
         <div className={styles.wrap} style={{ padding: "80px 28px" }}>
           <div className={styles.eyebrow}>Acesso restrito</div>
           <h1 className={`${styles.display} ${styles.displayLg}`} style={{ marginBottom: 16 }}>
@@ -441,7 +441,7 @@ function CursoPageContent() {
 
   if (modulesLoadError) {
     return (
-      <div className={styles.page}>
+      <div className={`${styles.page} on-light`}>
         <div className={styles.wrap} style={{ padding: "80px 28px", textAlign: "center" }}>
           <p role="alert" className={styles.lead} style={{ marginBottom: 24 }}>{modulesLoadError}</p>
           <button type="button" className={`${styles.btn} ${styles.btnPrimary}`} onClick={() => loadModules()}>
@@ -454,7 +454,7 @@ function CursoPageContent() {
 
   if (!modules) {
     return (
-      <div className={styles.page} aria-busy="true" aria-label={cp.verifyingSession}>
+      <div className={`${styles.page} on-light`} aria-busy="true" aria-label={cp.verifyingSession}>
         <div className={styles.wrap} style={{ padding: "80px 28px" }}>
           <div
             className={`${styles.progressCard} animate-pulse`}
@@ -494,7 +494,7 @@ function CursoPageContent() {
     : null;
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       {/* ============================================================
           STATE 1 — Module index
           ============================================================ */}
