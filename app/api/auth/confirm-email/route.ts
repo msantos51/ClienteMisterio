@@ -4,6 +4,7 @@
 
 import { NextResponse } from "next/server";
 
+import { getAppBaseUrl } from "@/lib/appUrl";
 import { query } from "@/lib/database";
 import { hashToken } from "@/lib/token";
 
@@ -16,8 +17,13 @@ export const GET = async (request: Request) => {
   const url = new URL(request.url);
   const token = url.searchParams.get("token")?.trim();
 
+  // Monta o redirect a partir de APP_URL, nunca de request.url — atrás do
+  // proxy de produção o host da ligação pode resolver para o bind interno
+  // do servidor (ex.: 0.0.0.0:<PORT>) em vez do domínio público.
+  const appBaseUrl = getAppBaseUrl();
+
   if (!token) {
-    return NextResponse.redirect(new URL("/entrar?confirmed=0", request.url));
+    return NextResponse.redirect(new URL("/entrar?confirmed=0", appBaseUrl));
   }
 
   const tokenHash = hashToken(token);
@@ -33,8 +39,8 @@ export const GET = async (request: Request) => {
   );
 
   if (!updateResult.rowCount) {
-    return NextResponse.redirect(new URL("/entrar?confirmed=0", request.url));
+    return NextResponse.redirect(new URL("/entrar?confirmed=0", appBaseUrl));
   }
 
-  return NextResponse.redirect(new URL("/entrar?confirmed=1", request.url));
+  return NextResponse.redirect(new URL("/entrar?confirmed=1", appBaseUrl));
 };
