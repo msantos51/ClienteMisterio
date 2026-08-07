@@ -1,7 +1,8 @@
 /*
  * DESCRIÇÃO DO FICHEIRO: Landing page principal.
- * Hero com proposta de valor à esquerda e ícone de destaque à direita,
- * seguido dos três passos do processo ligados por uma curva ascendente.
+ * Hero com proposta de valor à esquerda e moldura com o olho da marca à
+ * direita, sobre fundo claro (classe `on-light`), seguido dos três passos
+ * do processo ligados por uma curva ascendente.
  */
 
 "use client";
@@ -22,6 +23,19 @@ const CheckIcon = ({ size = 11 }: { size?: number }) => (
 const ArrowIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
     <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
+
+/* Ícone do olho da marca (mesma geometria do logo-mark.svg), recolorido
+   para se destacar sobre o painel claro da ilustração do hero. */
+const EyeMark = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 512 512" aria-hidden>
+    <path
+      d="M 48 256 C 48 256 160 146 256 146 C 352 146 464 256 464 256 C 464 256 352 366 256 366 C 160 366 48 256 48 256 Z"
+      fill="currentColor"
+    />
+    <circle cx="256" cy="230" r="64" fill="#ffffff" />
+    <rect x="222" y="270" width="68" height="66" rx="20" fill="#ffffff" />
   </svg>
 );
 
@@ -66,9 +80,9 @@ export default function HomePage() {
   ];
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       {/* ----------------------------------------------------------
-          HERO — proposta de valor à esquerda, destaque à direita
+          HERO — proposta de valor à esquerda, moldura com o olho à direita
           ---------------------------------------------------------- */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
@@ -77,32 +91,31 @@ export default function HomePage() {
             <h1 className={styles.title}>
               {t.home.titleLine1}
               <br />
-              <span className={styles.titleAccent}>
-                {t.home.titleLine2}
-                <span className={styles.dot}>.</span>
-              </span>
+              {t.home.titleLine2}.
             </h1>
             <p className={styles.subtitle}>{t.home.subtitle}</p>
-            <p className={styles.valueProp}>{t.home.heroGuarantee}</p>
+            <p className={styles.valueProp}>
+              <CheckIcon />
+              {t.home.heroGuarantee}
+            </p>
 
             <div className={styles.ctaRow}>
               <Link href={primaryCta.href} className={styles.ctaPrimary}>
                 {primaryCta.label}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
               </Link>
             </div>
           </div>
 
           <div className={styles.heroArt} aria-hidden>
-            <div className={styles.heroArtGlow} />
-            <div className={styles.heroArtRing}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M6 7h12l1 13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L6 7Z" />
-                <path d="M9 7a3 3 0 0 1 6 0" />
-                <path d="m9.5 12.5 1.7 1.7L15 10.5" />
-              </svg>
+            <div className={styles.heroArtFrame}>
+              <EyeMark className={styles.heroArtIcon} />
+              <div className={styles.heroArtCard}>
+                <span className={styles.heroArtCardLine} style={{ width: "72%" }} />
+                <span className={styles.heroArtCardLine} style={{ width: "48%" }} />
+                <span className={styles.heroArtCardToggle}>
+                  <span className={styles.heroArtCardDot} />
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -121,9 +134,9 @@ export default function HomePage() {
           >
             <defs>
               <linearGradient id="cmTrack" x1="0" y1="1" x2="1" y2="0">
-                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.18" />
-                <stop offset="45%" stopColor="#ffffff" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
+                <stop offset="0%" stopColor="#6a4ade" stopOpacity="0.12" />
+                <stop offset="45%" stopColor="#6a4ade" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#6a4ade" stopOpacity="0.85" />
               </linearGradient>
             </defs>
             <path
@@ -189,7 +202,7 @@ export default function HomePage() {
       {/* ----------------------------------------------------------
           PREÇO — reaproveita os valores já usados em /o-curso
           ---------------------------------------------------------- */}
-      <section className={`${styles.section} full-section full-section-scroll`}>
+      <section className={`${styles.section} ${styles.sectionPrice} full-section full-section-scroll`}>
         <div className={styles.sectionInner}>
           <div className={styles.priceCard}>
             <p className={styles.priceEyebrow}>{t.home.pricingEyebrow}</p>
@@ -215,7 +228,6 @@ export default function HomePage() {
             </ul>
             <Link href={primaryCta.href} className={styles.priceCta}>
               {t.home.pricingCta}
-              <ArrowIcon />
             </Link>
             <p className={styles.priceSecure}>{t.coursePage.paymentSecure}</p>
           </div>
@@ -253,14 +265,13 @@ export default function HomePage() {
       {/* ----------------------------------------------------------
           CTA FINAL
           ---------------------------------------------------------- */}
-      <section className={`${styles.section} full-section full-section-scroll`}>
+      <section className={`${styles.section} ${styles.sectionFinal} full-section full-section-scroll`}>
         <div className={styles.sectionInner}>
           <div className={styles.finalCta}>
             <h2 className={styles.finalCtaTitle}>{t.home.finalCtaTitle}</h2>
             <p className={styles.finalCtaDesc}>{t.home.finalCtaDesc}</p>
             <Link href={primaryCta.href} className={styles.ctaPrimary}>
               {t.home.finalCtaButton}
-              <ArrowIcon />
             </Link>
           </div>
         </div>
