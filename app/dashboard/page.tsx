@@ -418,7 +418,7 @@ function DashboardPageContent() {
 
   if (!profile && profileLoadError) {
     return (
-      <section className="full-section full-section-scroll w-full px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
+      <section className="full-section full-section-scroll on-light bg-[color:var(--surface)] w-full px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <div className="mx-auto flex w-full max-w-md flex-col items-center gap-4 text-center">
           <p role="alert" className="text-sm text-[color:var(--muted)]">{profileLoadError}</p>
           <button
@@ -439,7 +439,7 @@ function DashboardPageContent() {
   if (!profile) {
     return (
       <section
-        className="full-section full-section-scroll w-full space-y-4 px-3 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6"
+        className="full-section full-section-scroll on-light bg-[color:var(--surface)] w-full space-y-4 px-3 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6"
         aria-busy="true"
         aria-label={d.loading}
       >
@@ -455,7 +455,7 @@ function DashboardPageContent() {
   }
 
   return (
-    <section className="full-section full-section-scroll w-full space-y-2 px-3 py-3 sm:px-5 sm:py-4 md:px-6 md:py-4">
+    <section className="full-section full-section-scroll on-light bg-[color:var(--surface)] w-full space-y-2 px-3 py-3 sm:px-5 sm:py-4 md:px-6 md:py-4">
       {mustCompleteProfile && (
         <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4">
           <div className="login-form w-full max-w-2xl">

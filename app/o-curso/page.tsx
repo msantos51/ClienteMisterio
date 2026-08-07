@@ -152,7 +152,7 @@ export default function CoursePage() {
   ];
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       {/* ============================================================
           HERO
           ============================================================ */}

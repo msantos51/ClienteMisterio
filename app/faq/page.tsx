@@ -90,7 +90,7 @@ function FaqPageContent() {
   }, []);
 
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       <section className={`${styles.hero} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.eyebrow}>Perguntas frequentes</div>

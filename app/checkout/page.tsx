@@ -51,7 +51,7 @@ export default function CheckoutPage() {
 
   if (!paymentLink) {
     return (
-      <div className="full-section flex items-center justify-center">
+      <div className="full-section on-light bg-[color:var(--surface)] text-[color:var(--body)] flex items-center justify-center">
         <div className="text-center space-y-4 max-w-md px-4">
           <h1 className="text-xl font-semibold home-title-highlight-text">Pagamento indisponível de momento</h1>
           <p role="alert" className="text-sm sm:text-base leading-6 sm:leading-7">
@@ -63,7 +63,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="full-section flex items-center justify-center">
+    <div className="full-section on-light bg-[color:var(--surface)] text-[color:var(--body)] flex items-center justify-center">
       <div className="text-center space-y-4">
         <h1 className="text-xl font-semibold home-title-highlight-text">Redirecionando para pagamento...</h1>
         <p className="text-sm sm:text-base leading-6 sm:leading-7">Se não for redirecionado automaticamente,</p>

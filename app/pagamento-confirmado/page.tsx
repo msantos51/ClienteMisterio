@@ -80,7 +80,7 @@ export default function PagamentoConfirmadoPage() {
 
   if (state === "confirmed") {
     return (
-      <div className="full-section flex items-center justify-center">
+      <div className="full-section on-light bg-[color:var(--surface)] text-[color:var(--body)] flex items-center justify-center">
         <div className="text-center space-y-4 max-w-md px-4">
           <h1 className="text-xl font-semibold home-title-highlight-text">Pagamento confirmado!</h1>
           <p className="text-sm sm:text-base leading-6 sm:leading-7">
@@ -96,7 +96,7 @@ export default function PagamentoConfirmadoPage() {
 
   if (state === "pending") {
     return (
-      <div className="full-section flex items-center justify-center">
+      <div className="full-section on-light bg-[color:var(--surface)] text-[color:var(--body)] flex items-center justify-center">
         <div className="text-center space-y-4 max-w-md px-4">
           <h1 className="text-xl font-semibold home-title-highlight-text">A confirmação está a demorar mais do que o normal</h1>
           <p className="text-sm sm:text-base leading-6 sm:leading-7">
@@ -126,7 +126,7 @@ export default function PagamentoConfirmadoPage() {
   }
 
   return (
-    <div className="full-section flex items-center justify-center" aria-busy="true" aria-label="A confirmar o pagamento">
+    <div className="full-section on-light bg-[color:var(--surface)] text-[color:var(--body)] flex items-center justify-center" aria-busy="true" aria-label="A confirmar o pagamento">
       <div className="text-center space-y-4">
         <h1 className="text-xl font-semibold home-title-highlight-text">A confirmar o teu pagamento...</h1>
         <p className="text-sm sm:text-base leading-6 sm:leading-7">Isto demora só alguns segundos.</p>

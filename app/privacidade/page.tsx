@@ -57,7 +57,7 @@ const sections = [
 
 export default function PrivacidadePage() {
   return (
-    <div className={styles.page}>
+    <div className={`${styles.page} on-light`}>
       <header className={`${styles.hero} full-section full-section-scroll`}>
         <div className={styles.wrap}>
           <div className={styles.eyebrow}>Proteção de dados</div>

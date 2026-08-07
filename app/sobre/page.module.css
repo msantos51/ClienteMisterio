@@ -1,8 +1,12 @@
 /*
- * Página "Sobre" — sistema vermelho/branco.
- * A página inteira assenta no vermelho da marca; os blocos de foco (cartão de
- * preço) invertem-se para painel branco. As secções alternam entre o vermelho
- * base e o vermelho profundo para dar ritmo sem sair da paleta.
+ * Página "Sobre" — mesma linguagem clara da homepage.
+ * A página assenta em `--surface` (branco), texto quase-preto; os blocos de
+ * destaque (cartão de preço, pilar em foco, faixa de números) invertem-se
+ * para o roxo cheio da marca ou para preto, tal como o cartão de preço da
+ * homepage. A raiz da página leva a classe `on-light` (globals.css) em
+ * page.tsx — este ficheiro usa sempre os tokens genéricos (nunca
+ * --color-white/--on-brand-2/--surface-brand a direito, exceto nos blocos
+ * intencionalmente invertidos abaixo).
  */
 
 /* Reset global button/link styles inside this page */
@@ -13,8 +17,8 @@
    LAYOUT PRIMITIVES
    ============================================================ */
 .page {
-  background: var(--surface-brand);
-  color: var(--color-white);
+  background: var(--surface);
+  color: var(--ink);
   font-size: 15px;
   line-height: 1.65;
   font-family: var(--font-body);
@@ -43,7 +47,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--on-brand-2);
+  color: var(--brand);
   margin-bottom: 20px;
 }
 .eyebrow::before {
@@ -58,16 +62,16 @@
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1.02;
-  color: var(--color-white);
+  color: var(--ink);
   font-size: clamp(30px, 4.6vw, 62px);
   margin: 0;
 }
-/* Realce do título: inversão do sistema — caixa branca, texto vermelho. */
+/* Realce do título: inversão do sistema — caixa roxa, texto branco. */
 .italic {
   font-style: normal;
   font-weight: 700;
-  color: var(--color-red);
-  background: var(--color-white);
+  color: var(--color-white);
+  background: var(--color-red);
   padding: 0 0.14em;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
@@ -75,7 +79,7 @@
 .lead {
   font-size: clamp(15px, 1.1vw, 18px);
   line-height: 1.7;
-  color: var(--on-brand-2);
+  color: var(--body);
   max-width: 56ch;
   margin: 0;
 }
@@ -83,7 +87,7 @@
 /* ============================================================
    BUTTONS
    ============================================================ */
-/* CTA vazado a branco; enche no hover. */
+/* CTA vazado; enche no hover. */
 .page .btn {
   display: inline-flex;
   align-items: center;
@@ -94,23 +98,22 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 1.2;
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border: 1.5px solid var(--line-strong);
   background: transparent;
-  color: var(--color-white);
+  color: var(--ink);
   transition: all 200ms ease;
   white-space: nowrap;
   cursor: pointer;
   font-family: var(--font-body);
 }
 .page .btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--color-white);
+  background: var(--panel-strong);
+  border-color: var(--ink);
   transform: translateY(-2px);
 }
 .page .btn:active { transform: translateY(0); }
 
-/* Variante sólida — CTA principal. Dentro do cartão branco fica vermelho
-   sobre branco; sobre o vermelho da página fica branco sobre vermelho. */
+/* Variante sólida — CTA principal: roxo sobre branco. */
 .page .btnDark {
   background: var(--color-red);
   border-color: var(--color-red);
@@ -123,13 +126,26 @@
   color: var(--color-white);
   box-shadow: 0 8px 22px rgba(124, 92, 255, 0.34);
 }
+/* Dentro do cartão de preço (já roxo cheio) o botão inverte para branco. */
+.card .btnDark {
+  background: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--surface-brand);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+.card .btnDark:hover {
+  background: var(--color-white);
+  border-color: var(--color-white);
+  color: var(--color-red-3);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+}
 
 /* ============================================================
    HERO
    ============================================================ */
 .hero {
   padding: clamp(20px, 6vh, 64px) 0;
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,12 +174,12 @@
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.14;
-  color: var(--color-white);
+  color: var(--ink);
   margin: 0 0 16px;
 }
 .advDesc {
   font-size: 15px;
-  color: var(--on-brand-2);
+  color: var(--body);
   line-height: 1.6;
   margin: 0 0 32px;
 }
@@ -173,24 +189,24 @@
   align-items: flex-start;
   gap: 16px;
   padding: 20px 24px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid var(--hairline);
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   font-size: 15px;
-  color: var(--on-brand-3);
+  color: var(--body);
   line-height: 1.5;
   transition: border-color .2s, background .2s;
 }
 .adv:hover {
-  border-color: var(--color-white);
-  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--line-strong);
+  background: var(--panel-strong);
 }
 .advNum {
   flex-shrink: 0;
   width: 28px; height: 28px;
   border-radius: var(--radius-sm);
-  background: var(--color-white);
-  color: var(--color-red);
+  background: var(--color-red);
+  color: var(--color-white);
   font-weight: 700;
   font-size: 13px;
   display: inline-flex;
@@ -199,23 +215,18 @@
 }
 .bodyText {
   font-size: 16px;
-  color: var(--on-brand-2);
+  color: var(--body);
   line-height: 1.7;
   margin: 24px 0 0;
 }
 
 /* ============================================================
-   PRICING CARD — painel branco invertido
+   PRICING CARD — bloco roxo cheio, único acento forte da página
+   (mesmo papel que .priceCard na homepage).
    ============================================================ */
 .card {
-  /* Vira os tokens herdados para a escala escura: tudo o que está dentro
-     do cartão passa a ler-se sobre branco sem declarações extra. */
-  --line: var(--hairline-invert);
-  --muted: var(--on-invert-3);
-  --body: var(--on-invert-2);
-
-  background: var(--panel-invert-bg);
-  color: var(--on-invert);
+  background: var(--surface-brand);
+  color: var(--color-white);
   border: none;
   border-radius: var(--radius-xl);
   padding: 40px;
@@ -226,36 +237,36 @@
 @media (min-width: 1024px) {
   .card { position: sticky; top: 100px; }
 }
-/* Régua vermelha no topo, assinatura dos painéis brancos. */
+/* Régua branca no topo, assinatura dos painéis de destaque. */
 .card::before {
   content: "";
   position: absolute;
   top: 0; left: var(--radius-xl);
   width: 72px; height: 4px;
-  background: var(--color-red);
+  background: var(--color-white);
 }
 .cardEyebrow {
   margin-bottom: 16px;
-  color: var(--link-accent);
+  color: var(--on-brand-3);
 }
 .price {
   font-size: 44px;
   font-weight: 700;
   letter-spacing: -0.04em;
-  color: var(--on-invert);
+  color: var(--color-white);
   line-height: 1;
   margin: 0 0 4px;
 }
 .priceOriginal {
   font-size: 18px;
-  color: var(--on-invert-3);
+  color: var(--on-brand-3);
   text-decoration: line-through;
   margin-right: 8px;
   font-weight: 500;
 }
 .priceNote {
   font-size: 13px;
-  color: var(--on-invert-3);
+  color: var(--on-brand-3);
   margin: 0 0 28px;
 }
 .featureList {
@@ -263,8 +274,8 @@
   flex-direction: column;
   gap: 14px;
   padding: 24px 0;
-  border-top: 1px solid var(--hairline-invert);
-  border-bottom: 1px solid var(--hairline-invert);
+  border-top: 1px solid var(--hairline-soft);
+  border-bottom: 1px solid var(--hairline-soft);
   margin-bottom: 28px;
 }
 .featureItem {
@@ -272,14 +283,14 @@
   align-items: center;
   gap: 12px;
   font-size: 15px;
-  color: var(--on-invert-2);
+  color: var(--on-brand-2);
 }
 .check {
   flex-shrink: 0;
   width: 20px; height: 20px;
   border-radius: var(--radius-sm);
-  background: var(--color-red);
-  color: var(--color-white);
+  background: var(--color-white);
+  color: var(--surface-brand);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -290,15 +301,15 @@
    ============================================================ */
 .sectionAlt {
   padding: clamp(20px, 6vh, 64px) 0;
-  background: var(--surface-brand-alt);
-  border-top: 1px solid var(--hairline-soft);
+  background: var(--surface-raised);
+  border-top: 1px solid var(--line-light);
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 @media (min-width: 768px) { .sectionAlt { padding: clamp(28px, 8vh, 96px) 0; } }
 
-.dot { color: var(--on-brand-2); }
+.dot { color: var(--muted); }
 
 .head {
   display: grid;
@@ -313,7 +324,7 @@
 .headSub {
   font-size: 16px;
   line-height: 1.7;
-  color: var(--on-brand-2);
+  color: var(--body);
   max-width: 46ch;
   margin: 0;
   text-wrap: pretty;
@@ -323,11 +334,12 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--on-brand-2);
+  color: var(--body);
   margin: var(--sp-sm) 0 0;
 }
 
-/* Pilares */
+/* Pilares — os dois normais ficam claros; o pilar em destaque inverte
+   para o roxo cheio da marca, como o cartão de preço. */
 .pillars {
   display: grid;
   grid-template-columns: 1fr;
@@ -337,59 +349,59 @@
   .pillars { grid-template-columns: repeat(3, 1fr); }
 }
 .pillar {
-  background: transparent;
-  border: 1px solid var(--hairline);
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: var(--sp-lg);
   transition: all 300ms ease;
 }
 .pillar:hover {
   transform: translateY(-4px);
-  border-color: var(--color-white);
-  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--line-strong);
+  background: var(--panel-strong);
 }
-/* O pilar em destaque inverte-se: branco sobre o vermelho da secção. */
+/* O pilar em destaque inverte-se: roxo cheio, texto branco. */
 .pillarAccent {
-  background: var(--panel-invert-bg);
-  border-color: var(--panel-invert-bg);
+  background: var(--surface-brand);
+  border-color: var(--surface-brand);
   box-shadow: var(--shadow-md);
 }
 .pillarAccent:hover {
-  background: var(--panel-invert-bg);
-  border-color: var(--panel-invert-bg);
+  background: var(--surface-brand);
+  border-color: var(--surface-brand);
 }
 .pillarIcon {
   display: block;
   width: 32px;
   height: 32px;
-  color: var(--color-white);
+  color: var(--color-red);
   margin-bottom: var(--sp-md);
 }
 .pillarIcon svg { width: 100%; height: 100%; }
-.pillarAccent .pillarIcon { color: var(--link-accent); }
+.pillarAccent .pillarIcon { color: var(--color-white); }
 .pillarTitle {
   font-size: 23px;
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--color-white);
+  color: var(--ink);
   margin: 0 0 12px;
 }
-.pillarAccent .pillarTitle { color: var(--on-invert); }
+.pillarAccent .pillarTitle { color: var(--color-white); }
 .pillarRule {
   width: 34px;
   height: 3px;
-  background: var(--color-white);
+  background: var(--color-red);
   margin-bottom: var(--sp-sm);
 }
-.pillarAccent .pillarRule { background: var(--color-red); }
+.pillarAccent .pillarRule { background: var(--color-white); }
 .pillarDesc {
   font-size: 15px;
   line-height: 1.65;
-  color: var(--on-brand-2);
+  color: var(--body);
   margin: 0;
   text-wrap: pretty;
 }
-.pillarAccent .pillarDesc { color: var(--on-invert-2); }
+.pillarAccent .pillarDesc { color: var(--on-brand-2); }
 
 /* Setores */
 .cats {
@@ -404,9 +416,9 @@
   .cats { grid-template-columns: repeat(3, 1fr); }
 }
 .cat {
-  background: transparent;
-  border: 1px solid var(--hairline);
-  border-top: 3px solid var(--color-white);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--color-red);
   border-radius: var(--radius-lg);
   padding: var(--sp-md);
   display: flex;
@@ -416,14 +428,14 @@
 }
 .cat:hover {
   transform: translateY(-4px);
-  background: rgba(255, 255, 255, 0.07);
-  border-color: var(--hairline-strong);
-  border-top-color: var(--color-white);
+  background: var(--surface-raised);
+  border-color: var(--line-strong);
+  border-top-color: var(--color-red);
 }
 .catIcon {
   width: 26px;
   height: 26px;
-  color: var(--color-white);
+  color: var(--color-red);
   flex-shrink: 0;
 }
 .catBody { flex: 1; min-width: 0; }
@@ -431,21 +443,22 @@
   font-size: 20px;
   font-weight: 700;
   letter-spacing: -0.025em;
-  color: var(--color-white);
+  color: var(--ink);
   margin: 0 0 4px;
 }
 .catPay {
   font-size: 14px;
-  color: var(--on-brand-2);
+  color: var(--body);
   margin: 0;
 }
 .catPay strong {
-  color: var(--color-white);
+  color: var(--ink);
   font-weight: 700;
   font-size: 16px;
 }
 
-/* Faixa de números — preto, para ancorar o fim da página. */
+/* Faixa de números — preto, para ancorar o fim da página (bloco
+   intencionalmente escuro, independente do tema claro/roxo do resto). */
 .strip {
   background: var(--color-black);
   border-top: none;

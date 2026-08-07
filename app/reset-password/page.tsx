@@ -20,7 +20,7 @@ export default function ResetPasswordPage() {
 function ResetPasswordLoadingState() {
   const { t } = useLanguage();
   return (
-    <section className="full-section full-section-scroll w-full space-y-8">
+    <section className="full-section full-section-scroll on-light bg-[color:var(--surface)] w-full space-y-8">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form">
           <p className="text-center text-sm">{t.auth.loadingRecoveryForm}</p>
@@ -82,7 +82,7 @@ function ResetPasswordContent() {
   };
 
   return (
-    <section className="full-section full-section-scroll w-full space-y-8">
+    <section className="full-section full-section-scroll on-light bg-[color:var(--surface)] w-full space-y-8">
       <div className="mx-auto flex w-full max-w-6xl justify-center px-3 py-6 sm:px-6 sm:py-8 md:px-10 md:py-10">
         <article className="login-form">
           <h1 className="form-heading">{t.auth.resetPasswordTitle}</h1>
