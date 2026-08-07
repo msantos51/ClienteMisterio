@@ -598,63 +598,70 @@ function DashboardPageContent() {
                 <h2 className="section-title !text-lg">{d.accountInfo}</h2>
                 <p className="mt-1 text-xs">{d.updatePersonal}</p>
 
-                <div className="mt-2 grid gap-2 md:grid-cols-2">
-                  <div className="input-group">
-                    <input
-                      value={profile.firstName}
-                      onChange={(event) => handleProfileChange("firstName", event.target.value)}
-                    />
-                    <span className="label">{d.firstName}</span>
-                  </div>
+                <div className="dashboard-form-section mt-3">
+                  <div className="grid gap-x-4 md:grid-cols-2">
+                    <div className="input-group">
+                      <input
+                        value={profile.firstName}
+                        onChange={(event) => handleProfileChange("firstName", event.target.value)}
+                      />
+                      <span className="label">{d.firstName}</span>
+                    </div>
 
-                  <div className="input-group">
-                    <input
-                      value={profile.lastName}
-                      onChange={(event) => handleProfileChange("lastName", event.target.value)}
-                    />
-                    <span className="label">{d.lastName}</span>
-                  </div>
+                    <div className="input-group">
+                      <input
+                        value={profile.lastName}
+                        onChange={(event) => handleProfileChange("lastName", event.target.value)}
+                      />
+                      <span className="label">{d.lastName}</span>
+                    </div>
 
-                  <div className="input-group md:col-span-2">
-                    <input
-                      value={profile.email}
-                      onChange={(event) => handleProfileChange("email", event.target.value)}
-                    />
-                    <span className="label">{d.email}</span>
-                  </div>
-
-                  <div className="input-group">
-                    <input
-                      type="date"
-                      value={profile.birthDate}
-                      onChange={(event) => handleProfileChange("birthDate", event.target.value)}
-                    />
-                    <span className="label">{d.birthDate}</span>
-                  </div>
-
-                  <div className="input-group">
-                    <select
-                      value={profile.gender}
-                      onChange={(event) => handleProfileChange("gender", event.target.value)}
-                    >
-                      <option value="">{d.select}</option>
-                      <option value="male">{d.male}</option>
-                      <option value="female">{d.female}</option>
-                      <option value="unspecified">{d.genderUnspecified}</option>
-                    </select>
-                    <span className="label">{d.gender}</span>
+                    <div className="input-group md:col-span-2">
+                      <input
+                        value={profile.email}
+                        onChange={(event) => handleProfileChange("email", event.target.value)}
+                      />
+                      <span className="label">{d.email}</span>
+                    </div>
                   </div>
                 </div>
 
-                <div role="status" aria-live="polite">
-                  {profileFeedback && (
-                    <p className={`form-feedback mt-1 ${profileFeedback.type === "success" ? "form-feedback-success" : ""}`}>
-                      {profileFeedback.message}
-                    </p>
-                  )}
+                <div className="dashboard-form-section">
+                  <h3 className="dashboard-form-section-title">{d.additionalInfo}</h3>
+                  <div className="grid gap-x-4 md:grid-cols-2">
+                    <div className="input-group">
+                      <input
+                        type="date"
+                        value={profile.birthDate}
+                        onChange={(event) => handleProfileChange("birthDate", event.target.value)}
+                      />
+                      <span className="label">{d.birthDate}</span>
+                    </div>
+
+                    <div className="input-group">
+                      <select
+                        value={profile.gender}
+                        onChange={(event) => handleProfileChange("gender", event.target.value)}
+                      >
+                        <option value="">{d.select}</option>
+                        <option value="male">{d.male}</option>
+                        <option value="female">{d.female}</option>
+                        <option value="unspecified">{d.genderUnspecified}</option>
+                      </select>
+                      <span className="label">{d.gender}</span>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="mt-2">
+                <div className="dashboard-form-actions">
+                  <div role="status" aria-live="polite">
+                    {profileFeedback && (
+                      <p className={`form-feedback mb-2 ${profileFeedback.type === "success" ? "form-feedback-success" : ""}`}>
+                        {profileFeedback.message}
+                      </p>
+                    )}
+                  </div>
+
                   <button className="submit" type="button" onClick={handleSaveProfile}>
                     {isSavingProfile ? d.saving : d.saveProfile}
                   </button>
@@ -667,59 +674,63 @@ function DashboardPageContent() {
                 <h2 className="section-title !text-lg">{d.securityTitle}</h2>
                 <p className="mt-1 text-xs">{d.securePassword}</p>
 
-                <div className="mt-2 grid gap-2 md:grid-cols-2">
-                  <div className="input-group md:col-span-2">
-                    <input
-                      placeholder={d.currentPassword}
-                      type="password"
-                      value={passwordForm.currentPassword}
-                      onChange={(event) =>
-                        handlePasswordFieldChange("currentPassword", event.target.value)
-                      }
-                    />
-                    <span className="label">{d.currentPassword}</span>
-                  </div>
-                  <div className="input-group">
-                    <input
-                      placeholder={d.newPassword}
-                      type="password"
-                      value={passwordForm.newPassword}
-                      onChange={(event) => handlePasswordFieldChange("newPassword", event.target.value)}
-                    />
-                    <span className="label">{d.newPassword}</span>
-                  </div>
-                  <div className="input-group">
-                    <input
-                      placeholder={d.confirmPassword}
-                      type="password"
-                      value={passwordForm.confirmNewPassword}
-                      onChange={(event) =>
-                        handlePasswordFieldChange("confirmNewPassword", event.target.value)
-                      }
-                    />
-                    <span className="label">{d.confirmPassword}</span>
+                <div className="dashboard-form-section mt-3">
+                  <div className="grid gap-x-4 md:grid-cols-2">
+                    <div className="input-group md:col-span-2">
+                      <input
+                        placeholder={d.currentPassword}
+                        type="password"
+                        value={passwordForm.currentPassword}
+                        onChange={(event) =>
+                          handlePasswordFieldChange("currentPassword", event.target.value)
+                        }
+                      />
+                      <span className="label">{d.currentPassword}</span>
+                    </div>
+                    <div className="input-group">
+                      <input
+                        placeholder={d.newPassword}
+                        type="password"
+                        value={passwordForm.newPassword}
+                        onChange={(event) => handlePasswordFieldChange("newPassword", event.target.value)}
+                      />
+                      <span className="label">{d.newPassword}</span>
+                    </div>
+                    <div className="input-group">
+                      <input
+                        placeholder={d.confirmPassword}
+                        type="password"
+                        value={passwordForm.confirmNewPassword}
+                        onChange={(event) =>
+                          handlePasswordFieldChange("confirmNewPassword", event.target.value)
+                        }
+                      />
+                      <span className="label">{d.confirmPassword}</span>
+                    </div>
                   </div>
                 </div>
 
-                <div role="status" aria-live="polite">
-                  {passwordFeedback && (
-                    <p className={`form-feedback mt-1 ${passwordFeedback.type === "success" ? "form-feedback-success" : ""}`}>
-                      {passwordFeedback.message}
-                    </p>
-                  )}
+                <div className="dashboard-form-actions">
+                  <div role="status" aria-live="polite">
+                    {passwordFeedback && (
+                      <p className={`form-feedback mb-2 ${passwordFeedback.type === "success" ? "form-feedback-success" : ""}`}>
+                        {passwordFeedback.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <button className="submit" type="button" onClick={handleChangePassword}>
+                    {isSavingPassword ? d.updating : d.updatePassword}
+                  </button>
                 </div>
 
-                <button className="submit mt-2" type="button" onClick={handleChangePassword}>
-                  {isSavingPassword ? d.updating : d.updatePassword}
-                </button>
-
-                <div className="mt-3 rounded-[var(--radius-lg)] border border-[color:var(--color-primary-red)]/35 bg-[color:var(--color-primary-red)]/8 p-3">
+                <div className="mt-5 rounded-[var(--radius-lg)] border border-[color:var(--color-primary-red)]/35 bg-[color:var(--color-primary-red)]/8 p-4">
                   <h3 className="text-sm font-semibold text-[color:var(--color-red-ink)]">{d.dangerZone}</h3>
                   <p className="mt-1 text-xs text-[color:var(--color-red-ink)]">
                     {d.deleteWarning}
                   </p>
 
-                  <div className="input-group mt-2">
+                  <div className="input-group mt-3">
                     <input
                       placeholder={d.currentPassword}
                       type="password"
@@ -753,38 +764,48 @@ function DashboardPageContent() {
                 <h2 className="section-title !text-lg">{d.preferencesTitle}</h2>
                 <p className="mt-1 text-xs">{d.chooseUpdates}</p>
 
-                <div className="mt-3 space-y-2 rounded-[var(--radius-lg)] border border-[color:var(--line)] bg-[color:var(--surface-raised)] p-3">
-                  <div className="flex items-center justify-between text-sm">
-                    <label htmlFor="receive-newsletter">{d.newsletter}</label>
-                    <label className="checkbox-container" htmlFor="receive-newsletter">
-                      <input
-                        id="receive-newsletter"
-                        className="custom-checkbox"
-                        type="checkbox"
-                        checked={preferences.receiveNewsletter}
-                        onChange={() => handlePreferenceChange("receiveNewsletter")}
-                      />
-                      <span className="checkmark" aria-hidden="true" />
-                    </label>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <label htmlFor="allow-notifications">{d.notifications}</label>
-                    <label className="checkbox-container" htmlFor="allow-notifications">
-                      <input
-                        id="allow-notifications"
-                        className="custom-checkbox"
-                        type="checkbox"
-                        checked={preferences.allowNotifications}
-                        onChange={() => handlePreferenceChange("allowNotifications")}
-                      />
-                      <span className="checkmark" aria-hidden="true" />
-                    </label>
+                <div className="dashboard-form-section mt-3">
+                  <div className="rounded-[var(--radius-lg)] border border-[color:var(--line)] bg-[color:var(--surface-raised)] p-4">
+                    <div className="dashboard-pref-row">
+                      <div>
+                        <label className="dashboard-pref-label" htmlFor="receive-newsletter">{d.newsletter}</label>
+                        <p className="dashboard-pref-description">{d.newsletterDescription}</p>
+                      </div>
+                      <label className="checkbox-container" htmlFor="receive-newsletter">
+                        <input
+                          id="receive-newsletter"
+                          className="custom-checkbox"
+                          type="checkbox"
+                          checked={preferences.receiveNewsletter}
+                          onChange={() => handlePreferenceChange("receiveNewsletter")}
+                        />
+                        <span className="checkmark" aria-hidden="true" />
+                      </label>
+                    </div>
+                    <div className="dashboard-pref-row">
+                      <div>
+                        <label className="dashboard-pref-label" htmlFor="allow-notifications">{d.notifications}</label>
+                        <p className="dashboard-pref-description">{d.notificationsDescription}</p>
+                      </div>
+                      <label className="checkbox-container" htmlFor="allow-notifications">
+                        <input
+                          id="allow-notifications"
+                          className="custom-checkbox"
+                          type="checkbox"
+                          checked={preferences.allowNotifications}
+                          onChange={() => handlePreferenceChange("allowNotifications")}
+                        />
+                        <span className="checkmark" aria-hidden="true" />
+                      </label>
+                    </div>
                   </div>
                 </div>
 
-                <button className="submit mt-3" type="button" onClick={handleLogout}>
-                  {d.logout}
-                </button>
+                <div className="dashboard-form-actions">
+                  <button className="submit" type="button" onClick={handleLogout}>
+                    {d.logout}
+                  </button>
+                </div>
               </div>
             )}
           </article>

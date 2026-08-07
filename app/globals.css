@@ -2030,24 +2030,78 @@ html {
   .dashboard-form {
     max-width: min(100%, 900px) !important;
     margin-inline: auto;
-    padding: var(--sp-sm) !important;
+    padding: var(--sp-md) !important;
   }
 
   .dashboard-form .input-group {
-    margin-bottom: 8px;
+    margin-bottom: 18px;
   }
 
   .dashboard-form .input-group input,
   .dashboard-form .input-group select {
-    padding: 9px 12px;
-    min-height: 36px;
+    padding: 10px 12px;
+    min-height: 38px;
     font-size: 14px;
   }
 
   @media (min-width: 640px) {
     .dashboard-form {
-      padding: var(--sp-md) !important;
+      padding: var(--sp-lg) !important;
     }
+  }
+
+  /* Agrupa campos relacionados dentro de cada separador do dashboard (ex.:
+     identidade vs. dados adicionais na conta) com uma régua fina entre
+     grupos — sem isto os campos liam-se como uma pilha só, sem hierarquia. */
+  .dashboard-form-section + .dashboard-form-section {
+    margin-top: var(--sp-md);
+    padding-top: var(--sp-md);
+    border-top: 1px solid var(--line);
+  }
+
+  .dashboard-form-section-title {
+    /* O label flutuante do primeiro campo sobe 18px acima do próprio grupo
+       (ver .input-group .label) — a margem tem de absorver esse alcance
+       para não colidir com este título. */
+    margin-bottom: var(--sp-lg);
+    color: var(--link-accent) !important;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* Separa a ação (guardar/atualizar) dos campos que a precedem, para não
+     ficar ao mesmo peso visual do último campo do formulário. */
+  .dashboard-form-actions {
+    margin-top: var(--sp-md);
+    padding-top: var(--sp-sm);
+    border-top: 1px solid var(--line);
+  }
+
+  .dashboard-pref-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-sm);
+  }
+
+  .dashboard-pref-row + .dashboard-pref-row {
+    margin-top: var(--sp-sm);
+    padding-top: var(--sp-sm);
+    border-top: 1px solid var(--line-light);
+  }
+
+  .dashboard-pref-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--on-invert);
+  }
+
+  .dashboard-pref-description {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--on-invert-3);
   }
 
   .login-form * {
