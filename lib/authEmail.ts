@@ -2,39 +2,60 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/authEmail.ts` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
+import { getAppBaseUrl } from "./appUrl";
 import { assertEmailEnv } from "./email";
-
-const normalizeBaseUrl = (rawUrl: string) => {
-  // Remove espaços e barra final para evitar URLs duplicadas com "//" ao concatenar paths.
-  const sanitizedUrl = rawUrl.trim().replace(/\/+$/, "");
-
-  // Prefixa protocolo HTTPS quando a variável vier só com host (ex.: domínio sem esquema).
-  if (!/^https?:\/\//i.test(sanitizedUrl)) {
-    return `https://${sanitizedUrl}`;
-  }
-
-  return sanitizedUrl;
-};
 
 const resolveAppBaseUrl = () => {
   // Valida a configuração de e-mail (inclui APP_URL) antes de montar qualquer link.
   assertEmailEnv();
 
-  return normalizeBaseUrl(process.env.APP_URL!);
+  return getAppBaseUrl();
 };
 
-const createLayout = (title: string, description: string, buttonLabel: string, buttonUrl: string) => {
-  // Gera HTML padronizado para e-mails de autenticação com CTA principal.
+const createLayout = (
+  appBaseUrl: string,
+  title: string,
+  description: string,
+  buttonLabel: string,
+  buttonUrl: string
+) => {
+  // Gera HTML padronizado para e-mails de autenticação com as cores da marca
+  // (roxo — ver STYLEGUIDE.md) em vez de um template genérico vermelho/cinza.
+  // Tabela para o botão em vez de <a> com background direto: é o padrão
+  // "bulletproof button", o único jeito fiável de pintar o fundo do CTA no
+  // Outlook desktop (motor Word), que ignora background em <a>/<div>.
   return `
-    <div style="font-family: Arial, sans-serif; max-width: 560px; margin: 0 auto; padding: 24px; background: #ededed; color: #05141d;">
-      <h1 style="font-size: 24px; margin-bottom: 12px; color: #05141d;">${title}</h1>
-      <p style="font-size: 16px; line-height: 1.5; margin-bottom: 20px;">${description}</p>
-      <a href="${buttonUrl}" style="display: inline-block; background: #e20e17; color: #ededed; text-decoration: none; padding: 12px 18px; border-radius: 8px; font-weight: 700;">
-        ${buttonLabel}
-      </a>
-      <p style="font-size: 13px; color: #4a575e; margin-top: 18px; line-height: 1.4;">
-        Se o botão não funcionar, copie e cole este link no browser:<br />
-        <a href="${buttonUrl}" style="color: #e20e17;">${buttonUrl}</a>
+    <div style="background: #f3f1fb; padding: 40px 16px; font-family: Arial, Helvetica, sans-serif;">
+      <div style="max-width: 560px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(90, 61, 199, 0.12);">
+        <div style="height: 6px; line-height: 0; font-size: 0; background-color: #6a4ade;">&nbsp;</div>
+        <div style="padding: 40px 36px;">
+          <img
+            src="${appBaseUrl}/icon-512.png"
+            width="44"
+            height="44"
+            alt="Cliente Mistério"
+            style="display: block; width: 44px; height: 44px; border-radius: 10px; margin-bottom: 20px;"
+          />
+          <h1 style="font-size: 22px; line-height: 1.3; margin: 0 0 12px; color: #141416; font-weight: 700;">${title}</h1>
+          <p style="font-size: 15px; line-height: 1.6; margin: 0 0 28px; color: #4d4d55;">${description}</p>
+          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 0 28px;">
+            <tr>
+              <td style="border-radius: 6px; background-color: #6a4ade;">
+                <a
+                  href="${buttonUrl}"
+                  style="display: inline-block; padding: 14px 28px; font-size: 15px; font-weight: 700; color: #ffffff; text-decoration: none; font-family: Arial, Helvetica, sans-serif;"
+                >${buttonLabel}</a>
+              </td>
+            </tr>
+          </table>
+          <p style="font-size: 13px; color: #74747e; margin: 0; line-height: 1.5;">
+            Se o botão não funcionar, copie e cole este link no browser:<br />
+            <a href="${buttonUrl}" style="color: #6a4ade; word-break: break-all;">${buttonUrl}</a>
+          </p>
+        </div>
+      </div>
+      <p style="max-width: 560px; margin: 20px auto 0; padding: 0 16px; text-align: center; font-size: 12px; color: #9a94ad;">
+        Cliente Mistério · <a href="${appBaseUrl}" style="color: #9a94ad;">clientemisterio.com</a>
       </p>
     </div>
   `;
@@ -48,6 +69,7 @@ export const createEmailConfirmationTemplate = (token: string) => {
   return {
     subject: "Confirmação de conta - Cliente Mistério",
     html: createLayout(
+      appBaseUrl,
       "Confirme a sua conta",
       "Obrigado pelo registo. Para concluir a criação da conta e poder iniciar sessão, confirme o seu e-mail.",
       "Confirmar conta",
@@ -64,6 +86,7 @@ export const createPasswordResetTemplate = (token: string) => {
   return {
     subject: "Reposição de password - Cliente Mistério",
     html: createLayout(
+      appBaseUrl,
       "Reposição de password",
       "Recebemos um pedido para redefinir a sua password. Clique no botão abaixo para criar uma nova password.",
       "Redefinir password",

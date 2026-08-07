@@ -33,6 +33,7 @@ export default function LoginPage() {
   useEffect(() => {
     const urlParameters = new URLSearchParams(window.location.search);
     const checkout = urlParameters.get("checkout") === "1";
+    const confirmed = urlParameters.get("confirmed");
     setIsCheckout(checkout);
 
     if (urlParameters.get("registered") === "1") {
@@ -43,6 +44,10 @@ export default function LoginPage() {
       }
     } else if (checkout) {
       setFeedback({ message: t.auth.checkoutRequired, type: "success" });
+    } else if (confirmed === "1") {
+      setFeedback({ message: t.auth.emailConfirmed, type: "success" });
+    } else if (confirmed === "0") {
+      setFeedback({ message: t.auth.emailConfirmError, type: "error" });
     }
 
     // A sessão vive só no cookie httpOnly — pergunta ao servidor em vez de
@@ -51,8 +56,11 @@ export default function LoginPage() {
     fetch("/api/auth/session", { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : { authenticated: false }))
       .then((data: { authenticated: boolean }) => {
+        // Vem do fluxo de compra sem conta — leva a /o-curso para o cliente
+        // ver a informação do curso antes do Stripe, em vez de saltar direto
+        // para o pagamento.
         if (!cancelled && data.authenticated) {
-          router.push(checkout ? "/checkout" : "/dashboard");
+          router.push(checkout ? "/o-curso" : "/dashboard");
         }
       })
       .catch(() => {});
@@ -88,8 +96,9 @@ export default function LoginPage() {
       }
 
       // O login já deixou o cookie httpOnly definido no servidor — nada a
-      // guardar no cliente.
-      router.push(isCheckout ? "/checkout" : "/dashboard");
+      // guardar no cliente. Vem do fluxo de compra sem conta — leva a
+      // /o-curso para o cliente ver a informação do curso antes do Stripe.
+      router.push(isCheckout ? "/o-curso" : "/dashboard");
     } catch {
       setFeedback({ message: t.auth.loginError, type: "error" });
     } finally {

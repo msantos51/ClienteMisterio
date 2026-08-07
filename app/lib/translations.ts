@@ -211,6 +211,8 @@ export const translations = {
       loginSuccessCheckout: "Conta criada com sucesso. Inicia sessão para continuar com a compra.",
       checkoutRequired: "Para proceder com a compra é necessário iniciar sessão ou criar uma conta.",
       loginError: "Não foi possível iniciar sessão. Tenta novamente.",
+      emailConfirmed: "Conta confirmada com sucesso. Já podes iniciar sessão.",
+      emailConfirmError: "Não foi possível confirmar a conta. O link pode ter expirado ou já ter sido utilizado.",
 
       // Register
       registerTitle: "Criar Conta",
@@ -759,6 +761,8 @@ export const translations = {
       loginSuccessCheckout: "Account created successfully. Sign in to continue with your purchase.",
       checkoutRequired: "You need to sign in or create an account to proceed with checkout.",
       loginError: "Unable to sign in. Please try again.",
+      emailConfirmed: "Account confirmed successfully. You can now sign in.",
+      emailConfirmError: "Unable to confirm your account. The link may have expired or already been used.",
 
       // Register
       registerTitle: "Create Account",
