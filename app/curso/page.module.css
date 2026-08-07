@@ -821,6 +821,60 @@
 .premGood .premList li::before { background: var(--color-success); }
 .premBad .premList li::before { background: var(--color-danger); }
 
+/* Empresas recrutadoras (módulo do certificado) */
+.companyGroup { margin: 0 0 32px; }
+.companyGroup:last-child { margin-bottom: 0; }
+.companyGroupTitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--link-accent);
+  margin: 0 0 16px;
+}
+.companyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 640px) { .companyGrid { grid-template-columns: 1fr 1fr; } }
+.companyCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--hairline-invert);
+  background: var(--input-bg);
+  padding: 22px;
+}
+.companyName {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--on-invert);
+  margin: 0;
+}
+.companyDesc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--on-invert-2);
+  margin: 0;
+  flex: 1;
+}
+a.companyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  align-self: flex-start;
+}
+a.companyLink:hover { color: var(--color-red-2); }
+
 /* Exemplo de avaliação */
 .example {
   border-radius: var(--radius-lg);

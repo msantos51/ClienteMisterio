@@ -474,6 +474,8 @@ export const translations = {
       preparingCertificate: "A preparar certificado...",
       downloadCertificate: "Descarregar Certificado em PDF",
       startQuiz: "Iniciar Questionário",
+      recruitingCompaniesTitle: "Empresas que recrutam clientes mistério",
+      visitWebsite: "Visitar site",
     },
 
     // Catalog Page
@@ -1020,6 +1022,8 @@ export const translations = {
       preparingCertificate: "Preparing certificate...",
       downloadCertificate: "Download PDF Certificate",
       startQuiz: "Start Quiz",
+      recruitingCompaniesTitle: "Companies recruiting mystery shoppers",
+      visitWebsite: "Visit website",
     },
 
     // Catalog Page

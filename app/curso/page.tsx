@@ -701,6 +701,40 @@ function CursoPageContent() {
                   ))}
                 </div>
 
+                {/* Recruiting companies (certificate module, last page) */}
+                {isLastTheoryPage && activeModule.recruitingCompanies && activeModule.recruitingCompanies.length > 0 && (
+                  <>
+                    <div className={styles.readerBreak}>
+                      <span className={styles.readerBreakIcon}>§</span>
+                    </div>
+
+                    <h2 className={styles.readerH2}>{cp.recruitingCompaniesTitle}</h2>
+
+                    {activeModule.recruitingCompanies.map((group) => (
+                      <div key={group.category} className={styles.companyGroup}>
+                        <p className={styles.companyGroupTitle}>{group.category}</p>
+                        <div className={styles.companyGrid}>
+                          {group.companies.map((company) => (
+                            <div key={company.name} className={styles.companyCard}>
+                              <p className={styles.companyName}>{company.name}</p>
+                              <p className={styles.companyDesc}>{company.description}</p>
+                              <a
+                                href={company.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.companyLink}
+                              >
+                                {cp.visitWebsite}
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+                              </a>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                )}
+
                 {/* Premium content on last page */}
                 {premiumTheoryPage && theoryPage === allTheoryPages.length - 1 && activeSupportContent && (
                   <>
