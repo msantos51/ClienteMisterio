@@ -2,6 +2,8 @@
  * DESCRIÇÃO DO FICHEIRO: Este ficheiro implementa a lógica de `lib/authEmail.ts` no projeto, incluindo as responsabilidades principais desta unidade.
  */
 
+import { assertEmailEnv } from "./email";
+
 const normalizeBaseUrl = (rawUrl: string) => {
   // Remove espaços e barra final para evitar URLs duplicadas com "//" ao concatenar paths.
   const sanitizedUrl = rawUrl.trim().replace(/\/+$/, "");
@@ -15,17 +17,10 @@ const normalizeBaseUrl = (rawUrl: string) => {
 };
 
 const resolveAppBaseUrl = () => {
-  // Resolve a URL pública da aplicação com fallback entre variáveis comuns de deploy.
-  const rawBaseUrl =
-    process.env.APP_BASE_URL?.trim() ||
-    process.env.NEXT_PUBLIC_APP_URL?.trim() ||
-    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() ||
-    process.env.VERCEL_URL?.trim() ||
-    process.env.RAILWAY_PUBLIC_DOMAIN?.trim() ||
-    process.env.RENDER_EXTERNAL_URL?.trim() ||
-    "http://localhost:3000";
+  // Valida a configuração de e-mail (inclui APP_URL) antes de montar qualquer link.
+  assertEmailEnv();
 
-  return normalizeBaseUrl(rawBaseUrl);
+  return normalizeBaseUrl(process.env.APP_URL!);
 };
 
 const createLayout = (title: string, description: string, buttonLabel: string, buttonUrl: string) => {

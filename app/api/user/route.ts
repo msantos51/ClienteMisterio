@@ -181,8 +181,10 @@ export const PUT = async (request: Request) => {
         ]
       );
 
-      const template = createEmailConfirmationTemplate(confirmationToken);
       try {
+        // Construção do template (inclui validação de APP_URL) entra no mesmo try do envio:
+        // falha de configuração de e-mail não deve impedir a atualização do perfil já guardada.
+        const template = createEmailConfirmationTemplate(confirmationToken);
         await sendEmail({ to: normalizedEmail, subject: template.subject, html: template.html });
       } catch (error) {
         // A atualização do perfil já foi guardada; a pessoa pode pedir reenvio do e-mail de confirmação.
