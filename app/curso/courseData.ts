@@ -23,6 +23,17 @@ export type CoursePage = {
  blocks: string[];
 };
 
+export type RecruitingCompany = {
+ name: string;
+ description: string;
+ url: string;
+};
+
+export type RecruitingCompanyGroup = {
+ category: string;
+ companies: RecruitingCompany[];
+};
+
 export type CourseModule = {
  id: number;
  title: string;
@@ -35,6 +46,7 @@ export type CourseModule = {
  warning?: string;
  benefit?: string;
  evaluationExamples?: EvaluationExample[];
+ recruitingCompanies?: RecruitingCompanyGroup[];
 };
 
 // Forma pública do módulo, sem a resposta certa de cada pergunta — é o que
@@ -231,6 +243,15 @@ export const courseModules: CourseModule[] = [
      "Exemplo real: missão de 25 €, 40 minutos de carro (ida e volta), 30 minutos de visita, 40 minutos de relatório. São quase duas horas e uns 6 € de combustível: rende cerca de 10 €/hora. Agora agrupa três missões na mesma zona no mesmo dia e o valor por hora quase duplica — o segredo nunca foi a missão, foi a **rota**.",
     ],
    },
+   {
+    title: "Página 4 — Do primeiro registo à escolha estratégica",
+    blocks: [
+     "Este mercado não tem uma única porta de entrada. Se nunca fizeste nada parecido, o objetivo do primeiro mês é simples: fechar o ciclo completo em missões pequenas — candidatar, executar, documentar, submeter, ser aprovado. Não persigas o honorário mais alto; persegue a primeira aprovação limpa.",
+     "Se já vens de uma área próxima — atendimento ao público, receção de hotel, auditoria de qualidade, gestão de loja — já trazes o olho treinado para reparar no que a maioria demora meses a notar. Isso encurta a curva de **observação**. Não encurta, porém, a curva de **confiança**: nenhuma plataforma te dá uma missão de 150 € na primeira semana só porque o teu currículo é bom. A reputação constrói-se sempre com missões concluídas, não com experiência importada de outro lado.",
+     "A vantagem de quem já tem experiência é outra: sabe mais depressa em que setor quer especializar-se. Se já trabalhaste em concessionários, o automóvel é o teu atalho natural; se já trabalhaste em hotelaria, é aí que vais render mais rápido. Usa essa vantagem para escolher setor cedo — não para saltar etapas de confiança.",
+     "Seja qual for o ponto de partida, a fórmula para subir de nível é a mesma: perfil completo, resposta rápida a convites, prazos sempre cumpridos. Isso é o que as plataformas medem — e é sobre isso que voltamos a falar em detalhe no Módulo 10.",
+    ],
+   },
   ],
   evaluationExamples: [
    {
@@ -308,6 +329,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m2q6",
+    question: "Quem já tem experiência numa área próxima (hotelaria, atendimento, auditoria) pode saltar a fase de construir reputação nas plataformas?",
+    options: [
+     "Sim, a experiência substitui sempre as primeiras missões",
+     "Não — a experiência ajuda a observar melhor e a escolher setor mais depressa, mas a reputação constrói-se sempre com missões concluídas",
+     "Sim, desde que apresente o currículo à agência",
+     "Não, a experiência prévia não tem qualquer utilidade neste mercado",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -358,6 +390,15 @@ export const courseModules: CourseModule[] = [
      "**Fraude.** Inventar uma visita, reutilizar um talão antigo, copiar um relatório anterior ou pedir a outra pessoa que faça a missão por ti são motivos de exclusão imediata e, dependendo do caso, de responsabilidade civil. Vale sempre menos do que a missão que estavas a tentar salvar.",
      "**Dados pessoais.** Podes registar o nome próprio que consta do crachá e a descrição funcional (\"colaborador do balcão, cerca de 30 anos, camisa azul\"). Não recolhas dados de saúde, opiniões políticas, morada ou fotografias de rosto sem base para isso. O RGPD aplica-se a ti tal como a qualquer profissional.",
      "**Provocação.** Não crias cenários artificiais para \"apanhar\" alguém: não peças descontos ilegais, não simules conflitos, não insistas depois de um não. Avalias o serviço normal — não uma armadilha montada por ti.",
+    ],
+   },
+   {
+    title: "Página 4 — Calibrar a discrição consoante o contexto",
+    blocks: [
+     "Numa loja ou num café, aplicar as três regras de ouro é quase automático: entras, observas, sais, ninguém repara em ti. É por aí que todos começam, e é suficiente para 80% das missões do mercado.",
+     "Em missões mais longas — uma estadia de hotel de duas noites, um test-drive com follow-up, um processo de crédito com três contactos — o risco de exposição multiplica-se. Já não basta manter o cenário coerente durante 10 minutos; tens de o manter durante horas ou dias, perante várias pessoas que podem comparar notas entre si. Escreve o teu cenário antes de partires, exatamente como farias com um guião de teatro: quem és, porque estás ali, o que dizes se alguém repetir a pergunta no dia seguinte.",
+     "Há também um dilema que só aparece com a experiência: numa estadia longa, é fácil desenvolver simpatia genuína por um rececionista simpático que te ajudou várias vezes. É precisamente aí que a imparcialidade custa mais a manter — porque já não é uma pessoa desconhecida durante cinco minutos, é alguém com quem interagiste o fim de semana todo. A regra não muda: avalias o cumprimento dos critérios, não a relação que se criou.",
+     "Fica a ideia central deste módulo, para levares para todos os que se seguem: mais experiência não te dá licença para relaxar as três regras — dá-te apenas mais contextos onde as tens de aplicar com mais subtileza.",
     ],
    },
   ],
@@ -425,6 +466,17 @@ export const courseModules: CourseModule[] = [
      "Porque se as equipas souberem quando são avaliadas, o dado deixa de ser real",
      "Porque as marcas exigem sigilo por moda",
      "Porque evita que outros avaliadores concorram",
+    ],
+    correctIndex: 1,
+   },
+   {
+    id: "m3q6",
+    question: "Numa missão longa, como uma estadia de hotel de duas noites, o que muda em relação às três regras de ouro?",
+    options: [
+     "As regras deixam de se aplicar, porque já não é uma visita rápida",
+     "As regras mantêm-se, mas exigem mais cuidado a manter o cenário coerente ao longo do tempo",
+     "Só a confidencialidade continua a ser obrigatória",
+     "A simpatia genuína criada com a equipa passa a justificar avaliações mais brandas",
     ],
     correctIndex: 1,
    },
@@ -882,6 +934,15 @@ export const courseModules: CourseModule[] = [
      "Respeita os limites: as evidências são para a missão e mais nada. Não as publiques, não as partilhes, não as reutilizes noutra missão. Passado o prazo de guarda, apaga o que contém dados pessoais — é a atitude correta e é o que o RGPD espera de ti.",
     ],
    },
+   {
+    title: "Página 4 — Sistema de evidências para quem já faz várias missões por semana",
+    blocks: [
+     "Enquanto fazes uma ou duas missões por mês, uma pasta no telemóvel chega perfeitamente. O problema aparece quando o volume cresce: a partir de quatro ou cinco missões por semana, o método manual começa a falhar — talões trocados, fotos sem nome, uma agência a perguntar por uma evidência que já não sabes onde está.",
+     "Nessa fase, vale a pena migrar para uma pasta na nuvem sincronizada automaticamente (Drive, iCloud ou equivalente), organizada sempre pela mesma convenção de nomes que já usas: data, marca, cidade, código da missão. O ganho não é só arrumação — é teres a evidência acessível mesmo se perderes o telemóvel a meio de uma semana cheia.",
+     "Junta o registo de evidências a uma folha de acompanhamento simples, com uma linha por missão: data, marca, honorário, reembolso, prazo de submissão, estado (submetida, aprovada, paga). É a mesma lógica de controlo que vais aprofundar no Módulo 9 para a parte financeira — aqui serve para nunca perderes o rasto de uma prova.",
+     "E mantém a disciplina de sempre: duas cópias de cada evidência importante (telemóvel + nuvem), respeito pelo prazo de guarda de cada plataforma, e uma limpeza periódica — trimestral, por exemplo — para apagar o que já passou do prazo e contém dados pessoais de terceiros.",
+    ],
+   },
   ],
   quiz: [
    {
@@ -939,6 +1000,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m7q6",
+    question: "A partir de que ponto compensa migrar de uma pasta manual no telemóvel para um sistema mais organizado de evidências?",
+    options: [
+     "Nunca — a pasta manual chega sempre, independentemente do volume",
+     "Quando o volume de missões sobe (por exemplo, quatro ou cinco por semana) e o método manual começa a falhar",
+     "Apenas se a agência o exigir por escrito",
+     "Só depois de a primeira evidência se perder",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -990,6 +1062,15 @@ export const courseModules: CourseModule[] = [
      "**3. Evidências.** Talão legível, fotografias exigidas anexadas, ficheiros com o nome certo e no formato pedido?",
      "**4. Língua.** Ortografia e pontuação revistas. Um relatório com erros grosseiros parece feito à pressa — e passa a ideia de que a observação também foi.",
      "**5. Prazo.** Submetido dentro do prazo. Muitas plataformas exigem 12 a 24 horas após a visita e cortam automaticamente o pagamento a quem chega atrasado. Se surgir um imprevisto, avisa antes de o prazo terminar, nunca depois.",
+    ],
+   },
+   {
+    title: "Página 4 — Do relatório único ao sistema de escrita",
+    blocks: [
+     "No início, cada relatório demora o que tem de demorar: tudo é novo, cada campo obriga a pensar duas vezes. É o preço normal de aprender e não há atalho honesto para o saltar.",
+     "Quem já escreveu vinte ou trinta relatórios do mesmo tipo de missão começa naturalmente a criar \"moldes\" mentais — a mesma ordem, os mesmos blocos, frases que já sabem funcionar. Isso é bom: acelera e reduz erros de estrutura.",
+     "O risco aparece quando o molde deixa de ser estrutura e passa a ser texto copiado. Um banco pessoal de frases para situações recorrentes (\"colaborador não ofereceu o cartão de cliente\", \"espera superior a 5 minutos com caixa livre\") é uma ferramenta legítima — desde que cada frase seja sempre reescrita com os factos específicos daquela visita: a hora certa, o crachá certo, o número certo.",
+     "As agências com mais experiência sabem identificar relatórios \"parecidos demais\" do mesmo avaliador em missões diferentes — é um dos sinais mais óbvios de texto reciclado, e levanta suspeita de fraude mesmo quando a visita foi real. A velocidade que a experiência traz nunca pode substituir a variação genuína dos factos observados: mais rápido a escrever, sim; mais descuidado a verificar, nunca.",
     ],
    },
   ],
@@ -1065,6 +1146,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 0,
    },
+   {
+    id: "m8q6",
+    question: "Um avaliador experiente usa um banco pessoal de frases-modelo para acelerar a escrita. O que é indispensável para que isso continue a ser uma boa prática?",
+    options: [
+     "Usar sempre a mesma frase, sem alterações, para poupar tempo",
+     "Reescrever cada frase com os factos específicos da visita em causa (hora, nome, número)",
+     "Só usar frases-modelo em missões de baixo valor",
+     "Pedir autorização da agência para cada frase reutilizada",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -1115,6 +1207,15 @@ export const courseModules: CourseModule[] = [
      "O que declaras é o **honorário**, o teu rendimento. Reembolsos de despesa devidamente documentados têm tratamento diferente — vale a pena confirmar com um contabilista logo no início, sobretudo se as missões passarem a ser regulares.",
      "Existe uma isenção de IVA para quem tem rendimento anual baixo (o limiar é revisto periodicamente). Enquanto estiveres abaixo desse valor, emites recibos sem IVA; ao ultrapassá-lo, passas ao regime normal. Confirma sempre o valor em vigor no ano em causa.",
      "**Guarda tudo.** Recibos emitidos, comprovativos de pagamento, faturas de combustível e talões. Se um dia esta atividade passar de complemento a profissão, vais querer ter os últimos dois anos organizados — e a tua futura contabilista vai adorar-te.",
+    ],
+   },
+   {
+    title: "Página 4 — De complemento a atividade séria",
+    blocks: [
+     "Nos primeiros meses, com uma missão ocasional aqui e ali, uma folha simples com data, honorário e reembolso chega perfeitamente. É o suficiente para saberes se compensa continuar.",
+     "Quando o ritmo sobe — 15, 20 missões por mês, várias plataformas em simultâneo — a contabilidade exige mais rigor: reconcilia todos os meses os honorários recebidos com os recibos verdes emitidos, e não deixes essa reconciliação acumular-se para o fim do ano.",
+     "Nessa fase, diversificar deixa de ser só uma tática de agenda (como vimos no Módulo 2) e passa a ser proteção de rendimento: trabalhar com três ou quatro agências ou plataformas diferentes evita que uma quebra sazonal de um único operador — um projeto que acaba, uma pausa de contrato — te deixe sem missões durante semanas.",
+     "E há um ponto de decisão real que só chega com o volume: quando o rendimento mensal desta atividade se torna relevante para o teu orçamento, vale a pena sentar com um contabilista e confirmar se o enquadramento atual (recibos verdes simples) continua a ser o mais adequado. Não é uma decisão para tomar sozinho, nem de véspera da entrega do IRS.",
     ],
    },
   ],
@@ -1189,6 +1290,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m9q6",
+    question: "Porque é que trabalhar com várias agências ou plataformas em simultâneo protege o rendimento, à medida que o volume de missões cresce?",
+    options: [
+     "Porque cada plataforma paga mais quando há concorrência entre avaliadores",
+     "Porque evita que a quebra sazonal de um único operador te deixe sem missões durante semanas",
+     "Porque reduz os impostos a pagar",
+     "Porque as plataformas exigem exclusividade a partir de certo volume",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -1239,6 +1351,15 @@ export const courseModules: CourseModule[] = [
      "**Especializa-te em dois ou três setores.** Quem repete o mesmo tipo de missão fica mais rápido, escreve melhores relatórios e sobe de classificação. Restauração e retalho são portas de entrada; banca, automóvel e hotelaria são onde está o dinheiro sério.",
      "**Constrói relação com as agências.** Responde rápido, cumpre prazos, avisa quando algo corre mal e sê educado com quem revê os teus relatórios. Passados alguns meses começam a chegar convites diretos — as missões que nunca chegam a ser publicadas.",
      "**Meta realista para os primeiros três meses:** 4 a 8 missões por mês, entre 80 € e 250 € de honorário mensal, e uma classificação acima da média. A partir daí, é escolher: manter como complemento ou empurrar para valores que já pagam contas.",
+    ],
+   },
+   {
+    title: "Página 4 — Depois dos 90 dias: o caminho sénior",
+    blocks: [
+     "Com os primeiros três meses cumpridos e uma boa classificação, abre-se um caminho que poucos avaliadores conhecem à partida: algumas agências convidam avaliadores fiáveis para funções de **revisor ou validador** dos relatórios de outros avaliadores — mais responsabilidade, e normalmente remuneração fixa ou por lote de relatórios revistos, em vez de por missão.",
+     "Quem já vem de outra área — atendimento, hotelaria, auditoria de qualidade — tende a chegar mais depressa a este ponto, porque já traz hábitos de rigor treinados noutro contexto. Mas só chega lá com histórico de missões cumpridas nesta atividade: currículo de fora abre portas, não substitui a confiança construída aqui dentro.",
+     "Outro caminho, mais comum, é a **especialização vertical**: concentrares-te num setor de alto valor — automóvel, banca, hotelaria — até te tornares o avaliador de referência de uma agência para essa categoria. É aí que aparecem os convites diretos para missões que nunca chegam a ser publicadas, o objetivo que persegues desde a Página 3 deste módulo.",
+     "Seja qual for o caminho que te atrair, o próximo passo é sempre o mesmo e é imediato: candidatares-te. No módulo seguinte — o do certificado — encontras uma lista concreta de empresas e plataformas onde podes começar a fazê-lo hoje mesmo.",
     ],
    },
   ],
@@ -1318,6 +1439,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m10q6",
+    question: "O que é necessário para uma agência convidar um avaliador para funções de revisor ou validador de relatórios?",
+    options: [
+     "Ter um currículo forte noutra área, independentemente do histórico na plataforma",
+     "Ter histórico de missões cumpridas e boa classificação nesta atividade",
+     "Pagar uma taxa de acesso ao nível seguinte",
+     "Completar apenas o certificado do curso",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -1348,6 +1480,93 @@ export const courseModules: CourseModule[] = [
      "Levas contigo o método completo: **enquadramento** do mercado, **ética** e conduta, **observação objetiva**, **preparação**, **execução**, **evidências**, **relatório**, **contas** e um **plano de 30 dias** para arrancar.",
      "O teu **certificado nominal em PDF** está disponível no botão abaixo. Anexa-o ao perfil em todas as plataformas: mostra que sabes o que é um briefing, um item de guião e um prazo — coisas que a maioria dos candidatos descobre a errar.",
      "Agora falta a única parte que não se aprende a ler: **a primeira missão**. Escolhe uma pequena, perto de casa, esta semana. O resto vem com quilómetros — e com talões bem fotografados.",
+    ],
+   },
+   {
+    title: "Página 2 — Onde te candidatares agora",
+    blocks: [
+     "O certificado prova que sabes preparar, executar e reportar uma missão com rigor. A parte que falta já não se aprende a ler: é candidatares-te. Tal como no Módulo 2, o mercado divide-se em dois tipos de operador — plataformas internacionais de autorregisto e agências ou institutos portugueses que publicam vagas com regularidade.",
+     "A lista abaixo não é exaustiva — o mercado muda, plataformas fecham e outras abrem — mas é um ponto de partida real e verificado. Regista-te em pelo menos cinco ou seis ao mesmo tempo, hoje, enquanto o método ainda está fresco, e preenche o perfil a 100% em cada uma: é o que separa quem começa a receber convites em duas semanas de quem espera meses (Módulo 10, Página 1).",
+     "E o aviso do costume, porque vale sempre a pena repetir: nenhuma empresa séria — nem nenhuma das que aqui estão — cobra para te registares, para te \"certificar\" ou para desbloquear missões. Se alguém pedir dinheiro, não é uma oportunidade, é um esquema. Ignora e segue para a próxima da lista.",
+    ],
+   },
+  ],
+  recruitingCompanies: [
+   {
+    category: "Plataformas internacionais de autorregisto",
+    companies: [
+     {
+      name: "BARE International",
+      description:
+       "A maior rede internacional de avaliadores de cliente mistério, com missões em dezenas de países e uma área própria dedicada a quem quer começar.",
+      url: "https://www.bareinternational.com/evaluators/",
+     },
+     {
+      name: "Secret View",
+      description:
+       "Plataforma global com mais de 75 mil avaliadores registados e missões ativas em Portugal, com registo direto online.",
+      url: "https://www.secretview.io/en",
+     },
+     {
+      name: "Globis Survey",
+      description:
+       "Rede internacional com uma página dedicada a \"tornares-te cliente mistério\", sem entrevista prévia.",
+      url: "https://www.globis-survey.com/en/become-a-mystery-shopper/",
+     },
+     {
+      name: "Ipsos",
+      description:
+       "Um dos maiores institutos de estudos de mercado do mundo, com uma prática dedicada a mystery shopping em vários setores.",
+      url: "https://www.ipsos.com/en-us/mystery-shopping-0",
+     },
+    ],
+   },
+   {
+    category: "Agências e institutos em Portugal",
+    companies: [
+     {
+      name: "SGS Portugal",
+      description:
+       "Multinacional de inspeção e certificação com missões de cliente mistério em retalho, banca, automóvel e restauração.",
+      url: "https://www.sgs.com/en-pt/services/mystery-shopping",
+     },
+     {
+      name: "DEKRA Portugal",
+      description:
+       "Auditorias e avaliações de cliente mistério em diversos setores, com plataforma própria de registo de avaliadores.",
+      url: "https://www.dekra.pt/pt/cliente-misterio-auditorias/",
+     },
+     {
+      name: "IMR — Instituto de Marketing Research",
+      description:
+       "Instituto português de estudos de mercado com ofertas regulares para avaliadores de cliente mistério em todo o país.",
+      url: "https://www.imr.pt/pt/ofertas-de-emprego/cliente-misterio",
+     },
+     {
+      name: "Intercampus",
+      description: "Agência portuguesa de investigação de mercado com painel próprio de clientes mistério.",
+      url: "https://intercampus.pt/clientes_misterio/",
+     },
+     {
+      name: "QSP Marketing",
+      description: "Consultora portuguesa de marketing e research que recruta avaliadores para estudos de mystery shopper.",
+      url: "https://qspmarketing.pt/research-tecnicas/mystery-shopper/",
+     },
+     {
+      name: "Consulmark",
+      description: "Empresa de estudos de mercado sediada em Lisboa, com serviço dedicado de mystery shopping.",
+      url: "https://www.consulmark.pt/?produtos=mystery-shopping",
+     },
+     {
+      name: "SmartSkills",
+      description: "A recrutar e formar avaliadores em Portugal desde 2006, com centenas de missões já realizadas.",
+      url: "https://smartskills.pt/en/servicos/8/Mystery-Shopping-Audit",
+     },
+     {
+      name: "Triangulu",
+      description: "Agência portuguesa de research com serviço de cliente mistério para marcas de retalho e serviços.",
+      url: "https://www.triangulu.pt/servicos/clientemisterio/",
+     },
     ],
    },
   ],

@@ -24,6 +24,17 @@ export type CoursePage = {
  blocks: string[];
 };
 
+export type RecruitingCompany = {
+ name: string;
+ description: string;
+ url: string;
+};
+
+export type RecruitingCompanyGroup = {
+ category: string;
+ companies: RecruitingCompany[];
+};
+
 export type CourseModule = {
  id: number;
  title: string;
@@ -36,6 +47,7 @@ export type CourseModule = {
  warning?: string;
  benefit?: string;
  evaluationExamples?: EvaluationExample[];
+ recruitingCompanies?: RecruitingCompanyGroup[];
 };
 
 export const courseModules: CourseModule[] = [
@@ -226,6 +238,15 @@ export const courseModules: CourseModule[] = [
      "A real example: €25 mission, 40 minutes driving round trip, 30 minutes on site, 40 minutes writing. That's almost two hours and about €6 of fuel: roughly €10/hour. Now group three missions in the same area on the same day and the hourly rate almost doubles — the secret was never the mission, it was the **route**.",
     ],
    },
+   {
+    title: "Page 4 — From first sign-up to a real strategy",
+    blocks: [
+     "This market doesn't have a single entry point. If you've never done anything like this, the goal of month one is simple: close the full cycle on small missions — apply, execute, document, submit, get approved. Don't chase the highest fee; chase the first clean approval.",
+     "If you already come from an adjacent field — customer service, hotel reception, quality auditing, store management — you already bring a trained eye for what most people take months to notice. That shortens the **observation** curve. It does not shorten the **trust** curve: no platform hands you a €150 mission in week one just because your CV looks good. Reputation is always built with completed missions, not with experience imported from elsewhere.",
+     "The real advantage of prior experience is different: you know faster which sector to specialise in. If you've worked at a car dealership, automotive is your natural shortcut; if you've worked in hospitality, that's where you'll ramp up fastest. Use that advantage to pick a sector early — not to skip trust-building steps.",
+     "Whatever your starting point, the formula for levelling up is the same: a complete profile, fast responses to invitations, deadlines always met. That's what platforms actually measure — and we come back to it in detail in Module 10.",
+    ],
+   },
   ],
   evaluationExamples: [
    {
@@ -303,6 +324,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m2q6",
+    question: "Can someone with experience in an adjacent field (hospitality, customer service, auditing) skip the phase of building platform reputation?",
+    options: [
+     "Yes, experience always replaces the first missions",
+     "No — experience helps you observe better and pick a sector faster, but reputation is always built with completed missions",
+     "Yes, as long as they submit their CV to the agency",
+     "No, prior experience is of no use at all in this market",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -353,6 +385,15 @@ export const courseModules: CourseModule[] = [
      "**Fraud.** Inventing a visit, reusing an old receipt, copying a previous report or asking someone else to run the mission for you all mean immediate exclusion and, in some cases, civil liability. It's always worth less than the mission you were trying to save.",
      "**Personal data.** You may record the first name shown on a badge and a functional description (\"counter assistant, around 30, blue shirt\"). Don't collect health data, political opinions, addresses or facial photographs without a basis for it. GDPR applies to you like any other professional.",
      "**Entrapment.** Don't build artificial scenarios to catch people out: don't request illegal discounts, don't stage conflicts, don't push after a no. You're evaluating normal service — not a trap you set yourself.",
+    ],
+   },
+   {
+    title: "Page 4 — Calibrating discretion to the context",
+    blocks: [
+     "In a shop or a café, applying the three golden rules is almost automatic: you walk in, observe, leave, and nobody notices you. That's how everyone starts, and it's enough for 80% of the missions on the market.",
+     "On longer missions — a two-night hotel stay, a test drive with follow-up, a credit application with three separate contacts — the risk of exposure multiplies. It's no longer enough to keep your scenario coherent for 10 minutes; you have to hold it for hours or days, in front of several people who may compare notes with each other. Write your scenario down before you leave, exactly as you would a stage script: who you are, why you're there, what you say if someone repeats the question the next day.",
+     "There's also a dilemma that only shows up with experience: on a long stay, it's easy to develop genuine warmth towards a receptionist who's helped you several times. That's precisely where impartiality is hardest to hold onto — because it's no longer a stranger for five minutes, it's someone you interacted with all weekend. The rule doesn't change: you evaluate whether the criteria were met, not the relationship that formed.",
+     "Take this core idea into every module that follows: more experience doesn't give you licence to relax the three rules — it just gives you more contexts in which to apply them with more subtlety.",
     ],
    },
   ],
@@ -420,6 +461,17 @@ export const courseModules: CourseModule[] = [
      "Because if teams know when they're evaluated, the data stops being real",
      "Because brands demand secrecy as a fashion",
      "Because it stops other evaluators competing",
+    ],
+    correctIndex: 1,
+   },
+   {
+    id: "m3q6",
+    question: "On a long mission, such as a two-night hotel stay, what changes about the three golden rules?",
+    options: [
+     "The rules no longer apply, because it isn't a quick visit anymore",
+     "The rules still apply, but require more care to keep the scenario coherent over time",
+     "Only confidentiality remains mandatory",
+     "Genuine warmth built up with staff justifies softer evaluations",
     ],
     correctIndex: 1,
    },
@@ -877,6 +929,15 @@ export const courseModules: CourseModule[] = [
      "Respect the limits: evidence belongs to the mission and nothing else. Don't publish it, don't share it, don't reuse it in another mission. Once the retention period is over, delete anything containing personal data — it's the right thing to do and it's what GDPR expects of you.",
     ],
    },
+   {
+    title: "Page 4 — An evidence system for higher volumes",
+    blocks: [
+     "While you're doing one or two missions a month, a folder on your phone is plenty. The problem shows up once volume grows: from around four or five missions a week, the manual method starts to fail — swapped receipts, unnamed photos, an agency asking for evidence you can no longer locate.",
+     "At that point, it's worth moving to a folder in the cloud, synced automatically (Drive, iCloud or equivalent), organised with the same naming convention you already use: date, brand, city, mission code. The gain isn't just tidiness — it's having your evidence accessible even if you lose your phone in the middle of a busy week.",
+     "Pair the evidence folder with a simple tracking sheet, one row per mission: date, brand, fee, reimbursement, submission deadline, status (submitted, approved, paid). It's the same logic you'll build on for the financial side in Module 9 — here it just keeps you from ever losing track of a piece of evidence.",
+     "And keep the same discipline as always: two copies of every important piece of evidence (phone + cloud), respect for each platform's retention period, and a periodic clean-up — quarterly, say — to delete anything past its retention window that contains other people's personal data.",
+    ],
+   },
   ],
   quiz: [
    {
@@ -934,6 +995,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m7q6",
+    question: "At what point does it pay off to move from a manual phone folder to a more organised evidence system?",
+    options: [
+     "Never — a manual folder is always enough, regardless of volume",
+     "When mission volume rises (for example, four or five a week) and the manual method starts to fail",
+     "Only if the agency requires it in writing",
+     "Only after the first piece of evidence is lost",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -985,6 +1057,15 @@ export const courseModules: CourseModule[] = [
      "**3. Evidence.** Legible receipt, required photographs attached, files correctly named and in the requested format?",
      "**4. Language.** Spelling and punctuation checked. A report full of errors looks rushed — and suggests the observation was too.",
      "**5. Deadline.** Submitted on time. Many platforms require 12 to 24 hours after the visit and automatically cut payment for late submissions. If something comes up, warn them before the deadline, never after.",
+    ],
+   },
+   {
+    title: "Page 4 — From a single report to a writing system",
+    blocks: [
+     "At the start, every report takes as long as it takes: everything is new, every field forces you to think twice. That's the normal cost of learning and there's no honest shortcut around it.",
+     "Anyone who's written twenty or thirty reports on the same type of mission naturally starts building mental \"templates\" — the same order, the same blocks, sentences that already work. That's a good thing: it speeds you up and cuts structural mistakes.",
+     "The risk appears when the template stops being structure and becomes copy-pasted text. A personal bank of phrases for recurring situations (\"employee did not offer the loyalty card\", \"wait over 5 minutes with a free till\") is a legitimate tool — as long as every phrase is rewritten with the specific facts of that visit: the right time, the right badge, the right number.",
+     "More experienced agencies know how to spot reports that are \"too similar\" from the same evaluator across different missions — it's one of the clearest signs of recycled text, and it raises suspicion of fraud even when the visit was real. The speed that experience brings can never replace genuine variation in the facts you observed: faster to write, yes; sloppier to check, never.",
     ],
    },
   ],
@@ -1060,6 +1141,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 0,
    },
+   {
+    id: "m8q6",
+    question: "An experienced evaluator uses a personal bank of template phrases to write faster. What's essential for that to remain good practice?",
+    options: [
+     "Always using the exact same phrase, unchanged, to save time",
+     "Rewriting each phrase with the specific facts of that visit (time, name, number)",
+     "Only using template phrases on low-value missions",
+     "Getting the agency's approval for each reused phrase",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -1110,6 +1202,15 @@ export const courseModules: CourseModule[] = [
      "What you declare is the **fee**, your income. Properly documented expense reimbursements are treated differently — worth confirming with an accountant early on, especially if missions become regular.",
      "There's a VAT exemption for low annual income (the threshold is revised periodically). While below it you issue receipts without VAT; once you exceed it you move to the standard regime. Always check the threshold in force for the year in question.",
      "**Keep everything.** Receipts issued, payment confirmations, fuel invoices and till receipts. If this ever moves from side income to profession, you'll want the last two years organised — and your future accountant will love you for it.",
+    ],
+   },
+   {
+    title: "Page 4 — From side income to a serious activity",
+    blocks: [
+     "In the first few months, with the odd mission here and there, a simple sheet with date, fee and reimbursement is plenty. It's enough to tell you whether it's worth continuing.",
+     "Once the pace picks up — 15, 20 missions a month, several platforms at once — bookkeeping needs more rigour: reconcile the fees received against the green receipts issued every single month, and don't let that reconciliation pile up until year-end.",
+     "At that stage, diversifying stops being just a scheduling tactic (as in Module 2) and becomes income protection: working with three or four different agencies or platforms stops a single operator's seasonal dip — a project ending, a contract pause — from leaving you without missions for weeks.",
+     "And there's a real decision point that only arrives with volume: once this activity's monthly income becomes meaningful to your budget, it's worth sitting down with an accountant to confirm whether your current setup (simple green receipts) is still the right one. That's not a decision to make alone, or the night before your tax return is due.",
     ],
    },
   ],
@@ -1184,6 +1285,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m9q6",
+    question: "Why does working with several agencies or platforms at once protect your income as mission volume grows?",
+    options: [
+     "Because each platform pays more when evaluators compete",
+     "Because it stops a single operator's seasonal dip from leaving you without missions for weeks",
+     "Because it reduces the taxes you owe",
+     "Because platforms require exclusivity past a certain volume",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -1234,6 +1346,15 @@ export const courseModules: CourseModule[] = [
      "**Specialise in two or three sectors.** Repeating the same type of mission makes you faster, sharpens your reports and lifts your rating. Restaurants and retail are the entry doors; banking, automotive and hospitality are where the serious money is.",
      "**Build a relationship with agencies.** Reply quickly, meet deadlines, flag problems early and be courteous with whoever reviews your reports. After a few months, direct invitations start arriving — the missions that never get published.",
      "**A realistic target for the first three months:** 4 to 8 missions a month, €80 to €250 in monthly fees, and an above-average rating. From there it's your choice: keep it as side income or push it towards figures that pay bills.",
+    ],
+   },
+   {
+    title: "Page 4 — Beyond 90 days: the senior path",
+    blocks: [
+     "Once your first three months are behind you with a good rating, a path opens up that few evaluators know about going in: some agencies invite reliable evaluators into **reviewer or validator** roles for other evaluators' reports — more responsibility, and usually a fixed rate or a per-batch fee rather than per mission.",
+     "Anyone coming from another field — customer service, hospitality, quality auditing — tends to reach this point faster, because they already bring habits of rigour trained elsewhere. But you only get there with a track record of completed missions in this activity: an outside CV opens doors, it doesn't replace the trust built here.",
+     "Another, more common path is **vertical specialisation**: focusing on one high-value sector — automotive, banking, hospitality — until you become an agency's go-to evaluator for that category. That's where the direct invitations for unpublished missions come from, the goal you've been working towards since Page 3 of this module.",
+     "Whichever path appeals to you, the next step is always the same, and it's immediate: apply. In the next module — the certificate one — you'll find a concrete list of companies and platforms where you can start doing exactly that today.",
     ],
    },
   ],
@@ -1313,6 +1434,17 @@ export const courseModules: CourseModule[] = [
     ],
     correctIndex: 1,
    },
+   {
+    id: "m10q6",
+    question: "What does an agency need to see before inviting an evaluator to a reviewer or validator role?",
+    options: [
+     "A strong CV in another field, regardless of platform history",
+     "A track record of completed missions and a good rating in this activity",
+     "Payment of an access fee for the next level",
+     "Just finishing the course certificate",
+    ],
+    correctIndex: 1,
+   },
   ],
  },
 
@@ -1342,6 +1474,88 @@ export const courseModules: CourseModule[] = [
      "You're taking away the complete method: market **context**, **ethics** and conduct, **objective observation**, **preparation**, **execution**, **evidence**, **reporting**, **the maths**, and a **30-day plan** to get started.",
      "Your **personalised PDF certificate** is available from the button below. Attach it to your profile on every platform: it shows you know what a brief, a script item and a deadline are — things most applicants discover by getting them wrong.",
      "Now for the only part that can't be learned by reading: **the first mission**. Pick a small one, close to home, this week. The rest comes with mileage — and with well-photographed receipts.",
+    ],
+   },
+   {
+    title: "Page 2 — Where to apply now",
+    blocks: [
+     "The certificate proves you know how to prepare, execute and report a mission with rigour. The part that's missing can't be learned by reading anymore: it's applying. As in Module 2, the market splits into two types of operator — international self-registration platforms and Portuguese agencies or institutes that publish openings regularly.",
+     "The list below isn't exhaustive — the market shifts, platforms close and others open — but it's a real, checked starting point. Register on at least five or six of them at once, today, while the method is still fresh, and fill in your profile 100% on each: that's what separates people who start getting invitations within two weeks from those who wait months (Module 10, Page 1).",
+     "And the usual reminder, because it's always worth repeating: no serious company — none of the ones listed here included — charges you to register, to \"certify\" you, or to unlock missions. If anyone asks for money, it isn't an opportunity, it's a scam. Ignore it and move on to the next one on the list.",
+    ],
+   },
+  ],
+  recruitingCompanies: [
+   {
+    category: "International self-registration platforms",
+    companies: [
+     {
+      name: "BARE International",
+      description:
+       "The largest international network of mystery shopping evaluators, with missions in dozens of countries and a dedicated area for people getting started.",
+      url: "https://www.bareinternational.com/evaluators/",
+     },
+     {
+      name: "Secret View",
+      description:
+       "A global platform with over 75,000 registered evaluators and active missions in Portugal, with direct online sign-up.",
+      url: "https://www.secretview.io/en",
+     },
+     {
+      name: "Globis Survey",
+      description: "An international network with a dedicated \"become a mystery shopper\" page, no prior interview needed.",
+      url: "https://www.globis-survey.com/en/become-a-mystery-shopper/",
+     },
+     {
+      name: "Ipsos",
+      description: "One of the world's largest market research institutes, with a practice dedicated to mystery shopping across several sectors.",
+      url: "https://www.ipsos.com/en-us/mystery-shopping-0",
+     },
+    ],
+   },
+   {
+    category: "Agencies and institutes in Portugal",
+    companies: [
+     {
+      name: "SGS Portugal",
+      description: "A multinational inspection and certification company with mystery shopping missions in retail, banking, automotive and dining.",
+      url: "https://www.sgs.com/en-pt/services/mystery-shopping",
+     },
+     {
+      name: "DEKRA Portugal",
+      description: "Mystery shopping audits and evaluations across several sectors, with its own evaluator registration platform.",
+      url: "https://www.dekra.pt/pt/cliente-misterio-auditorias/",
+     },
+     {
+      name: "IMR — Instituto de Marketing Research",
+      description: "A Portuguese market research institute with regular openings for mystery shopping evaluators nationwide.",
+      url: "https://www.imr.pt/pt/ofertas-de-emprego/cliente-misterio",
+     },
+     {
+      name: "Intercampus",
+      description: "A Portuguese market research agency with its own mystery shopper panel.",
+      url: "https://intercampus.pt/clientes_misterio/",
+     },
+     {
+      name: "QSP Marketing",
+      description: "A Portuguese marketing and research consultancy that recruits evaluators for mystery shopper studies.",
+      url: "https://qspmarketing.pt/research-tecnicas/mystery-shopper/",
+     },
+     {
+      name: "Consulmark",
+      description: "A market research company based in Lisbon, with a dedicated mystery shopping service.",
+      url: "https://www.consulmark.pt/?produtos=mystery-shopping",
+     },
+     {
+      name: "SmartSkills",
+      description: "Recruiting and training evaluators in Portugal since 2006, with hundreds of missions already completed.",
+      url: "https://smartskills.pt/en/servicos/8/Mystery-Shopping-Audit",
+     },
+     {
+      name: "Triangulu",
+      description: "A Portuguese research agency offering mystery shopping for retail and service brands.",
+      url: "https://www.triangulu.pt/servicos/clientemisterio/",
+     },
     ],
    },
   ],
